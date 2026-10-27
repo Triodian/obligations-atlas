@@ -15,9 +15,18 @@
     "run_worker_first": ["/api/*", "/mcp", "/healthz"]
   },
   "vars": {
-    // "true" serves the preview snapshot, including records still waiting for review
-    "ATLAS_PREVIEW": "true",
+    // Hosts that show the preview data (records still waiting for review, with a banner).
+    // Every other host shows published records only.
+    "ATLAS_PREVIEW_HOSTS": "obligations-atlas-test.triodian.com",
+    "ATLAS_PREVIEW": "false",
+    // Where published records are read from when the FABRIC_READ_TOKEN secret is set.
+    "FABRIC_URL": "https://uat.api.orthogramic.com/governance/v1",
+    "ATLAS_CACHE_SECONDS": "300",
     "ATLAS_REQUIRE_KEY": "false"
   }
-  // Secret: ATLAS_API_KEYS (JSON [{ "firm", "keySha256", "perMinute" }]) via `wrangler secret put ATLAS_API_KEYS`
+  // Custom domains obligations-atlas.triodian.com and obligations-atlas-test.triodian.com are
+  // attached in the dashboard (Settings -> Domains & Routes).
+  // Secrets (Settings -> Variables and Secrets, or `wrangler secret put`):
+  //   FABRIC_READ_TOKEN  read-only governance token; turns on live published data
+  //   ATLAS_API_KEYS     JSON [{ "firm", "keySha256", "perMinute" }]
 }

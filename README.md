@@ -39,15 +39,18 @@ npm run data:check              # every snapshot record against its schema, lang
 
 ## Deploy (Cloudflare Workers)
 
-`wrangler.jsonc` serves `public/` as static assets, and runs `/api/*`, `/mcp` and `/healthz` in `src/worker.js`.
+Workers Builds deploys `main`. `wrangler.jsonc` serves `public/` as static assets, and runs `/api/*`, `/mcp` and `/healthz` in `src/handler.js`. One Worker serves both domains:
 
-```bash
-npx wrangler login                          # or set CLOUDFLARE_API_TOKEN
-npx wrangler secret put ATLAS_API_KEYS      # optional: [{"firm":"…","keySha256":"…","perMinute":600}]
-npm run deploy
-```
+| Domain | Shows |
+| --- | --- |
+| `obligations-atlas.triodian.com` | Published records only. With the `FABRIC_READ_TOKEN` secret set, they are read live from the Reasoning Fabric (`FABRIC_URL`) and cached for `ATLAS_CACHE_SECONDS`. Without it, or if the Fabric cannot be reached, the bundled `data/snapshot/ai-obligations-atlas.json` is used |
+| `obligations-atlas-test.triodian.com` (`ATLAS_PREVIEW_HOSTS`) | The bundled preview snapshot, including records waiting for review, under a preview banner |
 
-`ATLAS_PREVIEW` in `wrangler.jsonc` stays `"true"` until the seed records are approved. Set it to `"false"` for the public release.
+Attach both domains under Settings → Domains & Routes → Custom domain. Set the secrets under Settings → Variables and Secrets:
+- `FABRIC_READ_TOKEN`: the read-only `obligations-atlas` governance token;
+- `ATLAS_API_KEYS`: optional, `[{"firm":"…","keySha256":"…","perMinute":600}]`.
+
+`/healthz` reports which data a domain is serving (`fabric`, `bundled` or `bundled-preview`), and the last error reading from the Fabric, if any.
 
 ## Refresh the data
 
