@@ -174,6 +174,16 @@ dl.kv .brk{border-top:1px solid var(--rule-soft);padding-top:11px;margin-top:2px
 .srclink{display:inline-flex;align-items:center;gap:6px;font-weight:600}
 .srclink::after{content:"↗";font-size:12px;text-decoration:none}
 
+/* related records on a record page */
+.related{margin-top:20px}
+.filters.compact{background:none;border:0;padding:0;margin:0 0 10px}
+.filters.compact select{max-width:240px}
+.rel{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-soft)}
+.rel li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule-soft)}
+.rel li .badge{justify-self:start}
+.rel a{font-weight:600;color:var(--ink);text-decoration-color:rgba(23,32,43,.3)}
+.rel .where{display:block;font-size:12.5px;color:var(--ink-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 /* ---------- tables ---------- */
 .tw{border:1px solid var(--rule);border-radius:8px;background:var(--card);overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:14px}
@@ -238,6 +248,7 @@ footer.ft{border-top:1px solid var(--rule);padding:26px 0 34px;background:var(--
   .filters label,.filters select,.filters input[type="search"]{width:100%;max-width:none}
   .filters label{flex:1 1 100%}
   .card{padding:18px 16px}
+  .rel li{grid-template-columns:minmax(0,1fr);gap:4px}
   .filters select,.filters input,select.small,input.text{font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
