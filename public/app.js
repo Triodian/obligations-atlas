@@ -32,7 +32,10 @@ const tierLabel = (tier) => (TIERS[tier] ? TIERS[tier].label : tier);
 const tierBadge = (tier) => `<span class="badge ${esc(tier)}" title="${esc(TIERS[tier] ? TIERS[tier].describes : '')}">${esc(tierLabel(tier))}</span>`;
 const pendingBadge = (o) => (o.publicationStatus === 'pendingReview' ? '<span class="badge pending" title="Not yet approved by a Triodian reviewer">Pending review</span>' : '');
 const staleBadge = (o) => (o.stale ? '<span class="badge stale" title="Not re-verified within the freshness threshold">Past freshness threshold</span>' : '');
-const allUseCases = (ids) => data.useCases.length > 1 && ids.length >= data.useCases.length;
+// Use-case IDs known to the dataset: the published use-case records, or, before they are published, the IDs the obligations cite.
+const ucNum = (u) => Number(String(u).replace(/\D/g, '')) || 0;
+const ucIDs = () => (data.useCases.length ? data.useCases.map((u) => u.useCaseID) : [...new Set(data.obligations.flatMap((o) => o.useCaseIDs))].sort((a, b) => ucNum(a) - ucNum(b)));
+const allUseCases = (ids) => ucIDs().length > 1 && ids.length >= ucIDs().length;
 const ucShort = (ids) => (allUseCases(ids) ? `All ${ids.length} use cases` : ids.join(', '));
 const issuer = (o) => (o.regulator && o.regulator.acronym) || '';
 const whereLine = (o) => [issuer(o), o.instrument, o.citation].filter(Boolean).map(esc).join(' · ');
@@ -69,7 +72,7 @@ function renderRegister() {
   setNav('register');
   const jurOpts = [['', 'All jurisdictions'], ...data.jurisdictions.filter((j) => j.available && j.code !== 'INT').map((j) => [j.code, j.name])];
   const entOpts = [['', 'Any entity'], ...Object.entries(ENTITY_TYPES).filter(([k]) => !['anyOrganization', 'other'].includes(k) && data.obligations.some((o) => o.entityTypes.includes(k))).map(([k, v]) => [k, v])];
-  const ucOpts = [['', 'Any use case'], ...data.useCases.map((u) => [u.useCaseID, `${u.useCaseID} ${u.title}`])];
+  const ucOpts = [['', 'Any use case'], ...ucIDs().map((u) => [u, [u, ucTitle(u)].filter(Boolean).join(' ')])];
   const tierOpts = [['', 'All tiers'], ...Object.entries(TIERS).map(([k, t]) => [k, t.label])];
   const rows = filtered();
   main.innerHTML = `
@@ -122,6 +125,7 @@ async function renderObligation(id) {
           ${o.keyDates.length ? `<div class="section"><h2 class="sh">Key dates</h2><ol class="timeline">${o.keyDates.map((k) => `<li><time datetime="${esc(k.date)}">${esc(fmtDate(k.date))}</time>${esc(dateType(k.dateType))}${k.provisions ? `, ${esc(k.provisions)}` : ''}${k.note ? `<div class="note">${esc(k.note)}</div>` : ''}</li>`).join('')}</ol></div>` : ''}
           <div class="section"><h2 class="sh">Cite this record</h2><div class="cite"><span id="citeas">${esc(o.citeAs)}</span><button class="copybtn" id="copycite" type="button">Copy</button></div></div>
         </div>
+        <section class="card related" id="related" aria-labelledby="related-h"></section>
         <details class="pr" id="prov"><summary>Provenance trail <span class="small" id="provsum">Loading…</span></summary><div class="body" id="trail"></div></details>
       </div>
       <aside class="card facts" aria-label="Record details">
@@ -140,6 +144,7 @@ async function renderObligation(id) {
         </dl>
       </aside>
     </div>`;
+  renderRelated(o);
   document.getElementById('copycite').addEventListener('click', async (e) => {
     try { await navigator.clipboard.writeText(o.citeAs); e.target.textContent = 'Copied'; }
     catch { const r = document.createRange(); r.selectNodeContents(document.getElementById('citeas')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
@@ -155,6 +160,45 @@ async function renderObligation(id) {
     sum.textContent = 'Could not be loaded';
     document.getElementById('trail').innerHTML = '<p class="small soft">The provenance trail could not be loaded. Reload the page to try again.</p>';
   }
+}
+
+/**
+ * Related records on a record page. The jurisdiction is fixed to the record's own;
+ * the dropdowns offer only the use cases and entities this record applies to (shown when there is a choice),
+ * and match the register's filters so the selection can be opened there.
+ */
+const related = { useCase: '', entityType: '', tier: '' };
+function renderRelated(o) {
+  const box = document.getElementById('related');
+  const ents = o.entityTypes.filter((e) => e !== 'anyOrganization' && e !== 'other');
+  const keep = (k, vals) => { if (!vals.includes(related[k])) related[k] = ''; };
+  keep('useCase', o.useCaseIDs); keep('entityType', ents);
+  if (!related.useCase && state.useCase && o.useCaseIDs.includes(state.useCase)) related.useCase = state.useCase;
+  if (!related.entityType && state.entityType && ents.includes(state.entityType)) related.entityType = state.entityType;
+  const anyOf = () => 'Any of this record’s';
+  const sel = (name, label, pairs, all) => (pairs.length > 1 ? `<label>${label}<select name="${name}"><option value="">${esc(all)}</option>${options(pairs, related[name])}</select></label>` : '');
+  const rows = data.obligations.filter((x) => x.obligationID !== o.obligationID
+    && x.jurisdiction === o.jurisdiction
+    && !['superseded', 'repealed', 'withdrawn'].includes(x.status)
+    && (!related.tier || x.sourceTier === related.tier)
+    && (related.useCase ? x.useCaseIDs.includes(related.useCase) : x.useCaseIDs.some((u) => o.useCaseIDs.includes(u)))
+    && (related.entityType ? (x.entityTypes.includes(related.entityType) || x.entityTypes.includes('anyOrganization')) : true));
+  const max = 8;
+  box.innerHTML = `<h2 class="sh" id="related-h">Related records in ${esc(jurName(o.jurisdiction))}</h2>
+    <form class="filters compact" id="relform">
+      ${sel('useCase', 'Use case', o.useCaseIDs.map((u) => [u, [u, ucTitle(u)].filter(Boolean).join(' ')]), `${anyOf(o.useCaseIDs)} use cases`)}
+      ${sel('entityType', 'Entity', ents.map((e) => [e, ENTITY_TYPES[e] || e]), `${anyOf(ents)} entities`)}
+      <label>Tier<select name="tier">${options([['', 'All tiers'], ...Object.entries(TIERS).map(([k, t]) => [k, t.label])], related.tier)}</select></label>
+    </form>
+    <p class="small soft" aria-live="polite">${rows.length} other record${rows.length === 1 ? '' : 's'}${related.useCase || related.entityType || related.tier ? ' match' : ' share a use case with this one'}.</p>
+    ${rows.length ? `<ul class="rel">${rows.slice(0, max).map((x) => `<li>${tierBadge(x.sourceTier)}<span><a href="${href('obligation', x.obligationID)}">${esc(x.title)}</a><span class="where">${whereLine(x)}</span></span></li>`).join('')}</ul>` : ''}
+    ${rows.length ? `<p class="small" style="margin:10px 0 0"><a href="${href('register')}" id="relall">${rows.length > max ? `Show all ${rows.length} in the register` : 'Open these filters in the register'}</a></p>` : ''}`;
+  box.querySelector('#relform').addEventListener('change', (e) => { related[e.target.name] = e.target.value; renderRelated(o); box.querySelector(`[name="${e.target.name}"]`).focus(); });
+  const all = box.querySelector('#relall');
+  if (all) all.addEventListener('click', () => {
+    Object.assign(state, { jurisdiction: o.jurisdiction, useCase: related.useCase, entityType: related.entityType, tier: related.tier, q: '' });
+    store.set('atlas.filters', state);
+  });
 }
 
 function renderUseCases() {
