@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://triodian.com/schemas/connector/submission-result.schema.json",
-  "title": "Connector Submission Result Schema",
-  "description": "Reasoning Fabric connector. The Fabric's answer to a submission: for each proposal, whether it is valid, what it was matched to, its confidence, the treatment assigned and the provenance records written. The result states outcomes and the names of the published rules applied; it does not describe how the Fabric computes them.",
+  "$id": "https://triodian.com/schemas/governance/submission-result.schema.json",
+  "title": "Submission Result Schema",
+  "description": "Governance interface. The governing service's answer to a submission: for each proposal, whether it is valid, what it was matched to, its confidence, the treatment assigned and the provenance records written. The result states outcomes and the names of the published rules applied; it does not describe how the governing service computes them.",
   "type": "object",
   "required": [
     "submissionResultID",
@@ -39,18 +39,18 @@
     },
     "receivedAt": {
       "type": "string",
-      "description": "When the Fabric received the submission",
+      "description": "When the governing service received the submission",
       "format": "date-time"
     },
-    "connectorVersion": {
+    "interfaceVersion": {
       "type": "string",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
-      "description": "Version of the connector contract the Fabric applied"
+      "description": "Version of the governance interface the governing service applied"
     },
     "metamodelVersion": {
       "type": "string",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
-      "description": "Version of the Metamodel the Fabric validated against"
+      "description": "Version of the Metamodel the governing service validated against"
     },
     "outcomes": {
       "type": "array",

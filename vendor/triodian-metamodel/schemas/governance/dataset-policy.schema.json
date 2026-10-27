@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://triodian.com/schemas/connector/dataset-policy.schema.json",
+  "$id": "https://triodian.com/schemas/governance/dataset-policy.schema.json",
   "title": "Dataset Policy Schema",
-  "description": "Reasoning Fabric connector. The published rules a governed dataset runs under: which sources can set what, which changes publish automatically and which wait for a named approver, when records go stale, and the language rules every record and response must meet. The Fabric applies the policy and cites its rule IDs in results and provenance; the policy itself is public so that applications and reviewers can check behaviour against it.",
+  "description": "Governance interface. The published rules a governed dataset runs under: which sources can set what, which changes publish automatically and which wait for a named approver, when records go stale, and the language rules every record and response must meet. The governing service applies the policy and cites its rule IDs in results and provenance; the policy itself is public so that applications and reviewers can check behaviour against it.",
   "type": "object",
   "required": [
     "datasetPolicyID",
@@ -14,7 +14,7 @@
   "additionalProperties": false,
   "properties": {
     "datasetPolicyID": {
-      "description": "Unique identifier for the policy, e.g. POLICY-ATLAS-1",
+      "description": "Unique identifier for the policy, e.g. POLICY-REG-REGISTER-1",
       "allOf": [
         {
           "$ref": "../common.schema.json#/definitions/identifier"

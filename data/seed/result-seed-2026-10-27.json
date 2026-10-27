@@ -2,8 +2,8 @@
   "submissionResultID": "RES-SUB-ATLAS-SEED-2026-10-27",
   "submissionID": "SUB-ATLAS-SEED-2026-10-27",
   "mode": "propose",
-  "receivedAt": "2026-10-27T02:37:46.029Z",
-  "connectorVersion": "1.0.0",
+  "receivedAt": "2026-10-27T03:00:55.560Z",
+  "interfaceVersion": "1.0.0",
   "metamodelVersion": "2.3.0",
   "outcomes": [
     {

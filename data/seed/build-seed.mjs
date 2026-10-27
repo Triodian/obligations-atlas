@@ -298,7 +298,7 @@ for (const t of triggers) {
 
 const submission = {
   submissionID: 'SUB-ATLAS-SEED-2026-10-27',
-  connectorVersion: '1.0.0',
+  interfaceVersion: '1.0.0',
   metamodelVersion: METAMODEL_VERSION,
   mode: 'propose',
   dataset: 'ai-obligations-atlas',

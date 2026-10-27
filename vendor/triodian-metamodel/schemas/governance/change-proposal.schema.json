@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://triodian.com/schemas/connector/change-proposal.schema.json",
+  "$id": "https://triodian.com/schemas/governance/change-proposal.schema.json",
   "title": "Change Proposal Schema",
-  "description": "Reasoning Fabric connector. A proposed change to one governed Metamodel record, with the evidence for it. Proposals are submitted by an agent, a person or a system; the Fabric validates them against the Metamodel, matches them to existing records, arbitrates conflicts, scores confidence, and assigns a treatment under the published autonomy policy. Fields set by the Fabric (treatment, matchedEntityID, review) are ignored on submission.",
+  "description": "Governance interface. A proposed change to one governed Metamodel record, with the evidence for it. Proposals are submitted by an agent, a person or a system; the governing service validates them against the Metamodel, matches them to existing records, arbitrates conflicts, scores confidence, and assigns a treatment under the published autonomy policy. Fields set by the governing service (treatment, matchedEntityID, review) are ignored on submission.",
   "type": "object",
   "required": [
     "changeProposalID",
@@ -50,7 +50,7 @@
     },
     "baseVersion": {
       "type": "integer",
-      "description": "Version of the governed record the proposal was made against. The Fabric rejects the proposal as stale if the record has moved on",
+      "description": "Version of the governed record the proposal was made against. The governing service rejects the proposal as stale if the record has moved on",
       "minimum": 1
     },
     "supersededByEntityID": {
@@ -82,7 +82,7 @@
       ]
     },
     "treatment": {
-      "description": "Set by the Fabric: how the proposal is handled under the autonomy policy",
+      "description": "Set by the governing service: how the proposal is handled under the autonomy policy",
       "allOf": [
         {
           "$ref": "#/definitions/treatment"
@@ -90,7 +90,7 @@
       ]
     },
     "matchedEntityID": {
-      "description": "Set by the Fabric: an existing record the proposal was matched to, so one instrument is never entered twice",
+      "description": "Set by the governing service: an existing record the proposal was matched to, so one instrument is never entered twice",
       "allOf": [
         {
           "$ref": "../common.schema.json#/definitions/identifier"
@@ -98,7 +98,7 @@
       ]
     },
     "review": {
-      "description": "Set by the Fabric: the review of a queued or escalated proposal",
+      "description": "Set by the governing service: the review of a queued or escalated proposal",
       "allOf": [
         {
           "$ref": "#/definitions/reviewState"

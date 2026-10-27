@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://triodian.com/schemas/connector/provenance-record.schema.json",
+  "$id": "https://triodian.com/schemas/governance/provenance-record.schema.json",
   "title": "Provenance Record Schema",
-  "description": "Reasoning Fabric connector. One entry in the Semantic Provenance Ledger: an event in the life of a governed record, such as a source read, an extraction, a match, a conflict resolved, a score, a treatment, a review or a publication. Entries are append-only and hash-chained, so a gap or alteration is detectable. They name the published rule applied, not the method behind it.",
+  "description": "Governance interface. One entry in the Semantic Provenance Ledger: an event in the life of a governed record, such as a source read, an extraction, a match, a conflict resolved, a score, a treatment, a review or a publication. Entries are append-only and hash-chained, so a gap or alteration is detectable. They name the published rule applied, not the method behind it.",
   "type": "object",
   "required": [
     "provenanceRecordID",
@@ -68,7 +68,7 @@
             "agent",
             "person",
             "system",
-            "fabric"
+            "service"
           ]
         },
         "actorID": {
@@ -91,7 +91,7 @@
     },
     "dataset": {
       "type": "string",
-      "description": "Governed dataset, e.g. ai-obligations-atlas"
+      "description": "Governed dataset, e.g. example-regulatory-register"
     },
     "changeProposalID": {
       "description": "Proposal the event belongs to",

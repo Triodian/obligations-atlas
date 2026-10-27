@@ -23,7 +23,7 @@ for (const file of ['data/snapshot/ai-obligations-atlas.json', 'data/snapshot/ai
   const snap = JSON.parse(fs.readFileSync(file, 'utf8'));
   const rules = snap.policy.languageRules.filter((r) => r.appliesTo.includes('record')).map((r) => ({ ...r, re: new RegExp(r.pattern, 'i') }));
   for (const gr of snap.records) {
-    const g = v('connector/governed-record');
+    const g = v('governance/governed-record');
     if (!g(gr)) fail(`${file} ${gr.governedRecordID}: ${ajv.errorsText(g.errors)}`);
     const rv = v(FILES[gr.domainType]);
     if (!rv) fail(`${gr.governedRecordID}: no schema for ${gr.domainType}`);

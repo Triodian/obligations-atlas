@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://triodian.com/schemas/connector/governed-record.schema.json",
+  "$id": "https://triodian.com/schemas/governance/governed-record.schema.json",
   "title": "Governed Record Schema",
-  "description": "Reasoning Fabric connector. A published version of a Metamodel record, as the Fabric returns it to applications: the record itself, its verification state and confidence, the approver, and the provenance trail behind it. Applications show the record, its source link, tier and last-verified date together, and cite the provenance reference.",
+  "description": "Governance interface. A published version of a Metamodel record, as the governing service returns it to applications: the record itself, its verification state and confidence, the approver, and the provenance trail behind it. Applications show the record, its source link, tier and last-verified date together, and cite the provenance reference.",
   "type": "object",
   "required": [
     "governedRecordID",

@@ -13,7 +13,7 @@ It is built for AI, technology and regulatory lawyers in external counsel firms.
 
 ```mermaid
 flowchart LR
-  R["Research and update agent"] -- "change proposals<br/>(connector 1.0)" --> F["Reasoning Fabric<br/>(closed)"]
+  R["Research and update agent"] -- "change proposals<br/>(governance interface 1.0)" --> F["Reasoning Fabric<br/>(closed)"]
   V["Named reviewer<br/>(reasoning-fabric-app /admin/connector)"] -- "review decisions" --> F
   F -- "snapshot: governed records<br/>+ provenance" --> A["Atlas<br/>web app, REST API, MCP"]
   M["Triodian Metamodel<br/>(open schemas, policy)"] -.-> F
@@ -21,7 +21,7 @@ flowchart LR
 ```
 
 - **Data model:** the open [Triodian Metamodel](https://github.com/Triodian/Triodian_Metamodel), vendored and pinned in `vendor/triodian-metamodel` (`npm run sync-metamodel`). Records are Obligations, External Organizations, Use Cases, Data Flows (monitored sources) and Triggers (instrument changes).
-- **Governance:** every record goes through the Reasoning Fabric connector under the [AI Obligations Atlas dataset policy](vendor/triodian-metamodel/connector/policies/ai-obligations-atlas.policy.json). Nothing that sets a status, a date or a tier is published without a named approver. Every record carries a hash-chained provenance trail.
+- **Governance:** every record goes through the Reasoning Fabric connector under the AI Obligations Atlas dataset policy (kept in reasoning_fabric `policies/`, and served in every snapshot and at `/api/v1/policy`). Nothing that sets a status, a date or a tier is published without a named approver. Every record carries a hash-chained provenance trail.
 - **Data in this repo:**
   - `data/research/` holds the research behind the seed.
   - `data/seed/build-seed.mjs` turns it into connector proposals.

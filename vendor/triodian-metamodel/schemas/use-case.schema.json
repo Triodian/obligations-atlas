@@ -107,7 +107,7 @@
     },
     "boundary": {
       "type": "string",
-      "description": "Boundary scale B1 to B3, as defined in the AI Use Assessment framework. b1 = AI in a provider's service used by the organization; b2 = AI in the platform behind a provider (a fourth party); b3 = AI the organization deploys within its own boundary for its own use",
+      "description": "Boundary scale B1 to B3, as defined by the assessment method in use. b1 = AI in a provider's service used by the organization; b2 = AI in the platform behind a provider (a fourth party); b3 = AI the organization deploys within its own boundary for its own use",
       "enum": [
         "b1",
         "b2",
@@ -116,7 +116,7 @@
     },
     "consequenceLevel": {
       "type": "string",
-      "description": "Consequence scale C1 (lowest) to C5 (highest), as defined in the AI Use Assessment framework. Set per matter against the organization's own thresholds, never on the use case",
+      "description": "Consequence scale C1 (lowest) to C5 (highest), as defined by the assessment method in use. Set per matter against the organization's own thresholds, never on the use case",
       "enum": [
         "c1",
         "c2",
@@ -127,7 +127,7 @@
     },
     "evidenceLevel": {
       "type": "string",
-      "description": "Evidence scale E0 (no evidence) to E6 (strongest), as defined in the AI Use Assessment framework, for how well a control or claim is evidenced",
+      "description": "Evidence scale E0 (no evidence) to E6 (strongest), as defined by the assessment method in use, for how well a control or claim is evidenced",
       "enum": [
         "e0",
         "e1",
@@ -140,7 +140,7 @@
     },
     "confidentialityChannel": {
       "type": "string",
-      "description": "Confidentiality exposure channels K1 to K7, as defined in the AI Confidentiality Exposure Assessment framework: the routes by which confidential information can reach or leave an AI tool",
+      "description": "Confidentiality exposure channels K1 to K7, as defined by the assessment method in use: the routes by which confidential information can reach or leave an AI tool",
       "enum": [
         "k1",
         "k2",

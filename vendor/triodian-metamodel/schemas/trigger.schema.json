@@ -176,7 +176,7 @@
     },
     "changeProposalIDs": {
       "type": "array",
-      "description": "Change proposals submitted through the Reasoning Fabric connector in response to this trigger",
+      "description": "Change proposals submitted through the governance interface in response to this trigger",
       "items": {
         "$ref": "common.schema.json#/definitions/identifier"
       },

@@ -240,7 +240,7 @@
     },
     "provenanceRecordIDs": {
       "type": "array",
-      "description": "Provenance records, issued through the Reasoning Fabric connector, that trace how this record was sourced, extracted, reconciled and approved",
+      "description": "Provenance records, issued through the governance interface, that trace how this record was sourced, extracted, reconciled and approved",
       "items": {
         "$ref": "../common.schema.json#/definitions/identifier"
       },

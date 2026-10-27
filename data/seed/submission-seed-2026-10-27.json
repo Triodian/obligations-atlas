@@ -1,6 +1,6 @@
 {
   "submissionID": "SUB-ATLAS-SEED-2026-10-27",
-  "connectorVersion": "1.0.0",
+  "interfaceVersion": "1.0.0",
   "metamodelVersion": "2.3.0",
   "mode": "propose",
   "dataset": "ai-obligations-atlas",

@@ -1,9 +1,9 @@
 {
   "dataset": "ai-obligations-atlas",
-  "generatedAt": "2026-10-27T02:37:47.816Z",
-  "connectorVersion": "1.0.0",
+  "generatedAt": "2026-10-27T03:00:57.288Z",
+  "interfaceVersion": "1.0.0",
   "metamodelVersion": "2.3.0",
-  "metamodelCommit": "be3ef9138817a7b7c4a809a148acf39722507e30",
+  "metamodelCommit": "ff3eff90af2704b6eba5f27fd54a191a46888ae7",
   "includesPending": false,
   "policy": {
     "datasetPolicyID": "POLICY-AI-OBLIGATIONS-ATLAS",
@@ -233,7 +233,7 @@
         ]
       },
       "metamodelVersion": "2.3.0",
-      "publishedAt": "2026-10-27T02:37:46.532Z",
+      "publishedAt": "2026-10-27T03:00:56.019Z",
       "verification": {
         "lastVerified": "2026-10-27",
         "stale": false,
@@ -293,7 +293,7 @@
         ]
       },
       "metamodelVersion": "2.3.0",
-      "publishedAt": "2026-10-27T02:37:46.469Z",
+      "publishedAt": "2026-10-27T03:00:55.960Z",
       "verification": {
         "lastVerified": "2026-10-27",
         "stale": false,
@@ -322,7 +322,7 @@
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000226",
       "sequence": 226,
-      "recordedAt": "2026-10-27T02:37:46.460Z",
+      "recordedAt": "2026-10-27T03:00:55.952Z",
       "dataset": "ai-obligations-atlas",
       "actor": {
         "actorType": "agent",
@@ -343,16 +343,16 @@
       "evidenceURLs": [
         "https://www.allenandgledhill.com/sg/publication/articles/17670/"
       ],
-      "previousHash": "737df25059da24bb69c007e53f76c63b7e0b8bf188f94975633ff73a2e911b71",
-      "hash": "fbd310d93e7e8f16af51e85cfc18d430b435ebdbf65d43c449c9cb040f30e33a"
+      "previousHash": "ea300d620e46a844dcb9ab66052c853441a8d076d57e0f7ddb41cc695152d270",
+      "hash": "141bf42ad7fbed1447685b6e7460839fe98304fe655abc64b1e30e0bf4ab1fb7"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000227",
       "sequence": 227,
-      "recordedAt": "2026-10-27T02:37:46.462Z",
+      "recordedAt": "2026-10-27T03:00:55.954Z",
       "dataset": "ai-obligations-atlas",
       "actor": {
-        "actorType": "fabric",
+        "actorType": "service",
         "actorID": "reasoning-fabric",
         "displayName": "Reasoning Fabric"
       },
@@ -371,16 +371,16 @@
         "schema.metamodel",
         "language.rules"
       ],
-      "previousHash": "fbd310d93e7e8f16af51e85cfc18d430b435ebdbf65d43c449c9cb040f30e33a",
-      "hash": "e71eea07e38f464a7ab5279dd73495d89d0c02848ad8514435586c5efe2d7814"
+      "previousHash": "141bf42ad7fbed1447685b6e7460839fe98304fe655abc64b1e30e0bf4ab1fb7",
+      "hash": "ed22468f4e9ab80d906fae03e556c7975ba4921e1c46320a71ebd1da3e00e0a1"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000228",
       "sequence": 228,
-      "recordedAt": "2026-10-27T02:37:46.464Z",
+      "recordedAt": "2026-10-27T03:00:55.956Z",
       "dataset": "ai-obligations-atlas",
       "actor": {
-        "actorType": "fabric",
+        "actorType": "service",
         "actorID": "reasoning-fabric",
         "displayName": "Reasoning Fabric"
       },
@@ -399,16 +399,16 @@
       "ruleIDs": [
         "coverage.weighting"
       ],
-      "previousHash": "e71eea07e38f464a7ab5279dd73495d89d0c02848ad8514435586c5efe2d7814",
-      "hash": "23b644eb1600cdfc8f814f41c5c22e615f79c32b8f8fb7036feec65146de111a"
+      "previousHash": "ed22468f4e9ab80d906fae03e556c7975ba4921e1c46320a71ebd1da3e00e0a1",
+      "hash": "2361c3ee14263621622fdfe94c57d800e8b92a6fb295f23d011dbdb4ae4953e3"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000229",
       "sequence": 229,
-      "recordedAt": "2026-10-27T02:37:46.466Z",
+      "recordedAt": "2026-10-27T03:00:55.958Z",
       "dataset": "ai-obligations-atlas",
       "actor": {
-        "actorType": "fabric",
+        "actorType": "service",
         "actorID": "reasoning-fabric",
         "displayName": "Reasoning Fabric"
       },
@@ -426,17 +426,17 @@
       "ruleIDs": [
         "precedence.leadOnly"
       ],
-      "previousHash": "23b644eb1600cdfc8f814f41c5c22e615f79c32b8f8fb7036feec65146de111a",
-      "hash": "8dc4ecb127b7395541f5a1dbb7f16ae853588d1fa49ffa9d10ea956167e0ec03"
+      "previousHash": "2361c3ee14263621622fdfe94c57d800e8b92a6fb295f23d011dbdb4ae4953e3",
+      "hash": "748eaa1e8de40b8ecbc074ae93c1a64f8cf618fe2f32aed89aab0d87d6bea76f"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000230",
       "sequence": 230,
-      "recordedAt": "2026-10-27T02:37:46.469Z",
+      "recordedAt": "2026-10-27T03:00:55.960Z",
       "dataset": "ai-obligations-atlas",
       "eventType": "published",
       "actor": {
-        "actorType": "fabric",
+        "actorType": "service",
         "actorID": "reasoning-fabric",
         "displayName": "Reasoning Fabric"
       },
@@ -457,13 +457,13 @@
         "https://www.allenandgledhill.com/sg/publication/articles/17670/"
       ],
       "confidenceScore": 0.5,
-      "previousHash": "8dc4ecb127b7395541f5a1dbb7f16ae853588d1fa49ffa9d10ea956167e0ec03",
-      "hash": "5ac85fcf3ee2c421d11c9521953b1837ccfbf56c9671a19e0a0cd08aab2078b9"
+      "previousHash": "748eaa1e8de40b8ecbc074ae93c1a64f8cf618fe2f32aed89aab0d87d6bea76f",
+      "hash": "47a42f2b3f9653b864dbf0e58c52010796acdd56ab168ff94fe7b662195393ef"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000231",
       "sequence": 231,
-      "recordedAt": "2026-10-27T02:37:46.522Z",
+      "recordedAt": "2026-10-27T03:00:56.009Z",
       "dataset": "ai-obligations-atlas",
       "actor": {
         "actorType": "agent",
@@ -484,13 +484,13 @@
       "evidenceURLs": [
         "https://www.mas.gov.sg/regulation/third-party-risk-management"
       ],
-      "previousHash": "5ac85fcf3ee2c421d11c9521953b1837ccfbf56c9671a19e0a0cd08aab2078b9",
-      "hash": "2afe61c7589ef98d1ea629218a75e7407da34fd61b231a0c9091565dd263c526"
+      "previousHash": "47a42f2b3f9653b864dbf0e58c52010796acdd56ab168ff94fe7b662195393ef",
+      "hash": "018816c44cddc017b3dfe24571ce41998d7e651b1639aaa402f51345b696a989"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000232",
       "sequence": 232,
-      "recordedAt": "2026-10-27T02:37:46.524Z",
+      "recordedAt": "2026-10-27T03:00:56.011Z",
       "dataset": "ai-obligations-atlas",
       "actor": {
         "actorType": "agent",
@@ -511,16 +511,16 @@
       "evidenceURLs": [
         "https://www.mas.gov.sg/regulation/faqs/faq-on-mas-notice-658-and-1121-banks"
       ],
-      "previousHash": "2afe61c7589ef98d1ea629218a75e7407da34fd61b231a0c9091565dd263c526",
-      "hash": "ba4a20b722e8c74d36ec69e5d0ebdb42726d1b8524df68db49106e042e5b6e3e"
+      "previousHash": "018816c44cddc017b3dfe24571ce41998d7e651b1639aaa402f51345b696a989",
+      "hash": "4387f991469d65010fa1103689fcc70ffa4084e73c8af9dcaa2dce2b981f34cf"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000233",
       "sequence": 233,
-      "recordedAt": "2026-10-27T02:37:46.526Z",
+      "recordedAt": "2026-10-27T03:00:56.013Z",
       "dataset": "ai-obligations-atlas",
       "actor": {
-        "actorType": "fabric",
+        "actorType": "service",
         "actorID": "reasoning-fabric",
         "displayName": "Reasoning Fabric"
       },
@@ -539,16 +539,16 @@
         "schema.metamodel",
         "language.rules"
       ],
-      "previousHash": "ba4a20b722e8c74d36ec69e5d0ebdb42726d1b8524df68db49106e042e5b6e3e",
-      "hash": "2816043c7ade2d40a7900c2c7b6ae43c56cf4832b02b76011c3fce26cbf2a206"
+      "previousHash": "4387f991469d65010fa1103689fcc70ffa4084e73c8af9dcaa2dce2b981f34cf",
+      "hash": "803024c44a41fafd803480d7f7730c6aa5070531ea375ccc11c23cd85e43b68d"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000234",
       "sequence": 234,
-      "recordedAt": "2026-10-27T02:37:46.528Z",
+      "recordedAt": "2026-10-27T03:00:56.015Z",
       "dataset": "ai-obligations-atlas",
       "actor": {
-        "actorType": "fabric",
+        "actorType": "service",
         "actorID": "reasoning-fabric",
         "displayName": "Reasoning Fabric"
       },
@@ -567,16 +567,16 @@
       "ruleIDs": [
         "coverage.weighting"
       ],
-      "previousHash": "2816043c7ade2d40a7900c2c7b6ae43c56cf4832b02b76011c3fce26cbf2a206",
-      "hash": "e12ee29ed07ee62cdf9482dd1f2ea6d905ad14768d92674e3e5e7b6ba3f39e5e"
+      "previousHash": "803024c44a41fafd803480d7f7730c6aa5070531ea375ccc11c23cd85e43b68d",
+      "hash": "d0b662fd78ae5abcb830ce1d70f2a4bc830a91da3e4e724bda8a52169c96eb6a"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000235",
       "sequence": 235,
-      "recordedAt": "2026-10-27T02:37:46.530Z",
+      "recordedAt": "2026-10-27T03:00:56.017Z",
       "dataset": "ai-obligations-atlas",
       "actor": {
-        "actorType": "fabric",
+        "actorType": "service",
         "actorID": "reasoning-fabric",
         "displayName": "Reasoning Fabric"
       },
@@ -594,17 +594,17 @@
       "ruleIDs": [
         "precedence.rankCannotSetForTier"
       ],
-      "previousHash": "e12ee29ed07ee62cdf9482dd1f2ea6d905ad14768d92674e3e5e7b6ba3f39e5e",
-      "hash": "63e0e407d158406006109efdd240cf3e8ce0655999e7bfb00912ac4e35f056c1"
+      "previousHash": "d0b662fd78ae5abcb830ce1d70f2a4bc830a91da3e4e724bda8a52169c96eb6a",
+      "hash": "c9bdd4b0e89a204b6ec22a43c70fc492674182a0fb983717fa54e274b453894b"
     },
     {
       "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000236",
       "sequence": 236,
-      "recordedAt": "2026-10-27T02:37:46.532Z",
+      "recordedAt": "2026-10-27T03:00:56.019Z",
       "dataset": "ai-obligations-atlas",
       "eventType": "published",
       "actor": {
-        "actorType": "fabric",
+        "actorType": "service",
         "actorID": "reasoning-fabric",
         "displayName": "Reasoning Fabric"
       },
@@ -626,12 +626,12 @@
         "https://www.mas.gov.sg/regulation/faqs/faq-on-mas-notice-658-and-1121-banks"
       ],
       "confidenceScore": 0.85,
-      "previousHash": "63e0e407d158406006109efdd240cf3e8ce0655999e7bfb00912ac4e35f056c1",
-      "hash": "73b082b7768a57182e953fddcaa7f3e2eae3c14110b391630e913793fb4082db"
+      "previousHash": "c9bdd4b0e89a204b6ec22a43c70fc492674182a0fb983717fa54e274b453894b",
+      "hash": "373227bb226abf9035ae1dfa4406ae7dbfe7f0a090109ad9bbb595d848f3c6f4"
     }
   ],
   "ledgerHead": {
     "sequence": 469,
-    "hash": "008b9b2b1065a63373306a47eaab54456fa4c882fa5e6ea4b5a4e90834f47f50"
+    "hash": "72296710246a909b3baaf91a5427c986ea48d1914854739f8e6bf62abb4887bb"
   }
 }

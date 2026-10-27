@@ -112,7 +112,7 @@ export class Atlas {
       dataset: s.dataset,
       generatedAt: s.generatedAt,
       metamodelVersion: s.metamodelVersion,
-      connectorVersion: s.connectorVersion,
+      interfaceVersion: s.interfaceVersion,
       ledgerHead: s.ledgerHead,
       preview: this.preview,
       counts: {

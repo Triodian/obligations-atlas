@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://triodian.com/schemas/connector/review-decision.schema.json",
+  "$id": "https://triodian.com/schemas/governance/review-decision.schema.json",
   "title": "Review Decision Schema",
-  "description": "Reasoning Fabric connector. A named person's decision on a queued or escalated change proposal. Nothing that changes a status, a date or a tier is published without one. The approver is recorded on the published record.",
+  "description": "Governance interface. A named person's decision on a queued or escalated change proposal. Nothing that changes a status, a date or a tier is published without one. The approver is recorded on the published record.",
   "type": "object",
   "required": [
     "reviewDecisionID",
@@ -57,7 +57,7 @@
         },
         "role": {
           "type": "string",
-          "description": "Role, e.g. Triodian analyst, method owner, partner firm reviewer"
+          "description": "Role, e.g. Analyst, method owner, partner firm reviewer"
         },
         "organization": {
           "type": "string",
