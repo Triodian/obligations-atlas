@@ -193,20 +193,44 @@ tr:last-child td{border-bottom:0}
 .scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;background:var(--card)}
 
 /* ---------- brief ---------- */
-.brief-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:20px 0}
-.brief-form fieldset{border:1px solid var(--rule);border-radius:8px;background:var(--card);padding:18px 20px;margin:0;min-width:0}
-legend{font:600 15px/1.3 var(--serif);padding:0 4px}
-.check{display:flex;gap:8px;align-items:flex-start;padding:4px 0;font-size:14px}
-.check input{margin-top:4px;accent-color:var(--aubergine)}
-.ucrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-bottom:1px solid var(--rule-soft)}
+.brief-form{display:flex;flex-direction:column;gap:16px;min-width:0}
+.brief-form fieldset.card{margin:0;min-width:0}
+/* Legends sit inside the card as a heading, not on its border. */
+.brief-form legend{float:left;width:100%;padding:0;margin:0 0 14px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font:600 15px/1.3 var(--sans);color:var(--ink)}
+.brief-form legend + *{clear:both}
+.stepno{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--aubergine-bg);color:var(--aubergine);font:600 12px/1 var(--sans);align-self:center}
+.hint{font:400 13px/1.3 var(--sans);color:var(--ink-soft)}
+.field{display:flex;flex-direction:column;gap:6px;font:600 12px/1.3 var(--sans);color:var(--ink-soft);margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field .small{font-weight:400}
+.toggles{display:flex;flex-wrap:wrap;gap:8px}
+.toggle{position:relative;display:inline-flex}
+.toggle input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.toggle span{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 14px;border:1px solid #C3CAD3;border-radius:6px;background:#fff;font:500 14px var(--sans);color:var(--ink)}
+.toggle input:checked + span{background:var(--aubergine-bg);border-color:var(--aubergine);color:var(--aubergine);font-weight:600}
+.toggle input:checked + span::before{content:"✓";font-size:12px}
+.toggle input:focus-visible + span{outline:2px solid var(--aubergine);outline-offset:2px}
+.checkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2px 18px}
+.check{display:flex;gap:9px;align-items:flex-start;padding:5px 0;font-size:14px;cursor:pointer}
+.check input{margin-top:3px;accent-color:var(--aubergine);flex-shrink:0}
+.uctable{border:1px solid var(--rule-soft);border-radius:6px;overflow:hidden}
+.ucrow{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:12px;align-items:center;padding:4px 12px;border-bottom:1px solid var(--rule-soft)}
 .ucrow:last-child{border-bottom:0}
+.ucrow.on{background:#FAF8FC}
+.ucrow strong{display:inline-block;min-width:38px}
+.ucrow select:disabled{opacity:.45}
 select.small,input.text,textarea.text{font:500 14px var(--sans);padding:6px 9px;border:1px solid #C3CAD3;border-radius:6px;background:#fff;color:var(--ink)}
+input.text{font-weight:400;height:38px;color:var(--ink)}
 input.text,textarea.text{width:100%}
 .actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
 .btn{min-height:38px;padding:0 16px;border-radius:6px;border:1px solid var(--ink);background:var(--ink);color:#fff;font:600 14px var(--sans);cursor:pointer}
 .btn.secondary{background:#fff;color:var(--ink);border-color:var(--rule)}
 .btn.secondary:hover{border-color:#AEB7C2}
 .btn:disabled{opacity:.45;cursor:default}
+.brief-aside .actions.stack{flex-direction:column;margin:18px 0 12px}
+.brief-aside .actions.stack .btn{width:100%}
+.brief-aside .tiers{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:5px;font-size:13px}
+.brief-aside .tiers li{display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:160px}
 .brief{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:40px clamp(20px,5vw,56px);margin-top:18px;font:400 15.5px/1.6 var(--serif);box-shadow:0 1px 2px rgba(23,32,43,.06),0 8px 28px rgba(23,32,43,.06)}
 .brief h2{border-top:1px solid var(--rule-soft);padding-top:14px}
 .brief h2:first-child{margin-top:0;border:0;padding:0;font-size:28px}
