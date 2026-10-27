@@ -6,6 +6,15 @@
 import { buildMatterBrief, ENTITY_TYPES, ROLES, TIERS, STATUS, JURISDICTIONS, ASSESSMENTS, STANDING_RULE } from '/core/atlas.js';
 
 const main = document.getElementById('main');
+// When embedded (single-file preview), data comes from window.ATLAS_EMBED and routes are plain #names.
+const EMBED = window.ATLAS_EMBED || null;
+const href = (page, arg) => (EMBED ? `#${page || 'register'}${arg ? `-${arg}` : ''}` : `#/${page || ''}${arg ? `/${encodeURIComponent(arg)}` : ''}`);
+const parseRoute = () => {
+  const h = location.hash.replace(/^#\/?/, '');
+  if (!EMBED) { const [page, arg] = h.split('/'); return [page, arg ? decodeURIComponent(arg) : '']; }
+  const m = /^(obligation)-(.+)$/.exec(h);
+  return m ? [m[1], m[2]] : [h, ''];
+};
 let data;
 const state = { tier: '', jurisdiction: 'AU', entityType: '', useCase: '', q: '', current: true };
 
@@ -22,6 +31,8 @@ const tierWord = (tier) => `<span class="tierword ${esc(tier)}">${esc(TIERS[tier
 const pendingBadge = (o) => (o.publicationStatus === 'pendingReview' ? ' <span class="badge" title="Not yet approved by a Triodian reviewer">Pending review</span>' : '');
 
 function setNav(name) {
+  document.querySelectorAll('[data-nav]').forEach((a) => a.setAttribute('href', href(a.dataset.nav === 'register' ? '' : a.dataset.nav)));
+  document.querySelector('.wordmark').setAttribute('href', href(''));
   document.querySelectorAll('[data-nav]').forEach((a) => (a.dataset.nav === name ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
 }
 
@@ -40,7 +51,7 @@ function entryHTML(o) {
   return `<li class="entry">${tab(o.sourceTier)}
     <div class="entry-body">
       <div class="citation"><span class="where">${esc(o.instrument)}, ${esc(o.citation)}</span><span>${esc(jurName(o.jurisdiction))}. ${esc(o.statusLabel)}</span></div>
-      <h3><a href="#/obligation/${encodeURIComponent(o.obligationID)}">${esc(o.title)}</a>${pendingBadge(o)}${o.stale ? ' <span class="badge stale">Past freshness threshold</span>' : ''}</h3>
+      <h3><a href="${href('obligation', o.obligationID)}">${esc(o.title)}</a>${pendingBadge(o)}${o.stale ? ' <span class="badge stale">Past freshness threshold</span>' : ''}</h3>
       <p class="statement">${esc(o.statement)}</p>
       <ul class="facts">
         <li>${tierWord(o.sourceTier)}${o.tierBasis.length ? `, resting on ${o.tierBasis.length} binding provision${o.tierBasis.length > 1 ? 's' : ''}` : ''}</li>
@@ -101,10 +112,10 @@ function renderRegister() {
 async function renderObligation(id) {
   setNav('register');
   const o = data.obligations.find((x) => x.obligationID === id);
-  if (!o) { main.innerHTML = `<h1>No record ${esc(id)}</h1><p><a href="#/">Back to the register</a></p>`; return; }
+  if (!o) { main.innerHTML = `<h1>No record ${esc(id)}</h1><p><a href="${href('register')}">Back to the register</a></p>`; return; }
   const ents = o.entityTypes.map((e) => ENTITY_TYPES[e] || e).join(', ');
   main.innerHTML = `
-    <p><a href="#/">Register</a></p>
+    <p><a href="${href('register')}">Register</a></p>
     <div class="record-head">${tab(o.sourceTier)}<div>
       <div class="citation"><span>${esc(o.instrument)}, ${esc(o.citation)}</span></div>
       <h1>${esc(o.title)}${pendingBadge(o)}</h1>
@@ -112,7 +123,7 @@ async function renderObligation(id) {
     <div class="grid2">
       <div>
         <p class="statement" style="font-size:1.12rem">${esc(o.statement)}</p>
-        ${o.tierBasis.length ? `<h2>Rests on</h2><ul>${o.tierBasis.map((b) => `<li><a href="#/obligation/${encodeURIComponent(b.obligationID)}">${esc(b.title || b.obligationID)}</a> (${tierWord(b.sourceTier)})${b.note ? `<div class="muted">${esc(b.note)}</div>` : ''}</li>`).join('')}</ul>` : ''}
+        ${o.tierBasis.length ? `<h2>Rests on</h2><ul>${o.tierBasis.map((b) => `<li><a href="${href('obligation', b.obligationID)}">${esc(b.title || b.obligationID)}</a> (${tierWord(b.sourceTier)})${b.note ? `<div class="muted">${esc(b.note)}</div>` : ''}</li>`).join('')}</ul>` : ''}
         ${o.keyDates.length ? `<h2>Key dates</h2><ol class="timeline">${o.keyDates.map((k) => `<li><time datetime="${esc(k.date)}">${esc(fmtDate(k.date))}</time>${esc(k.dateType.replace(/([A-Z])/g, ' $1').toLowerCase())}${k.provisions ? `, ${esc(k.provisions)}` : ''}${k.note ? `<div class="muted">${esc(k.note)}</div>` : ''}</li>`).join('')}</ol>` : ''}
         <h2>Cite this record</h2>
         <p class="cite">${esc(o.citeAs)}</p>
@@ -137,8 +148,7 @@ async function renderObligation(id) {
       </aside>
     </div>`;
   try {
-    const r = await fetch(`/api/v1/provenance/${encodeURIComponent(o.obligationID)}`);
-    const p = await r.json();
+    const p = EMBED ? await EMBED.provenance(o.obligationID) : await (await fetch(`/api/v1/provenance/${encodeURIComponent(o.obligationID)}`)).json();
     document.getElementById('trail').innerHTML = `<p class="muted">Each step below is an entry in the Reasoning Fabric's append-only provenance ledger. Its hash is checked here against its content.</p>
       <ol class="trail">${p.entries.map((e) => `<li><span class="${e.hashVerified ? 'ok' : 'bad'}">${e.hashVerified ? 'Hash checks' : 'Hash does not match'}</span> ${esc(fmtDate(e.recordedAt))}, ${esc(e.eventType.replace(/([A-Z])/g, ' $1').toLowerCase())} by ${esc(e.actor.displayName || e.actor.actorID)}<div class="muted">${esc(e.decision || '')}${e.ruleIDs ? ` Rules: ${e.ruleIDs.map((x) => `<code>${esc(x)}</code>`).join(', ')}` : ''}</div></li>`).join('')}</ol>`;
   } catch {
@@ -151,7 +161,7 @@ function renderUseCases() {
   main.innerHTML = `<h1>Standardised AI use cases</h1>
     <p class="lede">Every obligation is mapped to the same ten use cases, defined on the authority (A) and boundary (B) scales, so results compare across jurisdictions and clients. Consequence (C1 to C5) is set per matter, against the client's own thresholds.</p>
     <div class="scroll"><table><thead><tr><th>Use case</th><th>Authority</th><th>Boundary</th><th>Leads to</th><th>Records</th></tr></thead><tbody>
-    ${data.useCases.map((u) => `<tr><td><strong>${esc(u.useCaseID)}</strong> ${esc(u.title)}<div class="muted">${esc(u.description)}</div></td><td>${esc(u.authorityLabels.join(', '))}</td><td>${esc((u.boundaries || []).map((b) => b.toUpperCase()).join(', ') || (u.confidentialityChannels ? 'Channels K1 to K7' : ''))}</td><td>${esc((u.assessmentTypes || []).map((a) => ASSESSMENTS[a].name).join('; '))}</td><td><a href="#/" data-uc="${esc(u.useCaseID)}">${u.obligationCount}</a></td></tr>`).join('')}
+    ${data.useCases.map((u) => `<tr><td><strong>${esc(u.useCaseID)}</strong> ${esc(u.title)}<div class="muted">${esc(u.description)}</div></td><td>${esc(u.authorityLabels.join(', '))}</td><td>${esc((u.boundaries || []).map((b) => b.toUpperCase()).join(', ') || (u.confidentialityChannels ? 'Channels K1 to K7' : ''))}</td><td>${esc((u.assessmentTypes || []).map((a) => ASSESSMENTS[a].name).join('; '))}</td><td><a href="${href('register')}" data-uc="${esc(u.useCaseID)}">${u.obligationCount}</a></td></tr>`).join('')}
     </tbody></table></div>`;
   main.querySelectorAll('[data-uc]').forEach((a) => a.addEventListener('click', () => { state.useCase = a.dataset.uc; state.jurisdiction = ''; }));
 }
@@ -165,7 +175,7 @@ function renderChanges() {
       <div class="citation"><span>${esc(kinds[c.kind] || c.kind)}${c.jurisdiction ? `, ${esc(jurName(c.jurisdiction))}` : ''}</span><time datetime="${esc(c.date)}">${esc(fmtDate(c.date))}</time></div>
       <h3>${esc(c.title)}${c.publicationStatus === 'pendingReview' ? ' <span class="badge">Pending review</span>' : ''}</h3>
       ${c.summary ? `<p class="statement">${esc(c.summary)}</p>` : ''}
-      <ul class="facts">${c.effectiveDate ? `<li>Effective ${esc(fmtDate(c.effectiveDate))}</li>` : ''}${c.sourceURL ? `<li><a href="${esc(c.sourceURL)}" target="_blank" rel="noopener">Source</a> (rank ${esc(c.sourceRank)})</li>` : ''}${(c.affects || []).filter((a) => data.obligations.some((o) => o.obligationID === a)).slice(0, 6).map((a) => `<li><a href="#/obligation/${encodeURIComponent(a)}">${esc(a)}</a></li>`).join('')}</ul>
+      <ul class="facts">${c.effectiveDate ? `<li>Effective ${esc(fmtDate(c.effectiveDate))}</li>` : ''}${c.sourceURL ? `<li><a href="${esc(c.sourceURL)}" target="_blank" rel="noopener">Source</a> (rank ${esc(c.sourceRank)})</li>` : ''}${(c.affects || []).filter((a) => data.obligations.some((o) => o.obligationID === a)).slice(0, 6).map((a) => `<li><a href="${href('obligation', a)}">${esc(a)}</a></li>`).join('')}</ul>
     </div></li>`).join('')}</ol>`;
 }
 
@@ -212,8 +222,8 @@ function renderBrief() {
     </form>
     <div class="actions">
       <button class="btn" id="build" type="button">Build brief</button>
-      <button class="btn secondary" id="export" type="button" disabled>Export for an assessment app</button>
-      <button class="btn secondary" id="print" type="button" disabled>Print</button>
+      <button class="btn secondary" id="export" type="button" disabled>${EMBED ? 'Copy brief as JSON' : 'Export for an assessment app'}</button>
+      ${EMBED ? '' : '<button class="btn secondary" id="print" type="button" disabled>Print</button>'}
       <button class="btn secondary" id="save" type="button" disabled>Save in this browser</button>
     </div>
     <div id="out"></div>
@@ -231,12 +241,18 @@ function renderBrief() {
   const show = (b) => {
     brief = b;
     document.getElementById('out').innerHTML = briefHTML(b);
-    ['export', 'print', 'save'].forEach((id) => (document.getElementById(id).disabled = false));
+    ['export', 'print', 'save'].forEach((id) => { const b = document.getElementById(id); if (b) b.disabled = false; });
   };
   form.addEventListener('change', read);
   document.getElementById('build').addEventListener('click', () => show(buildMatterBrief(data, read())));
-  document.getElementById('print').addEventListener('click', () => window.print());
-  document.getElementById('export').addEventListener('click', () => {
+  if (!EMBED) document.getElementById('print').addEventListener('click', () => window.print());
+  document.getElementById('export').addEventListener('click', async () => {
+    if (EMBED) {
+      const text = JSON.stringify(brief, null, 2);
+      try { await navigator.clipboard.writeText(text); document.getElementById('export').textContent = 'Copied brief as JSON'; }
+      catch { const out = document.getElementById('out'); out.insertAdjacentHTML('beforeend', `<textarea class="text" rows="12" readonly>${esc(text)}</textarea>`); out.lastElementChild.select(); }
+      return;
+    }
     const blob = new Blob([JSON.stringify(brief, null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -289,9 +305,9 @@ function renderDevelopers() {
 
 function route() {
   const h = location.hash.replace(/^#\/?/, '');
-  const [page, arg] = h.split('/');
+  const [page, arg] = parseRoute();
   window.scrollTo(0, 0);
-  if (page === 'obligation') renderObligation(decodeURIComponent(arg || ''));
+  if (page === 'obligation') renderObligation(arg);
   else if (page === 'use-cases') renderUseCases();
   else if (page === 'changes') renderChanges();
   else if (page === 'brief') renderBrief();
@@ -303,9 +319,12 @@ function route() {
 async function start() {
   Object.assign(state, store.get('atlas.filters', {}));
   try {
-    const r = await fetch('/api/v1/dataset');
-    if (!r.ok) throw new Error(String(r.status));
-    data = await r.json();
+    if (EMBED) data = EMBED.dataset();
+    else {
+      const r = await fetch('/api/v1/dataset');
+      if (!r.ok) throw new Error(String(r.status));
+      data = await r.json();
+    }
   } catch (e) {
     main.innerHTML = `<h1>The register could not be loaded</h1><p>The dataset request failed (${esc(e.message)}). Check your connection and reload the page.</p>`;
     return;

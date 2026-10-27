@@ -2,3 +2,4 @@ node_modules/
 public/core/
 .wrangler/
 .dev.vars
+dist/

@@ -19,7 +19,8 @@
     "prestart": "node scripts/build.mjs",
     "predev": "node scripts/build.mjs",
     "predeploy": "node scripts/build.mjs",
-    "pretest": "node scripts/build.mjs"
+    "pretest": "node scripts/build.mjs",
+    "build:preview-page": "node scripts/build-preview-page.mjs"
   },
   "dependencies": {
     "hono": "^4.6.14"
