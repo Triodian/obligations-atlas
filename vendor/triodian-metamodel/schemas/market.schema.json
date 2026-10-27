@@ -1,0 +1,1270 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/market.schema.json",
+  "title": "Market Domain Schema",
+  "description": "The external business environment, market dynamics, competitive positioning and industry trends that influence an organization's strategy. Competitive Position, Market Trend and Industry Analysis are separate element records that reference a market by marketID.",
+  "type": "object",
+  "required": [
+    "marketID",
+    "title",
+    "description",
+    "orgUnitTitle"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "marketID": {
+      "description": "Unique identifier for the market element",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Name or title of the market or competitive landscape"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed explanation of the market environment"
+    },
+    "marketDefinition": {
+      "type": "string",
+      "description": "Definition of market boundaries and characteristics"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "Organization unit responsible for market intelligence"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitRoles": {
+      "type": "array",
+      "description": "Roles within the organization unit that manage market analysis",
+      "items": {
+        "type": "string"
+      }
+    },
+    "marketSize": {
+      "type": "object",
+      "description": "Current and projected market dimensions",
+      "properties": {
+        "currentSize": {
+          "type": "string",
+          "description": "Current market size",
+          "examples": [
+            "$457 billion"
+          ]
+        },
+        "currency": {
+          "$ref": "common.schema.json#/definitions/currencyCode"
+        },
+        "year": {
+          "type": "string",
+          "description": "Year of the current size"
+        },
+        "projectedSize": {
+          "type": "string",
+          "description": "Projected market size"
+        },
+        "projectionYear": {
+          "type": "string",
+          "description": "Year of the projection"
+        },
+        "calculationMethod": {
+          "type": "string",
+          "description": "How the size was calculated"
+        }
+      },
+      "additionalProperties": false
+    },
+    "marketGrowthRate": {
+      "type": "object",
+      "description": "Rate of market expansion or contraction",
+      "properties": {
+        "currentRate": {
+          "type": "number",
+          "description": "Current growth rate, as a percentage"
+        },
+        "projectedRate": {
+          "type": "number",
+          "description": "Projected growth rate, as a percentage"
+        },
+        "timespan": {
+          "type": "string",
+          "description": "Period the rate applies to",
+          "examples": [
+            "Annual"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "marketSegmentation": {
+      "type": "array",
+      "description": "How the overall market is divided",
+      "items": {
+        "type": "object",
+        "properties": {
+          "segmentName": {
+            "type": "string",
+            "description": "Name of the segment"
+          },
+          "segmentDescription": {
+            "type": "string",
+            "description": "Description of the segment"
+          },
+          "segmentSize": {
+            "type": "string",
+            "description": "Size of the segment"
+          },
+          "segmentGrowth": {
+            "type": "string",
+            "description": "Growth of the segment"
+          }
+        },
+        "required": [
+          "segmentName"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "marketTrends": {
+      "type": "array",
+      "description": "Emerging patterns and directional shifts (see the marketTrend element for detail)",
+      "items": {
+        "type": "string"
+      }
+    },
+    "marketBarriers": {
+      "type": "array",
+      "description": "Obstacles to market entry or expansion",
+      "items": {
+        "type": "string"
+      }
+    },
+    "competitiveIntensity": {
+      "type": "object",
+      "description": "Level of competition in the market",
+      "properties": {
+        "level": {
+          "description": "Level of competition",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/ratingLevel"
+            }
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the competitive landscape"
+        }
+      },
+      "required": [
+        "level"
+      ],
+      "additionalProperties": false
+    },
+    "regulatoryFactors": {
+      "type": "array",
+      "description": "Regulatory influences on the market",
+      "items": {
+        "type": "string"
+      }
+    },
+    "technologicalFactors": {
+      "type": "array",
+      "description": "Technology impacts on the market",
+      "items": {
+        "type": "string"
+      }
+    },
+    "economicFactors": {
+      "type": "array",
+      "description": "Economic influences on the market",
+      "items": {
+        "type": "string"
+      }
+    },
+    "socialFactors": {
+      "type": "array",
+      "description": "Social trends affecting the market",
+      "items": {
+        "type": "string"
+      }
+    },
+    "environmentalFactors": {
+      "type": "array",
+      "description": "Environmental considerations",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strategicOpportunities": {
+      "type": "array",
+      "description": "Market-based opportunities identified",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strategicThreats": {
+      "type": "array",
+      "description": "Market-based threats identified",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How market understanding supports strategy"
+    },
+    "performanceIndicators": {
+      "type": "array",
+      "description": "Metrics used to measure market performance",
+      "items": {
+        "$ref": "common.schema.json#/definitions/performanceIndicator"
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other domains, processes or systems supporting market analysis",
+      "items": {
+        "$ref": "common.schema.json#/definitions/dependency"
+      }
+    },
+    "relatedMarkets": {
+      "type": "array",
+      "description": "Other markets with relationships to this one",
+      "items": {
+        "type": "object",
+        "properties": {
+          "marketID": {
+            "type": "string",
+            "description": "ID of the related market"
+          },
+          "relationshipType": {
+            "type": "string",
+            "enum": [
+              "overlapping",
+              "adjacent",
+              "parent",
+              "subMarket",
+              "substitute",
+              "complementary"
+            ],
+            "description": "Nature of the relationship"
+          },
+          "relationshipStrength": {
+            "description": "Strength of the relationship (1 = lowest, 5 = highest)",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/scale1to5"
+              }
+            ]
+          }
+        },
+        "required": [
+          "marketID",
+          "relationshipType"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "improvementOpportunities": {
+      "type": "array",
+      "description": "Areas where market intelligence can be enhanced",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "definitions": {
+    "metricComparison": {
+      "type": "object",
+      "description": "A metric with current and target values",
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric"
+        },
+        "currentValue": {
+          "type": "string",
+          "description": "Current value"
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "Target value"
+        }
+      },
+      "required": [
+        "metricName"
+      ],
+      "additionalProperties": false
+    },
+    "costShare": {
+      "type": "object",
+      "description": "A cost amount and its share of the total",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "Monetary amount",
+          "minimum": 0
+        },
+        "percentage": {
+          "type": "number",
+          "description": "Share of total cost",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": false
+    },
+    "competitivePosition": {
+      "type": "object",
+      "description": "An assessment of a competitor's standing within a market",
+      "properties": {
+        "positionID": {
+          "type": "string",
+          "description": "Unique identifier for the competitive position",
+          "examples": [
+            "CP-SFCRM-001"
+          ]
+        },
+        "competitorName": {
+          "type": "string",
+          "description": "Name of the competitor"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the competitive position"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit responsible for monitoring this competitor"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "marketID": {
+          "type": "string",
+          "description": "ID of the market this competitor operates in"
+        },
+        "competitorType": {
+          "type": "string",
+          "enum": [
+            "direct",
+            "indirect",
+            "substitute",
+            "emerging",
+            "potential"
+          ],
+          "description": "Classification of competitor"
+        },
+        "competitorStrength": {
+          "description": "Overall competitive strength (1 = lowest, 5 = highest)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/scale1to5"
+            }
+          ]
+        },
+        "marketShare": {
+          "type": "object",
+          "description": "Estimated share of the relevant market",
+          "properties": {
+            "value": {
+              "type": "number",
+              "description": "Estimated share of the relevant market, as a percentage",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "year": {
+              "type": "string",
+              "description": "Year the estimate applies to"
+            },
+            "trend": {
+              "description": "Direction of change in market share",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/quantityTrend"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "valueProposition": {
+          "type": "string",
+          "description": "Competitor's core value proposition"
+        },
+        "targetCustomers": {
+          "type": "array",
+          "description": "Competitor's primary customer segments",
+          "items": {
+            "type": "string"
+          }
+        },
+        "competitiveAdvantages": {
+          "type": "array",
+          "description": "Areas of competitor strength",
+          "items": {
+            "type": "object",
+            "properties": {
+              "advantage": {
+                "type": "string",
+                "description": "Area of competitor strength"
+              },
+              "impactLevel": {
+                "description": "Impact of the advantage (1 = lowest, 5 = highest)",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/scale1to5"
+                  }
+                ]
+              },
+              "domain": {
+                "type": "string",
+                "description": "Domain the advantage relates to",
+                "examples": [
+                  "Technology",
+                  "Price",
+                  "Distribution"
+                ]
+              }
+            },
+            "required": [
+              "advantage"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "competitiveDisadvantages": {
+          "type": "array",
+          "description": "Areas of competitor weakness",
+          "items": {
+            "type": "object",
+            "properties": {
+              "disadvantage": {
+                "type": "string",
+                "description": "Area of competitor weakness"
+              },
+              "exploitability": {
+                "description": "How readily the weakness can be exploited (1 = lowest, 5 = highest)",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/scale1to5"
+                  }
+                ]
+              },
+              "domain": {
+                "type": "string",
+                "description": "Domain the disadvantage relates to"
+              }
+            },
+            "required": [
+              "disadvantage"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "strategicDirection": {
+          "type": "string",
+          "description": "Observed strategic direction of the competitor"
+        },
+        "recentActions": {
+          "type": "array",
+          "description": "Notable competitor movements",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "description": "Date of the action",
+                "format": "date"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the action"
+              },
+              "significance": {
+                "description": "Significance of the action (1 = lowest, 5 = highest)",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/scale1to5"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "date",
+              "description"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "responseStrategies": {
+          "type": "array",
+          "description": "Organizational responses to this competitor",
+          "items": {
+            "type": "string"
+          }
+        },
+        "benchmarkMetrics": {
+          "type": "array",
+          "description": "Key metrics for competitive comparison",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metricName": {
+                "type": "string",
+                "description": "Name of the metric"
+              },
+              "competitorValue": {
+                "type": "string",
+                "description": "Competitor's value"
+              },
+              "organizationValue": {
+                "type": "string",
+                "description": "Organization's value"
+              }
+            },
+            "required": [
+              "metricName"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "monitoringFrequency": {
+          "description": "How often this competitor is formally assessed",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/frequency"
+            }
+          ]
+        },
+        "informationSources": {
+          "type": "array",
+          "description": "Sources of competitive intelligence",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Date of last competitive assessment",
+          "format": "date"
+        }
+      },
+      "required": [
+        "positionID",
+        "competitorName",
+        "description",
+        "marketID"
+      ],
+      "additionalProperties": false
+    },
+    "marketTrend": {
+      "type": "object",
+      "description": "An identifiable pattern or direction in the market",
+      "properties": {
+        "trendID": {
+          "type": "string",
+          "description": "Unique identifier for the market trend",
+          "examples": [
+            "TREND-AI-001"
+          ]
+        },
+        "trendTitle": {
+          "type": "string",
+          "description": "Name of the trend"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed explanation of the trend"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit responsible for monitoring this trend"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "marketID": {
+          "type": "string",
+          "description": "ID of the market this trend affects"
+        },
+        "trendTimeframe": {
+          "type": "object",
+          "description": "Expected duration and development timeline",
+          "properties": {
+            "emergenceDate": {
+              "type": "string",
+              "description": "When the trend emerged",
+              "format": "date"
+            },
+            "maturityEstimate": {
+              "type": "string",
+              "description": "Expected year or period of maturity"
+            },
+            "duration": {
+              "description": "Expected duration",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/timeHorizon"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "trendImpact": {
+          "type": "object",
+          "description": "Potential impact on the organization",
+          "properties": {
+            "impactLevel": {
+              "description": "Overall impact on the organization",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/changeMagnitude"
+                }
+              ]
+            },
+            "opportunityScore": {
+              "description": "Size of the opportunity (1 = lowest, 5 = highest)",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/scale1to5"
+                }
+              ]
+            },
+            "threatScore": {
+              "description": "Size of the threat (1 = lowest, 5 = highest)",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/scale1to5"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "trendEvidence": {
+          "type": "array",
+          "description": "Supporting data and observations",
+          "items": {
+            "type": "object",
+            "properties": {
+              "evidenceType": {
+                "type": "string",
+                "description": "Kind of evidence",
+                "examples": [
+                  "market data",
+                  "customer research",
+                  "analyst report"
+                ]
+              },
+              "source": {
+                "type": "string",
+                "description": "Source of the evidence"
+              },
+              "date": {
+                "type": "string",
+                "description": "Date of the evidence",
+                "format": "date"
+              }
+            },
+            "required": [
+              "evidenceType",
+              "source"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "trendUncertainty": {
+          "type": "object",
+          "description": "Level of certainty about the trend",
+          "properties": {
+            "uncertaintyLevel": {
+              "description": "Level of certainty about the trend",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/simpleLevel"
+                }
+              ]
+            },
+            "uncertaintyFactors": {
+              "type": "array",
+              "description": "Factors contributing to uncertainty",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "affectedDomains": {
+          "type": "array",
+          "description": "Business domains impacted by this trend",
+          "items": {
+            "type": "object",
+            "properties": {
+              "domainType": {
+                "description": "Business domain affected",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/domainType"
+                  }
+                ]
+              },
+              "impactDescription": {
+                "type": "string",
+                "description": "How the domain is affected"
+              },
+              "impactSeverity": {
+                "description": "Severity of the impact (1 = lowest, 5 = highest)",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/scale1to5"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "domainType"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "responseStrategies": {
+          "type": "array",
+          "description": "Approaches to addressing the trend",
+          "items": {
+            "type": "object",
+            "properties": {
+              "strategyName": {
+                "type": "string",
+                "description": "Name of the response strategy"
+              },
+              "implementationStatus": {
+                "description": "Implementation status",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/implementationStatus"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "strategyName"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "trendMonitoring": {
+          "type": "object",
+          "description": "How the trend is being tracked",
+          "properties": {
+            "monitoringMethod": {
+              "type": "string",
+              "description": "How the trend is tracked"
+            },
+            "frequency": {
+              "description": "How often the trend is reviewed",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/frequency"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "triggerPoints": {
+          "type": "array",
+          "description": "Events that would accelerate response",
+          "items": {
+            "type": "object",
+            "properties": {
+              "triggerDescription": {
+                "type": "string",
+                "description": "Event that would accelerate a response"
+              },
+              "likelihood": {
+                "description": "Likelihood of the trigger occurring",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/likelihood"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "triggerDescription"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "relatedTrends": {
+          "type": "array",
+          "description": "Other trends connected to this one",
+          "items": {
+            "type": "object",
+            "properties": {
+              "trendID": {
+                "type": "string",
+                "description": "ID of the related trend"
+              },
+              "relationshipType": {
+                "type": "string",
+                "enum": [
+                  "reinforcing",
+                  "counteracting",
+                  "enabling",
+                  "dependent"
+                ],
+                "description": "Nature of the relationship"
+              },
+              "relationshipStrength": {
+                "description": "Strength of the relationship (1 = lowest, 5 = highest)",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/scale1to5"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "trendID",
+              "relationshipType"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Date of last trend assessment",
+          "format": "date"
+        }
+      },
+      "required": [
+        "trendID",
+        "trendTitle",
+        "description",
+        "marketID"
+      ],
+      "additionalProperties": false
+    },
+    "industryAnalysis": {
+      "type": "object",
+      "description": "A structured evaluation of industry forces, dynamics and evolution",
+      "properties": {
+        "industryID": {
+          "type": "string",
+          "description": "Unique identifier for the industry analysis",
+          "examples": [
+            "IND-CLOUD-001"
+          ]
+        },
+        "industryName": {
+          "type": "string",
+          "description": "Name of the industry"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the industry"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit responsible for industry analysis"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "marketID": {
+          "type": "string",
+          "description": "ID of the related market"
+        },
+        "industryMaturity": {
+          "description": "Current lifecycle stage",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/adoptionStage"
+            }
+          ]
+        },
+        "industryStructure": {
+          "type": "object",
+          "description": "Key structural characteristics",
+          "properties": {
+            "concentration": {
+              "type": "string",
+              "enum": [
+                "fragmented",
+                "moderatelyConcentrated",
+                "concentrated",
+                "highlyConcentrated"
+              ],
+              "description": "Degree of market concentration"
+            },
+            "majorPlayers": {
+              "type": "array",
+              "description": "Major players in the industry",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "powerBalance": {
+          "type": "object",
+          "description": "Balance of power in the value chain",
+          "properties": {
+            "dominantParty": {
+              "type": "string",
+              "enum": [
+                "producers",
+                "suppliers",
+                "customers",
+                "intermediaries",
+                "regulators",
+                "balanced"
+              ],
+              "description": "Party holding most power in the value chain"
+            },
+            "powerDynamics": {
+              "type": "string",
+              "description": "Description of power dynamics"
+            }
+          },
+          "additionalProperties": false
+        },
+        "profitabilityDrivers": {
+          "type": "array",
+          "description": "Factors driving industry profitability",
+          "items": {
+            "type": "object",
+            "properties": {
+              "driver": {
+                "type": "string",
+                "description": "Factor driving profitability"
+              },
+              "effectDirection": {
+                "type": "string",
+                "enum": [
+                  "veryNegative",
+                  "negative",
+                  "neutral",
+                  "positive",
+                  "veryPositive"
+                ],
+                "description": "Direction of the effect on profitability"
+              },
+              "trend": {
+                "description": "Direction of change",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/quantityTrend"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "driver"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "disruptionPotential": {
+          "type": "object",
+          "description": "Likelihood of industry disruption",
+          "properties": {
+            "disruptionLevel": {
+              "description": "Likelihood of industry disruption",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/likelihood"
+                }
+              ]
+            },
+            "disruptionSources": {
+              "type": "array",
+              "description": "Sources of potential disruption",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "description": "Source of potential disruption"
+                  },
+                  "likelihood": {
+                    "description": "Likelihood of disruption from this source",
+                    "allOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/likelihood"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "source"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "entryBarriers": {
+          "type": "array",
+          "description": "Obstacles to new market entrants",
+          "items": {
+            "type": "object",
+            "properties": {
+              "barrier": {
+                "type": "string",
+                "description": "Obstacle to new entrants"
+              },
+              "strength": {
+                "description": "Strength of the barrier",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/simpleLevel"
+                  }
+                ]
+              },
+              "trend": {
+                "description": "Direction of change",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/quantityTrend"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "barrier"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "substitutionThreats": {
+          "type": "array",
+          "description": "Threat of substitute products or services",
+          "items": {
+            "type": "object",
+            "properties": {
+              "substitute": {
+                "type": "string",
+                "description": "Substitute product or service"
+              },
+              "threatLevel": {
+                "description": "Level of threat",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/simpleLevel"
+                  }
+                ]
+              },
+              "switchingCosts": {
+                "description": "Cost for customers to switch",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/simpleLevel"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "substitute"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "supplierLeverage": {
+          "type": "object",
+          "description": "Power of suppliers in the industry",
+          "properties": {
+            "overallLeverage": {
+              "description": "Overall leverage",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/simpleLevel"
+                }
+              ]
+            },
+            "concentration": {
+              "type": "string",
+              "enum": [
+                "fragmented",
+                "moderatelyConcentrated",
+                "concentrated",
+                "highlyConcentrated"
+              ],
+              "description": "Concentration of suppliers"
+            }
+          },
+          "additionalProperties": false
+        },
+        "customerLeverage": {
+          "type": "object",
+          "description": "Power of customers in the industry",
+          "properties": {
+            "overallLeverage": {
+              "description": "Overall leverage",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/simpleLevel"
+                }
+              ]
+            },
+            "switchingCosts": {
+              "description": "Cost for customers to switch",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/simpleLevel"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "regulatoryLandscape": {
+          "type": "object",
+          "description": "Regulatory factors affecting the industry",
+          "properties": {
+            "regulatoryBurden": {
+              "description": "Direction of regulatory burden",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/quantityTrend"
+                }
+              ]
+            },
+            "keyRegulations": {
+              "type": "array",
+              "description": "Key regulations",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "regulation": {
+                    "type": "string",
+                    "description": "Name of the regulation"
+                  },
+                  "impact": {
+                    "type": "string",
+                    "description": "Impact on the industry"
+                  }
+                },
+                "required": [
+                  "regulation"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "innovationDynamics": {
+          "type": "object",
+          "description": "Innovation patterns in the industry",
+          "properties": {
+            "innovationRate": {
+              "type": "string",
+              "enum": [
+                "slow",
+                "moderate",
+                "rapid"
+              ],
+              "description": "Pace of innovation"
+            },
+            "innovationFocus": {
+              "type": "array",
+              "description": "Areas of innovation focus",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "industryOutlook": {
+          "type": "object",
+          "description": "Future outlook for the industry",
+          "properties": {
+            "shortTermOutlook": {
+              "type": "string",
+              "description": "Outlook over the short term"
+            },
+            "mediumTermOutlook": {
+              "type": "string",
+              "description": "Outlook over the medium term"
+            },
+            "longTermOutlook": {
+              "type": "string",
+              "description": "Outlook over the long term"
+            }
+          },
+          "additionalProperties": false
+        },
+        "opportunitiesAndThreats": {
+          "type": "object",
+          "description": "Industry-specific opportunities and threats",
+          "properties": {
+            "opportunities": {
+              "type": "array",
+              "description": "Industry-specific opportunities",
+              "items": {
+                "type": "string"
+              }
+            },
+            "threats": {
+              "type": "array",
+              "description": "Industry-specific threats",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "strategicImplications": {
+          "type": "string",
+          "description": "Strategic implications of this industry analysis"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Date of last industry analysis update",
+          "format": "date"
+        }
+      },
+      "required": [
+        "industryID",
+        "industryName",
+        "description"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

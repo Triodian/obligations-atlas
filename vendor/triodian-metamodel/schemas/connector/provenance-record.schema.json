@@ -1,0 +1,164 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/connector/provenance-record.schema.json",
+  "title": "Provenance Record Schema",
+  "description": "Reasoning Fabric connector. One entry in the Semantic Provenance Ledger: an event in the life of a governed record, such as a source read, an extraction, a match, a conflict resolved, a score, a treatment, a review or a publication. Entries are append-only and hash-chained, so a gap or alteration is detectable. They name the published rule applied, not the method behind it.",
+  "type": "object",
+  "required": [
+    "provenanceRecordID",
+    "recordedAt",
+    "eventType",
+    "actor",
+    "subject",
+    "hash"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "provenanceRecordID": {
+      "description": "Unique identifier for the entry, e.g. PROV-000123",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "sequence": {
+      "type": "integer",
+      "description": "Position of the entry in the ledger",
+      "minimum": 1
+    },
+    "recordedAt": {
+      "type": "string",
+      "description": "When the event was recorded",
+      "format": "date-time"
+    },
+    "eventType": {
+      "type": "string",
+      "description": "What happened",
+      "enum": [
+        "submissionReceived",
+        "sourceRead",
+        "extracted",
+        "validated",
+        "matched",
+        "conflictDetected",
+        "conflictResolved",
+        "scored",
+        "treatmentAssigned",
+        "reviewDecided",
+        "published",
+        "superseded",
+        "removed",
+        "reverified"
+      ]
+    },
+    "actor": {
+      "type": "object",
+      "description": "Who or what acted",
+      "required": [
+        "actorType",
+        "actorID"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "actorType": {
+          "type": "string",
+          "description": "Kind of actor",
+          "enum": [
+            "agent",
+            "person",
+            "system",
+            "fabric"
+          ]
+        },
+        "actorID": {
+          "type": "string",
+          "description": "Identifier of the actor"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Name to show"
+        }
+      }
+    },
+    "subject": {
+      "description": "The record the event concerns",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/entityReference"
+        }
+      ]
+    },
+    "dataset": {
+      "type": "string",
+      "description": "Governed dataset, e.g. ai-obligations-atlas"
+    },
+    "changeProposalID": {
+      "description": "Proposal the event belongs to",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "submissionID": {
+      "description": "Submission the event belongs to",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "governedRecordID": {
+      "description": "Governed record version the event produced or affected",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "inputProvenanceRecordIDs": {
+      "type": "array",
+      "description": "Earlier entries this one follows from",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "decision": {
+      "type": "string",
+      "description": "Human-readable account of the event"
+    },
+    "ruleIDs": {
+      "type": "array",
+      "description": "Published rules applied",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidenceURLs": {
+      "type": "array",
+      "description": "Sources relied on",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "confidenceScore": {
+      "type": "number",
+      "description": "Confidence after the event, 0 to 1",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "previousHash": {
+      "type": "string",
+      "description": "hash of the previous entry in the ledger; empty for the first",
+      "pattern": "^([a-f0-9]{64})?$"
+    },
+    "hash": {
+      "type": "string",
+      "description": "SHA-256, hex encoded, of this entry's canonical JSON (keys sorted, no whitespace) with the hash field removed",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

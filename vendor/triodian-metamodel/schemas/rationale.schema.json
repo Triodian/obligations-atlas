@@ -1,0 +1,873 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/rationale.schema.json",
+  "title": "Rationale Schema",
+  "description": "Schema for the logical reasoning that connects a trigger to a specific response within the Strategic Response Model",
+  "type": "object",
+  "required": [
+    "rationaleID",
+    "rationaleTitle",
+    "description",
+    "triggerReference",
+    "rationaleType",
+    "rationaleOrientation"
+  ],
+  "properties": {
+    "rationaleID": {
+      "description": "Unique identifier for the rationale",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "rationaleTitle": {
+      "type": "string",
+      "description": "Title or summary of the rationale"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed explanation supporting a strategic response"
+    },
+    "triggerReference": {
+      "description": "Primary trigger this rationale responds to",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "triggerReferences": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "description": "Optional multiple triggers this rationale addresses"
+    },
+    "linkedDomains": {
+      "type": "array",
+      "description": "Business architecture domains influenced or justified by this rationale",
+      "items": {
+        "$ref": "common.schema.json#/definitions/domainType"
+      }
+    },
+    "rationaleType": {
+      "type": "string",
+      "enum": [
+        "preventative",
+        "remedial",
+        "opportunistic",
+        "proactive",
+        "reactive",
+        "complianceFulfillment",
+        "strategicAdvancement",
+        "customerNeedsBased",
+        "marketTrendsBased",
+        "customerExperienceEnhancement",
+        "customerFeedbackResponse",
+        "customerRetentionFocus",
+        "customerAcquisitionFocus",
+        "competitiveResponse",
+        "marketOpportunity",
+        "defensivePosition",
+        "industryAdaptation",
+        "growthInitiative",
+        "innovationImperative",
+        "consolidationStrategy",
+        "financialPerformanceImprovement",
+        "costOptimization",
+        "investmentJustification",
+        "capitalAllocation",
+        "financialRiskManagement",
+        "resourcePrioritization",
+        "financialSustainability",
+        "riskPrevention",
+        "riskMitigation",
+        "riskTransfer",
+        "riskAcceptance",
+        "controlEnhancement",
+        "responsePlanning",
+        "complianceManagement",
+        "disruptionResponse",
+        "networkOptimization",
+        "costReduction",
+        "serviceImprovement",
+        "capabilityDevelopment",
+        "technologyAdoption",
+        "innovationAdvancement",
+        "capabilityEnhancement",
+        "portfolioOptimization",
+        "experimentationNeed",
+        "innovationCulture",
+        "innovationProcessImprovement",
+        "sustainabilityCompliance",
+        "environmentalStewardship",
+        "socialImpactEnhancement",
+        "governanceImprovement",
+        "climateRiskMitigation",
+        "stakeholderExpectationManagement",
+        "circularEconomyAdvancement",
+        "resourceEfficiencyImprovement",
+        "talentDevelopment",
+        "cultureEnhancement",
+        "knowledgeManagement",
+        "workforceOptimization",
+        "talentAcquisition",
+        "employeeExperienceImprovement",
+        "leadershipDevelopment",
+        "organizationalAlignment",
+        "technologyRefresh",
+        "legacyModernization",
+        "securityEnhancement",
+        "technologyIntegration",
+        "technologyStandardization",
+        "architectureTransformation",
+        "digitalCapabilityBuilding",
+        "technicalDebtReduction",
+        "channelOptimization",
+        "channelExpansion",
+        "partnerManagement",
+        "distributionEfficiency",
+        "omnichannelIntegration",
+        "channelConflictResolution",
+        "digitalChannelDevelopment",
+        "channelMixRebalancing"
+      ],
+      "description": "The justification type for this rationale"
+    },
+    "rationaleOrientation": {
+      "type": "string",
+      "enum": [
+        "reactive",
+        "proactive"
+      ],
+      "description": "Whether the rationale is responding to existing conditions or anticipating future conditions"
+    },
+    "anticipatedOutcomes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "For proactive rationales, the expected benefits or outcomes"
+    },
+    "alternativesConsidered": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "alternativeID": {
+            "description": "Identifier for this alternative",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/identifier"
+              }
+            ]
+          },
+          "alternativeDescription": {
+            "type": "string",
+            "description": "Description of the alternative strategic option"
+          },
+          "reasonForRejection": {
+            "type": "string",
+            "description": "Reasoning behind why this alternative was not selected"
+          }
+        },
+        "required": [
+          "alternativeDescription"
+        ],
+        "description": "A specific alternative that was considered but not selected",
+        "additionalProperties": false
+      },
+      "description": "Other strategic options that were evaluated but not selected"
+    },
+    "reasoningPattern": {
+      "type": "string",
+      "enum": [
+        "causal",
+        "comparative",
+        "normative",
+        "predictive",
+        "analogical",
+        "deductive",
+        "inductive",
+        "customerNeedsBased",
+        "journeyFrictionBased",
+        "segmentValueBased",
+        "experienceGapBased"
+      ],
+      "description": "The logical structure of the rationale"
+    },
+    "evidenceBase": {
+      "type": "string",
+      "enum": [
+        "dataDriven",
+        "expertJudgment",
+        "industryBestPractice",
+        "customerFeedback",
+        "internalAnalysis",
+        "externalResearch",
+        "competitiveAnalysis",
+        "voiceOfCustomer",
+        "customerBehaviorAnalysis",
+        "marketResearch",
+        "customerServiceData",
+        "socialMediaAnalysis",
+        "customerJourneyMapping",
+        "competitiveIntelligence",
+        "industryAnalysis",
+        "salesData",
+        "partnerNetwork",
+        "externalConsultant",
+        "strategicPlanning",
+        "financialAnalysis",
+        "performanceMetrics",
+        "investmentReview",
+        "budgetAnalysis",
+        "costStructureAssessment",
+        "revenueAnalysis",
+        "riskAssessment",
+        "capitalPlanning",
+        "incidentAnalysis",
+        "controlMonitoring",
+        "auditFinding",
+        "industryIntelligence",
+        "scenarioAnalysis",
+        "supplyChainAnalytics",
+        "marketIntelligence",
+        "supplierFeedback",
+        "customerRequirements",
+        "technologyEvaluation",
+        "complianceAnalysis",
+        "sustainabilityInsight",
+        "peopleInsight",
+        "experimentResults",
+        "prototypeFeedback"
+      ],
+      "description": "The foundation for the rationale"
+    },
+    "strategicObjectiveReference": {
+      "description": "Reference to the strategic objective this rationale supports",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "businessValueType": {
+      "type": "string",
+      "enum": [
+        "costReduction",
+        "revenueGrowth",
+        "riskReduction",
+        "customerExperience",
+        "operationalEfficiency",
+        "competitiveAdvantage",
+        "brandPerception",
+        "stakeholderTrust",
+        "marketCreation",
+        "firstMoverAdvantage",
+        "marketDisruption",
+        "innovationLeadership",
+        "ecosystemDevelopment",
+        "strategicPositioning",
+        "customerRetentionValue",
+        "customerAcquisitionValue",
+        "customerGrowthValue",
+        "brandLoyaltyValue",
+        "marketShareValue",
+        "environmentalValue",
+        "socialValue",
+        "governanceValue",
+        "talentValue",
+        "cultureValue",
+        "knowledgeValue",
+        "technicalAgility",
+        "systemReliability",
+        "securityPosture",
+        "technicalPerformance",
+        "integrationEffectiveness",
+        "technologyCostEfficiency",
+        "digitalExperience",
+        "channelReachValue",
+        "distributionEfficiencyValue",
+        "partnerNetworkValue"
+      ],
+      "description": "The nature of value creation or preservation"
+    },
+    "competitivePositioning": {
+      "type": "object",
+      "properties": {
+        "positioningType": {
+          "type": "string",
+          "enum": [
+            "differentiation",
+            "costLeadership",
+            "focusStrategy",
+            "blueOcean",
+            "industryLeadership",
+            "fastFollower",
+            "nicheDominance",
+            "strategicAlliance",
+            "innovationLeadership"
+          ],
+          "description": "Type of competitive positioning strategy"
+        },
+        "positioningDescription": {
+          "type": "string",
+          "description": "Detailed description of how this advances competitive stance"
+        },
+        "competitiveTarget": {
+          "type": "string",
+          "description": "Specific market segment, competitor, or industry position targeted"
+        }
+      },
+      "required": [
+        "positioningDescription"
+      ],
+      "description": "How this rationale advances competitive positioning",
+      "additionalProperties": false
+    },
+    "dateCreated": {
+      "type": "string",
+      "format": "date",
+      "description": "The date the rationale was first recorded"
+    },
+    "lastReviewed": {
+      "type": "string",
+      "format": "date",
+      "description": "The most recent date of rationale review"
+    },
+    "effectivenessRating": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Optional evaluation of rationale effectiveness"
+    },
+    "author": {
+      "type": "string",
+      "description": "The person or team who documented the rationale"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organisational unit that owns or authored the rationale"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "relatedRationales": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "description": "References to other related rationales"
+    },
+    "relationshipTypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "supports",
+          "contradicts",
+          "expands",
+          "duplicates",
+          "supersedes"
+        ]
+      },
+      "description": "Types of relationships with each related rationale"
+    },
+    "relatedEntities": {
+      "type": "array",
+      "description": "Entities in any domain this rationale relates to, by domain and ID. Replaces the per-domain ID lists.",
+      "items": {
+        "$ref": "common.schema.json#/definitions/entityReference"
+      }
+    },
+    "customerInsightSource": {
+      "type": "string",
+      "enum": [
+        "voiceOfCustomer",
+        "customerBehaviorAnalysis",
+        "marketResearch",
+        "customerServiceData",
+        "socialMediaAnalysis",
+        "customerJourneyMapping",
+        "customerFeedback",
+        "competitiveAnalysis"
+      ],
+      "description": "Source of customer insights supporting this rationale"
+    },
+    "marketInsightSource": {
+      "type": "string",
+      "enum": [
+        "marketResearch",
+        "competitiveIntelligence",
+        "industryAnalysis",
+        "customerFeedback",
+        "salesData",
+        "partnerNetwork",
+        "externalConsultant",
+        "strategicPlanning"
+      ],
+      "description": "Source of market insights supporting this rationale"
+    },
+    "competitiveImplications": {
+      "type": "object",
+      "properties": {
+        "implicationType": {
+          "type": "string",
+          "enum": [
+            "offensive",
+            "defensive",
+            "neutral",
+            "disruptive"
+          ],
+          "description": "Type of competitive implication"
+        },
+        "targetCompetitors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Competitors targeted by this rationale"
+        },
+        "expectedResponse": {
+          "type": "string",
+          "description": "Expected competitive response"
+        }
+      },
+      "description": "How this rationale affects competitive position",
+      "additionalProperties": false
+    },
+    "marketRisks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "riskDescription": {
+            "type": "string",
+            "description": "Description of the market risk"
+          },
+          "likelihood": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Likelihood of this risk (1-5)"
+          },
+          "impact": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Impact of this risk (1-5)"
+          },
+          "mitigation": {
+            "type": "string",
+            "description": "Approach to mitigating this risk"
+          }
+        },
+        "required": [
+          "riskDescription"
+        ],
+        "description": "A specific market risk associated with this rationale",
+        "additionalProperties": false
+      },
+      "description": "Market risks associated with this rationale"
+    },
+    "financialInsightSource": {
+      "type": "string",
+      "enum": [
+        "financialAnalysis",
+        "performanceMetrics",
+        "investmentReview",
+        "budgetAnalysis",
+        "costStructureAssessment",
+        "revenueAnalysis",
+        "riskAssessment",
+        "capitalPlanning"
+      ],
+      "description": "Source of financial insights supporting this rationale"
+    },
+    "financialImpactAssessment": {
+      "type": "object",
+      "properties": {
+        "impactType": {
+          "type": "string",
+          "enum": [
+            "revenue",
+            "cost",
+            "profitMargin",
+            "cashFlow",
+            "balanceSheet",
+            "incomeStatement",
+            "capitalStructure",
+            "investmentReturn"
+          ],
+          "description": "Type of financial impact"
+        },
+        "estimatedAmount": {
+          "type": "number",
+          "description": "Estimated financial impact amount"
+        },
+        "impactTimeframe": {
+          "type": "string",
+          "description": "Timeframe for the financial impact"
+        }
+      },
+      "description": "Assessment of financial implications",
+      "additionalProperties": false
+    },
+    "financialRisks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "riskDescription": {
+            "type": "string",
+            "description": "Description of the financial risk"
+          },
+          "financialExposure": {
+            "type": "number",
+            "description": "Potential financial exposure"
+          },
+          "likelihood": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Likelihood of this risk (1-5)"
+          },
+          "mitigation": {
+            "type": "string",
+            "description": "Approach to mitigating this risk"
+          }
+        },
+        "required": [
+          "riskDescription"
+        ],
+        "description": "A specific financial risk associated with this rationale",
+        "additionalProperties": false
+      },
+      "description": "Financial risks associated with this rationale"
+    },
+    "riskInsightSource": {
+      "type": "string",
+      "enum": [
+        "riskAssessment",
+        "incidentAnalysis",
+        "controlMonitoring",
+        "auditFinding",
+        "industryIntelligence",
+        "scenarioAnalysis",
+        "expertJudgment"
+      ],
+      "description": "Source of risk insights supporting this rationale"
+    },
+    "riskImpactAssessment": {
+      "type": "object",
+      "properties": {
+        "impactType": {
+          "description": "Type of risk impact",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/riskCategory"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "cyber",
+                "healthSafety"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "impactSeverity": {
+          "description": "Severity of impact",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/impactMagnitude"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "critical"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "impactLikelihood": {
+          "description": "Likelihood of impact",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/likelihood"
+            }
+          ]
+        },
+        "confidenceLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Confidence in this assessment (1-5)"
+        }
+      },
+      "description": "Assessment of risk implications",
+      "additionalProperties": false
+    },
+    "supplyChainInsightSource": {
+      "type": "string",
+      "enum": [
+        "performanceMetrics",
+        "supplyChainAnalytics",
+        "marketIntelligence",
+        "supplierFeedback",
+        "customerRequirements",
+        "riskAssessment",
+        "technologyEvaluation",
+        "complianceAnalysis"
+      ],
+      "description": "Source of supply chain insights supporting this rationale"
+    },
+    "supplyChainImpactAssessment": {
+      "type": "object",
+      "properties": {
+        "impactAreas": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "supplierNetwork",
+              "logistics",
+              "inventory",
+              "manufacturing",
+              "distribution",
+              "procurement",
+              "demandPlanning",
+              "fulfillment"
+            ]
+          },
+          "description": "Areas of supply chain impacted"
+        },
+        "impactSeverity": {
+          "description": "Severity of impact",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/impactMagnitude"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "critical"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "impactTimeframe": {
+          "description": "Timeframe for impact",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/timeHorizon"
+            }
+          ]
+        }
+      },
+      "description": "Assessment of supply chain implications",
+      "additionalProperties": false
+    },
+    "innovationInsightSource": {
+      "type": "string",
+      "enum": [
+        "experimentResults",
+        "innovationMetrics",
+        "prototypeFeedback",
+        "ideaManagementSystem",
+        "innovationAssessment",
+        "technologyScouting",
+        "portfolioAnalysis"
+      ],
+      "description": "Source of innovation insights supporting this rationale"
+    },
+    "innovationImpactAssessment": {
+      "type": "object",
+      "properties": {
+        "impactType": {
+          "type": "string",
+          "enum": [
+            "acceleration",
+            "redirection",
+            "termination",
+            "expansion",
+            "contraction"
+          ],
+          "description": "Type of innovation impact"
+        },
+        "affectedCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Innovation capabilities affected"
+        },
+        "timeframeChange": {
+          "type": "string",
+          "description": "Impact on innovation timelines"
+        }
+      },
+      "description": "Assessment of innovation implications",
+      "additionalProperties": false
+    },
+    "sustainabilityInsightSource": {
+      "type": "string",
+      "enum": [
+        "esgAssessment",
+        "climateScenarioAnalysis",
+        "stakeholderMaterialityAssessment",
+        "sustainabilityReporting",
+        "externalEsgRating",
+        "environmentalImpactAnalysis",
+        "socialImpactAssessment"
+      ],
+      "description": "Source of sustainability insights supporting this rationale"
+    },
+    "sustainabilityImpactAssessment": {
+      "type": "object",
+      "properties": {
+        "impactDimensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Sustainability dimensions affected"
+        },
+        "stakeholderExpectations": {
+          "type": "string",
+          "description": "Expectations from stakeholders"
+        },
+        "complianceRelevance": {
+          "type": "string",
+          "description": "Relevance to sustainability compliance requirements"
+        }
+      },
+      "description": "Assessment of sustainability implications",
+      "additionalProperties": false
+    },
+    "peopleInsightSource": {
+      "type": "string",
+      "enum": [
+        "engagementAssessment",
+        "skillsAnalysis",
+        "culturalAssessment",
+        "competencyEvaluation",
+        "knowledgeAudit",
+        "exitInterviews",
+        "talentAnalytics",
+        "leadershipAssessment"
+      ],
+      "description": "Source of people insights supporting this rationale"
+    },
+    "peopleImpactAssessment": {
+      "type": "object",
+      "properties": {
+        "impactAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "People areas impacted"
+        },
+        "affectedRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specific roles affected"
+        },
+        "timeframeForChange": {
+          "type": "string",
+          "description": "Timeframe for people changes"
+        }
+      },
+      "description": "Assessment of workforce implications",
+      "additionalProperties": false
+    },
+    "technologyInsightSource": {
+      "type": "string",
+      "enum": [
+        "technologyAssessment",
+        "securityMonitoring",
+        "vendorNotification",
+        "technicalDebtAnalysis",
+        "architectureReview",
+        "technologyTrendAnalysis",
+        "systemPerformanceMonitoring"
+      ],
+      "description": "Source of technology insights supporting this rationale"
+    },
+    "technologyImpactAssessment": {
+      "type": "object",
+      "properties": {
+        "impactAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Technology areas impacted"
+        },
+        "technicalDebt": {
+          "type": "string",
+          "description": "Impact on technical debt"
+        },
+        "timeframeForImplementation": {
+          "type": "string",
+          "description": "Timeframe for technology implementation"
+        }
+      },
+      "description": "Assessment of technology implications",
+      "additionalProperties": false
+    },
+    "channelInsightSource": {
+      "type": "string",
+      "enum": [
+        "channelPerformanceAnalysis",
+        "partnerFeedback",
+        "distributionNetworkAssessment",
+        "customerChannelPreference",
+        "competitiveChannelAnalysis",
+        "channelCostAnalysis",
+        "omnichannelIntegrationAssessment"
+      ],
+      "description": "Source of channel insights supporting this rationale"
+    },
+    "channelImpactAssessment": {
+      "type": "object",
+      "properties": {
+        "impactAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Channel areas impacted"
+        },
+        "customerJourneyEffects": {
+          "type": "string",
+          "description": "Effects on customer journey"
+        },
+        "implementationComplexity": {
+          "description": "Complexity of implementation",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/simpleLevel"
+            }
+          ]
+        }
+      },
+      "description": "Assessment of channel implications",
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

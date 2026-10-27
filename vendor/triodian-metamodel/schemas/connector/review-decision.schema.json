@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/connector/review-decision.schema.json",
+  "title": "Review Decision Schema",
+  "description": "Reasoning Fabric connector. A named person's decision on a queued or escalated change proposal. Nothing that changes a status, a date or a tier is published without one. The approver is recorded on the published record.",
+  "type": "object",
+  "required": [
+    "reviewDecisionID",
+    "changeProposalID",
+    "decision",
+    "reviewer",
+    "decidedAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "reviewDecisionID": {
+      "description": "Unique identifier for the decision",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "changeProposalID": {
+      "description": "The proposal decided",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "decision": {
+      "type": "string",
+      "description": "approve = publish the proposal; reject = do not; amendAndApprove = publish with the amended record supplied",
+      "enum": [
+        "approve",
+        "reject",
+        "amendAndApprove"
+      ]
+    },
+    "amendedRecord": {
+      "type": "object",
+      "description": "For amendAndApprove: the record as approved"
+    },
+    "reviewer": {
+      "type": "object",
+      "description": "The person deciding",
+      "required": [
+        "name",
+        "role"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name"
+        },
+        "role": {
+          "type": "string",
+          "description": "Role, e.g. Triodian analyst, method owner, partner firm reviewer"
+        },
+        "organization": {
+          "type": "string",
+          "description": "Organization the reviewer acts for"
+        },
+        "actorID": {
+          "type": "string",
+          "description": "Reviewer's account ID"
+        }
+      }
+    },
+    "decidedAt": {
+      "type": "string",
+      "description": "When the decision was made",
+      "format": "date-time"
+    },
+    "note": {
+      "type": "string",
+      "description": "Reasons for the decision"
+    }
+  }
+}

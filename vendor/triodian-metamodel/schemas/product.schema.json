@@ -1,0 +1,505 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/product.schema.json",
+  "title": "Products Domain Schema",
+  "description": "Tangible and intangible offerings an organization creates to address customer needs and deliver value.",
+  "type": "object",
+  "properties": {
+    "productID": {
+      "description": "Unique identifier for the Product",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the Product"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the Product entails"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "The intended purpose or function of the Product within the Organization"
+    },
+    "owner": {
+      "type": "string",
+      "description": "The individual or team responsible for the Product"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The Organization unit(s) to which the Product is linked"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "productCategory": {
+      "type": "string",
+      "enum": [
+        "physicalProduct",
+        "digitalProduct",
+        "serviceProduct",
+        "informationProduct",
+        "platformProduct",
+        "hybridProduct"
+      ],
+      "description": "Broad categorization of product type"
+    },
+    "productType": {
+      "type": "string",
+      "enum": [
+        "hardware",
+        "software",
+        "platform",
+        "saas",
+        "report",
+        "dataset",
+        "api",
+        "component",
+        "system",
+        "tool",
+        "content",
+        "intellectualProperty"
+      ],
+      "description": "Specific type of product"
+    },
+    "targetMarket": {
+      "type": "string",
+      "enum": [
+        "internal",
+        "external",
+        "b2b",
+        "b2c",
+        "b2g",
+        "b2e",
+        "partner",
+        "developer"
+      ],
+      "description": "Primary market or customer segment"
+    },
+    "businessModel": {
+      "type": "string",
+      "enum": [
+        "oneTimePurchase",
+        "subscription",
+        "freemium",
+        "usageBased",
+        "advertising",
+        "marketplace",
+        "licensing",
+        "openSource",
+        "enterprise",
+        "channel",
+        "internalService",
+        "internalTool"
+      ],
+      "description": "Revenue or value delivery model"
+    },
+    "lifecycleStage": {
+      "description": "Current stage in the product lifecycle",
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/definitions/lifecycleStage"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "concept",
+            "growth",
+            "maturity",
+            "decline",
+            "maintenance"
+          ],
+          "description": "Domain-specific values in addition to the shared list"
+        }
+      ]
+    },
+    "lifecycleManagement": {
+      "type": "string",
+      "description": "Strategies for managing the Product from inception to retirement"
+    },
+    "marketCompetitiveness": {
+      "type": "string",
+      "description": "Analysis of how the Product compares with competitors"
+    },
+    "customerFeedback": {
+      "type": "string",
+      "description": "Data on customer satisfaction and Product performance"
+    },
+    "userBase": {
+      "type": "string",
+      "description": "Description of the current user base"
+    },
+    "usage": {
+      "type": "string",
+      "description": "How the product is typically used"
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Other Products, processes, or systems that the Product depends on"
+    },
+    "relatedProducts": {
+      "type": "string",
+      "description": "Products that are related or linked to this Product"
+    },
+    "relatedProductIDs": {
+      "type": "array",
+      "description": "IDs of related Products",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "integrations": {
+      "type": "string",
+      "description": "Systems or platforms the product integrates with"
+    },
+    "technologyStack": {
+      "type": "string",
+      "description": "Underlying technologies used"
+    },
+    "performanceIndicators": {
+      "type": "string",
+      "description": "Metrics used to measure the success and performance of the Product"
+    },
+    "qualityMetrics": {
+      "type": "string",
+      "description": "Quality assessment measures"
+    },
+    "adoptionMetrics": {
+      "type": "string",
+      "description": "Usage and adoption measurements"
+    },
+    "revenueModel": {
+      "type": "string",
+      "description": "How the product generates revenue or value"
+    },
+    "costs": {
+      "type": "string",
+      "description": "Development, maintenance and operational costs"
+    },
+    "pricingStrategy": {
+      "type": "string",
+      "enum": [
+        "costPlus",
+        "valueBased",
+        "competitive",
+        "penetration",
+        "skimming",
+        "freemium",
+        "dynamic",
+        "bundle",
+        "usageBased"
+      ],
+      "description": "Pricing approach"
+    },
+    "channels": {
+      "type": "array",
+      "description": "Distribution and delivery channels",
+      "items": {
+        "type": "string",
+        "enum": [
+          "directSales",
+          "onlinePlatform",
+          "partnerChannel",
+          "retail",
+          "mobileApp",
+          "api",
+          "subscriptionService",
+          "marketplace",
+          "internalDistribution"
+        ],
+        "description": "Distribution or delivery channel"
+      }
+    },
+    "customerSegments": {
+      "type": "array",
+      "description": "Types of customer the product targets. Specific segments are records in the Customer domain, referenced by customerSegmentIDs.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "enterprise",
+          "smb",
+          "government",
+          "consumer",
+          "developer",
+          "partner",
+          "startup",
+          "education",
+          "healthcare",
+          "financial",
+          "internal"
+        ],
+        "description": "Customer type"
+      }
+    },
+    "customerSegmentIDs": {
+      "type": "array",
+      "description": "IDs of the customer segments the product targets (see the Customer domain)",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "valueProposition": {
+      "type": "string",
+      "description": "Core value delivered to customers"
+    },
+    "competitiveAdvantage": {
+      "type": "string",
+      "description": "What differentiates the product from competitors"
+    },
+    "risks": {
+      "type": "string",
+      "description": "Potential risks associated with the Product and its lifecycle"
+    },
+    "riskCategories": {
+      "type": "array",
+      "description": "Categories of risks",
+      "items": {
+        "description": "Category of risk",
+        "anyOf": [
+          {
+            "$ref": "common.schema.json#/definitions/riskCategory"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "quality"
+            ],
+            "description": "Domain-specific values in addition to the shared list"
+          }
+        ]
+      }
+    },
+    "complianceRequirements": {
+      "type": "array",
+      "description": "Regulatory and compliance needs",
+      "items": {
+        "type": "string",
+        "enum": [
+          "gdpr",
+          "hipaa",
+          "sox",
+          "pciDss",
+          "iso27001",
+          "fedRamp",
+          "wcag",
+          "industryStandards",
+          "localRegulations",
+          "internalPolicies"
+        ],
+        "description": "Regulatory or compliance requirement"
+      }
+    },
+    "securityRequirements": {
+      "type": "string",
+      "description": "Security and privacy requirements"
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Areas where the Product can be enhanced or improved"
+    },
+    "roadmap": {
+      "type": "string",
+      "description": "Future development plans"
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How the Product aligns with the Organizations strategic goals and objectives"
+    },
+    "sustainability": {
+      "type": "string",
+      "description": "Environmental and sustainability considerations"
+    },
+    "accessibility": {
+      "type": "string",
+      "description": "Accessibility features and compliance"
+    },
+    "localization": {
+      "type": "string",
+      "description": "Multi-language and regional adaptations"
+    },
+    "productFeatures": {
+      "type": "array",
+      "description": "Specific features of the product",
+      "items": {
+        "$ref": "#/definitions/productFeature"
+      }
+    },
+    "userEmpathyMappingIntegrated": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): whether empathy maps and user personas are used consistently in product development"
+    },
+    "ethicalAIByDesign": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): for AI-driven products, whether ethical considerations and potential empathetic impacts are designed in"
+    },
+    "accessibilityFeatures": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): whether the product includes features addressing diverse user needs and challenges"
+    }
+  },
+  "required": [
+    "productID",
+    "title",
+    "description",
+    "purpose",
+    "owner"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "productFeature": {
+      "type": "object",
+      "description": "A specific capability, function or characteristic of a product that delivers value",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The name or title of the Product feature"
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed explanation of what the Product feature entails"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The intended purpose or benefit of the Product feature"
+        },
+        "owner": {
+          "type": "string",
+          "description": "The individual or team responsible for the Product feature"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The Organization unit(s) involved in the Product feature"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "featureType": {
+          "type": "string",
+          "enum": [
+            "coreFeature",
+            "premiumFeature",
+            "addOn",
+            "integration",
+            "customization",
+            "enhancement"
+          ],
+          "description": "Type of feature"
+        },
+        "priority": {
+          "description": "Development and business priority",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/priority"
+            }
+          ]
+        },
+        "complexity": {
+          "description": "Technical complexity",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/complexity"
+            }
+          ]
+        },
+        "userStories": {
+          "type": "string",
+          "description": "The user stories or use cases related to the Product feature"
+        },
+        "acceptanceCriteria": {
+          "type": "string",
+          "description": "Criteria for accepting the feature"
+        },
+        "technicalSpecifications": {
+          "type": "string",
+          "description": "The technical details and requirements of the Product feature"
+        },
+        "dependencies": {
+          "type": "string",
+          "description": "Technical or business dependencies"
+        },
+        "integrationRequirements": {
+          "type": "string",
+          "description": "Integration needs with other systems"
+        },
+        "performanceRequirements": {
+          "type": "string",
+          "description": "Performance benchmarks and standards"
+        },
+        "securityRequirements": {
+          "type": "string",
+          "description": "Security specifications"
+        },
+        "usabilityRequirements": {
+          "type": "string",
+          "description": "User experience and usability needs"
+        },
+        "testingRequirements": {
+          "type": "string",
+          "description": "Testing and quality assurance needs"
+        },
+        "releasePlan": {
+          "type": "string",
+          "description": "The plan for releasing the Product feature"
+        },
+        "rolloutStrategy": {
+          "type": "string",
+          "enum": [
+            "bigBang",
+            "phased",
+            "canary",
+            "beta",
+            "geographic",
+            "segment"
+          ],
+          "description": "Feature rollout approach"
+        },
+        "targetAudience": {
+          "type": "string",
+          "description": "Specific users or groups for the feature"
+        },
+        "businessValue": {
+          "type": "string",
+          "description": "Business value and impact"
+        },
+        "successMetrics": {
+          "type": "string",
+          "description": "Metrics to measure feature success"
+        },
+        "feedback": {
+          "type": "string",
+          "description": "User feedback and feature reception"
+        },
+        "maintenanceRequirements": {
+          "type": "string",
+          "description": "Ongoing maintenance and support needs"
+        },
+        "documentationRequirements": {
+          "type": "string",
+          "description": "Documentation and training needs"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "purpose"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/coverage/coverage-template.schema.json",
+  "title": "Coverage Template Schema",
+  "type": "object",
+  "description": "A reusable pattern of coverage expectations for specific types of organisations or industries.",
+  "properties": {
+    "coverageTemplateID": {
+      "type": "string",
+      "description": "Unique identifier for the coverage template."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the template (e.g. 'Public Sector – Large Agency')."
+    },
+    "description": {
+      "type": "string",
+      "description": "Explanation of the context and applicability of this template."
+    },
+    "sector": {
+      "type": "string",
+      "description": "Applicable industry or sector (e.g. Health, Government, Finance)."
+    },
+    "sizeCategory": {
+      "type": "string",
+      "enum": [
+        "small",
+        "medium",
+        "large",
+        "enterprise"
+      ],
+      "description": "Size category of organisations that this template is intended for."
+    },
+    "expectations": {
+      "type": "array",
+      "description": "List of domain-specific coverage expectations defined by the template.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "description": "The business architecture domain.",
+            "allOf": [
+              {
+                "$ref": "../common.schema.json#/definitions/domainType"
+              }
+            ]
+          },
+          "targetCoverageLevel": {
+            "type": "string",
+            "enum": [
+              "none",
+              "minimal",
+              "documented",
+              "analysed",
+              "governed",
+              "optimised"
+            ],
+            "description": "Target coverage level for the domain."
+          }
+        },
+        "required": [
+          "domain",
+          "targetCoverageLevel"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User or system that created this template."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of creation."
+    }
+  },
+  "required": [
+    "coverageTemplateID",
+    "name",
+    "sector",
+    "sizeCategory",
+    "expectations",
+    "createdBy",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}

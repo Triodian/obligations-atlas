@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/extensions/dynamic-time-series/predictive-model.schema.json",
+  "title": "Predictive Model Schema",
+  "description": "Dynamic and Time-Series extension. A machine learning or statistical model that predicts a timebound metric from others: its algorithm, inputs, output and accuracy. For governance of the model itself (ownership, validation, monitoring), link it to its Model Risk Management model profile.",
+  "type": "object",
+  "required": [
+    "predictiveModelID",
+    "title",
+    "inputTimeboundMetricIDs",
+    "predictedTimeboundMetricID"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "predictiveModelID": {
+      "description": "Unique identifier for the model, e.g. PM-INVENTORY-FORECAST",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Name of the model"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the model predicts and from what"
+    },
+    "modelAlgorithm": {
+      "type": "string",
+      "description": "Kind of algorithm",
+      "enum": [
+        "regression",
+        "classification",
+        "timeSeriesForecast",
+        "clustering",
+        "anomalyDetection",
+        "neuralNetwork",
+        "ensemble",
+        "largeLanguageModel",
+        "other"
+      ]
+    },
+    "inputTimeboundMetricIDs": {
+      "type": "array",
+      "description": "Timebound metrics that feed the model",
+      "items": {
+        "$ref": "../../common.schema.json#/definitions/identifier"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "predictedTimeboundMetricID": {
+      "description": "Timebound metric the model outputs",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "accuracy": {
+      "type": "object",
+      "description": "Measured accuracy of the model",
+      "required": [
+        "metric",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "metric": {
+          "type": "string",
+          "description": "Accuracy measure, e.g. MAPE, AUC, accuracy"
+        },
+        "value": {
+          "type": "number",
+          "description": "Value of the measure"
+        },
+        "measuredDate": {
+          "type": "string",
+          "description": "Date it was measured",
+          "format": "date"
+        }
+      }
+    },
+    "modelRiskModelID": {
+      "description": "Model Risk Management model profile that governs the model",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "useCaseIDs": {
+      "type": "array",
+      "description": "Standardised AI use cases the model is used in",
+      "items": {
+        "$ref": "../../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    }
+  },
+  "examples": [
+    {
+      "predictiveModelID": "PM-INVENTORY-FORECAST",
+      "title": "Inventory Demand Forecast",
+      "description": "Predicts future inventory demand from sales data, seasonality and promotional events.",
+      "modelAlgorithm": "regression",
+      "inputTimeboundMetricIDs": [
+        "TBM-SALES-VOLUMES",
+        "TBM-PROMO-EVENTS"
+      ],
+      "predictedTimeboundMetricID": "TBM-INVENTORY-LEVELS",
+      "accuracy": {
+        "metric": "accuracy",
+        "value": 0.955
+      }
+    }
+  ]
+}

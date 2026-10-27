@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/coverage/coverage-expectation.schema.json",
+  "title": "Coverage Expectation Schema",
+  "type": "object",
+  "description": "Defines the desired coverage level for a specific business architecture domain within an organisation or business unit.",
+  "properties": {
+    "coverageExpectationID": {
+      "type": "string",
+      "description": "Unique identifier for the coverage expectation."
+    },
+    "domain": {
+      "description": "The business architecture domain this expectation applies to.",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/domainType"
+        }
+      ]
+    },
+    "orgUnit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The organisation unit this expectation applies to. Leave null if applying to the whole organisation."
+    },
+    "targetCoverageLevel": {
+      "type": "string",
+      "enum": [
+        "none",
+        "minimal",
+        "documented",
+        "analysed",
+        "governed",
+        "optimised"
+      ],
+      "description": "The desired level of coverage for the specified domain."
+    },
+    "lifecycleStage": {
+      "description": "Optional lifecycle stage this expectation applies to. Used to tailor expectations based on the maturity or development phase of the domain element.",
+      "anyOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/lifecycleStage"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "justification": {
+      "type": "string",
+      "description": "Reason for the desired coverage level (e.g. compliance, risk, opportunity)."
+    },
+    "linkedStrategy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Link to the Strategy element supporting this expectation."
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User or system that created this record."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of creation."
+    }
+  },
+  "required": [
+    "coverageExpectationID",
+    "domain",
+    "targetCoverageLevel",
+    "justification",
+    "createdBy",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}

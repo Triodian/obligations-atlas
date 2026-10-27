@@ -1,0 +1,690 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/technology.schema.json",
+  "title": "Technology Domain Schema",
+  "description": "Schema for the Technology domain in the Triodian Metamodel",
+  "type": "object",
+  "required": [
+    "technologyID",
+    "title",
+    "description",
+    "orgUnitTitle"
+  ],
+  "properties": {
+    "technologyID": {
+      "type": "string",
+      "description": "Unique identifier for the technology element"
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the technology component or service"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of the technology element"
+    },
+    "technologyType": {
+      "type": "string",
+      "description": "Classification of technology (e.g., application, infrastructure, service, standard)",
+      "enum": [
+        "application",
+        "infrastructure",
+        "service",
+        "platform",
+        "database",
+        "integration",
+        "security",
+        "endUser",
+        "network",
+        "standard",
+        "other"
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The IT or technology organization unit responsible for this component"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitRoles": {
+      "type": "array",
+      "description": "Specific roles within the technology organization that manage this component",
+      "items": {
+        "type": "string"
+      }
+    },
+    "technologyLayer": {
+      "type": "string",
+      "description": "Position in the technology stack",
+      "enum": [
+        "presentation",
+        "application",
+        "data",
+        "integration",
+        "infrastructure",
+        "security",
+        "management",
+        "crossCutting",
+        "other"
+      ]
+    },
+    "currentState": {
+      "type": "string",
+      "description": "Status of the technology element",
+      "enum": [
+        "proposed",
+        "underDevelopment",
+        "pilot",
+        "production",
+        "beingReplaced",
+        "deprecated",
+        "retired"
+      ]
+    },
+    "targetState": {
+      "type": "string",
+      "description": "Desired future state"
+    },
+    "businessOwner": {
+      "type": "string",
+      "description": "Business stakeholder responsible"
+    },
+    "technicalOwner": {
+      "type": "string",
+      "description": "Technical stakeholder responsible"
+    },
+    "supportModel": {
+      "type": "string",
+      "description": "Support and maintenance approach"
+    },
+    "lifecycle": {
+      "description": "Current lifecycle stage",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/adoptionStage"
+        }
+      ]
+    },
+    "vendors": {
+      "type": "array",
+      "description": "External vendors/partners involved",
+      "items": {
+        "type": "string"
+      }
+    },
+    "standards": {
+      "type": "array",
+      "description": "Applicable technology standards",
+      "items": {
+        "type": "string"
+      }
+    },
+    "costs": {
+      "type": "object",
+      "description": "Financial implications of this technology",
+      "properties": {
+        "acquisitionCost": {
+          "type": "string",
+          "description": "Initial cost of acquisition"
+        },
+        "implementationCost": {
+          "type": "string",
+          "description": "Cost of implementation"
+        },
+        "annualOperatingCost": {
+          "type": "string",
+          "description": "Annual maintenance and operational costs"
+        },
+        "totalCostOfOwnership": {
+          "type": "string",
+          "description": "Five-year total cost of ownership"
+        },
+        "costTrends": {
+          "type": "string",
+          "description": "Expected cost trends"
+        }
+      },
+      "additionalProperties": false
+    },
+    "risks": {
+      "type": "array",
+      "description": "Technical and business risks",
+      "items": {
+        "type": "string"
+      }
+    },
+    "securityClassification": {
+      "description": "Security requirements rating; give the reason in prose, e.g. \"high: contains sensitive customer data\"",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/ratingLevel"
+        }
+      ]
+    },
+    "performanceRequirements": {
+      "type": "string",
+      "description": "Required performance characteristics"
+    },
+    "complianceRequirements": {
+      "type": "array",
+      "description": "Regulatory compliance considerations",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How this technology supports business strategy"
+    },
+    "performanceIndicators": {
+      "type": "array",
+      "description": "Metrics used to measure technology performance",
+      "items": {
+        "$ref": "common.schema.json#/definitions/performanceIndicator"
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other domains, processes, or systems supporting or depending on this technology",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dependencyType": {
+            "description": "Type of dependency",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/dependencyStrength"
+              }
+            ]
+          },
+          "domainType": {
+            "description": "Type of domain this depends on",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/domainType"
+              }
+            ]
+          },
+          "entityID": {
+            "type": "string",
+            "description": "ID of the entity being depended upon"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the dependency"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "relatedTechnologies": {
+      "type": "array",
+      "description": "Other technologies with relationships to this one",
+      "items": {
+        "type": "object",
+        "properties": {
+          "technologyID": {
+            "type": "string",
+            "description": "ID of the related technology"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of relationship",
+            "enum": [
+              "dependsOn",
+              "supports",
+              "integratesWith",
+              "replaces",
+              "isReplacedBy",
+              "extends",
+              "complement",
+              "alternative",
+              "other"
+            ]
+          },
+          "relationshipStrength": {
+            "type": "integer",
+            "description": "Strength of the relationship (1-5)",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the relationship"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "improvementOpportunities": {
+      "type": "array",
+      "description": "Areas where technology can be enhanced",
+      "items": {
+        "type": "string"
+      }
+    },
+    "applicationComponents": {
+      "type": "array",
+      "description": "Application components that are part of this technology",
+      "items": {
+        "$ref": "#/definitions/applicationComponent"
+      }
+    },
+    "technologyServices": {
+      "type": "array",
+      "description": "Technology services provided",
+      "items": {
+        "$ref": "#/definitions/technologyService"
+      }
+    },
+    "infrastructureElements": {
+      "type": "array",
+      "description": "Infrastructure elements",
+      "items": {
+        "$ref": "#/definitions/infrastructureElement"
+      }
+    },
+    "standardElements": {
+      "type": "array",
+      "description": "Technology standards",
+      "items": {
+        "$ref": "#/definitions/standardElement"
+      }
+    },
+    "governanceModel": {
+      "type": "object",
+      "description": "How the technology is governed",
+      "properties": {
+        "governanceStructure": {
+          "type": "string",
+          "description": "Governance bodies and roles"
+        },
+        "decisionRights": {
+          "type": "string",
+          "description": "Authority and decision-making framework"
+        },
+        "reviewProcess": {
+          "type": "string",
+          "description": "Process for governance reviews"
+        },
+        "changeManagement": {
+          "type": "string",
+          "description": "How changes are managed"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dataSecurity": {
+      "type": "object",
+      "description": "Security aspects specific to data handling",
+      "properties": {
+        "dataClassification": {
+          "type": "string",
+          "description": "Classification of handled data"
+        },
+        "securityControls": {
+          "type": "array",
+          "description": "Security measures implemented",
+          "items": {
+            "type": "string"
+          }
+        },
+        "complianceStatus": {
+          "description": "Current compliance status",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/complianceStatus"
+            }
+          ]
+        },
+        "securityAssessments": {
+          "type": "string",
+          "description": "Security assessment history"
+        }
+      },
+      "additionalProperties": false
+    },
+    "maturityLevel": {
+      "type": "object",
+      "description": "Technology maturity assessment",
+      "properties": {
+        "overallMaturity": {
+          "description": "Overall maturity rating",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/maturityLevel"
+            }
+          ]
+        },
+        "maturityAssessmentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of last maturity assessment"
+        },
+        "maturityRoadmap": {
+          "type": "string",
+          "description": "Plan for maturity improvement"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the technology element record was last updated"
+    },
+    "crossDomainRelationships": {
+      "type": "array",
+      "description": "Directional relationships from this record to entities in other domains",
+      "items": {
+        "$ref": "cross-domain-relationship.schema.json#/definitions/outgoingRelationship"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "applicationComponent": {
+      "type": "object",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "Name of the application"
+        },
+        "applicationDescription": {
+          "type": "string",
+          "description": "Detailed description"
+        },
+        "applicationCategory": {
+          "type": "string",
+          "description": "Classification within portfolio"
+        },
+        "businessCapabilitiesSupported": {
+          "type": "array",
+          "description": "Linked business capabilities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "functionalDescription": {
+          "type": "string",
+          "description": "Key functions provided"
+        },
+        "interfacesProvided": {
+          "type": "array",
+          "description": "Interfaces exposed to other systems",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interfacesConsumed": {
+          "type": "array",
+          "description": "External interfaces consumed",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataEntitiesManaged": {
+          "type": "array",
+          "description": "Key data handled by the application",
+          "items": {
+            "type": "string"
+          }
+        },
+        "technologyStack": {
+          "type": "string",
+          "description": "Technical foundation"
+        },
+        "deploymentModel": {
+          "type": "string",
+          "description": "How the application is deployed"
+        },
+        "scalability": {
+          "type": "string",
+          "description": "Scaling capabilities and limitations"
+        },
+        "availability": {
+          "type": "string",
+          "description": "Availability requirements and measures"
+        },
+        "developmentApproach": {
+          "type": "string",
+          "description": "Development methodology used"
+        },
+        "lifecycleStage": {
+          "type": "string",
+          "description": "Current stage in application lifecycle"
+        }
+      },
+      "required": [
+        "applicationName",
+        "applicationDescription"
+      ],
+      "additionalProperties": false
+    },
+    "technologyService": {
+      "type": "object",
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "Name of the technology service"
+        },
+        "serviceDescription": {
+          "type": "string",
+          "description": "Detailed description"
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "Classification of service"
+        },
+        "serviceLevel": {
+          "type": "string",
+          "description": "Performance and reliability parameters"
+        },
+        "serviceConsumers": {
+          "type": "array",
+          "description": "Systems that use this service",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceProviders": {
+          "type": "array",
+          "description": "Systems that deliver this service",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceProtocol": {
+          "type": "array",
+          "description": "Technical protocols used",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceInterfaces": {
+          "type": "array",
+          "description": "Interface specifications",
+          "items": {
+            "type": "string"
+          }
+        },
+        "securityControls": {
+          "type": "string",
+          "description": "Security measures applied"
+        },
+        "serviceDependencies": {
+          "type": "array",
+          "description": "Other services required",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceAvailability": {
+          "type": "string",
+          "description": "Availability characteristics"
+        },
+        "serviceScalability": {
+          "type": "string",
+          "description": "Scaling capabilities"
+        },
+        "serviceCost": {
+          "type": "string",
+          "description": "Cost structure for this service"
+        },
+        "serviceMonitoring": {
+          "type": "string",
+          "description": "How service health is tracked"
+        }
+      },
+      "required": [
+        "serviceName",
+        "serviceDescription"
+      ],
+      "additionalProperties": false
+    },
+    "infrastructureElement": {
+      "type": "object",
+      "properties": {
+        "infrastructureName": {
+          "type": "string",
+          "description": "Name of the infrastructure component"
+        },
+        "infrastructureType": {
+          "type": "string",
+          "description": "Type of infrastructure"
+        },
+        "infrastructureLocation": {
+          "type": "string",
+          "description": "Physical or logical location"
+        },
+        "capacityMetrics": {
+          "type": "string",
+          "description": "Key capacity parameters"
+        },
+        "utilizationMetrics": {
+          "type": "string",
+          "description": "Current utilization levels"
+        },
+        "environmentType": {
+          "type": "string",
+          "description": "Production, development, test, etc."
+        },
+        "infrastructureManager": {
+          "type": "string",
+          "description": "Responsible management entity"
+        },
+        "backupStrategy": {
+          "type": "string",
+          "description": "Data protection approach"
+        },
+        "disasterRecoveryCapability": {
+          "type": "string",
+          "description": "Recovery capabilities"
+        },
+        "technicalSpecifications": {
+          "type": "string",
+          "description": "Detailed specifications"
+        },
+        "maintenanceSchedule": {
+          "type": "string",
+          "description": "Maintenance approach"
+        },
+        "endOfLifeDate": {
+          "type": "string",
+          "description": "Expected retirement date"
+        },
+        "replacementStrategy": {
+          "type": "string",
+          "description": "Approach to replacement"
+        },
+        "infrastructureCost": {
+          "type": "string",
+          "description": "Cost structure"
+        }
+      },
+      "required": [
+        "infrastructureName",
+        "infrastructureType"
+      ],
+      "additionalProperties": false
+    },
+    "standardElement": {
+      "type": "object",
+      "properties": {
+        "standardName": {
+          "type": "string",
+          "description": "Name of the technology standard"
+        },
+        "standardType": {
+          "type": "string",
+          "description": "Category of standard"
+        },
+        "standardDescription": {
+          "type": "string",
+          "description": "Detailed description"
+        },
+        "standardVersion": {
+          "type": "string",
+          "description": "Current version"
+        },
+        "standardStatus": {
+          "type": "string",
+          "description": "Status (e.g., emerging, current, deprecated)",
+          "enum": [
+            "emerging",
+            "current",
+            "stable",
+            "declining",
+            "deprecated",
+            "retired"
+          ]
+        },
+        "complianceRequirement": {
+          "type": "string",
+          "description": "Mandatory or recommended",
+          "enum": [
+            "mandatory",
+            "recommended",
+            "optional",
+            "referenceOnly"
+          ]
+        },
+        "enforcementMechanism": {
+          "type": "string",
+          "description": "How compliance is enforced"
+        },
+        "waiverProcess": {
+          "type": "string",
+          "description": "Process for exceptions"
+        },
+        "standardUsage": {
+          "type": "string",
+          "description": "Where the standard applies"
+        },
+        "standardBenefits": {
+          "type": "string",
+          "description": "Benefits of adoption"
+        },
+        "alternativeStandards": {
+          "type": "string",
+          "description": "Acceptable alternatives"
+        },
+        "governingBody": {
+          "type": "string",
+          "description": "Entity managing the standard"
+        }
+      },
+      "required": [
+        "standardName",
+        "standardDescription"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,566 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/innovation.schema.json",
+  "title": "Innovation Domain Schema",
+  "description": "Schema for the Innovation Domain in the Triodian Metamodel, representing the structured approach to creating, developing, and implementing new ideas, products, services, processes, and business models.",
+  "type": "object",
+  "properties": {
+    "innovationID": {
+      "type": "string",
+      "description": "Unique identifier for the innovation element"
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the innovation"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the innovation entails"
+    },
+    "innovationType": {
+      "type": "string",
+      "description": "Classification of innovation approach",
+      "enum": [
+        "product",
+        "service",
+        "process",
+        "businessModel",
+        "organizational",
+        "market",
+        "technology",
+        "customerExperience",
+        "supplyChain",
+        "financial",
+        "other"
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organization unit responsible for this innovation"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitRoles": {
+      "type": "array",
+      "description": "Specific roles within the organization unit that manage this innovation",
+      "items": {
+        "type": "string"
+      }
+    },
+    "innovationScope": {
+      "type": "string",
+      "description": "Organizational breadth of the innovation",
+      "enum": [
+        "enterprise",
+        "businessUnit",
+        "department",
+        "team",
+        "productLine",
+        "crossFunctional",
+        "ecosystem"
+      ]
+    },
+    "innovationOrigin": {
+      "type": "object",
+      "description": "Source and genesis of the innovation",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "description": "Sources that inspired or triggered the innovation",
+          "items": {
+            "type": "string",
+            "enum": [
+              "customerInsights",
+              "employeeIdea",
+              "marketResearch",
+              "technologyExploration",
+              "competitiveAnalysis",
+              "regulatoryChange",
+              "strategicInitiative",
+              "externalPartnership",
+              "academicResearch",
+              "supplierCollaboration",
+              "other"
+            ]
+          }
+        },
+        "primarySource": {
+          "type": "string",
+          "description": "The main source that initiated this innovation"
+        },
+        "originDetails": {
+          "type": "string",
+          "description": "Additional context about the innovation's origin"
+        }
+      },
+      "required": [
+        "sources"
+      ],
+      "additionalProperties": false
+    },
+    "innovationStage": {
+      "type": "string",
+      "description": "Current development phase of the innovation",
+      "enum": [
+        "ideation",
+        "discovery",
+        "prototyping",
+        "validation",
+        "piloting",
+        "scaling",
+        "established",
+        "declining",
+        "discontinued"
+      ]
+    },
+    "innovationOwner": {
+      "type": "string",
+      "description": "Individual or role responsible for the innovation"
+    },
+    "strategicAlignment": {
+      "type": "object",
+      "description": "How innovation aligns with organization strategy",
+      "properties": {
+        "alignmentLevel": {
+          "description": "Degree of alignment with strategic objectives",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/alignmentLevel"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "critical"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "alignedObjectives": {
+          "type": "array",
+          "description": "Strategic objectives this innovation supports",
+          "items": {
+            "type": "object",
+            "properties": {
+              "objectiveID": {
+                "type": "string",
+                "description": "ID of the strategic objective"
+              },
+              "alignmentDescription": {
+                "type": "string",
+                "description": "How this innovation supports the objective"
+              }
+            },
+            "required": [
+              "objectiveID"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "alignmentLevel"
+      ],
+      "additionalProperties": false
+    },
+    "investmentLevel": {
+      "type": "object",
+      "description": "Resources committed to the innovation",
+      "properties": {
+        "annualBudget": {
+          "type": [
+            "string",
+            "number"
+          ],
+          "description": "Annual budget allocated to this innovation"
+        },
+        "resourceAllocation": {
+          "type": "array",
+          "description": "Breakdown of resource allocation",
+          "items": {
+            "type": "object",
+            "properties": {
+              "resourceType": {
+                "type": "string",
+                "description": "Type of resource allocated",
+                "enum": [
+                  "personnel",
+                  "technology",
+                  "research",
+                  "marketing",
+                  "facilities",
+                  "other"
+                ]
+              },
+              "allocation": {
+                "type": [
+                  "string",
+                  "number"
+                ],
+                "description": "Amount or description of allocation"
+              }
+            },
+            "required": [
+              "resourceType",
+              "allocation"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "fundingSources": {
+          "type": "array",
+          "description": "Sources of funding for this innovation",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "description": "Source of funding"
+              },
+              "percentage": {
+                "type": "number",
+                "description": "Percentage of total funding from this source"
+              }
+            },
+            "required": [
+              "source"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "riskProfile": {
+      "type": "object",
+      "description": "Risk characteristics of the innovation",
+      "properties": {
+        "overallRiskLevel": {
+          "description": "Overall risk assessment",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/riskLevel"
+            }
+          ]
+        },
+        "keyRiskFactors": {
+          "type": "array",
+          "description": "Key risk factors",
+          "items": {
+            "type": "object",
+            "properties": {
+              "factorName": {
+                "type": "string",
+                "description": "Name of the risk factor"
+              },
+              "riskLevel": {
+                "description": "Level of this specific risk",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/riskLevel"
+                  }
+                ]
+              },
+              "mitigationApproach": {
+                "type": "string",
+                "description": "Approach to mitigate this risk"
+              }
+            },
+            "required": [
+              "factorName",
+              "riskLevel"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "riskManagementApproach": {
+          "type": "string",
+          "description": "Overall approach to managing innovation risks"
+        }
+      },
+      "required": [
+        "overallRiskLevel"
+      ],
+      "additionalProperties": false
+    },
+    "expectedOutcomes": {
+      "type": "array",
+      "description": "Anticipated results from the innovation",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outcomeName": {
+            "type": "string",
+            "description": "Name of the outcome"
+          },
+          "outcomeMetric": {
+            "type": "string",
+            "description": "How the outcome will be measured"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for the outcome"
+          },
+          "currentValue": {
+            "type": "string",
+            "description": "Current value for the outcome"
+          }
+        },
+        "required": [
+          "outcomeName",
+          "outcomeMetric"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "timeHorizon": {
+      "type": "object",
+      "description": "Expected timeline for innovation development",
+      "properties": {
+        "portfolioTimespan": {
+          "type": "string",
+          "description": "Overall timeframe for the innovation"
+        },
+        "keyMilestones": {
+          "type": "array",
+          "description": "Key milestones in the innovation timeline",
+          "items": {
+            "type": "object",
+            "properties": {
+              "milestone": {
+                "type": "string",
+                "description": "Description of the milestone"
+              },
+              "targetDate": {
+                "type": "string",
+                "description": "Target date for achieving the milestone"
+              }
+            },
+            "required": [
+              "milestone"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "reviewCycles": {
+          "type": "string",
+          "description": "Frequency and approach to reviewing progress"
+        }
+      },
+      "additionalProperties": false
+    },
+    "successMetrics": {
+      "type": "array",
+      "description": "Metrics used to measure innovation performance",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metricName": {
+            "type": "string",
+            "description": "Name of the metric"
+          },
+          "metricDescription": {
+            "type": "string",
+            "description": "Detailed description of what the metric measures"
+          },
+          "currentValue": {
+            "type": "string",
+            "description": "Current value of the metric"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for the metric"
+          },
+          "measurementFrequency": {
+            "type": "string",
+            "description": "How often the metric is measured"
+          }
+        },
+        "required": [
+          "metricName"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "strategicHorizon": {
+      "type": "string",
+      "description": "Strategic timeframe category",
+      "enum": [
+        "horizon1",
+        "horizon2",
+        "horizon3"
+      ]
+    },
+    "crossDomainRelationships": {
+      "type": "array",
+      "description": "Directional relationships from this record to entities in other domains",
+      "items": {
+        "$ref": "cross-domain-relationship.schema.json#/definitions/outgoingRelationship"
+      }
+    },
+    "innovationBarriers": {
+      "type": "array",
+      "description": "Obstacles to innovation success",
+      "items": {
+        "type": "object",
+        "properties": {
+          "barrierName": {
+            "type": "string",
+            "description": "Name of the barrier"
+          },
+          "barrierDescription": {
+            "type": "string",
+            "description": "Description of the barrier"
+          },
+          "impactLevel": {
+            "type": "string",
+            "description": "Impact of the barrier on innovation success (e.g. moderate, significant, high)"
+          },
+          "mitigationApproach": {
+            "type": "string",
+            "description": "How the barrier is being addressed"
+          }
+        },
+        "required": [
+          "barrierName"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "innovationEnablers": {
+      "type": "array",
+      "description": "Factors that support innovation success",
+      "items": {
+        "type": "object",
+        "properties": {
+          "enablerName": {
+            "type": "string",
+            "description": "Name of the enabler"
+          },
+          "enablerDescription": {
+            "type": "string",
+            "description": "Description of the enabler"
+          },
+          "contributionLevel": {
+            "type": "string",
+            "description": "Contribution to innovation success (e.g. high, significant, critical)"
+          }
+        },
+        "required": [
+          "enablerName"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "governanceApproach": {
+      "type": "object",
+      "description": "How innovation is managed and governed",
+      "properties": {
+        "governanceStructure": {
+          "type": "string",
+          "description": "Governance bodies and structure"
+        },
+        "decisionRights": {
+          "type": "string",
+          "description": "Where decisions are made"
+        },
+        "reviewProcess": {
+          "type": "string",
+          "description": "How innovations are reviewed"
+        },
+        "resourceAllocationProcess": {
+          "type": "string",
+          "description": "How resources are allocated"
+        }
+      },
+      "additionalProperties": false
+    },
+    "intellectualPropertyStrategy": {
+      "type": "object",
+      "description": "Approach to managing intellectual property from innovation",
+      "properties": {
+        "patentStrategy": {
+          "type": "string",
+          "description": "Approach to patents"
+        },
+        "tradeSecretStrategy": {
+          "type": "string",
+          "description": "Approach to trade secrets"
+        },
+        "openInnovationApproach": {
+          "type": "string",
+          "description": "Approach to open innovation"
+        },
+        "licensingStrategy": {
+          "type": "string",
+          "description": "Approach to licensing"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other domain entities this innovation depends on",
+      "items": {
+        "$ref": "common.schema.json#/definitions/dependency"
+      }
+    },
+    "relatedInnovations": {
+      "type": "array",
+      "description": "Other innovations related to this one",
+      "items": {
+        "type": "object",
+        "properties": {
+          "innovationID": {
+            "description": "ID of the related innovation",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/identifier"
+              }
+            ]
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Nature of the relationship",
+            "examples": [
+              "enabling",
+              "synergistic"
+            ]
+          },
+          "relationshipStrength": {
+            "description": "Strength of the relationship",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/scale1to5"
+              }
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the relationship"
+          }
+        },
+        "required": [
+          "innovationID"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "innovationID",
+    "title",
+    "description",
+    "innovationType",
+    "orgUnitTitle",
+    "innovationStage",
+    "innovationOwner"
+  ],
+  "additionalProperties": false
+}

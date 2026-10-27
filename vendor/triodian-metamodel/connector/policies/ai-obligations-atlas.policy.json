@@ -1,0 +1,113 @@
+{
+  "datasetPolicyID": "POLICY-AI-OBLIGATIONS-ATLAS",
+  "dataset": "ai-obligations-atlas",
+  "version": "1.0.0",
+  "effectiveFrom": "2026-10-27",
+  "methodOwner": "Triodian method owner",
+  "sourcePrecedence": [
+    { "rank": 1, "basis": "officialText", "canSetStatusOrDate": true },
+    { "rank": 2, "basis": "regulatorPublication", "canSetStatusOrDate": true, "onlyForTiers": ["expected", "anticipated"] },
+    { "rank": 3, "basis": "standardsBodyPublication", "canSetStatusOrDate": true, "onlyForTiers": ["expected"] },
+    { "rank": 4, "basis": "commentary", "canSetStatusOrDate": false },
+    { "rank": 5, "basis": "news", "canSetStatusOrDate": false }
+  ],
+  "autonomyRules": [
+    {
+      "ruleID": "autonomy.lead.publishUnverified",
+      "changeTypes": ["addLead", "addCommentaryLink"],
+      "treatment": "publishedUnverified",
+      "approverRequired": false,
+      "description": "A new lead or commentary link is published automatically and marked unverified."
+    },
+    {
+      "ruleID": "autonomy.reverify.publish",
+      "changeTypes": ["reverify"],
+      "whenMaxSourceRank": 2,
+      "treatment": "published",
+      "approverRequired": false,
+      "description": "Confirming a record against an official or regulator source, with nothing else changed, updates its last-verified date automatically."
+    },
+    {
+      "ruleID": "autonomy.anticipated.reviewQueue",
+      "changeTypes": ["create"],
+      "whenTier": ["anticipated"],
+      "whenMaxSourceRank": 2,
+      "treatment": "reviewQueue",
+      "approverRequired": true,
+      "description": "A new Anticipated record from a rank 1 or 2 source waits for review."
+    },
+    {
+      "ruleID": "autonomy.create.reviewQueue",
+      "changeTypes": ["create"],
+      "treatment": "reviewQueue",
+      "approverRequired": true,
+      "description": "Any other new record sets a status, a date and a tier, so it waits for a named approver."
+    },
+    {
+      "ruleID": "autonomy.statusDateTier.reviewQueue",
+      "changeTypes": ["statusChange", "dateChange", "tierChange"],
+      "treatment": "reviewQueue",
+      "approverRequired": true,
+      "description": "A status change, effective date or tier change waits for review; the approver is named on the record."
+    },
+    {
+      "ruleID": "autonomy.supersede.reviewQueue",
+      "changeTypes": ["supersede", "remove"],
+      "treatment": "reviewQueue",
+      "approverRequired": true,
+      "keepSupersededVersion": true,
+      "description": "Removal or supersession waits for review; the superseded version is kept."
+    },
+    {
+      "ruleID": "autonomy.update.reviewQueue",
+      "changeTypes": ["update", "reverify"],
+      "treatment": "reviewQueue",
+      "approverRequired": true,
+      "description": "Any other change to a published record waits for review."
+    }
+  ],
+  "datePrecedence": [
+    "officialText.commencementProvision",
+    "officialText.registerCompilation",
+    "regulatorPublication",
+    "standardsBodyPublication"
+  ],
+  "freshness": [
+    { "sourceTier": "binding", "threshold": "P180D" },
+    { "sourceTier": "expected", "threshold": "P90D" },
+    { "sourceTier": "anticipated", "threshold": "P30D" }
+  ],
+  "confidenceBands": { "medium": 0.5, "high": 0.8 },
+  "languageRules": [
+    {
+      "ruleID": "language.addressedInstruction",
+      "pattern": "\\byou (must|need to|are required to|should)\\b",
+      "appliesTo": ["record", "response", "matterBrief"],
+      "description": "Records describe what a source says; they never tell a reader what to do."
+    },
+    {
+      "ruleID": "language.verdict",
+      "pattern": "\\b(is|are|be|being) (fully |partially )?(compliant|non-compliant|in breach)\\b|\\bcompliance (level|score|rating|verdict)\\b",
+      "appliesTo": ["record", "response", "matterBrief"],
+      "description": "No record, screen, export or response states whether anyone is compliant or in breach."
+    },
+    {
+      "ruleID": "language.requiredReserved",
+      "pattern": "\\brequired\\b",
+      "appliesTo": ["record", "response"],
+      "description": "'Required' is reserved for counsel's determination; records use source-describing words instead."
+    },
+    {
+      "ruleID": "language.clientRequirement",
+      "pattern": "\\b(the law|this|it) requires (the|your|this) (client|firm|entity|organi[sz]ation)\\b|\\bapplies to (your|the) client\\b",
+      "appliesTo": ["record", "response", "matterBrief"],
+      "description": "Nothing states what the law requires of a particular client; counsel decides what applies."
+    },
+    {
+      "ruleID": "language.passageLikelihood",
+      "pattern": "\\b(likely|unlikely|expected|certain) to (pass|be passed|be enacted|be made|commence)\\b|\\b(probability|chance|likelihood) of (passage|passing|enactment)\\b",
+      "appliesTo": ["record", "response", "matterBrief"],
+      "description": "An Anticipated record shows its trigger date or status, never a likelihood that it will pass or apply."
+    }
+  ]
+}

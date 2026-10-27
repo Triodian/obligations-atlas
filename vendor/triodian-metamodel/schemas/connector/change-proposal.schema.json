@@ -1,0 +1,269 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/connector/change-proposal.schema.json",
+  "title": "Change Proposal Schema",
+  "description": "Reasoning Fabric connector. A proposed change to one governed Metamodel record, with the evidence for it. Proposals are submitted by an agent, a person or a system; the Fabric validates them against the Metamodel, matches them to existing records, arbitrates conflicts, scores confidence, and assigns a treatment under the published autonomy policy. Fields set by the Fabric (treatment, matchedEntityID, review) are ignored on submission.",
+  "type": "object",
+  "required": [
+    "changeProposalID",
+    "changeType",
+    "target",
+    "evidence"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "changeProposalID": {
+      "description": "Unique identifier for the proposal, assigned by the submitter, e.g. CP-2026-10-27-0001",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "changeType": {
+      "description": "Kind of change proposed. Decides the autonomy rule that applies",
+      "allOf": [
+        {
+          "$ref": "#/definitions/changeType"
+        }
+      ]
+    },
+    "target": {
+      "description": "The record the proposal creates or changes",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/entityReference"
+        }
+      ]
+    },
+    "record": {
+      "type": "object",
+      "description": "For create and update changes: the full proposed record, valid against the schema for target.domainType. For other changes: omitted, or only the fields that change"
+    },
+    "changedFields": {
+      "type": "array",
+      "description": "Top-level fields of the record that the proposal changes, for update changes",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "baseVersion": {
+      "type": "integer",
+      "description": "Version of the governed record the proposal was made against. The Fabric rejects the proposal as stale if the record has moved on",
+      "minimum": 1
+    },
+    "supersededByEntityID": {
+      "description": "For supersede changes: the record that replaces the target",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "description": "Sources relied on for the change",
+      "items": {
+        "$ref": "#/definitions/sourceEvidence"
+      },
+      "minItems": 1
+    },
+    "rationale": {
+      "type": "string",
+      "description": "Why the change is proposed, in source-describing language"
+    },
+    "triggerID": {
+      "description": "Trigger record for the instrument change that prompted the proposal",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "treatment": {
+      "description": "Set by the Fabric: how the proposal is handled under the autonomy policy",
+      "allOf": [
+        {
+          "$ref": "#/definitions/treatment"
+        }
+      ]
+    },
+    "matchedEntityID": {
+      "description": "Set by the Fabric: an existing record the proposal was matched to, so one instrument is never entered twice",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "review": {
+      "description": "Set by the Fabric: the review of a queued or escalated proposal",
+      "allOf": [
+        {
+          "$ref": "#/definitions/reviewState"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "changeType": {
+      "type": "string",
+      "description": "create = a new record; update = change to fields other than status, dates or tier; statusChange, dateChange, tierChange = change to those fields; supersede = replace a record with another, keeping the old version; remove = withdraw a record from publication, keeping it in history; reverify = confirm a record against its source with no other change; addLead = record a lead (commentary or news) to an official source; addCommentaryLink = attach a commentary link to a record",
+      "enum": [
+        "create",
+        "update",
+        "statusChange",
+        "dateChange",
+        "tierChange",
+        "supersede",
+        "remove",
+        "reverify",
+        "addLead",
+        "addCommentaryLink"
+      ]
+    },
+    "treatment": {
+      "type": "string",
+      "description": "publishedUnverified = published automatically and marked unverified; published = published automatically (reverification only); reviewQueue = waits for a named approver; escalated = an unresolved conflict sent to the method owner; convertedToLead = the evidence cannot set a status or date alone, so the proposal is kept as a lead; rejected = invalid, stale or duplicate",
+      "enum": [
+        "publishedUnverified",
+        "published",
+        "reviewQueue",
+        "escalated",
+        "convertedToLead",
+        "rejected"
+      ]
+    },
+    "sourceEvidence": {
+      "type": "object",
+      "description": "One source relied on for a change",
+      "required": [
+        "url",
+        "sourceRank",
+        "retrievedAt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Address of the source",
+          "format": "uri"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the source document or page"
+        },
+        "sourceRank": {
+          "type": "integer",
+          "description": "Source precedence: 1 official text (legislation register, gazette, the instrument itself); 2 regulator publication; 3 standards body publication; 4 law firm or industry body commentary; 5 news",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "externalOrgID": {
+          "description": "External Organization that published the source",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "publishedDate": {
+          "type": "string",
+          "description": "Date the source was published",
+          "format": "date"
+        },
+        "retrievedAt": {
+          "type": "string",
+          "description": "When the source was read",
+          "format": "date-time"
+        },
+        "contentHash": {
+          "type": "string",
+          "description": "SHA-256 of the retrieved content, hex encoded, so the same content can be recognised later",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "excerpt": {
+          "type": "string",
+          "description": "The passage relied on, quoted from the source"
+        },
+        "dataFlowID": {
+          "description": "Data flow (monitored source) the evidence came through",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        }
+      }
+    },
+    "reviewState": {
+      "type": "object",
+      "description": "Review of a proposal by a named person",
+      "required": [
+        "reviewStatus"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "reviewStatus": {
+          "type": "string",
+          "description": "Where the review stands",
+          "enum": [
+            "pending",
+            "approved",
+            "rejected",
+            "withdrawn"
+          ]
+        },
+        "reviewDecisionID": {
+          "description": "Review decision record",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "approverName": {
+          "type": "string",
+          "description": "Name of the person who decided"
+        },
+        "decidedAt": {
+          "type": "string",
+          "description": "When the decision was made",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "changeProposalID": "CP-2026-10-27-0001",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-CPS230-48"
+      },
+      "record": {
+        "obligationID": "OBL-AU-CPS230-48",
+        "title": "Material service providers",
+        "statement": "CPS 230 provides that an APRA-regulated entity must maintain a register of its material service providers.",
+        "obligationType": "prudentialStandard",
+        "source": {
+          "authority": "APRA",
+          "instrument": "CPS 230 Operational Risk Management",
+          "citation": "para 48"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "status": "inForce"
+      },
+      "evidence": [
+        {
+          "url": "https://handbook.apra.gov.au/standard/cps-230",
+          "sourceRank": 1,
+          "retrievedAt": "2026-10-27T01:00:00Z"
+        }
+      ]
+    }
+  ]
+}

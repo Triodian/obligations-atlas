@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/use-case.schema.json",
+  "title": "Use Case Schema",
+  "description": "A standardised AI use case: a fixed, named pattern of AI use defined on the authority (A), boundary (B) and, where relevant, confidentiality channel (K) scales, so that obligations, assessments and results compare across jurisdictions and organizations. Use cases are reference definitions, not records of a particular organization's system; an organization's own AI systems are Model Risk Management model profiles, which can point to the use cases they instantiate. Consequence (C) is left to each matter, because it depends on the organization's own thresholds.",
+  "type": "object",
+  "required": [
+    "useCaseID",
+    "title",
+    "description",
+    "authorityLevels"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "useCaseID": {
+      "description": "Unique identifier for the use case, e.g. UC3",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Short name of the use case"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the AI does in this use case, and what it does not"
+    },
+    "authorityLevels": {
+      "type": "array",
+      "description": "Authority levels the use case spans: how far the AI's output stands in for a human decision or action",
+      "items": {
+        "$ref": "#/definitions/authorityLevel"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "anyAuthorityLevel": {
+      "type": "boolean",
+      "description": "True when the use case applies at any authority level (for example AI inside a provider); authorityLevels then lists the levels most often seen"
+    },
+    "boundaries": {
+      "type": "array",
+      "description": "Boundary positions the use case spans: where the AI sits relative to the organization",
+      "items": {
+        "$ref": "#/definitions/boundary"
+      },
+      "uniqueItems": true
+    },
+    "confidentialityChannels": {
+      "type": "array",
+      "description": "Confidentiality exposure channels the use case spans, for use cases about access to confidential information",
+      "items": {
+        "$ref": "#/definitions/confidentialityChannel"
+      },
+      "uniqueItems": true
+    },
+    "assessmentTypes": {
+      "type": "array",
+      "description": "Kinds of assessment the use case typically leads to",
+      "items": {
+        "$ref": "#/definitions/assessmentType"
+      },
+      "uniqueItems": true
+    },
+    "examples": {
+      "type": "array",
+      "description": "Illustrative instances of the use case",
+      "items": {
+        "type": "string"
+      }
+    },
+    "exclusions": {
+      "type": "array",
+      "description": "Patterns that look similar but belong to another use case, with the use case they belong to",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relatedUseCaseIDs": {
+      "type": "array",
+      "description": "Use cases that commonly occur alongside this one",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the use case definition"
+    }
+  },
+  "definitions": {
+    "authorityLevel": {
+      "type": "string",
+      "description": "Authority scale A1 to A6. a1Productivity = drafts, summarises or assists a person who remains the author; a2Analytical = produces a score, analysis or recommendation that a person decides on; a3Decision = makes or automates a decision such as triage or decline; a4Transactional = executes a transaction such as pricing or a payment straight through; a5Agentic = plans and acts across several steps and tools; a6Actuation = writes to or changes systems of record",
+      "enum": [
+        "a1Productivity",
+        "a2Analytical",
+        "a3Decision",
+        "a4Transactional",
+        "a5Agentic",
+        "a6Actuation"
+      ]
+    },
+    "boundary": {
+      "type": "string",
+      "description": "Boundary scale B1 to B3, as defined in the AI Use Assessment framework. b1 = AI in a provider's service used by the organization; b2 = AI in the platform behind a provider (a fourth party); b3 = AI the organization deploys within its own boundary for its own use",
+      "enum": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "consequenceLevel": {
+      "type": "string",
+      "description": "Consequence scale C1 (lowest) to C5 (highest), as defined in the AI Use Assessment framework. Set per matter against the organization's own thresholds, never on the use case",
+      "enum": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ]
+    },
+    "evidenceLevel": {
+      "type": "string",
+      "description": "Evidence scale E0 (no evidence) to E6 (strongest), as defined in the AI Use Assessment framework, for how well a control or claim is evidenced",
+      "enum": [
+        "e0",
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5",
+        "e6"
+      ]
+    },
+    "confidentialityChannel": {
+      "type": "string",
+      "description": "Confidentiality exposure channels K1 to K7, as defined in the AI Confidentiality Exposure Assessment framework: the routes by which confidential information can reach or leave an AI tool",
+      "enum": [
+        "k1",
+        "k2",
+        "k3",
+        "k4",
+        "k5",
+        "k6",
+        "k7"
+      ]
+    },
+    "assessmentType": {
+      "type": "string",
+      "description": "Kind of assessment a use case leads to: setting board AI risk appetite, assessing a particular AI use, or assessing exposure of confidential information to AI tools",
+      "enum": [
+        "aiRiskAppetite",
+        "aiUseAssessment",
+        "aiConfidentialityExposureAssessment"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "useCaseID": "UC3",
+      "title": "Automated triage or decline",
+      "description": "AI decides how a case, claim or application is routed, or declines it, without a person deciding each case.",
+      "authorityLevels": [
+        "a3Decision"
+      ],
+      "boundaries": [
+        "b1",
+        "b3"
+      ],
+      "assessmentTypes": [
+        "aiRiskAppetite",
+        "aiUseAssessment"
+      ],
+      "version": "1.0"
+    }
+  ]
+}

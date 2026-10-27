@@ -1,0 +1,671 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/performance-indicator.schema.json",
+  "title": "Performance Indicator Schema",
+  "description": "Schema for the Performance Indicator domain in the Triodian Metamodel",
+  "type": "object",
+  "properties": {
+    "performanceIndicatorID": {
+      "type": "string",
+      "description": "A unique identifier for the performance indicator"
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or label of the performance indicator"
+    },
+    "description": {
+      "type": "string",
+      "description": "A brief explanation of what the indicator measures"
+    },
+    "unitOfMeasure": {
+      "type": "string",
+      "description": "The unit in which performance is measured (e.g. %, $AUD)"
+    },
+    "baselineValue": {
+      "type": "number",
+      "description": "The starting reference point for performance"
+    },
+    "currentValue": {
+      "type": "number",
+      "description": "The current measured value (actual performance)"
+    },
+    "targetValue": {
+      "type": "number",
+      "description": "The target or goal value to be achieved"
+    },
+    "variance": {
+      "type": "number",
+      "description": "The calculated difference between currentValue and targetValue"
+    },
+    "variancePercentage": {
+      "type": "number",
+      "description": "The percentage difference from the target value"
+    },
+    "thresholdType": {
+      "type": "string",
+      "description": "General threshold logic, e.g. higher-is-better or lower-is-better",
+      "enum": [
+        "higherIsBetter",
+        "lowerIsBetter",
+        "targetIsOptimal",
+        "rangeIsOptimal"
+      ]
+    },
+    "thresholds": {
+      "type": "array",
+      "description": "Detailed list of threshold rules",
+      "items": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "string",
+            "description": "Label for the threshold level (e.g. warning, critical)"
+          },
+          "value": {
+            "type": "number",
+            "description": "Numeric threshold value"
+          },
+          "comparisonOperator": {
+            "type": "string",
+            "enum": [
+              "greaterThan",
+              "lessThan",
+              "greaterThanOrEqual",
+              "lessThanOrEqual",
+              "equal",
+              "notEqual"
+            ],
+            "description": "Logical operator for threshold evaluation"
+          },
+          "alertMessage": {
+            "type": "string",
+            "description": "Message to display or send when threshold is breached"
+          },
+          "notificationRecipients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of roles or individuals to be notified"
+          }
+        },
+        "required": [
+          "level",
+          "value",
+          "comparisonOperator"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "targetDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date by which the target should be achieved"
+    },
+    "validFrom": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date of the performance measurement period"
+    },
+    "validTo": {
+      "type": "string",
+      "format": "date",
+      "description": "End date of the performance measurement period"
+    },
+    "aggregationPeriod": {
+      "description": "The timeframe used to aggregate performance data",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/frequency"
+        }
+      ]
+    },
+    "assessmentFrequency": {
+      "type": "string",
+      "description": "How often the performance is assessed (e.g. weekly, monthly)"
+    },
+    "evaluativeModel": {
+      "type": "object",
+      "description": "Describes a model used to analyse or interpret performance trends",
+      "properties": {
+        "modelType": {
+          "type": "string",
+          "description": "The name of the model (e.g. movingAverage, trendLine)"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Model parameters as key-value pairs"
+        },
+        "description": {
+          "type": "string",
+          "description": "Explanation of the model's role or calculation logic"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dataSource": {
+      "type": "string",
+      "description": "Source system or method used to collect performance data"
+    },
+    "owner": {
+      "type": "string",
+      "description": "The person or role responsible for this indicator"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organizational unit to which this indicator belongs"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "leadingIndicators": {
+      "type": "array",
+      "description": "Metrics that show early progress before outcomes materialize",
+      "items": {
+        "type": "object",
+        "properties": {
+          "indicatorName": {
+            "type": "string",
+            "description": "Name of the leading indicator"
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of how this indicator signals future performance"
+          },
+          "triggerThreshold": {
+            "type": "number",
+            "description": "Value at which action should be taken"
+          },
+          "leadTime": {
+            "type": "string",
+            "description": "Typical time between indicator change and outcome impact"
+          },
+          "confidenceLevel": {
+            "type": "number",
+            "description": "Estimated confidence (0-100%) that this indicator predicts the outcome"
+          },
+          "currentValue": {
+            "type": "number",
+            "description": "Current measurement for this leading indicator"
+          }
+        },
+        "required": [
+          "indicatorName",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "potentialMetrics": {
+      "type": "array",
+      "description": "New measurement categories for innovative initiatives",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metricName": {
+            "type": "string",
+            "description": "Name of the potential new metric"
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of what this metric would measure"
+          },
+          "valueProposition": {
+            "type": "string",
+            "description": "How this metric would add value to performance measurement"
+          },
+          "implementationChallenges": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Potential challenges in implementing this metric"
+          },
+          "dataRequirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Data needed to calculate this metric"
+          },
+          "estimatedImplementationTime": {
+            "type": "string",
+            "description": "Estimated time required to implement this metric"
+          }
+        },
+        "required": [
+          "metricName",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "outcomeTimeframes": {
+      "type": "object",
+      "description": "When different results are expected to manifest",
+      "properties": {
+        "immediateOutcomes": {
+          "type": "array",
+          "description": "Outcomes expected within 0-3 months",
+          "items": {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "string",
+                "description": "Description of the immediate outcome"
+              },
+              "expectedValue": {
+                "type": "number",
+                "description": "Expected value to be achieved"
+              },
+              "confidenceLevel": {
+                "type": "number",
+                "description": "Confidence level for this outcome (0-100%)"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "intermediateOutcomes": {
+          "type": "array",
+          "description": "Outcomes expected within 3-12 months",
+          "items": {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "string",
+                "description": "Description of the intermediate outcome"
+              },
+              "expectedValue": {
+                "type": "number",
+                "description": "Expected value to be achieved"
+              },
+              "confidenceLevel": {
+                "type": "number",
+                "description": "Confidence level for this outcome (0-100%)"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "longTermOutcomes": {
+          "type": "array",
+          "description": "Outcomes expected after 12+ months",
+          "items": {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "string",
+                "description": "Description of the long-term outcome"
+              },
+              "expectedValue": {
+                "type": "number",
+                "description": "Expected value to be achieved"
+              },
+              "confidenceLevel": {
+                "type": "number",
+                "description": "Confidence level for this outcome (0-100%)"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "catalyticEvents": {
+          "type": "array",
+          "description": "Key events that may accelerate or modify outcomes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "event": {
+                "type": "string",
+                "description": "Description of the catalytic event"
+              },
+              "probability": {
+                "type": "number",
+                "description": "Probability of this event occurring (0-100%)"
+              },
+              "impactDescription": {
+                "type": "string",
+                "description": "Description of how this event would impact outcomes"
+              },
+              "estimatedDate": {
+                "type": "string",
+                "format": "date",
+                "description": "Estimated date when this event might occur"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "measurement": {
+      "type": "object",
+      "description": "Specify objective, subjective, or proxy measurement approaches",
+      "properties": {
+        "approachType": {
+          "type": "string",
+          "enum": [
+            "objective",
+            "subjective",
+            "proxy",
+            "hybrid"
+          ],
+          "description": "The primary approach to measurement"
+        },
+        "objectiveComponents": {
+          "type": "array",
+          "description": "Direct, quantifiable measurement components",
+          "items": {
+            "type": "object",
+            "properties": {
+              "component": {
+                "type": "string",
+                "description": "Name of the objective measurement component"
+              },
+              "method": {
+                "type": "string",
+                "description": "Method used for collecting this data"
+              },
+              "formula": {
+                "type": "string",
+                "description": "Formula or calculation used (if applicable)"
+              },
+              "weight": {
+                "type": "number",
+                "description": "Weight of this component in the overall metric (0-100%)"
+              },
+              "validationProcess": {
+                "type": "string",
+                "description": "Process used to validate this measurement"
+              }
+            },
+            "required": [
+              "component",
+              "method"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "subjectiveComponents": {
+          "type": "array",
+          "description": "Judgment or perception-based measurement components",
+          "items": {
+            "type": "object",
+            "properties": {
+              "component": {
+                "type": "string",
+                "description": "Name of the subjective measurement component"
+              },
+              "assessmentMethod": {
+                "type": "string",
+                "description": "Method used for subjective assessment (e.g., survey, expert review)"
+              },
+              "assessors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Roles or individuals conducting the assessment"
+              },
+              "weight": {
+                "type": "number",
+                "description": "Weight of this component in the overall metric (0-100%)"
+              },
+              "biasControlMeasures": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Measures to control bias in subjective assessment"
+              }
+            },
+            "required": [
+              "component",
+              "assessmentMethod"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "proxyComponents": {
+          "type": "array",
+          "description": "Indirect measurement components used when direct measurement isn't possible",
+          "items": {
+            "type": "object",
+            "properties": {
+              "component": {
+                "type": "string",
+                "description": "Name of the proxy measurement component"
+              },
+              "targetMeasure": {
+                "type": "string",
+                "description": "What this proxy is intended to represent"
+              },
+              "correlationStrength": {
+                "type": "number",
+                "description": "Estimated correlation between proxy and target (0-1)"
+              },
+              "validationMethod": {
+                "type": "string",
+                "description": "Method used to validate the proxy's correlation"
+              },
+              "limitations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Known limitations of this proxy measure"
+              },
+              "weight": {
+                "type": "number",
+                "description": "Weight of this component in the overall metric (0-100%)"
+              }
+            },
+            "required": [
+              "component",
+              "targetMeasure"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "dataNormalization": {
+          "type": "object",
+          "description": "Methods for normalizing or standardizing different measurement components",
+          "properties": {
+            "method": {
+              "type": "string",
+              "description": "Normalization method used (e.g., min-max, z-score)"
+            },
+            "description": {
+              "type": "string",
+              "description": "Explanation of how normalization is applied"
+            },
+            "parameters": {
+              "type": "object",
+              "description": "Parameters used in the normalization process"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "approachType"
+      ],
+      "additionalProperties": false
+    },
+    "strategicAlignments": {
+      "type": "array",
+      "description": "Strategic objectives or initiatives this indicator supports",
+      "items": {
+        "type": "object",
+        "properties": {
+          "alignmentID": {
+            "type": "string",
+            "description": "ID of the strategic objective or initiative"
+          },
+          "alignmentType": {
+            "description": "Type of strategic element this indicator aligns with",
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/definitions/domainType"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "strategicObjective"
+                ],
+                "description": "Domain-specific values in addition to the shared list"
+              }
+            ]
+          },
+          "alignmentStrength": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Strength of alignment on a scale of 1-5"
+          },
+          "alignmentDescription": {
+            "type": "string",
+            "description": "Description of how this indicator supports the strategic element"
+          }
+        },
+        "required": [
+          "alignmentID",
+          "alignmentType"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "statusHistory": {
+      "type": "array",
+      "description": "Historical performance records for trend analysis",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the performance measurement"
+          },
+          "value": {
+            "type": "number",
+            "description": "Measured value on that date"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "aboveTarget",
+              "onTarget",
+              "belowTarget",
+              "critical"
+            ],
+            "description": "Performance status relative to target"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Optional commentary on this measurement"
+          }
+        },
+        "required": [
+          "date",
+          "value"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "relatedIndicators": {
+      "type": "array",
+      "description": "Other performance indicators related to this one",
+      "items": {
+        "type": "object",
+        "properties": {
+          "indicatorID": {
+            "type": "string",
+            "description": "ID of the related indicator"
+          },
+          "relationshipType": {
+            "type": "string",
+            "enum": [
+              "parent",
+              "child",
+              "correlatesWith",
+              "influences",
+              "derivedFrom",
+              "componentOf"
+            ],
+            "description": "Type of relationship with the related indicator"
+          },
+          "relationshipStrength": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Strength of relationship on a scale of 1-5"
+          },
+          "relationshipDescription": {
+            "type": "string",
+            "description": "Description of how this indicator relates to the other"
+          }
+        },
+        "required": [
+          "indicatorID",
+          "relationshipType"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "stakeholderImpacts": {
+      "type": "array",
+      "description": "How this indicator affects or interests different stakeholders",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stakeholderID": {
+            "type": "string",
+            "description": "ID of the stakeholder"
+          },
+          "interestLevel": {
+            "description": "Level of interest from this stakeholder",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/ratingLevel"
+              }
+            ]
+          },
+          "impactDescription": {
+            "type": "string",
+            "description": "How this indicator impacts the stakeholder"
+          },
+          "communicationFrequency": {
+            "type": "string",
+            "description": "How often updates are shared with this stakeholder"
+          }
+        },
+        "required": [
+          "stakeholderID"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this indicator was last updated"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of this indicator definition"
+    }
+  },
+  "required": [
+    "performanceIndicatorID",
+    "title",
+    "description"
+  ],
+  "additionalProperties": false
+}

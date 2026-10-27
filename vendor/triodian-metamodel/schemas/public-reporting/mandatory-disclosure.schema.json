@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/public-reporting/mandatory-disclosure.schema.json",
+  "title": "Mandatory Disclosure Schema",
+  "description": "A specific piece of information that a requirement or obligation calls for an organization to make public, such as a Competent Person statement in a valuation, or the kinds of decisions made by automated means in a privacy policy. Each disclosure traces to the obligation or requirement behind it, the data it draws on, and the stakeholder accountable for it.",
+  "type": "object",
+  "required": [
+    "mandatoryDisclosureID",
+    "title"
+  ],
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": [
+        "obligationIDs"
+      ]
+    },
+    {
+      "required": [
+        "complianceRequirementIDs"
+      ]
+    }
+  ],
+  "properties": {
+    "mandatoryDisclosureID": {
+      "description": "Unique identifier for the disclosure, e.g. DISC-001",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Short name of the disclosure"
+    },
+    "description": {
+      "type": "string",
+      "description": "What must be disclosed, in source-describing language"
+    },
+    "disclosureChannel": {
+      "type": "string",
+      "description": "Where the disclosure is made",
+      "enum": [
+        "annualReport",
+        "privacyPolicy",
+        "website",
+        "marketAnnouncement",
+        "regulatorLodgement",
+        "productDisclosure",
+        "pointOfInteraction",
+        "other"
+      ]
+    },
+    "obligationIDs": {
+      "type": "array",
+      "description": "Obligations (semantic library) that call for the disclosure",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "complianceRequirementIDs": {
+      "type": "array",
+      "description": "Compliance requirements that call for the disclosure",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "sourceData": {
+      "type": "array",
+      "description": "Records the disclosed information is drawn from",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/entityReference"
+      }
+    },
+    "useCaseIDs": {
+      "type": "array",
+      "description": "Standardised AI use cases whose operation the disclosure describes, for AI disclosures",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "stakeholderTitle": {
+      "type": "string",
+      "description": "Person or role accountable for the disclosure"
+    },
+    "stakeholderID": {
+      "description": "Stakeholder record for that person or role",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "publicReportIDs": {
+      "type": "array",
+      "description": "Public reports that contain the disclosure",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "frequency": {
+      "description": "How often the disclosure is made or refreshed",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/frequency"
+        }
+      ]
+    }
+  },
+  "examples": [
+    {
+      "mandatoryDisclosureID": "DISC-001",
+      "title": "Competent Person statement",
+      "sourceData": [
+        {
+          "domainType": "information",
+          "entityID": "INFO-RESOURCE-MODEL"
+        }
+      ],
+      "complianceRequirementIDs": [
+        "CREQ-VALMIN-3.1"
+      ],
+      "stakeholderID": "STK-ANNA-L",
+      "disclosureChannel": "marketAnnouncement"
+    }
+  ]
+}

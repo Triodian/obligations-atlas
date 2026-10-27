@@ -1,0 +1,465 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/manufacturing.schema.json",
+  "title": "Manufacturing Domain Schema",
+  "description": "Schema for the Manufacturing domain in the Triodian Metamodel with global enumeration support",
+  "type": "object",
+  "properties": {
+    "manufacturingID": {
+      "description": "Unique identifier for the manufacturing entity",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Name/title of the manufacturing entity",
+      "examples": [
+        "Global Manufacturing Operations",
+        "North American Production Hub"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed explanation of the manufacturing entity or process"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Intended function or strategic goal of the manufacturing entity"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Responsible individual or team (e.g., Head of Operations)"
+    },
+    "manufacturingCategory": {
+      "type": "string",
+      "description": "Broad categorization of the type of manufacturing process.",
+      "enum": [
+        "jobShop",
+        "batchProduction",
+        "massProduction",
+        "continuousFlow",
+        "customManufacturing"
+      ]
+    },
+    "manufacturingFocus": {
+      "type": "string",
+      "description": "Primary focus area of the manufacturing strategy.",
+      "enum": [
+        "costReduction",
+        "qualityImprovement",
+        "leadTimeReduction",
+        "flexibility",
+        "innovation"
+      ]
+    },
+    "timeHorizon": {
+      "description": "Strategy time frame",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/timeHorizon"
+        }
+      ]
+    },
+    "scopeLevel": {
+      "type": "string",
+      "description": "Organizational or geographical scope",
+      "enum": [
+        "global",
+        "continental",
+        "regional",
+        "national",
+        "siteLevel",
+        "productionLine"
+      ]
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How the manufacturing plan aligns with the broader business strategy."
+    },
+    "productionUnits": {
+      "type": "array",
+      "description": "A list of production units within this manufacturing entity.",
+      "items": {
+        "$ref": "#/definitions/productionUnit"
+      }
+    },
+    "workOrders": {
+      "type": "array",
+      "description": "A list of active and completed work orders.",
+      "items": {
+        "$ref": "#/definitions/workOrder"
+      }
+    },
+    "billsOfMaterials": {
+      "type": "array",
+      "description": "A collection of bills of materials for various products.",
+      "items": {
+        "$ref": "#/definitions/billOfMaterials"
+      }
+    },
+    "inventory": {
+      "type": "array",
+      "description": "Current inventory levels of raw materials, WIP, and finished goods.",
+      "items": {
+        "$ref": "#/definitions/inventory"
+      }
+    },
+    "manufacturingObjectives": {
+      "type": "array",
+      "description": "Specific objectives supporting the manufacturing strategy.",
+      "items": {
+        "$ref": "#/definitions/manufacturingObjective"
+      }
+    },
+    "keyActivities": {
+      "type": "string",
+      "description": "Critical implementation actions for the manufacturing plan."
+    },
+    "resources": {
+      "type": "string",
+      "description": "Allocated resources (e.g., budget, personnel, machinery)."
+    },
+    "keyPerformanceIndicators": {
+      "type": "array",
+      "description": "Success metrics for the manufacturing operations.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Required dependencies (e.g., supply chain, IT systems)."
+    },
+    "risks": {
+      "type": "string",
+      "description": "Associated risks and challenges."
+    },
+    "riskCategories": {
+      "type": "array",
+      "description": "Categories of risks",
+      "items": {
+        "$ref": "common.schema.json#/definitions/riskCategory"
+      }
+    },
+    "mitigationStrategies": {
+      "type": "string",
+      "description": "Risk mitigation approaches."
+    }
+  },
+  "required": [
+    "manufacturingID",
+    "title",
+    "description",
+    "purpose",
+    "owner",
+    "manufacturingCategory",
+    "manufacturingFocus",
+    "timeHorizon",
+    "scopeLevel"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "productionUnit": {
+      "type": "object",
+      "description": "A structured entity for physical production.",
+      "properties": {
+        "unitName": {
+          "type": "string",
+          "description": "The name or title of the production unit.",
+          "examples": [
+            "Engine Assembly Line 1",
+            "Plastics Molding Department"
+          ]
+        },
+        "unitType": {
+          "type": "string",
+          "description": "The type of production unit.",
+          "enum": [
+            "assembly",
+            "fabrication",
+            "chemicalProcessing"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The physical location of the production unit.",
+          "examples": [
+            "Building 5, Plant North"
+          ]
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "The maximum output capacity of the unit per time period.",
+          "examples": [
+            500
+          ]
+        }
+      },
+      "required": [
+        "unitName",
+        "unitType"
+      ],
+      "additionalProperties": false
+    },
+    "workOrder": {
+      "type": "object",
+      "description": "An authorization to produce a specific quantity of a product.",
+      "properties": {
+        "orderID": {
+          "type": "string",
+          "description": "A unique identifier for the work order.",
+          "examples": [
+            "WO-2025-001"
+          ]
+        },
+        "productReference": {
+          "type": "string",
+          "description": "A link to the 'Product' domain element being manufactured.",
+          "examples": [
+            "PROD-A123"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "description": "The number of units to be produced.",
+          "examples": [
+            1000
+          ]
+        },
+        "status": {
+          "description": "The current state of the production order.",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/workStatus"
+            }
+          ]
+        }
+      },
+      "required": [
+        "orderID",
+        "productReference",
+        "quantity",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "billOfMaterials": {
+      "type": "object",
+      "description": "A complete list of raw materials, components, and sub-assemblies.",
+      "properties": {
+        "bomID": {
+          "type": "string",
+          "description": "A unique identifier for the Bill of Materials.",
+          "examples": [
+            "BOM-A123"
+          ]
+        },
+        "productReference": {
+          "type": "string",
+          "description": "A link to the 'Product' domain element this BOM is for.",
+          "examples": [
+            "PROD-A123"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "description": "A list of components and their required quantities.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "item": {
+                "type": "string",
+                "description": "Component or material"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Quantity required"
+              },
+              "unit": {
+                "type": "string",
+                "description": "Unit of measure"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "bomID",
+        "productReference",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "inventory": {
+      "type": "object",
+      "description": "The stock of raw materials, work-in-progress, and finished goods.",
+      "properties": {
+        "materialReference": {
+          "type": "string",
+          "description": "A link to the 'Material' or 'Product' element in the metamodel.",
+          "examples": [
+            "RAW-MTL-24"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "description": "The amount of the item currently in stock.",
+          "examples": [
+            5000
+          ]
+        },
+        "warehouseLocation": {
+          "type": "string",
+          "description": "The physical location of the inventory.",
+          "examples": [
+            "Warehouse 3, Shelf A"
+          ]
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last inventory update.",
+          "examples": [
+            "2025-08-04T12:00:00Z"
+          ]
+        }
+      },
+      "required": [
+        "materialReference",
+        "quantity"
+      ],
+      "additionalProperties": false
+    },
+    "manufacturingObjective": {
+      "type": "object",
+      "description": "A specific objective that supports a manufacturing strategy.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Name/title of objective."
+        },
+        "description": {
+          "type": "string",
+          "description": "Objective explanation."
+        },
+        "owner": {
+          "type": "string",
+          "description": "Responsible individual/team."
+        },
+        "priority": {
+          "description": "Priority level.",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/priority"
+            }
+          ]
+        },
+        "metrics": {
+          "type": "string",
+          "description": "Success assessment indicators."
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "Specific target to achieve."
+        },
+        "currentValue": {
+          "type": "string",
+          "description": "Current baseline value."
+        },
+        "timeline": {
+          "type": "string",
+          "description": "Achievement timeframe."
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "owner",
+        "priority"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "manufacturingID": "MFG-001",
+      "title": "Global Manufacturing Operations",
+      "description": "The central repository for all manufacturing data.",
+      "purpose": "To provide a canonical source of truth for manufacturing processes.",
+      "owner": "Head of Operations",
+      "manufacturingCategory": "continuousFlow",
+      "manufacturingFocus": "costReduction",
+      "timeHorizon": "mediumTerm",
+      "scopeLevel": "global",
+      "strategicAlignment": "Supports the corporate goal of improving profit margins by 5%.",
+      "productionUnits": [
+        {
+          "unitName": "Engine Assembly Line 1",
+          "unitType": "assembly",
+          "location": "Building 5, Plant North",
+          "capacity": 500
+        }
+      ],
+      "workOrders": [
+        {
+          "orderID": "WO-2025-002",
+          "productReference": "PROD-B555",
+          "quantity": 1000,
+          "status": "planned"
+        }
+      ],
+      "billsOfMaterials": [
+        {
+          "bomID": "BOM-A123",
+          "productReference": "PROD-A123",
+          "items": [
+            {
+              "item": "Bolt A",
+              "quantity": 50,
+              "unit": "pcs"
+            }
+          ]
+        }
+      ],
+      "inventory": [
+        {
+          "materialReference": "PROD-A123",
+          "quantity": 500,
+          "warehouseLocation": "Warehouse 3, Shelf B",
+          "lastUpdated": "2025-08-04T12:00:00Z"
+        }
+      ],
+      "manufacturingObjectives": [
+        {
+          "title": "Reduce Waste by 15%",
+          "description": "Implement new processes to reduce material waste on all production lines.",
+          "owner": "Process Improvement Team",
+          "priority": "high",
+          "metrics": "Waste reduction percentage",
+          "targetValue": "15%",
+          "currentValue": "5%",
+          "timeline": "Next 12 months"
+        }
+      ],
+      "keyActivities": "Implement Lean Six Sigma program, invest in new equipment, train staff.",
+      "resources": "$5M budget, 10 personnel, new automation technology.",
+      "keyPerformanceIndicators": [
+        "Overall Equipment Effectiveness (OEE)",
+        "First Pass Yield",
+        "Inventory Turnover Rate"
+      ],
+      "dependencies": "Stable supply chain, strong IT infrastructure for real-time monitoring.",
+      "risks": "Equipment failure, labor shortages, supply chain disruptions.",
+      "riskCategories": [
+        "operational",
+        "supplyChain",
+        "people"
+      ],
+      "mitigationStrategies": "Redundant equipment, cross-trained staff, diversify suppliers."
+    }
+  ]
+}

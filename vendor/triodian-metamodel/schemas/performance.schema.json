@@ -1,0 +1,480 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/performance.schema.json",
+  "title": "Performance Domain Schema",
+  "description": "Schema for the Performance domain in the Triodian Metamodel",
+  "type": "object",
+  "properties": {
+    "performanceID": {
+      "description": "Unique identifier for the performance metric",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the performance metric"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the performance metric entails"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "The intended purpose or function of the performance metric within the Organization"
+    },
+    "owner": {
+      "type": "string",
+      "description": "The individual or team responsible for the performance metric"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The Organization unit(s) to which the performance metric is linked"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "performanceCategory": {
+      "type": "string",
+      "enum": [
+        "strategicPerformance",
+        "operationalPerformance",
+        "financialPerformance",
+        "customerPerformance",
+        "processPerformance",
+        "qualityPerformance",
+        "safetyPerformance",
+        "innovationPerformance"
+      ],
+      "description": "Broad categorization of performance type"
+    },
+    "performanceType": {
+      "type": "string",
+      "enum": [
+        "kpi",
+        "metric",
+        "indicator",
+        "index",
+        "ratio",
+        "score",
+        "rate",
+        "benchmark",
+        "target",
+        "threshold"
+      ],
+      "description": "Specific type of performance metric"
+    },
+    "measurementLevel": {
+      "type": "string",
+      "enum": [
+        "enterprise",
+        "division",
+        "department",
+        "process",
+        "project",
+        "individual",
+        "system",
+        "product"
+      ],
+      "description": "Level at which performance is measured"
+    },
+    "metricClass": {
+      "type": "string",
+      "enum": [
+        "leadingIndicator",
+        "laggingIndicator",
+        "coincidentIndicator",
+        "predictiveMetric",
+        "diagnosticMetric"
+      ],
+      "description": "Classification of metric characteristics"
+    },
+    "rationales": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "References to rationale IDs explaining the strategic motivation for each KPI or performance goal"
+    },
+    "inputs": {
+      "type": "string",
+      "description": "The resources, information or materials required for the performance metric"
+    },
+    "outputs": {
+      "type": "string",
+      "description": "The deliverables or results produced by the performance metric"
+    },
+    "performanceIndicators": {
+      "type": "string",
+      "description": "Metrics used to measure the effectiveness and efficiency of the performance metric"
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Other metrics, processes or systems that the performance metric depends on"
+    },
+    "relatedPerformanceMetrics": {
+      "type": "string",
+      "description": "Performance metrics that are related or linked to this metric"
+    },
+    "relatedPerformanceIDs": {
+      "type": "array",
+      "description": "IDs of related performance metrics",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "maturityLevel": {
+      "description": "The current maturity level of the performance metric",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/maturityLevel"
+        }
+      ]
+    },
+    "toolsAndTechnologies": {
+      "type": "string",
+      "description": "Tools and technologies used to support or enable the performance metric"
+    },
+    "complianceAndStandards": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "federalRegulations",
+          "industryStandards",
+          "internalStandards",
+          "qualityStandards",
+          "safetyStandards"
+        ]
+      },
+      "description": "Regulatory requirements and standards the performance metric must adhere to"
+    },
+    "cost": {
+      "type": "string",
+      "description": "The financial cost associated with implementing and maintaining the performance metric"
+    },
+    "risks": {
+      "type": "string",
+      "description": "Potential risks associated with the performance metric and its operations"
+    },
+    "riskCategories": {
+      "type": "array",
+      "description": "Categories of risks",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "common.schema.json#/definitions/riskCategory"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "interpretation"
+            ],
+            "description": "Domain-specific values in addition to the shared list"
+          }
+        ]
+      }
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Areas where the performance metric can be enhanced or improved"
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How the performance metric aligns with the Organization's strategic goals and objectives"
+    },
+    "measurementMethod": {
+      "type": "string",
+      "description": "How the performance metric is calculated and measured"
+    },
+    "dataSource": {
+      "type": "string",
+      "description": "Primary sources of data for the performance metric"
+    },
+    "frequency": {
+      "description": "How often the performance metric is measured and reported",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/frequency"
+        }
+      ]
+    },
+    "targets": {
+      "type": "string",
+      "description": "Specific targets, benchmarks, or goals for the performance metric"
+    },
+    "thresholds": {
+      "type": "string",
+      "description": "Critical thresholds and alert levels"
+    },
+    "trending": {
+      "type": "string",
+      "description": "Historical trends and patterns"
+    },
+    "benchmarking": {
+      "type": "string",
+      "description": "External benchmarks and industry comparisons"
+    },
+    "actionTriggers": {
+      "type": "string",
+      "description": "Conditions that trigger management action"
+    },
+    "reportingStructure": {
+      "type": "string",
+      "description": "How and to whom performance results are reported"
+    },
+    "visualization": {
+      "type": "string",
+      "description": "How performance data is displayed and presented"
+    },
+    "dataQuality": {
+      "type": "string",
+      "description": "Data quality measures and validation procedures"
+    },
+    "automation": {
+      "description": "Level of automation in data collection and processing",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/automationLevel"
+        }
+      ]
+    },
+    "scalability": {
+      "type": "string",
+      "description": "Ability to scale measurement across the organization"
+    },
+    "integration": {
+      "type": "string",
+      "description": "Integration with other systems and platforms"
+    },
+    "historicalData": {
+      "type": "string",
+      "description": "Historical data availability and retention"
+    },
+    "predictiveCapability": {
+      "type": "string",
+      "description": "Predictive analytics and forecasting capabilities"
+    },
+    "businessValue": {
+      "type": "string",
+      "description": "Business value and impact of the performance metric"
+    },
+    "stakeholderImpact": {
+      "type": "string",
+      "description": "Impact on key stakeholders"
+    },
+    "competitiveAdvantage": {
+      "type": "string",
+      "description": "How this metric provides competitive differentiation"
+    },
+    "innovation": {
+      "type": "string",
+      "description": "Innovation opportunities and emerging technologies"
+    },
+    "sustainability": {
+      "type": "string",
+      "description": "Environmental and sustainability considerations"
+    },
+    "accessibility": {
+      "type": "string",
+      "description": "Accessibility features for performance information"
+    },
+    "governance": {
+      "type": "string",
+      "description": "Governance framework for the performance metric"
+    },
+    "changeManagement": {
+      "type": "string",
+      "description": "Approach to managing changes to the performance metric"
+    },
+    "training": {
+      "type": "string",
+      "description": "Training requirements for performance metric users"
+    },
+    "documentation": {
+      "type": "string",
+      "description": "Documentation and knowledge management"
+    },
+    "performanceKPIs": {
+      "type": "array",
+      "description": "Key Performance Indicators",
+      "items": {
+        "$ref": "#/definitions/performanceKPI"
+      }
+    }
+  },
+  "required": [
+    "performanceID",
+    "title",
+    "description",
+    "purpose",
+    "owner"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "performanceKPI": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The name or title of the Performance KPI"
+        },
+        "parent": {
+          "type": "string",
+          "description": "The Performance outcome the Performance KPI is related to"
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed explanation of what the Performance KPI entails"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The intended purpose or function of the Performance KPI within the performance measurement framework"
+        },
+        "owner": {
+          "type": "string",
+          "description": "The individual or team responsible for the Performance KPI"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The Organization unit(s) responsible for tracking the KPI"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "measurementMethod": {
+          "type": "string",
+          "description": "How the Performance KPI is measured"
+        },
+        "targets": {
+          "type": "string",
+          "description": "Specific targets or benchmarks for the Performance KPI"
+        },
+        "frequency": {
+          "description": "How often the Performance KPI is measured and reported",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/frequency"
+            }
+          ]
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "The source of data for the Performance KPI measurement"
+        },
+        "relatedKPIs": {
+          "type": "string",
+          "description": "KPIs that are related or linked to this Performance KPI"
+        },
+        "dependencies": {
+          "type": "string",
+          "description": "Other Performance KPIs, processes or systems that the Performance KPI depends on"
+        },
+        "risks": {
+          "type": "string",
+          "description": "Potential risks associated with the Performance KPI measurement and its interpretation"
+        },
+        "improvementOpportunities": {
+          "type": "string",
+          "description": "Areas where the Performance KPI measurement can be enhanced or improved"
+        },
+        "strategicAlignment": {
+          "type": "string",
+          "description": "How the Performance KPI aligns with the Organization's strategic goals and objectives"
+        },
+        "kpiType": {
+          "type": "string",
+          "enum": [
+            "outcomeKPI",
+            "processKPI",
+            "inputKPI",
+            "outputKPI",
+            "leadingKPI",
+            "laggingKPI"
+          ],
+          "description": "Type of KPI"
+        },
+        "priority": {
+          "description": "Business priority of the KPI",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/priority"
+            }
+          ]
+        },
+        "complexity": {
+          "description": "Measurement complexity level",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/complexity"
+            }
+          ]
+        },
+        "thresholds": {
+          "type": "string",
+          "description": "Performance thresholds and alert levels"
+        },
+        "calculationFormula": {
+          "type": "string",
+          "description": "Mathematical formula for calculating the KPI"
+        },
+        "dataQuality": {
+          "type": "string",
+          "description": "Data quality requirements and validation"
+        },
+        "reporting": {
+          "type": "string",
+          "description": "Reporting format and distribution"
+        },
+        "visualization": {
+          "type": "string",
+          "description": "How the KPI is displayed"
+        },
+        "automation": {
+          "description": "Level of automation in KPI calculation",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/automationLevel"
+            }
+          ]
+        },
+        "benchmarking": {
+          "type": "string",
+          "description": "External benchmarks and comparisons"
+        },
+        "actionPlans": {
+          "type": "string",
+          "description": "Predetermined actions based on KPI performance"
+        },
+        "historicalTrends": {
+          "type": "string",
+          "description": "Historical performance patterns"
+        },
+        "stakeholderNotification": {
+          "type": "string",
+          "description": "Who gets notified of KPI performance"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "purpose",
+        "owner"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

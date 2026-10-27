@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/compliance/statement-of-compliance.schema.json",
+  "title": "Statement of Compliance Schema",
+  "description": "An organization's formal, approved declaration that it has met one or more compliance requirements, with the evidence relied on. A statement of compliance is made by the organization about itself, under its own authority; a reference dataset of obligations never produces one.",
+  "type": "object",
+  "required": [
+    "statementOfComplianceID",
+    "title",
+    "authorTitle",
+    "approvedDate",
+    "complianceRequirementIDs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "statementOfComplianceID": {
+      "description": "Unique identifier for the statement, e.g. COMP-STATE-001",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Short name of the statement"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the statement declares"
+    },
+    "authorTitle": {
+      "type": "string",
+      "description": "Person or role who prepared the statement"
+    },
+    "authorStakeholderID": {
+      "description": "Stakeholder record for the author",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "approverTitle": {
+      "type": "string",
+      "description": "Person or role who approved the statement"
+    },
+    "approverStakeholderID": {
+      "description": "Stakeholder record for the approver",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "approvedDate": {
+      "type": "string",
+      "description": "Date the statement was approved",
+      "format": "date"
+    },
+    "periodCovered": {
+      "description": "Period the statement covers",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/datePeriod"
+        }
+      ]
+    },
+    "documentStatus": {
+      "description": "Approval state of the statement",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/documentStatus"
+        }
+      ]
+    },
+    "complianceRequirementIDs": {
+      "type": "array",
+      "description": "Requirements the statement addresses",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "complianceStatus": {
+      "description": "Compliance state the organization declares against those requirements",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/complianceStatus"
+        }
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "description": "Records relied on as evidence: policies, processes, controls, information assets, reports",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/entityReference"
+      }
+    },
+    "publicReportID": {
+      "description": "Public report the statement is published in, if any",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    }
+  },
+  "examples": [
+    {
+      "statementOfComplianceID": "COMP-STATE-001",
+      "title": "Competent Person statement, Q3 2025 valuation",
+      "authorTitle": "Anna L., Principal Geologist",
+      "authorStakeholderID": "STK-ANNA-L",
+      "approvedDate": "2025-10-15",
+      "complianceRequirementIDs": [
+        "CREQ-VALMIN-3.1"
+      ],
+      "complianceStatus": "compliant",
+      "evidence": [
+        {
+          "domainType": "publicReport",
+          "entityID": "PR-VAL-001",
+          "title": "Technical Assessment & Valuation Report"
+        }
+      ]
+    }
+  ]
+}

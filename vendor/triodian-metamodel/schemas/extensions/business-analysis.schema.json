@@ -1,0 +1,519 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/extensions/business-analysis.schema.json",
+  "title": "Business Analysis Extension Schema",
+  "description": "Formalises BA activities, requirements and artefacts within the Triodian Metamodel.",
+  "type": "object",
+  "properties": {
+    "requirements": {
+      "type": "array",
+      "description": "Requirements",
+      "items": {
+        "$ref": "#/definitions/requirement"
+      }
+    },
+    "requirementArtefacts": {
+      "type": "array",
+      "description": "Requirement artefacts such as models, specifications and prototypes",
+      "items": {
+        "$ref": "#/definitions/requirementArtefact"
+      }
+    },
+    "elicitationActivities": {
+      "type": "array",
+      "description": "Elicitation activities such as workshops and interviews",
+      "items": {
+        "$ref": "#/definitions/elicitationActivity"
+      }
+    },
+    "analysisDesignDefinitions": {
+      "type": "array",
+      "description": "Analysis and design definitions of the solution",
+      "items": {
+        "$ref": "#/definitions/analysisDesignDefinition"
+      }
+    },
+    "solutionEvaluations": {
+      "type": "array",
+      "description": "Evaluations of implemented solutions",
+      "items": {
+        "$ref": "#/definitions/solutionEvaluation"
+      }
+    }
+  },
+  "definitions": {
+    "requirement": {
+      "type": "object",
+      "properties": {
+        "requirementID": {
+          "description": "Unique identifier for the requirement.",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "businessRequirement",
+            "stakeholderRequirement",
+            "solutionRequirementFunctional",
+            "solutionRequirementNonFunctional",
+            "transitionRequirement",
+            "regulatoryRequirement"
+          ],
+          "description": "The classification of the requirement."
+        },
+        "title": {
+          "type": "string",
+          "description": "A concise title for the requirement."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the requirement."
+        },
+        "priority": {
+          "description": "The priority level of the requirement.",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/priority"
+            }
+          ]
+        },
+        "owner": {
+          "type": "string",
+          "format": "uri",
+          "description": "Reference to the owner (Organisation Unit or Person) of the requirement.",
+          "links": {
+            "$ref": "../organization.schema.json#/definitions/organizationUnit"
+          }
+        },
+        "acceptanceCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Conditions that must be met for the requirement to be accepted."
+        },
+        "measurementCriteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Metrics to measure the success of the requirement."
+        },
+        "riskLevel": {
+          "description": "Assessed risk level associated with the requirement.",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/riskLevel"
+            }
+          ]
+        },
+        "relatedCapability": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the related Capability.",
+          "links": {
+            "$ref": "../capability.schema.json"
+          }
+        },
+        "relatedValueStream": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the related Value Stream.",
+          "links": {
+            "$ref": "../value-stream.schema.json"
+          }
+        },
+        "relatedInitiative": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the related Initiative.",
+          "links": {
+            "$ref": "../initiative.schema.json"
+          }
+        },
+        "stakeholderRequirementRef": {
+          "type": "string",
+          "format": "uri",
+          "description": "Reference to the original Stakeholder Requirement (1:1 traceability).",
+          "links": {
+            "$ref": "../stakeholder.schema.json#/definitions/stakeholderRequirement"
+          }
+        },
+        "mappings": {
+          "$ref": "#/definitions/mapping"
+        }
+      },
+      "required": [
+        "requirementID",
+        "type",
+        "title",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "requirementArtefact": {
+      "type": "object",
+      "properties": {
+        "artefactID": {
+          "description": "Unique identifier for the artefact.",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "userStory",
+            "epic",
+            "useCase",
+            "processModel",
+            "dataModel",
+            "wireframePrototype",
+            "requirementsTraceabilityMatrix",
+            "solutionDesignDocument"
+          ],
+          "description": "The type of requirement artefact."
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The purpose of the artefact."
+        },
+        "linkedRequirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "#/definitions/requirement"
+            }
+          },
+          "description": "References to requirements documented or addressed by this artefact."
+        },
+        "status": {
+          "description": "The current status of the artefact.",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/documentStatus"
+            }
+          ]
+        },
+        "toolReference": {
+          "type": "string",
+          "format": "uri",
+          "description": "External tool link (e.g., Jira, Confluence, Miro)."
+        },
+        "relatedInformationModel": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to related Information domain model (e.g., for Data Models).",
+          "links": {
+            "$ref": "../information.schema.json"
+          }
+        },
+        "mappings": {
+          "$ref": "#/definitions/mapping"
+        }
+      },
+      "required": [
+        "artefactID",
+        "type",
+        "purpose",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "elicitationActivity": {
+      "type": "object",
+      "properties": {
+        "activityID": {
+          "description": "Unique identifier for the activity.",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "workshop",
+            "interview",
+            "observation",
+            "survey",
+            "documentAnalysis",
+            "prototypingSession"
+          ],
+          "description": "The type of elicitation activity."
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the activity."
+        },
+        "facilitator": {
+          "type": "string",
+          "format": "uri",
+          "description": "Reference to the facilitator (Organisation Unit or Person).",
+          "links": {
+            "$ref": "../people.schema.json"
+          }
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "../stakeholder.schema.json"
+            }
+          },
+          "description": "Links to participating Stakeholders."
+        },
+        "artefactsProduced": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "#/definitions/requirementArtefact"
+            }
+          },
+          "description": "References to artefacts produced during this activity."
+        },
+        "mappings": {
+          "$ref": "#/definitions/mapping"
+        }
+      },
+      "required": [
+        "activityID",
+        "type",
+        "date"
+      ],
+      "additionalProperties": false
+    },
+    "analysisDesignDefinition": {
+      "type": "object",
+      "properties": {
+        "designDefinitionID": {
+          "description": "Unique identifier for the analysis/design definition.",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the solution option or design refinement."
+        },
+        "feasibilityRating": {
+          "description": "Assessment of the feasibility of the solution option.",
+          "anyOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/ratingLevel"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "notFeasible"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "optionComparison": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "optionName": {
+                "type": "string",
+                "description": "Name of the option"
+              },
+              "pros": {
+                "type": "array",
+                "description": "Advantages of the option",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "cons": {
+                "type": "array",
+                "description": "Disadvantages of the option",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "score": {
+                "type": "number",
+                "description": "Overall score given to the option"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Structured comparison of solution options."
+        },
+        "relatedCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "../capability.schema.json"
+            }
+          },
+          "description": "Capabilities impacted or enabled by the solution."
+        },
+        "relatedInitiatives": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "../initiative.schema.json"
+            }
+          },
+          "description": "Initiatives related to the solution design."
+        },
+        "relatedRisks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "../risk-management.schema.json"
+            }
+          },
+          "description": "Risks identified during analysis and design."
+        },
+        "linkedRequirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "#/definitions/requirement"
+            }
+          },
+          "description": "Requirements addressed by this analysis or design."
+        },
+        "mappings": {
+          "$ref": "#/definitions/mapping"
+        }
+      },
+      "required": [
+        "designDefinitionID",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "solutionEvaluation": {
+      "type": "object",
+      "properties": {
+        "evaluationID": {
+          "description": "Unique identifier for the evaluation.",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the solution evaluation."
+        },
+        "evaluationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the evaluation."
+        },
+        "metricsObserved": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "../performance-indicator.schema.json"
+            }
+          },
+          "description": "References to specific Performance Indicators (KPIs) and their observed values."
+        },
+        "recommendation": {
+          "type": "string",
+          "enum": [
+            "continue",
+            "pivot",
+            "retire"
+          ],
+          "description": "Recommendation based on the evaluation."
+        },
+        "relatedInitiatives": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "../initiative.schema.json"
+            }
+          },
+          "description": "Initiatives that implemented the solution being evaluated."
+        },
+        "relatedRequirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "links": {
+              "$ref": "#/definitions/requirement"
+            }
+          },
+          "description": "Requirements that were fulfilled by the solution being evaluated."
+        },
+        "mappings": {
+          "$ref": "#/definitions/mapping"
+        }
+      },
+      "required": [
+        "evaluationID",
+        "description",
+        "evaluationDate",
+        "recommendation"
+      ],
+      "additionalProperties": false
+    },
+    "mapping": {
+      "type": "object",
+      "properties": {
+        "babok": {
+          "type": "string",
+          "description": "Corresponding BABOK concept"
+        },
+        "volere": {
+          "type": "string",
+          "description": "Corresponding Volere concept"
+        },
+        "ireb": {
+          "type": "string",
+          "description": "Corresponding IREB concept"
+        },
+        "togaf": {
+          "type": "string",
+          "description": "Corresponding TOGAF concept"
+        },
+        "agile": {
+          "type": "string",
+          "description": "Corresponding Agile concept"
+        }
+      },
+      "description": "Mapping of the entity to concepts in various business analysis frameworks.",
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

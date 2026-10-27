@@ -1,0 +1,255 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/intelligence.schema.json",
+  "title": "Intelligence Domain Schema",
+  "description": "Schema for capturing organizational intelligence activities, sources, applications, and attributes.",
+  "type": "object",
+  "properties": {
+    "intelligenceID": {
+      "type": "string",
+      "description": "Unique identifier for the intelligence record."
+    },
+    "title": {
+      "type": "string",
+      "description": "Name of the intelligence product or activity."
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the intelligence."
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Purpose of the intelligence activity."
+    },
+    "owner": {
+      "type": "string",
+      "description": "Person or team responsible for the intelligence."
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "Organizational unit responsible or consuming the intelligence."
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "description": "List of sources used for intelligence gathering.",
+      "items": {
+        "$ref": "#/definitions/intelligenceSource"
+      }
+    },
+    "intelligenceType": {
+      "type": "string",
+      "description": "Type of intelligence gathered.",
+      "enum": [
+        "businessReporting",
+        "competitiveIntelligence",
+        "marketIntelligence",
+        "regulatorySurveillance",
+        "securityIntelligence",
+        "insiderThreatMonitoring",
+        "geopoliticalAnalysis",
+        "corporateEspionage",
+        "agencyIntelligenceFeed",
+        "socialMediaAndOsint",
+        "darkWebMonitoring"
+      ]
+    },
+    "frequency": {
+      "description": "Frequency of intelligence reporting or updates.",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/frequency"
+        }
+      ]
+    },
+    "legalAndEthicalConsiderations": {
+      "type": "string",
+      "description": "Legal and ethical boundaries applicable to the intelligence activity."
+    },
+    "confidentialityLevel": {
+      "type": "string",
+      "description": "Level of confidentiality applied to the intelligence output.",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "secret",
+        "topSecret"
+      ]
+    },
+    "performanceIndicators": {
+      "type": "array",
+      "description": "List of performance indicators linked to the intelligence function.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "description": "Identified risks associated with intelligence collection or usage.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "improvementOpportunities": {
+      "type": "array",
+      "description": "Opportunities for improving the intelligence activity.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "Strategic objective supported by the intelligence."
+    },
+    "applications": {
+      "type": "array",
+      "description": "Applications and outcomes linked to the intelligence activity.",
+      "items": {
+        "$ref": "#/definitions/intelligenceApplication"
+      }
+    },
+    "sentimentAnalysisCapability": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): ability to analyze stakeholder sentiment from sources such as social media and internal communications"
+    },
+    "stakeholderNetworkMapping": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): whether key internal and external stakeholders and their relationships are identified and mapped"
+    },
+    "culturalIntelligenceIntegration": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): ability to incorporate cultural nuances and contexts into intelligence analysis"
+    },
+    "unstructuredDataAnalysisForEmpathy": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): ability to extract emotional and unspoken insights from qualitative data"
+    }
+  },
+  "required": [
+    "intelligenceID",
+    "title",
+    "intelligenceType"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "intelligenceSource": {
+      "type": "object",
+      "properties": {
+        "sourceName": {
+          "type": "string",
+          "description": "Name of the source"
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "Kind of source",
+          "enum": [
+            "publicData",
+            "paidResearchServices",
+            "regulatoryFilings",
+            "informalNetworks",
+            "thirdPartySubscription",
+            "darkWebSources",
+            "socialMedia",
+            "governmentIntelligence",
+            "corporateWhistleblowers",
+            "surveillanceSystems",
+            "internalMonitoring"
+          ]
+        },
+        "reliabilityRating": {
+          "description": "How reliable the source is",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/ratingLevel"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "unverified",
+                "variable"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "collectionMethod": {
+          "type": "string",
+          "description": "How intelligence is collected from the source",
+          "enum": [
+            "manualResearch",
+            "automatedScraping",
+            "sensorBasedCollection",
+            "thirdPartyAcquisition",
+            "humanIntelligence",
+            "signalsIntelligence",
+            "aiGeneratedSummarisation",
+            "manualInvestigation"
+          ]
+        },
+        "cost": {
+          "type": "string",
+          "description": "Cost of the source"
+        },
+        "complianceStatus": {
+          "$ref": "common.schema.json#/definitions/complianceStatus"
+        }
+      },
+      "required": [
+        "sourceName",
+        "sourceType"
+      ],
+      "additionalProperties": false
+    },
+    "intelligenceApplication": {
+      "type": "object",
+      "properties": {
+        "applicationArea": {
+          "type": "string",
+          "description": "Area where the intelligence is applied",
+          "enum": [
+            "strategicDecisionMaking",
+            "tacticalOperations",
+            "mergersAndAcquisitions",
+            "newMarketEntry",
+            "productDevelopment",
+            "riskManagement",
+            "competitiveResponse",
+            "brandReputationManagement",
+            "fraudPrevention"
+          ]
+        },
+        "organisationalDecisionsInfluenced": {
+          "type": "string",
+          "description": "Decisions the intelligence influences"
+        },
+        "intelligenceConsumers": {
+          "type": "array",
+          "description": "Who uses the intelligence",
+          "items": {
+            "type": "string"
+          }
+        },
+        "measurableOutcomes": {
+          "type": "array",
+          "description": "Measurable outcomes of using the intelligence",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "applicationArea"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

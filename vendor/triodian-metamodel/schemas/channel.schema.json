@@ -1,0 +1,1457 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/channel.schema.json",
+  "title": "Channel Domain Schema",
+  "description": "Schema for the Channel domain in the Triodian Metamodel, representing the methods, pathways, and networks through which an organization delivers its products and services to customers.",
+  "type": "object",
+  "required": [
+    "channelID",
+    "title",
+    "description",
+    "channelType"
+  ],
+  "properties": {
+    "channelID": {
+      "type": "string",
+      "description": "Unique identifier for the channel element"
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the channel"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of the channel"
+    },
+    "channelType": {
+      "type": "string",
+      "description": "Classification of channel approach",
+      "enum": [
+        "direct",
+        "indirect",
+        "digital",
+        "physical",
+        "hybrid",
+        "omnichannel"
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organization unit responsible for this channel"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitRoles": {
+      "type": "array",
+      "description": "Specific roles within the organization unit that manage this channel",
+      "items": {
+        "type": "string"
+      }
+    },
+    "channelReach": {
+      "type": "object",
+      "description": "Geographic and market coverage",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "description": "Geographic regions covered",
+          "items": {
+            "type": "string"
+          }
+        },
+        "countries": {
+          "type": "array",
+          "description": "Countries where channel operates",
+          "items": {
+            "type": "string"
+          }
+        },
+        "coverageType": {
+          "type": "string",
+          "description": "Type of market coverage",
+          "enum": [
+            "selective",
+            "intensive",
+            "exclusive",
+            "multiTiered",
+            "global"
+          ]
+        },
+        "expansionPlans": {
+          "type": "string",
+          "description": "Planned expansion of channel reach"
+        }
+      },
+      "additionalProperties": false
+    },
+    "customerSegmentsServed": {
+      "type": "array",
+      "description": "Target customers for this channel",
+      "items": {
+        "type": "string"
+      }
+    },
+    "productCategoriesCovered": {
+      "type": "array",
+      "description": "Products/services delivered through channel",
+      "items": {
+        "type": "string"
+      }
+    },
+    "channelVolume": {
+      "type": "object",
+      "description": "Transaction volume through channel",
+      "properties": {
+        "transactions": {
+          "type": "string",
+          "description": "Number of transactions"
+        },
+        "unitsSold": {
+          "type": "string",
+          "description": "Quantity of units sold"
+        },
+        "growthRate": {
+          "type": "string",
+          "description": "Rate of volume growth"
+        },
+        "seasonalPatterns": {
+          "type": "string",
+          "description": "Seasonal variations in volume"
+        }
+      },
+      "additionalProperties": false
+    },
+    "channelRevenue": {
+      "type": "object",
+      "description": "Revenue generated through channel",
+      "properties": {
+        "totalRevenue": {
+          "type": "string",
+          "description": "Total revenue amount"
+        },
+        "revenueByType": {
+          "type": "array",
+          "description": "Revenue breakdown by channel type",
+          "items": {
+            "type": "object",
+            "properties": {
+              "channelType": {
+                "type": "string",
+                "description": "Type of channel"
+              },
+              "revenuePercentage": {
+                "type": "number",
+                "description": "Percentage of total revenue"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "revenueGrowth": {
+          "type": "string",
+          "description": "Rate of revenue growth"
+        }
+      },
+      "additionalProperties": false
+    },
+    "channelCost": {
+      "type": "object",
+      "description": "Cost structure of the channel",
+      "properties": {
+        "totalCost": {
+          "type": "string",
+          "description": "Total cost amount"
+        },
+        "costComponents": {
+          "type": "array",
+          "description": "Breakdown of cost components",
+          "items": {
+            "type": "object",
+            "properties": {
+              "componentName": {
+                "type": "string",
+                "description": "Name of cost component"
+              },
+              "amount": {
+                "type": "string",
+                "description": "Cost amount"
+              },
+              "percentage": {
+                "type": "number",
+                "description": "Percentage of total cost"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "costTrends": {
+          "type": "string",
+          "description": "Trends in cost structure"
+        }
+      },
+      "additionalProperties": false
+    },
+    "channelMargin": {
+      "type": "object",
+      "description": "Profitability of the channel",
+      "properties": {
+        "overallMargin": {
+          "type": "string",
+          "description": "Overall profit margin"
+        },
+        "marginByType": {
+          "type": "array",
+          "description": "Margin breakdown by channel type",
+          "items": {
+            "type": "object",
+            "properties": {
+              "channelType": {
+                "type": "string",
+                "description": "Type of channel"
+              },
+              "marginPercentage": {
+                "type": "number",
+                "description": "Profit margin percentage"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "marginTrends": {
+          "type": "string",
+          "description": "Trends in profit margins"
+        }
+      },
+      "additionalProperties": false
+    },
+    "channelPartners": {
+      "type": "array",
+      "description": "External partners involved in channel",
+      "items": {
+        "type": "object",
+        "properties": {
+          "partnerName": {
+            "type": "string",
+            "description": "Name of partner organization"
+          },
+          "partnerType": {
+            "type": "string",
+            "description": "Type of partner",
+            "enum": [
+              "distributor",
+              "retailer",
+              "agent",
+              "franchise",
+              "dealer",
+              "valueAddedReseller",
+              "systemIntegrator",
+              "onlineMarketplace",
+              "retailChain",
+              "other"
+            ]
+          },
+          "relationshipStrength": {
+            "description": "Strength of partnership",
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/definitions/ratingLevel"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "strategic"
+                ],
+                "description": "Domain-specific values in addition to the shared list"
+              }
+            ]
+          },
+          "coverageContribution": {
+            "type": "string",
+            "description": "Coverage provided by partner"
+          },
+          "strategicImportance": {
+            "type": "string",
+            "description": "Importance to channel strategy"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "channelPerformance": {
+      "type": "object",
+      "description": "Success metrics for the channel",
+      "properties": {
+        "keyMetrics": {
+          "type": "array",
+          "description": "Key performance indicators",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metricName": {
+                "type": "string",
+                "description": "Name of performance metric"
+              },
+              "overallValue": {
+                "type": "string",
+                "description": "Current performance value"
+              },
+              "benchmarkComparison": {
+                "type": "string",
+                "description": "Comparison to benchmarks"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "performanceGaps": {
+          "type": "array",
+          "description": "Areas needing improvement",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gapArea": {
+                "type": "string",
+                "description": "Performance area with gap"
+              },
+              "currentPerformance": {
+                "type": "string",
+                "description": "Current performance level"
+              },
+              "targetPerformance": {
+                "type": "string",
+                "description": "Target performance level"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "channelMaturity": {
+      "type": "object",
+      "description": "Development stage of the channel",
+      "properties": {
+        "overallMaturity": {
+          "description": "Overall maturity level",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/maturityLevel"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "advanced"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "maturityByType": {
+          "type": "array",
+          "description": "Maturity breakdown by channel type",
+          "items": {
+            "type": "object",
+            "properties": {
+              "channelType": {
+                "type": "string",
+                "description": "Type of channel"
+              },
+              "maturityLevel": {
+                "description": "Maturity level of this type",
+                "anyOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/maturityLevel"
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      "advanced",
+                      "expanding"
+                    ],
+                    "description": "Domain-specific values in addition to the shared list"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "maturityRoadmap": {
+          "type": "string",
+          "description": "Plan for maturity improvement"
+        }
+      },
+      "additionalProperties": false
+    },
+    "channelRisks": {
+      "type": "array",
+      "description": "Risk factors for the channel",
+      "items": {
+        "type": "object",
+        "properties": {
+          "riskName": {
+            "type": "string",
+            "description": "Name of risk factor"
+          },
+          "riskDescription": {
+            "type": "string",
+            "description": "Description of risk"
+          },
+          "impactLevel": {
+            "description": "Level of potential impact",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/ratingLevel"
+              }
+            ]
+          },
+          "probability": {
+            "description": "Likelihood of risk occurrence",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/likelihood"
+              }
+            ]
+          },
+          "mitigationStrategy": {
+            "type": "string",
+            "description": "Approach to mitigate risk"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "channelStrategy": {
+      "type": "object",
+      "description": "Strategic approach for the channel",
+      "properties": {
+        "strategicPriorities": {
+          "type": "array",
+          "description": "Key strategic priorities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "investmentFocus": {
+          "type": "array",
+          "description": "Areas of strategic investment",
+          "items": {
+            "type": "object",
+            "properties": {
+              "focusArea": {
+                "type": "string",
+                "description": "Area of investment focus"
+              },
+              "investmentLevel": {
+                "description": "Level of investment",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/simpleLevel"
+                  }
+                ]
+              },
+              "timeframe": {
+                "type": "string",
+                "description": "Investment timeframe"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "strategicAlignment": {
+      "type": "object",
+      "description": "Connection to business strategy",
+      "properties": {
+        "alignmentWithObjectives": {
+          "type": "array",
+          "description": "Alignment with strategic objectives",
+          "items": {
+            "type": "object",
+            "properties": {
+              "objectiveID": {
+                "type": "string",
+                "description": "ID of strategic objective"
+              },
+              "alignmentDescription": {
+                "type": "string",
+                "description": "Description of alignment"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "competitivePositioning": {
+          "type": "string",
+          "description": "How channel contributes to competitive position"
+        }
+      },
+      "additionalProperties": false
+    },
+    "distributionNetwork": {
+      "type": "object",
+      "description": "Physical or digital network for product/service distribution",
+      "properties": {
+        "networkTitle": {
+          "type": "string",
+          "description": "Name of distribution network"
+        },
+        "networkDescription": {
+          "type": "string",
+          "description": "Detailed description"
+        },
+        "networkTopology": {
+          "type": "string",
+          "description": "Structure and organization"
+        },
+        "geographicCoverage": {
+          "type": "object",
+          "description": "Locations served",
+          "properties": {
+            "regions": {
+              "type": "array",
+              "description": "Regions served",
+              "items": {
+                "type": "string"
+              }
+            },
+            "countries": {
+              "type": "number",
+              "description": "Number of countries served"
+            },
+            "cities": {
+              "type": "number",
+              "description": "Number of cities served"
+            }
+          },
+          "additionalProperties": false
+        },
+        "distributionCenters": {
+          "type": "array",
+          "description": "Key facilities",
+          "items": {
+            "type": "object",
+            "properties": {
+              "centerName": {
+                "type": "string",
+                "description": "Name of the distribution center"
+              },
+              "location": {
+                "type": "string",
+                "description": "Location of the distribution center"
+              },
+              "capacity": {
+                "type": "string",
+                "description": "Capacity of the distribution center"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "transportationModes": {
+          "type": "array",
+          "description": "Channel methods",
+          "items": {
+            "type": "object",
+            "properties": {
+              "modeName": {
+                "type": "string",
+                "description": "Transportation mode, e.g. road, rail, air or sea"
+              },
+              "percentage": {
+                "type": "number",
+                "description": "Share of volume carried by this mode, as a percentage"
+              },
+              "costPerUnit": {
+                "type": "string",
+                "description": "Cost per unit shipped by this mode"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "networkCapacity": {
+          "type": "object",
+          "description": "Throughput capability",
+          "properties": {
+            "totalCapacity": {
+              "type": "string",
+              "description": "Total throughput capacity"
+            },
+            "utilizationRate": {
+              "type": "string",
+              "description": "Share of capacity in use"
+            },
+            "peakCapacity": {
+              "type": "string",
+              "description": "Maximum throughput at peak"
+            }
+          },
+          "additionalProperties": false
+        },
+        "serviceLevel": {
+          "type": "array",
+          "description": "Performance standards",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metricName": {
+                "type": "string",
+                "description": "Name of the service level metric"
+              },
+              "target": {
+                "type": "string",
+                "description": "Target value"
+              },
+              "actual": {
+                "type": "string",
+                "description": "Actual value"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "leadTime": {
+          "type": "object",
+          "description": "Fulfillment time",
+          "properties": {
+            "averageLeadTime": {
+              "type": "string",
+              "description": "Average time from order to fulfilment"
+            },
+            "variability": {
+              "type": "string",
+              "description": "Variation in lead time"
+            }
+          },
+          "additionalProperties": false
+        },
+        "networkCost": {
+          "type": "object",
+          "description": "Cost structure",
+          "properties": {
+            "totalAnnualCost": {
+              "type": "string",
+              "description": "Total annual cost of the network"
+            },
+            "fixedCosts": {
+              "type": "number",
+              "description": "Fixed costs"
+            },
+            "variableCosts": {
+              "type": "number",
+              "description": "Variable costs"
+            }
+          },
+          "additionalProperties": false
+        },
+        "networkFlexibility": {
+          "type": "object",
+          "description": "Adaptability",
+          "properties": {
+            "scalingCapability": {
+              "type": "string",
+              "description": "Ability to scale capacity up or down"
+            }
+          },
+          "additionalProperties": false
+        },
+        "networkResilience": {
+          "type": "object",
+          "description": "Disruption resistance",
+          "properties": {
+            "riskAssessment": {
+              "type": "string",
+              "description": "Assessment of disruption risk"
+            },
+            "backupCapability": {
+              "type": "string",
+              "description": "Backup or redundancy available if disrupted"
+            }
+          },
+          "additionalProperties": false
+        },
+        "technologyEnablers": {
+          "type": "array",
+          "description": "Supporting technologies",
+          "items": {
+            "type": "object",
+            "properties": {
+              "technologyName": {
+                "type": "string",
+                "description": "Name of the enabling technology"
+              },
+              "maturityLevel": {
+                "description": "Maturity of the technology",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/maturityLevel"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "networkOptimizationStrategy": {
+          "type": "object",
+          "description": "Improvement approach",
+          "properties": {
+            "focusAreas": {
+              "type": "array",
+              "description": "Areas the optimization focuses on",
+              "items": {
+                "type": "string"
+              }
+            },
+            "expectedOutcomes": {
+              "type": "array",
+              "description": "Outcomes expected from the optimization",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "channelIntegration": {
+      "type": "object",
+      "description": "How different channels connect and work together",
+      "properties": {
+        "integrationTitle": {
+          "type": "string",
+          "description": "Name of channel integration"
+        },
+        "integrationDescription": {
+          "type": "string",
+          "description": "Detailed description"
+        },
+        "channelsIntegrated": {
+          "type": "array",
+          "description": "Channels connected",
+          "items": {
+            "type": "string"
+          }
+        },
+        "integrationPurpose": {
+          "type": "array",
+          "description": "Integration goals",
+          "items": {
+            "type": "string"
+          }
+        },
+        "integrationArchitecture": {
+          "type": "object",
+          "description": "Technical approach",
+          "properties": {
+            "architectureType": {
+              "type": "string",
+              "description": "Type of integration architecture, e.g. API-led or event-driven"
+            },
+            "dataIntegrationApproach": {
+              "type": "string",
+              "description": "How data is integrated across channels"
+            }
+          },
+          "additionalProperties": false
+        },
+        "customerExperienceImpact": {
+          "type": "object",
+          "description": "Effect on customer",
+          "properties": {
+            "impactAreas": {
+              "type": "array",
+              "description": "Aspects of customer experience affected",
+              "items": {
+                "type": "string"
+              }
+            },
+            "customerFeedback": {
+              "type": "string",
+              "description": "Customer feedback on the integration"
+            }
+          },
+          "additionalProperties": false
+        },
+        "dataSharing": {
+          "type": "array",
+          "description": "Information exchange",
+          "items": {
+            "type": "object",
+            "properties": {
+              "dataType": {
+                "type": "string",
+                "description": "Type of data shared"
+              },
+              "sharingMethod": {
+                "type": "string",
+                "description": "How the data is shared"
+              },
+              "privacyControls": {
+                "type": "string",
+                "description": "Privacy controls applied to the shared data"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "processSynchronization": {
+          "type": "array",
+          "description": "Process alignment",
+          "items": {
+            "type": "object",
+            "properties": {
+              "processName": {
+                "type": "string",
+                "description": "Name of the synchronized process"
+              },
+              "synchronizationMethod": {
+                "type": "string",
+                "description": "How the process is kept synchronized across channels"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "technologyPlatforms": {
+          "type": "array",
+          "description": "Supporting technologies",
+          "items": {
+            "type": "object",
+            "properties": {
+              "platformName": {
+                "type": "string",
+                "description": "Name of the platform"
+              },
+              "vendorName": {
+                "type": "string",
+                "description": "Vendor of the platform"
+              },
+              "implementationStatus": {
+                "description": "Implementation status of the platform",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/implementationStatus"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "integrationChallenges": {
+          "type": "array",
+          "description": "Implementation issues",
+          "items": {
+            "type": "object",
+            "properties": {
+              "challengeType": {
+                "type": "string",
+                "description": "Kind of challenge"
+              },
+              "severityLevel": {
+                "type": "string",
+                "description": "Severity of the challenge"
+              },
+              "resolutionApproach": {
+                "type": "string",
+                "description": "How the challenge is being resolved"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "performanceMetrics": {
+          "type": "array",
+          "description": "Success measures",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metricName": {
+                "type": "string",
+                "description": "Name of the metric"
+              },
+              "baselineValue": {
+                "type": "string",
+                "description": "Baseline value"
+              },
+              "currentValue": {
+                "type": "string",
+                "description": "Current value"
+              },
+              "targetValue": {
+                "type": "string",
+                "description": "Target value"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "governanceModel": {
+          "type": "object",
+          "description": "Management approach",
+          "properties": {
+            "governanceBody": {
+              "type": "string",
+              "description": "Body that governs the integration"
+            },
+            "meetingFrequency": {
+              "type": "string",
+              "description": "How often the body meets"
+            },
+            "decisionRights": {
+              "type": "string",
+              "description": "Decisions the body can make"
+            }
+          },
+          "additionalProperties": false
+        },
+        "futureIntegrationPlans": {
+          "type": "array",
+          "description": "Development roadmap",
+          "items": {
+            "type": "object",
+            "properties": {
+              "initiativeName": {
+                "type": "string",
+                "description": "Name of the planned initiative"
+              },
+              "planningStatus": {
+                "type": "string",
+                "description": "Planning status of the initiative"
+              },
+              "implementationTimeline": {
+                "type": "string",
+                "description": "Expected implementation timeline"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "strategicBenefits": {
+          "type": "array",
+          "description": "Business advantages",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "omnichannelStrategy": {
+      "type": "object",
+      "description": "Approach to unified customer experiences across channels",
+      "properties": {
+        "strategyTitle": {
+          "type": "string",
+          "description": "Name of omnichannel strategy"
+        },
+        "strategyDescription": {
+          "type": "string",
+          "description": "Detailed description"
+        },
+        "channelsIncluded": {
+          "type": "array",
+          "description": "Channels in scope",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customerJourneyMapping": {
+          "type": "object",
+          "description": "Experience design",
+          "properties": {
+            "journeyFocus": {
+              "type": "string",
+              "description": "Customer journey the channel design focuses on"
+            },
+            "keyTouchpoints": {
+              "type": "array",
+              "description": "Key touchpoints in the journey",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "channelRoles": {
+          "type": "array",
+          "description": "Purpose of each channel",
+          "items": {
+            "type": "object",
+            "properties": {
+              "channelName": {
+                "type": "string",
+                "description": "Name of the channel"
+              },
+              "primaryRole": {
+                "type": "string",
+                "description": "Main role the channel plays in the journey"
+              },
+              "secondaryRole": {
+                "type": "string",
+                "description": "Supporting role the channel plays"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "channelTransitionPoints": {
+          "type": "array",
+          "description": "Handoff management",
+          "items": {
+            "type": "object",
+            "properties": {
+              "transitionName": {
+                "type": "string",
+                "description": "Name of the transition between channels"
+              },
+              "transitionMethod": {
+                "type": "string",
+                "description": "How customers move between the channels"
+              },
+              "successRate": {
+                "type": "string",
+                "description": "Share of transitions completed successfully"
+              },
+              "improvementFocus": {
+                "type": "string",
+                "description": "What is being improved in the transition"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "consistencyManagement": {
+          "type": "object",
+          "description": "Uniformity approach",
+          "properties": {
+            "consistencyElements": {
+              "type": "array",
+              "description": "Elements kept consistent across channels, e.g. pricing or branding",
+              "items": {
+                "type": "string"
+              }
+            },
+            "enforcementMethod": {
+              "type": "string",
+              "description": "How consistency is enforced"
+            }
+          },
+          "additionalProperties": false
+        },
+        "dataUnification": {
+          "type": "object",
+          "description": "Information integration",
+          "properties": {
+            "unificationApproach": {
+              "type": "string",
+              "description": "How customer and operational data are unified across channels"
+            },
+            "keyDatasets": {
+              "type": "array",
+              "description": "Datasets that are unified",
+              "items": {
+                "type": "string"
+              }
+            },
+            "dataSynchronization": {
+              "type": "string",
+              "description": "How unified data is kept in sync"
+            }
+          },
+          "additionalProperties": false
+        },
+        "pricingStrategy": {
+          "type": "object",
+          "description": "Price management",
+          "properties": {
+            "pricingApproach": {
+              "type": "string",
+              "description": "How prices are set across channels"
+            },
+            "exceptionHandling": {
+              "type": "string",
+              "description": "How channel-specific price exceptions are handled"
+            }
+          },
+          "additionalProperties": false
+        },
+        "inventoryVisibility": {
+          "type": "object",
+          "description": "Stock management",
+          "properties": {
+            "visibilityLevel": {
+              "type": "string",
+              "description": "Extent of inventory visibility across channels"
+            },
+            "allocationStrategy": {
+              "type": "string",
+              "description": "How inventory is allocated between channels"
+            },
+            "reservationRules": {
+              "type": "string",
+              "description": "Rules for reserving inventory"
+            }
+          },
+          "additionalProperties": false
+        },
+        "performanceMetrics": {
+          "type": "array",
+          "description": "Success measures",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metricGroup": {
+                "type": "string",
+                "description": "Group the metrics belong to"
+              },
+              "metrics": {
+                "type": "array",
+                "description": "Metrics in the group",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "implementationRoadmap": {
+          "type": "object",
+          "description": "Execution plan",
+          "properties": {
+            "implementationPhases": {
+              "type": "array",
+              "description": "Phases of the implementation",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "phaseName": {
+                    "type": "string",
+                    "description": "Name of the phase"
+                  },
+                  "timeframe": {
+                    "type": "string",
+                    "description": "When the phase runs"
+                  },
+                  "deliverables": {
+                    "type": "array",
+                    "description": "What the phase delivers",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "governanceFramework": {
+          "type": "object",
+          "description": "Management structure",
+          "properties": {
+            "governanceBody": {
+              "type": "string",
+              "description": "Body that governs the partnership"
+            },
+            "participants": {
+              "type": "array",
+              "description": "Members of the governance body",
+              "items": {
+                "type": "string"
+              }
+            },
+            "meetingCadence": {
+              "type": "string",
+              "description": "How often the body meets"
+            }
+          },
+          "additionalProperties": false
+        },
+        "strategicAdvantages": {
+          "type": "array",
+          "description": "Business benefits",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "channelPartnerDetails": {
+      "type": "array",
+      "description": "Detailed information about channel partners",
+      "items": {
+        "type": "object",
+        "properties": {
+          "partnerName": {
+            "type": "string",
+            "description": "Name of channel partner"
+          },
+          "partnerType": {
+            "type": "string",
+            "description": "Category of partner"
+          },
+          "partnerDescription": {
+            "type": "string",
+            "description": "Detailed description"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Nature of relationship",
+            "enum": [
+              "transactional",
+              "preferred",
+              "strategicAlliance",
+              "jointVenture",
+              "exclusive"
+            ]
+          },
+          "contractualTerms": {
+            "type": "object",
+            "description": "Agreement details",
+            "properties": {
+              "contractDuration": {
+                "type": "string",
+                "description": "Length of the contract"
+              },
+              "exclusivityLevel": {
+                "type": "string",
+                "description": "Degree of exclusivity agreed"
+              },
+              "renewalDate": {
+                "type": "string",
+                "description": "Date the contract is due for renewal",
+                "format": "date"
+              }
+            },
+            "additionalProperties": false
+          },
+          "partnerCapabilities": {
+            "type": "array",
+            "description": "Key capabilities",
+            "items": {
+              "type": "string"
+            }
+          },
+          "marketCoverage": {
+            "type": "object",
+            "description": "Markets served",
+            "properties": {
+              "regions": {
+                "type": "array",
+                "description": "Regions the partner covers",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "penetration": {
+                "type": "string",
+                "description": "Market penetration achieved"
+              }
+            },
+            "additionalProperties": false
+          },
+          "customerSegmentsReached": {
+            "type": "array",
+            "description": "Customers accessed",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productsCovered": {
+            "type": "array",
+            "description": "Products/services delivered",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exclusivityArrangements": {
+            "type": "object",
+            "description": "Exclusivity details",
+            "properties": {
+              "exclusiveProducts": {
+                "type": "array",
+                "description": "Products the partner sells exclusively",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "territorialExclusivity": {
+                "type": "string",
+                "description": "Territories where the partner has exclusivity"
+              }
+            },
+            "additionalProperties": false
+          },
+          "performanceMetrics": {
+            "type": "array",
+            "description": "Success measures",
+            "items": {
+              "type": "object",
+              "properties": {
+                "metricName": {
+                  "type": "string",
+                  "description": "Name of the metric"
+                },
+                "target": {
+                  "type": "string",
+                  "description": "Target value"
+                },
+                "actual": {
+                  "type": "string",
+                  "description": "Actual value"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "relationshipManagementApproach": {
+            "type": "string",
+            "description": "Management method"
+          },
+          "partnerDevelopmentStrategy": {
+            "type": "object",
+            "description": "Growth approach",
+            "properties": {
+              "developmentFocus": {
+                "type": "string",
+                "description": "Where partner development is focused"
+              },
+              "investmentLevel": {
+                "description": "Level of investment in the partner",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/simpleLevel"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "partnerRisks": {
+            "type": "array",
+            "description": "Risk factors",
+            "items": {
+              "type": "object",
+              "properties": {
+                "riskType": {
+                  "type": "string",
+                  "description": "Kind of partner risk"
+                },
+                "riskLevel": {
+                  "$ref": "common.schema.json#/definitions/riskLevel"
+                },
+                "mitigation": {
+                  "type": "string",
+                  "description": "How the risk is mitigated"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other domains, processes, or systems supporting this channel",
+      "items": {
+        "type": "object",
+        "required": [
+          "dependencyType",
+          "domainType",
+          "entityID"
+        ],
+        "properties": {
+          "dependencyType": {
+            "description": "Type of dependency",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/dependencyStrength"
+              }
+            ]
+          },
+          "domainType": {
+            "description": "Type of domain this element depends on",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/domainType"
+              }
+            ]
+          },
+          "entityID": {
+            "type": "string",
+            "description": "ID of the domain entity"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the dependency"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "relatedChannelElements": {
+      "type": "array",
+      "description": "Other channel elements with relationships to this one",
+      "items": {
+        "type": "object",
+        "properties": {
+          "elementID": {
+            "type": "string",
+            "description": "ID of related channel element"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of relationship",
+            "enum": [
+              "upstream",
+              "downstream",
+              "complementary",
+              "competitive",
+              "integrated",
+              "supporting"
+            ]
+          },
+          "relationshipStrength": {
+            "type": "integer",
+            "description": "Strength of relationship (1-5)",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the relationship"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "crossDomainRelationships": {
+      "type": "array",
+      "description": "Directional relationships from this record to entities in other domains",
+      "items": {
+        "$ref": "cross-domain-relationship.schema.json#/definitions/outgoingRelationship"
+      }
+    }
+  },
+  "additionalProperties": false
+}

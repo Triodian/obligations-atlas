@@ -1,0 +1,874 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/model-risk-management.schema.json",
+  "title": "Model Risk Management Schema",
+  "description": "Model Risk Management (MRM), a sub-domain of Risk Management: risks arising from the use of models in decision-making and regulatory reporting, with regulatory mapping (for example SR 11-7, Basel, IFRS 9, CCAR). The root is a Model Profile in the model inventory; Model Governance, Model Validation, Model Monitoring and Regulatory Framework Mapping are element records under definitions, linked to the model by modelID.",
+  "type": "object",
+  "properties": {
+    "modelID": {
+      "description": "Unique identifier for the model",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Model name",
+      "examples": [
+        "IFRS 9 Wholesale ECL"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Purpose and scope of the model"
+    },
+    "modelType": {
+      "type": "string",
+      "description": "Classification of the model",
+      "examples": [
+        "creditRisk/ECL_IFRS9"
+      ]
+    },
+    "useCategory": {
+      "type": "string",
+      "description": "Primary use of the model",
+      "examples": [
+        "provisioning",
+        "pricing",
+        "capital",
+        "stressTesting"
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "Accountable organization unit"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitRoles": {
+      "type": "array",
+      "description": "Key roles",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "Model Owner",
+          "Independent Validator",
+          "Approver"
+        ]
+      ]
+    },
+    "modelOwner": {
+      "type": "string",
+      "description": "Named owner of the model"
+    },
+    "regulatoryRelevance": {
+      "type": "array",
+      "description": "Regulatory frameworks that apply",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "IFRS9",
+          "SR 11-7",
+          "CCAR"
+        ]
+      ]
+    },
+    "businessCriticality": {
+      "type": "string",
+      "description": "Criticality tier",
+      "examples": [
+        "C1",
+        "C2",
+        "C3"
+      ]
+    },
+    "status": {
+      "description": "Lifecycle state of the model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/modelStatus"
+        }
+      ]
+    },
+    "relatedInformationAssets": {
+      "type": "array",
+      "description": "Key datasets the model uses",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relatedInformationIDs": {
+      "type": "array",
+      "description": "IDs of the information assets the model uses",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "supportsCapabilities": {
+      "type": "array",
+      "description": "Capabilities the model supports",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supportsCapabilityIDs": {
+      "type": "array",
+      "description": "IDs of the capabilities the model supports",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "crossDomainRelationships": {
+      "type": "array",
+      "description": "Directional relationships from this model to entities in other domains",
+      "items": {
+        "$ref": "cross-domain-relationship.schema.json#/definitions/outgoingRelationship"
+      }
+    }
+  },
+  "required": [
+    "modelID",
+    "title",
+    "description",
+    "modelType",
+    "status"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "documentationReference": {
+      "type": "object",
+      "description": "A document used as evidence",
+      "properties": {
+        "documentName": {
+          "type": "string",
+          "description": "Name of the document",
+          "examples": [
+            "MRM Policy"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Where the document is held",
+          "examples": [
+            "POL/MRM/2025-01"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Kind of document",
+          "examples": [
+            "policy",
+            "assessment",
+            "report",
+            "approval"
+          ]
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the document"
+        }
+      },
+      "required": [
+        "documentName"
+      ],
+      "additionalProperties": false
+    },
+    "validationMethod": {
+      "type": "string",
+      "enum": [
+        "conceptualSoundness",
+        "dataQuality",
+        "assumptions",
+        "outcomesAnalysis",
+        "benchmarking",
+        "implementationVerification"
+      ],
+      "description": "Validation method or category"
+    },
+    "driftLevel": {
+      "type": "string",
+      "enum": [
+        "noneObserved",
+        "low",
+        "medium",
+        "high"
+      ],
+      "description": "Observed level of drift"
+    },
+    "modelGovernance": {
+      "type": "object",
+      "description": "Roles, approvals, materiality and exceptions for a model. A separate record, linked to the model by modelID.",
+      "properties": {
+        "governanceID": {
+          "description": "Unique identifier for the governance record",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "modelID": {
+          "description": "ID of the model this record belongs to",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "roles": {
+          "type": "object",
+          "description": "People or bodies holding governance roles",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Model owner"
+            },
+            "sponsor": {
+              "type": "string",
+              "description": "Model sponsor"
+            },
+            "independentValidator": {
+              "type": "string",
+              "description": "Independent validator"
+            },
+            "approver": {
+              "type": "string",
+              "description": "Approver"
+            },
+            "challenger": {
+              "type": "string",
+              "description": "Challenger"
+            }
+          },
+          "additionalProperties": false
+        },
+        "approval": {
+          "type": "object",
+          "description": "Approval decision",
+          "properties": {
+            "decision": {
+              "type": "string",
+              "description": "Approval decision",
+              "examples": [
+                "approved",
+                "rejected",
+                "conditionallyApproved"
+              ]
+            },
+            "date": {
+              "type": "string",
+              "format": "date",
+              "description": "Date of the decision"
+            },
+            "conditions": {
+              "type": "string",
+              "description": "Conditions attached to the approval"
+            },
+            "approver": {
+              "type": "string",
+              "description": "Who approved"
+            }
+          },
+          "additionalProperties": false
+        },
+        "changeEvents": {
+          "type": "array",
+          "description": "Changes to the model and their approval",
+          "items": {
+            "type": "object",
+            "properties": {
+              "eventID": {
+                "description": "Unique identifier for the change event",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/identifier"
+                  }
+                ]
+              },
+              "type": {
+                "type": "string",
+                "description": "Kind of change",
+                "examples": [
+                  "material",
+                  "nonMaterial"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "description": "What changed"
+              },
+              "effectiveDate": {
+                "type": "string",
+                "format": "date",
+                "description": "When the change takes effect"
+              },
+              "approvedBy": {
+                "type": "string",
+                "description": "Who approved the change"
+              },
+              "rollbackPlan": {
+                "type": "string",
+                "description": "How the change would be reversed"
+              }
+            },
+            "required": [
+              "eventID",
+              "description"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "Exceptions granted against policy",
+          "items": {
+            "type": "object",
+            "properties": {
+              "exceptionID": {
+                "description": "Unique identifier for the exception",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/identifier"
+                  }
+                ]
+              },
+              "rationale": {
+                "type": "string",
+                "description": "Why the exception was granted"
+              },
+              "expiry": {
+                "type": "string",
+                "format": "date",
+                "description": "When the exception expires"
+              },
+              "compensatingControls": {
+                "type": "array",
+                "description": "Controls compensating for the exception",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "exceptionID",
+              "rationale"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "documentationReferences": {
+          "type": "array",
+          "description": "Policies, approvals, reports or assessments used as evidence",
+          "items": {
+            "$ref": "#/definitions/documentationReference"
+          }
+        }
+      },
+      "required": [
+        "governanceID",
+        "modelID"
+      ],
+      "additionalProperties": false
+    },
+    "modelValidation": {
+      "type": "object",
+      "description": "Validation plan, activities, findings and remediation for a model. A separate record, linked to the model by modelID.",
+      "properties": {
+        "validationID": {
+          "description": "Unique identifier for the validation",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "modelID": {
+          "description": "ID of the model this record belongs to",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "independence": {
+          "type": "boolean",
+          "description": "Whether the validation was performed independently of model development"
+        },
+        "plan": {
+          "type": "object",
+          "description": "Scope and methods",
+          "properties": {
+            "scope": {
+              "type": "string",
+              "description": "What the validation covers"
+            },
+            "methods": {
+              "type": "array",
+              "description": "Validation methods applied",
+              "items": {
+                "$ref": "#/definitions/validationMethod"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "activities": {
+          "type": "array",
+          "description": "Validation activities",
+          "items": {
+            "type": "object",
+            "properties": {
+              "activityID": {
+                "description": "Unique identifier for the activity",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/identifier"
+                  }
+                ]
+              },
+              "category": {
+                "description": "Validation method the activity applies",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/validationMethod"
+                  }
+                ]
+              },
+              "date": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of the activity"
+              },
+              "tooling": {
+                "type": "string",
+                "description": "Tools used"
+              },
+              "evidence": {
+                "type": "string",
+                "description": "Evidence produced"
+              }
+            },
+            "required": [
+              "activityID"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "findings": {
+          "type": "array",
+          "description": "Validation findings",
+          "items": {
+            "type": "object",
+            "properties": {
+              "findingID": {
+                "description": "Unique identifier for the finding",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/identifier"
+                  }
+                ]
+              },
+              "category": {
+                "type": "string",
+                "description": "Kind of finding",
+                "examples": [
+                  "calibration",
+                  "dataQuality",
+                  "documentation"
+                ]
+              },
+              "severity": {
+                "description": "Severity of the finding",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/severity"
+                  }
+                ]
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the finding"
+              },
+              "evidenceRef": {
+                "type": "string",
+                "description": "Reference to supporting evidence"
+              },
+              "dueDate": {
+                "type": "string",
+                "format": "date",
+                "description": "When the finding must be addressed"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Who owns the finding"
+              }
+            },
+            "required": [
+              "findingID",
+              "description"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "remediation": {
+          "type": "array",
+          "description": "Remediation actions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "actionID": {
+                "description": "Unique identifier for the remediation action",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/identifier"
+                  }
+                ]
+              },
+              "action": {
+                "type": "string",
+                "description": "What will be done"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Who is responsible"
+              },
+              "dueDate": {
+                "type": "string",
+                "format": "date",
+                "description": "When it is due"
+              },
+              "status": {
+                "description": "Progress of the action",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/workStatus"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "actionID",
+              "action"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "documentationReferences": {
+          "type": "array",
+          "description": "Policies, approvals, reports or assessments used as evidence",
+          "items": {
+            "$ref": "#/definitions/documentationReference"
+          }
+        }
+      },
+      "required": [
+        "validationID",
+        "modelID"
+      ],
+      "additionalProperties": false
+    },
+    "modelMonitoring": {
+      "type": "object",
+      "description": "Ongoing monitoring of a model: KRIs, performance metrics, drift and alerts. A separate record, linked to the model by modelID.",
+      "properties": {
+        "monitoringID": {
+          "description": "Unique identifier for the monitoring record",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "modelID": {
+          "description": "ID of the model this record belongs to",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "kri": {
+          "type": "array",
+          "description": "Key risk indicators",
+          "items": {
+            "type": "object",
+            "properties": {
+              "indicatorName": {
+                "type": "string",
+                "description": "Name of the key risk indicator"
+              },
+              "description": {
+                "type": "string",
+                "description": "What the indicator measures"
+              },
+              "currentValue": {
+                "type": "number",
+                "description": "Current value"
+              },
+              "threshold": {
+                "type": "number",
+                "description": "Threshold that triggers action"
+              },
+              "trend": {
+                "description": "Direction of the indicator",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/performanceTrend"
+                  }
+                ]
+              },
+              "monitoringFrequency": {
+                "description": "How often the indicator is measured",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/frequency"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "indicatorName"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "performanceMetrics": {
+          "type": "array",
+          "description": "Performance metrics such as calibration error, stability (PSI) and discrimination (AUC)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the metric",
+                "examples": [
+                  "stabilityPSI",
+                  "calibrationError",
+                  "discriminationAUC"
+                ]
+              },
+              "currentValue": {
+                "type": "number",
+                "description": "Current value"
+              },
+              "threshold": {
+                "type": "number",
+                "description": "Threshold"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "driftAssessment": {
+          "type": "object",
+          "description": "Data, concept and performance drift",
+          "properties": {
+            "dataDrift": {
+              "description": "Drift in input data",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/driftLevel"
+                }
+              ]
+            },
+            "conceptDrift": {
+              "description": "Drift in the relationship the model captures",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/driftLevel"
+                }
+              ]
+            },
+            "performanceDrift": {
+              "description": "Drift in model performance",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/driftLevel"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "alerts": {
+          "type": "array",
+          "description": "Alert conditions with responsible parties and required action",
+          "items": {
+            "type": "object",
+            "properties": {
+              "when": {
+                "type": "string",
+                "description": "Condition that triggers the alert"
+              },
+              "who": {
+                "type": "array",
+                "description": "Who is alerted",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "actionRequired": {
+                "type": "string",
+                "description": "Action required"
+              }
+            },
+            "required": [
+              "when"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "Dependencies on other domains",
+          "items": {
+            "$ref": "common.schema.json#/definitions/dependency"
+          }
+        }
+      },
+      "required": [
+        "monitoringID",
+        "modelID"
+      ],
+      "additionalProperties": false
+    },
+    "regulatoryFrameworkMapping": {
+      "type": "object",
+      "description": "Mapping of a model's obligations to named regulatory clauses, with controls and evidence. A separate record, linked to the model by modelID.",
+      "properties": {
+        "frameworkMapID": {
+          "description": "Unique identifier for the regulatory mapping",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "modelIDs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "IDs of the models the mapping covers; omit when it maps the model risk framework as a whole",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          }
+        },
+        "requirements": {
+          "type": "array",
+          "description": "Clause-level obligations with linked controls and evidence",
+          "items": {
+            "type": "object",
+            "properties": {
+              "framework": {
+                "type": "string",
+                "description": "Regulatory framework",
+                "examples": [
+                  "IFRS9",
+                  "SR11-7",
+                  "Basel",
+                  "CCAR"
+                ]
+              },
+              "reference": {
+                "type": "string",
+                "description": "Clause or principle reference",
+                "examples": [
+                  "IFRS9.5.5.17"
+                ]
+              },
+              "obligation": {
+                "type": "string",
+                "description": "What the clause requires"
+              },
+              "appliesTo": {
+                "type": "string",
+                "enum": [
+                  "model",
+                  "data",
+                  "implementation",
+                  "use",
+                  "governance",
+                  "validation",
+                  "monitoring",
+                  "other"
+                ],
+                "description": "Which part of model risk management the obligation applies to"
+              },
+              "controls": {
+                "type": "array",
+                "description": "IDs of the controls meeting the obligation",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "evidence": {
+                "type": "array",
+                "description": "Evidence that the obligation is met",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "description": "Whether the obligation is met",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/complianceStatus"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "framework",
+              "reference"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "documentationReferences": {
+          "type": "array",
+          "description": "Policies, approvals, reports or assessments used as evidence",
+          "items": {
+            "$ref": "#/definitions/documentationReference"
+          }
+        }
+      },
+      "required": [
+        "frameworkMapID"
+      ],
+      "additionalProperties": false
+    },
+    "modelStatus": {
+      "type": "string",
+      "description": "Lifecycle state of a model",
+      "enum": [
+        "inDevelopment",
+        "pendingValidation",
+        "underValidation",
+        "approved",
+        "conditionallyApproved",
+        "inUse",
+        "underReview",
+        "suspended",
+        "retired"
+      ]
+    }
+  }
+}

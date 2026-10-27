@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/connector/submission.schema.json",
+  "title": "Connector Submission Schema",
+  "description": "Reasoning Fabric connector. A batch of change proposals sent to the Fabric in one request. In validate mode the Fabric checks the proposals and returns the result without recording anything; in propose mode it also records them, assigns treatments and writes provenance.",
+  "type": "object",
+  "required": [
+    "submissionID",
+    "connectorVersion",
+    "metamodelVersion",
+    "mode",
+    "submitter",
+    "proposals"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "submissionID": {
+      "description": "Unique identifier for the submission, assigned by the submitter. Resubmitting the same ID is idempotent",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "connectorVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Version of the connector contract the submission follows, e.g. 1.0.0"
+    },
+    "metamodelVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Version of the Triodian Metamodel the records are written against, from its VERSION file"
+    },
+    "mode": {
+      "type": "string",
+      "description": "validate = check only; propose = check, record and route",
+      "enum": [
+        "validate",
+        "propose"
+      ]
+    },
+    "submitter": {
+      "$ref": "#/definitions/actor"
+    },
+    "dataset": {
+      "type": "string",
+      "description": "Governed dataset the proposals belong to, e.g. ai-obligations-atlas. The Fabric keeps datasets separate"
+    },
+    "submittedAt": {
+      "type": "string",
+      "description": "When the submission was sent",
+      "format": "date-time"
+    },
+    "proposals": {
+      "type": "array",
+      "description": "The change proposals",
+      "items": {
+        "$ref": "change-proposal.schema.json"
+      },
+      "minItems": 1,
+      "maxItems": 500
+    }
+  },
+  "definitions": {
+    "actor": {
+      "type": "object",
+      "description": "Who or what is acting",
+      "required": [
+        "actorType",
+        "actorID"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "actorType": {
+          "type": "string",
+          "description": "Kind of actor",
+          "enum": [
+            "agent",
+            "person",
+            "system"
+          ]
+        },
+        "actorID": {
+          "type": "string",
+          "description": "Identifier of the actor, e.g. atlas-update-agent or a person's account ID"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Name to show for the actor"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "submissionID": "SUB-2026-10-27-01",
+      "connectorVersion": "1.0.0",
+      "metamodelVersion": "2.3.0",
+      "mode": "validate",
+      "dataset": "ai-obligations-atlas",
+      "submitter": {
+        "actorType": "agent",
+        "actorID": "atlas-update-agent"
+      },
+      "proposals": [
+        {
+          "changeProposalID": "CP-1",
+          "changeType": "addLead",
+          "target": {
+            "domainType": "trigger",
+            "entityID": "TRG-LEAD-0001"
+          },
+          "evidence": [
+            {
+              "url": "https://example.com/commentary",
+              "sourceRank": 4,
+              "retrievedAt": "2026-10-27T01:00:00Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

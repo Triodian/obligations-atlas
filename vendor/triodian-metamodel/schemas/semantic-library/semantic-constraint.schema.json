@@ -1,0 +1,743 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/semantic-library/semantic-constraint.schema.json",
+  "title": "Semantic Constraint Schema",
+  "description": "An entry in a semantic library: a typed, governed constraint on what an AI system may say, assert, recommend or emit, traced to the obligations it enforces and the business context it applies to. Each constraint is routed to one enforcement tier: the rules tier when compliance is decidable from the form of the output, the semantic tier when it depends on meaning, or human adjudication when neither applies. The record carries the routing decision and its reason, the stewardship and lifecycle that govern it, and the calibration or conformance evidence for its tier.",
+  "type": "object",
+  "required": [
+    "semanticConstraintID",
+    "title",
+    "statement",
+    "constraintType",
+    "obligationMappings",
+    "enforcementTier",
+    "tierRationale",
+    "stewardship",
+    "status",
+    "version"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "semanticConstraintID": {
+      "description": "Unique identifier for the constraint, e.g. SC-001",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Short name of the constraint"
+    },
+    "statement": {
+      "type": "string",
+      "description": "The constraint in plain language, as an approver would read it"
+    },
+    "constraintType": {
+      "type": "string",
+      "description": "Kind of constraint",
+      "enum": [
+        "prohibition",
+        "boundedRange",
+        "requiredProperty",
+        "structuralForm",
+        "closedVocabulary",
+        "gradedSeverity"
+      ]
+    },
+    "obligationMappings": {
+      "type": "array",
+      "description": "Obligations the constraint enforces",
+      "items": {
+        "$ref": "#/definitions/obligationMapping"
+      },
+      "minItems": 1
+    },
+    "enforcementTier": {
+      "type": "string",
+      "description": "Tier the constraint is enforced in",
+      "enum": [
+        "rulesTier",
+        "semanticTier",
+        "humanAdjudication"
+      ]
+    },
+    "tierRationale": {
+      "type": "string",
+      "description": "Why the constraint is routed to this tier: whether compliance is decidable from form, depends on meaning, or needs facts or judgement outside the output"
+    },
+    "splitFromConstraintID": {
+      "description": "When a requirement was split across tiers, the constraint holding the other part",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "appliesTo": {
+      "type": "array",
+      "description": "Business context the constraint governs: products, services, channels, customer segments, value streams or capabilities. Constraints are authored against one distinction with this context as metadata, not re-authored per context.",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/entityReference"
+      }
+    },
+    "governedModelIDs": {
+      "type": "array",
+      "description": "AI systems the constraint governs, as Model Risk Management model profiles (the AI use-case inventory)",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "severityScale": {
+      "type": "array",
+      "description": "Graded-severity ladder, lowest first; required for gradedSeverity constraints",
+      "items": {
+        "$ref": "#/definitions/severityLevel"
+      },
+      "minItems": 2
+    },
+    "contestedDisposition": {
+      "type": "string",
+      "description": "What the constraint does in a contested or uncertain region",
+      "enum": [
+        "enforce",
+        "abstainAndEscalate",
+        "advisoryOnly"
+      ]
+    },
+    "exemplarSets": {
+      "type": "array",
+      "description": "Curated example sets the constraint is authored, calibrated and regression-tested from",
+      "items": {
+        "$ref": "#/definitions/exemplarSet"
+      }
+    },
+    "semanticEnvelope": {
+      "$ref": "#/definitions/semanticEnvelope"
+    },
+    "grammarArtifact": {
+      "$ref": "#/definitions/grammarArtifact"
+    },
+    "stewardship": {
+      "$ref": "#/definitions/stewardship"
+    },
+    "monitoring": {
+      "$ref": "#/definitions/monitoring"
+    },
+    "status": {
+      "description": "Lifecycle state. Constraints are never deleted or edited in place: a constraint that no longer reflects its obligation is deprecated with a pointer to its successor.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/constraintStatus"
+        }
+      ]
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the constraint",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "supersededByConstraintID": {
+      "description": "Successor constraint; required when deprecated. An inactivated constraint (e.g. its obligation was repealed) may have none.",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "relatedConstraintIDs": {
+      "type": "array",
+      "description": "Constraints that overlap with or complement this one; overlaps are reviewed so each obligation has one primary constraint",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "constraintType": {
+            "const": "gradedSeverity"
+          }
+        },
+        "required": [
+          "constraintType"
+        ]
+      },
+      "then": {
+        "required": [
+          "severityScale"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "enforcementTier": {
+            "const": "semanticTier"
+          }
+        },
+        "required": [
+          "enforcementTier"
+        ]
+      },
+      "then": {
+        "required": [
+          "exemplarSets"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "enforcementTier": {
+            "const": "rulesTier"
+          }
+        },
+        "required": [
+          "enforcementTier"
+        ]
+      },
+      "then": {
+        "required": [
+          "grammarArtifact"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "enforcementTier": {
+            "const": "semanticTier"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "const": "validated"
+              },
+              {
+                "const": "published"
+              }
+            ]
+          }
+        },
+        "required": [
+          "enforcementTier",
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "semanticEnvelope"
+        ],
+        "properties": {
+          "semanticEnvelope": {
+            "required": [
+              "validation"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "enforcementTier": {
+            "const": "rulesTier"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "const": "validated"
+              },
+              {
+                "const": "published"
+              }
+            ]
+          }
+        },
+        "required": [
+          "enforcementTier",
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "grammarArtifact": {
+            "required": [
+              "conformance"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "published"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "stewardship": {
+            "required": [
+              "approver",
+              "approvalDate"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "deprecated"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "supersededByConstraintID"
+        ]
+      }
+    }
+  ],
+  "definitions": {
+    "constraintStatus": {
+      "type": "string",
+      "description": "Lifecycle state of a semantic constraint",
+      "enum": [
+        "draft",
+        "validated",
+        "published",
+        "deprecated",
+        "inactivated"
+      ]
+    },
+    "obligationMapping": {
+      "type": "object",
+      "description": "Link from a constraint to an obligation it enforces",
+      "required": [
+        "obligationID",
+        "mappingRole"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "obligationID": {
+          "description": "The obligation enforced",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "mappingRole": {
+          "type": "string",
+          "description": "Whether this constraint is the obligation's primary control or supports another",
+          "enum": [
+            "primary",
+            "supporting"
+          ]
+        },
+        "note": {
+          "type": "string",
+          "description": "How the constraint covers the obligation, and any part it leaves to other controls"
+        }
+      }
+    },
+    "severityLevel": {
+      "type": "object",
+      "description": "One rung of a graded-severity ladder",
+      "required": [
+        "level",
+        "label",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Position on the ladder; higher is more severe"
+        },
+        "label": {
+          "type": "string",
+          "description": "Short name of the level"
+        },
+        "description": {
+          "type": "string",
+          "description": "What a statement at this level does, with the distinction from the level below"
+        },
+        "disposition": {
+          "type": "string",
+          "description": "What happens to a statement at this level",
+          "enum": [
+            "allow",
+            "allowWithControl",
+            "escalate",
+            "block"
+          ]
+        }
+      }
+    },
+    "exemplarSet": {
+      "type": "object",
+      "description": "Reference to a curated set of labelled examples. Exemplar sets are the durable, human-readable asset: vectors and thresholds are re-derived from them when the embedding model changes.",
+      "required": [
+        "exemplarSetID",
+        "setType",
+        "location"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "exemplarSetID": {
+          "description": "Unique identifier for the exemplar set",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "setType": {
+          "type": "string",
+          "description": "Role of the set",
+          "enum": [
+            "canonical",
+            "adversarial",
+            "calibration",
+            "regression",
+            "mustAccept",
+            "mustReject"
+          ]
+        },
+        "itemCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of labelled items in the set"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the set"
+        },
+        "location": {
+          "type": "string",
+          "description": "Where the set is stored, e.g. a repository path or URI"
+        },
+        "provenance": {
+          "type": "string",
+          "description": "Where the items came from: source clauses, adjudicated incidents, promoted novel cases, red-team runs"
+        }
+      }
+    },
+    "modelIdentity": {
+      "type": "object",
+      "description": "The exact model a calibration is valid for",
+      "required": [
+        "modelName",
+        "modelVersion"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "Name of the embedding model"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "Version identifier of the embedding model"
+        },
+        "modelHash": {
+          "type": "string",
+          "description": "Weight or version hash, where the model can be attested"
+        }
+      }
+    },
+    "semanticEnvelope": {
+      "type": "object",
+      "description": "Calibration and validation record for a semantic-tier constraint. Records references to artifacts, not the vectors themselves.",
+      "required": [
+        "embeddingModel",
+        "methodologyVersion",
+        "divergenceMetric",
+        "threshold",
+        "alpha",
+        "calibrationDate"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "embeddingModel": {
+          "$ref": "#/definitions/modelIdentity"
+        },
+        "methodologyVersion": {
+          "type": "string",
+          "description": "Authoring methodology and version the envelope was validated under, e.g. PACE 2.0"
+        },
+        "divergenceMetric": {
+          "type": "string",
+          "description": "Divergence measure between the reference and the governed output",
+          "enum": [
+            "cosine",
+            "euclidean",
+            "mahalanobis",
+            "klDivergence",
+            "jensenShannon"
+          ]
+        },
+        "threshold": {
+          "type": "number",
+          "description": "Calibrated divergence threshold above which the constraint fires"
+        },
+        "alpha": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1,
+          "description": "Conformal significance level the threshold was calibrated to (target error rate)"
+        },
+        "calibrationDate": {
+          "type": "string",
+          "description": "Date the threshold was last calibrated",
+          "format": "date"
+        },
+        "referenceArtifact": {
+          "type": "string",
+          "description": "Location and hash of the reference vector and projection artifacts"
+        },
+        "validation": {
+          "type": "object",
+          "description": "Result of the constraint validation harness, the ship gate for publication",
+          "required": [
+            "validatedDate",
+            "passed"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "validatedDate": {
+              "type": "string",
+              "description": "Date the harness was run",
+              "format": "date"
+            },
+            "passed": {
+              "type": "boolean",
+              "description": "Whether the constraint cleared every registered floor"
+            },
+            "separationAUC": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Separation of compliant from non-compliant exemplars"
+            },
+            "recall": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Recall at the operating point"
+            },
+            "falsePositiveRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "False positive rate at the operating point"
+            },
+            "monotonicityPassed": {
+              "type": "boolean",
+              "description": "Whether divergence increases with authored severity"
+            },
+            "beatsBaseline": {
+              "type": "boolean",
+              "description": "Whether the constraint outperforms the registered baseline"
+            },
+            "shiftRobustnessPassed": {
+              "type": "boolean",
+              "description": "Whether performance held under the distribution-shift test"
+            },
+            "leakagePassed": {
+              "type": "boolean",
+              "description": "Whether the leakage check found no concept leakage"
+            },
+            "evidenceLocation": {
+              "type": "string",
+              "description": "Where the harness evidence pack is stored"
+            }
+          }
+        }
+      }
+    },
+    "grammarArtifact": {
+      "type": "object",
+      "description": "Specification and conformance record for a rules-tier constraint",
+      "required": [
+        "formalism",
+        "artifactLocation",
+        "methodologyVersion"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "formalism": {
+          "type": "string",
+          "description": "Formalism the rule is expressed in",
+          "enum": [
+            "jsonSchema",
+            "regularExpression",
+            "contextFreeGrammar",
+            "closedVocabulary",
+            "other"
+          ]
+        },
+        "artifactLocation": {
+          "type": "string",
+          "description": "Where the grammar, schema or vocabulary is stored"
+        },
+        "artifactVersion": {
+          "type": "string",
+          "description": "Version of the grammar artifact"
+        },
+        "compiledArtifactHash": {
+          "type": "string",
+          "description": "Hash of the compiled automaton or enforcement artifact"
+        },
+        "methodologyVersion": {
+          "type": "string",
+          "description": "Authoring methodology and version, e.g. GRACE 0.1"
+        },
+        "conformance": {
+          "type": "object",
+          "description": "Result of the conformance harness, the ship gate for publication",
+          "required": [
+            "validatedDate",
+            "passed"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "validatedDate": {
+              "type": "string",
+              "description": "Date the harness was run",
+              "format": "date"
+            },
+            "passed": {
+              "type": "boolean",
+              "description": "Whether the grammar cleared every registered floor"
+            },
+            "mustAcceptPassRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Share of must-accept items accepted"
+            },
+            "mustRejectAcceptances": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Must-reject items wrongly accepted (the gate requires zero)"
+            },
+            "mutationKillRate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Share of grammar mutants the corpus detects"
+            },
+            "evidenceLocation": {
+              "type": "string",
+              "description": "Where the harness evidence pack is stored"
+            }
+          }
+        }
+      }
+    },
+    "stewardship": {
+      "type": "object",
+      "description": "Who owns, writes, calibrates and approves the constraint. The author and approver must be different people (separation of duties).",
+      "required": [
+        "policyOwner",
+        "author"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "policyOwner": {
+          "type": "string",
+          "description": "Accountable for the intent the constraint enforces"
+        },
+        "policyOwnerOrgUnitID": {
+          "description": "Organization unit of the policy owner",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "author": {
+          "type": "string",
+          "description": "Semantic librarian or constraint engineer who drafted the constraint"
+        },
+        "calibrator": {
+          "type": "string",
+          "description": "Person who set and validated the threshold (semantic tier)"
+        },
+        "approver": {
+          "type": "string",
+          "description": "Editorial board member or delegate who approved publication; not the author"
+        },
+        "approvalDate": {
+          "type": "string",
+          "description": "Date the current version was approved",
+          "format": "date"
+        }
+      }
+    },
+    "monitoring": {
+      "type": "object",
+      "description": "How the constraint is watched once published, and what prompts a review",
+      "additionalProperties": false,
+      "properties": {
+        "monitoringFrequency": {
+          "description": "How often coverage and drift are reviewed",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/frequency"
+            }
+          ]
+        },
+        "coverageFloor": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Registered minimum coverage; falling below it triggers recalibration"
+        },
+        "reviewTriggers": {
+          "type": "array",
+          "description": "Events that put the constraint back through review",
+          "items": {
+            "type": "string",
+            "enum": [
+              "coverageDegradation",
+              "guaranteeInvalidation",
+              "suspectedLeakage",
+              "obligationChange",
+              "modelChange",
+              "novelCasePromotion",
+              "incidentAdjudication",
+              "scheduledReview"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "lastReviewDate": {
+          "type": "string",
+          "description": "Date of the last review",
+          "format": "date"
+        }
+      }
+    }
+  }
+}

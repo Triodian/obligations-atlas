@@ -1,0 +1,228 @@
+{
+  "title": "Standardised AI use cases",
+  "description": "Reference definitions of the standardised AI use cases UC1 to UC10, on the authority (A), boundary (B) and confidentiality channel (K) scales. Each item validates against schemas/use-case.schema.json.",
+  "schema": "use-case.schema.json",
+  "version": "1.0",
+  "items": [
+    {
+      "useCaseID": "UC1",
+      "title": "Staff copilot drafts and summarises",
+      "description": "An AI assistant drafts, summarises or searches for staff, who remain the authors of what is sent or decided.",
+      "authorityLevels": [
+        "a1Productivity"
+      ],
+      "boundaries": [
+        "b3"
+      ],
+      "assessmentTypes": [
+        "aiUseAssessment",
+        "aiConfidentialityExposureAssessment"
+      ],
+      "examples": [
+        "Drafting emails or reports with a general-purpose assistant",
+        "Summarising a file of documents for a case officer"
+      ],
+      "exclusions": [
+        "A copilot whose draft is sent without review is UC3 or UC8"
+      ],
+      "version": "1.0"
+    },
+    {
+      "useCaseID": "UC2",
+      "title": "Score or recommendation shown to a decision-maker",
+      "description": "AI produces a score, ranking or recommendation that a person sees and decides on.",
+      "authorityLevels": [
+        "a2Analytical"
+      ],
+      "boundaries": [
+        "b1",
+        "b3"
+      ],
+      "assessmentTypes": [
+        "aiUseAssessment"
+      ],
+      "examples": [
+        "Credit risk score shown to a lending officer",
+        "Fraud alert reviewed by an analyst"
+      ],
+      "exclusions": [
+        "If the score decides the case without a person, UC3"
+      ],
+      "version": "1.0"
+    },
+    {
+      "useCaseID": "UC3",
+      "title": "Automated triage or decline",
+      "description": "AI decides how a case, claim or application is routed, or declines it, without a person deciding each case.",
+      "authorityLevels": [
+        "a3Decision"
+      ],
+      "boundaries": [
+        "b1",
+        "b3"
+      ],
+      "assessmentTypes": [
+        "aiRiskAppetite",
+        "aiUseAssessment"
+      ],
+      "examples": [
+        "Automatic decline of a credit application",
+        "Claims triage that fast-tracks or refers claims"
+      ],
+      "version": "1.0"
+    },
+    {
+      "useCaseID": "UC4",
+      "title": "Automated pricing or straight-through payment",
+      "description": "AI sets a price or executes a payment or transaction straight through.",
+      "authorityLevels": [
+        "a4Transactional"
+      ],
+      "boundaries": [
+        "b1"
+      ],
+      "assessmentTypes": [
+        "aiRiskAppetite",
+        "aiUseAssessment"
+      ],
+      "examples": [
+        "Dynamic premium pricing at quote",
+        "Straight-through claims payment"
+      ],
+      "version": "1.0"
+    },
+    {
+      "useCaseID": "UC5",
+      "title": "Agent acting across steps and tools",
+      "description": "An AI agent plans and carries out a task across several steps, calling tools or other systems.",
+      "authorityLevels": [
+        "a5Agentic"
+      ],
+      "boundaries": [
+        "b1",
+        "b3"
+      ],
+      "assessmentTypes": [
+        "aiRiskAppetite",
+        "aiUseAssessment"
+      ],
+      "examples": [
+        "An agent that gathers documents, checks them and prepares a file"
+      ],
+      "exclusions": [
+        "An agent that writes to systems of record is UC6"
+      ],
+      "version": "1.0"
+    },
+    {
+      "useCaseID": "UC6",
+      "title": "Agent with write access to systems of record",
+      "description": "An AI agent that can create, change or delete entries in systems of record.",
+      "authorityLevels": [
+        "a6Actuation"
+      ],
+      "boundaries": [
+        "b3"
+      ],
+      "assessmentTypes": [
+        "aiRiskAppetite",
+        "aiUseAssessment"
+      ],
+      "examples": [
+        "An agent that updates customer records or posts ledger entries"
+      ],
+      "version": "1.0"
+    },
+    {
+      "useCaseID": "UC7",
+      "title": "AI inside a provider or the platform behind it",
+      "description": "AI used by a service provider, or by the platform the provider relies on, in delivering a service to the organization.",
+      "authorityLevels": [
+        "a1Productivity",
+        "a2Analytical",
+        "a3Decision",
+        "a4Transactional",
+        "a5Agentic",
+        "a6Actuation"
+      ],
+      "anyAuthorityLevel": true,
+      "boundaries": [
+        "b1",
+        "b2"
+      ],
+      "assessmentTypes": [
+        "aiUseAssessment"
+      ],
+      "examples": [
+        "A provider's claims platform that uses AI",
+        "A cloud platform's AI features inside an outsourced service"
+      ],
+      "version": "1.0"
+    },
+    {
+      "useCaseID": "UC8",
+      "title": "Customer-facing assistant",
+      "description": "An AI assistant that customers or members talk to directly.",
+      "authorityLevels": [
+        "a1Productivity",
+        "a2Analytical",
+        "a3Decision"
+      ],
+      "boundaries": [
+        "b3"
+      ],
+      "assessmentTypes": [
+        "aiRiskAppetite",
+        "aiUseAssessment"
+      ],
+      "examples": [
+        "Member services chat",
+        "Customer support voice assistant"
+      ],
+      "version": "1.0"
+    },
+    {
+      "useCaseID": "UC9",
+      "title": "AI-generated code in production systems",
+      "description": "Code written or changed with AI assistance that runs in production systems.",
+      "authorityLevels": [
+        "a1Productivity"
+      ],
+      "boundaries": [
+        "b3"
+      ],
+      "assessmentTypes": [
+        "aiUseAssessment"
+      ],
+      "examples": [
+        "Coding assistant output merged into a core banking service"
+      ],
+      "version": "1.0"
+    },
+    {
+      "useCaseID": "UC10",
+      "title": "AI tools reachable by a deal team",
+      "description": "AI tools that people working on a confidential transaction can reach, through which deal information could be exposed.",
+      "authorityLevels": [
+        "a1Productivity"
+      ],
+      "confidentialityChannels": [
+        "k1",
+        "k2",
+        "k3",
+        "k4",
+        "k5",
+        "k6",
+        "k7"
+      ],
+      "assessmentTypes": [
+        "aiConfidentialityExposureAssessment"
+      ],
+      "examples": [
+        "A general-purpose assistant used to summarise a data room",
+        "Meeting transcription during deal negotiations"
+      ],
+      "version": "1.0"
+    }
+  ]
+}

@@ -1,0 +1,831 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/information.schema.json",
+  "title": "Information Domain Schema",
+  "description": "Schema for the Information domain in the Triodian Metamodel",
+  "version": "2.2",
+  "type": "object",
+  "properties": {
+    "informationID": {
+      "description": "Unique identifier for the Information asset",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the Information asset",
+      "examples": [
+        "Customer Transaction Database",
+        "Market Intelligence Repository"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the Information asset contains",
+      "examples": [
+        "Comprehensive database of all customer transactions and interactions"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "description": "The intended purpose or function within the Organization",
+      "examples": [
+        "Support customer analytics and personalization initiatives"
+      ]
+    },
+    "owner": {
+      "type": "string",
+      "description": "The individual or team responsible for the Information asset",
+      "examples": [
+        "Chief Data Officer",
+        "Customer Analytics Team"
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organization unit(s) to which the Information asset is linked",
+      "examples": [
+        "Data and Analytics Division"
+      ]
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "informationCategory": {
+      "type": "string",
+      "enum": [
+        "operationalData",
+        "analyticalData",
+        "referenceData",
+        "masterData",
+        "metadata",
+        "content",
+        "knowledge",
+        "intelligence"
+      ],
+      "description": "Broad categorization of information type"
+    },
+    "informationType": {
+      "type": "string",
+      "enum": [
+        "database",
+        "dataset",
+        "report",
+        "document",
+        "knowledgeBase",
+        "apiData",
+        "realTimeStream",
+        "archive",
+        "model",
+        "dashboard"
+      ],
+      "description": "Specific type of information"
+    },
+    "dataClassification": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "topSecret"
+      ],
+      "description": "Security and sensitivity classification"
+    },
+    "dataQuality": {
+      "type": "string",
+      "enum": [
+        "highQuality",
+        "goodQuality",
+        "acceptableQuality",
+        "poorQuality",
+        "unknownQuality"
+      ],
+      "description": "Quality level of the information"
+    },
+    "format": {
+      "type": "string",
+      "description": "Technical format or structure of the information",
+      "examples": [
+        "PostgreSQL database, JSON API, Excel spreadsheets, PDF documents"
+      ]
+    },
+    "volume": {
+      "type": "string",
+      "description": "Size or scale of the information asset",
+      "examples": [
+        "2.5TB database, 50M records, 10K documents updated daily"
+      ]
+    },
+    "updateFrequency": {
+      "description": "How often the information is updated",
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/definitions/frequency"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "static"
+          ],
+          "description": "Domain-specific values in addition to the shared list"
+        }
+      ]
+    },
+    "retention": {
+      "type": "string",
+      "description": "Data retention policies and schedules",
+      "examples": [
+        "Active for 7 years, archived for 10 years, then deleted per compliance"
+      ]
+    },
+    "sources": {
+      "type": "string",
+      "description": "Origin systems or processes that generate the information",
+      "examples": [
+        "CRM system, transaction processing, customer surveys, market research"
+      ]
+    },
+    "consumers": {
+      "type": "string",
+      "description": "Systems, processes, or users that utilize the information",
+      "examples": [
+        "Analytics platform, reporting tools, customer service, executive dashboards"
+      ]
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Other information assets or systems this information depends on",
+      "examples": [
+        "Customer master data, product catalog, transaction logs"
+      ]
+    },
+    "interfaces": {
+      "type": "string",
+      "description": "Technical interfaces and access methods",
+      "examples": [
+        "REST API, database views, file exports, real-time streaming"
+      ]
+    },
+    "governance": {
+      "type": "string",
+      "description": "Data governance policies and procedures",
+      "examples": [
+        "Data stewardship committee, quality monitoring, access controls"
+      ]
+    },
+    "dataOwner": {
+      "type": "string",
+      "description": "Party accountable for the information asset"
+    },
+    "dataSteward": {
+      "type": "string",
+      "description": "Party responsible for the quality and governance of the information"
+    },
+    "compliance": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "gdpr",
+          "hipaa",
+          "sox",
+          "pciDss",
+          "industryStandards",
+          "internalPolicies"
+        ]
+      },
+      "description": "Regulatory and compliance requirements"
+    },
+    "security": {
+      "type": "string",
+      "description": "Security measures and access controls",
+      "examples": [
+        "Role-based access, encryption at rest and transit, audit logging"
+      ]
+    },
+    "privacy": {
+      "type": "string",
+      "description": "Privacy protection measures and policies",
+      "examples": [
+        "Data anonymization, consent management, right to erasure procedures"
+      ]
+    },
+    "quality": {
+      "type": "string",
+      "description": "Data quality measures and monitoring",
+      "examples": [
+        "99.5% accuracy, completeness checks, validation rules, quality dashboards"
+      ]
+    },
+    "lineage": {
+      "type": "string",
+      "description": "Data lineage and transformation history",
+      "examples": [
+        "Source → ETL → Data warehouse → Analytics mart → Reports"
+      ]
+    },
+    "metadata": {
+      "type": "string",
+      "description": "Descriptive information about the data structure and meaning",
+      "examples": [
+        "Data dictionary, business glossary, technical specifications"
+      ]
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": [
+        "creation",
+        "activeUse",
+        "maintenance",
+        "archive",
+        "disposal",
+        "migration"
+      ],
+      "description": "Current stage in information lifecycle"
+    },
+    "businessValue": {
+      "type": "string",
+      "description": "Business value and impact of the information",
+      "examples": [
+        "Enables $2M annual savings through customer insights and optimization"
+      ]
+    },
+    "costs": {
+      "type": "string",
+      "description": "Costs associated with maintaining the information asset",
+      "examples": [
+        "Storage: $50K annually, maintenance: $30K, licensing: $20K"
+      ]
+    },
+    "risks": {
+      "type": "string",
+      "description": "Potential risks associated with the information",
+      "examples": [
+        "Data breach exposure, quality degradation, system dependencies"
+      ]
+    },
+    "riskCategories": {
+      "type": "array",
+      "description": "Categories of risks",
+      "items": {
+        "$ref": "common.schema.json#/definitions/riskCategory"
+      }
+    },
+    "accessPatterns": {
+      "type": "string",
+      "description": "How the information is typically accessed and used",
+      "examples": [
+        "Batch processing nightly, real-time queries during business hours"
+      ]
+    },
+    "performance": {
+      "type": "string",
+      "description": "Performance characteristics and requirements",
+      "examples": [
+        "Sub-second query response, 99.9% availability, 10GB/hour throughput"
+      ]
+    },
+    "integration": {
+      "type": "string",
+      "description": "Integration with other systems and platforms",
+      "examples": [
+        "Native CRM integration, API connections to analytics tools"
+      ]
+    },
+    "analytics": {
+      "type": "string",
+      "description": "Analytical capabilities and use cases",
+      "examples": [
+        "Customer segmentation, predictive modeling, trend analysis, KPI tracking"
+      ]
+    },
+    "archiving": {
+      "type": "string",
+      "description": "Archiving strategies and procedures",
+      "examples": [
+        "Automated monthly archiving, compressed storage, searchable archives"
+      ]
+    },
+    "backup": {
+      "type": "string",
+      "description": "Backup and recovery procedures",
+      "examples": [
+        "Daily incremental, weekly full backup, 4-hour recovery time objective"
+      ]
+    },
+    "monitoring": {
+      "type": "string",
+      "description": "Monitoring and alerting capabilities",
+      "examples": [
+        "Quality monitoring, usage tracking, performance alerts, anomaly detection"
+      ]
+    },
+    "documentation": {
+      "type": "string",
+      "description": "Documentation and knowledge management",
+      "examples": [
+        "Technical documentation, user guides, data dictionary, training materials"
+      ]
+    },
+    "training": {
+      "type": "string",
+      "description": "Training and skills development for information users",
+      "examples": [
+        "Data literacy programs, tool training, best practices workshops"
+      ]
+    },
+    "innovation": {
+      "type": "string",
+      "description": "Innovation opportunities and emerging technologies",
+      "examples": [
+        "AI/ML integration, real-time analytics, automated data discovery"
+      ]
+    },
+    "partnerships": {
+      "type": "string",
+      "description": "External partnerships for data sharing or enrichment",
+      "examples": [
+        "Third-party data providers, industry consortiums, research collaborations"
+      ]
+    },
+    "scalability": {
+      "type": "string",
+      "description": "Scaling capabilities and future growth plans",
+      "examples": [
+        "Cloud-native architecture supports 10x growth, auto-scaling enabled"
+      ]
+    },
+    "standardization": {
+      "type": "string",
+      "description": "Adherence to data standards and frameworks",
+      "examples": [
+        "ISO 8000 data quality, industry data models, enterprise standards"
+      ]
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "Alignment with organizational goals and strategies",
+      "examples": [
+        "Supports digital transformation and customer-centric strategy"
+      ]
+    },
+    "competitiveAdvantage": {
+      "type": "string",
+      "description": "How this information provides competitive differentiation",
+      "examples": [
+        "Unique customer insights enable personalized experiences"
+      ]
+    },
+    "relatedInformation": {
+      "type": "string",
+      "description": "Information assets that are related or linked",
+      "examples": [
+        "Customer master data, product reference data, transaction logs"
+      ]
+    },
+    "relatedInformationIDs": {
+      "type": "array",
+      "description": "IDs of related Information assets",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "technologyStack": {
+      "type": "string",
+      "description": "Underlying technologies used",
+      "examples": [
+        "Apache Kafka, PostgreSQL, Elasticsearch, Python, AWS"
+      ]
+    },
+    "roadmap": {
+      "type": "string",
+      "description": "Future development plans",
+      "examples": [
+        "Q2: Real-time analytics, Q4: AI-powered insights"
+      ]
+    },
+    "localization": {
+      "type": "string",
+      "description": "Multi-language and regional adaptations",
+      "examples": [
+        "Multi-language data dictionary, regional compliance variations"
+      ]
+    },
+    "adoptionMetrics": {
+      "type": "string",
+      "description": "Usage and adoption measurements",
+      "examples": [
+        "500 active users, 95% query success rate, 2TB monthly processing"
+      ]
+    },
+    "qualityMetrics": {
+      "type": "string",
+      "description": "Quality assessment measures",
+      "examples": [
+        "99.5% accuracy, 98% completeness, 0.1% error rate"
+      ]
+    },
+    "userBase": {
+      "type": "string",
+      "description": "Description of current user base",
+      "examples": [
+        "200 analysts, 50 data scientists, 1000 business users"
+      ]
+    },
+    "usage": {
+      "type": "string",
+      "description": "How the information is typically used",
+      "examples": [
+        "Real-time monitoring, batch analytics, ad-hoc queries"
+      ]
+    },
+    "revenueModel": {
+      "type": "string",
+      "description": "How the information generates revenue or value",
+      "examples": [
+        "Cost savings: $500K annually, revenue optimization: $2M"
+      ]
+    },
+    "marketPosition": {
+      "type": "string",
+      "enum": [
+        "industryLeader",
+        "strongPosition",
+        "competitive",
+        "developing",
+        "lagging"
+      ],
+      "description": "Information maturity position relative to industry"
+    },
+    "investmentLevel": {
+      "type": "string",
+      "enum": [
+        "highInvestment",
+        "mediumInvestment",
+        "lowInvestment",
+        "minimalInvestment"
+      ],
+      "description": "Required investment level for information management"
+    },
+    "stakeholderImpact": {
+      "type": "string",
+      "description": "Impact on key stakeholders",
+      "examples": [
+        "Improved decision-making for executives, faster insights for analysts"
+      ]
+    },
+    "parentInformation": {
+      "type": "string",
+      "description": "Parent information asset this is derived from",
+      "examples": [
+        "Enterprise Data Warehouse",
+        "Master Customer Database"
+      ]
+    },
+    "parentInformationID": {
+      "description": "ID of the parent Information asset this is derived from",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "childInformation": {
+      "type": "string",
+      "description": "Child information assets derived from this",
+      "examples": [
+        "Customer Analytics Mart",
+        "Real-time Dashboard Feeds"
+      ]
+    },
+    "changeManagement": {
+      "type": "string",
+      "description": "Approach to managing information changes and updates",
+      "examples": [
+        "Version control, impact analysis, stakeholder notification"
+      ]
+    },
+    "knowledgeManagement": {
+      "type": "string",
+      "description": "How information knowledge is captured and shared",
+      "examples": [
+        "Data dictionaries, best practices wiki, training programs"
+      ]
+    },
+    "inputs": {
+      "type": "string",
+      "description": "The resources, information or materials required for the information management element",
+      "examples": [
+        "Raw transaction data, customer feedback, external market data"
+      ]
+    },
+    "outputs": {
+      "type": "string",
+      "description": "The deliverables or results produced by the information management element",
+      "examples": [
+        "Customer insights reports, predictive models, real-time dashboards"
+      ]
+    },
+    "processes": {
+      "type": "string",
+      "description": "The set of processes that define how the information management element operates",
+      "examples": [
+        "Data ingestion, validation, transformation, analysis, and reporting processes"
+      ]
+    },
+    "performanceIndicators": {
+      "type": "string",
+      "description": "Metrics used to measure the effectiveness and efficiency of the information management element",
+      "examples": [
+        "Data quality score, processing time, user satisfaction, system availability"
+      ]
+    },
+    "relatedInformationElements": {
+      "type": "string",
+      "description": "Information elements that are related or linked to this element",
+      "examples": [
+        "Customer master data, product catalog, transaction history"
+      ]
+    },
+    "maturityLevel": {
+      "description": "The current maturity level of the information management element",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/maturityLevel"
+        }
+      ]
+    },
+    "toolsAndTechnologies": {
+      "type": "string",
+      "description": "Tools and technologies used to support or enable the information management element",
+      "examples": [
+        "Apache Kafka, PostgreSQL, Tableau, Python, AWS services"
+      ]
+    },
+    "complianceAndStandards": {
+      "type": "string",
+      "description": "Regulatory requirements and standards the information management element must adhere to",
+      "examples": [
+        "GDPR data protection, SOX financial reporting, industry data standards"
+      ]
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Areas where the information management element can be enhanced or improved",
+      "examples": [
+        "Implement real-time processing, enhance data quality automation, add AI capabilities"
+      ]
+    },
+    "informationElements": {
+      "type": "array",
+      "description": "Specific components or structures within the information asset",
+      "items": {
+        "$ref": "#/definitions/informationElement"
+      }
+    }
+  },
+  "required": [
+    "informationID",
+    "title",
+    "description",
+    "purpose",
+    "owner"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "informationElement": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The name or title of the Information element",
+          "examples": [
+            "Customer Transaction Records"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed explanation of what the Information element contains",
+          "examples": [
+            "Individual transaction records with timestamp, amount, product details"
+          ]
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The intended purpose or function of the Information element",
+          "examples": [
+            "Track individual customer purchases for analytics and reporting"
+          ]
+        },
+        "owner": {
+          "type": "string",
+          "description": "The individual or team responsible for the Information element",
+          "examples": [
+            "Transaction Processing Team"
+          ]
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The organization unit(s) involved with the Information element",
+          "examples": [
+            "Finance and Operations Division"
+          ]
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "elementType": {
+          "type": "string",
+          "enum": [
+            "table",
+            "field",
+            "file",
+            "stream",
+            "object",
+            "document",
+            "image",
+            "reportSection"
+          ],
+          "description": "Type of information element"
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Technical data type or format",
+          "examples": [
+            "VARCHAR(255)",
+            "INTEGER",
+            "TIMESTAMP",
+            "JSON",
+            "BLOB"
+          ]
+        },
+        "size": {
+          "type": "string",
+          "description": "Size or volume of the element",
+          "examples": [
+            "50 characters max",
+            "1-999999",
+            "Up to 10MB",
+            "Average 2KB per record"
+          ]
+        },
+        "constraints": {
+          "type": "string",
+          "description": "Data validation rules and constraints",
+          "examples": [
+            "NOT NULL",
+            "UNIQUE",
+            "Foreign key to customer table",
+            "Date range validation"
+          ]
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default values or behaviors",
+          "examples": [
+            "Current timestamp",
+            "NULL",
+            "System generated ID"
+          ]
+        },
+        "businessRules": {
+          "type": "string",
+          "description": "Business logic governing the element",
+          "examples": [
+            "Must be positive value",
+            "Required for premium customers",
+            "Auto-calculated field"
+          ]
+        },
+        "relationships": {
+          "type": "string",
+          "description": "Relationships to other information elements",
+          "examples": [
+            "Links to customer ID",
+            "Parent-child with order items",
+            "References product catalog"
+          ]
+        },
+        "quality": {
+          "type": "string",
+          "description": "Quality measures specific to this element",
+          "examples": [
+            "99.9% completeness",
+            "Real-time validation",
+            "Monthly quality audits"
+          ]
+        },
+        "sensitivity": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ],
+          "description": "Sensitivity level of the element"
+        },
+        "retention": {
+          "type": "string",
+          "description": "Retention policies specific to this element",
+          "examples": [
+            "Keep for 7 years then archive",
+            "Purge after customer deletion"
+          ]
+        },
+        "access": {
+          "type": "string",
+          "description": "Access controls and permissions",
+          "examples": [
+            "Read-only for analysts",
+            "Write access for transaction systems"
+          ]
+        },
+        "transformations": {
+          "type": "string",
+          "description": "Data transformations applied to the element",
+          "examples": [
+            "Encrypted storage",
+            "Masked in non-production",
+            "Aggregated for reporting"
+          ]
+        },
+        "validations": {
+          "type": "string",
+          "description": "Data validation procedures",
+          "examples": [
+            "Format validation",
+            "Business rule checks",
+            "Cross-reference validation"
+          ]
+        },
+        "sources": {
+          "type": "string",
+          "description": "Source systems or processes for this element",
+          "examples": [
+            "POS systems",
+            "Online checkout",
+            "Mobile app transactions"
+          ]
+        },
+        "usage": {
+          "type": "string",
+          "description": "How the element is typically used",
+          "examples": [
+            "Real-time fraud detection",
+            "Monthly reporting",
+            "Customer analytics"
+          ]
+        },
+        "performance": {
+          "type": "string",
+          "description": "Performance characteristics",
+          "examples": [
+            "Indexed for fast lookup",
+            "Partitioned by date",
+            "Cached for frequent access"
+          ]
+        },
+        "monitoring": {
+          "type": "string",
+          "description": "Monitoring and alerting for the element",
+          "examples": [
+            "Quality monitoring",
+            "Volume alerts",
+            "Performance tracking"
+          ]
+        },
+        "documentation": {
+          "type": "string",
+          "description": "Documentation and metadata",
+          "examples": [
+            "Business definition",
+            "Technical specifications",
+            "Usage guidelines"
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "purpose"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

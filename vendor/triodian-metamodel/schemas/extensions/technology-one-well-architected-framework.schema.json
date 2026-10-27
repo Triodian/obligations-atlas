@@ -1,0 +1,211 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/extensions/technology-one-well-architected-framework.schema.json",
+  "title": "TechnologyOne Well-Architected Framework Extension Schema",
+  "description": "Schema extension for the Triodian Metamodel, detailing architectural principles and patterns inspired by the TechnologyOne Well-Architected Framework. Represents the application of TechnologyOne's Well-Architected principles within a technology solution.",
+  "type": "object",
+  "properties": {
+    "frameworkOverview": {
+      "type": "object",
+      "description": "General overview of the TechnologyOne Well-Architected Framework principles.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the framework."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the framework referenced."
+        },
+        "description": {
+          "type": "string",
+          "description": "A high-level description of the framework's purpose."
+        }
+      },
+      "required": [
+        "name",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "corePrinciples": {
+      "type": "array",
+      "description": "Core guiding principles for architectural design, as identified in the TechnologyOne framework.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "principleName": {
+            "type": "string",
+            "enum": [
+              "citizenCentricDesign",
+              "dataDrivenDecisionMaking",
+              "continuousEvolution",
+              "other"
+            ],
+            "description": "Name of the core principle."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the principle and its implications for solution architecture."
+          },
+          "guidelines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specific guidelines or best practices associated with this principle."
+          }
+        },
+        "required": [
+          "principleName",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "architecturalPillars": {
+      "type": "array",
+      "description": "The foundational pillars that ensure comprehensive architectural excellence (e.g., Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pillarName": {
+            "type": "string",
+            "description": "Name of the architectural pillar."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of what the pillar entails."
+          },
+          "keyConsiderations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Key considerations or areas of focus within this pillar."
+          },
+          "bestPractices": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Recommended best practices for implementing this pillar."
+          }
+        },
+        "required": [
+          "pillarName",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "architecturalComponents": {
+      "type": "array",
+      "description": "Abstracted types of components commonly found in TechnologyOne-based architectures.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "componentType": {
+            "type": "string",
+            "enum": [
+              "coreErpModule",
+              "integrationService",
+              "apiGateway",
+              "workflowEngine",
+              "eventBus",
+              "dataWarehouse",
+              "reportingTool",
+              "securityProxy",
+              "externalSystemIntegration",
+              "webPortal",
+              "other"
+            ],
+            "description": "Categorization of the architectural component (e.g., T1Finance, T1HR, Workflow, APIGateway, EventBus, Security Proxy from the diagram)."
+          },
+          "genericDescription": {
+            "type": "string",
+            "description": "A generic description of the component's function."
+          },
+          "commonInteractions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Common ways this component interacts with others (e.g., REST APIs, Business Events, Data Export, Authenticated Requests)."
+          }
+        },
+        "required": [
+          "componentType",
+          "genericDescription"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "implementationMethodology": {
+      "type": "object",
+      "description": "Guidelines for implementing solutions following the framework.",
+      "properties": {
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key phases of implementation (e.g., Design, Build, Test, Deploy, Operate)."
+        },
+        "keyActivities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Critical activities within the methodology."
+        }
+      },
+      "additionalProperties": false
+    },
+    "governanceModel": {
+      "type": "object",
+      "description": "Aspects of governance related to the architectural framework.",
+      "properties": {
+        "decisionMakingProcess": {
+          "type": "string",
+          "description": "Description of how architectural decisions are made."
+        },
+        "reviewMechanisms": {
+          "type": "string",
+          "description": "How architectural adherence and quality are reviewed."
+        }
+      },
+      "additionalProperties": false
+    },
+    "kpis": {
+      "type": "array",
+      "description": "Key Performance Indicators relevant to solution architecture.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kpiName": {
+            "type": "string",
+            "description": "Name of the KPI."
+          },
+          "description": {
+            "type": "string",
+            "description": "What the KPI measures."
+          },
+          "measurementFrequency": {
+            "description": "How often the KPI is measured",
+            "allOf": [
+              {
+                "$ref": "../common.schema.json#/definitions/frequency"
+              }
+            ]
+          }
+        },
+        "required": [
+          "kpiName"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

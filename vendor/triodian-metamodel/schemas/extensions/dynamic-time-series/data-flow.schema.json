@@ -1,0 +1,300 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/extensions/dynamic-time-series/data-flow.schema.json",
+  "title": "Data Flow Schema",
+  "description": "Dynamic and Time-Series extension. A configured movement of data from one or more source systems to one or more target systems: what starts it, how often it runs, the schema of its payload, its quality measure and the governance applied to it. Data flows model live operational feeds and monitored sources alike, such as a sensor stream into a quality engine, or a regulator's publication page watched daily for new instruments.",
+  "type": "object",
+  "required": [
+    "dataFlowID",
+    "title",
+    "sourceSystems",
+    "frequency"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "dataFlowID": {
+      "description": "Unique identifier for the data flow, e.g. DF-PROC-001",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Name of the data flow"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the data flow carries and why"
+    },
+    "sourceSystems": {
+      "type": "array",
+      "description": "Systems or sources the data comes from",
+      "items": {
+        "$ref": "#/definitions/flowEndpoint"
+      },
+      "minItems": 1
+    },
+    "targetSystems": {
+      "type": "array",
+      "description": "Systems that receive the data",
+      "items": {
+        "$ref": "#/definitions/flowEndpoint"
+      }
+    },
+    "frequency": {
+      "description": "Cadence of the data flow",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/frequency"
+        }
+      ]
+    },
+    "triggeringEvent": {
+      "type": "object",
+      "description": "Event that starts the flow, for event-driven flows",
+      "required": [
+        "eventName"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "eventName": {
+          "type": "string",
+          "description": "Name of the event, e.g. PartProduced"
+        },
+        "source": {
+          "type": "string",
+          "description": "Where the event comes from, e.g. Machine101"
+        }
+      }
+    },
+    "schemaReference": {
+      "type": "object",
+      "description": "Schema of the data payload",
+      "required": [
+        "format"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Payload format",
+          "enum": [
+            "json",
+            "xml",
+            "csv",
+            "html",
+            "pdf",
+            "rss",
+            "atom",
+            "binary",
+            "other"
+          ]
+        },
+        "schemaID": {
+          "type": "string",
+          "description": "Identifier or URI of the payload schema, e.g. SCHEMA-MFG002 or a Triodian schema $id"
+        }
+      }
+    },
+    "sourcePrecedence": {
+      "type": "object",
+      "description": "How much weight the source carries when sources disagree. Used where a flow feeds governed reasoning",
+      "required": [
+        "rank",
+        "basis"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "rank": {
+          "type": "integer",
+          "description": "1 (highest precedence) to 5 (lowest)",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "basis": {
+          "type": "string",
+          "description": "Why the source has that rank",
+          "enum": [
+            "officialText",
+            "regulatorPublication",
+            "standardsBodyPublication",
+            "commentary",
+            "news",
+            "internalSystem",
+            "sensor",
+            "other"
+          ]
+        },
+        "canSetStatusOrDate": {
+          "type": "boolean",
+          "description": "Whether a change from this source alone may set a record's status or date, or only serve as a lead to a higher-ranked source"
+        }
+      }
+    },
+    "externalOrgID": {
+      "description": "External Organization that owns the source, for external sources",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "jurisdiction": {
+      "description": "Jurisdiction the source covers, for regulatory sources",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/jurisdictionCode"
+        }
+      ]
+    },
+    "dataQualityMetricID": {
+      "description": "Performance or timebound metric that measures the flow's data quality, latency or freshness",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "latency": {
+      "type": "string",
+      "description": "Expected latency of the flow, as an ISO 8601 duration or plain text, e.g. PT0.1S or 100ms"
+    },
+    "volume": {
+      "type": "string",
+      "description": "Expected volume, e.g. 1000 records/min"
+    },
+    "freshnessThreshold": {
+      "type": "string",
+      "description": "Maximum age, as an ISO 8601 duration, after which records fed by this flow are treated as stale unless re-verified, e.g. P90D"
+    },
+    "governance": {
+      "type": "object",
+      "description": "Governance controls applied to the flow",
+      "additionalProperties": false,
+      "properties": {
+        "ownerTitle": {
+          "type": "string",
+          "description": "Person or team that owns the flow"
+        },
+        "ownerStakeholderID": {
+          "description": "Stakeholder record for the owner",
+          "allOf": [
+            {
+              "$ref": "../../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "approvedDate": {
+          "type": "string",
+          "description": "Date the flow was approved",
+          "format": "date"
+        },
+        "reviewFrequency": {
+          "description": "How often the flow is reviewed",
+          "allOf": [
+            {
+              "$ref": "../../common.schema.json#/definitions/frequency"
+            }
+          ]
+        },
+        "humanApprovalRequired": {
+          "type": "boolean",
+          "description": "Whether changes derived from this flow need a named human approver before they are published"
+        }
+      }
+    },
+    "status": {
+      "description": "Implementation state of the flow",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/implementationStatus"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "flowEndpoint": {
+      "type": "object",
+      "description": "A system or source at one end of a data flow",
+      "required": [
+        "endpointType",
+        "title"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Kind of endpoint",
+          "enum": [
+            "software",
+            "sensor",
+            "dataStore",
+            "webPage",
+            "feed",
+            "register",
+            "api",
+            "person",
+            "other"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "Name of the endpoint"
+        },
+        "systemReference": {
+          "description": "Technology or Information record for the endpoint, when one exists",
+          "allOf": [
+            {
+              "$ref": "../../common.schema.json#/definitions/entityReference"
+            }
+          ]
+        },
+        "url": {
+          "type": "string",
+          "description": "Address of the endpoint, for web sources and APIs",
+          "format": "uri"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "dataFlowID": "DF-PROC-001",
+      "title": "Live Manufacturing Process Data",
+      "description": "Real-time ingestion of data from a manufacturing process line.",
+      "sourceSystems": [
+        {
+          "endpointType": "sensor",
+          "title": "Sensor Network A"
+        }
+      ],
+      "targetSystems": [
+        {
+          "endpointType": "software",
+          "title": "Operational Dashboard"
+        },
+        {
+          "endpointType": "software",
+          "title": "Quality Control Engine"
+        }
+      ],
+      "frequency": "realTime",
+      "triggeringEvent": {
+        "eventName": "PartProduced",
+        "source": "Machine101"
+      },
+      "schemaReference": {
+        "format": "json",
+        "schemaID": "SCHEMA-MFG002"
+      },
+      "dataQualityMetricID": "MET-LATENCY-001",
+      "latency": "100ms",
+      "governance": {
+        "ownerTitle": "DataOps Team",
+        "approvedDate": "2025-08-20"
+      }
+    }
+  ]
+}

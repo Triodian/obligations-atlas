@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/coverage/organization-goal.schema.json",
+  "title": "Organization Goal Schema",
+  "type": "object",
+  "description": "Represents an organisation's business architecture goal including domain weighting, coverage aspirations, and tolerances.",
+  "properties": {
+    "goalID": {
+      "type": "string",
+      "description": "Unique identifier for the goal."
+    },
+    "organization": {
+      "type": "string",
+      "description": "The organisation this goal applies to."
+    },
+    "orgUnit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional organisational unit this goal is targeted at. Leave null for organisation-wide goals."
+    },
+    "domain": {
+      "description": "The business architecture domain targeted by this goal.",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/domainType"
+        }
+      ]
+    },
+    "weighting": {
+      "type": "number",
+      "description": "Relative importance of this domain, typically between 0.0 and 1.0."
+    },
+    "coverageGapTolerance": {
+      "type": "number",
+      "description": "Acceptable gap between target and actual domain coverage (e.g. 0.1 = 10% gap)."
+    },
+    "maturityTargetDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Date by which the organisation aims to achieve the coverage goal."
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Additional context or commentary."
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User or system that created this record."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of creation."
+    }
+  },
+  "required": [
+    "goalID",
+    "organization",
+    "domain",
+    "weighting",
+    "coverageGapTolerance",
+    "createdBy",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}

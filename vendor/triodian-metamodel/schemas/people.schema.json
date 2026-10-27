@@ -1,0 +1,1355 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/people.schema.json",
+  "title": "People Domain Schema",
+  "description": "Comprehensive schema for the People domain in the Triodian Metamodel, focusing on workforce capabilities, organizational culture, leadership approaches, and knowledge management practices",
+  "type": "object",
+  "required": [
+    "peopleID",
+    "title",
+    "description",
+    "talentCategory",
+    "orgUnitTitle"
+  ],
+  "properties": {
+    "peopleID": {
+      "type": "string",
+      "description": "Unique identifier for the people element"
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the people element"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the people element entails"
+    },
+    "talentCategory": {
+      "type": "string",
+      "description": "Classification of people element type",
+      "enum": [
+        "technical",
+        "leadership",
+        "administrative",
+        "operational",
+        "creative",
+        "analytical",
+        "customerFacing",
+        "crossFunctional"
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organization unit responsible for this people element"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitRoles": {
+      "type": "array",
+      "description": "Specific roles within the organization unit that manage this people element",
+      "items": {
+        "type": "string"
+      }
+    },
+    "orgUnitsCovered": {
+      "type": "array",
+      "description": "Organizational units affected by this people element",
+      "items": {
+        "type": "string"
+      }
+    },
+    "workforceSize": {
+      "type": "object",
+      "description": "Quantitative metrics about the workforce",
+      "properties": {
+        "currentHeadcount": {
+          "type": "integer",
+          "description": "Current number of employees/contractors"
+        },
+        "plannedHeadcount": {
+          "type": "integer",
+          "description": "Target number of employees/contractors"
+        },
+        "timeframe": {
+          "type": "string",
+          "description": "Timeframe for planned headcount"
+        },
+        "vacancies": {
+          "type": "integer",
+          "description": "Current number of open positions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "skillsProfile": {
+      "type": "object",
+      "description": "Skills and competencies represented",
+      "properties": {
+        "technicalSkills": {
+          "type": "array",
+          "description": "Technical capabilities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "coreCompetencies": {
+          "type": "array",
+          "description": "Core business competencies",
+          "items": {
+            "type": "string"
+          }
+        },
+        "criticalSkillGaps": {
+          "type": "array",
+          "description": "Skills needed but currently insufficient",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skillAssessmentMethod": {
+          "type": "string",
+          "description": "How skills are assessed and measured"
+        }
+      },
+      "additionalProperties": false
+    },
+    "competencyFramework": {
+      "type": "string",
+      "description": "Competency structure used"
+    },
+    "talentDevelopmentApproach": {
+      "type": "object",
+      "description": "Approach to developing talent",
+      "properties": {
+        "developmentMethodology": {
+          "type": "string",
+          "description": "Overall approach to talent development"
+        },
+        "formalPrograms": {
+          "type": "array",
+          "description": "Structured development programs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "learningResources": {
+          "type": "array",
+          "description": "Resources provided for learning",
+          "items": {
+            "type": "string"
+          }
+        },
+        "developmentBudget": {
+          "type": "string",
+          "description": "Budget allocated for development"
+        }
+      },
+      "additionalProperties": false
+    },
+    "talentAcquisitionStrategy": {
+      "type": "object",
+      "description": "Approach to acquiring talent",
+      "properties": {
+        "sourcingChannels": {
+          "type": "array",
+          "description": "Methods for finding talent",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selectionCriteria": {
+          "type": "array",
+          "description": "Criteria for evaluating candidates",
+          "items": {
+            "type": "string"
+          }
+        },
+        "onboardingProcess": {
+          "type": "string",
+          "description": "Process for integrating new talent"
+        },
+        "timeToProductivity": {
+          "type": "string",
+          "description": "Expected time until full productivity"
+        }
+      },
+      "additionalProperties": false
+    },
+    "culturalValues": {
+      "type": "array",
+      "description": "Core values represented",
+      "items": {
+        "type": "string"
+      }
+    },
+    "leadershipModel": {
+      "type": "object",
+      "description": "Leadership approach",
+      "properties": {
+        "leadershipStyle": {
+          "type": "string",
+          "description": "Predominant leadership approach"
+        },
+        "decisionMakingApproach": {
+          "type": "string",
+          "description": "How decisions are typically made"
+        },
+        "leaderToIndividualContributorRatio": {
+          "type": "string",
+          "description": "Typical span of control"
+        }
+      },
+      "additionalProperties": false
+    },
+    "engagementMetrics": {
+      "type": "object",
+      "description": "Measurement of engagement",
+      "properties": {
+        "overallEngagementScore": {
+          "type": "number",
+          "description": "Composite engagement metric"
+        },
+        "benchmarkComparison": {
+          "type": "string",
+          "description": "Comparison to industry or other benchmarks"
+        },
+        "keyDrivers": {
+          "type": "array",
+          "description": "Primary engagement factors",
+          "items": {
+            "type": "string"
+          }
+        },
+        "improvementAreas": {
+          "type": "array",
+          "description": "Areas needing engagement improvement",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "knowledgeManagementApproach": {
+      "type": "object",
+      "description": "How knowledge is handled",
+      "properties": {
+        "primaryKnowledgeSharing": {
+          "type": "string",
+          "description": "Main approach to knowledge sharing"
+        },
+        "technicalDocumentation": {
+          "type": "string",
+          "description": "Approach to technical documentation"
+        },
+        "knowledgeRetention": {
+          "type": "string",
+          "description": "Methods for preserving critical knowledge"
+        }
+      },
+      "additionalProperties": false
+    },
+    "performanceManagementSystem": {
+      "type": "object",
+      "description": "Performance approach",
+      "properties": {
+        "reviewCycle": {
+          "type": "string",
+          "description": "Frequency and type of performance reviews"
+        },
+        "performanceCriteria": {
+          "type": "array",
+          "description": "Key criteria for performance evaluation",
+          "items": {
+            "type": "string"
+          }
+        },
+        "feedbackMechanisms": {
+          "type": "array",
+          "description": "Methods for providing feedback",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "workforceFlexibility": {
+      "type": "object",
+      "description": "Adaptability characteristics",
+      "properties": {
+        "workModel": {
+          "type": "string",
+          "description": "Primary work arrangement model"
+        },
+        "geographicDistribution": {
+          "type": "string",
+          "description": "Geographic spread of workforce"
+        },
+        "adaptabilityScore": {
+          "type": "string",
+          "description": "Assessment of workforce adaptability"
+        }
+      },
+      "additionalProperties": false
+    },
+    "diversityMetrics": {
+      "type": "object",
+      "description": "Diversity and inclusion measures",
+      "properties": {
+        "genderDiversity": {
+          "type": "string",
+          "description": "Gender composition metrics"
+        },
+        "ethnicDiversity": {
+          "type": "string",
+          "description": "Ethnic composition metrics"
+        },
+        "inclusionScore": {
+          "type": "number",
+          "description": "Measure of inclusiveness"
+        },
+        "diversityGoals": {
+          "type": "string",
+          "description": "Targeted diversity objectives"
+        }
+      },
+      "additionalProperties": false
+    },
+    "strategicAlignment": {
+      "type": "object",
+      "description": "Alignment with business strategy",
+      "properties": {
+        "alignmentDescription": {
+          "type": "string",
+          "description": "How the people element aligns with strategy"
+        },
+        "strategicObjectives": {
+          "type": "array",
+          "description": "Strategic objectives supported",
+          "items": {
+            "type": "object",
+            "properties": {
+              "objectiveID": {
+                "type": "string",
+                "description": "ID of the strategic objective"
+              },
+              "alignmentDescription": {
+                "type": "string",
+                "description": "How this people element supports the objective"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "alignmentStrength": {
+          "description": "Strength of strategic alignment",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/ratingLevel"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other domains, processes, or systems supporting this people element",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dependencyType": {
+            "description": "Type of dependency",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/dependencyStrength"
+              }
+            ]
+          },
+          "domainType": {
+            "description": "Type of domain this depends on",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/domainType"
+              }
+            ]
+          },
+          "entityID": {
+            "type": "string",
+            "description": "ID of the entity this depends on"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the dependency"
+          }
+        },
+        "required": [
+          "dependencyType",
+          "domainType",
+          "entityID"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "relatedPeopleElements": {
+      "type": "array",
+      "description": "Other people elements with relationships to this one",
+      "items": {
+        "type": "object",
+        "properties": {
+          "elementID": {
+            "type": "string",
+            "description": "ID of the related people element"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of relationship",
+            "enum": [
+              "enables",
+              "dependsOn",
+              "complements",
+              "conflictsWith",
+              "precedes",
+              "follows",
+              "defines",
+              "implements",
+              "supports"
+            ]
+          },
+          "relationshipStrength": {
+            "type": "integer",
+            "description": "Strength of relationship (1-5)",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the relationship"
+          }
+        },
+        "required": [
+          "elementID",
+          "relationshipType",
+          "relationshipStrength"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "workforceElements": {
+      "type": "array",
+      "description": "Workforce segments within this people domain",
+      "items": {
+        "$ref": "#/definitions/workforceElement"
+      }
+    },
+    "cultureElements": {
+      "type": "array",
+      "description": "Cultural attributes within this people domain",
+      "items": {
+        "$ref": "#/definitions/cultureElement"
+      }
+    },
+    "competencyFrameworks": {
+      "type": "array",
+      "description": "Competency frameworks within this people domain",
+      "items": {
+        "$ref": "#/definitions/competencyFramework"
+      }
+    },
+    "knowledgeAssets": {
+      "type": "array",
+      "description": "Knowledge management assets within this people domain",
+      "items": {
+        "$ref": "#/definitions/knowledgeAsset"
+      }
+    },
+    "crossDomainRelationships": {
+      "type": "array",
+      "description": "Directional relationships from this record to entities in other domains",
+      "items": {
+        "$ref": "cross-domain-relationship.schema.json#/definitions/outgoingRelationship"
+      }
+    },
+    "employeeEmpathyIndex": {
+      "type": "string",
+      "description": "Strategic empathy (suggested in the documentation): how empathetic employees perceive the organization to be",
+      "examples": [
+        "8.5/10"
+      ]
+    },
+    "cultureOfPsychologicalSafety": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): whether the culture promotes a safe environment for expressing concerns and vulnerability"
+    },
+    "leadershipEmpathyTraining": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): whether leadership development includes training on empathetic leadership and emotional intelligence"
+    },
+    "internalCommunicationEmpathyGuidelines": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): whether there are guidelines for empathetic communication across the organization"
+    },
+    "changeReadinessIndex": {
+      "type": "string",
+      "description": "Strategic empathy (suggested in the documentation): readiness for change, influenced by how well employee fears and concerns are addressed",
+      "examples": [
+        "75%"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "workforceElement": {
+      "type": "object",
+      "required": [
+        "workforceID",
+        "workforceTitle",
+        "workforceDescription",
+        "workforceType"
+      ],
+      "properties": {
+        "workforceID": {
+          "type": "string",
+          "description": "Unique identifier for the workforce element"
+        },
+        "workforceTitle": {
+          "type": "string",
+          "description": "Name of the specific workforce segment"
+        },
+        "workforceDescription": {
+          "type": "string",
+          "description": "Detailed explanation of the workforce segment"
+        },
+        "workforceType": {
+          "type": "string",
+          "description": "Category of workforce",
+          "enum": [
+            "permanent",
+            "contract",
+            "temporary",
+            "partTime",
+            "fullTime",
+            "contingent",
+            "remote",
+            "hybrid",
+            "onSite"
+          ]
+        },
+        "workforceSize": {
+          "type": "object",
+          "description": "Size metrics for this segment",
+          "properties": {
+            "headcount": {
+              "type": "number",
+              "description": "Number of individuals"
+            },
+            "fullTimeEquivalent": {
+              "type": "number",
+              "description": "FTE calculation"
+            },
+            "contractorPercentage": {
+              "type": "number",
+              "description": "Percentage of contractors"
+            }
+          },
+          "additionalProperties": false
+        },
+        "workforceLocation": {
+          "type": "object",
+          "description": "Geographic distribution",
+          "properties": {
+            "locations": {
+              "type": "array",
+              "description": "List of locations",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Location name"
+                  },
+                  "percentage": {
+                    "type": "number",
+                    "description": "Percentage at this location"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "workSkills": {
+          "type": "object",
+          "description": "Skills and capabilities",
+          "properties": {
+            "criticalSkills": {
+              "type": "array",
+              "description": "Essential skills for this workforce",
+              "items": {
+                "type": "string"
+              }
+            },
+            "skillProficiency": {
+              "type": "string",
+              "description": "Overall skill level",
+              "enum": [
+                "basic",
+                "intermediate",
+                "advanced",
+                "expert"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "workExperience": {
+          "type": "object",
+          "description": "Experience profile",
+          "properties": {
+            "averageYearsExperience": {
+              "type": "number",
+              "description": "Average years of relevant experience"
+            },
+            "seniorityProfile": {
+              "type": "string",
+              "description": "Breakdown of seniority levels"
+            }
+          },
+          "additionalProperties": false
+        },
+        "workforceAvailability": {
+          "type": "object",
+          "description": "Availability characteristics",
+          "properties": {
+            "utilizationRate": {
+              "type": "string",
+              "description": "Rate of productive utilization"
+            },
+            "leaveRate": {
+              "type": "string",
+              "description": "Typical leave percentage"
+            },
+            "overtimePercentage": {
+              "type": "string",
+              "description": "Typical overtime percentage"
+            }
+          },
+          "additionalProperties": false
+        },
+        "workforceCost": {
+          "type": "object",
+          "description": "Cost structure",
+          "properties": {
+            "averageSalary": {
+              "type": "string",
+              "description": "Average salary for this segment"
+            },
+            "fullyLoadedCost": {
+              "type": "string",
+              "description": "Total cost including benefits and overhead"
+            },
+            "annualCostIncrease": {
+              "type": "string",
+              "description": "Yearly cost growth percentage"
+            }
+          },
+          "additionalProperties": false
+        },
+        "workforceRisks": {
+          "type": "array",
+          "description": "Risk factors",
+          "items": {
+            "type": "object",
+            "properties": {
+              "riskName": {
+                "type": "string",
+                "description": "Name of the risk"
+              },
+              "riskLevel": {
+                "description": "Severity of the risk",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/riskLevel"
+                  }
+                ]
+              },
+              "mitigation": {
+                "type": "string",
+                "description": "Risk mitigation approach"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "successionPlanning": {
+          "type": "object",
+          "description": "Succession approach",
+          "properties": {
+            "criticalRolesCovered": {
+              "type": "string",
+              "description": "Percentage of critical roles with succession plans"
+            },
+            "benchStrength": {
+              "type": "string",
+              "description": "Ratio of succession candidates to critical roles"
+            }
+          },
+          "additionalProperties": false
+        },
+        "workforceStrategy": {
+          "type": "object",
+          "description": "Strategic approach to this segment",
+          "properties": {
+            "growthStrategy": {
+              "type": "string",
+              "description": "Approach to workforce growth"
+            },
+            "developmentFocus": {
+              "type": "string",
+              "description": "Primary development focus"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "cultureElement": {
+      "type": "object",
+      "required": [
+        "cultureID",
+        "cultureAttributeTitle",
+        "attributeDescription"
+      ],
+      "properties": {
+        "cultureID": {
+          "type": "string",
+          "description": "Unique identifier for the culture element"
+        },
+        "cultureAttributeTitle": {
+          "type": "string",
+          "description": "Name of the specific culture attribute"
+        },
+        "attributeDescription": {
+          "type": "string",
+          "description": "Detailed explanation of the culture attribute"
+        },
+        "currentState": {
+          "type": "object",
+          "description": "Present condition of this attribute",
+          "properties": {
+            "maturityLevel": {
+              "description": "Current maturity of the attribute",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/maturityLevel"
+                }
+              ]
+            },
+            "consistencyLevel": {
+              "type": "string",
+              "description": "How consistently this attribute appears across the organization"
+            }
+          },
+          "additionalProperties": false
+        },
+        "desiredState": {
+          "type": "object",
+          "description": "Target condition for this attribute",
+          "properties": {
+            "maturityLevel": {
+              "description": "Desired maturity of the attribute",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/maturityLevel"
+                }
+              ]
+            },
+            "consistencyLevel": {
+              "type": "string",
+              "description": "Desired consistency across the organization"
+            }
+          },
+          "additionalProperties": false
+        },
+        "culturalImportance": {
+          "type": "object",
+          "description": "Strategic significance",
+          "properties": {
+            "importanceLevel": {
+              "description": "Level of importance to the organization",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/importance"
+                }
+              ]
+            },
+            "businessImpact": {
+              "type": "string",
+              "description": "How this attribute impacts business outcomes"
+            }
+          },
+          "additionalProperties": false
+        },
+        "supportingBehaviors": {
+          "type": "array",
+          "description": "Behaviors reinforcing this attribute",
+          "items": {
+            "type": "string"
+          }
+        },
+        "counteringBehaviors": {
+          "type": "array",
+          "description": "Behaviors working against it",
+          "items": {
+            "type": "string"
+          }
+        },
+        "measurementApproach": {
+          "type": "object",
+          "description": "How attribute is assessed",
+          "properties": {
+            "assessmentMethod": {
+              "type": "string",
+              "description": "Method used to measure this attribute"
+            },
+            "leadingIndicators": {
+              "type": "array",
+              "description": "Early signals of this attribute",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "reinforcementMechanisms": {
+          "type": "object",
+          "description": "How attribute is strengthened",
+          "properties": {
+            "formalMechanisms": {
+              "type": "array",
+              "description": "Official programs or structures",
+              "items": {
+                "type": "string"
+              }
+            },
+            "informalMechanisms": {
+              "type": "array",
+              "description": "Unofficial practices or norms",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "leadershipInfluence": {
+          "type": "object",
+          "description": "Leadership impact on attribute",
+          "properties": {
+            "leadershipAlignment": {
+              "type": "string",
+              "description": "How well leadership embodies this attribute"
+            },
+            "keyLeadershipBehaviors": {
+              "type": "array",
+              "description": "Critical behaviors leadership must demonstrate",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "culturalBarriers": {
+          "type": "array",
+          "description": "Obstacles to developing attribute",
+          "items": {
+            "type": "object",
+            "properties": {
+              "barrierName": {
+                "type": "string",
+                "description": "Name of the obstacle"
+              },
+              "impactLevel": {
+                "description": "How much this blocks progress",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/impactMagnitude"
+                  }
+                ]
+              },
+              "mitigationApproach": {
+                "type": "string",
+                "description": "How this barrier is being addressed"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "culturalEnablers": {
+          "type": "array",
+          "description": "Factors supporting attribute",
+          "items": {
+            "type": "object",
+            "properties": {
+              "enablerName": {
+                "type": "string",
+                "description": "Name of the supporting factor"
+              },
+              "contributionLevel": {
+                "description": "How much this enables progress",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/ratingLevel"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "competencyFramework": {
+      "type": "object",
+      "required": [
+        "frameworkID",
+        "frameworkTitle",
+        "frameworkDescription"
+      ],
+      "properties": {
+        "frameworkID": {
+          "type": "string",
+          "description": "Unique identifier for the competency framework"
+        },
+        "frameworkTitle": {
+          "type": "string",
+          "description": "Name of the specific competency framework"
+        },
+        "frameworkDescription": {
+          "type": "string",
+          "description": "Detailed explanation of the framework"
+        },
+        "competencyCategories": {
+          "type": "array",
+          "description": "Major categories in the framework",
+          "items": {
+            "type": "object",
+            "properties": {
+              "categoryName": {
+                "type": "string",
+                "description": "Name of the category"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the category"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "competencyLevels": {
+          "type": "array",
+          "description": "Progression levels in the framework",
+          "items": {
+            "type": "object",
+            "properties": {
+              "levelName": {
+                "type": "string",
+                "description": "Name of the level"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the level"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "assessmentMethods": {
+          "type": "object",
+          "description": "Evaluation approaches",
+          "properties": {
+            "primaryMethod": {
+              "type": "string",
+              "description": "Main assessment approach"
+            },
+            "calibrationProcess": {
+              "type": "string",
+              "description": "Process for ensuring consistency"
+            }
+          },
+          "additionalProperties": false
+        },
+        "developmentPaths": {
+          "type": "array",
+          "description": "Progression routes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pathName": {
+                "type": "string",
+                "description": "Name of the career path"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the path"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "certificationRequirements": {
+          "type": "object",
+          "description": "Formal certifications",
+          "properties": {
+            "internalCertifications": {
+              "type": "array",
+              "description": "Organization-specific certifications",
+              "items": {
+                "type": "string"
+              }
+            },
+            "externalCertifications": {
+              "type": "array",
+              "description": "Industry certifications",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "competencyOwner": {
+          "type": "object",
+          "description": "Responsible entity",
+          "properties": {
+            "primaryOwner": {
+              "type": "string",
+              "description": "Main owner of the framework"
+            },
+            "supportingRoles": {
+              "type": "array",
+              "description": "Other roles involved in framework governance",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "frameworkAdoption": {
+          "type": "object",
+          "description": "Usage across organization",
+          "properties": {
+            "adoptionRate": {
+              "type": "string",
+              "description": "Percentage of organization using the framework"
+            },
+            "implementationApproach": {
+              "type": "string",
+              "description": "How the framework is applied"
+            }
+          },
+          "additionalProperties": false
+        },
+        "frameworkReviewCycle": {
+          "type": "object",
+          "description": "Update process",
+          "properties": {
+            "reviewFrequency": {
+              "description": "How often the framework is reviewed",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/frequency"
+                }
+              ]
+            },
+            "lastReviewDate": {
+              "type": "string",
+              "description": "Date of last review",
+              "format": "date"
+            }
+          },
+          "additionalProperties": false
+        },
+        "alignmentToStrategy": {
+          "type": "object",
+          "description": "Strategic alignment",
+          "properties": {
+            "alignmentLevel": {
+              "description": "Degree of alignment with strategy",
+              "anyOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/alignmentLevel"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "perfect"
+                  ],
+                  "description": "Domain-specific values in addition to the shared list"
+                }
+              ]
+            },
+            "strategicObjectives": {
+              "type": "array",
+              "description": "Strategic objectives supported",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "industryStandards": {
+          "type": "object",
+          "description": "Relevant external standards",
+          "properties": {
+            "referenceStandards": {
+              "type": "array",
+              "description": "Industry or professional standards used as reference",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "knowledgeAsset": {
+      "type": "object",
+      "required": [
+        "knowledgeID",
+        "knowledgeAssetTitle",
+        "assetDescription",
+        "knowledgeType"
+      ],
+      "properties": {
+        "knowledgeID": {
+          "type": "string",
+          "description": "Unique identifier for the knowledge element"
+        },
+        "knowledgeAssetTitle": {
+          "type": "string",
+          "description": "Name of the specific knowledge asset"
+        },
+        "assetDescription": {
+          "type": "string",
+          "description": "Detailed explanation of the knowledge asset"
+        },
+        "knowledgeType": {
+          "type": "string",
+          "description": "Category of knowledge",
+          "enum": [
+            "explicit",
+            "tacit",
+            "procedural",
+            "declarative",
+            "technical",
+            "business",
+            "institutional",
+            "hybrid"
+          ]
+        },
+        "knowledgeCriticality": {
+          "type": "object",
+          "description": "Strategic importance",
+          "properties": {
+            "criticalityLevel": {
+              "description": "How important this knowledge is",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/criticality"
+                }
+              ]
+            },
+            "businessImpact": {
+              "type": "string",
+              "description": "How this knowledge impacts business outcomes"
+            }
+          },
+          "additionalProperties": false
+        },
+        "knowledgeSources": {
+          "type": "object",
+          "description": "Origin points",
+          "properties": {
+            "primarySources": {
+              "type": "array",
+              "description": "Main sources of this knowledge",
+              "items": {
+                "type": "string"
+              }
+            },
+            "contributorRoles": {
+              "type": "array",
+              "description": "Roles that generate or contribute to this knowledge",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "knowledgeUsers": {
+          "type": "object",
+          "description": "Consumers",
+          "properties": {
+            "primaryUsers": {
+              "type": "array",
+              "description": "Main consumers of this knowledge",
+              "items": {
+                "type": "string"
+              }
+            },
+            "usageContext": {
+              "type": "string",
+              "description": "When and how the knowledge is typically used"
+            }
+          },
+          "additionalProperties": false
+        },
+        "captureMethod": {
+          "type": "object",
+          "description": "How knowledge is captured",
+          "properties": {
+            "method": {
+              "type": "string",
+              "description": "Approach to knowledge capture"
+            },
+            "captureProcess": {
+              "type": "string",
+              "description": "Process for collecting and documenting"
+            }
+          },
+          "additionalProperties": false
+        },
+        "storageApproach": {
+          "type": "object",
+          "description": "How knowledge is stored",
+          "properties": {
+            "storageSystem": {
+              "type": "string",
+              "description": "Technology or system used for storage"
+            },
+            "organizationMethod": {
+              "type": "string",
+              "description": "How the knowledge is structured and organized"
+            }
+          },
+          "additionalProperties": false
+        },
+        "accessControls": {
+          "type": "object",
+          "description": "Who can access",
+          "properties": {
+            "accessRestrictions": {
+              "type": "string",
+              "description": "Limitations on who can access this knowledge"
+            },
+            "securityLevel": {
+              "type": "string",
+              "description": "Classification of the knowledge"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sharingMechanisms": {
+          "type": "object",
+          "description": "How knowledge is shared",
+          "properties": {
+            "formalMechanisms": {
+              "type": "array",
+              "description": "Official channels for knowledge sharing",
+              "items": {
+                "type": "string"
+              }
+            },
+            "informalMechanisms": {
+              "type": "array",
+              "description": "Unofficial methods of knowledge transfer",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "utilizationMetrics": {
+          "type": "object",
+          "description": "How usage is measured",
+          "properties": {
+            "usageMetrics": {
+              "type": "array",
+              "description": "Measures of knowledge use",
+              "items": {
+                "type": "string"
+              }
+            },
+            "utilizationRate": {
+              "type": "string",
+              "description": "Level of active use of this knowledge"
+            }
+          },
+          "additionalProperties": false
+        },
+        "knowledgeRisks": {
+          "type": "array",
+          "description": "Risk factors",
+          "items": {
+            "type": "object",
+            "properties": {
+              "riskName": {
+                "type": "string",
+                "description": "Name of the risk"
+              },
+              "riskLevel": {
+                "description": "Severity of the risk",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/riskLevel"
+                  }
+                ]
+              },
+              "mitigation": {
+                "type": "string",
+                "description": "Risk mitigation approach"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "retentionStrategy": {
+          "type": "object",
+          "description": "How knowledge is preserved",
+          "properties": {
+            "retentionMethod": {
+              "type": "string",
+              "description": "Approach to knowledge retention"
+            },
+            "successorProgram": {
+              "type": "string",
+              "description": "Plan for knowledge transfer to successors"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

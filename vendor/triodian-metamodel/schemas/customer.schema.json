@@ -1,0 +1,731 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/customer.schema.json",
+  "title": "Customer Domain Schema",
+  "description": "Customer segments: distinct groups of customers with similar characteristics, needs or value. The root is a Customer Segment; Customer Persona, Customer Journey and Customer Relationship are element records under definitions, linked to the segment by customerSegmentID.",
+  "type": "object",
+  "required": [
+    "customerID",
+    "title",
+    "description",
+    "orgUnitTitle"
+  ],
+  "properties": {
+    "customerID": {
+      "type": "string",
+      "description": "Unique identifier for the customer element"
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the customer segment or persona"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of the customer segment's characteristics"
+    },
+    "customerSegmentType": {
+      "type": "string",
+      "description": "Classification of segment (e.g., demographic, behavioral, value-based)",
+      "enum": [
+        "demographic",
+        "behavioral",
+        "valueBased",
+        "needsBased",
+        "lifecycle",
+        "industry",
+        "geographic",
+        "psychographic",
+        "technographic",
+        "other"
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organization unit(s) responsible for this customer segment"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitRoles": {
+      "type": "array",
+      "description": "Specific roles within the organization unit that manage this segment",
+      "items": {
+        "type": "string"
+      }
+    },
+    "customerNeeds": {
+      "type": "array",
+      "description": "Primary needs, wants, and pain points addressed",
+      "items": {
+        "type": "string"
+      }
+    },
+    "customerValue": {
+      "type": "string",
+      "description": "The value proposition offered to this customer segment"
+    },
+    "acquisitionChannels": {
+      "type": "array",
+      "description": "Channels used to acquire this type of customer",
+      "items": {
+        "type": "string"
+      }
+    },
+    "retentionStrategies": {
+      "type": "array",
+      "description": "Approaches to maintaining customer relationships",
+      "items": {
+        "type": "string"
+      }
+    },
+    "customerLifecycleStage": {
+      "type": "string",
+      "description": "Current position in the customer journey",
+      "enum": [
+        "awareness",
+        "consideration",
+        "purchase",
+        "onboarding",
+        "usage",
+        "growth",
+        "retention",
+        "advocacy",
+        "winBack",
+        "other"
+      ]
+    },
+    "customerLifetimeValue": {
+      "type": "object",
+      "description": "Expected or measured value of this customer type",
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "Numeric value"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency code"
+        },
+        "timespan": {
+          "type": "string",
+          "description": "Period over which value is calculated"
+        },
+        "calculationMethod": {
+          "type": "string",
+          "description": "Method used to calculate lifetime value"
+        }
+      },
+      "additionalProperties": false
+    },
+    "performanceIndicators": {
+      "type": "array",
+      "description": "Metrics used to measure success with this segment",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metricName": {
+            "type": "string",
+            "description": "Name of the performance metric"
+          },
+          "metricDescription": {
+            "type": "string",
+            "description": "Description of what the metric measures"
+          },
+          "currentValue": {
+            "type": "string",
+            "description": "Current performance value"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target performance value"
+          },
+          "unit": {
+            "type": "string",
+            "description": "Unit of measurement"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other domains, processes, or systems supporting this segment",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dependencyType": {
+            "description": "Type of dependency",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/dependencyStrength"
+              }
+            ]
+          },
+          "domainType": {
+            "description": "Type of domain this depends on",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/domainType"
+              }
+            ]
+          },
+          "entityID": {
+            "type": "string",
+            "description": "ID of the entity being depended upon"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the dependency"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "relatedCustomerSegments": {
+      "type": "array",
+      "description": "Other segments with relationships to this one",
+      "items": {
+        "type": "object",
+        "properties": {
+          "segmentID": {
+            "type": "string",
+            "description": "ID of the related segment"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of relationship",
+            "enum": [
+              "parent",
+              "child",
+              "complementary",
+              "competitor",
+              "influencer",
+              "progression",
+              "other"
+            ]
+          },
+          "relationshipStrength": {
+            "type": "integer",
+            "description": "Strength of the relationship (1-5)",
+            "minimum": 1,
+            "maximum": 5
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "improvementOpportunities": {
+      "type": "array",
+      "description": "Areas where customer experience can be enhanced",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How this customer segment aligns with strategic goals"
+    },
+    "customerEmpathyScore": {
+      "type": "string",
+      "description": "Strategic empathy (suggested in the documentation): customers' perception of the organization's empathy",
+      "examples": [
+        "4.2/5"
+      ]
+    },
+    "customerJourneyEmotionalMapping": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): whether customer journeys are mapped to understand emotional touchpoints"
+    },
+    "clientTrustIndex": {
+      "type": "string",
+      "description": "Strategic empathy (suggested in the documentation): level of trust clients have in the organization",
+      "examples": [
+        "7/10"
+      ]
+    },
+    "feedbackLoopForEmotionalInsights": {
+      "type": "boolean",
+      "description": "Strategic empathy (suggested in the documentation): whether mechanisms capture and act on emotional feedback from customers"
+    },
+    "crossDomainRelationships": {
+      "type": "array",
+      "description": "Directional relationships from this record to entities in other domains",
+      "items": {
+        "$ref": "cross-domain-relationship.schema.json#/definitions/outgoingRelationship"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "customerPersona": {
+      "type": "object",
+      "description": "A representative customer within a segment, described by demographic, psychographic and behavioral attributes. A separate record, linked to its segment by customerSegmentID.",
+      "properties": {
+        "personaID": {
+          "description": "Unique identifier for the persona",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "Name of the persona",
+          "examples": [
+            "Michael Chen"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed profile of the persona"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The organization unit responsible"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "customerSegmentID": {
+          "description": "ID of the customer segment this persona belongs to",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "demographicAttributes": {
+          "type": "object",
+          "description": "Age, gender, location, income level and similar characteristics",
+          "properties": {
+            "age": {
+              "type": "string",
+              "description": "Age or age range"
+            },
+            "gender": {
+              "type": "string",
+              "description": "Gender"
+            },
+            "location": {
+              "type": "string",
+              "description": "Location or location type"
+            },
+            "incomeLevel": {
+              "type": "string",
+              "description": "Income level or range"
+            },
+            "occupation": {
+              "type": "string",
+              "description": "Occupation"
+            },
+            "education": {
+              "type": "string",
+              "description": "Education level"
+            },
+            "householdStatus": {
+              "type": "string",
+              "description": "Household or family status"
+            }
+          },
+          "additionalProperties": false
+        },
+        "psychographicAttributes": {
+          "type": "object",
+          "description": "Values, attitudes, interests and lifestyle",
+          "properties": {
+            "values": {
+              "type": "array",
+              "description": "Personal values",
+              "items": {
+                "type": "string"
+              }
+            },
+            "attitudes": {
+              "type": "array",
+              "description": "Attitudes",
+              "items": {
+                "type": "string"
+              }
+            },
+            "interests": {
+              "type": "array",
+              "description": "Interests",
+              "items": {
+                "type": "string"
+              }
+            },
+            "lifestyle": {
+              "type": "string",
+              "description": "Lifestyle"
+            }
+          },
+          "additionalProperties": false
+        },
+        "behaviors": {
+          "type": "array",
+          "description": "Typical behaviors and preferences",
+          "items": {
+            "type": "string"
+          }
+        },
+        "goals": {
+          "type": "array",
+          "description": "What the persona is trying to accomplish",
+          "items": {
+            "type": "string"
+          }
+        },
+        "painPoints": {
+          "type": "array",
+          "description": "Challenges and frustrations experienced",
+          "items": {
+            "type": "string"
+          }
+        },
+        "influences": {
+          "type": "array",
+          "description": "Factors influencing decisions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "purchaseDecisionProcess": {
+          "type": "string",
+          "description": "How decisions are made"
+        },
+        "technographics": {
+          "type": "string",
+          "description": "Technology usage patterns"
+        },
+        "quotations": {
+          "type": "array",
+          "description": "Representative quotes",
+          "items": {
+            "type": "string"
+          }
+        },
+        "narrativeScenario": {
+          "type": "string",
+          "description": "A day-in-the-life scenario"
+        }
+      },
+      "required": [
+        "personaID",
+        "title",
+        "description",
+        "customerSegmentID"
+      ],
+      "additionalProperties": false
+    },
+    "customerJourney": {
+      "type": "object",
+      "description": "The end-to-end experience a customer has with the organization across channels and touchpoints. A separate record, linked to its segment by customerSegmentID.",
+      "properties": {
+        "journeyID": {
+          "description": "Unique identifier for the customer journey",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "journeyTitle": {
+          "type": "string",
+          "description": "Name of the journey",
+          "examples": [
+            "Wealth Management Onboarding"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Overview of the entire customer journey"
+        },
+        "customerSegmentID": {
+          "description": "ID of the customer segment this journey is designed for",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "personaIDs": {
+          "type": "array",
+          "description": "IDs of the personas this journey applies to",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The organization unit responsible"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "journeyStages": {
+          "type": "array",
+          "description": "Sequential stages in the customer journey",
+          "items": {
+            "$ref": "#/definitions/journeyStage"
+          }
+        }
+      },
+      "required": [
+        "journeyID",
+        "journeyTitle",
+        "description",
+        "customerSegmentID"
+      ],
+      "additionalProperties": false
+    },
+    "journeyStage": {
+      "type": "object",
+      "description": "A stage in a customer journey",
+      "properties": {
+        "stageID": {
+          "description": "Unique identifier for the journey stage, so other records can reference it",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "stageName": {
+          "type": "string",
+          "description": "Name of the stage",
+          "examples": [
+            "Discovery",
+            "Needs Assessment"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "What happens in this stage"
+        },
+        "touchpoints": {
+          "type": "array",
+          "description": "Interaction points with the organization",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customerActions": {
+          "type": "array",
+          "description": "What customers do at this stage",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customerThoughts": {
+          "type": "array",
+          "description": "What customers think or feel",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customerPainPoints": {
+          "type": "array",
+          "description": "Challenges faced at this stage",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customerOpportunities": {
+          "type": "array",
+          "description": "Potential for an enhanced experience",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relevantCapabilities": {
+          "type": "array",
+          "description": "Capabilities supporting this stage",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relevantCapabilityIDs": {
+          "type": "array",
+          "description": "IDs of the capabilities supporting this stage",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        },
+        "relevantValueStreams": {
+          "type": "array",
+          "description": "Value streams involved",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relevantValueStreamIDs": {
+          "type": "array",
+          "description": "IDs of the value streams involved",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        },
+        "performanceMetrics": {
+          "type": "array",
+          "description": "How success is measured at this stage",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "stageName"
+      ],
+      "additionalProperties": false
+    },
+    "customerRelationship": {
+      "type": "object",
+      "description": "The ongoing connection between a customer segment and the organization. A separate record, linked to its segment by customerSegmentID.",
+      "properties": {
+        "relationshipID": {
+          "description": "Unique identifier for the customer relationship",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "Name of the relationship",
+          "examples": [
+            "Premium Advisory Relationship"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the relationship"
+        },
+        "customerSegmentID": {
+          "description": "ID of the customer segment this relationship applies to",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The organization unit responsible"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "Nature of the relationship",
+          "examples": [
+            "advisory",
+            "transactional"
+          ]
+        },
+        "relationshipStrength": {
+          "description": "Quality of the relationship",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/scale1to5"
+            }
+          ]
+        },
+        "engagementLevel": {
+          "type": "string",
+          "description": "Degree of active engagement",
+          "examples": [
+            "active",
+            "passive"
+          ]
+        },
+        "loyaltyStatus": {
+          "type": "string",
+          "description": "Current loyalty or retention status",
+          "examples": [
+            "loyal",
+            "atRisk"
+          ]
+        },
+        "relationshipHistory": {
+          "type": "array",
+          "description": "Timeline of key relationship events",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationshipValue": {
+          "type": "object",
+          "description": "Current and potential relationship value",
+          "properties": {
+            "currentValue": {
+              "type": "string",
+              "description": "Current value",
+              "examples": [
+                "$15,000 annual revenue"
+              ]
+            },
+            "potentialValue": {
+              "type": "string",
+              "description": "Potential value",
+              "examples": [
+                "$25,000 annual revenue"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "relationshipRisks": {
+          "type": "array",
+          "description": "Threats to relationship continuity",
+          "items": {
+            "type": "string"
+          }
+        },
+        "growthOpportunities": {
+          "type": "array",
+          "description": "Opportunities for relationship expansion",
+          "items": {
+            "type": "string"
+          }
+        },
+        "engagementModel": {
+          "type": "string",
+          "description": "How the relationship is managed"
+        }
+      },
+      "required": [
+        "relationshipID",
+        "title",
+        "description",
+        "customerSegmentID"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
