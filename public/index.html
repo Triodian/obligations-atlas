@@ -2,33 +2,55 @@
 <html lang="en-AU">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI Obligations Atlas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AI Obligations Atlas · Triodian</title>
   <meta name="description" content="AI governance obligations by jurisdiction, mapped to standardised AI use cases and tagged by source tier: Binding, Expected or Anticipated.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/triodian-mark.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23F6F7F5'/%3E%3Crect x='6' y='5' width='5' height='22' fill='%2323395B'/%3E%3Crect x='14' y='5' width='5' height='22' fill='%235C6B2F'/%3E%3Crect x='22.5' y='5.5' width='4' height='21' fill='none' stroke='%2394650A' stroke-dasharray='2 1.5'/%3E%3C/svg%3E">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="masthead">
-    <a class="wordmark" href="#/">AI Obligations Atlas</a>
-    <nav aria-label="Main">
+  <header class="hdr"><div class="hdr-in">
+    <a class="brand" href="#/" aria-label="Triodian · go to the register"><img class="logo" src="/triodian-logo.svg" alt="Triodian" height="26"></a>
+    <span class="vrule" aria-hidden="true"></span>
+    <a class="apptitle wordmark" href="#/">AI Obligations Atlas</a>
+    <nav class="steps" aria-label="Main">
       <a href="#/" data-nav="register">Register</a>
       <a href="#/use-cases" data-nav="use-cases">Use cases</a>
       <a href="#/changes" data-nav="changes">Changes</a>
       <a href="#/brief" data-nav="brief">Matter brief</a>
       <a href="#/developers" data-nav="developers">API and MCP</a>
     </nav>
-  </header>
-  <div id="preview" class="preview" hidden></div>
+    <div class="hdr-r">
+      <span class="checkcount" id="datachip" hidden></span>
+      <button class="iconbtn" id="menubtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="drawer">☰</button>
+    </div>
+  </div></header>
+  <div id="preview" class="examplebar" hidden></div>
+  <div class="drawer-bg" id="drawer-bg" hidden></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-label="Menu" hidden>
+    <div class="drawer-head"><strong>Menu</strong><button class="iconbtn" id="menuclose" type="button" aria-label="Close menu">✕</button></div>
+    <div class="grp">Atlas</div>
+    <a class="item" href="#/" data-nav="register">Register</a>
+    <a class="item" href="#/use-cases" data-nav="use-cases">Use cases</a>
+    <a class="item" href="#/changes" data-nav="changes">Changes</a>
+    <a class="item" href="#/brief" data-nav="brief">Matter brief</a>
+    <a class="item" href="#/developers" data-nav="developers">API and MCP</a>
+    <div class="grp">Apps</div>
+    <div class="item" aria-current="true"><span class="appic" style="background:var(--aubergine-bg);color:var(--aubergine)">OA</span><span>AI Obligations Atlas<br><span class="small soft">Obligations by jurisdiction, tier and use case</span></span><span class="badge b-green" style="margin-left:auto">now</span></div>
+    <a class="item" data-app="risk-appetite" href="https://risk-appetite.triodian.com/"><span class="appic" style="background:#E3E9EF;color:var(--navy)">RA</span><span>AI Risk Appetite<br><span class="small soft">Board positions and calibration set</span></span></a>
+    <a class="item" data-app="use-assessment" href="https://use-assessment.triodian.com/"><span class="appic" style="background:#E3E9EF;color:var(--navy)">UA</span><span>AI Use Assessment<br><span class="small soft">Register, tests and findings</span></span></a>
+  </aside>
   <main id="main" tabindex="-1"><p class="loading">Loading the register…</p></main>
-  <footer class="colophon">
-    <p id="standing-rule"></p>
-    <p id="dataset-line"></p>
-  </footer>
+  <footer class="ft"><div class="wrap">
+    <div class="scope" id="standing-rule"></div>
+    <div class="ftrow">
+      <span class="row" style="gap:8px"><img class="logo" src="/triodian-logo.svg" alt="Triodian" height="20"><span class="mono soft" id="dataset-line"></span></span>
+      <span class="row"><a class="lnk" href="#/developers" data-nav="developers">API and MCP</a><a class="lnk" href="/api/v1/policy" id="policylink">Dataset policy</a><span class="mono" id="statusline"></span></span>
+    </div>
+  </div></footer>
   <script type="module" src="/app.js"></script>
 </body>
 </html>
