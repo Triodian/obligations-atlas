@@ -5,6 +5,8 @@
   "name": "obligations-atlas",
   "main": "src/worker.js",
   "compatibility_date": "2026-10-01",
+  // Pull request preview builds run `npx wrangler preview`, which needs this block (it can be empty).
+  "previews": {},
   "build": { "command": "node scripts/build.mjs" },
   "assets": {
     "directory": "./public",
