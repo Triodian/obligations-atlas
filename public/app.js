@@ -25,15 +25,22 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* storage unavailable */ } },
 };
 const jurName = (c) => (JURISDICTIONS[c] ? JURISDICTIONS[c].name : c);
-const ucTitle = (id) => (data.useCases.find((u) => u.useCaseID === id) || {}).title || id;
-const tab = (tier) => `<span class="tab ${esc(tier)}" aria-hidden="true"></span>`;
-const tierWord = (tier) => `<span class="tierword ${esc(tier)}">${esc(TIERS[tier] ? TIERS[tier].label : tier)}</span>`;
-const pendingBadge = (o) => (o.publicationStatus === 'pendingReview' ? ' <span class="badge" title="Not yet approved by a Triodian reviewer">Pending review</span>' : '');
+// Use-case titles come from the published use-case records; when one is not yet published, show the ID alone.
+const ucTitle = (id) => (data.useCases.find((u) => u.useCaseID === id) || {}).title || '';
+const TIER_SHORT = { binding: 'in force', expected: 'guidance or standard', anticipated: 'not yet in force' };
+const tierLabel = (tier) => (TIERS[tier] ? TIERS[tier].label : tier);
+const tierBadge = (tier) => `<span class="badge ${esc(tier)}" title="${esc(TIERS[tier] ? TIERS[tier].describes : '')}">${esc(tierLabel(tier))}</span>`;
+const pendingBadge = (o) => (o.publicationStatus === 'pendingReview' ? '<span class="badge pending" title="Not yet approved by a Triodian reviewer">Pending review</span>' : '');
+const staleBadge = (o) => (o.stale ? '<span class="badge stale" title="Not re-verified within the freshness threshold">Past freshness threshold</span>' : '');
+const allUseCases = (ids) => data.useCases.length > 1 && ids.length >= data.useCases.length;
+const ucShort = (ids) => (allUseCases(ids) ? `All ${ids.length} use cases` : ids.join(', '));
+const issuer = (o) => (o.regulator && o.regulator.acronym) || '';
+const whereLine = (o) => [issuer(o), o.instrument, o.citation].filter(Boolean).map(esc).join(' · ');
 
 function setNav(name) {
   document.querySelectorAll('[data-nav]').forEach((a) => a.setAttribute('href', href(a.dataset.nav === 'register' ? '' : a.dataset.nav)));
-  document.querySelector('.wordmark').setAttribute('href', href(''));
-  document.querySelectorAll('[data-nav]').forEach((a) => (a.dataset.nav === name ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
+  document.querySelectorAll('.wordmark, .brand').forEach((a) => a.setAttribute('href', href('')));
+  document.querySelectorAll('.steps [data-nav], .drawer [data-nav]').forEach((a) => (a.dataset.nav === name ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
 }
 
 function filtered() {
@@ -48,61 +55,43 @@ function filtered() {
 const options = (pairs, selected) => pairs.map(([v, l]) => `<option value="${esc(v)}"${v === selected ? ' selected' : ''}>${esc(l)}</option>`).join('');
 
 function entryHTML(o) {
-  return `<li class="entry">${tab(o.sourceTier)}
-    <div class="entry-body">
-      <div class="citation"><span class="where">${esc(o.instrument)}, ${esc(o.citation)}</span><span>${esc(jurName(o.jurisdiction))}. ${esc(o.statusLabel)}</span></div>
-      <h3><a href="${href('obligation', o.obligationID)}">${esc(o.title)}</a>${pendingBadge(o)}${o.stale ? ' <span class="badge stale">Past freshness threshold</span>' : ''}</h3>
-      <p class="statement">${esc(o.statement)}</p>
-      <ul class="facts">
-        <li>${tierWord(o.sourceTier)}${o.tierBasis.length ? `, resting on ${o.tierBasis.length} binding provision${o.tierBasis.length > 1 ? 's' : ''}` : ''}</li>
-        <li>${o.useCaseIDs.map((u) => `<span class="uc" title="${esc(ucTitle(u))}">${esc(u)}</span>`).join('')}</li>
-        <li><a href="${esc(o.sourceURL)}" rel="noopener" target="_blank">Official source</a></li>
-        <li>Verified ${esc(fmtDate(o.lastVerified))}</li>
-      </ul>
+  const basis = o.tierBasis.length ? `Rests on ${o.tierBasis.length} binding provision${o.tierBasis.length > 1 ? 's' : ''}` : '';
+  return `<li class="entry ${esc(o.sourceTier)}"><div class="row">
+      <h3 class="title"><a href="${href('obligation', o.obligationID)}">${esc(o.title)}</a></h3>
+      <div class="tags">${tierBadge(o.sourceTier)}${pendingBadge(o)}${staleBadge(o)}</div>
+      <div class="where" title="${esc(`${o.instrument}, ${o.citation}`)}">${whereLine(o)}</div>
+      <p class="gist">${esc(o.statement)}</p>
+      <div class="meta"><span>${esc(jurName(o.jurisdiction))}</span><span>${esc(o.statusLabel)}</span><span title="${esc(o.useCaseIDs.map((u) => [u, ucTitle(u)].filter(Boolean).join(' ')).join('; '))}">${esc(ucShort(o.useCaseIDs))}</span>${basis ? `<span>${esc(basis)}</span>` : ''}<span>Verified ${esc(fmtDate(o.lastVerified))}</span></div>
     </div></li>`;
-}
-
-/** Size each select in the query sentence to its chosen option, so the sentence reads naturally. */
-function sizeSelects(form) {
-  const probe = document.createElement('span');
-  probe.style.cssText = 'position:absolute;visibility:hidden;white-space:pre';
-  form.appendChild(probe);
-  form.querySelectorAll('select').forEach((s) => {
-    probe.style.font = getComputedStyle(s).font;
-    probe.textContent = s.options[s.selectedIndex].text;
-    s.style.width = `${Math.ceil(probe.getBoundingClientRect().width) + 30}px`;
-  });
-  probe.remove();
 }
 
 function renderRegister() {
   setNav('register');
-  const jurOpts = [['', 'every jurisdiction'], ...data.jurisdictions.filter((j) => j.available && j.code !== 'INT').map((j) => [j.code, j.name])];
-  const entOpts = [['', 'any regulated entity'], ...Object.entries(ENTITY_TYPES).filter(([k]) => !['anyOrganization', 'other'].includes(k) && data.obligations.some((o) => o.entityTypes.includes(k))).map(([k, v]) => [k, `a ${v.toLowerCase()}`])];
-  const ucOpts = [['', 'any AI use case'], ...data.useCases.map((u) => [u.useCaseID, `${u.useCaseID}, ${u.title.toLowerCase()}`])];
-  const tierOpts = [['', 'all'], ['binding', 'binding'], ['expected', 'expected'], ['anticipated', 'anticipated']];
+  const jurOpts = [['', 'All jurisdictions'], ...data.jurisdictions.filter((j) => j.available && j.code !== 'INT').map((j) => [j.code, j.name])];
+  const entOpts = [['', 'Any entity'], ...Object.entries(ENTITY_TYPES).filter(([k]) => !['anyOrganization', 'other'].includes(k) && data.obligations.some((o) => o.entityTypes.includes(k))).map(([k, v]) => [k, v])];
+  const ucOpts = [['', 'Any use case'], ...data.useCases.map((u) => [u.useCaseID, `${u.useCaseID} ${u.title}`])];
+  const tierOpts = [['', 'All tiers'], ...Object.entries(TIERS).map(([k, t]) => [k, t.label])];
   const rows = filtered();
   main.innerHTML = `
-    <form class="query" id="query" role="search" aria-label="Find obligations">
-      Show <select name="tier" aria-label="Source tier">${options(tierOpts, state.tier)}</select> obligations in
-      <select name="jurisdiction" aria-label="Jurisdiction">${options(jurOpts, state.jurisdiction)}</select> for
-      <select name="entityType" aria-label="Entity type">${options(entOpts, state.entityType)}</select> using
-      <select name="useCase" aria-label="Use case">${options(ucOpts, state.useCase)}</select>, mentioning
-      <input name="q" type="search" placeholder="anything" value="${esc(state.q)}" aria-label="Text to match">.
+    <div class="opening">
+      <div class="eyebrow">Register</div>
+      <h1>AI governance obligations</h1>
+    </div>
+    <form class="filters" id="query" role="search" aria-label="Find obligations">
+      <label>Tier<select name="tier">${options(tierOpts, state.tier)}</select></label>
+      <label>Jurisdiction<select name="jurisdiction">${options(jurOpts, state.jurisdiction)}</select></label>
+      <label>Entity<select name="entityType">${options(entOpts, state.entityType)}</select></label>
+      <label>Use case<select name="useCase">${options(ucOpts, state.useCase)}</select></label>
+      <label class="grow">Search<input name="q" type="search" placeholder="Title, instrument or text" value="${esc(state.q)}"></label>
     </form>
     <div class="resultline">
-      <ul class="key" aria-label="Source tiers">
-        ${Object.entries(TIERS).map(([k, t]) => `<li>${tab(k)}<span><strong>${esc(t.label)}</strong>: ${esc(t.describes.toLowerCase())}</span></li>`).join('')}
-      </ul>
+      <span aria-live="polite"><span class="count">${rows.length} record${rows.length === 1 ? '' : 's'}</span>${state.jurisdiction ? ', including international standards' : ''}</span>
+      <ul class="key" aria-label="Source tiers">${Object.entries(TIERS).map(([k]) => `<li>${tierBadge(k)}<span>${esc(TIER_SHORT[k] || '')}</span></li>`).join('')}</ul>
+      <label><input type="checkbox" id="current" ${state.current ? 'checked' : ''}> Hide superseded and withdrawn</label>
     </div>
-    <div class="resultline">
-      <span aria-live="polite">${rows.length} record${rows.length === 1 ? '' : 's'}${state.jurisdiction ? `, including international standards` : ''}</span>
-      <label><input type="checkbox" id="current" ${state.current ? 'checked' : ''}> Hide superseded and withdrawn sources</label>
-    </div>
-    ${rows.length ? `<ol class="register">${rows.map(entryHTML).join('')}</ol>` : `<p class="empty">No records match. Widen the jurisdiction, entity or use case above.</p>`}`;
+    ${rows.length ? `<ol class="register">${rows.map(entryHTML).join('')}</ol>` : '<p class="empty">No records match. Widen the jurisdiction, entity or use case above.</p>'}`;
   const form = document.getElementById('query');
-  sizeSelects(form);
-  form.addEventListener('change', (e) => { state[e.target.name] = e.target.value; store.set('atlas.filters', state); renderRegister(); document.querySelector(`[name="${e.target.name}"]`).focus(); });
+  form.addEventListener('change', (e) => { if (e.target.name === 'q') return; state[e.target.name] = e.target.value; store.set('atlas.filters', state); renderRegister(); document.querySelector(`[name="${e.target.name}"]`).focus(); });
   let t;
   form.q.addEventListener('input', (e) => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value; renderRegister(); const i = document.querySelector('[name="q"]'); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }, 250); });
   form.addEventListener('submit', (e) => e.preventDefault());
@@ -112,54 +101,66 @@ function renderRegister() {
 async function renderObligation(id) {
   setNav('register');
   const o = data.obligations.find((x) => x.obligationID === id);
-  if (!o) { main.innerHTML = `<h1>No record ${esc(id)}</h1><p><a href="${href('register')}">Back to the register</a></p>`; return; }
+  if (!o) { main.innerHTML = `<a class="back" href="${href('register')}">Register</a><h1>No record ${esc(id)}</h1>`; return; }
   const ents = o.entityTypes.map((e) => ENTITY_TYPES[e] || e).join(', ');
+  const ucs = allUseCases(o.useCaseIDs)
+    ? `All ${o.useCaseIDs.length} use cases`
+    : `<ul class="uclist">${o.useCaseIDs.map((u) => `<li><span class="uc">${esc(u)}</span>${esc(ucTitle(u))}</li>`).join('')}</ul>`;
+  const dateType = (t) => t.replace(/([A-Z])/g, ' $1').toLowerCase().replace(/^./, (c) => c.toUpperCase());
   main.innerHTML = `
-    <p><a href="${href('register')}">Register</a></p>
-    <div class="record-head">${tab(o.sourceTier)}<div>
-      <div class="citation"><span>${esc(o.instrument)}, ${esc(o.citation)}</span></div>
-      <h1>${esc(o.title)}${pendingBadge(o)}</h1>
-    </div></div>
-    <div class="grid2">
+    <a class="back" href="${href('register')}">Register</a>
+    <div class="opening">
+      <div class="eyebrow">${whereLine(o)}</div>
+      <h1>${esc(o.title)}</h1>
+      <div class="record-tags">${tierBadge(o.sourceTier)}<span class="badge status">${esc(o.statusLabel)}</span>${pendingBadge(o)}${staleBadge(o)}</div>
+    </div>
+    <div class="split">
       <div>
-        <p class="statement" style="font-size:1.12rem">${esc(o.statement)}</p>
-        ${o.tierBasis.length ? `<h2>Rests on</h2><ul>${o.tierBasis.map((b) => `<li><a href="${href('obligation', b.obligationID)}">${esc(b.title || b.obligationID)}</a> (${tierWord(b.sourceTier)})${b.note ? `<div class="muted">${esc(b.note)}</div>` : ''}</li>`).join('')}</ul>` : ''}
-        ${o.keyDates.length ? `<h2>Key dates</h2><ol class="timeline">${o.keyDates.map((k) => `<li><time datetime="${esc(k.date)}">${esc(fmtDate(k.date))}</time>${esc(k.dateType.replace(/([A-Z])/g, ' $1').toLowerCase())}${k.provisions ? `, ${esc(k.provisions)}` : ''}${k.note ? `<div class="muted">${esc(k.note)}</div>` : ''}</li>`).join('')}</ol>` : ''}
-        <h2>Cite this record</h2>
-        <p class="cite">${esc(o.citeAs)}</p>
-        <h2>Provenance</h2>
-        <div id="trail"><p class="muted">Loading the provenance trail…</p></div>
+        <div class="card">
+          <div class="section"><p class="statement">${esc(o.statement)}</p></div>
+          ${o.tierBasis.length ? `<div class="section"><h2 class="sh">Rests on</h2><ul class="basis">${o.tierBasis.map((b) => `<li><a href="${href('obligation', b.obligationID)}">${esc(b.title || b.obligationID)}</a>${tierBadge(b.sourceTier)}${b.note ? `<span class="note">${esc(b.note)}</span>` : ''}</li>`).join('')}</ul></div>` : ''}
+          ${o.keyDates.length ? `<div class="section"><h2 class="sh">Key dates</h2><ol class="timeline">${o.keyDates.map((k) => `<li><time datetime="${esc(k.date)}">${esc(fmtDate(k.date))}</time>${esc(dateType(k.dateType))}${k.provisions ? `, ${esc(k.provisions)}` : ''}${k.note ? `<div class="note">${esc(k.note)}</div>` : ''}</li>`).join('')}</ol></div>` : ''}
+          <div class="section"><h2 class="sh">Cite this record</h2><div class="cite"><span id="citeas">${esc(o.citeAs)}</span><button class="copybtn" id="copycite" type="button">Copy</button></div></div>
+        </div>
+        <details class="pr" id="prov"><summary>Provenance trail <span class="small" id="provsum">Loading…</span></summary><div class="body" id="trail"></div></details>
       </div>
-      <aside>
-        <dl class="props">
-          <dt>Tier</dt><dd>${tierWord(o.sourceTier)}<div class="muted">${esc(TIERS[o.sourceTier].describes)}</div></dd>
-          <dt>Status</dt><dd>${esc(o.statusLabel)}</dd>
+      <aside class="card facts" aria-label="Record details">
+        <dl class="kv">
+          <dt>Tier</dt><dd>${tierBadge(o.sourceTier)}<div class="small soft" style="margin-top:4px">${esc(TIERS[o.sourceTier].describes)}</div></dd>
           <dt>Jurisdiction</dt><dd>${esc(jurName(o.jurisdiction))}</dd>
           <dt>Issued by</dt><dd>${esc(o.regulator ? o.regulator.name : o.authority)}</dd>
           <dt>Addressed to</dt><dd>${esc(ents)}</dd>
           <dt>Roles</dt><dd>${esc(o.roles.map((r) => ROLES[r] || r).join(', '))}</dd>
-          <dt>Use cases</dt><dd>${o.useCaseIDs.map((u) => `<div><span class="uc">${esc(u)}</span> ${esc(ucTitle(u))}</div>`).join('')}</dd>
-          <dt>Source</dt><dd><a href="${esc(o.sourceURL)}" target="_blank" rel="noopener">Official text</a></dd>
-          <dt>Last verified</dt><dd>${esc(fmtDate(o.lastVerified))}${o.stale ? ' <span class="badge stale">Stale</span>' : ''}</dd>
-          <dt>Confidence</dt><dd>${o.confidence ? `${esc(o.confidence.band)} (${esc(o.confidence.score)})` : 'not scored'}</dd>
-          <dt>Approved by</dt><dd>${o.approval ? `${esc(o.approval.approverName)}, ${esc(fmtDate(o.approval.approvedAt))}` : '<span class="muted">Not yet approved</span>'}</dd>
+          <dt>Use cases</dt><dd>${ucs}</dd>
+          <dt class="brk">Source</dt><dd class="brk"><a class="srclink" href="${esc(o.sourceURL)}" target="_blank" rel="noopener">Official text</a></dd>
+          <dt>Verified</dt><dd>${esc(fmtDate(o.lastVerified))}</dd>
+          <dt>Confidence</dt><dd>${o.confidence ? `${esc(o.confidence.band.replace(/^./, (c) => c.toUpperCase()))} (${esc(Number(o.confidence.score).toFixed(2))})` : 'Not scored'}</dd>
+          <dt>Approved by</dt><dd>${o.approval ? `${esc(o.approval.approverName)}<div class="small soft">${esc(fmtDate(o.approval.approvedAt))}</div>` : '<span class="soft">Not yet approved</span>'}</dd>
           <dt>Record</dt><dd><code>${esc(o.governedRecordID)}</code></dd>
         </dl>
       </aside>
     </div>`;
+  document.getElementById('copycite').addEventListener('click', async (e) => {
+    try { await navigator.clipboard.writeText(o.citeAs); e.target.textContent = 'Copied'; }
+    catch { const r = document.createRange(); r.selectNodeContents(document.getElementById('citeas')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+  });
+  const sum = document.getElementById('provsum');
   try {
     const p = EMBED ? await EMBED.provenance(o.obligationID) : await (await fetch(`/api/v1/provenance/${encodeURIComponent(o.obligationID)}`)).json();
-    document.getElementById('trail').innerHTML = `<p class="muted">Each step below is an entry in the Reasoning Fabric's append-only provenance ledger. Its hash is checked here against its content.</p>
-      <ol class="trail">${p.entries.map((e) => `<li><span class="${e.hashVerified ? 'ok' : 'bad'}">${e.hashVerified ? 'Hash checks' : 'Hash does not match'}</span> ${esc(fmtDate(e.recordedAt))}, ${esc(e.eventType.replace(/([A-Z])/g, ' $1').toLowerCase())} by ${esc(e.actor.displayName || e.actor.actorID)}<div class="muted">${esc(e.decision || '')}${e.ruleIDs ? ` Rules: ${e.ruleIDs.map((x) => `<code>${esc(x)}</code>`).join(', ')}` : ''}</div></li>`).join('')}</ol>`;
+    const bad = p.entries.filter((e) => !e.hashVerified).length;
+    sum.textContent = `${p.entries.length} ledger entr${p.entries.length === 1 ? 'y' : 'ies'}, ${bad ? `${bad} hash${bad > 1 ? 'es do' : ' does'} not match` : 'every hash checks'}`;
+    document.getElementById('trail').innerHTML = `<p class="small soft">Each step is an entry in the Reasoning Fabric's append-only provenance ledger. Its hash is checked here against its content.</p>
+      <ol class="trail">${p.entries.map((e) => `<li><span class="${e.hashVerified ? 'ok' : 'bad'}">${e.hashVerified ? 'Hash checks' : 'Hash does not match'}</span> · ${esc(fmtDate(e.recordedAt))}, ${esc(e.eventType.replace(/([A-Z])/g, ' $1').toLowerCase())} by ${esc(e.actor.displayName || e.actor.actorID)}${e.decision || e.ruleIDs ? `<div class="small soft">${esc(e.decision || '')}${e.ruleIDs ? ` Rules: ${e.ruleIDs.map((x) => `<code>${esc(x)}</code>`).join(', ')}` : ''}</div>` : ''}</li>`).join('')}</ol>`;
   } catch {
-    document.getElementById('trail').innerHTML = '<p class="muted">The provenance trail could not be loaded. Reload the page to try again.</p>';
+    sum.textContent = 'Could not be loaded';
+    document.getElementById('trail').innerHTML = '<p class="small soft">The provenance trail could not be loaded. Reload the page to try again.</p>';
   }
 }
 
 function renderUseCases() {
   setNav('use-cases');
-  main.innerHTML = `<h1>Standardised AI use cases</h1>
-    <p class="lede">Every obligation is mapped to the same ten use cases, defined on the authority (A) and boundary (B) scales, so results compare across jurisdictions and clients. Consequence (C1 to C5) is set per matter, against the client's own thresholds.</p>
+  main.innerHTML = `<div class="opening"><div class="eyebrow">Use cases</div><h1>Standardised AI use cases</h1>
+    <p class="lede">Every obligation is mapped to the same ten use cases, defined on the authority (A) and boundary (B) scales, so results compare across jurisdictions and clients. Consequence (C1 to C5) is set per matter, against the client's own thresholds.</p></div>
     <div class="scroll"><table><thead><tr><th>Use case</th><th>Authority</th><th>Boundary</th><th>Leads to</th><th>Records</th></tr></thead><tbody>
     ${data.useCases.map((u) => `<tr><td><strong>${esc(u.useCaseID)}</strong> ${esc(u.title)}<div class="muted">${esc(u.description)}</div></td><td>${esc(u.authorityLabels.join(', '))}</td><td>${esc((u.boundaries || []).map((b) => b.toUpperCase()).join(', ') || (u.confidentialityChannels ? 'Channels K1 to K7' : ''))}</td><td>${esc((u.assessmentTypes || []).map((a) => ASSESSMENTS[a].name).join('; '))}</td><td><a href="${href('register')}" data-uc="${esc(u.useCaseID)}">${u.obligationCount}</a></td></tr>`).join('')}
     </tbody></table></div>`;
@@ -169,13 +170,14 @@ function renderUseCases() {
 function renderChanges() {
   setNav('changes');
   const kinds = { instrumentChange: 'Instrument change', lead: 'Lead, unverified', recordPublished: 'Record published', recordUpdated: 'Record updated', recordSuperseded: 'Record superseded' };
-  main.innerHTML = `<h1>Changes</h1>
-    <p class="lede">New and amended instruments, commencements and withdrawals, newest first. A lead comes from a source that cannot set a status or date on its own; it points to an official source still to be checked.</p>
-    <ol class="register">${data.changes.map((c) => `<li class="entry"><div class="entry-body">
-      <div class="citation"><span>${esc(kinds[c.kind] || c.kind)}${c.jurisdiction ? `, ${esc(jurName(c.jurisdiction))}` : ''}</span><time datetime="${esc(c.date)}">${esc(fmtDate(c.date))}</time></div>
-      <h3>${esc(c.title)}${c.publicationStatus === 'pendingReview' ? ' <span class="badge">Pending review</span>' : ''}</h3>
-      ${c.summary ? `<p class="statement">${esc(c.summary)}</p>` : ''}
-      <ul class="facts">${c.effectiveDate ? `<li>Effective ${esc(fmtDate(c.effectiveDate))}</li>` : ''}${c.sourceURL ? `<li><a href="${esc(c.sourceURL)}" target="_blank" rel="noopener">Source</a> (rank ${esc(c.sourceRank)})</li>` : ''}${(c.affects || []).filter((a) => data.obligations.some((o) => o.obligationID === a)).slice(0, 6).map((a) => `<li><a href="${href('obligation', a)}">${esc(a)}</a></li>`).join('')}</ul>
+  main.innerHTML = `<div class="opening"><div class="eyebrow">Changes</div><h1>New and amended sources</h1>
+    <p class="lede">New and amended instruments, commencements and withdrawals, newest first. A lead comes from a source that cannot set a status or date on its own; it points to an official source still to be checked.</p></div>
+    <ol class="register">${data.changes.map((c) => `<li class="entry"><div class="row">
+      <h3 class="title">${esc(c.title)}</h3>
+      <div class="tags"><span class="badge status">${esc(kinds[c.kind] || c.kind)}</span>${c.publicationStatus === 'pendingReview' ? '<span class="badge pending">Pending review</span>' : ''}</div>
+      <div class="where"><time datetime="${esc(c.date)}">${esc(fmtDate(c.date))}</time>${c.jurisdiction ? ` · ${esc(jurName(c.jurisdiction))}` : ''}</div>
+      ${c.summary ? `<p class="gist">${esc(c.summary)}</p>` : ''}
+      <div class="meta">${c.effectiveDate ? `<span>Effective ${esc(fmtDate(c.effectiveDate))}</span>` : ''}${c.sourceURL ? `<span><a href="${esc(c.sourceURL)}" target="_blank" rel="noopener">Source</a> (rank ${esc(c.sourceRank)})</span>` : ''}${(c.affects || []).filter((a) => data.obligations.some((o) => o.obligationID === a)).slice(0, 6).map((a) => `<span><a href="${href('obligation', a)}">${esc(a)}</a></span>`).join('')}</div>
     </div></li>`).join('')}</ol>`;
 }
 
@@ -183,7 +185,7 @@ function renderChanges() {
 function briefHTML(b) {
   const sect = (tier) => {
     const items = b.obligationsByTier[tier] || [];
-    return `<h3>${tab(tier).replace('class="tab', 'style="display:inline-block;height:0.9em;width:0.45em;margin-right:0.5em;vertical-align:-0.05em" class="tab')}${esc(TIERS[tier].label)} (${items.length})</h3>
+    return `<h3>${tierBadge(tier)} ${items.length} record${items.length === 1 ? '' : 's'}</h3>
       ${items.length ? `<ol>${items.map((o) => `<li><strong>${esc(o.instrument)}, ${esc(o.citation)}</strong>: ${esc(o.title)} <span class="muted">(${esc(o.jurisdiction)}; ${esc(STATUS[o.status] || o.status)}; verified ${esc(fmtDate(o.lastVerified))}; <a href="${esc(o.sourceURL)}">source</a>; record ${esc(o.governedRecordID)}${o.publicationStatus === 'pendingReview' ? '; pending review' : ''})</span></li>`).join('')}</ol>` : '<p class="muted">None in scope.</p>'}`;
   };
   return `<div class="brief" id="brief-out">
@@ -202,8 +204,8 @@ function renderBrief() {
   const saved = store.get('atlas.briefs', []);
   const draft = store.get('atlas.briefDraft', { matterLabel: '', jurisdictions: ['AU'], entityTypes: [], useCaseIDs: [], consequence: {} });
   const ents = Object.entries(ENTITY_TYPES).filter(([k]) => !['anyOrganization', 'other'].includes(k) && data.obligations.some((o) => o.entityTypes.includes(k)));
-  main.innerHTML = `<h1 class="screen-only">Matter brief</h1>
-    <p class="lede screen-only">Pick the client's jurisdictions, entity type and AI use cases. The brief lists the obligations in scope by tier, the questions counsel will need to determine, and the engagements that fit. It is built and kept in this browser; nothing you enter here is sent to Triodian.</p>
+  main.innerHTML = `<div class="opening screen-only"><div class="eyebrow">Matter brief</div><h1>Matter brief</h1>
+    <p class="lede">Pick the client's jurisdictions, entity type and AI use cases. The brief lists the obligations in scope by tier, the questions counsel will need to determine, and the engagements that fit. It is built and kept in this browser; nothing you enter here is sent to Triodian.</p></div>
     <form class="brief-form" id="bf">
       <fieldset><legend>Matter</legend>
         <label for="ml" class="muted">Your label for the matter (stays in this browser)</label>
@@ -268,8 +270,8 @@ function renderBrief() {
 function renderDevelopers() {
   setNav('developers');
   const origin = location.origin;
-  main.innerHTML = `<h1>API and MCP</h1>
-    <p class="lede">The same records are served to the web app, to firms' knowledge systems through the REST API, and to AI assistants through the MCP server. Every response carries the source link, tier, last-verified date and a provenance reference, so anything that quotes a record can cite it.</p>
+  main.innerHTML = `<div class="opening"><div class="eyebrow">For developers</div><h1>API and MCP</h1>
+    <p class="lede">The same records are served to the web app, to firms' knowledge systems through the REST API, and to AI assistants through the MCP server. Every response carries the source link, tier, last-verified date and a provenance reference, so anything that quotes a record can cite it.</p></div>
     <h2>REST API</h2>
     <div class="scroll"><table><thead><tr><th>Call</th><th>Returns</th></tr></thead><tbody>
       <tr><td><code>GET /api/v1/obligations?jurisdiction=AU&amp;tier=binding&amp;useCase=UC7</code></td><td>Obligations, filtered by jurisdiction, tier, use case, entity type, role, status or text</td></tr>
@@ -303,6 +305,21 @@ function renderDevelopers() {
     <p class="muted">Dataset generated ${esc(fmtDate(data.info.generatedAt))}; Metamodel ${esc(data.info.metamodelVersion)}; ledger head ${esc(data.info.ledgerHead ? `#${data.info.ledgerHead.sequence}, ${data.info.ledgerHead.hash.slice(0, 16)}…` : 'none')}.</p>`;
 }
 
+function setupDrawer() {
+  const btn = document.getElementById('menubtn');
+  const drawer = document.getElementById('drawer');
+  const bg = document.getElementById('drawer-bg');
+  const set = (open) => {
+    drawer.hidden = !open; bg.hidden = !open; btn.setAttribute('aria-expanded', String(open));
+    if (open) drawer.querySelector('a.item, button').focus(); else btn.focus({ preventScroll: true });
+  };
+  btn.addEventListener('click', () => set(drawer.hidden));
+  bg.addEventListener('click', () => set(false));
+  document.getElementById('menuclose').addEventListener('click', () => set(false));
+  drawer.addEventListener('click', (e) => { if (e.target.closest('a.item[data-nav]')) { drawer.hidden = true; bg.hidden = true; btn.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !drawer.hidden) set(false); });
+}
+
 function route() {
   const h = location.hash.replace(/^#\/?/, '');
   const [page, arg] = parseRoute();
@@ -330,12 +347,22 @@ async function start() {
     return;
   }
   document.getElementById('standing-rule').textContent = STANDING_RULE;
-  document.getElementById('dataset-line').textContent = `${data.info.counts.obligations} records across ${data.jurisdictions.filter((j) => j.available).length} jurisdictions. Data generated ${fmtDate(data.info.generatedAt)}. Data model: Triodian Metamodel ${data.info.metamodelVersion}.`;
+  const jurs = data.jurisdictions.filter((j) => j.available).length;
+  document.getElementById('dataset-line').textContent = `Triodian Metamodel ${data.info.metamodelVersion} · data ${fmtDate(data.info.generatedAt)}`;
+  document.getElementById('statusline').textContent = `${data.info.counts.obligations} records · ${jurs} jurisdictions`;
+  const chip = document.getElementById('datachip');
+  chip.hidden = false;
+  chip.className = `checkcount ${data.info.preview ? 'b-ochre' : 'b-green'}`;
+  chip.textContent = data.info.preview ? 'Preview data' : 'Published records';
+  chip.title = data.info.preview ? 'Includes records still waiting for review' : 'Records approved by a named reviewer';
+  if (EMBED) document.getElementById('policylink').remove();
   if (data.info.preview) {
     const p = document.getElementById('preview');
     p.hidden = false;
     p.textContent = 'Preview. Records marked pending review come from the seed research of 27 October 2026 and have not yet been approved by a Triodian reviewer. Do not rely on them in a matter.';
+    document.querySelectorAll('[data-app]').forEach((a) => { a.href = `https://${a.dataset.app}-test.triodian.com/`; });
   }
+  setupDrawer();
   window.addEventListener('hashchange', route);
   route();
 }
