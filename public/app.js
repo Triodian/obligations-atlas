@@ -248,51 +248,90 @@ function renderBrief() {
   const saved = store.get('atlas.briefs', []);
   const draft = store.get('atlas.briefDraft', { matterLabel: '', jurisdictions: ['AU'], entityTypes: [], useCaseIDs: [], consequence: {} });
   const ents = Object.entries(ENTITY_TYPES).filter(([k]) => !['anyOrganization', 'other'].includes(k) && data.obligations.some((o) => o.entityTypes.includes(k)));
-  main.innerHTML = `<div class="opening screen-only"><div class="eyebrow">Matter brief</div><h1>Matter brief</h1>
-    <p class="lede">Pick the client's jurisdictions, entity type and AI use cases. The brief lists the obligations in scope by tier, the questions counsel will need to determine, and the engagements that fit. It is built and kept in this browser; nothing you enter here is sent to Triodian.</p></div>
-    <form class="brief-form" id="bf">
-      <fieldset><legend>Matter</legend>
-        <label for="ml" class="muted">Your label for the matter (stays in this browser)</label>
-        <input id="ml" class="text" name="matterLabel" value="${esc(draft.matterLabel)}" placeholder="e.g. Insurer AI claims triage">
-        <legend style="margin-top:1.2rem">Jurisdictions</legend>
-        ${data.jurisdictions.filter((j) => j.available && j.code !== 'INT').map((j) => `<label class="check"><input type="checkbox" name="jur" value="${esc(j.code)}" ${draft.jurisdictions.includes(j.code) ? 'checked' : ''}> ${esc(j.name)}</label>`).join('')}
-        <p class="muted">International standards are included with any jurisdiction.</p>
-      </fieldset>
-      <fieldset><legend>Entity type</legend>
-        ${ents.map(([k, v]) => `<label class="check"><input type="checkbox" name="ent" value="${esc(k)}" ${draft.entityTypes.includes(k) ? 'checked' : ''}> ${esc(v)}</label>`).join('')}
-      </fieldset>
-      <fieldset><legend>Use cases, and consequence for this client</legend>
-        ${data.useCases.map((u) => `<div class="ucrow"><label class="check"><input type="checkbox" name="uc" value="${esc(u.useCaseID)}" ${draft.useCaseIDs.includes(u.useCaseID) ? 'checked' : ''}> <span><strong>${esc(u.useCaseID)}</strong> ${esc(u.title)}</span></label>
-          <select class="small" name="c-${esc(u.useCaseID)}" aria-label="Consequence for ${esc(u.useCaseID)}">${options([['', 'C not set'], ['c1', 'C1'], ['c2', 'C2'], ['c3', 'C3'], ['c4', 'C4'], ['c5', 'C5']], draft.consequence[u.useCaseID] || '')}</select></div>`).join('')}
-      </fieldset>
-    </form>
-    <div class="actions">
-      <button class="btn" id="build" type="button">Build brief</button>
-      <button class="btn secondary" id="export" type="button" disabled>${EMBED ? 'Copy brief as JSON' : 'Export for an assessment app'}</button>
-      ${EMBED ? '' : '<button class="btn secondary" id="print" type="button" disabled>Print</button>'}
-      <button class="btn secondary" id="save" type="button" disabled>Save in this browser</button>
+  const jurs = data.jurisdictions.filter((j) => j.available && j.code !== 'INT');
+  const cOpts = [['', 'Not set'], ['c1', 'C1'], ['c2', 'C2'], ['c3', 'C3'], ['c4', 'C4'], ['c5', 'C5']];
+  main.innerHTML = `<div class="opening screen-only"><div class="eyebrow">Build a brief for a client matter</div><h1>Matter brief</h1>
+    <p class="lede">Choose the client's jurisdictions, entity type and AI use cases. The brief lists the obligations in scope by tier, the questions for counsel and the engagements that fit.</p></div>
+    <div class="split brief-split">
+      <form class="brief-form" id="bf">
+        <fieldset class="card">
+          <legend class="sh"><span class="stepno">1</span>Matter</legend>
+          <label class="field" for="ml">Your label for the matter<input id="ml" class="text" name="matterLabel" value="${esc(draft.matterLabel)}" placeholder="e.g. Insurer AI claims triage"></label>
+          <div class="field">Jurisdictions
+            <div class="toggles">${jurs.map((j) => `<label class="toggle"><input type="checkbox" name="jur" value="${esc(j.code)}" ${draft.jurisdictions.includes(j.code) ? 'checked' : ''}><span>${esc(j.name)}</span></label>`).join('')}</div>
+            <span class="small soft">International standards are included with any jurisdiction.</span>
+          </div>
+        </fieldset>
+        <fieldset class="card">
+          <legend class="sh"><span class="stepno">2</span>Entity type <span class="hint">Leave all clear for any entity</span></legend>
+          <div class="checkgrid">${ents.map(([k, v]) => `<label class="check"><input type="checkbox" name="ent" value="${esc(k)}" ${draft.entityTypes.includes(k) ? 'checked' : ''}> ${esc(v)}</label>`).join('')}</div>
+        </fieldset>
+        <fieldset class="card">
+          <legend class="sh"><span class="stepno">3</span>AI use cases <span class="hint">Consequence (C1 to C5) against the client's own thresholds</span></legend>
+          <div class="uctable">${ucIDs().map((u) => { const on = draft.useCaseIDs.includes(u); return `<div class="ucrow${on ? ' on' : ''}">
+            <label class="check"><input type="checkbox" name="uc" value="${esc(u)}" ${on ? 'checked' : ''}><span><strong>${esc(u)}</strong> ${esc(ucTitle(u))}</span></label>
+            <select class="small" name="c-${esc(u)}" aria-label="Consequence for ${esc(u)}" ${on ? '' : 'disabled'}>${options(cOpts, draft.consequence[u] || '')}</select></div>`; }).join('')}</div>
+        </fieldset>
+      </form>
+      <aside class="card facts brief-aside" aria-label="Brief scope">
+        <h2 class="sh">Scope</h2>
+        <dl class="kv" id="scope"></dl>
+        <div class="actions stack">
+          <button class="btn" id="build" type="button">Build brief</button>
+          <button class="btn secondary" id="export" type="button">${EMBED ? 'Copy brief as JSON' : 'Export for an assessment app'}</button>
+          ${EMBED ? '' : '<button class="btn secondary" id="print" type="button">Print</button>'}
+          <button class="btn secondary" id="save" type="button">Save in this browser</button>
+        </div>
+        <p class="small" style="margin:0 0 6px;color:var(--green)" id="briefstatus" aria-live="polite"></p>
+        <p class="small soft" style="margin:0">Built and kept in this browser. Nothing you enter here is sent to Triodian.</p>
+        ${saved.length ? `<div class="saved-wrap"><h2 class="sh" style="margin-top:18px">Saved in this browser</h2><ul class="saved">${saved.map((x, i) => `<li><button class="linkish" data-open="${i}">${esc(x.matterLabel || 'Untitled matter')}</button><span class="small soft">${esc(fmtDate(x.generatedAt))}</span><button class="linkish small" data-del="${i}" aria-label="Delete ${esc(x.matterLabel || 'untitled matter')}">Delete</button></li>`).join('')}</ul></div>` : ''}
+      </aside>
     </div>
-    <div id="out"></div>
-    <div class="saved-wrap">${saved.length ? `<h2>Saved in this browser</h2><ul class="saved">${saved.map((s, i) => `<li><button class="linkish" data-open="${i}">${esc(s.matterLabel)}</button><span class="muted">${esc(fmtDate(s.generatedAt))}</span><button class="linkish" data-del="${i}">Delete</button></li>`).join('')}</ul>` : ''}</div>`;
+    <div id="out"></div>`;
 
   const form = document.getElementById('bf');
   let brief = null;
   const read = () => {
     const f = new FormData(form);
     const d = { matterLabel: f.get('matterLabel') || '', jurisdictions: f.getAll('jur'), entityTypes: f.getAll('ent'), useCaseIDs: f.getAll('uc'), consequence: {} };
-    for (const u of data.useCases) { const c = f.get(`c-${u.useCaseID}`); if (c) d.consequence[u.useCaseID] = c; }
+    for (const u of ucIDs()) { const c = f.get(`c-${u}`); if (c) d.consequence[u] = c; }
     store.set('atlas.briefDraft', d);
     return d;
   };
-  const show = (b) => {
-    brief = b;
-    document.getElementById('out').innerHTML = briefHTML(b);
-    ['export', 'print', 'save'].forEach((id) => { const b = document.getElementById(id); if (b) b.disabled = false; });
+  const status = (t) => { document.getElementById('briefstatus').textContent = t; };
+  const out = () => document.getElementById('out');
+  const show = (b) => { brief = b; out().innerHTML = briefHTML(b); };
+  // Build, Export, Print and Save all work from the current choices: the brief is rebuilt when they have changed.
+  let builtFrom = '';
+  const current = () => {
+    const d = read();
+    const key = JSON.stringify(d);
+    if (!brief || key !== builtFrom) { show(buildMatterBrief(data, d)); builtFrom = key; }
+    return brief;
   };
-  form.addEventListener('change', read);
-  document.getElementById('build').addEventListener('click', () => show(buildMatterBrief(data, read())));
-  if (!EMBED) document.getElementById('print').addEventListener('click', () => window.print());
+  const scope = () => {
+    const d = read();
+    const b = buildMatterBrief(data, d);
+    const n = Object.values(b.obligationsByTier).reduce((t, x) => t + x.length, 0);
+    const none = (x) => `<span class="soft">${x}</span>`;
+    document.getElementById('scope').innerHTML = `
+      <dt>Matter</dt><dd>${d.matterLabel ? esc(d.matterLabel) : none('No label')}</dd>
+      <dt>Jurisdictions</dt><dd>${d.jurisdictions.length ? esc(d.jurisdictions.map(jurName).join(', ')) : none('All')}</dd>
+      <dt>Entities</dt><dd>${d.entityTypes.length ? esc(d.entityTypes.map((e) => ENTITY_TYPES[e] || e).join(', ')) : none('Any')}</dd>
+      <dt>Use cases</dt><dd>${d.useCaseIDs.length ? esc(d.useCaseIDs.map((u) => `${u}${d.consequence[u] ? ` (${d.consequence[u].toUpperCase()})` : ''}`).join(', ')) : none('Any')}</dd>
+      <dt class="brk">In scope</dt><dd class="brk"><strong>${n} record${n === 1 ? '' : 's'}</strong><ul class="tiers">${Object.keys(TIERS).map((t) => `<li>${tierBadge(t)}<span>${(b.obligationsByTier[t] || []).length}</span></li>`).join('')}</ul></dd>`;
+    status('');
+  };
+  form.addEventListener('change', (e) => {
+    if (e.target.name === 'uc') { const row = e.target.closest('.ucrow'); row.classList.toggle('on', e.target.checked); row.querySelector('select').disabled = !e.target.checked; }
+    scope();
+  });
+  form.matterLabel.addEventListener('input', scope);
+  scope();
+  document.getElementById('build').addEventListener('click', () => { current(); out().scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  if (!EMBED) document.getElementById('print').addEventListener('click', () => { current(); window.print(); });
   document.getElementById('export').addEventListener('click', async () => {
+    current();
     if (EMBED) {
       const text = JSON.stringify(brief, null, 2);
       try { await navigator.clipboard.writeText(text); document.getElementById('export').textContent = 'Copied brief as JSON'; }
@@ -305,9 +344,16 @@ function renderBrief() {
     a.download = `matter-brief-${(brief.matterLabel || 'matter').toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}.json`;
     a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    status(`Downloaded ${a.download}`);
   });
-  document.getElementById('save').addEventListener('click', () => { store.set('atlas.briefs', [brief, ...saved].slice(0, 30)); renderBrief(); show(brief); });
-  main.querySelectorAll('[data-open]').forEach((b) => b.addEventListener('click', () => show(saved[Number(b.dataset.open)])));
+  document.getElementById('save').addEventListener('click', () => {
+    const b = current();
+    store.set('atlas.briefs', [b, ...saved].slice(0, 30));
+    renderBrief();
+    document.getElementById('out').innerHTML = briefHTML(b);
+    document.getElementById('briefstatus').textContent = `Saved “${b.matterLabel || 'Untitled matter'}” in this browser`;
+  });
+  main.querySelectorAll('[data-open]').forEach((b) => b.addEventListener('click', () => { show(saved[Number(b.dataset.open)]); out().scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
   main.querySelectorAll('[data-del]').forEach((b) => b.addEventListener('click', () => { saved.splice(Number(b.dataset.del), 1); store.set('atlas.briefs', saved); renderBrief(); }));
 }
 
