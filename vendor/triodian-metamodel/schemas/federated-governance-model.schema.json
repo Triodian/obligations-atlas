@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/federated-governance-model.schema.json",
+  "title": "Federated Governance Model Schema",
+  "description": "Schema for modeling how multiple organizations co-own or co-steward resources",
+  "type": "object",
+  "required": [
+    "governanceID",
+    "name",
+    "domainType"
+  ],
+  "properties": {
+    "governanceID": {
+      "type": "string",
+      "description": "Unique identifier for the governance model"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the governance arrangement"
+    },
+    "domainType": {
+      "description": "Type of domain being governed",
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/definitions/domainType"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "standard"
+          ],
+          "description": "Domain-specific values in addition to the shared list"
+        }
+      ]
+    },
+    "domainReference": {
+      "type": "string",
+      "description": "Reference to the specific domain entity being governed"
+    },
+    "participatingOrganizations": {
+      "type": "array",
+      "description": "Organizations involved in this governance model",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orgID": {
+            "type": "string",
+            "description": "ID of the participating organization"
+          },
+          "orgType": {
+            "type": "string",
+            "description": "Type of the participating organization",
+            "enum": [
+              "internal",
+              "external"
+            ]
+          },
+          "governanceRole": {
+            "type": "string",
+            "description": "Role the organization plays in governance",
+            "enum": [
+              "lead",
+              "participant",
+              "advisor",
+              "approver",
+              "auditor"
+            ]
+          },
+          "votingWeight": {
+            "type": "number",
+            "description": "Relative weight in decisions, if applicable"
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 2
+    },
+    "decisionProcess": {
+      "type": "string",
+      "description": "How decisions are made (consensus, majority, etc.)"
+    },
+    "meetingCadence": {
+      "type": "string",
+      "description": "Frequency of governance meetings"
+    },
+    "escalationPath": {
+      "type": "string",
+      "description": "Process for escalating unresolved issues"
+    },
+    "documentationLink": {
+      "type": "string",
+      "description": "Link to governance documentation"
+    }
+  },
+  "additionalProperties": false
+}

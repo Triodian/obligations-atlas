@@ -1,0 +1,162 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/public-reporting/public-report.schema.json",
+  "title": "Public Report Schema",
+  "description": "A formal report an organization makes public, such as an annual report, a valuation, a privacy policy or a market announcement: its type, version, lifecycle status, the person or team that issues it, and the mandatory disclosures it contains. Public reports give an auditable record of what was disclosed, when, and under whose authority.",
+  "type": "object",
+  "required": [
+    "publicReportID",
+    "title",
+    "reportType",
+    "reportStatus",
+    "version"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "publicReportID": {
+      "description": "Unique identifier for the report, e.g. PR-VAL-001",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Short, descriptive name of the report"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the report covers"
+    },
+    "reportType": {
+      "description": "Formal type of the report",
+      "allOf": [
+        {
+          "$ref": "#/definitions/reportType"
+        }
+      ]
+    },
+    "reportStatus": {
+      "description": "Lifecycle status of the report",
+      "allOf": [
+        {
+          "$ref": "#/definitions/reportStatus"
+        }
+      ]
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the report, e.g. 1.0"
+    },
+    "issuingStakeholderTitle": {
+      "type": "string",
+      "description": "Person or team responsible for issuing the report"
+    },
+    "issuingStakeholderID": {
+      "description": "Stakeholder record for the issuer",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitID": {
+      "description": "Organization unit that owns the report",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "reportingPeriod": {
+      "description": "Period the report covers",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/datePeriod"
+        }
+      ]
+    },
+    "publishedDate": {
+      "type": "string",
+      "description": "Date the report was made public",
+      "format": "date"
+    },
+    "linkToDocument": {
+      "type": "string",
+      "description": "Link to the published document",
+      "format": "uri"
+    },
+    "lodgedWithExternalOrgID": {
+      "description": "Regulator, exchange or registry the report was lodged with, if any",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "mandatoryDisclosureIDs": {
+      "type": "array",
+      "description": "Mandatory disclosures the report contains",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "statementOfComplianceIDs": {
+      "type": "array",
+      "description": "Statements of compliance published in the report",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    }
+  },
+  "definitions": {
+    "reportType": {
+      "type": "string",
+      "description": "Formal type of a public report. aiDisclosure = a report or section whose purpose is to disclose the organization's use of AI or automated decision-making",
+      "enum": [
+        "financial",
+        "technical",
+        "valuation",
+        "compliance",
+        "sustainability",
+        "governance",
+        "privacyPolicy",
+        "marketAnnouncement",
+        "productDisclosure",
+        "aiDisclosure",
+        "other"
+      ]
+    },
+    "reportStatus": {
+      "type": "string",
+      "description": "Lifecycle status of a public report: draft (in preparation), approved (internally approved), published (made public), cancelled (publication formally stopped), withdrawn (removed after publication)",
+      "enum": [
+        "draft",
+        "approved",
+        "published",
+        "cancelled",
+        "withdrawn"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "publicReportID": "PR-VAL-001",
+      "title": "Technical Assessment & Valuation Report",
+      "description": "A valuation of the company's mineral assets as of Q3 2025.",
+      "reportType": "valuation",
+      "reportStatus": "published",
+      "version": "1.0",
+      "issuingStakeholderTitle": "Anna L.",
+      "issuingStakeholderID": "STK-ANNA-L",
+      "linkToDocument": "https://cdn.example.com/reports/PR-VAL-001.pdf",
+      "mandatoryDisclosureIDs": [
+        "DISC-001",
+        "DISC-002"
+      ]
+    }
+  ]
+}

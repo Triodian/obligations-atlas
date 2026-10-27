@@ -1,0 +1,506 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/organization.schema.json",
+  "title": "Organization Domain Schema",
+  "description": "Schema for the Organization domain in the Triodian Metamodel with global enumeration support",
+  "type": "object",
+  "properties": {
+    "organizationID": {
+      "description": "Unique identifier for the Organization",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgTitle": {
+      "type": "string",
+      "description": "The name or title of the Organization",
+      "examples": [
+        "Office of Railroad Safety",
+        "Deutsche Bahn AG",
+        "Singapore Railways Corporation"
+      ]
+    },
+    "orgShortName": {
+      "type": "string",
+      "description": "Shortened form of organization name",
+      "examples": [
+        "Railroad Safety",
+        "DB",
+        "SRC"
+      ]
+    },
+    "legalName": {
+      "type": "string",
+      "description": "Formal legal name of the organization",
+      "examples": [
+        "Deutsche Bahn Aktiengesellschaft"
+      ]
+    },
+    "registeredAddress": {
+      "type": "string",
+      "description": "Official registered address of the organization"
+    },
+    "incorporationDate": {
+      "type": "string",
+      "description": "Date the organization was legally formed",
+      "format": "date"
+    },
+    "jurisdictionOfEstablishment": {
+      "type": "string",
+      "description": "Legal jurisdiction where the organization is established",
+      "examples": [
+        "Germany",
+        "Delaware, United States"
+      ]
+    },
+    "orgType": {
+      "type": "string",
+      "description": "Type of organization",
+      "enum": [
+        "governmentAgency",
+        "federalNationalAgency",
+        "stateProvincialAgency",
+        "regionalAuthority",
+        "localMunicipalAuthority",
+        "publicLimitedCompany",
+        "privateLimitedCompany",
+        "corporation",
+        "limitedLiabilityCompany",
+        "partnership",
+        "soleProprietorship",
+        "cooperative",
+        "jointVenture",
+        "nonProfitOrganization",
+        "crownCorporation",
+        "stateOwnedEnterprise",
+        "internationalOrganization",
+        "other"
+      ]
+    },
+    "country": {
+      "type": "string",
+      "description": "The country where the organization is headquartered or primarily operates",
+      "examples": [
+        "United States of America",
+        "Germany",
+        "Singapore",
+        "United Kingdom",
+        "Australia"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the Organization entails"
+    },
+    "structure": {
+      "type": "string",
+      "description": "The Organization structure of the company",
+      "examples": [
+        "5 Regional Offices - 8 Technical Divisions",
+        "Matrix organization with 12 business units",
+        "Flat structure with 6 departments"
+      ]
+    },
+    "structureType": {
+      "type": "string",
+      "description": "Type of organizational structure",
+      "enum": [
+        "functional",
+        "divisional",
+        "matrix",
+        "hierarchical",
+        "flatHorizontal",
+        "regional",
+        "countryBased",
+        "globalTransnational",
+        "hubAndSpoke",
+        "distributedDecentralized",
+        "network",
+        "virtualRemote",
+        "hybrid",
+        "productBased",
+        "customerMarketBased",
+        "serviceLineBased",
+        "projectBased",
+        "teamOfTeams",
+        "crossFunctionalSquads",
+        "other"
+      ]
+    },
+    "roles": {
+      "type": "string",
+      "description": "The roles within the Organization"
+    },
+    "missionStatement": {
+      "type": "string",
+      "description": "The mission of the Organization"
+    },
+    "visionStatement": {
+      "type": "string",
+      "description": "The vision of the Organization"
+    },
+    "values": {
+      "type": "string",
+      "description": "The core values guiding the Organization"
+    },
+    "legalStructure": {
+      "type": "string",
+      "description": "The legal structure of the Organization",
+      "enum": [
+        "federalNationalAgency",
+        "stateProvincialAgency",
+        "regionalAuthority",
+        "localMunicipalAuthority",
+        "autonomousPublicBody",
+        "crownCorporation",
+        "stateOwnedEnterprise",
+        "governmentLinkedCompany",
+        "publicLimitedCompany",
+        "privateLimitedCompany",
+        "corporation",
+        "limitedLiabilityCompany",
+        "partnership",
+        "limitedPartnership",
+        "limitedLiabilityPartnership",
+        "soleProprietorship",
+        "cooperativeMutualSociety",
+        "jointStockCompany",
+        "publicPrivatePartnership",
+        "jointVenture",
+        "consortium",
+        "specialPurposeVehicle",
+        "trust",
+        "foundation",
+        "nonGovernmentalOrganization",
+        "internationalOrganization",
+        "supranationalEntity",
+        "other"
+      ]
+    },
+    "geographicPresence": {
+      "type": "string",
+      "description": "Locations and geographic reach of the Organization"
+    },
+    "geographicScope": {
+      "description": "Geographic scope of operations",
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/definitions/geographicScope"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "regionalBloc",
+            "emergingMarkets",
+            "developedMarkets",
+            "asiaPacific",
+            "europeMiddleEastAfrica",
+            "americas"
+          ],
+          "description": "Domain-specific values in addition to the shared list"
+        }
+      ]
+    },
+    "operationalModel": {
+      "type": "string",
+      "description": "Operational model for geographic presence",
+      "enum": [
+        "centralizedOperations",
+        "decentralizedOperations",
+        "hubAndSpokeModel",
+        "distributedNetwork",
+        "franchiseModel",
+        "licensingModel",
+        "representativeOffices",
+        "jointVentures",
+        "strategicPartnerships"
+      ]
+    },
+    "size": {
+      "type": "string",
+      "description": "The size of the Organization in terms of employees, revenue etc."
+    },
+    "currency": {
+      "type": "string",
+      "description": "Primary currency for financial reporting",
+      "enum": [
+        "usd",
+        "eur",
+        "gbp",
+        "jpy",
+        "cny",
+        "chf",
+        "cad",
+        "aud",
+        "sgd",
+        "inr",
+        "brl",
+        "localCurrency",
+        "multiCurrency"
+      ]
+    },
+    "culture": {
+      "type": "string",
+      "description": "The culture within the Organization"
+    },
+    "cultureType": {
+      "type": "string",
+      "description": "Type of organizational culture",
+      "enum": [
+        "highContextCulture",
+        "lowContextCulture",
+        "hierarchicalCulture",
+        "egalitarianCulture",
+        "individualFocused",
+        "collectiveFocused",
+        "riskAverse",
+        "riskTaking",
+        "innovationFocused",
+        "processFocused",
+        "customerCentric",
+        "employeeCentric",
+        "performanceDriven",
+        "collaborative"
+      ]
+    },
+    "history": {
+      "type": "string",
+      "description": "The history and milestones of the Organization"
+    },
+    "complianceFrameworks": {
+      "type": "array",
+      "description": "Regulatory and compliance frameworks applicable to the organization",
+      "items": {
+        "type": "string",
+        "enum": [
+          "iso9001",
+          "iso14001",
+          "iso27001",
+          "iso45001",
+          "sox",
+          "gdpr",
+          "hipaa",
+          "pciDss",
+          "basel3",
+          "solvency2",
+          "mifid2",
+          "cosoFramework",
+          "cobitFramework",
+          "nistCybersecurityFramework",
+          "localRegulatoryRequirements",
+          "industrySpecificStandards",
+          "other"
+        ]
+      }
+    },
+    "primaryLanguages": {
+      "type": "array",
+      "description": "Primary languages used in the organization",
+      "items": {
+        "type": "string",
+        "enum": [
+          "english",
+          "mandarinChinese",
+          "spanish",
+          "hindi",
+          "arabic",
+          "portuguese",
+          "russian",
+          "japanese",
+          "french",
+          "german",
+          "korean",
+          "italian",
+          "dutch",
+          "swedish",
+          "localRegionalLanguage",
+          "multiLingual"
+        ]
+      }
+    },
+    "organizationUnits": {
+      "type": "array",
+      "description": "Sub-organization units within this organization",
+      "items": {
+        "$ref": "#/definitions/organizationUnit"
+      }
+    }
+  },
+  "required": [
+    "organizationID",
+    "orgTitle",
+    "orgType",
+    "country",
+    "description",
+    "legalStructure"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "organizationUnit": {
+      "type": "object",
+      "description": "A sub-division or entity within an organization",
+      "properties": {
+        "orgUnitID": {
+          "description": "Unique identifier for the organization unit; other records reference it as orgUnitID",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The name or title of the Organization unit"
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed explanation of what the Organization unit entails"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The intended purpose or function of the Organization unit within the Organization"
+        },
+        "owner": {
+          "type": "string",
+          "description": "The individual or team responsible for the Organization unit"
+        },
+        "higherOrganizationUnit": {
+          "type": "string",
+          "description": "The Organization or Organization unit above in the Organization hierarchy"
+        },
+        "parentOrgUnitID": {
+          "description": "ID of the organization unit directly above this one (omit for a top-level unit)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "subOrganizationUnits": {
+          "type": "array",
+          "description": "Sub-Organization units directly below this Organization unit",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subOrgUnitIDs": {
+          "type": "array",
+          "description": "IDs of the organization units directly below this one",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        },
+        "roles": {
+          "type": "string",
+          "description": "Specific roles within the Organization unit"
+        }
+      },
+      "required": [
+        "orgUnitID",
+        "orgUnitTitle",
+        "description",
+        "purpose",
+        "owner"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "organizationID": "ORG-001",
+      "orgTitle": "Office of Railroad Safety",
+      "orgShortName": "Railroad Safety",
+      "orgType": "governmentAgency",
+      "country": "United States of America",
+      "description": "Regional safety oversight office responsible for inspections and enforcement of federal railroad safety regulations in the Northeast corridor",
+      "structure": "5 Regional Offices - 8 Technical Divisions",
+      "structureType": "regional",
+      "missionStatement": "Reduce railroad-related accidents through proactive inspections and data-driven safety programs",
+      "visionStatement": "Zero train accidents and employee injuries through technology-enabled safety systems",
+      "values": "Safety First, Data-Driven Decisions, Continuous Improvement",
+      "legalStructure": "federalNationalAgency",
+      "geographicScope": "national",
+      "operationalModel": "decentralizedOperations",
+      "currency": "usd",
+      "cultureType": "processFocused",
+      "history": "Est. 1966, implemented PTC mandate 2008, achieved 99.6% compliance 2023",
+      "complianceFrameworks": [
+        "localRegulatoryRequirements"
+      ],
+      "primaryLanguages": [
+        "english"
+      ],
+      "organizationUnits": [
+        {
+          "orgUnitID": "OU-001",
+          "orgUnitTitle": "Track and Rail Infrastructure Division",
+          "description": "Oversees track safety standards and inspection programs across the national rail network",
+          "purpose": "Maintain Class 1-5 track safety standards compliance",
+          "owner": "Director of Track Safety",
+          "higherOrganizationUnit": "Office of Railroad Safety",
+          "subOrganizationUnits": [
+            "Track Geometry Program",
+            "Rail Defect Detection",
+            "Bridge Safety Unit"
+          ],
+          "roles": "Senior Track Inspector, Rail Integrity Specialist, Bridge Safety Engineer"
+        }
+      ]
+    },
+    {
+      "organizationID": "ORG-002",
+      "orgTitle": "Deutsche Bahn AG",
+      "orgShortName": "DB",
+      "orgType": "publicLimitedCompany",
+      "country": "Germany",
+      "description": "National railway company providing passenger and freight transportation services across Germany and Europe",
+      "structureType": "divisional",
+      "missionStatement": "Connect people and markets through sustainable mobility solutions",
+      "visionStatement": "Leading integrated mobility provider in Europe",
+      "values": "Customer Focus, Sustainability, Innovation, Reliability",
+      "legalStructure": "publicLimitedCompany",
+      "geographicScope": "multinational",
+      "operationalModel": "hubAndSpokeModel",
+      "currency": "eur",
+      "cultureType": "customerCentric",
+      "size": "338,000 employees, €44.4B annual revenue",
+      "complianceFrameworks": [
+        "iso9001",
+        "iso14001",
+        "gdpr"
+      ],
+      "primaryLanguages": [
+        "german",
+        "english"
+      ]
+    },
+    {
+      "organizationID": "ORG-003",
+      "orgTitle": "Singapore Digital Railways Corporation",
+      "orgShortName": "SDRC",
+      "orgType": "stateOwnedEnterprise",
+      "country": "Singapore",
+      "description": "Technology-focused urban rail operator providing smart transportation solutions",
+      "structureType": "matrix",
+      "missionStatement": "Transform urban mobility through innovative digital rail solutions",
+      "visionStatement": "World's smartest rail network by 2030",
+      "values": "Innovation, Excellence, Sustainability, Customer Delight",
+      "legalStructure": "stateOwnedEnterprise",
+      "geographicScope": "local",
+      "operationalModel": "centralizedOperations",
+      "currency": "sgd",
+      "cultureType": "innovationFocused",
+      "complianceFrameworks": [
+        "iso27001",
+        "localRegulatoryRequirements"
+      ],
+      "primaryLanguages": [
+        "english",
+        "mandarinChinese"
+      ]
+    }
+  ]
+}

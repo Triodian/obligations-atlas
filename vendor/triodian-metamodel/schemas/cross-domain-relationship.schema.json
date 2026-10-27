@@ -1,0 +1,337 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/cross-domain-relationship.schema.json",
+  "title": "Cross-Domain Relationship Schema",
+  "description": "A directional relationship between entities in different business architecture domains, flowing from an initiating (source) domain to a receiving (target) domain. Active domains (strategy, capability, valueStream, initiative, policy, stakeholder) typically initiate relationships; passive domains (information, performance, product, service) receive them and never act as the source.",
+  "type": "object",
+  "properties": {
+    "relationshipID": {
+      "description": "Unique identifier for the relationship",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "sourceDomain": {
+      "description": "The domain that initiates or provides in the relationship. Passive domains (information, performance, product, service) cannot be the source.",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/domainType"
+        },
+        {
+          "not": {
+            "enum": [
+              "information",
+              "performance",
+              "product",
+              "service"
+            ]
+          }
+        }
+      ]
+    },
+    "sourceEntityID": {
+      "description": "ID of the source entity, when the relationship is between specific records",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "targetDomain": {
+      "description": "The domain that receives the relationship",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/domainType"
+        }
+      ]
+    },
+    "targetEntityID": {
+      "description": "ID of the target entity, when the relationship is between specific records",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "relationshipType": {
+      "$ref": "#/definitions/relationshipType"
+    },
+    "description": {
+      "type": "string",
+      "description": "How the source and target interact"
+    },
+    "metadata": {
+      "$ref": "#/definitions/relationshipMetadata"
+    }
+  },
+  "required": [
+    "relationshipID",
+    "sourceDomain",
+    "targetDomain",
+    "relationshipType",
+    "description"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "relationshipType": {
+      "type": "string",
+      "description": "How the source entity relates to the target entity. Categories: financial: funds, measures, reports, forecasts; operational: depends, constrains, enables, mitigates, consumes, delivers, optimizes, maintains; governance: monitors, governs, audits, certifies, escalates, accountableFor, responsibleFor; informationAndKnowledge: informs, validates, enriches, learns, teaches, benchmarks; innovationAndTransformation: innovates, evolves, transforms, designs, implements; coordinationAndIntegration: orchestrates, integrates, synchronizes, aligns, prioritizes; marketAndDemand: drives, responds.",
+      "oneOf": [
+        {
+          "const": "funds",
+          "description": "(financial) Finance provides financial resources to another domain entity to enable its development, operation or enhancement"
+        },
+        {
+          "const": "measures",
+          "description": "(financial) Finance expresses the activities, outputs or outcomes of another domain entity in measurable financial terms"
+        },
+        {
+          "const": "reports",
+          "description": "(financial) Finance produces formal reports on the financial performance, costs or returns of another domain entity"
+        },
+        {
+          "const": "forecasts",
+          "description": "(financial) Finance projects future financial needs, costs or revenues of another domain entity"
+        },
+        {
+          "const": "depends",
+          "description": "(operational) The source receives necessary resources, services or capabilities from the target to deliver its outputs or outcomes"
+        },
+        {
+          "const": "constrains",
+          "description": "(operational) The source imposes limitations, standards or compliance requirements on the target's design, operation or evolution"
+        },
+        {
+          "const": "enables",
+          "description": "(operational) The source is essential to the implementation, operationalization or fulfilment of the target"
+        },
+        {
+          "const": "mitigates",
+          "description": "(operational) The source actively reduces the risks or vulnerabilities of the target"
+        },
+        {
+          "const": "consumes",
+          "description": "(operational) The source uses, relies on or draws from the resources, outputs or services of the target"
+        },
+        {
+          "const": "delivers",
+          "description": "(operational) The source provides specific value or outcomes to the target"
+        },
+        {
+          "const": "optimizes",
+          "description": "(operational) The source improves the performance or efficiency of the target"
+        },
+        {
+          "const": "maintains",
+          "description": "(operational) The source ensures the ongoing operation of the target"
+        },
+        {
+          "const": "monitors",
+          "description": "(governance) The source oversees, measures or evaluates the performance or effectiveness of the target"
+        },
+        {
+          "const": "governs",
+          "description": "(governance) The source defines policies, standards or decision rights that control the target's operation"
+        },
+        {
+          "const": "audits",
+          "description": "(governance) The source formally examines the target for compliance, performance or quality"
+        },
+        {
+          "const": "certifies",
+          "description": "(governance) The source provides formal approval or certification to the target"
+        },
+        {
+          "const": "escalates",
+          "description": "(governance) The source receives escalated issues or exceptions from the target"
+        },
+        {
+          "const": "accountableFor",
+          "description": "(governance) The source is accountable for oversight of the target"
+        },
+        {
+          "const": "responsibleFor",
+          "description": "(governance) The source has a clear line of responsibility for the target"
+        },
+        {
+          "const": "informs",
+          "description": "(informationAndKnowledge) The source provides information or data that shapes decisions in the target"
+        },
+        {
+          "const": "validates",
+          "description": "(informationAndKnowledge) The source confirms or verifies outputs, decisions or processes of the target"
+        },
+        {
+          "const": "enriches",
+          "description": "(informationAndKnowledge) The source enhances the data quality, completeness or value of the target"
+        },
+        {
+          "const": "learns",
+          "description": "(informationAndKnowledge) The source gains knowledge or insights from the target"
+        },
+        {
+          "const": "teaches",
+          "description": "(informationAndKnowledge) The source transfers knowledge or capabilities to the target"
+        },
+        {
+          "const": "benchmarks",
+          "description": "(informationAndKnowledge) The source uses the target as a performance standard or reference point"
+        },
+        {
+          "const": "innovates",
+          "description": "(innovationAndTransformation) The source drives innovation or new developments in the target"
+        },
+        {
+          "const": "evolves",
+          "description": "(innovationAndTransformation) The source causes evolutionary change in the target"
+        },
+        {
+          "const": "transforms",
+          "description": "(innovationAndTransformation) The source drives transformational change in the target"
+        },
+        {
+          "const": "designs",
+          "description": "(innovationAndTransformation) The source shapes the structure, approach or architecture of the target"
+        },
+        {
+          "const": "implements",
+          "description": "(innovationAndTransformation) The source executes or realizes the vision, strategy or design of the target"
+        },
+        {
+          "const": "orchestrates",
+          "description": "(coordinationAndIntegration) The source coordinates the activities of the target alongside other entities"
+        },
+        {
+          "const": "integrates",
+          "description": "(coordinationAndIntegration) The source brings together outputs or processes from the target"
+        },
+        {
+          "const": "synchronizes",
+          "description": "(coordinationAndIntegration) The source ensures timing alignment with the target"
+        },
+        {
+          "const": "aligns",
+          "description": "(coordinationAndIntegration) The source is intentionally harmonized with the target in purpose, direction or design, without a direct dependency"
+        },
+        {
+          "const": "prioritizes",
+          "description": "(coordinationAndIntegration) The source influences the priority or sequencing of the target"
+        },
+        {
+          "const": "drives",
+          "description": "(marketAndDemand) The source generates, influences or amplifies demand for the target's outputs, services or capabilities"
+        },
+        {
+          "const": "responds",
+          "description": "(marketAndDemand) The source is triggered, adapted or activated in response to changes in the target or an external event"
+        }
+      ]
+    },
+    "relationshipMetadata": {
+      "type": "object",
+      "description": "Priority, impact area, frequency and strength of the relationship",
+      "properties": {
+        "priority": {
+          "description": "Priority of the relationship",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/priority"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "strategic"
+              ],
+              "description": "Long-term strategic importance; prioritize in strategic planning"
+            }
+          ]
+        },
+        "impactArea": {
+          "type": "string",
+          "description": "Area of the organization the relationship affects",
+          "enum": [
+            "strategic",
+            "operational",
+            "tactical",
+            "financial",
+            "regulatory",
+            "customer",
+            "innovation",
+            "risk"
+          ]
+        },
+        "frequency": {
+          "description": "How often the relationship is exercised",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/frequency"
+            }
+          ]
+        },
+        "strength": {
+          "description": "Strength of the relationship: 1 very weak, 3 moderate, 5 very strong with critical dependency",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/scale1to5"
+            }
+          ]
+        },
+        "conditions": {
+          "type": "string",
+          "description": "Conditions under which the relationship exists"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date the relationship becomes effective"
+        },
+        "reviewDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date the relationship should be reviewed"
+        }
+      },
+      "additionalProperties": false
+    },
+    "outgoingRelationship": {
+      "type": "object",
+      "description": "A relationship from the record that contains it (the source) to an entity in another domain. Used in a domain's crossDomainRelationships list.",
+      "properties": {
+        "targetDomain": {
+          "description": "The domain that receives the relationship",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/domainType"
+            }
+          ]
+        },
+        "targetEntityID": {
+          "description": "ID of the target entity, when the relationship is between specific records",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "relationshipType": {
+          "$ref": "#/definitions/relationshipType"
+        },
+        "description": {
+          "type": "string",
+          "description": "How the source and target interact"
+        },
+        "metadata": {
+          "$ref": "#/definitions/relationshipMetadata"
+        }
+      },
+      "required": [
+        "targetDomain",
+        "relationshipType",
+        "description"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,23 @@
+// Cloudflare Workers deployment for the AI Obligations Atlas.
+// public/ is served as static assets; /api/*, /mcp and /healthz run in src/worker.js.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "obligations-atlas",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  // Pull request preview builds run `npx wrangler preview`, which needs this block (it can be empty).
+  "previews": {},
+  "build": { "command": "node scripts/build.mjs" },
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*", "/mcp", "/healthz"]
+  },
+  "vars": {
+    // "true" serves the preview snapshot, including records still waiting for review
+    "ATLAS_PREVIEW": "true",
+    "ATLAS_REQUIRE_KEY": "false"
+  }
+  // Secret: ATLAS_API_KEYS (JSON [{ "firm", "keySha256", "perMinute" }]) via `wrangler secret put ATLAS_API_KEYS`
+}

@@ -1,0 +1,22 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Data check (schemas, language rules, provenance hashes)
+        run: npm run data:check
+      - run: npm test
+      - name: Worker bundles
+        run: npx wrangler deploy --dry-run --outdir dist

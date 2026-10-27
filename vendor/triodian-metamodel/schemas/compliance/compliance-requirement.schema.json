@@ -1,0 +1,192 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/compliance/compliance-requirement.schema.json",
+  "title": "Compliance Requirement Schema",
+  "description": "A formal requirement an organization must demonstrably meet, issued by a regulator, professional body or standards body, and made up of one or more clause-level obligations from the semantic library. Compliance requirements are the unit of audit: each traces to the obligations it comprises, the internal policies that address it, and the statements of compliance that evidence it. The issuing body is an External Organization record, so any regulator in any jurisdiction can be represented.",
+  "type": "object",
+  "required": [
+    "complianceRequirementID",
+    "title",
+    "source",
+    "obligationIDs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "complianceRequirementID": {
+      "description": "Unique identifier for the requirement, e.g. CREQ-VALMIN-3.1",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Short, descriptive name of the requirement"
+    },
+    "description": {
+      "type": "string",
+      "description": "The intent of the requirement"
+    },
+    "source": {
+      "type": "object",
+      "description": "The external document and section the requirement comes from",
+      "required": [
+        "instrument",
+        "citation"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "instrument": {
+          "type": "string",
+          "description": "The code, standard or instrument, e.g. VALMIN Code 2015"
+        },
+        "citation": {
+          "type": "string",
+          "description": "Section or clause, e.g. Clause 3.1"
+        },
+        "url": {
+          "type": "string",
+          "description": "Link to the authoritative text",
+          "format": "uri"
+        }
+      }
+    },
+    "regulatoryBodyExternalOrgID": {
+      "description": "External Organization record for the body that issued or enforces the requirement",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "regulatoryBodyTitle": {
+      "type": "string",
+      "description": "Name of the body in regulatoryBodyExternalOrgID, for readability"
+    },
+    "jurisdiction": {
+      "description": "Jurisdiction in which the requirement applies",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/jurisdictionCode"
+        }
+      ]
+    },
+    "validityPeriod": {
+      "type": "object",
+      "description": "When the requirement is in effect. Omit endDate when it has no set end",
+      "required": [
+        "startDate"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "description": "Date the requirement takes effect",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Date the requirement ceases to apply",
+          "format": "date"
+        }
+      }
+    },
+    "status": {
+      "description": "Whether the requirement currently applies",
+      "allOf": [
+        {
+          "$ref": "../semantic-library/obligation.schema.json#/definitions/obligationStatus"
+        }
+      ]
+    },
+    "obligationIDs": {
+      "type": "array",
+      "description": "Clause-level obligations (semantic library) that make up the requirement",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "implementingPolicyIDs": {
+      "type": "array",
+      "description": "Internal policies (Policy domain) that address the requirement",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "statementOfComplianceIDs": {
+      "type": "array",
+      "description": "Statements of compliance that evidence the requirement has been met",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "mandatoryDisclosureIDs": {
+      "type": "array",
+      "description": "Disclosures (Public Reporting domain) that the requirement calls for",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "Organization unit accountable for meeting the requirement"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit named in orgUnitTitle",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "riskLevel": {
+      "description": "Consequence of failing the requirement",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/riskLevel"
+        }
+      ]
+    },
+    "reviewFrequency": {
+      "description": "How often the requirement and its evidence are reviewed",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/frequency"
+        }
+      ]
+    }
+  },
+  "examples": [
+    {
+      "complianceRequirementID": "CREQ-VALMIN-3.1",
+      "title": "Mandatory Competent Person statement",
+      "description": "A public report must be based on, and fairly reflect, the work of a Competent Person.",
+      "source": {
+        "instrument": "VALMIN Code 2015",
+        "citation": "Clause 3.1"
+      },
+      "regulatoryBodyExternalOrgID": "EXT-AUSIMM",
+      "regulatoryBodyTitle": "The Australasian Institute of Mining and Metallurgy",
+      "jurisdiction": "AU",
+      "validityPeriod": {
+        "startDate": "2016-01-30"
+      },
+      "status": "inForce",
+      "obligationIDs": [
+        "OBL-VALMIN-3.1"
+      ],
+      "implementingPolicyIDs": [
+        "POLICY-CP001"
+      ],
+      "statementOfComplianceIDs": [
+        "COMP-STATE-001"
+      ]
+    }
+  ]
+}

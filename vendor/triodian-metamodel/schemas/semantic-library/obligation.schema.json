@@ -1,0 +1,470 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/semantic-library/obligation.schema.json",
+  "title": "Obligation Schema",
+  "description": "A requirement the organization must meet, captured at clause level from its governing source (statute, prudential standard, regulatory guidance, industry code, contract, clinical standard or internal policy). Obligations are the source end of the semantic library's traceability: each semantic constraint maps to the obligations it enforces, and the inverse index tells a regulatory watch which constraints to review when an obligation changes. Obligations can also be published as a reference dataset, such as a register of AI governance obligations by jurisdiction: each record is then tagged with the tier of its source (binding, expected or anticipated), the entity types, roles and standardised use cases it may reach, its key dates, and when it was last verified against the official text. A source tier describes the source, never an organization's position: it does not say that anyone is compliant, in breach, or required to act.",
+  "type": "object",
+  "required": [
+    "obligationID",
+    "title",
+    "statement",
+    "obligationType",
+    "source",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "obligationID": {
+      "description": "Unique identifier for the obligation, e.g. OBL-001",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Short name of the obligation"
+    },
+    "statement": {
+      "type": "string",
+      "description": "The obligation in plain language: what must or must not be done"
+    },
+    "obligationType": {
+      "type": "string",
+      "description": "Kind of source the obligation comes from. recognisedStandard = a published standard or framework from a standards body (for example ISO/IEC 42001 or the NIST AI RMF)",
+      "enum": [
+        "statutory",
+        "prudentialStandard",
+        "regulatoryGuidance",
+        "industryCode",
+        "recognisedStandard",
+        "contractual",
+        "clinicalStandard",
+        "internalPolicy",
+        "other"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "description": "The governing source, cited precisely enough to find the clause",
+      "required": [
+        "authority",
+        "instrument",
+        "citation"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "Body that issues or enforces the source, e.g. Parliament, APRA, ASIC, a standards body, the organization itself"
+        },
+        "instrument": {
+          "type": "string",
+          "description": "The instrument, e.g. Corporations Act 2001 (Cth), CPS 230, RG 271, an internal policy"
+        },
+        "citation": {
+          "type": "string",
+          "description": "Section, paragraph or clause, e.g. s766B(3)"
+        },
+        "instrumentVersion": {
+          "type": "string",
+          "description": "Version, compilation or amendment of the instrument the obligation was captured from"
+        },
+        "url": {
+          "type": "string",
+          "description": "Link to the authoritative text",
+          "format": "uri"
+        },
+        "externalOrgID": {
+          "description": "External Organization record for the authority, when one exists",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "provision": {
+          "type": "string",
+          "description": "Short heading of the provision cited, e.g. 'Material service providers'"
+        }
+      }
+    },
+    "jurisdiction": {
+      "description": "Jurisdiction in which the obligation applies, e.g. AU",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/jurisdictionCode"
+        }
+      ]
+    },
+    "sourceTier": {
+      "description": "Tier of the source the obligation comes from: binding (law or prudential standard in force), expected (regulator expectation, guidance or recognised standard) or anticipated (made but not yet in force, under consultation, or a pending bill). Describes the source only",
+      "allOf": [
+        {
+          "$ref": "#/definitions/sourceTier"
+        }
+      ]
+    },
+    "tierBasis": {
+      "type": "array",
+      "description": "Other obligations this one rests on, with their tiers. Lets a record carry a second tier, as when a regulator's expectation rests on a binding standard",
+      "items": {
+        "$ref": "#/definitions/tierBasis"
+      }
+    },
+    "entityTypes": {
+      "type": "array",
+      "description": "Kinds of entity the source is addressed to",
+      "items": {
+        "$ref": "#/definitions/regulatedEntityType"
+      },
+      "uniqueItems": true
+    },
+    "roles": {
+      "type": "array",
+      "description": "Roles within an entity or an AI value chain that the source addresses",
+      "items": {
+        "$ref": "#/definitions/obligationRole"
+      },
+      "uniqueItems": true
+    },
+    "useCaseIDs": {
+      "type": "array",
+      "description": "Standardised AI use cases (Use Case records) the obligation may reach",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "effectiveDate": {
+      "type": "string",
+      "description": "Date from which the obligation applies",
+      "format": "date"
+    },
+    "effectiveDates": {
+      "type": "array",
+      "description": "Key dates for the source and the provisions it contains, such as when it was made, when it commences, when particular provisions apply, or when a consultation closes. effectiveDate keeps the main date",
+      "items": {
+        "$ref": "#/definitions/keyDate"
+      }
+    },
+    "status": {
+      "description": "Whether the obligation currently applies",
+      "allOf": [
+        {
+          "$ref": "#/definitions/obligationStatus"
+        }
+      ]
+    },
+    "supersededByObligationID": {
+      "description": "The obligation that replaces this one, when status is superseded or amended",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "appliesTo": {
+      "type": "array",
+      "description": "Context the obligation applies to: products, services, channels, customer segments, value streams, capabilities or organization units",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/entityReference"
+      }
+    },
+    "implementingPolicyIDs": {
+      "type": "array",
+      "description": "Internal policies (Policy domain) that implement the obligation",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "Organization unit accountable for meeting the obligation"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit named in orgUnitTitle",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "accountablePerson": {
+      "type": "string",
+      "description": "Named role personally accountable for the obligation, e.g. an accountable person under an accountability regime"
+    },
+    "riskLevel": {
+      "description": "Consequence of failing the obligation",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/riskLevel"
+        }
+      ]
+    },
+    "complianceStatus": {
+      "description": "Current assessed compliance with the obligation",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/complianceStatus"
+        }
+      ]
+    },
+    "relatedObligationIDs": {
+      "type": "array",
+      "description": "Obligations that overlap with or depend on this one",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "monitoringFrequency": {
+      "description": "How often the source is watched for change",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/frequency"
+        }
+      ]
+    },
+    "lastReviewDate": {
+      "type": "string",
+      "description": "Date the obligation was last checked against its source",
+      "format": "date"
+    },
+    "lastVerified": {
+      "type": "string",
+      "description": "Date the record was last checked against the official text by its publisher. Unlike lastReviewDate, which is the organization's own review, this is the date a reference dataset confirmed the record",
+      "format": "date"
+    },
+    "provenanceRecordIDs": {
+      "type": "array",
+      "description": "Provenance records, issued through the governance interface, that trace how this record was sourced, extracted, reconciled and approved",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "anyOf": [
+              {
+                "const": "superseded"
+              },
+              {
+                "const": "amended"
+              }
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "supersededByObligationID"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "sourceTier": {
+            "const": "binding"
+          }
+        },
+        "required": [
+          "sourceTier"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "anyOf": [
+              {
+                "const": "inForce"
+              },
+              {
+                "const": "amended"
+              },
+              {
+                "const": "superseded"
+              },
+              {
+                "const": "repealed"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "sourceTier": {
+            "const": "anticipated"
+          }
+        },
+        "required": [
+          "sourceTier"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "anyOf": [
+              {
+                "const": "proposed"
+              },
+              {
+                "const": "pending"
+              },
+              {
+                "const": "superseded"
+              },
+              {
+                "const": "withdrawn"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "obligationStatus": {
+      "type": "string",
+      "description": "Whether an obligation currently applies. proposed = under consultation or a bill not yet passed; pending = made but not yet in force; withdrawn = a proposal that will not proceed",
+      "enum": [
+        "proposed",
+        "pending",
+        "inForce",
+        "amended",
+        "superseded",
+        "repealed",
+        "withdrawn"
+      ]
+    },
+    "sourceTier": {
+      "type": "string",
+      "description": "Tier of an obligation's source. binding = law or prudential standard in force; expected = regulator expectations, guidance and recognised standards; anticipated = made but not yet in force, under consultation, or a pending bill. A tier says nothing about whether an organization meets the source, or whether it will apply",
+      "enum": [
+        "binding",
+        "expected",
+        "anticipated"
+      ]
+    },
+    "tierBasis": {
+      "type": "object",
+      "description": "An obligation another rests on, and the tier of its source",
+      "required": [
+        "obligationID",
+        "sourceTier"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "obligationID": {
+          "description": "The obligation relied on",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "sourceTier": {
+          "description": "Tier of that obligation's source",
+          "allOf": [
+            {
+              "$ref": "#/definitions/sourceTier"
+            }
+          ]
+        },
+        "note": {
+          "type": "string",
+          "description": "How the one rests on the other"
+        }
+      }
+    },
+    "keyDate": {
+      "type": "object",
+      "description": "A dated event in the life of a source or provision",
+      "required": [
+        "dateType",
+        "date"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "dateType": {
+          "type": "string",
+          "description": "What the date marks",
+          "enum": [
+            "made",
+            "published",
+            "commences",
+            "applies",
+            "transitionEnds",
+            "consultationOpens",
+            "consultationCloses",
+            "reviewDue",
+            "repealed"
+          ]
+        },
+        "date": {
+          "type": "string",
+          "description": "The date",
+          "format": "date"
+        },
+        "provisions": {
+          "type": "string",
+          "description": "Provisions the date applies to, when not the whole instrument, e.g. 'sections 5-6'"
+        },
+        "note": {
+          "type": "string",
+          "description": "Context for the date"
+        }
+      }
+    },
+    "regulatedEntityType": {
+      "type": "string",
+      "description": "A kind of entity a source is addressed to. Jurisdiction-specific licence categories map to the nearest value; anyOrganization is for sources of general application",
+      "enum": [
+        "authorisedDepositTakingInstitution",
+        "generalInsurer",
+        "lifeInsurer",
+        "privateHealthInsurer",
+        "superannuationTrustee",
+        "financialServicesLicensee",
+        "creditLicensee",
+        "listedEntity",
+        "bank",
+        "insurer",
+        "capitalMarketsIntermediary",
+        "paymentServiceProvider",
+        "financialInstitution",
+        "anyOrganization",
+        "other"
+      ]
+    },
+    "obligationRole": {
+      "type": "string",
+      "description": "A role a source addresses. regulatedEntity = the entity itself; board, seniorManagement and accountablePerson = roles inside it; provider, deployer and serviceProvider = roles in an AI value chain (the developer of a system, the entity using it, and a third party supplying it)",
+      "enum": [
+        "regulatedEntity",
+        "board",
+        "seniorManagement",
+        "accountablePerson",
+        "provider",
+        "deployer",
+        "serviceProvider",
+        "importer",
+        "distributor"
+      ]
+    }
+  }
+}

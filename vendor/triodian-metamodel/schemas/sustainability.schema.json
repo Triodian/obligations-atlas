@@ -1,0 +1,2091 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/sustainability.schema.json",
+  "title": "Sustainability Domain Schema",
+  "description": "Schema for the Sustainability domain in the Triodian Metamodel",
+  "type": "object",
+  "required": [
+    "sustainabilityID",
+    "title",
+    "description",
+    "sustainabilityCategory",
+    "orgUnitTitle"
+  ],
+  "properties": {
+    "sustainabilityID": {
+      "type": "string",
+      "description": "Unique identifier for the sustainability element"
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the sustainability element"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of the sustainability element"
+    },
+    "sustainabilityCategory": {
+      "type": "string",
+      "description": "Classification of sustainability type",
+      "enum": [
+        "environmental",
+        "social",
+        "governance",
+        "integrated"
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organization unit responsible for this sustainability element"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitRoles": {
+      "type": "array",
+      "description": "Specific roles within the organization unit that manage this sustainability element",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sustainabilityScope": {
+      "type": "string",
+      "description": "Organizational scope covered by this sustainability element",
+      "enum": [
+        "enterprise",
+        "businessUnit",
+        "productLine",
+        "project",
+        "location",
+        "function"
+      ]
+    },
+    "materiality": {
+      "type": "object",
+      "description": "Significance to stakeholders and business",
+      "properties": {
+        "materialityLevel": {
+          "description": "Level of materiality",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/ratingLevel"
+            }
+          ]
+        },
+        "assessmentMethod": {
+          "type": "string",
+          "description": "Methodology used for materiality assessment"
+        },
+        "lastAssessment": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of last materiality assessment"
+        },
+        "keyDrivers": {
+          "type": "array",
+          "description": "Key factors driving materiality",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "regulatoryRequirements": {
+      "type": "array",
+      "description": "Compliance obligations related to this sustainability element",
+      "items": {
+        "type": "string"
+      }
+    },
+    "voluntaryCommitments": {
+      "type": "array",
+      "description": "Non-regulatory commitments related to this sustainability element",
+      "items": {
+        "type": "string"
+      }
+    },
+    "currentPerformance": {
+      "type": "object",
+      "description": "Present state of sustainability performance",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "description": "Current performance metrics",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metricName": {
+                "type": "string",
+                "description": "Name of the metric"
+              },
+              "currentValue": {
+                "type": "string",
+                "description": "Current value of the metric"
+              },
+              "unit": {
+                "type": "string",
+                "description": "Unit of measurement"
+              },
+              "reportingPeriod": {
+                "type": "string",
+                "description": "Time period for the measurement"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "performanceAssessment": {
+          "type": "string",
+          "description": "Overall assessment of current performance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "targetPerformance": {
+      "type": "object",
+      "description": "Desired state of sustainability performance",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "description": "Target performance metrics",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metricName": {
+                "type": "string",
+                "description": "Name of the metric"
+              },
+              "targetValue": {
+                "type": "string",
+                "description": "Target value of the metric"
+              },
+              "targetYear": {
+                "type": "string",
+                "description": "Year when target should be achieved"
+              },
+              "alignmentStandard": {
+                "type": "string",
+                "description": "Standard or framework aligned with this target"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "strategicAlignment": {
+      "type": "object",
+      "description": "Connection to business strategy",
+      "properties": {
+        "alignmentLevel": {
+          "description": "Level of alignment with strategy",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/alignmentLevel"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "critical"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "alignedObjectives": {
+          "type": "array",
+          "description": "Strategic objectives supported by this sustainability element",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alignmentDescription": {
+          "type": "string",
+          "description": "Description of how this element aligns with strategy"
+        }
+      },
+      "additionalProperties": false
+    },
+    "investmentLevel": {
+      "type": "object",
+      "description": "Resource commitment to sustainability",
+      "properties": {
+        "annualBudget": {
+          "type": "string",
+          "description": "Annual budget allocated"
+        },
+        "resourceAllocation": {
+          "type": "array",
+          "description": "Resources allocated to this sustainability element",
+          "items": {
+            "type": "string"
+          }
+        },
+        "investmentTimeframe": {
+          "type": "string",
+          "description": "Timeframe for investment"
+        },
+        "roiExpectation": {
+          "type": "string",
+          "description": "Expected return on investment"
+        }
+      },
+      "additionalProperties": false
+    },
+    "stakeholderInterest": {
+      "type": "object",
+      "description": "Level of stakeholder concern",
+      "properties": {
+        "interestLevel": {
+          "description": "Level of stakeholder interest",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/ratingLevel"
+            }
+          ]
+        },
+        "keyStakeholders": {
+          "type": "array",
+          "description": "Key stakeholders concerned with this element",
+          "items": {
+            "type": "string"
+          }
+        },
+        "engagementApproach": {
+          "type": "string",
+          "description": "Approach to stakeholder engagement"
+        }
+      },
+      "additionalProperties": false
+    },
+    "reportingFramework": {
+      "type": "object",
+      "description": "Reporting methodology for sustainability",
+      "properties": {
+        "frameworks": {
+          "type": "array",
+          "description": "Reporting frameworks used",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reportingFrequency": {
+          "description": "How often reporting occurs",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/frequency"
+            }
+          ]
+        },
+        "publicDisclosure": {
+          "type": "boolean",
+          "description": "Whether reporting is publicly disclosed"
+        }
+      },
+      "additionalProperties": false
+    },
+    "verificationApproach": {
+      "type": "object",
+      "description": "Validation method for sustainability data",
+      "properties": {
+        "approach": {
+          "type": "string",
+          "description": "Approach to verification",
+          "enum": [
+            "selfAssessment",
+            "internalAudit",
+            "thirdPartyVerification",
+            "thirdPartyAssurance"
+          ]
+        },
+        "standard": {
+          "type": "string",
+          "description": "Standard used for verification"
+        },
+        "verifier": {
+          "type": "string",
+          "description": "Entity performing verification"
+        },
+        "verificationScope": {
+          "type": "string",
+          "description": "Scope of verification"
+        }
+      },
+      "additionalProperties": false
+    },
+    "improvementStrategy": {
+      "type": "object",
+      "description": "Enhancement approach for sustainability",
+      "properties": {
+        "strategyName": {
+          "type": "string",
+          "description": "Name of improvement strategy"
+        },
+        "approaches": {
+          "type": "array",
+          "description": "Approaches to improvement",
+          "items": {
+            "type": "string"
+          }
+        },
+        "priorityAreas": {
+          "type": "array",
+          "description": "Priority areas for improvement",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reviewProcess": {
+          "type": "string",
+          "description": "Process for reviewing improvements"
+        }
+      },
+      "additionalProperties": false
+    },
+    "riskImplications": {
+      "type": "object",
+      "description": "Risks associated with sustainability element",
+      "properties": {
+        "riskLevel": {
+          "description": "Overall risk level",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/riskLevel"
+            }
+          ]
+        },
+        "keyRisks": {
+          "type": "array",
+          "description": "Key risks associated with this element",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mitigationApproaches": {
+          "type": "array",
+          "description": "Approaches to risk mitigation",
+          "items": {
+            "type": "string"
+          }
+        },
+        "riskAssessmentFrequency": {
+          "type": "string",
+          "description": "How often risks are assessed"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other domains, processes, or systems supporting this sustainability element",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dependencyType": {
+            "description": "Type of dependency",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/dependencyStrength"
+              }
+            ]
+          },
+          "domainType": {
+            "description": "Type of domain the dependency relates to",
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/definitions/domainType"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "process"
+                ],
+                "description": "Domain-specific values in addition to the shared list"
+              }
+            ]
+          },
+          "entityID": {
+            "type": "string",
+            "description": "ID of the related entity"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the dependency"
+          }
+        },
+        "required": [
+          "dependencyType",
+          "domainType",
+          "description"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "relatedSustainabilityElements": {
+      "type": "array",
+      "description": "Other sustainability elements with relationships to this one",
+      "items": {
+        "type": "object",
+        "properties": {
+          "elementID": {
+            "type": "string",
+            "description": "ID of related sustainability element"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of relationship",
+            "enum": [
+              "upstream",
+              "downstream",
+              "supporting",
+              "dependent",
+              "complementary",
+              "conflicting"
+            ]
+          },
+          "relationshipStrength": {
+            "type": "integer",
+            "description": "Strength of the relationship (1-5)",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the relationship"
+          }
+        },
+        "required": [
+          "elementID",
+          "relationshipType",
+          "relationshipStrength"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "governanceModel": {
+      "type": "object",
+      "description": "Governance approach for sustainability",
+      "properties": {
+        "governanceBody": {
+          "type": "string",
+          "description": "Body responsible for governance"
+        },
+        "meetingFrequency": {
+          "type": "string",
+          "description": "How often governance meetings occur"
+        },
+        "decisionRights": {
+          "type": "string",
+          "description": "Decision-making authority"
+        },
+        "escalationPath": {
+          "type": "string",
+          "description": "Path for issue escalation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "implementationStatus": {
+      "description": "Current status of implementation",
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/definitions/implementationStatus"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "optimizing"
+          ],
+          "description": "Domain-specific values in addition to the shared list"
+        }
+      ]
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when this sustainability element was last updated"
+    },
+    "crossDomainRelationships": {
+      "type": "array",
+      "description": "Directional relationships from this record to entities in other domains",
+      "items": {
+        "$ref": "cross-domain-relationship.schema.json#/definitions/outgoingRelationship"
+      }
+    }
+  },
+  "definitions": {
+    "environmentalImpact": {
+      "type": "object",
+      "required": [
+        "impactID",
+        "impactTitle",
+        "impactDescription",
+        "impactCategory",
+        "orgUnitTitle"
+      ],
+      "properties": {
+        "impactID": {
+          "type": "string",
+          "description": "Unique identifier for the environmental impact"
+        },
+        "impactTitle": {
+          "type": "string",
+          "description": "Name of the specific environmental impact"
+        },
+        "impactDescription": {
+          "type": "string",
+          "description": "Detailed explanation of the environmental impact"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit responsible for this impact"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "sustainabilityID": {
+          "type": "string",
+          "description": "ID of the sustainability domain this impact belongs to"
+        },
+        "impactScope": {
+          "type": "string",
+          "description": "Organizational scope of the impact",
+          "enum": [
+            "enterprise",
+            "businessUnit",
+            "productLine",
+            "project",
+            "location",
+            "function"
+          ]
+        },
+        "impactCategory": {
+          "type": "string",
+          "description": "Type of environmental impact",
+          "enum": [
+            "emissions",
+            "energy",
+            "water",
+            "waste",
+            "materials",
+            "biodiversity",
+            "landUse",
+            "other"
+          ]
+        },
+        "impactMeasurement": {
+          "type": "object",
+          "description": "Approach to measuring the impact",
+          "properties": {
+            "methodologyName": {
+              "type": "string",
+              "description": "Name of measurement methodology"
+            },
+            "measurementUnits": {
+              "type": "string",
+              "description": "Units used for measurement"
+            },
+            "measurementFrequency": {
+              "description": "How often measurement occurs",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/frequency"
+                }
+              ]
+            },
+            "dataQuality": {
+              "description": "Quality of measurement data",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/fivePointLevel"
+                }
+              ]
+            },
+            "verificationStatus": {
+              "type": "string",
+              "description": "Status of data verification",
+              "enum": [
+                "unverified",
+                "internallyVerified",
+                "thirdPartyVerified"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "currentFootprint": {
+          "type": "object",
+          "description": "Present measurement of the impact",
+          "properties": {
+            "reportingPeriod": {
+              "type": "string",
+              "description": "Period for current measurement"
+            },
+            "totalImpact": {
+              "type": "string",
+              "description": "Total measured impact"
+            },
+            "impactBreakdown": {
+              "type": "array",
+              "description": "Breakdown of impact by category",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "type": "string",
+                    "description": "Impact category"
+                  },
+                  "amount": {
+                    "type": "string",
+                    "description": "Impact amount"
+                  },
+                  "percentage": {
+                    "type": "number",
+                    "description": "Percentage of total"
+                  },
+                  "sources": {
+                    "type": "array",
+                    "description": "Sources of this impact",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "baselineComparison": {
+              "type": "object",
+              "description": "Comparison with baseline",
+              "properties": {
+                "baselineYear": {
+                  "type": "string",
+                  "description": "Year of baseline"
+                },
+                "changePercentage": {
+                  "type": "number",
+                  "description": "Percentage change from baseline"
+                },
+                "absoluteChange": {
+                  "type": "string",
+                  "description": "Absolute change from baseline"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "targetFootprint": {
+          "type": "object",
+          "description": "Goal for impact reduction",
+          "properties": {
+            "targetYear": {
+              "type": "string",
+              "description": "Year for target achievement"
+            },
+            "reductionTarget": {
+              "type": "string",
+              "description": "Target reduction amount or percentage"
+            },
+            "absoluteTarget": {
+              "type": "string",
+              "description": "Absolute target amount"
+            },
+            "scienceBasedAlignment": {
+              "type": "string",
+              "description": "Alignment with science-based targets"
+            },
+            "interimTargets": {
+              "type": "array",
+              "description": "Interim targets on path to main target",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "year": {
+                    "type": "string",
+                    "description": "Year for interim target"
+                  },
+                  "targetReduction": {
+                    "type": "string",
+                    "description": "Interim reduction target"
+                  },
+                  "absoluteTarget": {
+                    "type": "string",
+                    "description": "Interim absolute target"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "reductionStrategy": {
+          "type": "object",
+          "description": "Approach to improve environmental impact",
+          "properties": {
+            "strategyName": {
+              "type": "string",
+              "description": "Name of reduction strategy"
+            },
+            "approachDescription": {
+              "type": "string",
+              "description": "Description of strategy approach"
+            },
+            "keyInitiatives": {
+              "type": "array",
+              "description": "Key initiatives in the strategy",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "initiativeName": {
+                    "type": "string",
+                    "description": "Name of initiative"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of initiative"
+                  },
+                  "expectedReduction": {
+                    "type": "string",
+                    "description": "Expected impact reduction"
+                  },
+                  "timeframe": {
+                    "type": "string",
+                    "description": "Implementation timeframe"
+                  },
+                  "investmentRequired": {
+                    "type": "string",
+                    "description": "Required investment"
+                  },
+                  "status": {
+                    "description": "Implementation status",
+                    "allOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/workStatus"
+                      }
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "regulatoryRequirements": {
+          "type": "object",
+          "description": "Compliance requirements related to impact",
+          "properties": {
+            "currentRegulations": {
+              "type": "array",
+              "description": "Current applicable regulations",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "regulationName": {
+                    "type": "string",
+                    "description": "Name of regulation"
+                  },
+                  "jurisdiction": {
+                    "type": "string",
+                    "description": "Regulatory jurisdiction"
+                  },
+                  "complianceStatus": {
+                    "description": "Status of compliance",
+                    "allOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/complianceStatus"
+                      }
+                    ]
+                  },
+                  "requirementDescription": {
+                    "type": "string",
+                    "description": "Description of requirement"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "emergingRegulations": {
+              "type": "array",
+              "description": "Emerging regulations",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "regulationName": {
+                    "type": "string",
+                    "description": "Name of regulation"
+                  },
+                  "jurisdiction": {
+                    "type": "string",
+                    "description": "Regulatory jurisdiction"
+                  },
+                  "expectedImpact": {
+                    "description": "Expected impact level",
+                    "anyOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/ratingLevel"
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "significant"
+                        ],
+                        "description": "Domain-specific values in addition to the shared list"
+                      }
+                    ]
+                  },
+                  "preparednessLevel": {
+                    "type": "string",
+                    "description": "Level of preparedness",
+                    "enum": [
+                      "notStarted",
+                      "planningStage",
+                      "preparationUnderway",
+                      "prepared"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "industryBenchmarks": {
+          "type": "object",
+          "description": "Comparison with industry peers",
+          "properties": {
+            "industryAverage": {
+              "type": "string",
+              "description": "Industry average performance"
+            },
+            "industryLeaders": {
+              "type": "string",
+              "description": "Performance of industry leaders"
+            },
+            "competitivePosition": {
+              "type": "string",
+              "description": "Position relative to industry"
+            },
+            "peerComparison": {
+              "type": "string",
+              "description": "Detailed comparison with peers"
+            }
+          },
+          "additionalProperties": false
+        },
+        "mitigationInitiatives": {
+          "type": "array",
+          "description": "Specific efforts to reduce impact",
+          "items": {
+            "type": "object",
+            "properties": {
+              "initiativeID": {
+                "type": "string",
+                "description": "ID of initiative"
+              },
+              "initiativeTitle": {
+                "type": "string",
+                "description": "Title of initiative"
+              },
+              "status": {
+                "description": "Status of initiative",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/workStatus"
+                  }
+                ]
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "Relationship to impact",
+                "enum": [
+                  "primary",
+                  "supporting",
+                  "indirect",
+                  "monitoring"
+                ]
+              },
+              "relationshipStrength": {
+                "type": "integer",
+                "description": "Strength of relationship (1-5)",
+                "minimum": 1,
+                "maximum": 5
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "reportingProtocol": {
+          "type": "object",
+          "description": "How impact is reported",
+          "properties": {
+            "frameworkName": {
+              "type": "string",
+              "description": "Name of reporting framework"
+            },
+            "reportingFrequency": {
+              "description": "How often reporting occurs",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/frequency"
+                }
+              ]
+            },
+            "publicDisclosure": {
+              "type": "string",
+              "description": "Whether reporting is public",
+              "enum": [
+                "yes",
+                "partial",
+                "no"
+              ]
+            },
+            "reportingPlatforms": {
+              "type": "array",
+              "description": "Platforms for reporting",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "verificationStandard": {
+          "type": "object",
+          "description": "How impact data is validated",
+          "properties": {
+            "standardName": {
+              "type": "string",
+              "description": "Name of verification standard"
+            },
+            "verifier": {
+              "type": "string",
+              "description": "Entity performing verification"
+            },
+            "assuranceLevel": {
+              "type": "string",
+              "description": "Level of assurance",
+              "enum": [
+                "limited",
+                "reasonable",
+                "moderate",
+                "notAssured"
+              ]
+            },
+            "verificationScope": {
+              "type": "string",
+              "description": "Scope of verification"
+            },
+            "lastVerificationDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Date of last verification"
+            }
+          },
+          "additionalProperties": false
+        },
+        "orgUnitRoles": {
+          "type": "array",
+          "description": "Roles within the organization unit that manage this impact",
+          "items": {
+            "type": "string"
+          }
+        },
+        "strategicAlignment": {
+          "type": "object",
+          "description": "Alignment with business strategy",
+          "properties": {
+            "alignmentDescription": {
+              "type": "string",
+              "description": "How the impact relates to strategy"
+            },
+            "strategicObjectives": {
+              "type": "array",
+              "description": "Strategic objectives the impact relates to",
+              "items": {
+                "type": "string"
+              }
+            },
+            "alignmentStrength": {
+              "description": "Strength of alignment",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/alignmentLevel"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "riskImplications": {
+          "type": "object",
+          "description": "Risks associated with this impact",
+          "properties": {
+            "primaryRisks": {
+              "type": "array",
+              "description": "Primary risks",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "riskType": {
+                    "type": "string",
+                    "description": "Kind of risk",
+                    "examples": [
+                      "transition",
+                      "physical",
+                      "reputation"
+                    ]
+                  },
+                  "riskDescription": {
+                    "type": "string",
+                    "description": "Description of the risk"
+                  },
+                  "potentialImpact": {
+                    "description": "Potential impact",
+                    "allOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/ratingLevel"
+                      }
+                    ]
+                  },
+                  "mitigationApproach": {
+                    "type": "string",
+                    "description": "How the risk is mitigated"
+                  }
+                },
+                "required": [
+                  "riskType"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "secondaryRisks": {
+              "type": "array",
+              "description": "Secondary risks",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "riskType": {
+                    "type": "string",
+                    "description": "Kind of risk",
+                    "examples": [
+                      "transition",
+                      "physical",
+                      "reputation"
+                    ]
+                  },
+                  "riskDescription": {
+                    "type": "string",
+                    "description": "Description of the risk"
+                  },
+                  "potentialImpact": {
+                    "description": "Potential impact",
+                    "allOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/ratingLevel"
+                      }
+                    ]
+                  },
+                  "mitigationApproach": {
+                    "type": "string",
+                    "description": "How the risk is mitigated"
+                  }
+                },
+                "required": [
+                  "riskType"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "socialResponsibility": {
+      "type": "object",
+      "required": [
+        "initiativeID",
+        "initiativeTitle",
+        "initiativeDescription",
+        "socialCategory",
+        "orgUnitTitle"
+      ],
+      "properties": {
+        "initiativeID": {
+          "type": "string",
+          "description": "Unique identifier for the social initiative"
+        },
+        "initiativeTitle": {
+          "type": "string",
+          "description": "Name of the specific social initiative"
+        },
+        "initiativeDescription": {
+          "type": "string",
+          "description": "Detailed explanation of the social initiative"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit responsible for this initiative"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "sustainabilityID": {
+          "type": "string",
+          "description": "ID of the sustainability domain this initiative belongs to"
+        },
+        "socialCategory": {
+          "type": "string",
+          "description": "Type of social impact",
+          "enum": [
+            "diversityAndInclusion",
+            "humanRights",
+            "laborPractices",
+            "communityDevelopment",
+            "healthAndSafety",
+            "supplyChainResponsibility",
+            "productResponsibility",
+            "other"
+          ]
+        },
+        "stakeholderBeneficiaries": {
+          "type": "array",
+          "description": "Who benefits from this initiative",
+          "items": {
+            "type": "string"
+          }
+        },
+        "businessImpact": {
+          "type": "object",
+          "description": "Effect on business operations and outcomes",
+          "properties": {
+            "impactAreas": {
+              "type": "array",
+              "description": "Business areas impacted",
+              "items": {
+                "type": "string"
+              }
+            },
+            "impactLevel": {
+              "description": "Level of business impact",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/changeMagnitude"
+                }
+              ]
+            },
+            "impactDescription": {
+              "type": "string",
+              "description": "Description of business impact"
+            }
+          },
+          "additionalProperties": false
+        },
+        "currentPerformance": {
+          "type": "object",
+          "description": "Present state of the initiative",
+          "properties": {
+            "metrics": {
+              "type": "array",
+              "description": "Current performance metrics",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "metricName": {
+                    "type": "string",
+                    "description": "Name of metric"
+                  },
+                  "currentValue": {
+                    "type": "string",
+                    "description": "Current value"
+                  },
+                  "performanceTrend": {
+                    "description": "Performance trend",
+                    "anyOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/performanceTrend"
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "mixed"
+                        ],
+                        "description": "Domain-specific values in addition to the shared list"
+                      }
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "qualitativeAssessment": {
+              "type": "string",
+              "description": "Qualitative assessment of current state"
+            }
+          },
+          "additionalProperties": false
+        },
+        "performanceTargets": {
+          "type": "object",
+          "description": "Goals for the initiative",
+          "properties": {
+            "metrics": {
+              "type": "array",
+              "description": "Target performance metrics",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "metricName": {
+                    "type": "string",
+                    "description": "Name of metric"
+                  },
+                  "targetValue": {
+                    "type": "string",
+                    "description": "Target value"
+                  },
+                  "targetYear": {
+                    "type": "string",
+                    "description": "Year for target achievement"
+                  },
+                  "alignmentFramework": {
+                    "type": "string",
+                    "description": "Framework aligned with target"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "implementationApproach": {
+          "type": "object",
+          "description": "Method for executing the initiative",
+          "properties": {
+            "approaches": {
+              "type": "array",
+              "description": "Implementation approaches",
+              "items": {
+                "type": "string"
+              }
+            },
+            "implementationPhases": {
+              "type": "array",
+              "description": "Phases of implementation",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "phaseName": {
+                    "type": "string",
+                    "description": "Name of phase"
+                  },
+                  "phaseDescription": {
+                    "type": "string",
+                    "description": "Description of phase"
+                  },
+                  "timeframe": {
+                    "type": "string",
+                    "description": "Timeframe for phase"
+                  },
+                  "completionStatus": {
+                    "description": "Completion status",
+                    "anyOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/workStatus"
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "notStarted"
+                        ],
+                        "description": "Domain-specific values in addition to the shared list"
+                      }
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "resourceCommitment": {
+          "type": "object",
+          "description": "Resources allocated to the initiative",
+          "properties": {
+            "annualBudget": {
+              "type": "string",
+              "description": "Annual budget allocated"
+            },
+            "personnel": {
+              "type": "string",
+              "description": "Personnel allocated"
+            },
+            "executiveSponsorship": {
+              "type": "string",
+              "description": "Executive sponsor"
+            },
+            "investmentTimeframe": {
+              "type": "string",
+              "description": "Timeframe for investment"
+            }
+          },
+          "additionalProperties": false
+        },
+        "partnershipModel": {
+          "type": "object",
+          "description": "External collaborations for the initiative",
+          "properties": {
+            "partners": {
+              "type": "array",
+              "description": "External partners",
+              "items": {
+                "type": "string"
+              }
+            },
+            "partnershipStructure": {
+              "type": "string",
+              "description": "Structure of partnerships"
+            },
+            "partnershipScope": {
+              "type": "string",
+              "description": "Scope of partnerships"
+            }
+          },
+          "additionalProperties": false
+        },
+        "successMetrics": {
+          "type": "object",
+          "description": "How initiative success is measured",
+          "properties": {
+            "metricCategories": {
+              "type": "array",
+              "description": "Categories of success metrics",
+              "items": {
+                "type": "string"
+              }
+            },
+            "evaluationFrequency": {
+              "type": "string",
+              "description": "How often success is evaluated"
+            },
+            "evaluationMethodology": {
+              "type": "string",
+              "description": "Methodology for evaluation"
+            }
+          },
+          "additionalProperties": false
+        },
+        "reportingFramework": {
+          "type": "object",
+          "description": "How initiative is reported",
+          "properties": {
+            "frameworks": {
+              "type": "array",
+              "description": "Reporting frameworks used",
+              "items": {
+                "type": "string"
+              }
+            },
+            "reportingFrequency": {
+              "description": "How often reporting occurs",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/frequency"
+                }
+              ]
+            },
+            "publicDisclosure": {
+              "type": "boolean",
+              "description": "Whether reporting is public"
+            }
+          },
+          "additionalProperties": false
+        },
+        "governanceModel": {
+          "type": "object",
+          "description": "How initiative is managed",
+          "properties": {
+            "committee": {
+              "type": "string",
+              "description": "Governing committee or body"
+            },
+            "reviewFrequency": {
+              "description": "How often governance reviews occur",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/frequency"
+                }
+              ]
+            },
+            "decisionRights": {
+              "type": "string",
+              "description": "Decision-making authority"
+            },
+            "escalationProcess": {
+              "type": "string",
+              "description": "Process for issue escalation"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "governancePractice": {
+      "type": "object",
+      "required": [
+        "practiceID",
+        "practiceTitle",
+        "practiceDescription",
+        "governanceCategory",
+        "orgUnitTitle"
+      ],
+      "properties": {
+        "practiceID": {
+          "type": "string",
+          "description": "Unique identifier for the governance practice"
+        },
+        "practiceTitle": {
+          "type": "string",
+          "description": "Name of the specific governance practice"
+        },
+        "practiceDescription": {
+          "type": "string",
+          "description": "Detailed explanation of the governance practice"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit responsible for this practice"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "sustainabilityID": {
+          "type": "string",
+          "description": "ID of the sustainability domain this practice belongs to"
+        },
+        "governanceCategory": {
+          "type": "string",
+          "description": "Type of governance practice",
+          "enum": [
+            "boardOversight",
+            "managementAccountability",
+            "stakeholderEngagement",
+            "complianceManagement",
+            "reportingDisclosure",
+            "ethicsIntegrity",
+            "riskOversight",
+            "other"
+          ]
+        },
+        "governanceScope": {
+          "type": "string",
+          "description": "Organizational reach of the practice",
+          "enum": [
+            "enterprise",
+            "businessUnit",
+            "productLine",
+            "project",
+            "location",
+            "function"
+          ]
+        },
+        "industryStandards": {
+          "type": "array",
+          "description": "Relevant standards for this practice",
+          "items": {
+            "type": "string"
+          }
+        },
+        "implementationStatus": {
+          "description": "Current state of implementation",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/implementationStatus"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "leading"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "verificationMethod": {
+          "type": "object",
+          "description": "Validation approach for the practice",
+          "properties": {
+            "methodName": {
+              "type": "string",
+              "description": "Name of verification method"
+            },
+            "frequency": {
+              "description": "Frequency of verification",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/frequency"
+                }
+              ]
+            },
+            "verifier": {
+              "type": "string",
+              "description": "Entity performing verification"
+            },
+            "scope": {
+              "type": "string",
+              "description": "Scope of verification"
+            }
+          },
+          "additionalProperties": false
+        },
+        "responsibleParties": {
+          "type": "object",
+          "description": "Who is accountable for this practice",
+          "properties": {
+            "board": {
+              "type": "string",
+              "description": "Board-level responsibility"
+            },
+            "executive": {
+              "type": "string",
+              "description": "Executive-level responsibility"
+            },
+            "management": {
+              "type": "string",
+              "description": "Management-level responsibility"
+            },
+            "operationalRoles": {
+              "type": "array",
+              "description": "Operational roles involved",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "performanceMetrics": {
+          "type": "object",
+          "description": "Success measures for the practice",
+          "properties": {
+            "metrics": {
+              "type": "array",
+              "description": "Performance metrics",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "metricName": {
+                    "type": "string",
+                    "description": "Name of metric"
+                  },
+                  "currentValue": {
+                    "type": "string",
+                    "description": "Current value"
+                  },
+                  "targetValue": {
+                    "type": "string",
+                    "description": "Target value"
+                  },
+                  "evaluationFrequency": {
+                    "type": "string",
+                    "description": "How often metric is evaluated"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "stakeholderEngagement": {
+          "type": "object",
+          "description": "How stakeholders are involved",
+          "properties": {
+            "approaches": {
+              "type": "array",
+              "description": "Stakeholder engagement approaches",
+              "items": {
+                "type": "string"
+              }
+            },
+            "keyStakeholders": {
+              "type": "array",
+              "description": "Key stakeholders involved",
+              "items": {
+                "type": "string"
+              }
+            },
+            "engagementFrequency": {
+              "description": "How often engagement occurs",
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/frequency"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "transparencyMechanisms": {
+          "type": "object",
+          "description": "Disclosure approaches",
+          "properties": {
+            "mechanisms": {
+              "type": "array",
+              "description": "Transparency mechanisms",
+              "items": {
+                "type": "string"
+              }
+            },
+            "disclosureScope": {
+              "type": "string",
+              "description": "Scope of disclosure"
+            },
+            "accessibilityLevel": {
+              "type": "string",
+              "description": "Accessibility of disclosures",
+              "enum": [
+                "public",
+                "investorsOnly",
+                "regulatorsOnly",
+                "internalOnly"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "reviewProcess": {
+          "type": "object",
+          "description": "Evaluation methodology",
+          "properties": {
+            "process": {
+              "type": "string",
+              "description": "Review process description"
+            },
+            "annual": {
+              "type": "string",
+              "description": "Annual review approach"
+            },
+            "reviewResponsibility": {
+              "type": "string",
+              "description": "Who conducts reviews"
+            },
+            "improvementProcess": {
+              "type": "string",
+              "description": "Process for implementing improvements"
+            }
+          },
+          "additionalProperties": false
+        },
+        "improvementInitiatives": {
+          "type": "object",
+          "description": "Enhancement efforts",
+          "properties": {
+            "initiatives": {
+              "type": "array",
+              "description": "Improvement initiatives",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "initiativeName": {
+                    "type": "string",
+                    "description": "Name of initiative"
+                  },
+                  "initiativeDescription": {
+                    "type": "string",
+                    "description": "Description of initiative"
+                  },
+                  "status": {
+                    "description": "Status of initiative",
+                    "allOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/workStatus"
+                      }
+                    ]
+                  },
+                  "timeframe": {
+                    "type": "string",
+                    "description": "Timeframe for implementation"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "sustainabilityStrategy": {
+      "type": "object",
+      "required": [
+        "strategyID",
+        "strategyTitle",
+        "strategyDescription",
+        "orgUnitTitle"
+      ],
+      "properties": {
+        "strategyID": {
+          "type": "string",
+          "description": "Unique identifier for the sustainability strategy"
+        },
+        "strategyTitle": {
+          "type": "string",
+          "description": "Name of the specific sustainability strategy"
+        },
+        "strategyDescription": {
+          "type": "string",
+          "description": "Detailed explanation of the sustainability strategy"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit responsible for this strategy"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "sustainabilityID": {
+          "type": "string",
+          "description": "ID of the sustainability domain this strategy belongs to"
+        },
+        "strategicPriorities": {
+          "type": "array",
+          "description": "Key focus areas of the strategy",
+          "items": {
+            "type": "string"
+          }
+        },
+        "businessCaseElements": {
+          "type": "object",
+          "description": "Value proposition of the strategy",
+          "properties": {
+            "valueDrivers": {
+              "type": "array",
+              "description": "Drivers of business value",
+              "items": {
+                "type": "string"
+              }
+            },
+            "financialImpacts": {
+              "type": "array",
+              "description": "Financial impacts expected",
+              "items": {
+                "type": "string"
+              }
+            },
+            "nonFinancialImpacts": {
+              "type": "array",
+              "description": "Non-financial impacts expected",
+              "items": {
+                "type": "string"
+              }
+            },
+            "caseSummary": {
+              "type": "string",
+              "description": "Summary of business case"
+            }
+          },
+          "additionalProperties": false
+        },
+        "stakeholderAlignment": {
+          "type": "object",
+          "description": "How strategy aligns with stakeholder expectations",
+          "properties": {
+            "alignmentAssessment": {
+              "type": "string",
+              "description": "Assessment of stakeholder alignment"
+            },
+            "keyStakeholders": {
+              "type": "array",
+              "description": "Key stakeholders aligned with strategy",
+              "items": {
+                "type": "string"
+              }
+            },
+            "engagementApproach": {
+              "type": "string",
+              "description": "Approach to stakeholder engagement"
+            }
+          },
+          "additionalProperties": false
+        },
+        "timeHorizon": {
+          "type": "object",
+          "description": "Timeline for strategy implementation",
+          "properties": {
+            "startYear": {
+              "type": "string",
+              "description": "Start year for strategy"
+            },
+            "endYear": {
+              "type": "string",
+              "description": "End year for strategy"
+            },
+            "phaseApproach": {
+              "type": "string",
+              "description": "Phased approach description"
+            },
+            "keyMilestones": {
+              "type": "array",
+              "description": "Key strategy milestones",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "milestoneName": {
+                    "type": "string",
+                    "description": "Name of milestone"
+                  },
+                  "targetDate": {
+                    "type": "string",
+                    "description": "Target date for milestone",
+                    "format": "date"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of milestone"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "resourceRequirements": {
+          "type": "object",
+          "description": "Resources needed for the strategy",
+          "properties": {
+            "totalInvestment": {
+              "type": "string",
+              "description": "Total investment required"
+            },
+            "staffingNeeds": {
+              "type": "string",
+              "description": "Personnel requirements"
+            },
+            "technologyRequirements": {
+              "type": "string",
+              "description": "Technology needs"
+            },
+            "fundingSources": {
+              "type": "array",
+              "description": "Sources of funding",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "implementationRoadmap": {
+          "type": "object",
+          "description": "Plan for strategy execution",
+          "properties": {
+            "phases": {
+              "type": "array",
+              "description": "Implementation phases",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "phaseName": {
+                    "type": "string",
+                    "description": "Name of phase"
+                  },
+                  "timeframe": {
+                    "type": "string",
+                    "description": "Timeframe for phase"
+                  },
+                  "keyActivities": {
+                    "type": "array",
+                    "description": "Key activities in phase",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "deliverables": {
+                    "type": "array",
+                    "description": "Phase deliverables",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "implementationApproach": {
+              "type": "string",
+              "description": "Overall implementation approach"
+            }
+          },
+          "additionalProperties": false
+        },
+        "governanceStructure": {
+          "type": "object",
+          "description": "Management approach for the strategy",
+          "properties": {
+            "oversight": {
+              "type": "string",
+              "description": "Strategy oversight body"
+            },
+            "execution": {
+              "type": "string",
+              "description": "Execution responsibility"
+            },
+            "reportingStructure": {
+              "type": "string",
+              "description": "Reporting structure"
+            },
+            "reviewProcess": {
+              "type": "string",
+              "description": "Strategy review process"
+            }
+          },
+          "additionalProperties": false
+        },
+        "performanceIndicators": {
+          "type": "object",
+          "description": "How strategy success is measured",
+          "properties": {
+            "frameworkType": {
+              "type": "string",
+              "description": "Type of performance framework"
+            },
+            "keyMetrics": {
+              "type": "array",
+              "description": "Key performance metrics",
+              "items": {
+                "type": "string"
+              }
+            },
+            "evaluationFrequency": {
+              "type": "string",
+              "description": "How often performance is evaluated"
+            }
+          },
+          "additionalProperties": false
+        },
+        "communicationApproach": {
+          "type": "object",
+          "description": "How strategy is communicated",
+          "properties": {
+            "internalApproach": {
+              "type": "string",
+              "description": "Internal communication approach"
+            },
+            "externalApproach": {
+              "type": "string",
+              "description": "External communication approach"
+            },
+            "keyMessages": {
+              "type": "array",
+              "description": "Key communication messages",
+              "items": {
+                "type": "string"
+              }
+            },
+            "communicationChannels": {
+              "type": "array",
+              "description": "Communication channels used",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "integrationWithBusinessStrategy": {
+          "type": "object",
+          "description": "How sustainability connects with overall strategy",
+          "properties": {
+            "integrationLevel": {
+              "type": "string",
+              "description": "Level of integration with business strategy",
+              "enum": [
+                "separate",
+                "aligned",
+                "integrated",
+                "fullyIntegrated"
+              ]
+            },
+            "strategicPillars": {
+              "type": "array",
+              "description": "Business strategy pillars supported",
+              "items": {
+                "type": "string"
+              }
+            },
+            "integrationApproach": {
+              "type": "string",
+              "description": "Approach to integration"
+            }
+          },
+          "additionalProperties": false
+        },
+        "riskMitigationApproach": {
+          "type": "object",
+          "description": "How strategy addresses risks",
+          "properties": {
+            "approaches": {
+              "type": "array",
+              "description": "Risk mitigation approaches",
+              "items": {
+                "type": "string"
+              }
+            },
+            "keyRisks": {
+              "type": "array",
+              "description": "Key risks addressed",
+              "items": {
+                "type": "string"
+              }
+            },
+            "riskOversight": {
+              "type": "string",
+              "description": "Responsibility for risk oversight"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

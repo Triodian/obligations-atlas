@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/policy.schema.json",
+  "title": "Policy Domain Schema",
+  "description": "Rules, guidelines and standards that govern operations and decision-making. A guiding principle that sets boundaries and constraints for organizational behavior.",
+  "type": "object",
+  "properties": {
+    "policyID": {
+      "description": "Unique identifier for the Policy",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the Policy"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the Policy entails"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "The intended purpose or function of the Policy within the Organization"
+    },
+    "scope": {
+      "type": "string",
+      "description": "The range or extent to which the policy applies",
+      "examples": [
+        "All track maintenance activities on Class 1-5 track"
+      ]
+    },
+    "enforcedBy": {
+      "type": "string",
+      "description": "Party responsible for enforcing the policy"
+    },
+    "owner": {
+      "type": "string",
+      "description": "The individual or team responsible for the Policy"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The Organization unit(s) to which the Policy is linked"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "requirements": {
+      "type": "string",
+      "description": "Specific conditions or criteria to be met under the Policy"
+    },
+    "complianceMetrics": {
+      "type": "string",
+      "description": "Measures to ensure adherence to policies"
+    },
+    "reviewFrequency": {
+      "type": "string",
+      "description": "How often the Policy is reviewed and updated"
+    },
+    "approvals": {
+      "type": "string",
+      "description": "Individuals or groups that must approve the Policy"
+    },
+    "relatedPolicies": {
+      "type": "string",
+      "description": "Policies that are related or linked to this Policy"
+    },
+    "relatedPolicyIDs": {
+      "type": "array",
+      "description": "IDs of related Policies",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "complianceAndStandards": {
+      "type": "string",
+      "description": "Regulatory requirements and standards the Policy must adhere to"
+    },
+    "risks": {
+      "type": "string",
+      "description": "Potential risks associated with the Policy and its implementation"
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Areas where the Policy can be enhanced or improved"
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How the Policy aligns with the Organization's strategic goals and objectives"
+    }
+  },
+  "required": [
+    "policyID"
+  ],
+  "additionalProperties": false
+}

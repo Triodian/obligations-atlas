@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/shared-initiative.schema.json",
+  "title": "Shared Initiative Schema",
+  "description": "Schema for initiatives with multiple owning organizations",
+  "type": "object",
+  "required": [
+    "initiativeID",
+    "title",
+    "description",
+    "owningOrganizations"
+  ],
+  "properties": {
+    "initiativeID": {
+      "type": "string",
+      "description": "Unique identifier for the initiative"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the initiative"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the initiative"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Purpose of the initiative"
+    },
+    "startDate": {
+      "type": "string",
+      "description": "Date the initiative starts",
+      "format": "date"
+    },
+    "endDate": {
+      "type": "string",
+      "description": "Date the initiative ends",
+      "format": "date"
+    },
+    "status": {
+      "$ref": "common.schema.json#/definitions/workStatus"
+    },
+    "budget": {
+      "type": "number",
+      "description": "Total budget"
+    },
+    "goals": {
+      "type": "array",
+      "description": "Goals of the initiative",
+      "items": {
+        "type": "string"
+      }
+    },
+    "owningOrganizations": {
+      "type": "array",
+      "description": "Multiple organizations involved in the initiative",
+      "items": {
+        "type": "object",
+        "required": [
+          "orgID",
+          "orgType",
+          "role"
+        ],
+        "properties": {
+          "orgID": {
+            "type": "string",
+            "description": "Reference to internal or external organization"
+          },
+          "orgType": {
+            "type": "string",
+            "enum": [
+              "internal",
+              "external"
+            ],
+            "description": "Whether this is an internal or external organization"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "lead",
+              "sponsor",
+              "fundingPartner",
+              "implementationPartner",
+              "stakeholder",
+              "oversight"
+            ],
+            "description": "Role of the organization in this initiative"
+          },
+          "responsibilities": {
+            "type": "string",
+            "description": "Specific responsibilities of this organization"
+          },
+          "resourceContribution": {
+            "type": "string",
+            "description": "Resources contributed by this organization"
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "governanceModel": {
+      "type": "string",
+      "description": "Description of how decisions are made across organizations"
+    },
+    "crossOrgDependencies": {
+      "type": "array",
+      "description": "Dependencies involving multiple organizations",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dependencyType": {
+            "type": "string",
+            "description": "What is depended on",
+            "enum": [
+              "information",
+              "capability",
+              "resource",
+              "decision",
+              "approval"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the dependency"
+          },
+          "sourceOrgID": {
+            "type": "string",
+            "description": "ID of the organization that depends"
+          },
+          "targetOrgID": {
+            "type": "string",
+            "description": "ID of the organization depended on"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

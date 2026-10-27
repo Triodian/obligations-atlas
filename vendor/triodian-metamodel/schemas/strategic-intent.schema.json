@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/strategic-intent.schema.json",
+  "title": "Strategic Intent Schema",
+  "description": "A proactive strategic aspiration or opportunity the organization intends to pursue, realised through strategic responses.",
+  "type": "object",
+  "properties": {
+    "intentID": {
+      "type": "string",
+      "description": "Unique identifier for the strategic intent"
+    },
+    "title": {
+      "type": "string",
+      "description": "Concise name describing the strategic intent"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed explanation of the intent's purpose and scope"
+    },
+    "strategicObjectiveReference": {
+      "type": "string",
+      "description": "Direct link to the relevant strategic objective"
+    },
+    "opportunityType": {
+      "type": "string",
+      "enum": [
+        "innovation",
+        "growth",
+        "efficiency",
+        "resilience",
+        "compliance",
+        "differentiation",
+        "sustainability",
+        "transformation"
+      ],
+      "description": "Classification of opportunity type"
+    },
+    "targetTimeframe": {
+      "type": "string",
+      "description": "Expected time horizon for realization"
+    },
+    "maturityLevel": {
+      "type": "string",
+      "enum": [
+        "conceptual",
+        "emerging",
+        "established",
+        "scaling",
+        "optimizing"
+      ],
+      "description": "Assessment of organizational readiness"
+    },
+    "potentialValue": {
+      "description": "Estimated business value or impact",
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/definitions/ratingLevel"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "transformative"
+          ],
+          "description": "Domain-specific values in addition to the shared list"
+        }
+      ]
+    },
+    "uncertaintyLevel": {
+      "description": "Assessment of associated risks and unknowns",
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/definitions/ratingLevel"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "experimental"
+          ],
+          "description": "Domain-specific values in addition to the shared list"
+        }
+      ]
+    },
+    "responseReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Strategic responses initiated by this intent"
+    },
+    "responsibleStakeholders": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Key organizational units or roles championing the intent"
+    },
+    "businessCapabilitiesImpacted": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Capabilities expected to be affected"
+    },
+    "rationaleReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of rationale IDs providing justification for this intent"
+    },
+    "performanceIndicatorReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Metrics or KPIs that will be used to measure the success of the strategic intent"
+    },
+    "status": {
+      "description": "The current status of the strategic intent",
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/definitions/workStatus"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "transformed",
+            "superseded"
+          ],
+          "description": "Domain-specific values in addition to the shared list"
+        }
+      ]
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date",
+      "description": "The date when the strategic intent record was last updated"
+    }
+  },
+  "required": [
+    "intentID",
+    "title",
+    "description",
+    "strategicObjectiveReference",
+    "opportunityType"
+  ],
+  "additionalProperties": false
+}

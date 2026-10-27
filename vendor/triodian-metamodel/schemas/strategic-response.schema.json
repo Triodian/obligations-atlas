@@ -1,0 +1,1387 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/strategic-response.schema.json",
+  "title": "Strategic Response Schema",
+  "description": "A planned or enacted response to one or more triggers or strategic intents, justified by rationales and measured by performance indicators.",
+  "type": "object",
+  "properties": {
+    "responseID": {
+      "type": "string",
+      "description": "A unique identifier for the strategic response"
+    },
+    "responseTitle": {
+      "type": "string",
+      "description": "A short title summarising the response"
+    },
+    "responseType": {
+      "type": "string",
+      "description": "The classification of the response",
+      "enum": [
+        "policyChange",
+        "capabilityDevelopment",
+        "initiativeLaunch",
+        "processImprovement",
+        "technologyImplementation",
+        "organizationalChange",
+        "marketEntry",
+        "marketExit",
+        "competitiveResponse",
+        "productInnovation",
+        "repositioning",
+        "marketExpansion",
+        "defensiveAction",
+        "partnershipStrategy",
+        "pricingStrategy",
+        "channelStrategy",
+        "costOptimization",
+        "investmentStrategy",
+        "capitalStructureChange",
+        "financialRiskManagement",
+        "budgetReallocation",
+        "fundingStrategy",
+        "revenueEnhancement",
+        "workingCapitalManagement",
+        "financialRestructuring",
+        "riskPrevention",
+        "riskMitigation",
+        "riskTransfer",
+        "riskAcceptance",
+        "controlEnhancement",
+        "incidentResponse",
+        "businessContinuity",
+        "complianceProgram",
+        "riskGovernance",
+        "networkRedesign",
+        "supplierChange",
+        "inventoryStrategy",
+        "logisticsOptimization",
+        "costReduction",
+        "serviceEnhancement",
+        "sustainabilityInitiative",
+        "customerExperienceInitiative",
+        "customerRetentionProgram",
+        "customerAcquisitionCampaign",
+        "customerJourneyRedesign",
+        "customerSegmentStrategy",
+        "customerInsightApplication",
+        "customerTechnologyImplementation",
+        "innovationProgram",
+        "innovationCultureChange",
+        "innovationCapabilityBuilding",
+        "portfolioAdjustment",
+        "experimentationFramework",
+        "ideaManagementEnhancement",
+        "environmentalInitiative",
+        "socialProgram",
+        "governanceEnhancement",
+        "climateAdaptation",
+        "sustainabilityReportingImprovement",
+        "talentInitiative",
+        "cultureChangeProgram",
+        "leadershipDevelopment",
+        "knowledgeRetentionProgram",
+        "workforceRestructuring",
+        "technologyModernization",
+        "securityRemediation",
+        "technologyStandardization",
+        "platformConsolidation",
+        "digitalTransformation",
+        "channelExpansion",
+        "channelConsolidation",
+        "partnerStrategyChange",
+        "distributionNetworkRedesign",
+        "omnichannelIntegration",
+        "channelMixOptimization"
+      ]
+    },
+    "responseDescription": {
+      "type": "string",
+      "description": "Detailed description of the strategic response, its objectives, and scope"
+    },
+    "triggerReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of triggerIDs that initiated this strategic response"
+    },
+    "intentReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of strategic intentIDs that initiated this response"
+    },
+    "rationaleReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of rationaleIDs providing justification for this response"
+    },
+    "performanceIndicatorReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Metrics or KPIs that will be used to measure the success of the strategic response"
+    },
+    "affectedDomains": {
+      "type": "array",
+      "description": "Business architecture domains impacted by this response",
+      "items": {
+        "$ref": "common.schema.json#/definitions/domainType"
+      }
+    },
+    "impactedUnits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orgUnitTitle": {
+            "type": "string",
+            "description": "Name of the organization unit"
+          },
+          "orgUnitID": {
+            "description": "ID of the organization unit (see orgUnitTitle)",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/identifier"
+              }
+            ]
+          },
+          "relationshipRole": {
+            "type": "string",
+            "enum": [
+              "owningUnit",
+              "providingUnit",
+              "consumingUnit",
+              "utilisingUnit",
+              "custodianUnit",
+              "dependentUnit",
+              "supportedUnit",
+              "governingUnit"
+            ],
+            "description": "Role the unit plays in relation to this response"
+          },
+          "relationshipStrength": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Strength of the relationship on a scale from 1 (very weak) to 5 (very strong)"
+          }
+        },
+        "required": [
+          "orgUnitTitle",
+          "relationshipRole"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Organization units impacted by this response and their roles"
+    },
+    "implementationPlan": {
+      "type": "string",
+      "description": "Reference or description of the plan outlining how the response will be executed"
+    },
+    "expectedOutcomes": {
+      "type": "string",
+      "description": "Anticipated results or benefits from implementing the response"
+    },
+    "responsibleOrgUnits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Organization units accountable for executing the strategic response"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The planned start date for implementing the strategic response"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The planned completion date for the strategic response"
+    },
+    "status": {
+      "description": "The current status of the strategic response",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/workStatus"
+        }
+      ]
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date",
+      "description": "The date when the strategic response record was last updated"
+    },
+    "strategicThemes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Organizational strategic priorities this response supports"
+    },
+    "alignmentStrength": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "How closely the response aligns with organizational strategy (1-5)"
+    },
+    "adjacentInitiatives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Related initiatives that complement or support this response"
+    },
+    "strategicLevers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "scale",
+          "scope",
+          "differentiation",
+          "innovation",
+          "efficiency",
+          "resilience",
+          "other"
+        ]
+      },
+      "description": "Business mechanisms being utilized to effect change"
+    },
+    "strategicHorizon": {
+      "type": "string",
+      "enum": [
+        "horizon1",
+        "horizon2",
+        "horizon3"
+      ],
+      "description": "Categorization of the strategic timeframe (H1: 0-18 months, H2: 18-36 months, H3: 36+ months)"
+    },
+    "customerSegmentIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Customer segments this response targets (Customer domain)"
+    },
+    "customerOutcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outcomeDescription": {
+            "type": "string",
+            "description": "Description of the customer outcome"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for this outcome"
+          }
+        },
+        "required": [
+          "outcomeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific customer outcomes resulting from this response (Customer domain)"
+    },
+    "customerExperienceChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "journeyStageID": {
+            "type": "string",
+            "description": "ID of the customer journey stage affected"
+          },
+          "changeDescription": {
+            "type": "string",
+            "description": "Description of the change to the journey stage"
+          },
+          "expectedImpact": {
+            "type": "string",
+            "description": "Expected impact of the change"
+          }
+        },
+        "required": [
+          "changeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific changes to customer experience (Customer domain)"
+    },
+    "customerFeedbackMechanism": {
+      "type": "string",
+      "description": "How customer feedback will be collected (Customer domain)"
+    },
+    "marketIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Markets this response addresses (Market domain)"
+    },
+    "competitorIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Competitors this response addresses (Market domain)"
+    },
+    "competitiveAdvantage": {
+      "type": "object",
+      "properties": {
+        "advantageType": {
+          "type": "string",
+          "enum": [
+            "cost",
+            "differentiation",
+            "focus",
+            "innovation",
+            "other"
+          ],
+          "description": "Type of competitive advantage created"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the competitive advantage"
+        },
+        "sustainability": {
+          "description": "Expected duration of advantage",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/timeHorizon"
+            }
+          ]
+        }
+      },
+      "description": "Competitive advantage created or enhanced (Market domain)",
+      "additionalProperties": false
+    },
+    "marketPositionChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "marketID": {
+            "type": "string",
+            "description": "ID of the market"
+          },
+          "changeDescription": {
+            "type": "string",
+            "description": "Description of market position change"
+          }
+        },
+        "required": [
+          "changeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific changes to market position (Market domain)"
+    },
+    "competitiveMonitoring": {
+      "type": "object",
+      "properties": {
+        "monitoringApproach": {
+          "type": "string",
+          "description": "Approach to monitoring competitive reactions"
+        },
+        "keyIndicators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key indicators being monitored"
+        }
+      },
+      "description": "How competitive reactions will be monitored (Market domain)",
+      "additionalProperties": false
+    },
+    "financeIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Financial elements this response addresses (Finance domain)"
+    },
+    "financialOutcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outcomeDescription": {
+            "type": "string",
+            "description": "Description of the financial outcome"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for this outcome"
+          },
+          "realizationTimeline": {
+            "type": "string",
+            "description": "Timeline for realizing this outcome"
+          }
+        },
+        "required": [
+          "outcomeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific financial outcomes resulting from this response (Finance domain)"
+    },
+    "financialResources": {
+      "type": "object",
+      "properties": {
+        "budgetRequired": {
+          "type": "number",
+          "description": "Budget amount required for this response"
+        },
+        "fundingSources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sourceName": {
+                "type": "string",
+                "description": "Name of funding source"
+              },
+              "amount": {
+                "type": "number",
+                "description": "Amount from this source"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "secured",
+                  "pending",
+                  "proposed"
+                ],
+                "description": "Status of this funding"
+              }
+            },
+            "required": [
+              "sourceName"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Sources of funding for this response"
+        }
+      },
+      "description": "Resources required for this response (Finance domain)",
+      "additionalProperties": false
+    },
+    "financialRiskAssessment": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "riskDescription": {
+            "type": "string",
+            "description": "Description of financial risk"
+          },
+          "potentialImpact": {
+            "type": "number",
+            "description": "Potential monetary impact"
+          },
+          "likelihood": {
+            "description": "Likelihood of this risk",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/likelihood"
+              }
+            ]
+          },
+          "mitigationStrategy": {
+            "type": "string",
+            "description": "Strategy to mitigate this risk"
+          }
+        },
+        "required": [
+          "riskDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Assessment of financial risks (Finance domain)"
+    },
+    "financialReviewMechanism": {
+      "type": "string",
+      "description": "How financial performance will be reviewed (Finance domain)"
+    },
+    "riskIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Risk elements this response addresses (Risk Management domain)"
+    },
+    "implementedControls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "controlName": {
+            "type": "string",
+            "description": "Name of the control"
+          },
+          "controlDescription": {
+            "type": "string",
+            "description": "Description of the control"
+          },
+          "controlType": {
+            "type": "string",
+            "enum": [
+              "preventive",
+              "detective",
+              "corrective",
+              "directive"
+            ],
+            "description": "Type of control"
+          },
+          "implementationStatus": {
+            "description": "Status of control implementation",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/implementationStatus"
+              }
+            ]
+          }
+        },
+        "required": [
+          "controlName",
+          "controlDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Risk controls implemented by this response (Risk Management domain)"
+    },
+    "riskMonitoring": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "monitoringMethod": {
+            "type": "string",
+            "description": "Method for monitoring risk"
+          },
+          "keyIndicators": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Key indicators being monitored"
+          },
+          "frequency": {
+            "description": "Frequency of monitoring",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/frequency"
+              }
+            ]
+          }
+        },
+        "required": [
+          "monitoringMethod"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Ongoing risk monitoring approaches (Risk Management domain)"
+    },
+    "residualRiskAssessment": {
+      "type": "string",
+      "description": "Assessment of risk remaining after response (Risk Management domain)"
+    },
+    "supplyChainIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Supply chain elements this response addresses (Supply Chain domain)"
+    },
+    "supplyChainOutcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outcomeDescription": {
+            "type": "string",
+            "description": "Description of the supply chain outcome"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for this outcome"
+          },
+          "measurementApproach": {
+            "type": "string",
+            "description": "How this outcome will be measured"
+          }
+        },
+        "required": [
+          "outcomeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific supply chain outcomes resulting from this response (Supply Chain domain)"
+    },
+    "supplyChainChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "changeType": {
+            "type": "string",
+            "enum": [
+              "network",
+              "process",
+              "supplier",
+              "inventory",
+              "logistics",
+              "technology"
+            ],
+            "description": "Type of supply chain change"
+          },
+          "changeDescription": {
+            "type": "string",
+            "description": "Description of the change"
+          },
+          "implementationApproach": {
+            "type": "string",
+            "description": "Approach to implementing this change"
+          }
+        },
+        "required": [
+          "changeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific changes to supply chain configuration (Supply Chain domain)"
+    },
+    "supplyChainRisks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "riskDescription": {
+            "type": "string",
+            "description": "Description of supply chain risk"
+          },
+          "likelihood": {
+            "description": "Likelihood of this risk",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/likelihood"
+              }
+            ]
+          },
+          "impact": {
+            "description": "Impact if this risk materializes",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/impactMagnitude"
+              }
+            ]
+          },
+          "mitigationStrategy": {
+            "type": "string",
+            "description": "Strategy to mitigate this risk"
+          }
+        },
+        "required": [
+          "riskDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Risks related to the supply chain response (Supply Chain domain)"
+    },
+    "stakeholderEngagement": {
+      "type": "object",
+      "properties": {
+        "keyStakeholders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stakeholderName": {
+                "type": "string",
+                "description": "Name of stakeholder"
+              },
+              "stakeholderType": {
+                "type": "string",
+                "enum": [
+                  "supplier",
+                  "customer",
+                  "partner",
+                  "regulator",
+                  "internal"
+                ],
+                "description": "Type of stakeholder"
+              },
+              "engagementApproach": {
+                "type": "string",
+                "description": "How this stakeholder will be engaged"
+              }
+            },
+            "required": [
+              "stakeholderName",
+              "stakeholderType"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Key stakeholders for this response"
+        }
+      },
+      "description": "Approach to engaging key stakeholders (Supply Chain domain)",
+      "additionalProperties": false
+    },
+    "innovationIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Innovation elements this response addresses (Innovation domain)"
+    },
+    "innovationOutcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outcomeDescription": {
+            "type": "string",
+            "description": "Description of the innovation outcome"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for this outcome"
+          },
+          "measurementApproach": {
+            "type": "string",
+            "description": "How this outcome will be measured"
+          }
+        },
+        "required": [
+          "outcomeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific innovation outcomes resulting from this response (Innovation domain)"
+    },
+    "innovationCapabilityChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capabilityArea": {
+            "type": "string",
+            "description": "Area of innovation capability"
+          },
+          "changeDescription": {
+            "type": "string",
+            "description": "Description of the capability change"
+          },
+          "expectedImpact": {
+            "type": "string",
+            "description": "Expected impact of the change"
+          }
+        },
+        "required": [
+          "capabilityArea",
+          "changeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Changes to innovation capabilities (Innovation domain)"
+    },
+    "experimentationApproach": {
+      "type": "object",
+      "properties": {
+        "methodologyName": {
+          "type": "string",
+          "description": "Name of experimentation methodology"
+        },
+        "keyMechanisms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key mechanisms for experimentation"
+        },
+        "feedbackLoops": {
+          "type": "string",
+          "description": "How feedback is collected and processed"
+        }
+      },
+      "description": "How concepts will be tested (Innovation domain)",
+      "additionalProperties": false
+    },
+    "portfolioImpact": {
+      "type": "object",
+      "properties": {
+        "balanceShift": {
+          "type": "string",
+          "description": "How portfolio balance will shift"
+        },
+        "resourceReallocation": {
+          "type": "string",
+          "description": "How resources will be reallocated"
+        }
+      },
+      "description": "How innovation portfolio is affected (Innovation domain)",
+      "additionalProperties": false
+    },
+    "sustainabilityIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Sustainability elements this response addresses (Sustainability domain)"
+    },
+    "environmentalOutcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outcomeDescription": {
+            "type": "string",
+            "description": "Description of the environmental outcome"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for this outcome"
+          },
+          "baselineValue": {
+            "type": "string",
+            "description": "Current baseline value"
+          },
+          "measurementApproach": {
+            "type": "string",
+            "description": "How this outcome will be measured"
+          }
+        },
+        "required": [
+          "outcomeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific environmental outcomes from this response (Sustainability domain)"
+    },
+    "socialOutcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outcomeDescription": {
+            "type": "string",
+            "description": "Description of the social outcome"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for this outcome"
+          },
+          "measurementApproach": {
+            "type": "string",
+            "description": "How this outcome will be measured"
+          }
+        },
+        "required": [
+          "outcomeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific social outcomes from this response (Sustainability domain)"
+    },
+    "stakeholderExpectations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stakeholderGroup": {
+            "type": "string",
+            "description": "Stakeholder group with expectation"
+          },
+          "expectationDescription": {
+            "type": "string",
+            "description": "Description of the expectation"
+          },
+          "responseApproach": {
+            "type": "string",
+            "description": "How the expectation will be addressed"
+          }
+        },
+        "required": [
+          "stakeholderGroup",
+          "expectationDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Stakeholder expectations being addressed (Sustainability domain)"
+    },
+    "complianceRequirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "regulationName": {
+            "type": "string",
+            "description": "Name of regulation or requirement"
+          },
+          "complianceApproach": {
+            "type": "string",
+            "description": "How compliance will be achieved"
+          }
+        },
+        "required": [
+          "regulationName"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Sustainability compliance requirements addressed (Sustainability domain)"
+    },
+    "climateScenarioConsiderations": {
+      "type": "object",
+      "properties": {
+        "scenarioTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Types of climate scenarios considered"
+        },
+        "timeHorizons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Time horizons evaluated"
+        },
+        "adaptationMeasures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Adaptation measures included"
+        }
+      },
+      "description": "Climate scenarios factored into response (Sustainability domain)",
+      "additionalProperties": false
+    },
+    "peopleIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "People elements this response addresses (People domain)"
+    },
+    "workforceChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "changeArea": {
+            "type": "string",
+            "description": "Area of workforce change"
+          },
+          "changeDescription": {
+            "type": "string",
+            "description": "Description of the change"
+          },
+          "implementationApproach": {
+            "type": "string",
+            "description": "Approach to implementing this change"
+          },
+          "expectedImpact": {
+            "type": "string",
+            "description": "Expected impact of the change"
+          }
+        },
+        "required": [
+          "changeArea",
+          "changeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific workforce changes implemented (People domain)"
+    },
+    "culturalDevelopment": {
+      "type": "object",
+      "properties": {
+        "focusAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Areas of cultural focus"
+        },
+        "developmentApproaches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Approaches to cultural development"
+        },
+        "measurementMechanisms": {
+          "type": "string",
+          "description": "How cultural change will be measured"
+        }
+      },
+      "description": "Cultural development initiatives (People domain)",
+      "additionalProperties": false
+    },
+    "talentDevelopmentApproach": {
+      "type": "object",
+      "properties": {
+        "developmentMethodology": {
+          "type": "string",
+          "description": "Methodology for talent development"
+        },
+        "keyPrograms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key development programs"
+        },
+        "evaluationApproach": {
+          "type": "string",
+          "description": "How development will be evaluated"
+        }
+      },
+      "description": "Approach to talent development (People domain)",
+      "additionalProperties": false
+    },
+    "knowledgeManagementStrategy": {
+      "type": "object",
+      "properties": {
+        "knowledgeAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key knowledge areas"
+        },
+        "captureApproaches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Approaches to capturing knowledge"
+        },
+        "transferMechanisms": {
+          "type": "string",
+          "description": "How knowledge will be transferred"
+        }
+      },
+      "description": "Strategy for managing knowledge (People domain)",
+      "additionalProperties": false
+    },
+    "competencyFrameworkUpdates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "frameworkID": {
+            "type": "string",
+            "description": "ID of competency framework"
+          },
+          "updateDescription": {
+            "type": "string",
+            "description": "Description of the update"
+          },
+          "implementationTimeframe": {
+            "type": "string",
+            "description": "Timeframe for implementation"
+          }
+        },
+        "required": [
+          "frameworkID",
+          "updateDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Updates to competency frameworks (People domain)"
+    },
+    "technologyIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Technology elements this response addresses (Technology domain)"
+    },
+    "architectureChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "architectureLayer": {
+            "type": "string",
+            "description": "Layer of architecture affected"
+          },
+          "changeDescription": {
+            "type": "string",
+            "description": "Description of the change"
+          },
+          "implementationApproach": {
+            "type": "string",
+            "description": "Approach to implementing this change"
+          },
+          "expectedImpact": {
+            "type": "string",
+            "description": "Expected impact of the change"
+          }
+        },
+        "required": [
+          "architectureLayer",
+          "changeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific architecture changes implemented (Technology domain)"
+    },
+    "technicalDebtImpact": {
+      "type": "object",
+      "properties": {
+        "debtReductionAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Areas where technical debt will be reduced"
+        },
+        "measurementApproach": {
+          "type": "string",
+          "description": "How technical debt change will be measured"
+        },
+        "projectedImprovement": {
+          "type": "string",
+          "description": "Expected improvement in technical debt"
+        }
+      },
+      "description": "Impact on technical debt (Technology domain)",
+      "additionalProperties": false
+    },
+    "securityEnhancements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "securityDomain": {
+            "type": "string",
+            "description": "Security domain affected"
+          },
+          "enhancementDescription": {
+            "type": "string",
+            "description": "Description of the enhancement"
+          },
+          "implementationApproach": {
+            "type": "string",
+            "description": "Approach to implementing this enhancement"
+          }
+        },
+        "required": [
+          "securityDomain",
+          "enhancementDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Security improvements implemented (Technology domain)"
+    },
+    "integrationApproaches": {
+      "type": "object",
+      "properties": {
+        "integrationPattern": {
+          "type": "string",
+          "description": "Pattern for integration"
+        },
+        "keyComponents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key components of integration"
+        },
+        "governanceModel": {
+          "type": "string",
+          "description": "How integration will be governed"
+        }
+      },
+      "description": "Integration approaches implemented (Technology domain)",
+      "additionalProperties": false
+    },
+    "technologyStandardsChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "standardID": {
+            "type": "string",
+            "description": "ID of technology standard"
+          },
+          "changeDescription": {
+            "type": "string",
+            "description": "Description of the change"
+          },
+          "implementationTimeline": {
+            "type": "string",
+            "description": "Timeline for implementation"
+          }
+        },
+        "required": [
+          "standardID",
+          "changeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Changes to technology standards (Technology domain)"
+    },
+    "channelIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Channels this response addresses (Channel domain)"
+    },
+    "channelOutcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outcomeDescription": {
+            "type": "string",
+            "description": "Description of the channel outcome"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for this outcome"
+          },
+          "measurementApproach": {
+            "type": "string",
+            "description": "How this outcome will be measured"
+          }
+        },
+        "required": [
+          "outcomeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific channel outcomes (Channel domain)"
+    },
+    "channelChanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "changeType": {
+            "type": "string",
+            "description": "Type of channel change"
+          },
+          "changeDescription": {
+            "type": "string",
+            "description": "Description of the change"
+          },
+          "implementationApproach": {
+            "type": "string",
+            "description": "Approach to implementing this change"
+          },
+          "expectedImpact": {
+            "type": "string",
+            "description": "Expected impact of the change"
+          }
+        },
+        "required": [
+          "changeType",
+          "changeDescription"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Specific changes to channel configuration (Channel domain)"
+    },
+    "partnerEngagement": {
+      "type": "object",
+      "properties": {
+        "partnerTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Types of channel partners"
+        },
+        "engagementApproach": {
+          "type": "string",
+          "description": "Approach to engaging partners"
+        },
+        "supportMechanisms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Mechanisms to support partners"
+        },
+        "incentiveStructure": {
+          "type": "string",
+          "description": "How partners will be incentivized"
+        }
+      },
+      "description": "Approach to engaging channel partners (Channel domain)",
+      "additionalProperties": false
+    },
+    "omniChannelIntegration": {
+      "type": "object",
+      "properties": {
+        "integrationFocus": {
+          "type": "string",
+          "description": "Focus of integration efforts"
+        },
+        "keyIntegrationPoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key points of channel integration"
+        },
+        "dataUnification": {
+          "type": "string",
+          "description": "How data will be unified across channels"
+        }
+      },
+      "description": "Omnichannel integration approach (Channel domain)",
+      "additionalProperties": false
+    },
+    "distributionNetworkOptimization": {
+      "type": "object",
+      "properties": {
+        "networkChanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Changes to distribution network"
+        },
+        "optimizationObjectives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Objectives of optimization"
+        },
+        "modelingApproach": {
+          "type": "string",
+          "description": "Approach to network modeling"
+        }
+      },
+      "description": "Distribution network optimization (Channel domain)",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "responseID",
+    "responseTitle",
+    "responseType",
+    "responseDescription",
+    "affectedDomains",
+    "status"
+  ],
+  "additionalProperties": false
+}

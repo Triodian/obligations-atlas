@@ -1,0 +1,217 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/value-stream.schema.json",
+  "title": "Value Stream Domain Schema",
+  "description": "End-to-end activities that create value for customers or internal stakeholders. The root is a Value Stream; Value Stream Stage is an element record under definitions, linked by parentValueStreamID.",
+  "type": "object",
+  "properties": {
+    "valueStreamID": {
+      "description": "Unique identifier for the Value Stream",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the Value Stream"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the Value Stream entails"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "The intended purpose or function of the Value Stream within the Organization"
+    },
+    "owner": {
+      "type": "string",
+      "description": "The individual or team responsible for the Value Stream"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The Organization unit(s) to which the Value Stream is linked"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "performanceIndicators": {
+      "type": "string",
+      "description": "Metrics used to measure the effectiveness and efficiency of the Value Stream"
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Other capabilities, processes or systems that the Value Stream depends on"
+    },
+    "relatedValueStreams": {
+      "type": "string",
+      "description": "Value streams that are related or linked to this Value Stream"
+    },
+    "relatedValueStreamIDs": {
+      "type": "array",
+      "description": "IDs of related Value Streams",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "maturityLevel": {
+      "description": "The current maturity level of the Value Stream",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/maturityLevel"
+        }
+      ]
+    },
+    "toolsAndTechnologies": {
+      "type": "string",
+      "description": "Tools and technologies used to support or enable the Value Stream"
+    },
+    "complianceAndStandards": {
+      "type": "string",
+      "description": "Regulatory requirements and standards the Value Stream must adhere to"
+    },
+    "cost": {
+      "type": "string",
+      "description": "The financial cost associated with implementing and maintaining the Value Stream"
+    },
+    "risks": {
+      "type": "string",
+      "description": "Potential risks associated with the Value Stream and its operations"
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Areas where the Value Stream can be enhanced or improved"
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How the Value Stream aligns with the Organization's strategic goals and objectives"
+    }
+  },
+  "required": [
+    "valueStreamID"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "valueStreamStage": {
+      "type": "object",
+      "description": "Sequential steps or phases within a value stream that contribute to value transformation",
+      "properties": {
+        "stageID": {
+          "description": "Unique identifier for the Value Stream stage",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "stageTitle": {
+          "type": "string",
+          "description": "Name/title of the Value Stream stage"
+        },
+        "parentValueStream": {
+          "type": "string",
+          "description": "The Value Stream it belongs to"
+        },
+        "parentValueStreamID": {
+          "description": "ID of the Value Stream this stage belongs to",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "What the stage entails"
+        },
+        "valueItems": {
+          "type": "string",
+          "description": "Specific outputs or benefits generated in the stage"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Intended function within the Value Stream"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Responsible individual/team"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Associated Organization unit(s)"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "inputs": {
+          "type": "string",
+          "description": "Required resources/information"
+        },
+        "outputs": {
+          "type": "string",
+          "description": "Deliverables/results produced"
+        },
+        "performanceIndicators": {
+          "type": "string",
+          "description": "Metrics for effectiveness/efficiency"
+        },
+        "dependencies": {
+          "type": "string",
+          "description": "Other stages/systems it depends on"
+        },
+        "relatedValueStreamStages": {
+          "type": "string",
+          "description": "Connected stages"
+        },
+        "relatedStageIDs": {
+          "type": "array",
+          "description": "IDs of connected stages",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        },
+        "risks": {
+          "type": "string",
+          "description": "Potential risks"
+        },
+        "improvementOpportunities": {
+          "type": "string",
+          "description": "Areas for enhancement"
+        },
+        "strategicAlignment": {
+          "type": "string",
+          "description": "Alignment with Organization goals"
+        },
+        "enablingCapability": {
+          "type": "string",
+          "description": "Capability that enables this stage"
+        },
+        "enablingCapabilityID": {
+          "description": "ID of the Capability that enables this stage",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        }
+      },
+      "required": [
+        "stageID"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

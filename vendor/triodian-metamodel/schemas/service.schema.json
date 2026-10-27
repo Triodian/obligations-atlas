@@ -1,0 +1,793 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/service.schema.json",
+  "title": "Services Domain Schema",
+  "description": "Schema for the Services domain in the Triodian Metamodel",
+  "version": "2.2",
+  "type": "object",
+  "properties": {
+    "serviceID": {
+      "description": "Unique identifier for the Service",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the Service",
+      "examples": [
+        "Rail Freight Transport Service",
+        "Customer Support Portal"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the Service entails",
+      "examples": [
+        "End-to-end freight transportation service using the national rail network"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "description": "The intended purpose or benefit of the Service",
+      "examples": [
+        "To provide reliable, cost-effective freight transportation solutions"
+      ]
+    },
+    "owner": {
+      "type": "string",
+      "description": "The individual or team responsible for the Service",
+      "examples": [
+        "James Wilson, Director of Freight Operations"
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The Organization unit the Service belongs to",
+      "examples": [
+        "Freight Operations Division"
+      ]
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "serviceCategory": {
+      "type": "string",
+      "enum": [
+        "customerService",
+        "supportService",
+        "operationalService",
+        "administrativeService",
+        "digitalService",
+        "professionalService",
+        "infrastructureService"
+      ],
+      "description": "Broad categorization of service type"
+    },
+    "serviceType": {
+      "type": "string",
+      "enum": [
+        "transportation",
+        "consulting",
+        "maintenance",
+        "support",
+        "platform",
+        "apiService",
+        "analytics",
+        "training",
+        "monitoring",
+        "integration"
+      ],
+      "description": "Specific type of service"
+    },
+    "deliveryModel": {
+      "type": "string",
+      "enum": [
+        "selfService",
+        "assistedService",
+        "automatedService",
+        "onDemand",
+        "scheduled",
+        "continuous",
+        "hybrid"
+      ],
+      "description": "How the service is delivered"
+    },
+    "serviceLevel": {
+      "type": "string",
+      "enum": [
+        "basic",
+        "standard",
+        "premium",
+        "enterprise",
+        "missionCritical"
+      ],
+      "description": "Service tier or quality level"
+    },
+    "serviceLevelAgreements": {
+      "type": "string",
+      "description": "The SLAs associated with the Service",
+      "examples": [
+        "98% on-time delivery, maximum delay of 2 hours for priority shipments"
+      ]
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "onlinePortal",
+          "mobileApp",
+          "phone",
+          "inPerson",
+          "api",
+          "email",
+          "chat",
+          "socialMedia",
+          "partnerChannel"
+        ]
+      },
+      "description": "The channels through which the Service is provided"
+    },
+    "customerFeedback": {
+      "type": "string",
+      "description": "The methods for collecting and analyzing customer feedback",
+      "examples": [
+        "Post-delivery satisfaction surveys, annual customer interviews"
+      ]
+    },
+    "processFlow": {
+      "type": "string",
+      "description": "The sequence of activities and interactions that comprise Service delivery",
+      "examples": [
+        "Booking request → Cargo inspection → Loading → Transport → Tracking"
+      ]
+    },
+    "customerJourney": {
+      "type": "string",
+      "description": "The touchpoints and experiences throughout Service delivery",
+      "examples": [
+        "Inquiry → Quote → Contract → Scheduling → Tracking → Delivery"
+      ]
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Other Services, systems, or resources required for Service delivery",
+      "examples": [
+        "Track maintenance services, locomotive fleet management"
+      ]
+    },
+    "stakeholderNetwork": {
+      "type": "string",
+      "description": "The individuals or groups involved in or impacted by Service delivery",
+      "examples": [
+        "Shippers, receivers, rail network operations team"
+      ]
+    },
+    "performanceIndicators": {
+      "type": "string",
+      "description": "Metrics used to measure Service effectiveness and value delivery",
+      "examples": [
+        "On-time delivery percentage, customer satisfaction score"
+      ]
+    },
+    "continuousImprovement": {
+      "type": "string",
+      "description": "Methods for gathering and implementing Service improvements",
+      "examples": [
+        "Quarterly performance reviews, customer feedback integration"
+      ]
+    },
+    "resourceManagement": {
+      "type": "string",
+      "description": "Required resources for consistent Service delivery",
+      "examples": [
+        "Locomotive allocation system, crew scheduling software"
+      ]
+    },
+    "riskManagement": {
+      "type": "string",
+      "description": "Identified risks to Service delivery and mitigation strategies",
+      "examples": [
+        "Weather contingency plans, security protocols for high-value cargo"
+      ]
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How the Service supports Organization objectives and outcomes",
+      "examples": [
+        "Supports national freight mobility goals, carbon reduction initiatives"
+      ]
+    },
+    "qualityFramework": {
+      "type": "string",
+      "description": "Standards and procedures for ensuring Service quality",
+      "examples": [
+        "ISO 9001 certified operations, monthly safety inspections"
+      ]
+    },
+    "valueStream": {
+      "type": "string",
+      "description": "Mapping of how value flows through the Service delivery process",
+      "examples": [
+        "Initial customer inquiry → Contract → Service delivery → Invoice"
+      ]
+    },
+    "complianceRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "federalRegulations",
+          "stateRegulations",
+          "industryStandards",
+          "safetyRequirements",
+          "environmentalStandards",
+          "privacyRegulations",
+          "securityStandards"
+        ]
+      },
+      "description": "Regulatory and Policy requirements affecting Service delivery"
+    },
+    "targetAudience": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "internalEmployees",
+          "externalCustomers",
+          "partners",
+          "vendors",
+          "government",
+          "public"
+        ]
+      },
+      "description": "Primary users or beneficiaries of the service"
+    },
+    "availability": {
+      "type": "string",
+      "description": "Service availability schedule and requirements",
+      "examples": [
+        "24/7 tracking, business hours customer support"
+      ]
+    },
+    "capacity": {
+      "type": "string",
+      "description": "Service capacity limits and scaling capabilities",
+      "examples": [
+        "Maximum 500 concurrent shipments, auto-scaling for peak seasons"
+      ]
+    },
+    "pricing": {
+      "type": "string",
+      "description": "Pricing structure and cost model",
+      "examples": [
+        "Per-mile rates, volume discounts, premium service surcharges"
+      ]
+    },
+    "competitiveAdvantage": {
+      "type": "string",
+      "description": "What differentiates this service from alternatives",
+      "examples": [
+        "Real-time tracking with 99.5% accuracy, carbon-neutral options"
+      ]
+    },
+    "integrations": {
+      "type": "string",
+      "description": "Systems, platforms, or services this service integrates with",
+      "examples": [
+        "ERP systems, warehouse management, GPS tracking platforms"
+      ]
+    },
+    "automationLevel": {
+      "description": "Degree of automation in service delivery",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/automationLevel"
+        }
+      ]
+    },
+    "scalability": {
+      "type": "string",
+      "description": "Service scaling capabilities and constraints",
+      "examples": [
+        "Horizontally scalable with cloud infrastructure, seasonal capacity planning"
+      ]
+    },
+    "lifecycle": {
+      "description": "Current stage in service lifecycle",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/lifecycleStage"
+        }
+      ]
+    },
+    "innovationOpportunities": {
+      "type": "string",
+      "description": "Areas for service innovation and enhancement",
+      "examples": [
+        "AI-powered route optimization, blockchain-based tracking"
+      ]
+    },
+    "sustainability": {
+      "type": "string",
+      "description": "Environmental and sustainability considerations",
+      "examples": [
+        "Carbon offset programs, electric vehicle integration"
+      ]
+    },
+    "accessibility": {
+      "type": "string",
+      "description": "Accessibility features and accommodations",
+      "examples": [
+        "Multi-language support, disability-friendly interfaces"
+      ]
+    },
+    "security": {
+      "type": "string",
+      "description": "Security measures and protocols",
+      "examples": [
+        "End-to-end encryption, role-based access control"
+      ]
+    },
+    "businessModel": {
+      "type": "string",
+      "enum": [
+        "feeForService",
+        "subscription",
+        "usageBased",
+        "freemium",
+        "commission",
+        "license",
+        "supportModel"
+      ],
+      "description": "Revenue or value creation model"
+    },
+    "customerSegments": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "enterprise",
+          "smb",
+          "government",
+          "individual",
+          "partner",
+          "developer"
+        ]
+      },
+      "description": "Target customer segments"
+    },
+    "valueProposition": {
+      "type": "string",
+      "description": "Core value delivered to customers",
+      "examples": [
+        "Reduce transportation costs by 25% while improving delivery reliability"
+      ]
+    },
+    "successMetrics": {
+      "type": "string",
+      "description": "Key metrics that define service success",
+      "examples": [
+        "Customer retention rate, Net Promoter Score, first-call resolution"
+      ]
+    },
+    "changeManagement": {
+      "type": "string",
+      "description": "Approach to managing service changes and updates",
+      "examples": [
+        "Phased rollouts, customer communication, training programs"
+      ]
+    },
+    "knowledgeManagement": {
+      "type": "string",
+      "description": "How service knowledge is captured and shared",
+      "examples": [
+        "Service documentation, best practices database, training materials"
+      ]
+    },
+    "marketPosition": {
+      "type": "string",
+      "enum": [
+        "marketLeader",
+        "marketChallenger",
+        "marketFollower",
+        "nichePlayer",
+        "disruptor",
+        "emergingPlayer"
+      ],
+      "description": "Desired market position in the service category"
+    },
+    "investmentLevel": {
+      "type": "string",
+      "enum": [
+        "highInvestment",
+        "mediumInvestment",
+        "lowInvestment",
+        "minimalInvestment"
+      ],
+      "description": "Required investment level for service delivery"
+    },
+    "stakeholderImpact": {
+      "type": "string",
+      "description": "Impact on key stakeholders",
+      "examples": [
+        "Improved safety for passengers, reduced costs for operators"
+      ]
+    },
+    "parentService": {
+      "type": "string",
+      "description": "Parent service this is derived from",
+      "examples": [
+        "Enterprise Customer Management Platform"
+      ]
+    },
+    "parentServiceID": {
+      "description": "ID of the parent Service this is derived from",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "childServices": {
+      "type": "string",
+      "description": "Child services derived from this",
+      "examples": [
+        "Mobile Customer App, Partner Portal Service"
+      ]
+    },
+    "costs": {
+      "type": "string",
+      "description": "Development, maintenance, and operational costs",
+      "examples": [
+        "Development: $500K, Annual operations: $150K"
+      ]
+    },
+    "revenueModel": {
+      "type": "string",
+      "description": "How the service generates revenue or value",
+      "examples": [
+        "Annual service fees: $100K, Premium features: $25K"
+      ]
+    },
+    "adoptionMetrics": {
+      "type": "string",
+      "description": "Usage and adoption measurements",
+      "examples": [
+        "Monthly active users: 2,500, Feature utilization: 85%"
+      ]
+    },
+    "qualityMetrics": {
+      "type": "string",
+      "description": "Quality assessment measures",
+      "examples": [
+        "Error rate: 0.1%, Customer satisfaction: 4.5/5"
+      ]
+    },
+    "userBase": {
+      "type": "string",
+      "description": "Description of current user base",
+      "examples": [
+        "1,200 active users across 15 departments"
+      ]
+    },
+    "usage": {
+      "type": "string",
+      "description": "How the service is typically used",
+      "examples": [
+        "Daily operations support, weekly reporting, monthly planning"
+      ]
+    },
+    "relatedServices": {
+      "type": "string",
+      "description": "Services that are related or linked",
+      "examples": [
+        "Customer Analytics Service, Billing Management Service"
+      ]
+    },
+    "relatedServiceIDs": {
+      "type": "array",
+      "description": "IDs of related Services",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "technologyStack": {
+      "type": "string",
+      "description": "Underlying technologies used",
+      "examples": [
+        "Node.js, PostgreSQL, React, AWS cloud infrastructure"
+      ]
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Areas for enhancement or improvement",
+      "examples": [
+        "Add mobile notifications, implement chatbot support"
+      ]
+    },
+    "roadmap": {
+      "type": "string",
+      "description": "Future development plans",
+      "examples": [
+        "Q2: AI integration, Q4: Advanced analytics dashboard"
+      ]
+    },
+    "localization": {
+      "type": "string",
+      "description": "Multi-language and regional adaptations",
+      "examples": [
+        "Available in English, Spanish, French with local compliance"
+      ]
+    },
+    "serviceFeatures": {
+      "type": "array",
+      "description": "Specific features or components of the Service",
+      "items": {
+        "$ref": "#/definitions/serviceFeature"
+      }
+    }
+  },
+  "required": [
+    "serviceID",
+    "title",
+    "description",
+    "purpose",
+    "owner"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "serviceFeature": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The name or title of the Service feature",
+          "examples": [
+            "Real-time Cargo Tracking"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed explanation of what the Service feature entails",
+          "examples": [
+            "GPS-based tracking system providing customers with real-time location updates"
+          ]
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The intended purpose or benefit of the Service feature",
+          "examples": [
+            "Provide transparency and certainty about cargo location and arrival times"
+          ]
+        },
+        "owner": {
+          "type": "string",
+          "description": "The individual or team responsible for the Service feature",
+          "examples": [
+            "Sarah Johnson, Head of Digital Services"
+          ]
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The Organization unit(s) involved in the Service feature",
+          "examples": [
+            "Technology and Customer Experience Department"
+          ]
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "featureType": {
+          "type": "string",
+          "enum": [
+            "coreFeature",
+            "premiumFeature",
+            "addOn",
+            "integration",
+            "automation",
+            "enhancement"
+          ],
+          "description": "Type of service feature"
+        },
+        "priority": {
+          "description": "Business and development priority",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/priority"
+            }
+          ]
+        },
+        "complexity": {
+          "description": "Implementation and operational complexity",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/complexity"
+            }
+          ]
+        },
+        "serviceLevelAgreements": {
+          "type": "string",
+          "description": "The SLAs associated with the Service feature",
+          "examples": [
+            "99.5% system uptime, location updates every 15 minutes"
+          ]
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "webPortal",
+              "mobileApplication",
+              "smsAlerts",
+              "emailNotifications",
+              "apiIntegration",
+              "phone",
+              "chat"
+            ]
+          },
+          "description": "The channels through which the Service feature is provided"
+        },
+        "customerFeedback": {
+          "type": "string",
+          "description": "Methods for collecting feedback on this feature",
+          "examples": [
+            "In-app feedback option, usage analytics, satisfaction surveys"
+          ]
+        },
+        "userExperience": {
+          "type": "string",
+          "description": "Description of user interaction and experience",
+          "examples": [
+            "Intuitive interface with real-time map visualization and status updates"
+          ]
+        },
+        "performanceMetrics": {
+          "type": "string",
+          "description": "Metrics specific to this feature",
+          "examples": [
+            "Update frequency, accuracy rate, user engagement, satisfaction score"
+          ]
+        },
+        "dependencies": {
+          "type": "string",
+          "description": "Technical or business dependencies for this feature",
+          "examples": [
+            "GPS infrastructure, mobile networks, database systems"
+          ]
+        },
+        "integrationRequirements": {
+          "type": "string",
+          "description": "Integration needs with other systems or services",
+          "examples": [
+            "ERP integration, mobile push notifications, third-party mapping services"
+          ]
+        },
+        "securityRequirements": {
+          "type": "string",
+          "description": "Security specifications for the feature",
+          "examples": [
+            "Encrypted data transmission, secure authentication, access controls"
+          ]
+        },
+        "accessibilityFeatures": {
+          "type": "string",
+          "description": "Accessibility accommodations",
+          "examples": [
+            "Screen reader support, high contrast mode, voice commands"
+          ]
+        },
+        "businessValue": {
+          "type": "string",
+          "description": "Business impact and value delivered",
+          "examples": [
+            "Reduces customer inquiries by 40%, improves satisfaction scores"
+          ]
+        },
+        "implementationTimeline": {
+          "type": "string",
+          "description": "Development and rollout timeline",
+          "examples": [
+            "Phase 1: Basic tracking Q1, Phase 2: Advanced analytics Q3"
+          ]
+        },
+        "maintenanceRequirements": {
+          "type": "string",
+          "description": "Ongoing maintenance and support needs",
+          "examples": [
+            "Daily monitoring, weekly updates, quarterly system maintenance"
+          ]
+        },
+        "scalabilityConsiderations": {
+          "type": "string",
+          "description": "Scaling capabilities and constraints",
+          "examples": [
+            "Auto-scaling infrastructure, handles 10,000 concurrent users"
+          ]
+        },
+        "complianceAspects": {
+          "type": "string",
+          "description": "Regulatory and compliance considerations",
+          "examples": [
+            "Data privacy compliance, location sharing consent"
+          ]
+        },
+        "innovationOpportunities": {
+          "type": "string",
+          "description": "Future enhancement possibilities",
+          "examples": [
+            "Predictive delivery times, IoT sensor integration, AI-powered insights"
+          ]
+        },
+        "rolloutStrategy": {
+          "type": "string",
+          "enum": [
+            "bigBang",
+            "phased",
+            "canary",
+            "beta",
+            "geographic",
+            "segment"
+          ],
+          "description": "Feature rollout approach"
+        },
+        "targetAudience": {
+          "type": "string",
+          "description": "Specific users or groups for the feature",
+          "examples": [
+            "Customer service representatives, field technicians, managers"
+          ]
+        },
+        "successMetrics": {
+          "type": "string",
+          "description": "Metrics to measure feature success",
+          "examples": [
+            "User adoption rate, error reduction, time savings, satisfaction score"
+          ]
+        },
+        "feedback": {
+          "type": "string",
+          "description": "User feedback and feature reception",
+          "examples": [
+            "Initial users report 30% time savings and improved accuracy"
+          ]
+        },
+        "costs": {
+          "type": "string",
+          "description": "Development and operational costs for the feature",
+          "examples": [
+            "Development: $50K, Annual maintenance: $10K"
+          ]
+        },
+        "riskFactors": {
+          "type": "string",
+          "description": "Key risks to feature success",
+          "examples": [
+            "Integration complexity, user adoption challenges, data quality issues"
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "purpose"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

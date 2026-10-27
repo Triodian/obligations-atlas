@@ -1,0 +1,1264 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/risk-management.schema.json",
+  "title": "Risk Management Domain Schema",
+  "description": "Comprehensive schema encompassing all Risk Management domain elements including risk, assessment, control, response, and monitoring",
+  "type": "object",
+  "required": [
+    "riskID",
+    "title",
+    "description",
+    "orgUnitTitle"
+  ],
+  "properties": {
+    "riskID": {
+      "type": "string",
+      "description": "Unique identifier for the risk element"
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the risk"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of the risk"
+    },
+    "riskCategory": {
+      "description": "Classification of risk type",
+      "anyOf": [
+        {
+          "$ref": "common.schema.json#/definitions/riskCategory"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "project"
+          ],
+          "description": "Domain-specific values in addition to the shared list"
+        }
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organization unit(s) responsible for managing this risk"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "orgUnitRoles": {
+      "type": "array",
+      "description": "Specific roles within the organization unit that manage this risk",
+      "items": {
+        "type": "string"
+      }
+    },
+    "riskSource": {
+      "type": "string",
+      "description": "Origin of the risk",
+      "enum": [
+        "internal",
+        "external",
+        "hybrid"
+      ]
+    },
+    "riskOwner": {
+      "type": "string",
+      "description": "Individual or role responsible for risk management"
+    },
+    "riskProbability": {
+      "type": "object",
+      "description": "Likelihood of risk occurrence",
+      "properties": {
+        "level": {
+          "description": "Qualitative probability level",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/likelihood"
+            }
+          ]
+        },
+        "numericValue": {
+          "type": "number",
+          "description": "Quantitative probability (0-1 or percentage)"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Explanation for probability assessment"
+        },
+        "timeHorizon": {
+          "type": "string",
+          "description": "Time period for probability assessment"
+        }
+      },
+      "additionalProperties": false
+    },
+    "riskImpact": {
+      "type": "object",
+      "description": "Potential effect if risk is realized",
+      "properties": {
+        "level": {
+          "description": "Qualitative impact level",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/impactMagnitude"
+            }
+          ]
+        },
+        "financialImpact": {
+          "type": "string",
+          "description": "Monetary impact estimation"
+        },
+        "nonFinancialImpacts": {
+          "type": "array",
+          "description": "Non-monetary impacts",
+          "items": {
+            "type": "object",
+            "properties": {
+              "impactType": {
+                "description": "Type of non-financial impact",
+                "anyOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/riskCategory"
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      "safety"
+                    ],
+                    "description": "Domain-specific values in addition to the shared list"
+                  }
+                ]
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the impact"
+              },
+              "severity": {
+                "description": "Severity of this impact",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/severity"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Explanation for impact assessment"
+        }
+      },
+      "additionalProperties": false
+    },
+    "riskSeverity": {
+      "type": "object",
+      "description": "Combined measure of probability and impact",
+      "properties": {
+        "level": {
+          "description": "Overall risk severity",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/riskLevel"
+            }
+          ]
+        },
+        "score": {
+          "type": "number",
+          "description": "Numerical risk score"
+        },
+        "calculationMethod": {
+          "type": "string",
+          "description": "Method used to determine severity"
+        }
+      },
+      "additionalProperties": false
+    },
+    "riskTolerance": {
+      "type": "object",
+      "description": "Acceptable level of this risk",
+      "properties": {
+        "toleranceLevel": {
+          "type": "string",
+          "description": "Organizational tolerance for this risk",
+          "enum": [
+            "zeroTolerance",
+            "low",
+            "moderate",
+            "high",
+            "caseByCase"
+          ]
+        },
+        "thresholds": {
+          "type": "array",
+          "description": "Specific tolerance thresholds",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metricName": {
+                "type": "string",
+                "description": "Name of threshold metric"
+              },
+              "thresholdValue": {
+                "type": "string",
+                "description": "Value that triggers action"
+              },
+              "responseRequired": {
+                "type": "string",
+                "description": "Action required when threshold is crossed"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Explanation for tolerance level"
+        }
+      },
+      "additionalProperties": false
+    },
+    "riskStatus": {
+      "type": "string",
+      "description": "Current status in management lifecycle",
+      "enum": [
+        "identified",
+        "assessed",
+        "accepted",
+        "mitigated",
+        "transferred",
+        "avoided",
+        "realized",
+        "closed"
+      ]
+    },
+    "mitigationStrategy": {
+      "type": "object",
+      "description": "Approach to risk reduction",
+      "properties": {
+        "approachType": {
+          "type": "string",
+          "description": "Primary risk response type",
+          "enum": [
+            "accept",
+            "reduce",
+            "transfer",
+            "avoid",
+            "exploit",
+            "share",
+            "enhance",
+            "contingent"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of mitigation approach"
+        },
+        "expectedOutcome": {
+          "type": "string",
+          "description": "Anticipated result of mitigation"
+        },
+        "implementationStatus": {
+          "description": "Current status of implementation",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/implementationStatus"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "ineffective"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "residualRisk": {
+      "type": "object",
+      "description": "Risk remaining after controls",
+      "properties": {
+        "level": {
+          "description": "Level of remaining risk",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/riskLevel"
+            }
+          ]
+        },
+        "acceptableLevel": {
+          "type": "boolean",
+          "description": "Whether residual risk is acceptable"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of residual risk"
+        },
+        "additionalControls": {
+          "type": "array",
+          "description": "Additional controls needed",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "controlEffectiveness": {
+      "type": "object",
+      "description": "Effectiveness of current controls",
+      "properties": {
+        "level": {
+          "description": "Overall effectiveness level",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/effectiveness"
+            }
+          ]
+        },
+        "lastAssessment": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of last effectiveness assessment"
+        },
+        "improvementNeeds": {
+          "type": "array",
+          "description": "Areas needing improvement",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "reviewFrequency": {
+      "description": "How often risk is reassessed",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/frequency"
+        }
+      ]
+    },
+    "lastReviewDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of last formal risk review"
+    },
+    "nextReviewDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Scheduled date for next review"
+    },
+    "regulatoryImplications": {
+      "type": "array",
+      "description": "Compliance aspects of this risk",
+      "items": {
+        "type": "object",
+        "properties": {
+          "regulationType": {
+            "type": "string",
+            "description": "Type of regulation"
+          },
+          "regulationName": {
+            "type": "string",
+            "description": "Name of specific regulation"
+          },
+          "implications": {
+            "type": "string",
+            "description": "How regulation relates to risk"
+          },
+          "complianceStatus": {
+            "description": "Current compliance status",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/complianceStatus"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "strategicImplications": {
+      "type": "object",
+      "description": "Impact on strategic objectives",
+      "properties": {
+        "overallImpact": {
+          "type": "string",
+          "description": "General strategic impact",
+          "enum": [
+            "enabling",
+            "impeding",
+            "neutral",
+            "mixed"
+          ]
+        },
+        "affectedObjectives": {
+          "type": "array",
+          "description": "Strategic objectives affected",
+          "items": {
+            "type": "object",
+            "properties": {
+              "objectiveID": {
+                "type": "string",
+                "description": "Identifier of affected objective"
+              },
+              "impactDescription": {
+                "type": "string",
+                "description": "Description of impact on objective"
+              },
+              "impactSeverity": {
+                "description": "Severity of impact",
+                "anyOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/impactMagnitude"
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      "critical"
+                    ],
+                    "description": "Domain-specific values in addition to the shared list"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "emergingFactors": {
+      "type": "array",
+      "description": "Developing influences on this risk",
+      "items": {
+        "type": "object",
+        "properties": {
+          "factorName": {
+            "type": "string",
+            "description": "Name of emerging factor"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the factor"
+          },
+          "potentialImpact": {
+            "type": "string",
+            "description": "How factor may change risk profile"
+          },
+          "timeHorizon": {
+            "description": "When factor may become significant",
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/definitions/timeHorizon"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "uncertain"
+                ],
+                "description": "Domain-specific values in addition to the shared list"
+              }
+            ]
+          },
+          "monitoringApproach": {
+            "type": "string",
+            "description": "How this factor is being tracked"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "relatedRisks": {
+      "type": "array",
+      "description": "Relationships to other risks",
+      "items": {
+        "type": "object",
+        "properties": {
+          "riskID": {
+            "type": "string",
+            "description": "ID of related risk"
+          },
+          "relationshipType": {
+            "type": "string",
+            "description": "Type of relationship",
+            "enum": [
+              "parent",
+              "child",
+              "contributor",
+              "consequence",
+              "similar",
+              "opposing",
+              "compound",
+              "other"
+            ]
+          },
+          "relationshipStrength": {
+            "type": "integer",
+            "description": "Strength of relationship (1-5)",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the relationship"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "keyRiskIndicators": {
+      "type": "array",
+      "description": "Metrics used to monitor this risk",
+      "items": {
+        "type": "object",
+        "properties": {
+          "indicatorName": {
+            "type": "string",
+            "description": "Name of risk indicator"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the indicator"
+          },
+          "currentValue": {
+            "type": "string",
+            "description": "Present measurement"
+          },
+          "threshold": {
+            "type": "string",
+            "description": "Value that triggers action"
+          },
+          "trend": {
+            "description": "Direction of indicator movement",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/performanceTrend"
+              }
+            ]
+          },
+          "monitoringFrequency": {
+            "description": "How often indicator is measured",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/frequency"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Other domains, processes, or systems related to this risk",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dependencyType": {
+            "description": "Type of dependency",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/dependencyStrength"
+              }
+            ]
+          },
+          "domainType": {
+            "description": "Type of domain this depends on",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/domainType"
+              }
+            ]
+          },
+          "entityID": {
+            "type": "string",
+            "description": "ID of the entity being depended upon"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the dependency"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "crossDomainRelationships": {
+      "type": "array",
+      "description": "Directional relationships from this record to entities in other domains",
+      "items": {
+        "$ref": "cross-domain-relationship.schema.json#/definitions/outgoingRelationship"
+      }
+    },
+    "documentationReferences": {
+      "type": "array",
+      "description": "References to detailed documentation",
+      "items": {
+        "type": "object",
+        "properties": {
+          "documentName": {
+            "type": "string",
+            "description": "Name of document"
+          },
+          "documentLocation": {
+            "type": "string",
+            "description": "Where document is stored"
+          },
+          "documentType": {
+            "type": "string",
+            "description": "Type of document",
+            "enum": [
+              "policy",
+              "procedure",
+              "assessment",
+              "report",
+              "plan",
+              "controlDescription",
+              "other"
+            ]
+          },
+          "documentDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of document"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "description": "Risk assessments conducted",
+      "items": {
+        "type": "object",
+        "properties": {
+          "assessmentID": {
+            "type": "string",
+            "description": "Unique identifier for the risk assessment"
+          },
+          "assessmentTitle": {
+            "type": "string",
+            "description": "Name of the specific risk assessment"
+          },
+          "assessmentMethod": {
+            "type": "string",
+            "description": "Methodology used for assessment",
+            "enum": [
+              "qualitative",
+              "semiQuantitative",
+              "quantitative",
+              "scenarioBased",
+              "workshop",
+              "expertJudgment",
+              "historicalAnalysis",
+              "modelBased",
+              "other"
+            ]
+          },
+          "assessmentScope": {
+            "type": "object",
+            "description": "Boundaries of the assessment",
+            "properties": {
+              "inScope": {
+                "type": "array",
+                "description": "Areas explicitly included",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "outOfScope": {
+                "type": "array",
+                "description": "Areas explicitly excluded",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "scopeRationale": {
+                "type": "string",
+                "description": "Explanation for scope boundaries"
+              }
+            },
+            "additionalProperties": false
+          },
+          "assessmentContext": {
+            "type": "string",
+            "description": "Business context for the assessment"
+          },
+          "assessmentDate": {
+            "type": "object",
+            "description": "When assessment was conducted",
+            "properties": {
+              "startDate": {
+                "type": "string",
+                "format": "date",
+                "description": "When assessment began"
+              },
+              "completionDate": {
+                "type": "string",
+                "format": "date",
+                "description": "When assessment was completed"
+              },
+              "validityPeriod": {
+                "type": "string",
+                "description": "How long assessment remains valid"
+              }
+            },
+            "additionalProperties": false
+          },
+          "assessmentParticipants": {
+            "type": "array",
+            "description": "People involved in assessment",
+            "items": {
+              "type": "object",
+              "properties": {
+                "participantName": {
+                  "type": "string",
+                  "description": "Name of participant"
+                },
+                "participantRole": {
+                  "type": "string",
+                  "description": "Organizational role"
+                },
+                "participationType": {
+                  "type": "string",
+                  "description": "Nature of participation",
+                  "enum": [
+                    "facilitator",
+                    "subjectMatterExpert",
+                    "stakeholder",
+                    "riskOwner",
+                    "reviewer",
+                    "approver",
+                    "other"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "identifiedRisks": {
+            "type": "array",
+            "description": "Risks discovered during assessment",
+            "items": {
+              "type": "object",
+              "properties": {
+                "riskID": {
+                  "type": "string",
+                  "description": "Identifier for this risk"
+                },
+                "riskTitle": {
+                  "type": "string",
+                  "description": "Brief name for the risk"
+                },
+                "riskDescription": {
+                  "type": "string",
+                  "description": "Detailed description"
+                },
+                "riskCauses": {
+                  "type": "array",
+                  "description": "Factors that could cause this risk",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "riskConsequences": {
+                  "type": "array",
+                  "description": "Potential outcomes if risk materializes",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "inherentRiskLevel": {
+                  "description": "Risk level without controls",
+                  "allOf": [
+                    {
+                      "$ref": "common.schema.json#/definitions/riskLevel"
+                    }
+                  ]
+                },
+                "residualRiskLevel": {
+                  "description": "Risk level with controls",
+                  "allOf": [
+                    {
+                      "$ref": "common.schema.json#/definitions/riskLevel"
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "assessmentFindings": {
+            "type": "array",
+            "description": "Key outcomes and insights",
+            "items": {
+              "type": "object",
+              "properties": {
+                "findingTitle": {
+                  "type": "string",
+                  "description": "Brief title of finding"
+                },
+                "findingDescription": {
+                  "type": "string",
+                  "description": "Detailed description"
+                },
+                "findingCategory": {
+                  "type": "string",
+                  "description": "Type of finding",
+                  "enum": [
+                    "riskIdentification",
+                    "controlGap",
+                    "improvementOpportunity",
+                    "positiveObservation",
+                    "complianceIssue",
+                    "other"
+                  ]
+                },
+                "findingSeverity": {
+                  "description": "Severity of finding",
+                  "anyOf": [
+                    {
+                      "$ref": "common.schema.json#/definitions/severity"
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "informational"
+                      ],
+                      "description": "Domain-specific values in addition to the shared list"
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "assessmentRecommendations": {
+            "type": "array",
+            "description": "Suggested actions",
+            "items": {
+              "type": "object",
+              "properties": {
+                "recommendationTitle": {
+                  "type": "string",
+                  "description": "Brief title of recommendation"
+                },
+                "recommendationDescription": {
+                  "type": "string",
+                  "description": "Detailed description"
+                },
+                "recommendationPriority": {
+                  "description": "Implementation priority",
+                  "allOf": [
+                    {
+                      "$ref": "common.schema.json#/definitions/priority"
+                    }
+                  ]
+                },
+                "timeframe": {
+                  "description": "Suggested timeframe",
+                  "allOf": [
+                    {
+                      "$ref": "common.schema.json#/definitions/timeHorizon"
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "controls": {
+      "type": "array",
+      "description": "Risk controls implemented",
+      "items": {
+        "type": "object",
+        "properties": {
+          "controlID": {
+            "type": "string",
+            "description": "Unique identifier for the risk control"
+          },
+          "controlTitle": {
+            "type": "string",
+            "description": "Name of the specific risk control"
+          },
+          "controlType": {
+            "type": "string",
+            "description": "Type of control measure",
+            "enum": [
+              "preventive",
+              "detective",
+              "corrective",
+              "directive",
+              "deterrent",
+              "recovery",
+              "compensating",
+              "other"
+            ]
+          },
+          "controlCategory": {
+            "type": "string",
+            "description": "Functional category of control",
+            "enum": [
+              "administrative",
+              "technical",
+              "physical",
+              "operational",
+              "managerial",
+              "procedural",
+              "contractual",
+              "other"
+            ]
+          },
+          "controlMethod": {
+            "type": "string",
+            "description": "How control operates",
+            "enum": [
+              "automated",
+              "manual",
+              "hybrid",
+              "systemic",
+              "periodic",
+              "continuous",
+              "other"
+            ]
+          },
+          "controlObjective": {
+            "type": "string",
+            "description": "What the control aims to achieve"
+          },
+          "implementationStatus": {
+            "description": "Current implementation state",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/implementationStatus"
+              }
+            ]
+          },
+          "controlEffectiveness": {
+            "type": "object",
+            "description": "How well control works",
+            "properties": {
+              "designEffectiveness": {
+                "description": "How well control is designed",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/effectiveness"
+                  }
+                ]
+              },
+              "operationalEffectiveness": {
+                "description": "How well control operates",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/effectiveness"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "controlTesting": {
+            "type": "object",
+            "description": "How and when control is tested",
+            "properties": {
+              "testingMethod": {
+                "type": "string",
+                "description": "Approach to testing",
+                "enum": [
+                  "inspection",
+                  "observation",
+                  "inquiry",
+                  "analysis",
+                  "rePerformance",
+                  "automatedMonitoring",
+                  "other"
+                ]
+              },
+              "testingFrequency": {
+                "description": "How often testing occurs",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/frequency"
+                  }
+                ]
+              },
+              "lastTestResult": {
+                "type": "string",
+                "description": "Outcome of last test",
+                "enum": [
+                  "passed",
+                  "failed",
+                  "passedWithExceptions",
+                  "notTested"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "responses": {
+      "type": "array",
+      "description": "Risk response actions",
+      "items": {
+        "type": "object",
+        "properties": {
+          "responseID": {
+            "type": "string",
+            "description": "Unique identifier for the risk response"
+          },
+          "responseTitle": {
+            "type": "string",
+            "description": "Name of the specific risk response"
+          },
+          "responseStrategy": {
+            "type": "string",
+            "description": "Approach to handling risk",
+            "enum": [
+              "avoid",
+              "reduce",
+              "transfer",
+              "accept",
+              "exploit",
+              "share",
+              "enhance",
+              "contingent"
+            ]
+          },
+          "responseDescription": {
+            "type": "string",
+            "description": "Detailed explanation of response approach"
+          },
+          "responsePriority": {
+            "description": "Priority level",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/priority"
+              }
+            ]
+          },
+          "responseStatus": {
+            "type": "string",
+            "description": "Current implementation status",
+            "enum": [
+              "notStarted",
+              "planning",
+              "inProgress",
+              "implemented",
+              "completed",
+              "canceled",
+              "deferred"
+            ]
+          },
+          "responseTimeline": {
+            "type": "object",
+            "description": "Implementation schedule",
+            "properties": {
+              "startDate": {
+                "type": "string",
+                "format": "date",
+                "description": "When implementation begins"
+              },
+              "targetEndDate": {
+                "type": "string",
+                "format": "date",
+                "description": "Planned completion date"
+              },
+              "actualEndDate": {
+                "type": "string",
+                "format": "date",
+                "description": "Actual completion date"
+              }
+            },
+            "additionalProperties": false
+          },
+          "responseSuccess": {
+            "type": "object",
+            "description": "Criteria for successful response",
+            "properties": {
+              "successCriteria": {
+                "type": "array",
+                "description": "Specific success measures",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "criterionName": {
+                      "type": "string",
+                      "description": "Name of criterion"
+                    },
+                    "targetValue": {
+                      "type": "string",
+                      "description": "Value that indicates success"
+                    },
+                    "currentValue": {
+                      "type": "string",
+                      "description": "Current measurement"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "overallSuccess": {
+                "type": "string",
+                "description": "Overall success assessment",
+                "enum": [
+                  "successful",
+                  "partiallySuccessful",
+                  "unsuccessful",
+                  "tooEarlyToDetermine",
+                  "notMeasured"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "monitoring": {
+      "type": "object",
+      "description": "Risk monitoring activities",
+      "properties": {
+        "monitoringID": {
+          "type": "string",
+          "description": "Unique identifier for the risk monitoring activity"
+        },
+        "monitoringTitle": {
+          "type": "string",
+          "description": "Name of the specific risk monitoring activity"
+        },
+        "monitoringFrequency": {
+          "type": "object",
+          "description": "Frequency of monitoring activities",
+          "properties": {
+            "reviewCycle": {
+              "description": "How often monitoring occurs",
+              "anyOf": [
+                {
+                  "$ref": "common.schema.json#/definitions/frequency"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "biWeekly"
+                  ],
+                  "description": "Domain-specific values in addition to the shared list"
+                }
+              ]
+            },
+            "justification": {
+              "type": "string",
+              "description": "Explanation for chosen frequency"
+            }
+          },
+          "additionalProperties": false
+        },
+        "monitoringMethods": {
+          "type": "array",
+          "description": "Approaches used for monitoring",
+          "items": {
+            "type": "object",
+            "properties": {
+              "methodName": {
+                "type": "string",
+                "description": "Name of method"
+              },
+              "automationLevel": {
+                "description": "Degree of automation",
+                "allOf": [
+                  {
+                    "$ref": "common.schema.json#/definitions/automationLevel"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "earlyWarningSystem": {
+          "type": "object",
+          "description": "System for early detection of risk changes",
+          "properties": {
+            "alertMechanisms": {
+              "type": "array",
+              "description": "How alerts are generated",
+              "items": {
+                "type": "string"
+              }
+            },
+            "escalationPath": {
+              "type": "string",
+              "description": "How alerts are escalated"
+            }
+          },
+          "additionalProperties": false
+        },
+        "reportingStructure": {
+          "type": "object",
+          "description": "How monitoring results are reported",
+          "properties": {
+            "reportTypes": {
+              "type": "array",
+              "description": "Types of reports produced",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "reportName": {
+                    "type": "string",
+                    "description": "Name of report"
+                  },
+                  "reportFrequency": {
+                    "type": "string",
+                    "description": "How often produced"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "dashboards": {
+              "type": "array",
+              "description": "Visual monitoring tools",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dashboardName": {
+                    "type": "string",
+                    "description": "Name of dashboard"
+                  },
+                  "updateFrequency": {
+                    "description": "How often updated",
+                    "allOf": [
+                      {
+                        "$ref": "common.schema.json#/definitions/frequency"
+                      }
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

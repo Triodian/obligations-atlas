@@ -1,0 +1,589 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/strategy.schema.json",
+  "title": "Strategy Domain Schema",
+  "description": "Schema for the Strategy domain in the Triodian Metamodel with global enumeration support",
+  "type": "object",
+  "properties": {
+    "strategyID": {
+      "description": "Unique identifier for the Strategy",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Name/title of strategy",
+      "examples": [
+        "Predictive Track Maintenance Program",
+        "Digital Transformation Strategy",
+        "Customer Excellence Initiative"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed explanation"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Intended function"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Responsible individual/team"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "Most closely linked organizational units"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "strategyCategory": {
+      "type": "string",
+      "description": "Broad categorization of strategy type",
+      "enum": [
+        "military",
+        "political",
+        "diplomatic",
+        "economic",
+        "intelligence",
+        "corporate",
+        "geopolitical",
+        "socialMovement",
+        "technological",
+        "resourceControl",
+        "information",
+        "legalJudicial"
+      ]
+    },
+    "strategyType": {
+      "type": "string",
+      "description": "Specific type of strategy",
+      "enum": [
+        "offensive",
+        "defensive",
+        "containment",
+        "deterrence",
+        "attrition",
+        "blitzkrieg",
+        "asymmetric",
+        "coalitionBuilding",
+        "divideAndConquer",
+        "encirclement",
+        "infiltration",
+        "scorchedEarth",
+        "flanking",
+        "preemption",
+        "escalation",
+        "deEscalation",
+        "provocation",
+        "deception",
+        "accumulation",
+        "disruption",
+        "withdrawal",
+        "retrenchment",
+        "transition",
+        "abandonment",
+        "appeasement",
+        "capitulation"
+      ]
+    },
+    "strategicFocus": {
+      "type": "string",
+      "description": "Primary focus area",
+      "enum": [
+        "powerAccumulation",
+        "powerPreservation",
+        "powerTransfer",
+        "powerReduction",
+        "territoryControl",
+        "territoryWithdrawal",
+        "resourceDominance",
+        "resourceDenial",
+        "informationControl",
+        "allianceBuilding",
+        "allianceDissolution",
+        "opponentNeutralization",
+        "conflictAvoidance",
+        "systemDisruption",
+        "statusQuoMaintenance",
+        "influenceProjection",
+        "influenceWithdrawal",
+        "survival",
+        "hegemony",
+        "legitimacy",
+        "innovationLeadership",
+        "economicDominance",
+        "culturalHegemony"
+      ]
+    },
+    "timeHorizon": {
+      "description": "Strategy time frame",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/timeHorizon"
+        }
+      ]
+    },
+    "scopeLevel": {
+      "type": "string",
+      "description": "Organizational scope",
+      "enum": [
+        "global",
+        "continental",
+        "regional",
+        "national",
+        "stateProvincial",
+        "local",
+        "sector",
+        "organization",
+        "coalition",
+        "bilateral",
+        "multilateral",
+        "asymmetric"
+      ]
+    },
+    "objectives": {
+      "type": "string",
+      "description": "Specific measurable targets"
+    },
+    "keyActivities": {
+      "type": "string",
+      "description": "Critical implementation actions"
+    },
+    "resources": {
+      "type": "string",
+      "description": "Allocated resources"
+    },
+    "timeline": {
+      "type": "string",
+      "description": "Achievement timeline"
+    },
+    "keyPerformanceIndicators": {
+      "type": "string",
+      "description": "Success metrics"
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Required dependencies"
+    },
+    "relatedStrategies": {
+      "type": "string",
+      "description": "Related/linked strategies"
+    },
+    "relatedStrategyIDs": {
+      "type": "array",
+      "description": "IDs of related Strategies",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "risks": {
+      "type": "string",
+      "description": "Associated risks"
+    },
+    "riskCategories": {
+      "type": "array",
+      "description": "Categories of risks",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "common.schema.json#/definitions/riskCategory"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "diplomatic"
+            ],
+            "description": "Domain-specific values in addition to the shared list"
+          }
+        ]
+      }
+    },
+    "mitigationStrategies": {
+      "type": "string",
+      "description": "Risk mitigation approaches"
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Enhancement areas"
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "Goal alignment"
+    },
+    "businessObjective": {
+      "type": "string",
+      "description": "Supporting business goal"
+    },
+    "competitiveAdvantage": {
+      "type": "string",
+      "description": "How strategy creates competitive advantage"
+    },
+    "marketPosition": {
+      "type": "string",
+      "description": "Desired market position",
+      "enum": [
+        "marketLeader",
+        "marketChallenger",
+        "marketFollower",
+        "nichePlayer",
+        "disruptor",
+        "emergingPlayer",
+        "defensivePositioning"
+      ]
+    },
+    "investmentLevel": {
+      "type": "string",
+      "description": "Required investment level",
+      "enum": [
+        "highInvestment",
+        "mediumInvestment",
+        "lowInvestment",
+        "minimalInvestment"
+      ]
+    },
+    "successCriteria": {
+      "type": "string",
+      "description": "Criteria for measuring success"
+    },
+    "stakeholderImpact": {
+      "type": "string",
+      "description": "Impact on key stakeholders"
+    },
+    "changeManagement": {
+      "type": "string",
+      "description": "Change management approach"
+    },
+    "parent": {
+      "type": "string",
+      "description": "Parent strategy"
+    },
+    "parentStrategyID": {
+      "description": "ID of the parent Strategy",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "child": {
+      "type": "string",
+      "description": "Child strategy"
+    },
+    "childStrategyIDs": {
+      "type": "array",
+      "description": "IDs of child Strategies",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "strategyObjectives": {
+      "type": "array",
+      "description": "Specific objectives supporting the strategy",
+      "items": {
+        "$ref": "#/definitions/strategyObjective"
+      }
+    },
+    "empathyFocus": {
+      "type": "string",
+      "description": "The primary stakeholder group(s) whose emotional insights and perspectives are prioritized in strategic decision-making.",
+      "enum": [
+        "customer",
+        "employee",
+        "partner",
+        "community",
+        "shareholder"
+      ]
+    },
+    "empathyIntegrationLevel": {
+      "type": "string",
+      "description": "Describes how deeply empathetic considerations are embedded within the organization's strategic planning and execution processes.",
+      "enum": [
+        "adHoc",
+        "definedProcess",
+        "systemic",
+        "coreCapability"
+      ]
+    },
+    "stakeholderEmotionalInsight": {
+      "type": "boolean",
+      "description": "Indicates whether the strategy development actively seeks to understand and incorporate the emotional states and underlying motivations of key stakeholders."
+    },
+    "politicalAcuity": {
+      "type": "boolean",
+      "description": "Refers to the strategic team's ability to recognize and navigate the unspoken power dynamics and political constraints within the organization and external environment."
+    },
+    "trustBuildingMandate": {
+      "type": "boolean",
+      "description": "Specifies if the strategy includes explicit objectives or mechanisms designed to build, restore, or maintain trust with relevant stakeholders."
+    },
+    "fearNavigationCapability": {
+      "type": "boolean",
+      "description": "Represents the strategic approach to proactively identify, address, and de-escalate fear or resistance among stakeholders during periods of significant change or transformation."
+    },
+    "unspokenDynamicsAwareness": {
+      "type": "boolean",
+      "description": "The capacity within the strategic leadership to 'read the room' and understand unstated concerns, cultural nuances, or hidden agendas that could impact strategic adoption."
+    },
+    "relationshipCentricity": {
+      "type": "string",
+      "description": "How central relationships are to the overall strategic success and how they are fostered.",
+      "enum": [
+        "transactional",
+        "collaborative",
+        "partnership"
+      ]
+    },
+    "empathyDrivenKPIs": {
+      "type": "array",
+      "description": "Specific measurable outcomes or metrics that assess the impact of empathetic approaches on strategic success.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "culturalContextIntegration": {
+      "type": "boolean",
+      "description": "Whether the strategy is designed with a deep understanding of organizational and external cultural nuances."
+    }
+  },
+  "required": [
+    "strategyID",
+    "title",
+    "description",
+    "purpose",
+    "owner"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "strategyObjective": {
+      "type": "object",
+      "description": "A specific objective that supports a strategy",
+      "properties": {
+        "objectiveID": {
+          "description": "Unique identifier for the objective, so other records can reference it",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "Name/title of objective"
+        },
+        "description": {
+          "type": "string",
+          "description": "Objective explanation"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Intended purpose/function"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Responsible individual/team"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Aligned organization units"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "objectiveType": {
+          "type": "string",
+          "description": "Type of objective",
+          "enum": [
+            "powerAcquisition",
+            "powerPreservation",
+            "powerTransfer",
+            "powerReduction",
+            "destruction",
+            "neutralization",
+            "control",
+            "influence",
+            "access",
+            "denial",
+            "intelligence",
+            "disruption",
+            "legitimacy",
+            "survival",
+            "growth",
+            "efficiency",
+            "innovation",
+            "alliance",
+            "withdrawal",
+            "transition"
+          ]
+        },
+        "priority": {
+          "description": "Priority level",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/priority"
+            }
+          ]
+        },
+        "metrics": {
+          "type": "string",
+          "description": "Success assessment indicators"
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "Specific target to achieve"
+        },
+        "currentValue": {
+          "type": "string",
+          "description": "Current baseline value"
+        },
+        "timeline": {
+          "type": "string",
+          "description": "Achievement timeframe"
+        },
+        "milestones": {
+          "type": "string",
+          "description": "Key milestones and checkpoints"
+        },
+        "resources": {
+          "type": "string",
+          "description": "Required resources"
+        },
+        "dependencies": {
+          "type": "string",
+          "description": "Critical dependencies"
+        },
+        "constraints": {
+          "type": "string",
+          "description": "Limitations and constraints"
+        },
+        "stakeholders": {
+          "type": "string",
+          "description": "Involved/affected stakeholders"
+        },
+        "riskFactors": {
+          "type": "string",
+          "description": "Key risks to achievement"
+        },
+        "successCriteria": {
+          "type": "string",
+          "description": "Criteria for success measurement"
+        },
+        "reportingFrequency": {
+          "description": "How often progress is reported",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/frequency"
+            }
+          ]
+        },
+        "parentStrategy": {
+          "type": "string",
+          "description": "Parent strategy this objective supports"
+        },
+        "parentStrategyID": {
+          "description": "ID of the Strategy this objective supports",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "purpose",
+        "owner"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "strategyID": "STR-001",
+      "title": "Eastern Border Defense Initiative",
+      "description": "Comprehensive defensive strategy to secure eastern territorial borders against potential invasion",
+      "purpose": "Maintain territorial integrity and deter aggression through layered defense",
+      "owner": "General of Eastern Command",
+      "orgUnitTitle": "Eastern Military District",
+      "strategyCategory": "military",
+      "strategyType": "defensive",
+      "strategicFocus": "territoryControl",
+      "timeHorizon": "longTerm",
+      "scopeLevel": "regional",
+      "objectives": "Establish 500km defensive line, deploy 50,000 troops, achieve 95% early warning coverage",
+      "keyActivities": "Fortification construction, troop deployment, sensor network installation, training exercises",
+      "resources": "$2.5B defense budget, 50,000 military personnel, advanced radar systems",
+      "timeline": "48 months: 2024-2027",
+      "keyPerformanceIndicators": "Border security coverage: 95%, Response time: <30 minutes, Deterrence effectiveness",
+      "dependencies": "Allied support, intelligence sharing, logistics infrastructure",
+      "relatedStrategies": "Northern Defense Strategy, Cyber Defense Initiative",
+      "risks": "Budget constraints, equipment delays, intelligence failures",
+      "riskCategories": [
+        "strategic",
+        "operational",
+        "technology"
+      ],
+      "mitigationStrategies": "Redundant systems, phased deployment, international cooperation",
+      "strategicAlignment": "National defense and territorial sovereignty",
+      "investmentLevel": "highInvestment",
+      "successCriteria": "Zero border incursions, 95% deterrence effectiveness, ally confidence",
+      "stakeholderImpact": "Enhanced security for border communities, military readiness"
+    },
+    {
+      "strategyID": "STR-002",
+      "title": "Regional Political Consolidation Campaign",
+      "description": "Multi-year campaign to consolidate political control across regional administrative districts",
+      "purpose": "Accumulate political power and establish dominant influence in regional governance",
+      "owner": "Regional Party Chairman",
+      "orgUnitTitle": "Regional Political Committee",
+      "strategyCategory": "political",
+      "strategyType": "accumulation",
+      "strategicFocus": "powerAccumulation",
+      "timeHorizon": "mediumTerm",
+      "scopeLevel": "regional",
+      "objectives": "Control 75% of district councils, secure 60% of popular vote, place allies in key positions",
+      "keyActivities": "Coalition building, candidate recruitment, media campaigns, grassroots organizing",
+      "investmentLevel": "mediumInvestment",
+      "riskCategories": [
+        "political",
+        "reputational",
+        "people"
+      ]
+    },
+    {
+      "strategyID": "STR-003",
+      "title": "Trade Route Disruption Initiative",
+      "description": "Economic strategy to limit competitor's access to critical trade routes and markets",
+      "purpose": "Contain economic expansion and maintain strategic trade advantages",
+      "owner": "Minister of Economic Security",
+      "strategyCategory": "economic",
+      "strategyType": "containment",
+      "strategicFocus": "resourceDominance",
+      "timeHorizon": "mediumTerm",
+      "scopeLevel": "continental",
+      "investmentLevel": "highInvestment",
+      "riskCategories": [
+        "economic",
+        "diplomatic",
+        "strategic"
+      ]
+    }
+  ]
+}

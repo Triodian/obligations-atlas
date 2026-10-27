@@ -1,0 +1,160 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/governance/governed-record.schema.json",
+  "title": "Governed Record Schema",
+  "description": "Governance interface. A published version of a Metamodel record, as the governing service returns it to applications: the record itself, its verification state and confidence, the approver, and the provenance trail behind it. Applications show the record, its source link, tier and last-verified date together, and cite the provenance reference.",
+  "type": "object",
+  "required": [
+    "governedRecordID",
+    "domainType",
+    "entityID",
+    "version",
+    "publicationStatus",
+    "record",
+    "publishedAt",
+    "provenanceRecordIDs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "governedRecordID": {
+      "description": "Identifier of this version: the entity ID, '@' and the version, e.g. OBL-AU-CPS230-48@2",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "domainType": {
+      "description": "Domain of the record",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/domainType"
+        }
+      ]
+    },
+    "entityID": {
+      "description": "Identifier of the record within its domain",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "description": "Version number, starting at 1",
+      "minimum": 1
+    },
+    "dataset": {
+      "type": "string",
+      "description": "Governed dataset the record belongs to"
+    },
+    "publicationStatus": {
+      "type": "string",
+      "description": "published = approved or reverified; unverified = published automatically and not yet reviewed (leads and commentary); pendingReview = visible to reviewers only; superseded = replaced by a later version; removed = withdrawn from publication",
+      "enum": [
+        "published",
+        "unverified",
+        "pendingReview",
+        "superseded",
+        "removed"
+      ]
+    },
+    "record": {
+      "type": "object",
+      "description": "The Metamodel record, valid against the schema for domainType"
+    },
+    "metamodelVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Version of the Metamodel the record was validated against"
+    },
+    "publishedAt": {
+      "type": "string",
+      "description": "When this version was published",
+      "format": "date-time"
+    },
+    "approval": {
+      "type": "object",
+      "description": "The named person who approved this version, when approval was required",
+      "required": [
+        "approverName",
+        "approvedAt",
+        "reviewDecisionID"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "approverName": {
+          "type": "string",
+          "description": "Name of the approver"
+        },
+        "approverRole": {
+          "type": "string",
+          "description": "Role of the approver"
+        },
+        "approvedAt": {
+          "type": "string",
+          "description": "When it was approved",
+          "format": "date-time"
+        },
+        "reviewDecisionID": {
+          "description": "Review decision record",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "description": "Verification state of this version",
+      "required": [
+        "lastVerified"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "lastVerified": {
+          "type": "string",
+          "description": "Date last checked against the official text",
+          "format": "date"
+        },
+        "freshnessThreshold": {
+          "type": "string",
+          "description": "Maximum age before the record is stale, as an ISO 8601 duration",
+          "pattern": "^P"
+        },
+        "stale": {
+          "type": "boolean",
+          "description": "Whether the record is past its freshness threshold"
+        },
+        "confidence": {
+          "$ref": "submission-result.schema.json#/definitions/confidence"
+        }
+      }
+    },
+    "supersedesVersion": {
+      "type": "integer",
+      "description": "Version this one replaces",
+      "minimum": 1
+    },
+    "provenanceRecordIDs": {
+      "type": "array",
+      "description": "Provenance entries behind this version, oldest first",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "changeProposalIDs": {
+      "type": "array",
+      "description": "Proposals that produced this version",
+      "items": {
+        "$ref": "../common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    }
+  }
+}

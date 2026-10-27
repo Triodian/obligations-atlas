@@ -1,0 +1,257 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/governance/dataset-policy.schema.json",
+  "title": "Dataset Policy Schema",
+  "description": "Governance interface. The published rules a governed dataset runs under: which sources can set what, which changes publish automatically and which wait for a named approver, when records go stale, and the language rules every record and response must meet. The governing service applies the policy and cites its rule IDs in results and provenance; the policy itself is public so that applications and reviewers can check behaviour against it.",
+  "type": "object",
+  "required": [
+    "datasetPolicyID",
+    "dataset",
+    "version",
+    "sourcePrecedence",
+    "autonomyRules"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "datasetPolicyID": {
+      "description": "Unique identifier for the policy, e.g. POLICY-REG-REGISTER-1",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "dataset": {
+      "type": "string",
+      "description": "Dataset the policy governs"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Version of the policy"
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "description": "Date the policy version applies from",
+      "format": "date"
+    },
+    "methodOwner": {
+      "type": "string",
+      "description": "Role that receives escalations"
+    },
+    "sourcePrecedence": {
+      "type": "array",
+      "description": "Source ranks and what each can do alone",
+      "items": {
+        "$ref": "#/definitions/sourceRankRule"
+      },
+      "minItems": 1
+    },
+    "autonomyRules": {
+      "type": "array",
+      "description": "Treatment for each kind of change. The first matching rule applies",
+      "items": {
+        "$ref": "#/definitions/autonomyRule"
+      },
+      "minItems": 1
+    },
+    "datePrecedence": {
+      "type": "array",
+      "description": "Order in which date evidence is preferred when sources disagree, highest first",
+      "items": {
+        "type": "string"
+      }
+    },
+    "freshness": {
+      "type": "array",
+      "description": "How long a record stays fresh without reverification",
+      "items": {
+        "$ref": "#/definitions/freshnessRule"
+      }
+    },
+    "confidenceBands": {
+      "type": "object",
+      "description": "Score thresholds for the confidence bands",
+      "required": [
+        "medium",
+        "high"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "medium": {
+          "type": "number",
+          "description": "Lowest score in the medium band",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "high": {
+          "type": "number",
+          "description": "Lowest score in the high band",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "languageRules": {
+      "type": "array",
+      "description": "Wording that records and responses must not contain",
+      "items": {
+        "$ref": "#/definitions/languageRule"
+      }
+    }
+  },
+  "definitions": {
+    "sourceRankRule": {
+      "type": "object",
+      "description": "What a source of one rank can do alone",
+      "required": [
+        "rank",
+        "basis",
+        "canSetStatusOrDate"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "rank": {
+          "type": "integer",
+          "description": "Source rank",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "basis": {
+          "type": "string",
+          "description": "Kind of source",
+          "enum": [
+            "officialText",
+            "regulatorPublication",
+            "standardsBodyPublication",
+            "commentary",
+            "news"
+          ]
+        },
+        "canSetStatusOrDate": {
+          "type": "boolean",
+          "description": "Whether this rank alone can set a status or date"
+        },
+        "onlyForTiers": {
+          "type": "array",
+          "description": "Tiers for which it can set a status or date, when not all",
+          "items": {
+            "$ref": "../semantic-library/obligation.schema.json#/definitions/sourceTier"
+          }
+        }
+      }
+    },
+    "autonomyRule": {
+      "type": "object",
+      "description": "Treatment for a kind of change",
+      "required": [
+        "ruleID",
+        "changeTypes",
+        "treatment"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ruleID": {
+          "type": "string",
+          "description": "Stable rule ID cited in results and provenance"
+        },
+        "changeTypes": {
+          "type": "array",
+          "description": "Change types the rule matches",
+          "items": {
+            "$ref": "change-proposal.schema.json#/definitions/changeType"
+          },
+          "minItems": 1
+        },
+        "whenTier": {
+          "type": "array",
+          "description": "Only match records of these tiers",
+          "items": {
+            "$ref": "../semantic-library/obligation.schema.json#/definitions/sourceTier"
+          }
+        },
+        "whenMaxSourceRank": {
+          "type": "integer",
+          "description": "Only match when the best evidence is at least this rank (a lower number is better)",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "treatment": {
+          "description": "Treatment assigned",
+          "allOf": [
+            {
+              "$ref": "change-proposal.schema.json#/definitions/treatment"
+            }
+          ]
+        },
+        "approverRequired": {
+          "type": "boolean",
+          "description": "Whether publication needs a named approver"
+        },
+        "keepSupersededVersion": {
+          "type": "boolean",
+          "description": "Whether the replaced version is kept in history"
+        },
+        "description": {
+          "type": "string",
+          "description": "The rule in plain words"
+        }
+      }
+    },
+    "freshnessRule": {
+      "type": "object",
+      "description": "Freshness threshold for records of a tier",
+      "required": [
+        "sourceTier",
+        "threshold"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sourceTier": {
+          "$ref": "../semantic-library/obligation.schema.json#/definitions/sourceTier"
+        },
+        "threshold": {
+          "type": "string",
+          "description": "ISO 8601 duration, e.g. P90D",
+          "pattern": "^P"
+        }
+      }
+    },
+    "languageRule": {
+      "type": "object",
+      "description": "A pattern that must not appear",
+      "required": [
+        "ruleID",
+        "pattern",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ruleID": {
+          "type": "string",
+          "description": "Stable rule ID"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Case-insensitive regular expression (ECMAScript syntax)"
+        },
+        "appliesTo": {
+          "type": "array",
+          "description": "Where the rule is checked",
+          "items": {
+            "type": "string",
+            "enum": [
+              "record",
+              "response",
+              "matterBrief"
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "What the rule prevents"
+        }
+      }
+    }
+  }
+}

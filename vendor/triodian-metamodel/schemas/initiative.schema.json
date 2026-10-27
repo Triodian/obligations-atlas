@@ -1,0 +1,371 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/initiative.schema.json",
+  "title": "Initiatives Domain Schema",
+  "description": "Focused efforts undertaken to deliver value, following the hierarchy Initiative > Program > Project. The root is an Initiative; Program and Project are element records under definitions, linked by parentInitiativeID and parentProgramID.",
+  "type": "object",
+  "properties": {
+    "initiativeID": {
+      "description": "Unique identifier for the Initiative",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the Initiative"
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the Initiative entails"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "The intended purpose or function of the Initiative within the Organization"
+    },
+    "scope": {
+      "type": "string",
+      "description": "The range or extent of the initiative"
+    },
+    "status": {
+      "description": "Current progress state of the initiative",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/workStatus"
+        }
+      ]
+    },
+    "owner": {
+      "type": "string",
+      "description": "The individual or team responsible for the Initiative"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The Organization unit(s) to which the Initiative is linked"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "driverType": {
+      "type": "string",
+      "description": "Primary driver for this initiative, based on the SRM trigger catalogue."
+    },
+    "rationale": {
+      "type": "string",
+      "description": "Narrative explanation referencing this driver and the rationale for the initiative."
+    },
+    "goals": {
+      "type": "string",
+      "description": "Specific objectives of the Initiative"
+    },
+    "progressTracking": {
+      "type": "string",
+      "description": "Tools and methods to monitor progress towards Initiative goals"
+    },
+    "resourceAllocation": {
+      "type": "string",
+      "description": "Distribution and management of resources for Initiatives"
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Other Initiatives, processes or systems that the Initiative depends on"
+    },
+    "relatedInitiatives": {
+      "type": "string",
+      "description": "Initiatives that are related or linked to this Initiative"
+    },
+    "relatedInitiativeIDs": {
+      "type": "array",
+      "description": "IDs of related Initiatives",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "performanceIndicators": {
+      "type": "string",
+      "description": "Metrics used to measure the success and progress of the Initiative"
+    },
+    "risks": {
+      "type": "string",
+      "description": "Potential risks associated with the Initiative and its implementation"
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Areas where the Initiative can be enhanced or improved"
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "How the Initiative aligns with the Organization's strategic goals and objectives"
+    },
+    "justification": {
+      "type": "string",
+      "description": "Explanation of why the initiative is required, referencing business drivers, strategic goals, capability gaps, stakeholder needs, or regulatory obligations."
+    },
+    "relatedStrategies": {
+      "type": "string",
+      "description": "Strategies that are connected or aligned with the primary Strategy"
+    },
+    "relatedStrategyIDs": {
+      "type": "array",
+      "description": "IDs of the Strategies this Initiative aligns with",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "childProgram": {
+      "type": "string",
+      "description": "A specific Program that is part of a larger Initiative"
+    },
+    "childProgramIDs": {
+      "type": "array",
+      "description": "IDs of the Programs that are part of this Initiative",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "initiativeID"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "program": {
+      "type": "object",
+      "description": "Programs sit beneath initiatives and are collections of related projects",
+      "properties": {
+        "programID": {
+          "description": "Unique identifier for the Program",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "The name or title of the Program"
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed explanation of what the Program entails"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The intended purpose or function of the Program within the Organization"
+        },
+        "owner": {
+          "type": "string",
+          "description": "The individual or team responsible for the Program"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The Organization unit(s) to which the Program is linked"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "goals": {
+          "type": "string",
+          "description": "Specific objectives of the Program"
+        },
+        "resources": {
+          "type": "string",
+          "description": "Resources allocated for the Program implementation"
+        },
+        "timeline": {
+          "type": "string",
+          "description": "The timeline for achieving the Program goals"
+        },
+        "performanceIndicators": {
+          "type": "string",
+          "description": "Metrics used to measure the success of the Program"
+        },
+        "dependencies": {
+          "type": "string",
+          "description": "Other Programs, Initiatives or processes that the Program depends on"
+        },
+        "relatedPrograms": {
+          "type": "string",
+          "description": "Programs that are related or linked to this Program"
+        },
+        "relatedProgramIDs": {
+          "type": "array",
+          "description": "IDs of related Programs",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        },
+        "risks": {
+          "type": "string",
+          "description": "Potential risks associated with the Program and its implementation"
+        },
+        "improvementOpportunities": {
+          "type": "string",
+          "description": "Areas where the Program can be enhanced or improved"
+        },
+        "strategicAlignment": {
+          "type": "string",
+          "description": "How the Program aligns with the Organization's strategic goals and objectives"
+        },
+        "parentInitiative": {
+          "type": "string",
+          "description": "The parent Initiative to which this Program belongs"
+        },
+        "parentInitiativeID": {
+          "description": "ID of the Initiative this Program belongs to",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "childProjects": {
+          "type": "string",
+          "description": "Projects that are part of this Program"
+        },
+        "childProjectIDs": {
+          "type": "array",
+          "description": "IDs of the Projects that are part of this Program",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "programID"
+      ],
+      "additionalProperties": false
+    },
+    "project": {
+      "type": "object",
+      "description": "Projects are specific tasks or efforts at the base of the hierarchy",
+      "properties": {
+        "projectID": {
+          "description": "Unique identifier for the Project",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "The name or title of the Project"
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed explanation of what the Project entails"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The intended purpose or function of the Project within the Program"
+        },
+        "owner": {
+          "type": "string",
+          "description": "The individual or team responsible for the Project"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "The Organization unit(s) to which the Project is linked"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "goals": {
+          "type": "string",
+          "description": "Specific objectives of the Project"
+        },
+        "resources": {
+          "type": "string",
+          "description": "Resources allocated for the Project implementation"
+        },
+        "timeline": {
+          "type": "string",
+          "description": "The timeline for completing the Project"
+        },
+        "performanceIndicators": {
+          "type": "string",
+          "description": "Metrics used to measure the success of the Project"
+        },
+        "dependencies": {
+          "type": "string",
+          "description": "Other Projects, Initiatives or processes that the Project depends on"
+        },
+        "relatedProjects": {
+          "type": "string",
+          "description": "Projects that are related or linked to this Project"
+        },
+        "relatedProjectIDs": {
+          "type": "array",
+          "description": "IDs of related Projects",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        },
+        "risks": {
+          "type": "string",
+          "description": "Potential risks associated with the Project and its implementation"
+        },
+        "improvementOpportunities": {
+          "type": "string",
+          "description": "Areas where the Project can be enhanced or improved"
+        },
+        "strategicAlignment": {
+          "type": "string",
+          "description": "How the Project aligns with the Organization's strategic goals and objectives"
+        },
+        "parentProgram": {
+          "type": "string",
+          "description": "The parent Program to which this Project belongs"
+        },
+        "parentProgramID": {
+          "description": "ID of the Program this Project belongs to",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "childProjects": {
+          "type": "string",
+          "description": "Projects that are part of this Project"
+        },
+        "childProjectIDs": {
+          "type": "array",
+          "description": "IDs of sub-Projects that are part of this Project",
+          "items": {
+            "$ref": "common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "projectID"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

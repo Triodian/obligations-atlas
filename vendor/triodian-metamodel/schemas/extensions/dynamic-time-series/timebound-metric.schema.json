@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/extensions/dynamic-time-series/timebound-metric.schema.json",
+  "title": "Timebound Metric Schema",
+  "description": "Dynamic and Time-Series extension to the Performance domain. A metric measured as a time series from a live source, with its unit, update interval and target, linked to the strategic initiative or performance record it supports. Timebound metrics are the foundation for live monitoring, trend analysis and predictive models.",
+  "type": "object",
+  "required": [
+    "timeboundMetricID",
+    "title",
+    "unitOfMeasure",
+    "updateFrequency"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "timeboundMetricID": {
+      "description": "Unique identifier for the metric, e.g. TBM-MACHINE-TEMPERATURE",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Name of the metric"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the metric measures"
+    },
+    "source": {
+      "type": "string",
+      "description": "Sensor, stream or data flow the values come from"
+    },
+    "dataFlowID": {
+      "description": "Data flow that supplies the values",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "unitOfMeasure": {
+      "type": "string",
+      "description": "Unit the metric is measured in, e.g. Celsius"
+    },
+    "updateFrequency": {
+      "description": "How often the metric updates",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/frequency"
+        }
+      ]
+    },
+    "updateInterval": {
+      "type": "string",
+      "description": "Exact update interval as an ISO 8601 duration, e.g. PT10S"
+    },
+    "target": {
+      "type": "object",
+      "description": "Desired or expected value",
+      "required": [
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "Target value"
+        },
+        "comparison": {
+          "type": "string",
+          "description": "How a reading is compared with the target",
+          "enum": [
+            "atMost",
+            "atLeast",
+            "equals",
+            "within"
+          ]
+        },
+        "tolerance": {
+          "type": "number",
+          "description": "Allowed deviation when comparison is within"
+        }
+      }
+    },
+    "alertThresholds": {
+      "type": "array",
+      "description": "Values that raise an alert",
+      "items": {
+        "$ref": "#/definitions/alertThreshold"
+      }
+    },
+    "linkedInitiativeID": {
+      "description": "Strategic initiative the metric supports",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "performanceID": {
+      "description": "Performance record the metric reports into",
+      "allOf": [
+        {
+          "$ref": "../../common.schema.json#/definitions/identifier"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "alertThreshold": {
+      "type": "object",
+      "description": "A value that raises an alert when crossed",
+      "required": [
+        "value",
+        "direction",
+        "severity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "Threshold value"
+        },
+        "direction": {
+          "type": "string",
+          "description": "Whether the alert fires above or below the value",
+          "enum": [
+            "above",
+            "below"
+          ]
+        },
+        "severity": {
+          "description": "Seriousness of the alert",
+          "allOf": [
+            {
+              "$ref": "../../common.schema.json#/definitions/severity"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "timeboundMetricID": "TBM-MACHINE-TEMPERATURE",
+      "title": "Machine 101 Temperature",
+      "description": "Temperature of a critical machine component, updated every 10 seconds.",
+      "source": "Machine-101-Sensor-B",
+      "unitOfMeasure": "Celsius",
+      "updateFrequency": "realTime",
+      "updateInterval": "PT10S",
+      "target": {
+        "value": 85.0,
+        "comparison": "atMost"
+      },
+      "linkedInitiativeID": "INIT-ENERGY-EFFICIENCY"
+    }
+  ]
+}

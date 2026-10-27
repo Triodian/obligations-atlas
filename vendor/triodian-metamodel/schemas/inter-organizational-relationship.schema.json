@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/inter-organizational-relationship.schema.json",
+  "title": "Inter-Organizational Relationship Schema",
+  "description": "Schema for modeling links between internal and external organizational units",
+  "type": "object",
+  "required": [
+    "relationshipID",
+    "sourceOrgID",
+    "targetOrgID",
+    "relationshipType"
+  ],
+  "properties": {
+    "relationshipID": {
+      "type": "string",
+      "description": "Unique identifier for the relationship"
+    },
+    "sourceOrgID": {
+      "type": "string",
+      "description": "Reference to the source organization (internal or external)"
+    },
+    "sourceType": {
+      "type": "string",
+      "enum": [
+        "internal",
+        "external"
+      ],
+      "description": "Whether the source is an internal or external organization"
+    },
+    "targetOrgID": {
+      "type": "string",
+      "description": "Reference to the target organization (internal or external)"
+    },
+    "targetType": {
+      "type": "string",
+      "enum": [
+        "internal",
+        "external"
+      ],
+      "description": "Whether the target is an internal or external organization"
+    },
+    "relationshipType": {
+      "type": "string",
+      "enum": [
+        "sharesDataWith",
+        "providesServicesTo",
+        "regulates",
+        "collaboratesWith",
+        "funds",
+        "reportsTo",
+        "advises",
+        "coGovernsWith"
+      ],
+      "description": "The nature of the relationship between organizations"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the relationship"
+    },
+    "strength": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Strength of the relationship from 1 (very weak) to 5 (very strong)"
+    },
+    "formalAgreement": {
+      "type": "string",
+      "description": "Reference to any formal agreement governing this relationship"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "When the relationship began"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date",
+      "description": "When the relationship is scheduled to end (if applicable)"
+    },
+    "linkedDomains": {
+      "type": "array",
+      "description": "Domains affected by this relationship",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domainType": {
+            "$ref": "common.schema.json#/definitions/domainType"
+          },
+          "domainID": {
+            "type": "string",
+            "description": "ID of the linked domain entity"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

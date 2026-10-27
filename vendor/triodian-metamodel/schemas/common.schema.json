@@ -1,0 +1,553 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/common.schema.json",
+  "title": "Shared Vocabulary Schema",
+  "description": "Controlled vocabularies and reusable structures shared by every Triodian domain. Domains reference these definitions with $ref (for example \"common.schema.json#/definitions/riskLevel\") instead of defining their own lists. All enumerated values are camelCase. This file defines no instance type of its own.",
+  "definitions": {
+    "ratingLevel": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "description": "General four-point rating, from least to most significant. The basis for priority, criticality, risk level, severity and importance."
+    },
+    "priority": {
+      "description": "How urgently something should be addressed relative to other work.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ratingLevel"
+        }
+      ]
+    },
+    "criticality": {
+      "description": "How essential something is to business operation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ratingLevel"
+        }
+      ]
+    },
+    "importance": {
+      "description": "Strategic importance of something to the organization.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ratingLevel"
+        }
+      ]
+    },
+    "riskLevel": {
+      "description": "Overall level of a risk, combining likelihood and impact.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ratingLevel"
+        }
+      ]
+    },
+    "severity": {
+      "description": "Seriousness of an issue, finding or non-financial impact.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ratingLevel"
+        }
+      ]
+    },
+    "simpleLevel": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "description": "Simple three-point rating, for strength, threat, leverage, uncertainty and similar judgements where a critical level does not apply."
+    },
+    "fivePointLevel": {
+      "type": "string",
+      "enum": [
+        "veryLow",
+        "low",
+        "medium",
+        "high",
+        "veryHigh"
+      ],
+      "description": "Five-point rating from very low to very high, for judgements such as flexibility, resilience, visibility or data quality where a critical level does not apply. Risk levels use riskLevel instead."
+    },
+    "confidenceLevel": {
+      "description": "Confidence in an estimate, assumption or assessment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/simpleLevel"
+        }
+      ]
+    },
+    "alignmentLevel": {
+      "type": "string",
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "description": "Degree to which something aligns with a strategy, objective or standard."
+    },
+    "likelihood": {
+      "type": "string",
+      "enum": [
+        "veryLow",
+        "low",
+        "medium",
+        "high",
+        "veryHigh"
+      ],
+      "description": "Five-point likelihood or probability of an event occurring."
+    },
+    "impactMagnitude": {
+      "type": "string",
+      "enum": [
+        "negligible",
+        "minor",
+        "moderate",
+        "major",
+        "severe"
+      ],
+      "description": "Five-point magnitude of an adverse consequence if a risk or event occurs (risk-assessment convention)."
+    },
+    "changeMagnitude": {
+      "type": "string",
+      "enum": [
+        "minimal",
+        "moderate",
+        "significant",
+        "transformative",
+        "disruptive"
+      ],
+      "description": "Scale of change something brings about: from minimal adjustment, through transformation of how things work, to disruption of the existing model."
+    },
+    "effectiveness": {
+      "type": "string",
+      "enum": [
+        "notAssessed",
+        "ineffective",
+        "partiallyEffective",
+        "effective",
+        "highlyEffective"
+      ],
+      "description": "How well a control, mechanism or intervention achieves its purpose."
+    },
+    "complexity": {
+      "type": "string",
+      "enum": [
+        "simple",
+        "moderate",
+        "complex",
+        "highlyComplex"
+      ],
+      "description": "Implementation or operational complexity."
+    },
+    "scale1to5": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Numeric strength or score from 1 (lowest) to 5 (highest)."
+    },
+    "frequency": {
+      "type": "string",
+      "enum": [
+        "continuous",
+        "realTime",
+        "hourly",
+        "daily",
+        "weekly",
+        "monthly",
+        "quarterly",
+        "semiAnnually",
+        "annually",
+        "eventDriven",
+        "onDemand",
+        "adHoc"
+      ],
+      "description": "How often something happens: measurement, reporting, review, monitoring, engagement or execution. continuous = always running; realTime = responds as events occur; eventDriven = triggered by a defined event; onDemand = when requested; adHoc = irregular, as needed."
+    },
+    "timeHorizon": {
+      "type": "string",
+      "enum": [
+        "immediate",
+        "shortTerm",
+        "mediumTerm",
+        "longTerm",
+        "extended"
+      ],
+      "description": "Planning or impact horizon. Default ranges unless a domain states otherwise: immediate = now to 3 months; shortTerm = up to 1 year; mediumTerm = 2 to 3 years; longTerm = 4 to 5 years; extended = beyond 5 years."
+    },
+    "performanceTrend": {
+      "type": "string",
+      "enum": [
+        "improving",
+        "stable",
+        "declining",
+        "fluctuating",
+        "notTracked"
+      ],
+      "description": "Direction of a measure judged against its goal (better or worse)."
+    },
+    "quantityTrend": {
+      "type": "string",
+      "enum": [
+        "increasing",
+        "stable",
+        "decreasing",
+        "fluctuating"
+      ],
+      "description": "Neutral direction of change in an amount, without judging whether the change is good or bad."
+    },
+    "workStatus": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "planned",
+        "approved",
+        "inProgress",
+        "onHold",
+        "deferred",
+        "completed",
+        "cancelled"
+      ],
+      "description": "Progress of a piece of work such as an initiative, program, project, action, response or work order."
+    },
+    "documentStatus": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "inReview",
+        "approved",
+        "superseded",
+        "obsolete"
+      ],
+      "description": "Approval state of a document, artefact, policy or standard."
+    },
+    "implementationStatus": {
+      "type": "string",
+      "enum": [
+        "notStarted",
+        "planned",
+        "inProgress",
+        "implemented",
+        "operational",
+        "verified",
+        "retiring",
+        "retired",
+        "abandoned",
+        "notApplicable"
+      ],
+      "description": "Implementation state of a control, technology, strategy or practice. implemented = in place; operational = in routine use; verified = independently confirmed effective."
+    },
+    "complianceStatus": {
+      "type": "string",
+      "enum": [
+        "compliant",
+        "partiallyCompliant",
+        "nonCompliant",
+        "underReview",
+        "exempt",
+        "notApplicable"
+      ],
+      "description": "Compliance state against a regulation, standard or policy."
+    },
+    "lifecycleStage": {
+      "type": "string",
+      "enum": [
+        "ideation",
+        "planning",
+        "design",
+        "development",
+        "implementation",
+        "launch",
+        "operational",
+        "enhancement",
+        "optimization",
+        "retirement"
+      ],
+      "description": "Delivery lifecycle stage of something the organization builds or runs, such as a capability component, service, product feature or initiative output."
+    },
+    "adoptionStage": {
+      "type": "string",
+      "enum": [
+        "emerging",
+        "growth",
+        "mature",
+        "declining",
+        "legacy",
+        "sunset"
+      ],
+      "description": "Position in a market or technology adoption curve, for an industry, technology, product category or trend."
+    },
+    "maturityLevel": {
+      "type": "string",
+      "enum": [
+        "initial",
+        "repeatable",
+        "defined",
+        "managed",
+        "optimizing"
+      ],
+      "description": "Five-level capability maturity model: initial = ad hoc; repeatable = disciplined but not standard; defined = standard and documented; managed = measured and controlled; optimizing = continuously improved."
+    },
+    "automationLevel": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "semiAutomated",
+        "highlyAutomated",
+        "fullyAutomated",
+        "aiEnabled"
+      ],
+      "description": "Degree of automation in a process, service, measure or activity."
+    },
+    "riskCategory": {
+      "type": "string",
+      "enum": [
+        "strategic",
+        "operational",
+        "financial",
+        "market",
+        "economic",
+        "political",
+        "compliance",
+        "legal",
+        "technology",
+        "security",
+        "privacy",
+        "dataQuality",
+        "supplyChain",
+        "people",
+        "reputational",
+        "relationship",
+        "changeManagement",
+        "environmental",
+        "external",
+        "other"
+      ],
+      "description": "Category of risk. compliance covers regulatory risk; technology covers technical failure and obsolescence; security covers cybersecurity; people covers workforce, skills, capacity and labour; environmental covers natural-environment and climate risk; external covers other outside events beyond the organization's control."
+    },
+    "domainType": {
+      "type": "string",
+      "enum": [
+        "organization",
+        "stakeholder",
+        "capability",
+        "strategy",
+        "product",
+        "service",
+        "information",
+        "performance",
+        "initiative",
+        "policy",
+        "valueStream",
+        "customer",
+        "market",
+        "finance",
+        "risk",
+        "modelRisk",
+        "supplyChain",
+        "innovation",
+        "sustainability",
+        "people",
+        "technology",
+        "channel",
+        "socialChange",
+        "intelligence",
+        "manufacturing",
+        "businessAnalysis",
+        "externalOrganization",
+        "trigger",
+        "rationale",
+        "strategicIntent",
+        "strategicResponse",
+        "obligation",
+        "semanticConstraint",
+        "complianceRequirement",
+        "statementOfCompliance",
+        "publicReport",
+        "mandatoryDisclosure",
+        "useCase",
+        "dataFlow",
+        "timeboundMetric",
+        "predictiveModel",
+        "other"
+      ],
+      "description": "A Triodian metamodel domain, used when one record refers to an entity in another domain."
+    },
+    "dependencyStrength": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "important",
+        "supportive",
+        "optional"
+      ],
+      "description": "How strongly one entity depends on another: critical = cannot function without it; important = significantly degraded without it; supportive = helped by it; optional = minor benefit."
+    },
+    "geographicScope": {
+      "type": "string",
+      "enum": [
+        "local",
+        "regional",
+        "national",
+        "multinational",
+        "continental",
+        "global",
+        "crossBorder",
+        "virtual"
+      ],
+      "description": "Geographic reach. regional = within a state, province or sub-national region; multinational = several specific countries; virtual = no physical geographic limit."
+    },
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier of a record within its domain, for example \"CAP-001\" or \"MKT-ENTSW-001\"."
+    },
+    "currencyCode": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 three-letter currency code.",
+      "examples": [
+        "AUD",
+        "USD",
+        "EUR"
+      ]
+    },
+    "jurisdictionCode": {
+      "type": "string",
+      "pattern": "^([A-Z]{2}(-[A-Z0-9]{1,3})?|INT)$",
+      "description": "Jurisdiction as an ISO 3166-1 alpha-2 country code, optionally followed by an ISO 3166-2 subdivision code (\"US-NY\"). \"EU\" is used for European Union law, and \"INT\" for international standards and frameworks that are not tied to one jurisdiction.",
+      "examples": [
+        "AU",
+        "SG",
+        "EU",
+        "GB",
+        "NZ",
+        "US-NY",
+        "INT"
+      ]
+    },
+    "moneyAmount": {
+      "type": "object",
+      "description": "A monetary amount in a stated currency.",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "Monetary amount"
+        },
+        "currency": {
+          "$ref": "#/definitions/currencyCode"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "additionalProperties": false
+    },
+    "datePeriod": {
+      "type": "object",
+      "description": "A period between two dates.",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date"
+        }
+      },
+      "required": [
+        "startDate",
+        "endDate"
+      ],
+      "additionalProperties": false
+    },
+    "entityReference": {
+      "type": "object",
+      "description": "A reference to an entity in any domain, by identifier.",
+      "properties": {
+        "domainType": {
+          "$ref": "#/definitions/domainType"
+        },
+        "entityID": {
+          "$ref": "#/definitions/identifier"
+        },
+        "title": {
+          "type": "string",
+          "description": "Name of the referenced entity, for readability"
+        }
+      },
+      "required": [
+        "domainType",
+        "entityID"
+      ],
+      "additionalProperties": false
+    },
+    "dependency": {
+      "type": "object",
+      "description": "An entity in another domain that this record depends on.",
+      "properties": {
+        "dependencyType": {
+          "$ref": "#/definitions/dependencyStrength"
+        },
+        "domainType": {
+          "$ref": "#/definitions/domainType"
+        },
+        "entityID": {
+          "$ref": "#/definitions/identifier"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the dependency"
+        }
+      },
+      "required": [
+        "domainType",
+        "entityID"
+      ],
+      "additionalProperties": false
+    },
+    "performanceIndicator": {
+      "type": "object",
+      "description": "A metric used to measure performance, with current and target values.",
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric"
+        },
+        "metricDescription": {
+          "type": "string",
+          "description": "What the metric measures"
+        },
+        "currentValue": {
+          "type": "string",
+          "description": "Current value"
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "Target value"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of measurement"
+        },
+        "trend": {
+          "$ref": "#/definitions/performanceTrend"
+        }
+      },
+      "required": [
+        "metricName"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

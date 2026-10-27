@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/coverage/coverage-status.schema.json",
+  "title": "Coverage Status Schema",
+  "type": "object",
+  "description": "Derived record comparing actual domain coverage to expectations and identifying gaps.",
+  "properties": {
+    "coverageStatusID": {
+      "type": "string",
+      "description": "Unique identifier for the coverage status record."
+    },
+    "orgUnit": {
+      "type": "string",
+      "description": "Organisation unit assessed."
+    },
+    "domain": {
+      "description": "The business architecture domain assessed.",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/domainType"
+        }
+      ]
+    },
+    "coverageScore": {
+      "type": "number",
+      "description": "Numeric score (e.g. 0.0–1.0) based on actual coverage determined by document and data analysis."
+    },
+    "coverageLevelAchieved": {
+      "type": "string",
+      "enum": [
+        "none",
+        "minimal",
+        "documented",
+        "analysed",
+        "governed",
+        "optimised"
+      ],
+      "description": "Categorical level derived from the score."
+    },
+    "expectedCoverageLevel": {
+      "type": "string",
+      "enum": [
+        "none",
+        "minimal",
+        "documented",
+        "analysed",
+        "governed",
+        "optimised"
+      ],
+      "description": "Target level defined in CoverageExpectation."
+    },
+    "coverageGap": {
+      "type": "number",
+      "description": "Calculated gap between achieved and expected levels (may be zero)."
+    },
+    "lastEvaluatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this coverage status was last assessed."
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional comments or explanation for gap."
+    }
+  },
+  "required": [
+    "coverageStatusID",
+    "orgUnit",
+    "domain",
+    "coverageScore",
+    "coverageLevelAchieved",
+    "expectedCoverageLevel",
+    "coverageGap",
+    "lastEvaluatedAt"
+  ],
+  "additionalProperties": false
+}

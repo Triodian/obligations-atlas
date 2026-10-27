@@ -1,0 +1,985 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/social-change.schema.json",
+  "title": "Social Change Domain Schema",
+  "description": "Schema for modeling campaigns, movements, and interventions aimed at addressing systemic injustice, inequality, and exclusion, including revolutionary transformations and organizational change initiatives",
+  "type": "object",
+  "required": [
+    "socialChangeID",
+    "name",
+    "description",
+    "activityType"
+  ],
+  "properties": {
+    "socialChangeID": {
+      "type": "string",
+      "description": "Unique identifier for the social change activity"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name/title of the social change action or campaign"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short summary of the goal and focus"
+    },
+    "activityType": {
+      "type": "string",
+      "enum": [
+        "campaign",
+        "protest",
+        "strike",
+        "picket",
+        "boycott",
+        "legalChallenge",
+        "coalition",
+        "researchProgram",
+        "revolution",
+        "insurrection",
+        "uprising",
+        "organizationalReform",
+        "policyInitiative",
+        "communityOrganizing",
+        "consultingProject",
+        "institutionalTransformation"
+      ],
+      "description": "Type of activity or intervention"
+    },
+    "activityCategory": {
+      "type": "string",
+      "enum": [
+        "grassrootsOrganizing",
+        "institutionalAction",
+        "revolutionaryAction",
+        "organizationalChange",
+        "researchAndAnalysis",
+        "communityDevelopment"
+      ],
+      "description": "Primary category classification of the activity"
+    },
+    "specificActions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specific actions employed in the campaign"
+    },
+    "leadingOrganizations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Key organisations leading or coordinating the action"
+    },
+    "systemicProblem": {
+      "type": "string",
+      "description": "Systemic problem or injustice being addressed"
+    },
+    "primaryAffectedGroups": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Primary groups impacted by the injustice"
+    },
+    "stakeholders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the stakeholder"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "laborUnions",
+              "governmentAgencies",
+              "corporateLeadership",
+              "ngosCivilSociety",
+              "communityGroups",
+              "professionalOrganizations",
+              "academicInstitutions",
+              "mediaOrganizations",
+              "religiousOrganizations",
+              "individualCitizens"
+            ],
+            "description": "Type of stakeholder"
+          },
+          "influenceLevel": {
+            "type": "string",
+            "enum": [
+              "low",
+              "lowMedium",
+              "medium",
+              "mediumHigh",
+              "high"
+            ],
+            "description": "Level of influence the stakeholder has"
+          },
+          "engagementStrategy": {
+            "type": "string",
+            "description": "Strategy for engaging this stakeholder"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Structured list of involved or affected actors"
+    },
+    "policyTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Legislation or policy being influenced or challenged"
+    },
+    "institutionalTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "State or corporate entities engaged or targeted"
+    },
+    "tactics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "tacticType",
+          "description"
+        ],
+        "properties": {
+          "tacticType": {
+            "type": "string",
+            "description": "Type of tactic employed"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the tactic"
+          },
+          "channel": {
+            "type": "string",
+            "description": "Channel or venue for the tactic"
+          },
+          "violenceLevel": {
+            "type": "string",
+            "enum": [
+              "nonViolent",
+              "propertyDisruption",
+              "minimalViolence",
+              "armedResistance",
+              "civilWar"
+            ],
+            "description": "Level of violence involved in the tactic"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Advocacy and action tactics used"
+    },
+    "escalationSequence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Sequence of increasing pressure or intervention"
+    },
+    "economicImpact": {
+      "type": "string",
+      "description": "Scale and nature of economic disruption"
+    },
+    "legalBasis": {
+      "type": "string",
+      "description": "Jurisdictional basis for action"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "capabilityID",
+          "name"
+        ],
+        "properties": {
+          "capabilityID": {
+            "type": "string",
+            "description": "Identifier for the capability"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the capability"
+          },
+          "levelOfUse": {
+            "description": "Level of capability utilization",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/simpleLevel"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "List of related capabilities leveraged"
+    },
+    "valueStreams": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Value flows disrupted or transformed"
+    },
+    "successMeasurement": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "Method for evaluating effectiveness"
+        },
+        "measurementType": {
+          "type": "string",
+          "enum": [
+            "outputMetrics",
+            "outcomeMetrics",
+            "impactMetrics",
+            "processMetrics"
+          ],
+          "description": "Category of measurement"
+        },
+        "timeHorizon": {
+          "description": "Time frame for measurement",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/timeHorizon"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "ongoing"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        }
+      },
+      "description": "Method for evaluating effectiveness",
+      "additionalProperties": false
+    },
+    "successMetrics": {
+      "type": "array",
+      "description": "How success will be measured, e.g. policy adoption rates or community engagement levels",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "riskType",
+          "description"
+        ],
+        "properties": {
+          "riskType": {
+            "description": "Category of risk",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/riskCategory"
+              }
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the risk"
+          },
+          "severityLevel": {
+            "description": "Severity level of the risk",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/severity"
+              }
+            ]
+          },
+          "mitigationStrategy": {
+            "type": "string",
+            "description": "Strategy for mitigating the risk"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Operational or reputational risks"
+    },
+    "keyPerformanceIndicators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "indicatorName",
+          "measurementMethod"
+        ],
+        "properties": {
+          "indicatorName": {
+            "type": "string",
+            "description": "Name of the performance indicator"
+          },
+          "targetValue": {
+            "type": "string",
+            "description": "Target value for the indicator"
+          },
+          "measurementMethod": {
+            "type": "string",
+            "description": "Method for measuring the indicator"
+          },
+          "dataSource": {
+            "type": "string",
+            "description": "Source of data for measurement"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "KPIs used to measure campaign success"
+    },
+    "improvementAreas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Areas to enhance strategy or inclusiveness"
+    },
+    "strategicGoals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Broader goals supported by this action"
+    },
+    "changeScope": {
+      "type": "string",
+      "enum": [
+        "departmentLevel",
+        "organizationWide",
+        "multiOrganizational",
+        "sectorWide",
+        "local",
+        "regional",
+        "national",
+        "international"
+      ],
+      "description": "Level and breadth of change initiative"
+    },
+    "changeAgentType": {
+      "type": "string",
+      "enum": [
+        "workerCommittee",
+        "hrLeadership",
+        "externalConsultant",
+        "governmentAgency",
+        "ngoPartnership",
+        "communityCoalition",
+        "revolutionaryCouncil"
+      ],
+      "description": "Who is driving the change initiative"
+    },
+    "institutionalContext": {
+      "type": "string",
+      "enum": [
+        "privateCorporation",
+        "governmentAgency",
+        "nonProfitOrganization",
+        "educationalInstitution",
+        "healthcareSystem",
+        "religiousInstitution",
+        "communityOrganization"
+      ],
+      "description": "Type of organization or institution"
+    },
+    "changeMethodology": {
+      "type": "string",
+      "enum": [
+        "communityOrganizing",
+        "policyAdvocacy",
+        "organizationalDevelopment",
+        "directAction",
+        "legalStrategy",
+        "researchAndEducation",
+        "participatoryActionResearch",
+        "policyDesignThinking"
+      ],
+      "description": "Approach or framework used for change"
+    },
+    "resourceSource": {
+      "type": "string",
+      "enum": [
+        "internalBudget",
+        "governmentGrant",
+        "foundationFunding",
+        "consultingContract",
+        "volunteerResources",
+        "membershipFees",
+        "donations",
+        "coalitionResources"
+      ],
+      "description": "Funding and resource origin"
+    },
+    "timeline": {
+      "type": "string",
+      "enum": [
+        "eventBased",
+        "3MonthPilot",
+        "6MonthProject",
+        "1YearImplementation",
+        "multiYearTransformation",
+        "ongoingProgram",
+        "permanentInitiative"
+      ],
+      "description": "Expected duration of change initiative"
+    },
+    "resistanceFactors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Anticipated or encountered opposition"
+    },
+    "sustainabilityPlan": {
+      "type": "string",
+      "description": "How changes will be maintained"
+    },
+    "revolutionType": {
+      "type": "string",
+      "enum": [
+        "politicalRevolution",
+        "socialRevolution",
+        "economicRevolution",
+        "culturalRevolution"
+      ],
+      "description": "Classification of revolutionary approach (for revolutionary activities)"
+    },
+    "violenceClassification": {
+      "type": "string",
+      "enum": [
+        "nonViolent",
+        "propertyDisruption",
+        "minimalViolence",
+        "armedResistance",
+        "civilWar"
+      ],
+      "description": "Degree of violence employed (for revolutionary activities)"
+    },
+    "revolutionaryScope": {
+      "type": "string",
+      "enum": [
+        "localUprising",
+        "regionalRevolution",
+        "nationalRevolution",
+        "internationalRevolution"
+      ],
+      "description": "Geographic and institutional reach (for revolutionary activities)"
+    },
+    "legitimacyBasis": {
+      "type": "string",
+      "enum": [
+        "tyrannicalOppression",
+        "colonialLiberation",
+        "democraticRestoration",
+        "economicJustice",
+        "selfDetermination",
+        "humanRightsProtection"
+      ],
+      "description": "Legal and moral justification for revolution (for revolutionary activities)"
+    },
+    "revolutionaryLeadership": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "leadershipType",
+          "organizationType"
+        ],
+        "properties": {
+          "leadershipType": {
+            "type": "string",
+            "enum": [
+              "decentralized",
+              "hierarchical",
+              "coalitionBased",
+              "emergent"
+            ],
+            "description": "Structure of revolutionary leadership"
+          },
+          "organizationType": {
+            "type": "string",
+            "enum": [
+              "popularMovement",
+              "liberationArmy",
+              "undergroundNetwork",
+              "politicalCoalition",
+              "workerCouncil"
+            ],
+            "description": "Type of revolutionary organization"
+          },
+          "keyFigures": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Key leadership figures or bodies"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Leadership structure and organization (for revolutionary activities)"
+    },
+    "targetRegime": {
+      "type": "string",
+      "enum": [
+        "authoritarianGovernment",
+        "colonialAdministration",
+        "oligarchy",
+        "militaryDictatorship",
+        "corruptDemocracy",
+        "corporateOligarchy"
+      ],
+      "description": "Specific government or system being challenged (for revolutionary activities)"
+    },
+    "revolutionaryPhases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "preRevolutionaryConditions",
+          "grievanceAccumulation",
+          "mobilization",
+          "activeRevolution",
+          "confrontation",
+          "systemOverthrow",
+          "consolidation",
+          "reconstruction",
+          "institutionBuilding",
+          "colonialResistance",
+          "armedStruggle",
+          "territoryControl",
+          "independence"
+        ]
+      },
+      "description": "Progression through revolutionary stages (for revolutionary activities)"
+    },
+    "internationalSupport": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "supportType",
+          "source"
+        ],
+        "properties": {
+          "supportType": {
+            "type": "string",
+            "enum": [
+              "diplomatic",
+              "economic",
+              "military",
+              "humanitarian",
+              "media"
+            ],
+            "description": "Type of international support"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source of the support"
+          },
+          "level": {
+            "description": "Level of support provided",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/simpleLevel"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "External backing or opposition (for revolutionary activities)"
+    },
+    "historicalPrecedent": {
+      "type": "string",
+      "description": "Reference to similar historical movements"
+    },
+    "counterRevolutionaryForces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "forceType"
+        ],
+        "properties": {
+          "forceType": {
+            "type": "string",
+            "enum": [
+              "stateSecurity",
+              "military",
+              "paramilitary",
+              "foreignIntervention",
+              "economicElite",
+              "politicalOpposition"
+            ],
+            "description": "Type of counter-revolutionary force"
+          },
+          "strength": {
+            "description": "Strength of the counter-revolutionary force",
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/definitions/simpleLevel"
+              }
+            ]
+          },
+          "tactics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tactics employed by counter-revolutionary forces"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Opposition and resistance to revolutionary change (for revolutionary activities)"
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "stageName",
+          "stageDescription"
+        ],
+        "properties": {
+          "stageName": {
+            "type": "string",
+            "description": "Name/title of the stage"
+          },
+          "stageDescription": {
+            "type": "string",
+            "description": "Description of what happens in this phase"
+          },
+          "intendedOutcome": {
+            "type": "string",
+            "description": "Intended outcome of this stage"
+          },
+          "stageLeadership": {
+            "type": "string",
+            "description": "Lead team or individual coordinating the stage"
+          },
+          "communicationChannels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Communication and mobilisation channels used"
+          },
+          "stageInterventions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "tacticType",
+                "description"
+              ],
+              "properties": {
+                "tacticType": {
+                  "type": "string",
+                  "description": "Type of intervention"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the intervention"
+                },
+                "channel": {
+                  "type": "string",
+                  "description": "Channel for the intervention"
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "Interventions deployed during this phase"
+          },
+          "prerequisites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Prerequisites and enablers"
+          },
+          "stageOutcomes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tangible or intangible results"
+          },
+          "successMetrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "indicatorName",
+                "measurementMethod"
+              ],
+              "properties": {
+                "indicatorName": {
+                  "type": "string",
+                  "description": "Name of success indicator"
+                },
+                "targetValue": {
+                  "type": "string",
+                  "description": "Target value for the indicator"
+                },
+                "measurementMethod": {
+                  "type": "string",
+                  "description": "Method for measuring the indicator"
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "Metrics of success at this stage"
+          },
+          "stageRisks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "riskType",
+                "description"
+              ],
+              "properties": {
+                "riskType": {
+                  "type": "string",
+                  "description": "Type of stage-specific risk"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Description of the risk"
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "Stage-specific risks"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Staged progression of the social change action"
+    },
+    "relationships": {
+      "type": "object",
+      "properties": {
+        "owningUnit": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "orgUnitID": {
+                "type": "string",
+                "description": "ID of the owning organization unit"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the owning organization unit"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Organisation unit responsible for coordination"
+        },
+        "triggeredCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "capabilityID": {
+                "type": "string",
+                "description": "ID of the capability"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the capability"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Capabilities activated or strengthened by campaign"
+        },
+        "valueStreamImpacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "valueStreamID": {
+                "type": "string",
+                "description": "ID of the value stream"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the value stream"
+              },
+              "impactType": {
+                "type": "string",
+                "enum": [
+                  "disrupted",
+                  "supported",
+                  "transformed"
+                ],
+                "description": "Type of impact on the value stream"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Value streams disrupted or supported"
+        },
+        "stakeholderAffected": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "stakeholderID": {
+                "type": "string",
+                "description": "ID of the stakeholder"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the stakeholder"
+              },
+              "relationshipType": {
+                "type": "string",
+                "enum": [
+                  "target",
+                  "ally",
+                  "neutral",
+                  "opposition"
+                ],
+                "description": "Relationship type with the stakeholder"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Groups participating in or targeted by action"
+        },
+        "policyTargets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "policyID": {
+                "type": "string",
+                "description": "ID of the policy"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the policy"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Laws or regulations being influenced"
+        },
+        "strategicAlignment": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "strategyID": {
+                "type": "string",
+                "description": "ID of the strategy"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the strategic goal"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Higher-level goals this contributes to"
+        },
+        "initiativeContainer": {
+          "type": "object",
+          "properties": {
+            "initiativeID": {
+              "type": "string",
+              "description": "ID of the initiative"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the parent initiative"
+            }
+          },
+          "description": "Parent initiative or funding body",
+          "additionalProperties": false
+        }
+      },
+      "description": "Relationships to other domains in the Triodian Metamodel",
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the record was created"
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the record was last modified"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Person or system that created the record"
+        },
+        "status": {
+          "description": "Current status of the social change action",
+          "anyOf": [
+            {
+              "$ref": "common.schema.json#/definitions/workStatus"
+            },
+            {
+              "type": "string",
+              "enum": [
+                "failed"
+              ],
+              "description": "Domain-specific values in addition to the shared list"
+            }
+          ]
+        },
+        "progressiveOrientation": {
+          "type": "boolean",
+          "description": "Indicates whether this action advances progressive social democratic values",
+          "default": true
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "Source of the information"
+        },
+        "confidentialityLevel": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ],
+          "description": "Level of confidentiality for this record"
+        }
+      },
+      "description": "Metadata about the social change record",
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

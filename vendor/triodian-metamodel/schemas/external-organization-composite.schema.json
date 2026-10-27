@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/external-organization-composite.schema.json",
+  "title": "External Organizations Composite Schema",
+  "description": "Composite schema linking all external organization related schemas",
+  "type": "object",
+  "properties": {
+    "externalOrganizations": {
+      "type": "array",
+      "description": "External organizations",
+      "items": {
+        "$ref": "external-organization.schema.json"
+      }
+    },
+    "interOrganizationalRelationships": {
+      "type": "array",
+      "description": "Relationships between organizations",
+      "items": {
+        "$ref": "inter-organizational-relationship.schema.json"
+      }
+    },
+    "sharedInitiatives": {
+      "type": "array",
+      "description": "Initiatives owned jointly by several organizations",
+      "items": {
+        "$ref": "shared-initiative.schema.json"
+      }
+    },
+    "federatedGovernanceModels": {
+      "type": "array",
+      "description": "Governance models shared across organizations",
+      "items": {
+        "$ref": "federated-governance-model.schema.json"
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,286 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/governance/submission-result.schema.json",
+  "title": "Submission Result Schema",
+  "description": "Governance interface. The governing service's answer to a submission: for each proposal, whether it is valid, what it was matched to, its confidence, the treatment assigned and the provenance records written. The result states outcomes and the names of the published rules applied; it does not describe how the governing service computes them.",
+  "type": "object",
+  "required": [
+    "submissionResultID",
+    "submissionID",
+    "mode",
+    "receivedAt",
+    "outcomes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "submissionResultID": {
+      "description": "Unique identifier for the result",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "submissionID": {
+      "description": "The submission this answers",
+      "allOf": [
+        {
+          "$ref": "../common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "mode": {
+      "type": "string",
+      "description": "Mode the submission was processed in",
+      "enum": [
+        "validate",
+        "propose"
+      ]
+    },
+    "receivedAt": {
+      "type": "string",
+      "description": "When the governing service received the submission",
+      "format": "date-time"
+    },
+    "interfaceVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Version of the governance interface the governing service applied"
+    },
+    "metamodelVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Version of the Metamodel the governing service validated against"
+    },
+    "outcomes": {
+      "type": "array",
+      "description": "One outcome per proposal, in submission order",
+      "items": {
+        "$ref": "#/definitions/proposalOutcome"
+      }
+    }
+  },
+  "definitions": {
+    "proposalOutcome": {
+      "type": "object",
+      "description": "What happened to one proposal",
+      "required": [
+        "changeProposalID",
+        "valid",
+        "treatment"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "changeProposalID": {
+          "description": "The proposal",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "Whether the proposal and its record are valid against the Metamodel"
+        },
+        "issues": {
+          "type": "array",
+          "description": "Validation errors and warnings",
+          "items": {
+            "$ref": "#/definitions/issue"
+          }
+        },
+        "matchedEntityID": {
+          "description": "Existing record the proposal was matched to",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "conflicts": {
+          "type": "array",
+          "description": "Conflicts found between sources or with the current record, and how each was resolved",
+          "items": {
+            "$ref": "#/definitions/conflict"
+          }
+        },
+        "confidence": {
+          "$ref": "#/definitions/confidence"
+        },
+        "treatment": {
+          "description": "Treatment assigned",
+          "allOf": [
+            {
+              "$ref": "change-proposal.schema.json#/definitions/treatment"
+            }
+          ]
+        },
+        "ruleIDs": {
+          "type": "array",
+          "description": "Published rules applied, e.g. autonomy.reviewQueue.statusChange, precedence.officialTextFirst",
+          "items": {
+            "type": "string"
+          }
+        },
+        "governedRecordID": {
+          "description": "Governed record version published, when the proposal was published",
+          "allOf": [
+            {
+              "$ref": "../common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "provenanceRecordIDs": {
+          "type": "array",
+          "description": "Provenance records written for the proposal",
+          "items": {
+            "$ref": "../common.schema.json#/definitions/identifier"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "issue": {
+      "type": "object",
+      "description": "A validation finding",
+      "required": [
+        "issueLevel",
+        "code",
+        "message"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "issueLevel": {
+          "type": "string",
+          "description": "error blocks the proposal; warning does not",
+          "enum": [
+            "error",
+            "warning"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "description": "Stable code, e.g. schema.required, reference.unresolved, language.verdict, version.stale, duplicate.existing"
+        },
+        "path": {
+          "type": "string",
+          "description": "JSON Pointer to the field concerned"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable explanation"
+        }
+      }
+    },
+    "conflict": {
+      "type": "object",
+      "description": "A conflict between sources, or between a proposal and the current record",
+      "required": [
+        "field",
+        "resolution"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Field in conflict"
+        },
+        "values": {
+          "type": "array",
+          "description": "The competing values, each with its source rank",
+          "items": {
+            "type": "object",
+            "description": "One competing value",
+            "required": [
+              "value",
+              "sourceRank"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "The value, as text"
+              },
+              "sourceRank": {
+                "type": "integer",
+                "description": "Rank of the source asserting it",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "url": {
+                "type": "string",
+                "description": "Source asserting it",
+                "format": "uri"
+              }
+            }
+          }
+        },
+        "resolution": {
+          "type": "string",
+          "description": "resolved = settled by a published rule; unresolved = escalated to the method owner",
+          "enum": [
+            "resolved",
+            "unresolved"
+          ]
+        },
+        "resolvedValue": {
+          "type": "string",
+          "description": "Value adopted, when resolved"
+        },
+        "ruleID": {
+          "type": "string",
+          "description": "Published rule that resolved it"
+        }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "description": "Confidence in a record, from the reliability, recency and corroboration of its evidence",
+      "required": [
+        "score",
+        "band"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "score": {
+          "type": "number",
+          "description": "0 (none) to 1 (highest)",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "band": {
+          "type": "string",
+          "description": "Band the score falls in",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "reliability": {
+          "type": "number",
+          "description": "Reliability component, 0 to 1",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "recency": {
+          "type": "number",
+          "description": "Recency component, 0 to 1",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "corroboration": {
+          "type": "number",
+          "description": "Corroboration component, 0 to 1",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stale": {
+          "type": "boolean",
+          "description": "Whether the record is past its freshness threshold"
+        }
+      }
+    }
+  }
+}

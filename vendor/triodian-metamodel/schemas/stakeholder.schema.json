@@ -1,0 +1,471 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/stakeholder.schema.json",
+  "title": "Stakeholder Domain Schema",
+  "description": "Schema for the Stakeholder domain in the Triodian Metamodel with global enumeration support",
+  "type": "object",
+  "properties": {
+    "stakeholderID": {
+      "description": "Unique identifier for the Stakeholder",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Name/title of stakeholder",
+      "examples": [
+        "Class I Railroad Operations",
+        "Federal Railroad Administration",
+        "Railway Technology Solutions Ltd"
+      ]
+    },
+    "tType": {
+      "type": "string",
+      "description": "Position relation to organization",
+      "enum": [
+        "primaryCustomer",
+        "secondaryCustomer",
+        "b2bCustomer",
+        "b2cCustomer",
+        "b2gCustomer",
+        "internalCustomer",
+        "endUser",
+        "regulatoryBody",
+        "governmentAgency",
+        "localAuthority",
+        "internationalBody",
+        "standardsOrganization",
+        "strategicPartner",
+        "supplierVendor",
+        "distributorChannelPartner",
+        "systemIntegrator",
+        "consultantAdvisor",
+        "financialInstitution",
+        "investorShareholder",
+        "boardMember",
+        "employeeStaff",
+        "tradeUnion",
+        "industryAssociation",
+        "communityRepresentative",
+        "environmentalGroup",
+        "mediaPress",
+        "academicInstitution",
+        "competitor",
+        "other"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed explanation"
+    },
+    "role": {
+      "type": "string",
+      "description": "Responsibilities and interests"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "Most closely linked org unit"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "stakeholderCategory": {
+      "type": "string",
+      "description": "Broad stakeholder classification",
+      "enum": [
+        "internalStakeholder",
+        "externalStakeholder",
+        "primaryStakeholder",
+        "secondaryStakeholder",
+        "keyStakeholder",
+        "influentialStakeholder"
+      ]
+    },
+    "influenceLevel": {
+      "type": "string",
+      "description": "Degree of influence on organization",
+      "enum": [
+        "highInfluence",
+        "mediumInfluence",
+        "lowInfluence"
+      ]
+    },
+    "interestLevel": {
+      "type": "string",
+      "description": "Level of interest in organization",
+      "enum": [
+        "highInterest",
+        "mediumInterest",
+        "lowInterest"
+      ]
+    },
+    "engagementStrategies": {
+      "type": "string",
+      "description": "Communication/interaction plans"
+    },
+    "engagementFrequency": {
+      "description": "How often engagement occurs",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/frequency"
+        }
+      ]
+    },
+    "communicationChannels": {
+      "type": "array",
+      "description": "Preferred communication methods",
+      "items": {
+        "type": "string",
+        "enum": [
+          "email",
+          "phoneCall",
+          "videoConference",
+          "inPersonMeeting",
+          "digitalPlatform",
+          "socialMedia",
+          "website",
+          "newsletter",
+          "reports",
+          "surveys",
+          "workshops",
+          "conferences",
+          "mobileApp",
+          "traditionalMail"
+        ]
+      }
+    },
+    "inputs": {
+      "type": "string",
+      "description": "Resources/info provided"
+    },
+    "outputs": {
+      "type": "string",
+      "description": "Benefits/outcomes received"
+    },
+    "expectations": {
+      "type": "string",
+      "description": "What stakeholder expects from organization"
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Required dependencies"
+    },
+    "relatedStakeholders": {
+      "type": "string",
+      "description": "Related/linked stakeholders"
+    },
+    "relatedStakeholderIDs": {
+      "type": "array",
+      "description": "IDs of related Stakeholders",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "geographicScope": {
+      "description": "Geographic scope of stakeholder",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/geographicScope"
+        }
+      ]
+    },
+    "industry": {
+      "type": "string",
+      "description": "Industry sector of stakeholder",
+      "enum": [
+        "transportation",
+        "government",
+        "technology",
+        "manufacturing",
+        "financialServices",
+        "healthcare",
+        "energy",
+        "retail",
+        "education",
+        "consulting",
+        "construction",
+        "agriculture",
+        "media",
+        "telecommunications",
+        "nonProfit",
+        "other"
+      ]
+    },
+    "organizationType": {
+      "type": "string",
+      "description": "Type of organization stakeholder represents",
+      "enum": [
+        "governmentAgency",
+        "privateCompany",
+        "publicCompany",
+        "nonProfitOrganization",
+        "internationalOrganization",
+        "academicInstitution",
+        "industryAssociation",
+        "partnership",
+        "individual",
+        "communityGroup"
+      ]
+    },
+    "performanceIndicators": {
+      "type": "string",
+      "description": "Engagement effectiveness metrics"
+    },
+    "risks": {
+      "type": "string",
+      "description": "Engagement risks"
+    },
+    "riskCategories": {
+      "type": "array",
+      "description": "Categories of risks",
+      "items": {
+        "$ref": "common.schema.json#/definitions/riskCategory"
+      }
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Enhancement areas"
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "Goal alignment"
+    },
+    "stakeholderRequirements": {
+      "type": "array",
+      "description": "Specific requirements from stakeholder",
+      "items": {
+        "$ref": "#/definitions/stakeholderRequirement"
+      }
+    }
+  },
+  "required": [
+    "stakeholderID",
+    "title",
+    "tType",
+    "description"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "stakeholderRequirement": {
+      "type": "object",
+      "description": "A specific requirement from a stakeholder",
+      "properties": {
+        "requirementID": {
+          "description": "Unique identifier for the requirement, so other records can reference it",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "Name/title of requirement"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed explanation"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Intended purpose/benefit"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Responsible fulfiller"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Impacted organization units"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "priority": {
+          "description": "Requirement priority level",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/priority"
+            }
+          ]
+        },
+        "requirementType": {
+          "type": "string",
+          "description": "Type of requirement",
+          "enum": [
+            "functional",
+            "nonFunctional",
+            "compliance",
+            "business",
+            "technical",
+            "userExperience"
+          ]
+        },
+        "acceptanceCriteria": {
+          "type": "string",
+          "description": "Acceptance criteria"
+        },
+        "timeline": {
+          "type": "string",
+          "description": "Expected timeline for fulfillment"
+        },
+        "dependencies": {
+          "type": "string",
+          "description": "Related dependencies"
+        },
+        "complianceFramework": {
+          "type": "string",
+          "description": "Regulatory requirement framework",
+          "enum": [
+            "isoStandards",
+            "governmentRegulation",
+            "industryStandard",
+            "internalPolicy",
+            "internationalTreaty",
+            "professionalStandard"
+          ]
+        },
+        "regulatoryCompliance": {
+          "type": "string",
+          "description": "Regulatory requirements"
+        },
+        "measurementCriteria": {
+          "type": "string",
+          "description": "How requirement success is measured"
+        },
+        "riskLevel": {
+          "description": "Risk level if not met",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/riskLevel"
+            }
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "purpose"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "stakeholderID": "STK-001",
+      "title": "Federal Railroad Administration",
+      "tType": "regulatoryBody",
+      "description": "Federal agency responsible for railroad safety regulation and oversight",
+      "role": "Establish and enforce railroad safety standards and regulations",
+      "orgUnitTitle": "Regulatory Compliance Division",
+      "stakeholderCategory": "externalStakeholder",
+      "influenceLevel": "highInfluence",
+      "interestLevel": "highInterest",
+      "engagementStrategies": "Regular compliance reporting, safety audits, policy consultations",
+      "engagementFrequency": "monthly",
+      "communicationChannels": [
+        "email",
+        "inPersonMeeting",
+        "reports"
+      ],
+      "expectations": "Full compliance with safety regulations, timely incident reporting",
+      "geographicScope": "national",
+      "industry": "government",
+      "organizationType": "governmentAgency",
+      "riskCategories": [
+        "compliance",
+        "reputational"
+      ],
+      "strategicAlignment": "Critical for maintaining operating licenses and safety compliance",
+      "stakeholderRequirements": [
+        {
+          "title": "Monthly Safety Reporting",
+          "description": "Submit comprehensive monthly safety performance reports",
+          "purpose": "Ensure regulatory oversight and compliance monitoring",
+          "owner": "Chief Safety Officer",
+          "orgUnitTitle": "Safety Compliance Division",
+          "priority": "critical",
+          "requirementType": "compliance",
+          "acceptanceCriteria": "Reports submitted by 5th of each month with 99.5% data accuracy",
+          "complianceFramework": "governmentRegulation",
+          "regulatoryCompliance": "49 CFR Part 225 - Railroad Accidents/Incidents",
+          "riskLevel": "high"
+        }
+      ]
+    },
+    {
+      "stakeholderID": "STK-002",
+      "title": "Railway Technology Solutions Ltd",
+      "tType": "strategicPartner",
+      "description": "Technology company providing AI-powered track monitoring solutions",
+      "role": "Develop and maintain predictive maintenance technology systems",
+      "stakeholderCategory": "externalStakeholder",
+      "influenceLevel": "mediumInfluence",
+      "interestLevel": "highInterest",
+      "engagementStrategies": "Joint product development, regular technical reviews, innovation workshops",
+      "engagementFrequency": "weekly",
+      "communicationChannels": [
+        "videoConference",
+        "digitalPlatform",
+        "workshops"
+      ],
+      "inputs": "Technical expertise, software development, system integration",
+      "outputs": "Licensing fees, partnership opportunities, market access",
+      "geographicScope": "multinational",
+      "industry": "technology",
+      "organizationType": "privateCompany",
+      "strategicAlignment": "Enables digital transformation and predictive maintenance capabilities"
+    },
+    {
+      "stakeholderID": "STK-003",
+      "title": "Downtown Residents Association",
+      "tType": "communityRepresentative",
+      "description": "Local community group representing residents near railway operations",
+      "role": "Advocate for community safety and noise reduction concerns",
+      "stakeholderCategory": "externalStakeholder",
+      "influenceLevel": "lowInfluence",
+      "interestLevel": "highInterest",
+      "engagementStrategies": "Community meetings, public consultations, safety briefings",
+      "engagementFrequency": "quarterly",
+      "communicationChannels": [
+        "inPersonMeeting",
+        "newsletter",
+        "website"
+      ],
+      "expectations": "Minimal noise disruption, advance notice of maintenance activities",
+      "geographicScope": "local",
+      "industry": "nonProfit",
+      "organizationType": "communityGroup",
+      "riskCategories": [
+        "reputational",
+        "operational"
+      ],
+      "stakeholderRequirements": [
+        {
+          "title": "Noise Level Compliance",
+          "description": "Maintain railway noise levels within city ordinance limits",
+          "purpose": "Ensure community quality of life standards",
+          "priority": "medium",
+          "requirementType": "compliance",
+          "acceptanceCriteria": "Noise levels below 65dB during nighttime hours",
+          "complianceFramework": "governmentRegulation",
+          "riskLevel": "medium"
+        }
+      ]
+    }
+  ]
+}

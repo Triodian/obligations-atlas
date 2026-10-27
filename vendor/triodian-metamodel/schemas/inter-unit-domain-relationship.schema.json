@@ -1,0 +1,244 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/inter-unit-domain-relationship.schema.json",
+  "title": "Inter-Unit Domain Relationship Schema",
+  "description": "How an organization unit relates to a domain entity: owning, providing, consuming, governing and other roles. Inter-unit relationships connect organization units within one domain; for links between domains, see cross-domain-relationship.schema.json.",
+  "type": "object",
+  "properties": {
+    "relationshipID": {
+      "description": "Unique identifier for the inter-unit domain relationship",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "domainType": {
+      "description": "The domain of the entity. Inter-unit relationships focus on capability, information, service, valueStream, initiative or product.",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/domainType"
+        },
+        {
+          "enum": [
+            "capability",
+            "information",
+            "service",
+            "valueStream",
+            "initiative",
+            "product"
+          ]
+        }
+      ]
+    },
+    "entityName": {
+      "type": "string",
+      "description": "Name of the domain entity",
+      "examples": [
+        "Risk Management Capability"
+      ]
+    },
+    "entityID": {
+      "description": "ID of the domain entity (see entityName)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "relationshipRole": {
+      "type": "string",
+      "description": "The organization unit's role in relation to the entity",
+      "oneOf": [
+        {
+          "const": "owning",
+          "description": "Accountable for the entity's governance, lifecycle and quality; one owning unit per entity"
+        },
+        {
+          "const": "providing",
+          "description": "Delivers the entity's core functionality, service or resource"
+        },
+        {
+          "const": "consuming",
+          "description": "Actively uses the entity's outputs or results to perform its own operations"
+        },
+        {
+          "const": "contributing",
+          "description": "Provides partial input, expertise or resources without being the primary provider"
+        },
+        {
+          "const": "benefiting",
+          "description": "Benefits from the entity, even indirectly, without consuming or operating it"
+        },
+        {
+          "const": "custodian",
+          "description": "Maintains the integrity, accuracy and compliance of an information or data entity"
+        },
+        {
+          "const": "dependent",
+          "description": "Relies on the effective functioning of another unit's entity to achieve its objectives"
+        },
+        {
+          "const": "supporting",
+          "description": "Gives operational advantage or risk reduction to another unit's activity"
+        },
+        {
+          "const": "governing",
+          "description": "Sets rules, standards or oversight mechanisms for the entity"
+        },
+        {
+          "const": "monitoring",
+          "description": "Tracks the entity's performance, usage or compliance without operational involvement"
+        },
+        {
+          "const": "reviewing",
+          "description": "Validates, approves or signs off the entity's outputs or changes"
+        },
+        {
+          "const": "coordinating",
+          "description": "Facilitates collaboration between the units involved with the entity"
+        },
+        {
+          "const": "consulting",
+          "description": "Provides advisory input or specialist knowledge without operational responsibility"
+        },
+        {
+          "const": "escalatingTo",
+          "description": "Receives escalated issues, exceptions or decisions about the entity"
+        },
+        {
+          "const": "participating",
+          "description": "(value streams only) Contributes to specific stages of the value stream"
+        },
+        {
+          "const": "triggering",
+          "description": "(value streams only) Initiates or activates value stream execution"
+        },
+        {
+          "const": "sponsoring",
+          "description": "(initiatives only) Provides funding, executive support or strategic backing"
+        },
+        {
+          "const": "impactedBy",
+          "description": "(initiatives only) Its operations, processes or outcomes are affected by the initiative"
+        }
+      ]
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "Name of the organization unit holding the role",
+      "examples": [
+        "Legal Division"
+      ]
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "relationshipDescription": {
+      "type": "string",
+      "description": "How the unit is involved with the entity"
+    },
+    "relationshipStrength": {
+      "description": "Intensity of the relationship: 1 very weak, 3 moderate, 5 very strong (mission-critical)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/scale1to5"
+        }
+      ]
+    },
+    "relationshipRationale": {
+      "type": "string",
+      "description": "Why the relationship exists"
+    }
+  },
+  "required": [
+    "relationshipID",
+    "domainType",
+    "relationshipRole",
+    "relationshipStrength"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "description": "Identify the entity by name or ID",
+      "anyOf": [
+        {
+          "required": [
+            "entityName"
+          ]
+        },
+        {
+          "required": [
+            "entityID"
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Identify the organization unit by name or ID",
+      "anyOf": [
+        {
+          "required": [
+            "orgUnitTitle"
+          ]
+        },
+        {
+          "required": [
+            "orgUnitID"
+          ]
+        }
+      ]
+    },
+    {
+      "description": "participating and triggering apply only to value streams",
+      "if": {
+        "properties": {
+          "relationshipRole": {
+            "enum": [
+              "participating",
+              "triggering"
+            ]
+          }
+        },
+        "required": [
+          "relationshipRole"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domainType": {
+            "const": "valueStream"
+          }
+        }
+      }
+    },
+    {
+      "description": "sponsoring and impactedBy apply only to initiatives",
+      "if": {
+        "properties": {
+          "relationshipRole": {
+            "enum": [
+              "sponsoring",
+              "impactedBy"
+            ]
+          }
+        },
+        "required": [
+          "relationshipRole"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domainType": {
+            "const": "initiative"
+          }
+        }
+      }
+    }
+  ]
+}

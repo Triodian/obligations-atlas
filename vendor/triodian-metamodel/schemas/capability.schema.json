@@ -1,0 +1,649 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/capability.schema.json",
+  "title": "Capabilities Domain Schema",
+  "description": "Schema for the Capabilities domain in the Triodian Metamodel with global enumeration support",
+  "type": "object",
+  "properties": {
+    "capabilityID": {
+      "description": "Unique identifier for the Capability",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or title of the Capability",
+      "examples": [
+        "Automated Track Inspection System",
+        "Customer Data Analytics",
+        "Digital Innovation Platform"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed explanation of what the Capability entails"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "The intended purpose or function within the Organization"
+    },
+    "owner": {
+      "type": "string",
+      "description": "The individual or team responsible for the Capability"
+    },
+    "orgUnitTitle": {
+      "type": "string",
+      "description": "The organization unit(s) to which the Capability is linked"
+    },
+    "orgUnitID": {
+      "description": "ID of the organization unit (see orgUnitTitle)",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "capabilityCategory": {
+      "type": "string",
+      "description": "Broad categorization of capability type",
+      "enum": [
+        "coreBusiness",
+        "supporting",
+        "enabling",
+        "strategic",
+        "foundational",
+        "distinctive"
+      ]
+    },
+    "capabilityType": {
+      "type": "string",
+      "description": "Specific type of capability",
+      "enum": [
+        "operational",
+        "technical",
+        "business",
+        "governance",
+        "innovation",
+        "analytical",
+        "digital",
+        "customer"
+      ]
+    },
+    "businessDomain": {
+      "type": "string",
+      "description": "Business domain area",
+      "enum": [
+        "operations",
+        "finance",
+        "technology",
+        "humanResources",
+        "salesMarketing",
+        "customerService",
+        "legalCompliance",
+        "researchDevelopment",
+        "qualityAssurance",
+        "strategyPlanning",
+        "procurement",
+        "facilities"
+      ]
+    },
+    "inputs": {
+      "type": "string",
+      "description": "Required resources/information/materials"
+    },
+    "outputs": {
+      "type": "string",
+      "description": "Deliverables or results produced"
+    },
+    "performanceIndicators": {
+      "type": "string",
+      "description": "Effectiveness and efficiency metrics"
+    },
+    "dependencies": {
+      "type": "string",
+      "description": "Other capabilities, processes, or systems required"
+    },
+    "relatedCapabilities": {
+      "type": "string",
+      "description": "Capabilities that are related or linked"
+    },
+    "relatedCapabilityIDs": {
+      "type": "array",
+      "description": "IDs of related Capabilities",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "maturityLevel": {
+      "description": "Current maturity level of the Capability",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/maturityLevel"
+        }
+      ]
+    },
+    "targetMaturityLevel": {
+      "description": "Desired future maturity level",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/maturityLevel"
+        }
+      ]
+    },
+    "toolsAndTechnologies": {
+      "type": "string",
+      "description": "Tools and technologies used to support the Capability"
+    },
+    "cost": {
+      "type": "string",
+      "description": "Financial cost for implementation and maintenance"
+    },
+    "investmentCategory": {
+      "type": "string",
+      "description": "Type of investment required",
+      "enum": [
+        "capex",
+        "opex",
+        "mixed",
+        "people",
+        "technology",
+        "process"
+      ]
+    },
+    "risks": {
+      "type": "string",
+      "description": "Potential risks associated with the Capability"
+    },
+    "riskCategories": {
+      "type": "array",
+      "description": "Categories of risks",
+      "items": {
+        "$ref": "common.schema.json#/definitions/riskCategory"
+      }
+    },
+    "improvementOpportunities": {
+      "type": "string",
+      "description": "Areas for enhancement or improvement"
+    },
+    "strategicAlignment": {
+      "type": "string",
+      "description": "Alignment with strategic goals and objectives"
+    },
+    "criticality": {
+      "description": "Business criticality level",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/criticality"
+        }
+      ]
+    },
+    "availability": {
+      "type": "string",
+      "description": "Availability requirement",
+      "enum": [
+        "24x7",
+        "businessHours",
+        "onDemand",
+        "seasonal",
+        "scheduled"
+      ]
+    },
+    "scalability": {
+      "type": "string",
+      "description": "Scalability characteristics",
+      "enum": [
+        "highlyScalable",
+        "moderatelyScalable",
+        "limitedScalability",
+        "notScalable"
+      ]
+    },
+    "parent": {
+      "type": "string",
+      "description": "High-level Capability that encompasses this capability"
+    },
+    "parentCapabilityID": {
+      "description": "ID of the higher-level Capability that encompasses this one",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "child": {
+      "type": "string",
+      "description": "Specific Capability that falls under this capability"
+    },
+    "childCapabilityIDs": {
+      "type": "array",
+      "description": "IDs of the Capabilities that fall under this one",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "capabilityFunctions": {
+      "type": "array",
+      "description": "Functions that define capability purpose",
+      "items": {
+        "$ref": "#/definitions/capabilityFunction"
+      }
+    },
+    "capabilityComponents": {
+      "type": "array",
+      "description": "Structural elements of the capability",
+      "items": {
+        "$ref": "#/definitions/capabilityComponent"
+      }
+    },
+    "capabilityProcesses": {
+      "type": "array",
+      "description": "Processes that drive capability operation",
+      "items": {
+        "$ref": "#/definitions/capabilityProcess"
+      }
+    }
+  },
+  "required": [
+    "capabilityID",
+    "title",
+    "description",
+    "purpose",
+    "owner"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "capabilityFunction": {
+      "type": "object",
+      "description": "A function that defines the overarching purpose of a capability",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Name/title of the function"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed explanation of the function"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Intended purpose of the function"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Individual/team responsible for the function"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit(s) where function resides"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "functionType": {
+          "type": "string",
+          "description": "Type of function",
+          "enum": [
+            "primary",
+            "secondary",
+            "supporting",
+            "enabling"
+          ]
+        },
+        "inputs": {
+          "type": "string",
+          "description": "Required inputs to perform the function"
+        },
+        "outputs": {
+          "type": "string",
+          "description": "Outputs or deliverables produced"
+        },
+        "processes": {
+          "type": "string",
+          "description": "Processes involved in the function"
+        },
+        "performanceMetrics": {
+          "type": "string",
+          "description": "Metrics for measuring function effectiveness"
+        },
+        "frequency": {
+          "description": "How often the function is performed",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/frequency"
+            }
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "purpose"
+      ],
+      "additionalProperties": false
+    },
+    "capabilityComponent": {
+      "type": "object",
+      "description": "A structural element that makes up a capability",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Name/title of the component"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed explanation of the component"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Intended purpose/benefit of the component"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Individual/team responsible for the component"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit(s) utilizing the component"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "componentType": {
+          "type": "string",
+          "description": "Type of component",
+          "enum": [
+            "people",
+            "process",
+            "technology",
+            "information",
+            "infrastructure"
+          ]
+        },
+        "technologies": {
+          "type": "string",
+          "description": "Technologies and tools used"
+        },
+        "processes": {
+          "type": "string",
+          "description": "Processes involved in the component"
+        },
+        "skills": {
+          "type": "string",
+          "description": "Skills and competencies required"
+        },
+        "vendor": {
+          "type": "string",
+          "description": "External vendor or supplier"
+        },
+        "lifecycle": {
+          "description": "Lifecycle stage of component",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/lifecycleStage"
+            }
+          ]
+        },
+        "cost": {
+          "type": "string",
+          "description": "Cost associated with the component"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "purpose"
+      ],
+      "additionalProperties": false
+    },
+    "capabilityProcess": {
+      "type": "object",
+      "description": "A process that drives the capability's operation",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Name/title of the Process"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed explanation of the Process"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Intended purpose/function of the Process"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Individual/team responsible for the Process"
+        },
+        "orgUnitTitle": {
+          "type": "string",
+          "description": "Organization unit(s) where Process resides"
+        },
+        "orgUnitID": {
+          "description": "ID of the organization unit (see orgUnitTitle)",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "parentCapability": {
+          "type": "string",
+          "description": "The Capability this Process supports"
+        },
+        "parentCapabilityID": {
+          "description": "ID of the Capability this Process supports",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "processType": {
+          "type": "string",
+          "description": "Type of process",
+          "enum": [
+            "core",
+            "support",
+            "management",
+            "governance"
+          ]
+        },
+        "processCategory": {
+          "type": "string",
+          "description": "Process category",
+          "enum": [
+            "operational",
+            "strategic",
+            "tactical",
+            "administrative"
+          ]
+        },
+        "inputs": {
+          "type": "string",
+          "description": "Required inputs to perform the Process"
+        },
+        "outputs": {
+          "type": "string",
+          "description": "Outputs or deliverables produced"
+        },
+        "steps": {
+          "type": "string",
+          "description": "Detailed steps involved in the Process"
+        },
+        "performanceMetrics": {
+          "type": "string",
+          "description": "Metrics used to measure Process effectiveness"
+        },
+        "complianceRequirements": {
+          "type": "string",
+          "description": "Regulatory requirements governing the Process"
+        },
+        "toolsRequired": {
+          "type": "string",
+          "description": "Tools and equipment needed for the Process"
+        },
+        "duration": {
+          "type": "string",
+          "description": "Typical time to complete the process"
+        },
+        "frequency": {
+          "description": "How often the process is executed",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/frequency"
+            }
+          ]
+        },
+        "automation": {
+          "description": "Level of automation in the process",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/automationLevel"
+            }
+          ]
+        },
+        "complexity": {
+          "description": "Process complexity level",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/complexity"
+            }
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "purpose",
+        "owner"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "capabilityID": "CAP-001",
+      "title": "Automated Track Inspection System",
+      "description": "AI-enabled system for continuous track geometry measurement and defect detection using advanced sensor technology",
+      "purpose": "Enhance track inspection efficiency and accuracy while reducing manual inspection requirements",
+      "owner": "Chief of Track Inspection Technology",
+      "orgUnitTitle": "Track and Rail Infrastructure Division",
+      "capabilityCategory": "coreBusiness",
+      "capabilityType": "technical",
+      "businessDomain": "operations",
+      "inputs": "Track geometry data, rail wear measurements, historical defect data",
+      "outputs": "Daily inspection reports, defect predictions, maintenance recommendations",
+      "maturityLevel": "managed",
+      "targetMaturityLevel": "optimizing",
+      "toolsAndTechnologies": "LIDAR sensors, machine learning models, track geometry cars, cloud analytics",
+      "cost": "Annual operating cost: $12.8M, Initial investment: $45M",
+      "investmentCategory": "mixed",
+      "riskCategories": [
+        "technology",
+        "operational"
+      ],
+      "criticality": "critical",
+      "availability": "24x7",
+      "scalability": "highlyScalable",
+      "parent": "Track Safety Assurance System",
+      "child": "Rail Profile Measurement",
+      "capabilityFunctions": [
+        {
+          "title": "Track Geometry Measurement",
+          "description": "Automated measurement of track geometry parameters using AI-enabled sensors",
+          "purpose": "Ensure compliance with FRA track geometry standards",
+          "owner": "Track Geometry Program Manager",
+          "orgUnitTitle": "Track Inspection Division",
+          "functionType": "primary",
+          "inputs": "Raw sensor data, track class information",
+          "outputs": "Geometry exception reports, maintenance alerts",
+          "processes": "Data collection, analysis, reporting, validation",
+          "frequency": "continuous"
+        }
+      ],
+      "capabilityComponents": [
+        {
+          "title": "Rail Wear Detection System",
+          "description": "Automated measurement of rail head wear and profile using laser profiling technology",
+          "purpose": "Monitor rail degradation and predict maintenance needs",
+          "owner": "Rail Integrity Program Lead",
+          "orgUnitTitle": "Track Maintenance Division",
+          "componentType": "technology",
+          "technologies": "Laser profilers, ultrasonic sensors, analysis software",
+          "processes": "Data collection, wear analysis, reporting",
+          "skills": "Rail inspection certification, data analysis expertise",
+          "lifecycle": "operational"
+        }
+      ],
+      "capabilityProcesses": [
+        {
+          "title": "Track Inspection and Assessment Process",
+          "description": "Standardized procedure for conducting comprehensive track inspections and safety assessments",
+          "purpose": "Ensure systematic evaluation of track conditions to maintain FRA safety standards",
+          "owner": "Chief Track Inspector",
+          "orgUnitTitle": "Track Safety Division",
+          "parentCapability": "Track Safety Assurance System",
+          "processType": "core",
+          "processCategory": "operational",
+          "inputs": "Track class specifications, Previous inspection data, Maintenance history",
+          "outputs": "Inspection reports, Defect notifications, Maintenance recommendations",
+          "steps": "1. Pre-inspection preparation, 2. Visual examination, 3. Geometry measurement, 4. Data analysis, 5. Report generation",
+          "performanceMetrics": "Inspection completion rate: 98%, Defect identification accuracy: 96%",
+          "complianceRequirements": "49 CFR Part 213 - Track Safety Standards",
+          "toolsRequired": "Track geometry car, Gauge measurement devices, Digital inspection tablets",
+          "duration": "4-6 hours per track segment",
+          "frequency": "daily",
+          "automation": "semiAutomated",
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "capabilityID": "CAP-002",
+      "title": "Digital Innovation Platform",
+      "description": "Comprehensive platform for managing innovation initiatives, from ideation to implementation",
+      "purpose": "Accelerate digital transformation and foster culture of continuous innovation",
+      "owner": "Chief Innovation Officer",
+      "orgUnitTitle": "Digital Transformation Office",
+      "capabilityCategory": "strategic",
+      "capabilityType": "innovation",
+      "businessDomain": "strategyPlanning",
+      "maturityLevel": "defined",
+      "targetMaturityLevel": "managed",
+      "investmentCategory": "capex",
+      "criticality": "high",
+      "scalability": "moderatelyScalable"
+    },
+    {
+      "capabilityID": "CAP-003",
+      "title": "Enterprise Data Analytics Platform",
+      "description": "Centralized platform for data integration, analysis, and business intelligence across the organization",
+      "purpose": "Enable data-driven decision making and provide insights for operational optimization",
+      "owner": "Chief Data Officer",
+      "capabilityCategory": "enabling",
+      "capabilityType": "analytical",
+      "businessDomain": "technology",
+      "maturityLevel": "managed",
+      "investmentCategory": "technology",
+      "criticality": "high",
+      "availability": "businessHours",
+      "scalability": "highlyScalable"
+    }
+  ]
+}

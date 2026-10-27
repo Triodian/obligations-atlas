@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/external-organization.schema.json",
+  "title": "External Organization Schema",
+  "description": "Schema for representing third-party entities such as partners, regulators, standards bodies and customers",
+  "type": "object",
+  "required": [
+    "externalOrgID",
+    "name",
+    "type"
+  ],
+  "properties": {
+    "externalOrgID": {
+      "description": "Unique identifier for the external organization",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The full name of the external organization"
+    },
+    "acronym": {
+      "type": "string",
+      "description": "Short form of the name, e.g. APRA"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "partner",
+        "regulator",
+        "standardsBody",
+        "legislature",
+        "government",
+        "industryBody",
+        "customer",
+        "supplier",
+        "peer"
+      ],
+      "description": "Classification of the external organization. standardsBody = issues recognised standards or frameworks; legislature = makes statute law; government = a government department or agency that is not a regulator; industryBody = an industry association or professional body"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the external organization"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Industry or government domain the organization belongs to"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "description": "Legal jurisdiction the organization operates under"
+    },
+    "jurisdictionCodes": {
+      "type": "array",
+      "description": "Jurisdictions the organization's remit covers, as codes",
+      "items": {
+        "$ref": "common.schema.json#/definitions/jurisdictionCode"
+      },
+      "uniqueItems": true
+    },
+    "remit": {
+      "type": "string",
+      "description": "For a regulator or standards body, what it regulates or standardises, e.g. 'Prudential regulation of banks, insurers and superannuation trustees'"
+    },
+    "contactInfo": {
+      "type": "object",
+      "description": "Contact information for the external organization",
+      "properties": {
+        "primaryContact": {
+          "type": "string",
+          "description": "Name of the primary contact"
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "website": {
+      "type": "string",
+      "description": "Website of the organization",
+      "format": "uri"
+    },
+    "monitoredSourceDataFlowIDs": {
+      "type": "array",
+      "description": "Data flows (Dynamic and Time-Series extension) that watch this organization's publications for change",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}

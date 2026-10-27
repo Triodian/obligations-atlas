@@ -1,0 +1,423 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/trigger.schema.json",
+  "title": "Trigger Schema",
+  "type": "object",
+  "required": [
+    "triggerID",
+    "label",
+    "primaryCategory",
+    "origin"
+  ],
+  "properties": {
+    "triggerID": {
+      "description": "Unique identifier for the trigger",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "label": {
+      "type": "string",
+      "description": "Short, human-readable name of the trigger"
+    },
+    "description": {
+      "type": "string",
+      "description": "Expanded explanation of the trigger's relevance"
+    },
+    "primaryCategory": {
+      "type": "string",
+      "description": "Primary classification of trigger context",
+      "enum": [
+        "regulatoryCompliance",
+        "technologicalChange",
+        "environmentalSafety",
+        "operationalTransformation",
+        "strategicRealignment",
+        "customerStakeholder",
+        "workforceSkills",
+        "performanceResponse",
+        "politicalSocial",
+        "innovationOpportunity",
+        "other"
+      ]
+    },
+    "subCategory": {
+      "type": "string",
+      "description": "More specific classification within the primary category"
+    },
+    "origin": {
+      "type": "string",
+      "description": "Whether the trigger originates from inside or outside the organisation"
+    },
+    "timeHorizon": {
+      "description": "The temporal nature of the trigger",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/timeHorizon"
+        }
+      ]
+    },
+    "impactLevel": {
+      "description": "The potential significance of the trigger",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/ratingLevel"
+        }
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status in the lifecycle of the trigger"
+    },
+    "detectionMethod": {
+      "type": "string",
+      "description": "How this trigger was detected"
+    },
+    "evidenceStrength": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Strength of evidence for this trigger (1-5)"
+    },
+    "detectionDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the trigger was identified"
+    },
+    "validUntil": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the trigger is no longer expected to be relevant"
+    },
+    "sourceReference": {
+      "type": "string",
+      "description": "Reference to source document, report, or authority identifying the trigger"
+    },
+    "instrumentChange": {
+      "type": "object",
+      "description": "For a regulatory trigger: the new or amended instrument that was found, and what changed. The obligations it affects are listed in affectedEntities",
+      "required": [
+        "instrument",
+        "changeType"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "instrument": {
+          "type": "string",
+          "description": "The instrument, e.g. CPS 230 or MAS Guidelines on AI Risk Management"
+        },
+        "changeType": {
+          "type": "string",
+          "description": "What happened to the instrument",
+          "enum": [
+            "newInstrument",
+            "amendment",
+            "commencement",
+            "consultation",
+            "guidance",
+            "supersession",
+            "repeal",
+            "withdrawal",
+            "correction"
+          ]
+        },
+        "jurisdiction": {
+          "description": "Jurisdiction of the instrument",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/jurisdictionCode"
+            }
+          ]
+        },
+        "externalOrgID": {
+          "description": "External Organization that issued it",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/identifier"
+            }
+          ]
+        },
+        "sourceURL": {
+          "type": "string",
+          "description": "Official source where the change was found",
+          "format": "uri"
+        },
+        "sourceRank": {
+          "type": "integer",
+          "description": "Precedence of the source the change was found in: 1 official text, 2 regulator publication, 3 standards body publication, 4 law firm or industry commentary, 5 news. Ranks 4 and 5 are leads to an official source, never the basis of a change",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "publishedDate": {
+          "type": "string",
+          "description": "Date the change was published",
+          "format": "date"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "description": "Date the change takes effect",
+          "format": "date"
+        },
+        "summary": {
+          "type": "string",
+          "description": "What changed, in source-describing language"
+        }
+      }
+    },
+    "detectedByDataFlowID": {
+      "description": "Data flow (monitored source) that detected the trigger",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "changeProposalIDs": {
+      "type": "array",
+      "description": "Change proposals submitted through the governance interface in response to this trigger",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "uniqueItems": true
+    },
+    "relatedTriggers": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "description": "References to other related triggers"
+    },
+    "strategicResponseReferences": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/definitions/identifier"
+      },
+      "description": "References to related strategicResponseModel artefacts"
+    },
+    "affectedEntities": {
+      "type": "array",
+      "description": "Entities in any domain this trigger affects or relates to, by domain and ID (for example a market, budget, customer journey stage, risk control or channel). Replaces the per-domain ID fields.",
+      "items": {
+        "$ref": "common.schema.json#/definitions/entityReference"
+      }
+    },
+    "supplyChainImpact": {
+      "type": "object",
+      "properties": {
+        "impactDescription": {
+          "type": "string",
+          "description": "Description of supply chain impact"
+        },
+        "affectedProcesses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supply chain processes affected"
+        },
+        "potentialLosses": {
+          "type": "string",
+          "description": "Potential financial or operational impact"
+        },
+        "affectedCustomers": {
+          "type": "string",
+          "description": "Impact on customer service"
+        }
+      },
+      "description": "Impact on supply chain operations",
+      "additionalProperties": false
+    },
+    "financialImpact": {
+      "type": "object",
+      "properties": {
+        "impactAmount": {
+          "type": "number",
+          "description": "Estimated financial impact"
+        },
+        "impactType": {
+          "type": "string",
+          "description": "Nature of financial impact"
+        },
+        "confidenceLevel": {
+          "description": "Confidence in financial impact estimate",
+          "allOf": [
+            {
+              "$ref": "common.schema.json#/definitions/confidenceLevel"
+            }
+          ]
+        },
+        "impactTimeframe": {
+          "type": "string",
+          "description": "When financial impact is expected"
+        }
+      },
+      "description": "Monetary impact of the trigger",
+      "additionalProperties": false
+    },
+    "riskImpact": {
+      "type": "object",
+      "properties": {
+        "impactDescription": {
+          "type": "string",
+          "description": "Description of risk impact"
+        },
+        "affectedRiskCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Categories of risk affected"
+        },
+        "potentialLoss": {
+          "type": "string",
+          "description": "Potential financial impact if unaddressed"
+        },
+        "cascadingRisks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Additional risks that may result"
+        }
+      },
+      "description": "Impact on risk profile",
+      "additionalProperties": false
+    },
+    "innovationImpact": {
+      "type": "object",
+      "properties": {
+        "impactDescription": {
+          "type": "string",
+          "description": "Description of innovation impact"
+        },
+        "affectedCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Innovation capabilities affected"
+        },
+        "opportunityWindow": {
+          "type": "string",
+          "description": "Time window for competitive advantage"
+        },
+        "innovationPriorities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Innovation areas requiring focus"
+        }
+      },
+      "description": "Impact on innovation capabilities or projects",
+      "additionalProperties": false
+    },
+    "sustainabilityImpact": {
+      "type": "object",
+      "properties": {
+        "impactDescription": {
+          "type": "string",
+          "description": "Description of sustainability impact"
+        },
+        "affectedDimensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Sustainability dimensions affected"
+        },
+        "stakeholderExpectations": {
+          "type": "string",
+          "description": "Stakeholder expectations regarding sustainability"
+        },
+        "timelineImplications": {
+          "type": "string",
+          "description": "Impact on sustainability timelines"
+        }
+      },
+      "description": "Impact on sustainability efforts",
+      "additionalProperties": false
+    },
+    "peopleImpact": {
+      "type": "object",
+      "properties": {
+        "impactDescription": {
+          "type": "string",
+          "description": "Description of workforce impact"
+        },
+        "affectedRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Workforce roles affected"
+        },
+        "talentImplications": {
+          "type": "string",
+          "description": "Implications for talent management"
+        },
+        "culturalDimensions": {
+          "type": "string",
+          "description": "Impact on organizational culture"
+        }
+      },
+      "description": "Impact on workforce or culture",
+      "additionalProperties": false
+    },
+    "technologyImpact": {
+      "type": "object",
+      "properties": {
+        "impactDescription": {
+          "type": "string",
+          "description": "Description of technology impact"
+        },
+        "affectedSystems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Systems affected"
+        },
+        "technicalDebt": {
+          "type": "string",
+          "description": "Implications for technical debt"
+        },
+        "architecturalImplications": {
+          "type": "string",
+          "description": "Impact on technical architecture"
+        }
+      },
+      "description": "Impact on technology systems",
+      "additionalProperties": false
+    },
+    "channelImpact": {
+      "type": "object",
+      "properties": {
+        "impactDescription": {
+          "type": "string",
+          "description": "Description of channel impact"
+        },
+        "affectedChannelTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Channel types affected"
+        },
+        "potentialLosses": {
+          "type": "string",
+          "description": "Potential channel capacity or revenue impact"
+        },
+        "affectedCustomerSegments": {
+          "type": "string",
+          "description": "Customer segments affected by channel impact"
+        }
+      },
+      "description": "Impact on distribution channels",
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

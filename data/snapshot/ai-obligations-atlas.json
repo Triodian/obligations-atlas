@@ -1,0 +1,637 @@
+{
+  "dataset": "ai-obligations-atlas",
+  "generatedAt": "2026-10-27T03:00:57.288Z",
+  "interfaceVersion": "1.0.0",
+  "metamodelVersion": "2.3.0",
+  "metamodelCommit": "ff3eff90af2704b6eba5f27fd54a191a46888ae7",
+  "includesPending": false,
+  "policy": {
+    "datasetPolicyID": "POLICY-AI-OBLIGATIONS-ATLAS",
+    "dataset": "ai-obligations-atlas",
+    "version": "1.0.0",
+    "effectiveFrom": "2026-10-27",
+    "methodOwner": "Triodian method owner",
+    "sourcePrecedence": [
+      {
+        "rank": 1,
+        "basis": "officialText",
+        "canSetStatusOrDate": true
+      },
+      {
+        "rank": 2,
+        "basis": "regulatorPublication",
+        "canSetStatusOrDate": true,
+        "onlyForTiers": [
+          "expected",
+          "anticipated"
+        ]
+      },
+      {
+        "rank": 3,
+        "basis": "standardsBodyPublication",
+        "canSetStatusOrDate": true,
+        "onlyForTiers": [
+          "expected"
+        ]
+      },
+      {
+        "rank": 4,
+        "basis": "commentary",
+        "canSetStatusOrDate": false
+      },
+      {
+        "rank": 5,
+        "basis": "news",
+        "canSetStatusOrDate": false
+      }
+    ],
+    "autonomyRules": [
+      {
+        "ruleID": "autonomy.lead.publishUnverified",
+        "changeTypes": [
+          "addLead",
+          "addCommentaryLink"
+        ],
+        "treatment": "publishedUnverified",
+        "approverRequired": false,
+        "description": "A new lead or commentary link is published automatically and marked unverified."
+      },
+      {
+        "ruleID": "autonomy.reverify.publish",
+        "changeTypes": [
+          "reverify"
+        ],
+        "whenMaxSourceRank": 2,
+        "treatment": "published",
+        "approverRequired": false,
+        "description": "Confirming a record against an official or regulator source, with nothing else changed, updates its last-verified date automatically."
+      },
+      {
+        "ruleID": "autonomy.anticipated.reviewQueue",
+        "changeTypes": [
+          "create"
+        ],
+        "whenTier": [
+          "anticipated"
+        ],
+        "whenMaxSourceRank": 2,
+        "treatment": "reviewQueue",
+        "approverRequired": true,
+        "description": "A new Anticipated record from a rank 1 or 2 source waits for review."
+      },
+      {
+        "ruleID": "autonomy.create.reviewQueue",
+        "changeTypes": [
+          "create"
+        ],
+        "treatment": "reviewQueue",
+        "approverRequired": true,
+        "description": "Any other new record sets a status, a date and a tier, so it waits for a named approver."
+      },
+      {
+        "ruleID": "autonomy.statusDateTier.reviewQueue",
+        "changeTypes": [
+          "statusChange",
+          "dateChange",
+          "tierChange"
+        ],
+        "treatment": "reviewQueue",
+        "approverRequired": true,
+        "description": "A status change, effective date or tier change waits for review; the approver is named on the record."
+      },
+      {
+        "ruleID": "autonomy.supersede.reviewQueue",
+        "changeTypes": [
+          "supersede",
+          "remove"
+        ],
+        "treatment": "reviewQueue",
+        "approverRequired": true,
+        "keepSupersededVersion": true,
+        "description": "Removal or supersession waits for review; the superseded version is kept."
+      },
+      {
+        "ruleID": "autonomy.update.reviewQueue",
+        "changeTypes": [
+          "update",
+          "reverify"
+        ],
+        "treatment": "reviewQueue",
+        "approverRequired": true,
+        "description": "Any other change to a published record waits for review."
+      }
+    ],
+    "datePrecedence": [
+      "officialText.commencementProvision",
+      "officialText.registerCompilation",
+      "regulatorPublication",
+      "standardsBodyPublication"
+    ],
+    "freshness": [
+      {
+        "sourceTier": "binding",
+        "threshold": "P180D"
+      },
+      {
+        "sourceTier": "expected",
+        "threshold": "P90D"
+      },
+      {
+        "sourceTier": "anticipated",
+        "threshold": "P30D"
+      }
+    ],
+    "confidenceBands": {
+      "medium": 0.5,
+      "high": 0.8
+    },
+    "languageRules": [
+      {
+        "ruleID": "language.addressedInstruction",
+        "pattern": "\\byou (must|need to|are required to|should)\\b",
+        "appliesTo": [
+          "record",
+          "response",
+          "matterBrief"
+        ],
+        "description": "Records describe what a source says; they never tell a reader what to do."
+      },
+      {
+        "ruleID": "language.verdict",
+        "pattern": "\\b(is|are|be|being) (fully |partially )?(compliant|non-compliant|in breach)\\b|\\bcompliance (level|score|rating|verdict)\\b",
+        "appliesTo": [
+          "record",
+          "response",
+          "matterBrief"
+        ],
+        "description": "No record, screen, export or response states whether anyone is compliant or in breach."
+      },
+      {
+        "ruleID": "language.requiredReserved",
+        "pattern": "\\brequired\\b",
+        "appliesTo": [
+          "record",
+          "response"
+        ],
+        "description": "'Required' is reserved for counsel's determination; records use source-describing words instead."
+      },
+      {
+        "ruleID": "language.clientRequirement",
+        "pattern": "\\b(the law|this|it) requires (the|your|this) (client|firm|entity|organi[sz]ation)\\b|\\bapplies to (your|the) client\\b",
+        "appliesTo": [
+          "record",
+          "response",
+          "matterBrief"
+        ],
+        "description": "Nothing states what the law requires of a particular client; counsel decides what applies."
+      },
+      {
+        "ruleID": "language.passageLikelihood",
+        "pattern": "\\b(likely|unlikely|expected|certain) to (pass|be passed|be enacted|be made|commence)\\b|\\b(probability|chance|likelihood) of (passage|passing|enactment)\\b",
+        "appliesTo": [
+          "record",
+          "response",
+          "matterBrief"
+        ],
+        "description": "An Anticipated record shows its trigger date or status, never a likelihood that it will pass or apply."
+      }
+    ]
+  },
+  "records": [
+    {
+      "governedRecordID": "TRG-LEAD-3B3A9EFFDE@1",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-3B3A9EFFDE",
+      "version": 1,
+      "dataset": "ai-obligations-atlas",
+      "publicationStatus": "unverified",
+      "record": {
+        "triggerID": "TRG-LEAD-3B3A9EFFDE",
+        "label": "Lead: Binding requirements on banks' outsourced relevant services",
+        "description": "Research note: Notice text not fetched; specific provisions (register, materiality, contract terms, notification) not verified. Notices are legally binding under the Banking Act (obligationType 'statutory' used for binding subsidiary instruments). Whether a third-party AI service is an 'outsourced relevant service' depends on the Notice definitions - not verified.",
+        "primaryCategory": "regulatoryCompliance",
+        "origin": "External",
+        "status": "lead",
+        "detectionMethod": "Reasoning Fabric connector",
+        "detectionDate": "2026-10-27",
+        "sourceReference": "https://www.mas.gov.sg/regulation/third-party-risk-management",
+        "instrumentChange": {
+          "instrument": "MAS Notice 658 Management of Outsourced Relevant Services for Banks (and Notice 1121 for Merchant Banks)",
+          "changeType": "guidance",
+          "sourceURL": "https://www.mas.gov.sg/regulation/third-party-risk-management",
+          "sourceRank": 2
+        },
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-SG-MAS-N658",
+            "title": "Binding requirements on banks' outsourced relevant services"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-SEED-2026-10-27-0044"
+        ]
+      },
+      "metamodelVersion": "2.3.0",
+      "publishedAt": "2026-10-27T03:00:56.019Z",
+      "verification": {
+        "lastVerified": "2026-10-27",
+        "stale": false,
+        "confidence": {
+          "score": 0.85,
+          "band": "high",
+          "reliability": 0.9,
+          "recency": 0.999,
+          "corroboration": 0.5,
+          "stale": false
+        }
+      },
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000231",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000232",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000233",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000234",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000235",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000236"
+      ],
+      "changeProposalIDs": [
+        "CP-SEED-2026-10-27-0044"
+      ]
+    },
+    {
+      "governedRecordID": "TRG-LEAD-30B2A7E1E3@1",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-30B2A7E1E3",
+      "version": 1,
+      "dataset": "ai-obligations-atlas",
+      "publicationStatus": "unverified",
+      "record": {
+        "triggerID": "TRG-LEAD-30B2A7E1E3",
+        "label": "Lead: Technology risk management expectations",
+        "description": "Research note: UNVERIFIED against official text: section numbers and wording must be confirmed from the MAS PDF before publication. MAS AI Guidelines para 5.16/5.22 build on technology-risk controls.",
+        "primaryCategory": "regulatoryCompliance",
+        "origin": "External",
+        "status": "lead",
+        "detectionMethod": "Reasoning Fabric connector",
+        "detectionDate": "2026-10-27",
+        "sourceReference": "https://www.allenandgledhill.com/sg/publication/articles/17670/",
+        "instrumentChange": {
+          "instrument": "MAS Technology Risk Management Guidelines",
+          "changeType": "guidance",
+          "sourceURL": "https://www.allenandgledhill.com/sg/publication/articles/17670/",
+          "sourceRank": 4
+        },
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-SG-MAS-TRM",
+            "title": "Technology risk management expectations"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-SEED-2026-10-27-0043"
+        ]
+      },
+      "metamodelVersion": "2.3.0",
+      "publishedAt": "2026-10-27T03:00:55.960Z",
+      "verification": {
+        "lastVerified": "2026-10-27",
+        "stale": false,
+        "confidence": {
+          "score": 0.5,
+          "band": "medium",
+          "reliability": 0.4,
+          "recency": 0.999,
+          "corroboration": 0,
+          "stale": false
+        }
+      },
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000226",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000227",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000228",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000229",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000230"
+      ],
+      "changeProposalIDs": [
+        "CP-SEED-2026-10-27-0043"
+      ]
+    }
+  ],
+  "provenance": [
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000226",
+      "sequence": 226,
+      "recordedAt": "2026-10-27T03:00:55.952Z",
+      "dataset": "ai-obligations-atlas",
+      "actor": {
+        "actorType": "agent",
+        "actorID": "atlas-seed-builder",
+        "displayName": "Atlas seed builder (research of 27 Oct 2026)"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-30B2A7E1E3"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0043",
+      "submissionID": "SUB-ATLAS-SEED-2026-10-27",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000001"
+      ],
+      "eventType": "sourceRead",
+      "decision": "Read MAS Technology Risk Management Guidelines (Law firm commentary) (rank 4)",
+      "evidenceURLs": [
+        "https://www.allenandgledhill.com/sg/publication/articles/17670/"
+      ],
+      "previousHash": "ea300d620e46a844dcb9ab66052c853441a8d076d57e0f7ddb41cc695152d270",
+      "hash": "141bf42ad7fbed1447685b6e7460839fe98304fe655abc64b1e30e0bf4ab1fb7"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000227",
+      "sequence": 227,
+      "recordedAt": "2026-10-27T03:00:55.954Z",
+      "dataset": "ai-obligations-atlas",
+      "actor": {
+        "actorType": "service",
+        "actorID": "reasoning-fabric",
+        "displayName": "Reasoning Fabric"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-30B2A7E1E3"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0043",
+      "submissionID": "SUB-ATLAS-SEED-2026-10-27",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000226"
+      ],
+      "eventType": "validated",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "previousHash": "141bf42ad7fbed1447685b6e7460839fe98304fe655abc64b1e30e0bf4ab1fb7",
+      "hash": "ed22468f4e9ab80d906fae03e556c7975ba4921e1c46320a71ebd1da3e00e0a1"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000228",
+      "sequence": 228,
+      "recordedAt": "2026-10-27T03:00:55.956Z",
+      "dataset": "ai-obligations-atlas",
+      "actor": {
+        "actorType": "service",
+        "actorID": "reasoning-fabric",
+        "displayName": "Reasoning Fabric"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-30B2A7E1E3"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0043",
+      "submissionID": "SUB-ATLAS-SEED-2026-10-27",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000227"
+      ],
+      "eventType": "scored",
+      "decision": "Confidence 0.5 (medium)",
+      "confidenceScore": 0.5,
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "previousHash": "ed22468f4e9ab80d906fae03e556c7975ba4921e1c46320a71ebd1da3e00e0a1",
+      "hash": "2361c3ee14263621622fdfe94c57d800e8b92a6fb295f23d011dbdb4ae4953e3"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000229",
+      "sequence": 229,
+      "recordedAt": "2026-10-27T03:00:55.958Z",
+      "dataset": "ai-obligations-atlas",
+      "actor": {
+        "actorType": "service",
+        "actorID": "reasoning-fabric",
+        "displayName": "Reasoning Fabric"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-30B2A7E1E3"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0043",
+      "submissionID": "SUB-ATLAS-SEED-2026-10-27",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000228"
+      ],
+      "eventType": "treatmentAssigned",
+      "decision": "Treatment: convertedToLead",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "previousHash": "2361c3ee14263621622fdfe94c57d800e8b92a6fb295f23d011dbdb4ae4953e3",
+      "hash": "748eaa1e8de40b8ecbc074ae93c1a64f8cf618fe2f32aed89aab0d87d6bea76f"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000230",
+      "sequence": 230,
+      "recordedAt": "2026-10-27T03:00:55.960Z",
+      "dataset": "ai-obligations-atlas",
+      "eventType": "published",
+      "actor": {
+        "actorType": "service",
+        "actorID": "reasoning-fabric",
+        "displayName": "Reasoning Fabric"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-30B2A7E1E3"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0043",
+      "governedRecordID": "TRG-LEAD-30B2A7E1E3@1",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000229"
+      ],
+      "decision": "Published unverified: TRG-LEAD-30B2A7E1E3@1",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "evidenceURLs": [
+        "https://www.allenandgledhill.com/sg/publication/articles/17670/"
+      ],
+      "confidenceScore": 0.5,
+      "previousHash": "748eaa1e8de40b8ecbc074ae93c1a64f8cf618fe2f32aed89aab0d87d6bea76f",
+      "hash": "47a42f2b3f9653b864dbf0e58c52010796acdd56ab168ff94fe7b662195393ef"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000231",
+      "sequence": 231,
+      "recordedAt": "2026-10-27T03:00:56.009Z",
+      "dataset": "ai-obligations-atlas",
+      "actor": {
+        "actorType": "agent",
+        "actorID": "atlas-seed-builder",
+        "displayName": "Atlas seed builder (research of 27 Oct 2026)"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3B3A9EFFDE"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0044",
+      "submissionID": "SUB-ATLAS-SEED-2026-10-27",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000001"
+      ],
+      "eventType": "sourceRead",
+      "decision": "Read MAS Notice 658 Management of Outsourced Relevant Services for Banks (and Notice 1121 for Merchant Banks) (Regulator publication) (rank 2)",
+      "evidenceURLs": [
+        "https://www.mas.gov.sg/regulation/third-party-risk-management"
+      ],
+      "previousHash": "47a42f2b3f9653b864dbf0e58c52010796acdd56ab168ff94fe7b662195393ef",
+      "hash": "018816c44cddc017b3dfe24571ce41998d7e651b1639aaa402f51345b696a989"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000232",
+      "sequence": 232,
+      "recordedAt": "2026-10-27T03:00:56.011Z",
+      "dataset": "ai-obligations-atlas",
+      "actor": {
+        "actorType": "agent",
+        "actorID": "atlas-seed-builder",
+        "displayName": "Atlas seed builder (research of 27 Oct 2026)"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3B3A9EFFDE"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0044",
+      "submissionID": "SUB-ATLAS-SEED-2026-10-27",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000231"
+      ],
+      "eventType": "sourceRead",
+      "decision": "Read MAS Notice 658 Management of Outsourced Relevant Services for Banks (and Notice 1121 for Merchant Banks) (Regulator publication) (rank 2)",
+      "evidenceURLs": [
+        "https://www.mas.gov.sg/regulation/faqs/faq-on-mas-notice-658-and-1121-banks"
+      ],
+      "previousHash": "018816c44cddc017b3dfe24571ce41998d7e651b1639aaa402f51345b696a989",
+      "hash": "4387f991469d65010fa1103689fcc70ffa4084e73c8af9dcaa2dce2b981f34cf"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000233",
+      "sequence": 233,
+      "recordedAt": "2026-10-27T03:00:56.013Z",
+      "dataset": "ai-obligations-atlas",
+      "actor": {
+        "actorType": "service",
+        "actorID": "reasoning-fabric",
+        "displayName": "Reasoning Fabric"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3B3A9EFFDE"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0044",
+      "submissionID": "SUB-ATLAS-SEED-2026-10-27",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000232"
+      ],
+      "eventType": "validated",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "previousHash": "4387f991469d65010fa1103689fcc70ffa4084e73c8af9dcaa2dce2b981f34cf",
+      "hash": "803024c44a41fafd803480d7f7730c6aa5070531ea375ccc11c23cd85e43b68d"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000234",
+      "sequence": 234,
+      "recordedAt": "2026-10-27T03:00:56.015Z",
+      "dataset": "ai-obligations-atlas",
+      "actor": {
+        "actorType": "service",
+        "actorID": "reasoning-fabric",
+        "displayName": "Reasoning Fabric"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3B3A9EFFDE"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0044",
+      "submissionID": "SUB-ATLAS-SEED-2026-10-27",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000233"
+      ],
+      "eventType": "scored",
+      "decision": "Confidence 0.85 (high)",
+      "confidenceScore": 0.85,
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "previousHash": "803024c44a41fafd803480d7f7730c6aa5070531ea375ccc11c23cd85e43b68d",
+      "hash": "d0b662fd78ae5abcb830ce1d70f2a4bc830a91da3e4e724bda8a52169c96eb6a"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000235",
+      "sequence": 235,
+      "recordedAt": "2026-10-27T03:00:56.017Z",
+      "dataset": "ai-obligations-atlas",
+      "actor": {
+        "actorType": "service",
+        "actorID": "reasoning-fabric",
+        "displayName": "Reasoning Fabric"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3B3A9EFFDE"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0044",
+      "submissionID": "SUB-ATLAS-SEED-2026-10-27",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000234"
+      ],
+      "eventType": "treatmentAssigned",
+      "decision": "Treatment: convertedToLead",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "previousHash": "d0b662fd78ae5abcb830ce1d70f2a4bc830a91da3e4e724bda8a52169c96eb6a",
+      "hash": "c9bdd4b0e89a204b6ec22a43c70fc492674182a0fb983717fa54e274b453894b"
+    },
+    {
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000236",
+      "sequence": 236,
+      "recordedAt": "2026-10-27T03:00:56.019Z",
+      "dataset": "ai-obligations-atlas",
+      "eventType": "published",
+      "actor": {
+        "actorType": "service",
+        "actorID": "reasoning-fabric",
+        "displayName": "Reasoning Fabric"
+      },
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3B3A9EFFDE"
+      },
+      "changeProposalID": "CP-SEED-2026-10-27-0044",
+      "governedRecordID": "TRG-LEAD-3B3A9EFFDE@1",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000235"
+      ],
+      "decision": "Published unverified: TRG-LEAD-3B3A9EFFDE@1",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "evidenceURLs": [
+        "https://www.mas.gov.sg/regulation/third-party-risk-management",
+        "https://www.mas.gov.sg/regulation/faqs/faq-on-mas-notice-658-and-1121-banks"
+      ],
+      "confidenceScore": 0.85,
+      "previousHash": "c9bdd4b0e89a204b6ec22a43c70fc492674182a0fb983717fa54e274b453894b",
+      "hash": "373227bb226abf9035ae1dfa4406ae7dbfe7f0a090109ad9bbb595d848f3c6f4"
+    }
+  ],
+  "ledgerHead": {
+    "sequence": 469,
+    "hash": "72296710246a909b3baaf91a5427c986ea48d1914854739f8e6bf62abb4887bb"
+  }
+}
