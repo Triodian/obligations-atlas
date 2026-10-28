@@ -5,7 +5,7 @@
 import { STANDING_RULE } from '../core/atlas.js';
 
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
-const RELAY = `Responses are records, not legal conclusions. When you quote a record, cite its source link, tier and last-verified date (the citeAs field does this). Describe tiers as describing sources: never tell the user that they or a client are compliant, in breach, or required to do something; say what the source says and that counsel decides what applies. For Anticipated records give the status or key date, never a likelihood that the source will pass or apply. ${STANDING_RULE}`;
+const RELAY = `Coverage: the Atlas holds records for Australia, Singapore and international standards. When a response carries a coverage note for a jurisdiction, tell the user that the Atlas does not yet cover it; never read an empty result as meaning no obligations apply. Records with appliesToAnyAIUse apply to any AI use rather than to particular use cases. Responses are records, not legal conclusions. When you quote a record, cite its source link, tier and last-verified date (the citeAs field does this). Describe tiers as describing sources: never tell the user that they or a client are compliant, in breach, or required to do something; say what the source says and that counsel decides what applies. For Anticipated records give the status or key date, never a likelihood that the source will pass or apply. ${STANDING_RULE}`;
 
 export const TOOLS = [
   {
@@ -15,9 +15,10 @@ export const TOOLS = [
     inputSchema: {
       type: 'object',
       properties: {
-        jurisdiction: { type: 'array', items: { type: 'string', enum: ['AU', 'SG', 'EU', 'GB', 'NZ', 'US', 'INT'] }, description: 'Jurisdiction codes. International standards (INT) are included unless includeInternational is false.' },
+        jurisdiction: { type: 'array', items: { type: 'string', enum: ['AU', 'SG', 'EU', 'GB', 'NZ', 'US', 'INT'] }, description: 'Jurisdiction codes. Covered now: AU, SG and INT (international standards, included unless includeInternational is false). EU, GB, NZ and US are not yet covered; asking for them returns a coverage note, not an answer that nothing applies.' },
         tier: { type: 'array', items: { type: 'string', enum: ['binding', 'expected', 'anticipated'] }, description: 'Source tiers' },
-        useCase: { type: 'array', items: { type: 'string', pattern: '^UC([1-9]|10)$' }, description: 'Standardised use cases, e.g. UC3 (automated triage or decline), UC7 (AI inside a provider)' },
+        useCase: { type: 'array', items: { type: 'string', pattern: '^UC([1-9]|10)$' }, description: 'Standardised use cases, e.g. UC3 (automated triage or decline), UC7 (AI inside a provider). Records specific to these come first, then records that apply to any AI use.' },
+        includeAnyUse: { type: 'boolean', default: true, description: 'false to leave out records that apply to any AI use when filtering by use case' },
         entityType: { type: 'array', items: { type: 'string' }, description: 'Entity types, e.g. authorisedDepositTakingInstitution, generalInsurer, superannuationTrustee, bank, insurer, listedEntity' },
         q: { type: 'string', description: 'Text to match in title, statement, instrument or citation' },
         current: { type: 'boolean', description: 'Exclude superseded, repealed and withdrawn records' },
@@ -57,7 +58,8 @@ async function callTool(atlas, name, args = {}) {
   if (name === 'find_obligations') {
     const all = atlas.findObligations(args);
     const limit = Math.min(Number(args.limit) || 25, 100);
-    return text({ total: all.length, returned: Math.min(all.length, limit), obligations: all.slice(0, limit), notice: STANDING_RULE });
+    const coverage = atlas.coverage(args.jurisdiction);
+    return text({ total: all.length, returned: Math.min(all.length, limit), obligations: all.slice(0, limit), ...(coverage.length ? { coverage } : {}), notice: STANDING_RULE });
   }
   if (name === 'get_obligation') {
     const o = atlas.getObligation(args.obligationID);
@@ -67,7 +69,8 @@ async function callTool(atlas, name, args = {}) {
   if (name === 'list_changes') {
     let items = atlas.changes(args.since);
     if (args.jurisdiction) items = items.filter((i) => !i.jurisdiction || i.jurisdiction === args.jurisdiction.toUpperCase());
-    return text({ since: args.since, changes: items });
+    const coverage = atlas.coverage(args.jurisdiction);
+    return text({ since: args.since, changes: items, ...(coverage.length ? { coverage } : {}) });
   }
   if (name === 'explain_provenance') {
     const p = await atlas.provenance(args.ref);

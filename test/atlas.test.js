@@ -134,3 +134,53 @@ test('MCP: initialize, list tools, call each tool', async () => {
   const unknown = await rpc({ jsonrpc: '2.0', id: 8, method: 'nope' });
   assert.equal(unknown.body.error.code, -32601);
 });
+
+test('matter brief asks about consequence only for use cases still without a level', () => {
+  const data = atlas.dataset();
+  const b = buildMatterBrief(data, { jurisdictions: ['AU'], useCaseIDs: ['UC3', 'UC5'], consequence: { UC3: 'c5' } });
+  const about = b.questionsForCounsel.map((q) => q.about);
+  assert.ok(!about.includes('UC3'), 'UC3 has C5 set, so no consequence question');
+  assert.ok(about.includes('UC5'), 'UC5 has no level, so counsel is asked');
+});
+
+test('records mapped to every use case apply to any AI use and follow use-case-specific records', () => {
+  const rows = atlas.findObligations({ jurisdiction: 'AU', useCase: 'UC3' });
+  const firstAny = rows.findIndex((o) => o.appliesToAnyAIUse);
+  assert.ok(firstAny > 0, 'specific records come first');
+  assert.ok(rows.slice(firstAny).every((o) => o.appliesToAnyAIUse));
+  const specificOnly = atlas.findObligations({ jurisdiction: 'AU', useCase: 'UC3', includeAnyUse: false });
+  assert.equal(specificOnly.length, firstAny);
+  assert.ok(atlas.getObligation('OBL-AU-CPS220-9').appliesToAnyAIUse);
+  const b = buildMatterBrief(atlas.dataset(), { jurisdictions: ['AU'], useCaseIDs: ['UC3'] });
+  assert.equal(b.counts.specificToUseCases + b.counts.anyAIUse, b.counts.binding + b.counts.expected + b.counts.anticipated);
+});
+
+test('jurisdictions without records say "not yet covered" in the API and MCP', async () => {
+  const r = await get('/api/v1/obligations?jurisdiction=EU');
+  assert.equal(r.body.coverage[0].coverage, 'notYetCovered');
+  assert.match(r.body.coverage[0].note, /does not yet cover the European Union/);
+  const au = await get('/api/v1/obligations?jurisdiction=AU');
+  assert.equal(au.body.coverage, undefined);
+  const m = await rpc({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'find_obligations', arguments: { jurisdiction: ['US'], includeInternational: false } } });
+  assert.equal(m.body.result.structuredContent.total, 0);
+  assert.equal(m.body.result.structuredContent.coverage[0].jurisdiction, 'US');
+  assert.ok(atlas.jurisdictions().find((j) => j.code === 'NZ').coverage === 'notYetCovered');
+});
+
+test('entity types are grouped by the jurisdiction whose records address them', () => {
+  const g = atlas.entityTypesByJurisdiction();
+  assert.ok(g.AU.includes('generalInsurer') && !g.AU.includes('bank'));
+  assert.ok(g.SG.includes('bank') && !g.SG.includes('generalInsurer'));
+  assert.ok(!g.INT);
+});
+
+test('change log: commencements dated when they take effect, upcoming marked, leads carry no research notes', () => {
+  const items = atlas.changes('1970-01-01', { now: '2026-10-28' });
+  const adm = items.find((i) => /Automated decision transparency/.test(i.title));
+  assert.equal(adm.date, '2026-12-10');
+  assert.equal(adm.upcoming, true);
+  for (const lead of items.filter((i) => i.kind === 'lead')) {
+    assert.doesNotMatch(lead.summary, /UNVERIFIED|Research note|before publication/i);
+    assert.match(lead.summary, /not yet been checked against the official text/);
+  }
+});

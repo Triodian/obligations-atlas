@@ -60,6 +60,26 @@ export const ASSESSMENTS = {
   aiConfidentialityExposureAssessment: { name: 'AI Confidentiality Exposure Assessment', does: 'Assesses exposure of confidential information, such as deal information, to AI tools' },
 };
 
+/** The ten standardised use cases. A record mapped to all of them applies to any AI use. */
+export const ALL_USE_CASES = ['UC1', 'UC2', 'UC3', 'UC4', 'UC5', 'UC6', 'UC7', 'UC8', 'UC9', 'UC10'];
+export const appliesToAnyAIUse = (ids) => ALL_USE_CASES.every((u) => (ids || []).includes(u));
+
+/** What a source rank means, for leads and evidence. */
+export const SOURCE_RANKS = {
+  1: 'official text',
+  2: 'regulator publication',
+  3: 'standards body publication',
+  4: 'commentary',
+  5: 'other source',
+};
+
+/** Coverage note for a jurisdiction the Atlas holds no records for. */
+export const notCoveredNote = (code) => {
+  const j = JURISDICTIONS[code];
+  const name = j ? j.name : code;
+  return `The Atlas does not yet cover ${/^(United|European)/.test(name) ? 'the ' : ''}${name}. No records here does not mean no obligations apply there; check other sources.`;
+};
+
 export const AUTHORITY = { a1Productivity: 'A1 productivity', a2Analytical: 'A2 analytical', a3Decision: 'A3 decision', a4Transactional: 'A4 transactional', a5Agentic: 'A5 agentic', a6Actuation: 'A6 actuation' };
 
 const byNum = (a, b) => String(a).localeCompare(String(b), 'en', { numeric: true });
@@ -162,6 +182,7 @@ export class Atlas {
       entityTypes: o.entityTypes || [],
       roles: o.roles || [],
       useCaseIDs: o.useCaseIDs || [],
+      appliesToAnyAIUse: appliesToAnyAIUse(o.useCaseIDs),
       supersededByObligationID: o.supersededByObligationID,
       lastVerified: v.lastVerified || o.lastVerified,
       stale: !!v.stale,
@@ -176,7 +197,9 @@ export class Atlas {
 
   /**
    * Obligations matching filters. jurisdiction includes INT (international
-   * standards) unless includeInternational is false.
+   * standards) unless includeInternational is false. With a useCase filter,
+   * records specific to those use cases come first, then records that apply
+   * to any AI use (left out when includeAnyUse is false).
    */
   findObligations(filters = {}) {
     const jur = list(filters.jurisdiction).map((j) => j.toUpperCase());
@@ -187,11 +210,13 @@ export class Atlas {
     const statuses = list(filters.status);
     const q = (filters.q || '').toLowerCase().trim();
     const includeIntl = filters.includeInternational !== false && filters.includeInternational !== 'false';
+    const includeAnyUse = filters.includeAnyUse !== false && filters.includeAnyUse !== 'false';
     const out = this.obligationRecords.filter((gr) => {
       const o = gr.record;
       if (jur.length && !jur.includes(o.jurisdiction) && !(includeIntl && o.jurisdiction === 'INT')) return false;
       if (tiers.length && !tiers.includes(o.sourceTier)) return false;
       if (ucs.length && !(o.useCaseIDs || []).some((u) => ucs.includes(u))) return false;
+      if (ucs.length && !includeAnyUse && appliesToAnyAIUse(o.useCaseIDs)) return false;
       if (ets.length && !(o.entityTypes || []).some((e) => ets.includes(e) || e === 'anyOrganization')) return false;
       if (roles.length && !(o.roles || []).some((r) => roles.includes(r))) return false;
       if (statuses.length && !statuses.includes(o.status)) return false;
@@ -202,8 +227,9 @@ export class Atlas {
       return true;
     });
     const tierOrder = { binding: 0, expected: 1, anticipated: 2 };
+    const anyFirst = (a, b) => (ucs.length ? Number(appliesToAnyAIUse(a.record.useCaseIDs)) - Number(appliesToAnyAIUse(b.record.useCaseIDs)) : 0);
     return out
-      .sort((a, b) => (a.record.jurisdiction === b.record.jurisdiction ? 0 : a.record.jurisdiction === 'INT' ? 1 : b.record.jurisdiction === 'INT' ? -1 : a.record.jurisdiction < b.record.jurisdiction ? -1 : 1)
+      .sort((a, b) => anyFirst(a, b) || (a.record.jurisdiction === b.record.jurisdiction ? 0 : a.record.jurisdiction === 'INT' ? 1 : b.record.jurisdiction === 'INT' ? -1 : a.record.jurisdiction < b.record.jurisdiction ? -1 : 1)
         || tierOrder[a.record.sourceTier] - tierOrder[b.record.sourceTier]
         || byNum(a.record.source.instrument, b.record.source.instrument)
         || byNum(a.entityID, b.entityID))
@@ -251,26 +277,70 @@ export class Atlas {
       const obs = this.obligationRecords.filter((o) => o.record.jurisdiction === code);
       const tiers = {};
       for (const o of obs) tiers[o.record.sourceTier] = (tiers[o.record.sourceTier] || 0) + 1;
-      return { code, ...j, obligations: obs.length, tiers, available: obs.length > 0 };
+      const available = obs.length > 0;
+      return { code, ...j, obligations: obs.length, tiers, available, coverage: available ? 'covered' : 'notYetCovered', ...(available ? {} : { note: notCoveredNote(code) }) };
     });
   }
 
-  /** Instrument changes (Triggers) and record versions, newest first, since a date. */
-  changes(since = '1970-01-01') {
+  /**
+   * Coverage notes for requested jurisdictions the Atlas holds no records for,
+   * so an empty result is never read as "no obligations".
+   */
+  coverage(requested) {
+    const codes = list(requested).map((j) => j.toUpperCase()).filter((c) => c !== 'INT');
+    const notes = [];
+    for (const code of codes) {
+      if (this.obligationRecords.some((o) => o.record.jurisdiction === code)) continue;
+      notes.push({ jurisdiction: code, name: JURISDICTIONS[code] ? JURISDICTIONS[code].name : code, coverage: 'notYetCovered', note: notCoveredNote(code) });
+    }
+    return notes;
+  }
+
+  /** Entity types used by each covered jurisdiction's records. */
+  entityTypesByJurisdiction() {
+    const out = {};
+    for (const gr of this.obligationRecords) {
+      const j = gr.record.jurisdiction;
+      if (j === 'INT') continue;
+      for (const e of gr.record.entityTypes || []) {
+        if (e === 'anyOrganization' || e === 'other') continue;
+        (out[j] || (out[j] = [])).includes(e) || out[j].push(e);
+      }
+    }
+    const order = Object.keys(ENTITY_TYPES);
+    for (const j of Object.keys(out)) out[j].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+    return out;
+  }
+
+  /**
+   * Instrument changes (Triggers) and record versions, newest first, since a
+   * date. A commencement is dated by the day it takes effect, not the day the
+   * Act was made. Items dated after today are marked upcoming. A lead carries
+   * a public summary; the research notes behind it stay in provenance.
+   */
+  changes(since = '1970-01-01', { now = today() } = {}) {
     const s = String(since);
     const items = [];
     for (const t of this.triggerRecords) {
       const r = t.record;
-      const date = (r.instrumentChange && (r.instrumentChange.publishedDate || r.instrumentChange.effectiveDate)) || r.detectionDate || t.publishedAt.slice(0, 10);
+      const ic = r.instrumentChange || {};
+      const isLead = r.status === 'lead' || t.publicationStatus === 'unverified';
+      const date = (ic.changeType === 'commencement' ? ic.effectiveDate || ic.publishedDate : ic.publishedDate || ic.effectiveDate) || r.detectionDate || t.publishedAt.slice(0, 10);
       if (date < s.slice(0, 10)) continue;
+      const rankLabel = SOURCE_RANKS[ic.sourceRank] || 'source';
       items.push({
-        kind: r.status === 'lead' || t.publicationStatus === 'unverified' ? 'lead' : 'instrumentChange',
+        kind: isLead ? 'lead' : 'instrumentChange',
         date,
-        title: r.label,
-        summary: r.description,
+        upcoming: date > now,
+        title: isLead ? r.label.replace(/^Lead:\s*/, '') : r.label,
+        summary: isLead
+          ? `${ic.instrument || 'This instrument'} has not yet been checked against the official text (read so far: ${rankLabel}). It sets no status or date until a reviewer confirms it.`
+          : r.description,
+        sourceKind: SOURCE_RANKS[ic.sourceRank] || undefined,
         changeType: r.instrumentChange && r.instrumentChange.changeType,
         instrument: r.instrumentChange && r.instrumentChange.instrument,
-        jurisdiction: r.instrumentChange && r.instrumentChange.jurisdiction,
+        // A lead's jurisdiction comes from the record it points to, when the lead does not carry one.
+        jurisdiction: ic.jurisdiction || ((r.affectedEntities || []).map((x) => (/^OBL-([A-Z]{2,3})-/.exec(x.entityID) || [])[1]).find(Boolean)),
         effectiveDate: r.instrumentChange && r.instrumentChange.effectiveDate,
         sourceURL: r.instrumentChange && r.instrumentChange.sourceURL,
         sourceRank: r.instrumentChange && r.instrumentChange.sourceRank,
@@ -285,6 +355,7 @@ export class Atlas {
       items.push({
         kind: gr.publicationStatus === 'superseded' ? 'recordSuperseded' : gr.version > 1 ? 'recordUpdated' : 'recordPublished',
         date: gr.publishedAt.slice(0, 10),
+        upcoming: false,
         title: gr.record.title,
         obligationID: gr.entityID,
         governedRecordID: gr.governedRecordID,
@@ -347,6 +418,7 @@ export class Atlas {
       useCases: this.useCases(),
       organizations: this.organizations(),
       jurisdictions: this.jurisdictions(),
+      entityTypesByJurisdiction: this.entityTypesByJurisdiction(),
       changes: this.changes(),
       policy: { languageRules: (this.policy && this.policy.languageRules) || [], freshness: this.policy && this.policy.freshness },
     };
@@ -370,17 +442,21 @@ export function buildMatterBrief(data, input) {
     && !['superseded', 'repealed', 'withdrawn'].includes(o.status));
   const ref = (o) => ({
     obligationID: o.obligationID, title: o.title, instrument: o.instrument, citation: o.citation, jurisdiction: o.jurisdiction,
+    appliesToAnyAIUse: appliesToAnyAIUse(o.useCaseIDs),
     status: o.status, keyDates: o.keyDates, useCaseIDs: o.useCaseIDs.filter((u) => !ucs.length || ucs.includes(u)),
     sourceURL: o.sourceURL, lastVerified: o.lastVerified, governedRecordID: o.governedRecordID, publicationStatus: o.publicationStatus, provenanceRef: o.provenanceRef,
   });
   const byTier = { binding: [], expected: [], anticipated: [] };
-  for (const o of obligations) (byTier[o.sourceTier] || (byTier[o.sourceTier] = [])).push(ref(o));
+  // Records specific to the selected use cases come before records that apply to any AI use.
+  const sorted = obligations.slice().sort((a, b) => Number(appliesToAnyAIUse(a.useCaseIDs)) - Number(appliesToAnyAIUse(b.useCaseIDs)));
+  for (const o of sorted) (byTier[o.sourceTier] || (byTier[o.sourceTier] = [])).push(ref(o));
   const ucByID = new Map(data.useCases.map((u) => [u.useCaseID, u]));
 
   const questions = [];
+  const consequence = input.consequence || {};
   for (const u of ucs) {
     const uc = ucByID.get(u);
-    if (!uc) continue;
+    if (!uc || consequence[u]) continue; // only where counsel has not yet set a level
     questions.push({ about: u, question: `Measured against the client’s own thresholds, which consequence level (C1 to C5) should counsel set for ${u} (${uc.title})?` });
   }
   const instruments = new Map();
@@ -416,7 +492,12 @@ export function buildMatterBrief(data, input) {
     },
     dataset: { name: data.info.name, generatedAt: data.info.generatedAt, metamodelVersion: data.info.metamodelVersion, ledgerHead: data.info.ledgerHead, preview: data.info.preview },
     obligationsByTier: byTier,
-    counts: { binding: byTier.binding.length, expected: byTier.expected.length, anticipated: byTier.anticipated.length },
+    counts: {
+      binding: byTier.binding.length, expected: byTier.expected.length, anticipated: byTier.anticipated.length,
+      specificToUseCases: obligations.filter((o) => !appliesToAnyAIUse(o.useCaseIDs)).length,
+      anyAIUse: obligations.filter((o) => appliesToAnyAIUse(o.useCaseIDs)).length,
+    },
+    coverage: jur.filter((j) => j !== 'INT' && !data.obligations.some((o) => o.jurisdiction === j)).map((j) => ({ jurisdiction: j, coverage: 'notYetCovered', note: notCoveredNote(j) })),
     questionsForCounsel: questions,
     engagementsThatFit,
     notices: [

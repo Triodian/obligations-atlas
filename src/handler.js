@@ -10,8 +10,13 @@
  *   set, they are read live from the Reasoning Fabric's governance interface
  *   (FABRIC_URL) and cached for ATLAS_CACHE_SECONDS; if the Fabric cannot be
  *   reached, the last good copy, then the bundled published snapshot, is used.
+ *
+ * Firm registration and "Bring in Triodian" requests go to the Fabric's firm
+ * registry with the same token (it needs the firms.submit scope). Firm API keys
+ * issued there are read with the snapshot and cached the same way.
  */
 import { createApp } from './api/app.js';
+import { fabricFirmsClient, firmsBaseFrom } from './firms.js';
 
 const DEFAULT_FABRIC = 'https://uat.api.orthogramic.com/governance/v1';
 const DATASET = 'ai-obligations-atlas';
@@ -21,6 +26,25 @@ const isSnapshot = (s) => s && Array.isArray(s.records) && Array.isArray(s.prove
 export function createHandler({ published, preview, fetchImpl = (...a) => fetch(...a), now = () => Date.now() }) {
   const apps = new Map(); // key -> { app, snapshot }
   const live = { snapshot: null, fetchedAt: 0, error: null, inflight: null };
+  const firmKeys = { items: [], fetchedAt: 0, inflight: null, error: null };
+  let firmsClient = null;
+  const firmsFor = (env) => {
+    if (!env.FABRIC_READ_TOKEN) return null;
+    if (!firmsClient) firmsClient = fabricFirmsClient({ baseUrl: firmsBaseFrom(env.FABRIC_URL || DEFAULT_FABRIC), token: env.FABRIC_READ_TOKEN, fetchImpl });
+    return firmsClient;
+  };
+  // Firm keys are refreshed in the background; a caller is checked against the last good list.
+  const refreshKeys = (env, ctx) => {
+    const client = firmsFor(env);
+    const ttl = Number(env.ATLAS_CACHE_SECONDS || 300) * 1000;
+    if (!client || firmKeys.inflight || now() - firmKeys.fetchedAt < ttl) return;
+    firmKeys.inflight = client.keys()
+      .then((items) => { firmKeys.items = items; firmKeys.fetchedAt = now(); firmKeys.error = null; })
+      .catch((e) => { firmKeys.error = e.message; firmKeys.fetchedAt = now(); })
+      .finally(() => { firmKeys.inflight = null; });
+    if (ctx && ctx.waitUntil) ctx.waitUntil(firmKeys.inflight);
+    return firmKeys.inflight;
+  };
 
   const appFor = (key, snapshot, env, isPreview) => {
     const cached = apps.get(key);
@@ -30,6 +54,8 @@ export function createHandler({ published, preview, fetchImpl = (...a) => fetch(
       preview: isPreview,
       apiKeys: env.ATLAS_API_KEYS ? JSON.parse(env.ATLAS_API_KEYS) : [],
       requireKey: env.ATLAS_REQUIRE_KEY === 'true',
+      keyProvider: () => firmKeys.items,
+      firms: firmsFor(env),
     });
     apps.set(key, { app, snapshot });
     return app;
@@ -81,8 +107,12 @@ export function createHandler({ published, preview, fetchImpl = (...a) => fetch(
         records: snapshot.records.length,
         generatedAt: snapshot.generatedAt,
         ...(source !== 'bundled-preview' && env.FABRIC_READ_TOKEN ? { liveError: live.error || undefined, fetchedAt: live.fetchedAt ? new Date(live.fetchedAt).toISOString() : undefined } : {}),
+        firms: env.FABRIC_READ_TOKEN ? { registration: 'fabric', keys: firmKeys.items.length, keysError: firmKeys.error || undefined } : { registration: 'unavailable' },
       });
     }
+    const keysReady = refreshKeys(env, ctx);
+    // A request carrying a key waits for the first key list, so a new firm's key works at once.
+    if (keysReady && !firmKeys.items.length && (request.headers.get('x-api-key') || request.headers.get('authorization'))) await keysReady;
     const app = appFor(isPreview ? 'preview' : 'published', snapshot, env, isPreview);
     return app.fetch(request, env, ctx);
   };
