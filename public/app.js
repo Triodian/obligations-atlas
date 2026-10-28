@@ -441,7 +441,7 @@ function renderDevelopers() {
       <li><h3>Verdict</h3><p>Each output is checked against the constraint and given a verdict, such as allowed, escalated or blocked, with a trace back to the constraint and the obligation.</p></li>
     </ol>
     <h2>Open data model</h2>
-    <p>Records are written against the open <a href="https://github.com/Triodian/Triodian_Metamodel">Triodian Metamodel</a>: Obligation, External Organization, Use Case, Trigger, Data Flow, Compliance and Public Reporting. They are governed through the published Reasoning Fabric connector, under the <a href="/api/v1/policy">AI Obligations Atlas dataset policy</a>. That policy sets source precedence, which changes wait for a named reviewer, freshness thresholds and the language rules.</p>
+    <p>Records are written against the open <a href="https://github.com/Triodian/Triodian_Metamodel">Triodian Metamodel</a>: Obligation, External Organization, Use Case, Trigger, Data Flow, Compliance and Public Reporting. They are governed through the published Reasoning Fabric connector, under the <a href="${href('policy')}">AI Obligations Atlas dataset policy</a>. That policy sets source precedence, which changes wait for a named reviewer, freshness thresholds and the language rules.</p>
     <p class="muted">Dataset generated ${esc(fmtDate(data.info.generatedAt))}; Metamodel ${esc(data.info.metamodelVersion)}; ledger head ${esc(data.info.ledgerHead ? `#${data.info.ledgerHead.sequence}, ${data.info.ledgerHead.hash.slice(0, 16)}…` : 'none')}.</p>`;
 }
 
@@ -458,6 +458,79 @@ function setupDrawer() {
   document.getElementById('menuclose').addEventListener('click', () => set(false));
   drawer.addEventListener('click', (e) => { if (e.target.closest('a.item[data-nav]')) { drawer.hidden = true; bg.hidden = true; btn.setAttribute('aria-expanded', 'false'); } });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !drawer.hidden) set(false); });
+}
+
+// ------------------------------------------------------------ dataset policy
+const RANK_KIND = {
+  officialText: 'Official text', regulatorPublication: 'Regulator publication', standardsBodyPublication: 'Standards body publication',
+  commentary: 'Commentary', news: 'News',
+};
+const CHANGE_LABEL = {
+  addLead: 'a new lead', addCommentaryLink: 'a commentary link', reverify: 're-checking a record', create: 'a new record', statusChange: 'a status change',
+  dateChange: 'a date change', tierChange: 'a tier change', supersede: 'superseding a record', remove: 'removing a record', update: 'any other change',
+};
+const DATE_SOURCE = {
+  'officialText.commencementProvision': 'The commencement provision in the official text',
+  'officialText.registerCompilation': 'The official register’s compilation',
+  regulatorPublication: 'A regulator publication',
+  standardsBodyPublication: 'A standards body publication',
+};
+const SCOPE_LABEL = { record: 'records', response: 'API and MCP responses', matterBrief: 'matter briefs' };
+const days = (iso) => { const m = /^P(\d+)D$/.exec(iso || ''); return m ? `${m[1]} days` : iso; };
+const sentence = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+const listText = (xs) => (xs.length <= 1 ? xs.join('') : `${xs.slice(0, -1).join(', ')} or ${xs[xs.length - 1]}`);
+
+function renderPolicy() {
+  setNav('policy');
+  const p = data.policy || {};
+  const precedence = (p.sourcePrecedence || []).slice().sort((a, b) => a.rank - b.rank);
+  const canSet = (r) => (!r.canSetStatusOrDate ? 'No'
+    : r.onlyForTiers ? `Only for ${listText(r.onlyForTiers.map((t) => tierLabel(t)))} records` : 'Yes');
+  const rules = p.autonomyRules || [];
+  const auto = rules.filter((r) => !r.approverRequired);
+  const review = rules.filter((r) => r.approverRequired);
+  const ruleRow = (r) => `<tr><td>${esc(sentence(listText((r.changeTypes || []).map((c) => CHANGE_LABEL[c] || c))))}${r.whenTier ? `<div class="small soft">${esc(r.whenTier.map(tierLabel).join(', '))} records</div>` : ''}${r.whenMaxSourceRank ? `<div class="small soft">From a rank ${esc(r.whenMaxSourceRank)} source or better</div>` : ''}</td><td>${esc(r.description || '')}</td></tr>`;
+  const bands = Object.entries(p.confidenceBands || {}).sort((a, b) => b[1] - a[1]);
+  main.innerHTML = `<div class="opening"><div class="eyebrow">Dataset policy</div><h1>How records are sourced and published</h1>
+    <p class="lede">The rules the Reasoning Fabric applies to every Atlas record: which sources can set a status or date, what waits for a named reviewer, when a record goes stale, and the language records may use.</p>
+    <p class="small soft">Version ${esc(p.version || '')}${p.effectiveFrom ? `, in effect from ${esc(fmtDate(p.effectiveFrom))}` : ''}${p.methodOwner ? `. Owned by the ${esc(p.methodOwner.replace(/^Triodian /, 'Triodian '))}` : ''}. ${EMBED ? '' : 'Machine-readable: <a href="/api/v1/policy">/api/v1/policy</a>.'}</p></div>
+
+    <div class="policy">
+    <section class="card"><h2 class="sh">Source precedence</h2>
+      <p class="small soft">When sources disagree, the higher-ranked source wins. Only some sources can set a record’s status or dates.</p>
+      <div class="tw"><table><thead><tr><th>Rank</th><th>Source</th><th>Can set a status or date</th></tr></thead><tbody>
+      ${precedence.map((r) => `<tr><td>${esc(r.rank)}</td><td>${esc(RANK_KIND[r.basis] || r.basis)}</td><td>${esc(canSet(r))}</td></tr>`).join('')}
+      </tbody></table></div>
+      <p class="small soft" style="margin-top:10px">A source that cannot set a status or date on its own becomes a lead in the change log until a reviewer checks it against the official text.</p>
+    </section>
+
+    <section class="card"><h2 class="sh">What waits for a named reviewer</h2>
+      <p class="small soft">Nothing that sets a status, a date or a tier is published without a named reviewer, whose name is shown on the record.</p>
+      <div class="tw"><table><thead><tr><th>Change</th><th>What happens</th></tr></thead><tbody>
+      ${review.map(ruleRow).join('')}
+      </tbody></table></div>
+      ${auto.length ? `<h3 class="sh" style="margin-top:16px">Published without review</h3><div class="tw"><table><thead><tr><th>Change</th><th>What happens</th></tr></thead><tbody>${auto.map(ruleRow).join('')}</tbody></table></div>` : ''}
+    </section>
+
+    <div class="policy-pair">
+    <section class="card"><h2 class="sh">Which date is used</h2>
+      <p class="small soft">When sources give different dates, the first available in this order is used.</p>
+      <ol class="plain">${(p.datePrecedence || []).map((d) => `<li>${esc(DATE_SOURCE[d] || d)}</li>`).join('')}</ol>
+    </section>
+
+    <section class="card"><h2 class="sh">Freshness</h2>
+      <p class="small soft">A record not re-checked within its tier’s threshold is marked past its freshness threshold.</p>
+      <dl class="kv">${(p.freshness || []).map((f) => `<dt>${tierBadge(f.sourceTier)}</dt><dd>${esc(days(f.threshold))}</dd>`).join('')}</dl>
+      ${bands.length ? `<h3 class="sh" style="margin-top:16px">Confidence</h3><p class="small soft">Each record’s confidence combines source reliability, recency and corroboration, from 0 to 1.</p>
+        <dl class="kv">${bands.map(([k, v]) => `<dt>${esc(sentence(k))}</dt><dd>${esc(Number(v).toFixed(2))} or more</dd>`).join('')}<dt>Low</dt><dd>Below ${esc(Number(Math.min(...bands.map(([, v]) => v))).toFixed(2))}</dd></dl>` : ''}
+    </section>
+    </div>
+
+    <section class="card"><h2 class="sh">Language rules</h2>
+      <p class="small soft">Every record, API and MCP response and matter brief is checked against these rules before it is shown. A response that fails is withheld.</p>
+      <ul class="rules">${(p.languageRules || []).map((r) => `<li>${esc(r.description)}<div class="small soft">Checked in ${esc(listText((r.appliesTo || []).map((a) => SCOPE_LABEL[a] || a)).replace(' or ', ' and '))}</div></li>`).join('')}</ul>
+    </section>
+    </div>`;
 }
 
 // ------------------------------------------------------------ firm registration and Bring in Triodian
@@ -603,6 +676,7 @@ function route() {
   else if (page === 'brief') renderBrief();
   else if (page === 'developers') renderDevelopers();
   else if (page === 'firm') renderFirm();
+  else if (page === 'policy') renderPolicy();
   else renderRegister();
   if (h) main.focus({ preventScroll: true });
 }
@@ -629,7 +703,7 @@ async function start() {
   chip.className = `checkcount ${data.info.preview ? 'b-ochre' : 'b-green'}`;
   chip.textContent = data.info.preview ? 'Preview data' : 'Published records';
   chip.title = data.info.preview ? 'Includes records still waiting for review' : 'Records approved by a named reviewer';
-  if (EMBED) document.getElementById('policylink').remove();
+
   if (data.info.preview) {
     const p = document.getElementById('preview');
     p.hidden = false;

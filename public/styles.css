@@ -206,6 +206,15 @@ details.anyuse[open] > summary::before{content:"▾"}
 .keybox{margin:10px 0 16px}
 .keybox code{word-break:break-all;background:none;padding:0}
 
+/* dataset policy page */
+.policy{display:grid;gap:16px;max-width:980px}
+.policy-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.policy ol.plain{margin:0;padding-left:20px}
+.policy ol.plain li{padding:3px 0}
+.policy ul.rules{list-style:none;margin:0;padding:0}
+.policy ul.rules li{padding:9px 0;border-top:1px solid var(--rule-soft)}
+.policy ul.rules li:first-child{border-top:0;padding-top:0}
+
 /* ---------- tables ---------- */
 .tw{border:1px solid var(--rule);border-radius:8px;background:var(--card);overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:14px}

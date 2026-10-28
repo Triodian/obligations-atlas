@@ -410,6 +410,17 @@ export class Atlas {
     return issues;
   }
 
+  /** The dataset policy for people to read: everything except the language rules' match patterns. */
+  publicPolicy() {
+    const p = this.policy || {};
+    return {
+      datasetPolicyID: p.datasetPolicyID, version: p.version, effectiveFrom: p.effectiveFrom, methodOwner: p.methodOwner,
+      sourcePrecedence: p.sourcePrecedence || [], autonomyRules: p.autonomyRules || [], datePrecedence: p.datePrecedence || [],
+      freshness: p.freshness || [], confidenceBands: p.confidenceBands || {},
+      languageRules: (p.languageRules || []).map((r) => ({ ruleID: r.ruleID, description: r.description, appliesTo: r.appliesTo })),
+    };
+  }
+
   /** Compact dataset for the web app, which filters and builds matter briefs in the browser. */
   dataset() {
     return {
@@ -420,7 +431,7 @@ export class Atlas {
       jurisdictions: this.jurisdictions(),
       entityTypesByJurisdiction: this.entityTypesByJurisdiction(),
       changes: this.changes(),
-      policy: { languageRules: (this.policy && this.policy.languageRules) || [], freshness: this.policy && this.policy.freshness },
+      policy: this.publicPolicy(),
     };
   }
 }

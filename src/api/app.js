@@ -127,7 +127,8 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
   app.get('/api/v1/use-cases', (c) => send(c, { items: atlas.useCases() }));
   app.get('/api/v1/jurisdictions', (c) => send(c, { items: atlas.jurisdictions() }));
   app.get('/api/v1/organizations', (c) => send(c, { items: atlas.organizations() }));
-  app.get('/api/v1/policy', (c) => c.json(snapshot.policy));
+  // Indented, so it reads cleanly when opened in a browser; the web app's Dataset policy page explains it.
+  app.get('/api/v1/policy', (c) => c.body(JSON.stringify(snapshot.policy, null, 2), 200, { 'content-type': 'application/json; charset=utf-8' }));
 
   // ------------------------------------------------------------ firm registration and Bring in Triodian
   // Passed to the Reasoning Fabric's firm registry; personal details are not kept here.
