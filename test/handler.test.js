@@ -26,7 +26,10 @@ test('the test domain serves the preview data; the live domain serves published 
 test('with FABRIC_READ_TOKEN the live domain reads published records from the Fabric, with caching', async () => {
   let calls = 0; let auth;
   let clock = 1_000_000;
-  const h = createHandler({ published, preview, now: () => clock, fetchImpl: async (url, init) => { calls++; auth = init.headers.authorization; assert.match(url, /\/governance\/v1\/snapshot\/ai-obligations-atlas$/); return Response.json(liveSnap); } });
+  const h = createHandler({ published, preview, now: () => clock, fetchImpl: async (url, init) => {
+    if (/\/firms\/v1\//.test(url)) return Response.json({ items: [] });
+    calls++; auth = init.headers.authorization; assert.match(url, /\/governance\/v1\/snapshot\/ai-obligations-atlas$/); return Response.json(liveSnap);
+  } });
   const e = env({ FABRIC_READ_TOKEN: 'tok', FABRIC_URL: 'https://fabric.example/governance/v1' });
   const r = await get(h, 'obligations-atlas.triodian.com', '/api/v1/obligations?jurisdiction=AU', e);
   assert.ok(r.body.total > 20);
@@ -55,4 +58,45 @@ test('a malformed Fabric response is not served', async () => {
   const hz = await get(h, 'obligations-atlas.triodian.com', '/healthz', env({ FABRIC_READ_TOKEN: 'tok' }));
   assert.equal(hz.body.data, 'bundled');
   assert.match(hz.body.liveError, /unexpected shape/);
+});
+
+test('firm registration, status and Bring in Triodian go to the Fabric firm registry; firm keys from the Fabric work', async () => {
+  const seen = [];
+  const key = 'oa_test_key_123';
+  const keyHash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(key)))].map((b) => b.toString(16).padStart(2, '0')).join('');
+  const fetchImpl = async (url, init) => {
+    seen.push({ url, method: init.method || 'GET', body: init.body ? JSON.parse(init.body) : null, auth: init.headers.authorization });
+    if (url.endsWith('/firms/v1/ai-obligations-atlas/keys')) return Response.json({ items: [{ firm: 'Firm & Co', keySha256: keyHash, perMinute: 600 }] });
+    if (url.endsWith('/firms/v1/ai-obligations-atlas/registrations')) return Response.json({ registrationID: 'FIRMREG-20261028000000-abcdef0123', status: 'pending' });
+    if (/\/registrations\/FIRMREG-20261028000000-abcdef0123\/status$/.test(url)) return Response.json({ status: 'approved', apiKey: key });
+    if (url.endsWith('/firms/v1/ai-obligations-atlas/contacts')) return Response.json({ contactID: 'CONTACT-1', status: 'new' });
+    return Response.json(liveSnap);
+  };
+  const h = createHandler({ published, preview, fetchImpl });
+  const e = env({ FABRIC_READ_TOKEN: 'tok', FABRIC_URL: 'https://fabric.example/governance/v1' });
+  const post = async (path, body) => { const r = await h(new Request(`https://obligations-atlas.triodian.com${path}`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }), e, { waitUntil: () => {} }); return { status: r.status, body: await r.json() }; };
+  const secret = 'a'.repeat(43);
+
+  assert.equal((await post('/api/v1/firms/register', { name: 'Ada', email: 'ada@firm.example', firm: 'Firm', accessSecret: 'short' })).status, 400);
+  const reg = await post('/api/v1/firms/register', { name: 'Ada', email: 'ada@firm.example', firm: 'Firm', accessSecret: secret });
+  assert.equal(reg.body.status, 'pending');
+  const sent = seen.find((x) => x.url.endsWith('/registrations'));
+  assert.equal(sent.auth, 'Bearer tok');
+  assert.equal(sent.body.site, 'obligations-atlas.triodian.com');
+  assert.match(sent.body.accessSecretSha256, /^[0-9a-f]{64}$/);
+  assert.ok(!JSON.stringify(sent.body).includes(secret), 'the access secret itself never leaves the Atlas');
+
+  const st = await post('/api/v1/firms/status', { registrationID: 'FIRMREG-20261028000000-abcdef0123', accessSecret: secret });
+  assert.equal(st.body.apiKey, key);
+  const ct = await post('/api/v1/firms/contact', { registrationID: 'FIRMREG-20261028000000-abcdef0123', accessSecret: secret, message: 'Help', scope: { jurisdictions: ['AU'] } });
+  assert.equal(ct.body.status, 'new');
+
+  const withKey = await h(new Request('https://obligations-atlas.triodian.com/api/v1/obligations', { headers: { 'x-api-key': key } }), e, { waitUntil: () => {} });
+  assert.equal(withKey.status, 200, 'a key issued through the Fabric is accepted');
+  const bad = await h(new Request('https://obligations-atlas.triodian.com/api/v1/obligations', { headers: { 'x-api-key': 'oa_unknown' } }), e, { waitUntil: () => {} });
+  assert.equal(bad.status, 401);
+
+  const noFabric = createHandler({ published, preview });
+  const r = await noFabric(new Request('https://obligations-atlas.triodian.com/api/v1/firms/register', { method: 'POST', body: JSON.stringify({ accessSecret: secret }) }), env(), {});
+  assert.equal(r.status, 503);
 });

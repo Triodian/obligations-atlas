@@ -184,6 +184,28 @@ dl.kv .brk{border-top:1px solid var(--rule-soft);padding-top:11px;margin-top:2px
 .rel a{font-weight:600;color:var(--ink);text-decoration-color:rgba(23,32,43,.3)}
 .rel .where{display:block;font-size:12.5px;color:var(--ink-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
+/* any-AI-use group, coverage line, brief entity groups */
+.coverage{margin:-4px 0 12px;color:var(--ink-soft)}
+details.anyuse{margin-top:18px}
+details.anyuse > summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:12px 16px;border:1px solid var(--rule);border-radius:8px;background:var(--parchment-2);margin-bottom:10px}
+details.anyuse > summary::-webkit-details-marker{display:none}
+details.anyuse > summary::before{content:"▸";font-size:11px;color:var(--ink-soft)}
+details.anyuse[open] > summary::before{content:"▾"}
+.entgroup + .entgroup{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule-soft)}
+.entjur{font:600 12px/1.3 var(--sans);color:var(--ink-soft);margin-bottom:4px}
+.brief .subgroup{font:600 13px/1.3 var(--sans);color:var(--ink-soft);margin:10px 0 4px}
+
+/* firm panel */
+#bring-slot{margin-top:26px;padding-top:6px;border-top:1px solid var(--rule-soft)}
+#bring-slot:empty{display:none}
+.firmcard{font:400 15px/1.55 var(--sans)}
+.regform{display:grid;gap:12px;max-width:520px;margin-top:10px}
+.regform .field{margin:0}
+.regform textarea.text{font:400 14px/1.5 var(--sans);resize:vertical}
+.regform .check{font-size:13.5px}
+.keybox{margin:10px 0 16px}
+.keybox code{word-break:break-all;background:none;padding:0}
+
 /* ---------- tables ---------- */
 .tw{border:1px solid var(--rule);border-radius:8px;background:var(--card);overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:14px}
