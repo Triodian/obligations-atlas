@@ -708,7 +708,7 @@ async function start() {
     const p = document.getElementById('preview');
     p.hidden = false;
     p.textContent = 'Preview. Records marked pending review come from the seed research of 27 October 2026 and have not yet been approved by a Triodian reviewer. Do not rely on them in a matter.';
-    document.querySelectorAll('[data-app]').forEach((a) => { a.href = `https://${a.dataset.app}-test.triodian.com/`; });
+    document.querySelectorAll('[data-app]').forEach((a) => { a.href = `https://${a.dataset.app}-test.triodian.com/?suite=1`; });
   }
   setupDrawer();
   window.addEventListener('hashchange', route);
