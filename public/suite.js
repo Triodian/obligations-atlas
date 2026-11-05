@@ -1,7 +1,7 @@
 /* Triodian demo suite: an introduction to the three apps, and a "Switch app" link in a demo band.
  *
  * DEMO ADDITION. This file is the same in all three apps (AI Obligations Atlas, AI Risk Appetite,
- * AI Use Assessment). The dialog also shows a fourth, separate app for unregulated entities
+ * AI Use Assessment), and in AI Confidentiality Exposure Assessment. The dialog also shows a fourth, separate app for unregulated entities
  * (AI Confidentiality Exposure Assessment), which is outside the three-step chain. It is not part of any app's own logic: it adds a band at the top of the page
  * and a dialog, and touches nothing else. To switch it off for a client deployment, set DEMO to
  * false below, or remove the <script src="/suite.js"> line from public/index.html.
@@ -102,6 +102,7 @@
     '.tsu-ce .tsu-text{margin:0 0 10px}',
     '.tsu-ce .tsu-out{margin:0;border:0;padding:0}',
     '.tsu-ce .tsu-go{white-space:nowrap}',
+    '.tsu-ce.is-here{background:#fff;border-color:#8A5A3B}',
     '@media (max-width:820px){.tsu-ce{grid-template-columns:1fr}}',
     '.tsu-foot{display:flex;gap:10px;align-items:flex-start;margin-top:16px;padding-top:14px;border-top:1px dashed #C99A3A;font-size:12px;color:#5C3D00}',
     '.tsu-foot .tsu-tag{flex-shrink:0;margin-top:1px}',
@@ -127,13 +128,17 @@
   }
 
   function ceCard(a) {
-    return '<section class="tsu-ce" aria-labelledby="tsu-' + a.id + '"><div>' +
+    var here = a.id === CURRENT;
+    return '<section class="tsu-ce' + (here ? ' is-here' : '') + '" aria-labelledby="tsu-' + a.id + '"><div>' +
+      (here ? '<div class="tsu-step"><span class="tsu-here">● You are here</span></div>' : '') +
       '<h3 id="tsu-' + a.id + '" style="font:600 19px/1.25 \'Source Serif 4\',Georgia,serif;margin:0 0 2px">' + a.name + '</h3>' +
       '<p class="tsu-verb">' + a.verb + '</p>' +
       '<p class="tsu-who">' + a.who + '</p>' +
       '<p class="tsu-text">' + a.text + '</p>' +
       '<p class="tsu-out">Hands on: <b>' + a.hands + '</b></p></div>' +
-      '<a class="tsu-go" href="' + url(a) + '">Open Confidentiality Exposure <span aria-hidden="true">→</span></a>' +
+      (here
+        ? '<a class="tsu-go" href="#" data-tsu-close>Continue in Confidentiality Exposure</a>'
+        : '<a class="tsu-go" href="' + url(a) + '">Open Confidentiality Exposure <span aria-hidden="true">→</span></a>') +
       '</section>';
   }
 
