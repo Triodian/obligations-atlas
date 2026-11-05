@@ -1,8 +1,9 @@
-/* Triodian demo suite: an introduction to the three apps, and a "Switch app" link in a demo band.
+/* Triodian demo suite: an introduction to the five apps, and a "Switch app" link in a demo band.
  *
- * DEMO ADDITION. This file is the same in all three apps (AI Obligations Atlas, AI Risk Appetite,
- * AI Use Assessment), and in AI Confidentiality Exposure Assessment. The dialog also shows a fourth, separate app for unregulated entities
- * (AI Confidentiality Exposure Assessment), which is outside the three-step chain. It is not part of any app's own logic: it adds a band at the top of the page
+ * DEMO ADDITION. This file is the same in all five apps: AI Obligations Atlas, AI Board Direction, AI Risk Appetite,
+ * AI Use Assessment and AI Confidentiality Exposure Assessment. The dialog shows the four-step chain for regulated
+ * entities, then the two apps an unregulated company uses: AI Board Direction in standalone mode, and AI Confidentiality
+ * Exposure Assessment. It is not part of any app's own logic: it adds a band at the top of the page
  * and a dialog, and touches nothing else. To switch it off for a client deployment, set DEMO to
  * false below, or remove the <script src="/suite.js"> line from public/index.html.
  *
@@ -29,23 +30,29 @@
       hands: 'Matter brief',
     },
     {
-      id: 'ra', host: 'risk-appetite', name: 'AI Risk Appetite', n: '2', verb: 'What the board will accept',
+      id: 'bd', host: 'board-direction', name: 'AI Board Direction', n: '2', verb: 'What the board directs',
+      who: 'For the board, its advisor and the GC',
+      text: 'The board works through ten templated steps, from the AI in use to red lines, decisions reserved to it, confidential information and what it expects to hear. Connected, it gives the board’s directions for the appetite. Standalone, it is the whole appetite for an unregulated company.',
+      hands: 'Board directions',
+    },
+    {
+      id: 'ra', host: 'risk-appetite', name: 'AI Risk Appetite', n: '3', verb: 'What the board will accept',
       who: 'For the CRO, counsel and the board',
       text: 'The board’s positions on eight decisions about AI, tested for consistency and challenged before approval. It produces the appetite statement, the tolerance and trigger schedule, and the calibration set.',
       hands: 'Calibration set',
     },
     {
-      id: 'ua', host: 'use-assessment', name: 'AI Use Assessment', n: '3', verb: 'Whether each AI use fits',
+      id: 'ua', host: 'use-assessment', name: 'AI Use Assessment', n: '4', verb: 'Whether each AI use fits',
       who: 'For counsel, the GC and the CRO',
       text: 'Each AI arrangement registered and classified against the calibration set, with blind peer review and independent validation. It produces the register, the evidence gaps and the findings.',
       hands: 'Register and findings',
     },
   ];
-  // A separate app, not a step in the chain above: for unregulated entities, which have no board appetite to measure against.
+  // A separate app, not a step in the chain above: for unregulated entities, which have no calibration set to measure against.
   var CE = {
     id: 'ce', host: 'confidentiality', name: 'AI Confidentiality Exposure Assessment', verb: 'Where deal information can reach an external AI model',
     who: 'For unregulated entities · counsel and the GC, during a transaction',
-    text: 'For companies outside the regulated-entity chain above, with no board appetite or calibration set to measure against. For one live or recently closed transaction, it registers every channel by which deal information can reach an external model, and what the company could show about each. It produces the channel register, one finding per channel and a 90-day plan.',
+    text: 'For companies outside the regulated-entity chain above, with no calibration set to measure against. For one live or recently closed transaction, it registers every channel by which deal information can reach an external model, and what the company could show about each. It produces the channel register, one finding per channel and a 90-day plan.',
     hands: 'Channel register and findings',
   };
   var url = function (a) { return 'https://' + a.host + (TEST ? '-test' : '') + '.triodian.com/?suite=1'; };
@@ -69,7 +76,7 @@
     '.tsu-switch:focus-visible,.tsu-card a:focus-visible,.tsu-x:focus-visible{outline:2px solid #182635;outline-offset:2px}',
     '@media (max-width:620px){.tsu-note .tsu-long{display:none}}',
     '.tsu-bg{position:fixed;inset:0;z-index:300;background:rgba(24,38,53,.62);display:flex;align-items:flex-start;justify-content:center;padding:max(5vh,20px) 16px 24px;overflow:auto;box-sizing:border-box}',
-    ".tsu-dlg{position:relative;background:#fff;color:#17202B;border-radius:14px;max-width:980px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.28);padding:32px 34px 22px;box-sizing:border-box;font:400 15px/1.55 'IBM Plex Sans',system-ui,sans-serif}",
+    ".tsu-dlg{position:relative;background:#fff;color:#17202B;border-radius:14px;max-width:1180px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.28);padding:32px 34px 22px;box-sizing:border-box;font:400 15px/1.55 'IBM Plex Sans',system-ui,sans-serif}",
     '.tsu-dlg *{box-sizing:border-box}',
     '.tsu-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border:0;border-radius:8px;background:transparent;color:#4F5966;font-size:18px;cursor:pointer}',
     '.tsu-x:hover{background:#F4F5F7;color:#17202B}',
@@ -77,7 +84,8 @@
     '.tsu-top img{height:26px;width:auto;display:block}',
     ".tsu-h{font:600 30px/1.18 'Source Serif 4',Georgia,serif;margin:0 0 8px;letter-spacing:-.01em;max-width:24ch}",
     '.tsu-lead{color:#4F5966;margin:0 0 24px;max-width:64ch}',
-    '.tsu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch}',
+    '.tsu-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}',
+    '@media (max-width:1060px){.tsu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}',
     '@media (max-width:820px){.tsu-grid{grid-template-columns:1fr}.tsu-dlg{padding:26px 20px 18px}.tsu-h{font-size:25px}}',
     '.tsu-card{position:relative;display:flex;flex-direction:column;border:1px solid #D3D8DF;border-radius:12px;padding:18px 18px 16px;background:#F4F5F7}',
     '.tsu-card.is-here{background:#fff;border-color:#4E3A5E;box-shadow:inset 0 3px 0 #4E3A5E}',
@@ -151,10 +159,11 @@
       '<button class="tsu-x" type="button" aria-label="Close" data-tsu-close>✕</button>' +
       '<div class="tsu-top"><img src="/triodian-logo.svg" alt="Triodian"></div>' +
       '<h2 class="tsu-h" id="tsu-h">From what the law expects to evidence each AI use fits</h2>' +
-      '<p class="tsu-lead">Three connected apps for governing AI in a regulated entity. Counsel leads each engagement; the CRO and the board own the positions. Each app hands a defined output to the next, so the board’s appetite is traceable from the obligations behind it to the assessment of every AI use.</p>' +
+      '<p class="tsu-lead">Four connected apps for governing AI in a regulated entity. Counsel and the board’s advisor lead each engagement; the board, the CRO and management own the positions. Each app hands a defined output to the next, so the board’s appetite is traceable from the obligations behind it to the assessment of every AI use.</p>' +
       '<div class="tsu-grid">' + APPS.map(card).join('') + '</div>' +
-      '<div class="tsu-flow" aria-label="How the apps connect"><b>Obligations</b><span class="tsu-arrow" aria-hidden="true">→</span>matter brief<span class="tsu-arrow" aria-hidden="true">→</span><b>Appetite</b><span class="tsu-arrow" aria-hidden="true">→</span>calibration set<span class="tsu-arrow" aria-hidden="true">→</span><b>Assessment</b><span class="tsu-arrow" aria-hidden="true">→</span>register and findings</div>' +
-      '<div class="tsu-sep">Separate app · for unregulated entities</div>' + ceCard(CE) +
+      '<div class="tsu-flow" aria-label="How the apps connect"><b>Obligations</b><span class="tsu-arrow" aria-hidden="true">→</span>matter brief<span class="tsu-arrow" aria-hidden="true">→</span><b>Board direction</b><span class="tsu-arrow" aria-hidden="true">→</span>board directions<span class="tsu-arrow" aria-hidden="true">→</span><b>Appetite</b><span class="tsu-arrow" aria-hidden="true">→</span>calibration set<span class="tsu-arrow" aria-hidden="true">→</span><b>Assessment</b><span class="tsu-arrow" aria-hidden="true">→</span>register and findings</div>' +
+      '<div class="tsu-sep">For unregulated entities</div>' +
+      '<p class="tsu-text" style="margin:0 0 12px">An unregulated company starts with <a href="' + url(APPS[1]) + '">AI Board Direction</a> in standalone mode: the board’s steps are the whole appetite, and its confidentiality position can seed the assessment below.</p>' + ceCard(CE) +
       '<div class="tsu-foot"><span class="tsu-tag">DEMO</span><span>This introduction and the Switch app link are added for demonstrations and are not part of the apps. The worked examples use fictional organisations. Atlas records describe what sources say; they are not legal advice.</span></div>' +
       '</div></div>');
     document.body.appendChild(dlg);
