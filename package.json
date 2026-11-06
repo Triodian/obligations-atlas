@@ -2,6 +2,7 @@
   "name": "obligations-atlas",
   "version": "0.1.0",
   "private": true,
+  "license": "Apache-2.0",
   "description": "AI Obligations Atlas: AI governance obligations by jurisdiction, mapped to standardised AI use cases and tagged by source tier. Web app, REST API and MCP server.",
   "type": "module",
   "engines": {

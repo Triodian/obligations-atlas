@@ -84,3 +84,8 @@ node scripts/connector.js snapshot ai-obligations-atlas ../obligations-atlas/dat
 **Coverage.** The Atlas covers Australia, Singapore and international standards. Asking the API or MCP server about another jurisdiction (EU, GB, NZ, US) returns a `coverage` note saying it isn't covered yet, so an empty result isn't read as "no obligations".
 
 **Language rules.** Every API and MCP response is checked against the dataset's language rules before it leaves. A response that fails the check is withheld.
+
+## Licence
+
+AI Obligations Atlas is open source under the [Apache License, Version 2.0](LICENSE). Copyright 2026 Triodian Pty Ltd.
+Third-party components bundled with it keep their own licences; see [`NOTICE`](NOTICE).
