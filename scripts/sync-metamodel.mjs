@@ -9,7 +9,7 @@ const src = path.resolve(process.argv[2] || '../triodian_metamodel');
 const dest = path.resolve('vendor/triodian-metamodel');
 if (!fs.existsSync(path.join(src, 'schemas/common.schema.json'))) throw new Error(`Not a Triodian_Metamodel checkout: ${src}`);
 fs.rmSync(dest, { recursive: true, force: true });
-for (const rel of ['schemas', 'reference-data', 'VERSION']) {
+for (const rel of ['schemas', 'reference-data', 'VERSION', 'LICENSE']) {
   fs.cpSync(path.join(src, rel), path.join(dest, rel), { recursive: true });
 }
 let commit = 'unknown';
