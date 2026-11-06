@@ -7,4 +7,4 @@ It includes third-party components, each under its own licence:
 
 - IBM Plex Sans (`public/fonts/`), Copyright 2019 IBM Corp., under the SIL Open Font License 1.1. See `public/fonts/LICENSE-ibm-plex-sans.txt`.
 - Source Serif 4 (`public/fonts/`), Copyright Google Inc., under the SIL Open Font License 1.1. See `public/fonts/LICENSE-source-serif-4.txt`.
-- Triodian Metamodel schemas and reference data (`vendor/triodian-metamodel/`), copied from https://github.com/Triodian/Triodian_Metamodel at the commit in `VENDORED.json`. They are under the licence stated in that repository, not this one.
+- Triodian Metamodel schemas and reference data (`vendor/triodian-metamodel/`), Copyright Triodian Pty Ltd, copied from https://github.com/Triodian/Triodian_Metamodel at the commit in `VENDORED.json`. Also under the Apache License, Version 2.0; see `vendor/triodian-metamodel/LICENSE`.
