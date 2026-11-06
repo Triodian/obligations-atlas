@@ -85,6 +85,10 @@ node scripts/connector.js snapshot ai-obligations-atlas ../obligations-atlas/dat
 
 **Language rules.** Every API and MCP response is checked against the dataset's language rules before it leaves. A response that fails the check is withheld.
 
+## Supporting the project
+
+Use it, review it, tell us you use it, or fund its upkeep: see [SUPPORTING.md](SUPPORTING.md). Reviewers and organisations stay private unless they choose otherwise.
+
 ## Licence
 
 AI Obligations Atlas is open source under the [Apache License, Version 2.0](LICENSE). Copyright 2026 Triodian Pty Ltd.
