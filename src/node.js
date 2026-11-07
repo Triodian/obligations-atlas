@@ -36,6 +36,7 @@ const api = createApp({
   preview,
   apiKeys: process.env.ATLAS_API_KEYS ? JSON.parse(process.env.ATLAS_API_KEYS) : [],
   requireKey: process.env.ATLAS_REQUIRE_KEY === 'true',
+  defaults: { jurisdiction: (process.env.DEFAULT_JURISDICTION || 'AU').toUpperCase(), domain: process.env.DEFAULT_DOMAIN || '' },
 });
 
 // Apply the "/*" block of public/_headers locally, as Cloudflare does in production.

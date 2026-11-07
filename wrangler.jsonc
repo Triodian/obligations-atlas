@@ -22,7 +22,11 @@
     // Where published records are read from when the FABRIC_READ_TOKEN secret is set.
     "FABRIC_URL": "https://uat.api.orthogramic.com/governance/v1",
     "ATLAS_CACHE_SECONDS": "300",
-    "ATLAS_REQUIRE_KEY": "false"
+    "ATLAS_REQUIRE_KEY": "false",
+    // The jurisdiction and regulated domain the register and matter brief start in (users can change both).
+    // The installer sets them for a client; the demo starts in Australia with no domain.
+    "DEFAULT_JURISDICTION": "AU",
+    "DEFAULT_DOMAIN": ""
   }
   // Custom domains obligations-atlas.triodian.com and obligations-atlas-test.triodian.com are
   // attached in the dashboard (Settings -> Domains & Routes).

@@ -52,6 +52,10 @@ Attach both domains under Settings → Domains & Routes → Custom domain. Set t
 - `FABRIC_READ_TOKEN`: the read-only `obligations-atlas` governance token;
 - `ATLAS_API_KEYS`: optional, `[{"firm":"…","keySha256":"…","perMinute":600}]`.
 
+### Starting jurisdiction and regulated domain
+
+The register and the matter brief open in the jurisdiction and regulated domain set by two variables in `wrangler.jsonc`: `DEFAULT_JURISDICTION` (`AU` or `SG`, default `AU`) and `DEFAULT_DOMAIN` (a domain id such as `AU-SUPERANNUATION`, or empty for none). The installer sets both. Users can change either at any time from the register's filters or the brief's step 2, and the browser keeps their choice. The domains come from the Metamodel's `reference-data/regulated-domains.json`.
+
 `/healthz` reports which data a domain is serving (`fabric`, `bundled` or `bundled-preview`), and the last error reading from the Fabric, if any.
 
 ## Refresh the data

@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/regulated-domain.schema.json",
+  "title": "Regulated Domain Schema",
+  "description": "A regulated domain within a jurisdiction, such as banking or superannuation in Australia: the field an organization works in, grouping the entity types obligations are addressed to. Apps let a user choose a jurisdiction, then a domain, then the entity type, and use the domain to scope obligations and engagements. A domain describes who sources address, not which law binds a particular organization; that is for counsel.",
+  "type": "object",
+  "required": [
+    "regulatedDomainID",
+    "jurisdiction",
+    "name",
+    "entityTypes",
+    "financiallyRegulated"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "regulatedDomainID": {
+      "description": "Unique identifier for the domain: the jurisdiction code and a short name, e.g. AU-BANKING",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "jurisdiction": {
+      "description": "Jurisdiction the domain belongs to, e.g. AU",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/jurisdictionCode"
+        }
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Short name shown to users, e.g. Banking"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the domain covers, in plain words"
+    },
+    "financiallyRegulated": {
+      "type": "boolean",
+      "description": "True when a prudential or financial services regulator licenses the entities in the domain. Apps use it to suggest a connected engagement; it is not a finding about any organization"
+    },
+    "regulators": {
+      "type": "array",
+      "description": "Short names of the regulators most associated with the domain, for display",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "entityTypes": {
+      "type": "array",
+      "description": "Entity types an organization in the domain chooses from",
+      "items": {
+        "$ref": "semantic-library/obligation.schema.json#/definitions/regulatedEntityType"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "alsoReaches": {
+      "type": "array",
+      "description": "Broader entity types whose sources also reach an organization in the domain, such as financialInstitution for every MAS-licensed domain. Records addressed to anyOrganization reach every domain and are not listed",
+      "items": {
+        "$ref": "semantic-library/obligation.schema.json#/definitions/regulatedEntityType"
+      },
+      "uniqueItems": true
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the domain definition"
+    }
+  }
+}
