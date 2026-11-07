@@ -93,8 +93,8 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
   app.get('/api/v1/openapi.json', (c) => c.json(openapi(VERSION)));
   app.get('/api/v1/dataset', (c) => {
     c.header('cache-control', 'public, max-age=300');
-    // defaults: the jurisdiction and regulated domain this deployment starts in (DEFAULT_JURISDICTION, DEFAULT_DOMAIN).
-    return send(c, { ...atlas.dataset(), defaults: { jurisdiction: defaults.jurisdiction || 'AU', domain: defaults.domain || '' } });
+    // defaults: the jurisdiction and regulated sector this deployment starts in (DEFAULT_JURISDICTION, DEFAULT_SECTOR).
+    return send(c, { ...atlas.dataset(), defaults: { jurisdiction: defaults.jurisdiction || 'AU', sector: defaults.sector || '' } });
   });
 
   app.get('/api/v1/obligations', (c) => {

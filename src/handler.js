@@ -56,7 +56,7 @@ export function createHandler({ published, preview, fetchImpl = (...a) => fetch(
       requireKey: env.ATLAS_REQUIRE_KEY === 'true',
       keyProvider: () => firmKeys.items,
       firms: firmsFor(env),
-      defaults: { jurisdiction: (env.DEFAULT_JURISDICTION || 'AU').toUpperCase(), domain: env.DEFAULT_DOMAIN || '' },
+      defaults: { jurisdiction: (env.DEFAULT_JURISDICTION || 'AU').toUpperCase(), sector: env.DEFAULT_SECTOR || '' },
     });
     apps.set(key, { app, snapshot });
     return app;

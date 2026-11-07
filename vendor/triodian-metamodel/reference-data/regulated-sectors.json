@@ -1,11 +1,11 @@
 {
-  "title": "Regulated domains",
-  "description": "The regulated domains in each jurisdiction the Atlas covers, and the entity types in each. A user chooses a jurisdiction, then a domain, then the entity type. Each item validates against schemas/regulated-domain.schema.json.",
-  "schema": "regulated-domain.schema.json",
+  "title": "Regulated sectors",
+  "description": "The regulated sectors in each jurisdiction the Atlas covers, and the entity types in each. A user chooses a jurisdiction, then a sector, then the entity type. Each item validates against schemas/regulated-sector.schema.json.",
+  "schema": "regulated-sector.schema.json",
   "version": "1.0",
   "items": [
     {
-      "regulatedDomainID": "AU-BANKING",
+      "regulatedSectorID": "AU-BANKING",
       "jurisdiction": "AU",
       "name": "Banking",
       "description": "Banks, building societies, credit unions and other authorised deposit-taking institutions",
@@ -20,7 +20,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-INSURANCE",
+      "regulatedSectorID": "AU-INSURANCE",
       "jurisdiction": "AU",
       "name": "Insurance",
       "description": "General, life and private health insurers",
@@ -37,7 +37,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-SUPERANNUATION",
+      "regulatedSectorID": "AU-SUPERANNUATION",
       "jurisdiction": "AU",
       "name": "Superannuation",
       "description": "Trustees of superannuation funds",
@@ -52,7 +52,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-FINANCIAL-SERVICES",
+      "regulatedSectorID": "AU-FINANCIAL-SERVICES",
       "jurisdiction": "AU",
       "name": "Financial services and markets",
       "description": "Holders of an Australian financial services licence, such as advisers, fund managers and market intermediaries",
@@ -66,7 +66,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-CREDIT",
+      "regulatedSectorID": "AU-CREDIT",
       "jurisdiction": "AU",
       "name": "Credit",
       "description": "Holders of an Australian credit licence, such as lenders and brokers",
@@ -80,7 +80,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-PAYMENTS",
+      "regulatedSectorID": "AU-PAYMENTS",
       "jurisdiction": "AU",
       "name": "Payments",
       "description": "Providers of payment services",
@@ -91,7 +91,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-LISTED",
+      "regulatedSectorID": "AU-LISTED",
       "jurisdiction": "AU",
       "name": "Listed companies",
       "description": "Entities listed on a securities exchange",
@@ -106,7 +106,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-HEALTH",
+      "regulatedSectorID": "AU-HEALTH",
       "jurisdiction": "AU",
       "name": "Health",
       "description": "Hospitals, clinics and other providers of health services",
@@ -117,7 +117,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-CRITICAL-INFRASTRUCTURE",
+      "regulatedSectorID": "AU-CRITICAL-INFRASTRUCTURE",
       "jurisdiction": "AU",
       "name": "Critical infrastructure",
       "description": "Owners and operators of assets a critical infrastructure law covers",
@@ -128,7 +128,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-DEFENCE",
+      "regulatedSectorID": "AU-DEFENCE",
       "jurisdiction": "AU",
       "name": "Defence industry",
       "description": "Suppliers to the Australian Defence Force or the Department of Defence",
@@ -139,10 +139,10 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "AU-GENERAL",
+      "regulatedSectorID": "AU-GENERAL",
       "jurisdiction": "AU",
       "name": "Not financially regulated",
-      "description": "Private companies and not-for-profits outside the domains above",
+      "description": "Private companies and not-for-profits outside the sectors above",
       "financiallyRegulated": false,
       "entityTypes": [
         "privateCompany",
@@ -151,7 +151,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "SG-BANKING",
+      "regulatedSectorID": "SG-BANKING",
       "jurisdiction": "SG",
       "name": "Banking",
       "description": "Banks licensed in Singapore",
@@ -168,7 +168,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "SG-INSURANCE",
+      "regulatedSectorID": "SG-INSURANCE",
       "jurisdiction": "SG",
       "name": "Insurance",
       "description": "Insurers licensed in Singapore",
@@ -185,7 +185,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "SG-CAPITAL-MARKETS",
+      "regulatedSectorID": "SG-CAPITAL-MARKETS",
       "jurisdiction": "SG",
       "name": "Capital markets",
       "description": "Holders of a capital markets services licence, such as brokers and fund managers",
@@ -202,7 +202,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "SG-PAYMENTS",
+      "regulatedSectorID": "SG-PAYMENTS",
       "jurisdiction": "SG",
       "name": "Payments",
       "description": "Payment service providers licensed in Singapore",
@@ -219,7 +219,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "SG-LISTED",
+      "regulatedSectorID": "SG-LISTED",
       "jurisdiction": "SG",
       "name": "Listed companies",
       "description": "Entities listed on a securities exchange",
@@ -233,7 +233,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "SG-HEALTH",
+      "regulatedSectorID": "SG-HEALTH",
       "jurisdiction": "SG",
       "name": "Health",
       "description": "Hospitals, clinics and other providers of health services",
@@ -244,7 +244,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "SG-CRITICAL-INFRASTRUCTURE",
+      "regulatedSectorID": "SG-CRITICAL-INFRASTRUCTURE",
       "jurisdiction": "SG",
       "name": "Critical infrastructure",
       "description": "Owners and operators of assets a critical infrastructure law covers",
@@ -255,7 +255,7 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "SG-DEFENCE",
+      "regulatedSectorID": "SG-DEFENCE",
       "jurisdiction": "SG",
       "name": "Defence industry",
       "description": "Suppliers to the Singapore Armed Forces or the Ministry of Defence",
@@ -266,10 +266,10 @@
       "version": "1.0"
     },
     {
-      "regulatedDomainID": "SG-GENERAL",
+      "regulatedSectorID": "SG-GENERAL",
       "jurisdiction": "SG",
       "name": "Not financially regulated",
-      "description": "Private companies and not-for-profits outside the domains above",
+      "description": "Private companies and not-for-profits outside the sectors above",
       "financiallyRegulated": false,
       "entityTypes": [
         "privateCompany",

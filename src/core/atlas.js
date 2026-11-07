@@ -1,7 +1,7 @@
-import { REGULATED_DOMAINS } from './domains.js';
+import { REGULATED_SECTORS } from './sectors.js';
 /**
  * Atlas core: queries over a governed-record snapshot from the Reasoning Fabric
- * connector. Plain ES module whose only import is the generated domains.js, shared by the server, the
+ * connector. Plain ES module whose only import is the generated sectors.js, shared by the server, the
  * REST API, the MCP server and the browser (the matter brief runs entirely in
  * the lawyer's browser).
  *
@@ -56,18 +56,18 @@ export const ENTITY_TYPES = {
  */
 export const GENERAL_ENTITY_TYPES = ['privateCompany', 'notForProfit', 'criticalInfrastructureAssetOwner', 'defenceIndustrySupplier', 'healthServiceProvider'];
 
-/** The regulated domains (Metamodel reference data): jurisdiction, then domain, then entity type. */
-export { REGULATED_DOMAINS };
-export const domainByID = (id) => REGULATED_DOMAINS.find((d) => d.regulatedDomainID === id) || null;
-/** Entity types a domain's organisations are reached by: its own and the broader ones it lists (alsoReaches). */
-export const domainEntityTypes = (d) => (d ? [...d.entityTypes, ...(d.alsoReaches || [])] : []);
+/** The regulated sectors (Metamodel reference data): jurisdiction, then sector, then entity type. */
+export { REGULATED_SECTORS };
+export const sectorByID = (id) => REGULATED_SECTORS.find((d) => d.regulatedSectorID === id) || null;
+/** Entity types a sector's organisations are reached by: its own and the broader ones it lists (alsoReaches). */
+export const sectorEntityTypes = (d) => (d ? [...d.entityTypes, ...(d.alsoReaches || [])] : []);
 /**
- * Widens chosen entity types by the broader types their domains list, so a Singapore bank also reaches records
- * addressed to any MAS-licensed financial institution. With jurisdictions given, only those jurisdictions' domains count.
+ * Widens chosen entity types by the broader types their sectors list, so a Singapore bank also reaches records
+ * addressed to any MAS-licensed financial institution. With jurisdictions given, only those jurisdictions' sectors count.
  */
 export function reachedEntityTypes(ets, jurisdictions = []) {
   const out = new Set(ets);
-  for (const d of REGULATED_DOMAINS) {
+  for (const d of REGULATED_SECTORS) {
     if (jurisdictions.length && !jurisdictions.includes(d.jurisdiction)) continue;
     if (d.entityTypes.some((e) => ets.includes(e))) for (const e of d.alsoReaches || []) out.add(e);
   }
@@ -235,10 +235,10 @@ export class Atlas {
     const jur = list(filters.jurisdiction).map((j) => j.toUpperCase());
     const tiers = list(filters.tier);
     const ucs = list(filters.useCase);
-    const doms = list(filters.domain).map(domainByID).filter(Boolean);
-    for (const d of doms) if (!jur.includes(d.jurisdiction)) jur.push(d.jurisdiction);
+    const secs = list(filters.sector).map(sectorByID).filter(Boolean);
+    for (const d of secs) if (!jur.includes(d.jurisdiction)) jur.push(d.jurisdiction);
     const chosen = list(filters.entityType);
-    const ets = reachedEntityTypes(chosen.length ? chosen : doms.flatMap((d) => d.entityTypes), jur);
+    const ets = reachedEntityTypes(chosen.length ? chosen : secs.flatMap((d) => d.entityTypes), jur);
     const roles = list(filters.role);
     const statuses = list(filters.status);
     const q = (filters.q || '').toLowerCase().trim();
@@ -465,7 +465,7 @@ export class Atlas {
       organizations: this.organizations(),
       jurisdictions: this.jurisdictions(),
       entityTypesByJurisdiction: this.entityTypesByJurisdiction(),
-      domains: REGULATED_DOMAINS.filter((d) => this.jurisdictions().some((j) => j.code === d.jurisdiction && j.available)),
+      sectors: REGULATED_SECTORS.filter((d) => this.jurisdictions().some((j) => j.code === d.jurisdiction && j.available)),
       changes: this.changes(),
       policy: this.publicPolicy(),
     };
@@ -477,13 +477,13 @@ export class Atlas {
  * browser and no client facts leave it.
  *
  * @param {object} data   Atlas.dataset() output
- * @param {object} input  { matterLabel, jurisdictions[], domains[] (regulated domain ids), entityTypes[], useCaseIDs[], consequence: { UCn: 'c1'..'c5' }, preparedBy }
+ * @param {object} input  { matterLabel, jurisdictions[], sectors[] (regulated sector ids), entityTypes[], useCaseIDs[], consequence: { UCn: 'c1'..'c5' }, preparedBy }
  */
 export function buildMatterBrief(data, input) {
   const jur = (input.jurisdictions || []).map((j) => j.toUpperCase());
-  const doms = (input.domains || []).map(domainByID).filter(Boolean);
-  for (const d of doms) if (!jur.includes(d.jurisdiction)) jur.push(d.jurisdiction);
-  const ets = (input.entityTypes || []).length ? input.entityTypes : doms.flatMap((d) => d.entityTypes);
+  const secs = (input.sectors || []).map(sectorByID).filter(Boolean);
+  for (const d of secs) if (!jur.includes(d.jurisdiction)) jur.push(d.jurisdiction);
+  const ets = (input.entityTypes || []).length ? input.entityTypes : secs.flatMap((d) => d.entityTypes);
   const reach = reachedEntityTypes(ets, jur);
   const ucs = input.useCaseIDs || [];
   const obligations = data.obligations.filter((o) => (!jur.length || jur.includes(o.jurisdiction) || o.jurisdiction === 'INT')
@@ -537,7 +537,7 @@ export function buildMatterBrief(data, input) {
     ...(input.preparedBy ? { preparedBy: input.preparedBy } : {}),
     scope: {
       jurisdictions: jur,
-      ...(doms.length ? { domains: doms.map((d) => ({ regulatedDomainID: d.regulatedDomainID, name: d.name })) } : {}),
+      ...(secs.length ? { sectors: secs.map((d) => ({ regulatedSectorID: d.regulatedSectorID, name: d.name })) } : {}),
       entityTypes: ets,
       useCases: ucs.map((u) => ({ useCaseID: u, title: (ucByID.get(u) || {}).title, consequenceLevel: (input.consequence || {})[u] || null })),
     },

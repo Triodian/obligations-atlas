@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/regulated-sector.schema.json",
+  "title": "Regulated Sector Schema",
+  "description": "A regulated sector within a jurisdiction, such as banking or superannuation in Australia: the field an organization works in, grouping the entity types obligations are addressed to. Apps let a user choose a jurisdiction, then a sector, then the entity type, and use the sector to scope obligations and engagements. A sector describes who sources address, not which law binds a particular organization; that is for counsel.",
+  "type": "object",
+  "required": [
+    "regulatedSectorID",
+    "jurisdiction",
+    "name",
+    "entityTypes",
+    "financiallyRegulated"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "regulatedSectorID": {
+      "description": "Unique identifier for the sector: the jurisdiction code and a short name, e.g. AU-BANKING",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "jurisdiction": {
+      "description": "Jurisdiction the sector belongs to, e.g. AU",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/jurisdictionCode"
+        }
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Short name shown to users, e.g. Banking"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the sector covers, in plain words"
+    },
+    "financiallyRegulated": {
+      "type": "boolean",
+      "description": "True when a prudential or financial services regulator licenses the entities in the sector. Apps use it to suggest a connected engagement; it is not a finding about any organization"
+    },
+    "regulators": {
+      "type": "array",
+      "description": "Short names of the regulators most associated with the sector, for display",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "entityTypes": {
+      "type": "array",
+      "description": "Entity types an organization in the sector chooses from",
+      "items": {
+        "$ref": "semantic-library/obligation.schema.json#/definitions/regulatedEntityType"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "alsoReaches": {
+      "type": "array",
+      "description": "Broader entity types whose sources also reach an organization in the sector, such as financialInstitution for every MAS-licensed sector. Records addressed to anyOrganization reach every sector and are not listed",
+      "items": {
+        "$ref": "semantic-library/obligation.schema.json#/definitions/regulatedEntityType"
+      },
+      "uniqueItems": true
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the sector definition"
+    }
+  }
+}
