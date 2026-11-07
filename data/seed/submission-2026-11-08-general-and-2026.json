@@ -1,0 +1,1551 @@
+{
+  "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026",
+  "interfaceVersion": "1.0.0",
+  "metamodelVersion": "2.5.0",
+  "mode": "propose",
+  "dataset": "ai-obligations-atlas",
+  "submittedAt": "2026-11-08T00:00:00Z",
+  "submitter": {
+    "actorType": "agent",
+    "actorID": "atlas-update-agent",
+    "displayName": "Atlas update agent (research of 2026-11-08)"
+  },
+  "proposals": [
+    {
+      "changeProposalID": "CP-2026-11-08-0001",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-CORPS-180",
+        "title": "Directors' and officers' care and diligence, including over AI"
+      },
+      "record": {
+        "obligationID": "OBL-AU-CORPS-180",
+        "title": "Directors' and officers' care and diligence, including over AI",
+        "statement": "Section 180(1) provides that 'A director or other officer of a corporation must exercise their powers and discharge their duties with the degree of care and diligence that a reasonable person would exercise' in the corporation's circumstances and office. Section 180(2) treats a business judgment as meeting that standard where the director or officer makes it in good faith for a proper purpose, has no material personal interest, informs themselves to the extent they reasonably believe appropriate, and rationally believes it is in the corporation's best interests. The provision does not mention AI; it addresses how directors and officers oversee and decide, including on the adoption and control of AI.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Corporations Act 2001 (Cth)",
+          "citation": "s 180(1) (care and diligence); s 180(2) (business judgment rule)",
+          "url": "https://www.legislation.gov.au/C2004A00818/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "privateCompany",
+          "listedEntity",
+          "notForProfit",
+          "anyOrganization"
+        ],
+        "roles": [
+          "board",
+          "seniorManagement"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2004A00818/2025-03-17/2025-03-17/text/original/epub/OEBPS/document_1/document_1.html",
+          "title": "Corporations Act 2001 (Cth) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Text quoted from the 17 March 2025 compilation on the Federal Register of Legislation; a later compilation may exist but s 180 has not been amended in substance. Applies to corporations under the Act; not-for-profits that are companies limited by guarantee are corporations, other not-for-profits are not, so counsel decides reach. Whether a particular AI decision meets s 180 is for counsel. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0002",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-ACL-18-29",
+        "title": "Misleading conduct and false representations, including by or about AI"
+      },
+      "record": {
+        "obligationID": "OBL-AU-ACL-18-29",
+        "title": "Misleading conduct and false representations, including by or about AI",
+        "statement": "ACL s 18(1) provides that 'A person must not, in trade or commerce, engage in conduct that is misleading or deceptive or is likely to mislead or deceive.' Section 29(1) addresses false or misleading representations in connection with the supply of goods or services, including that goods are of 'a particular standard, quality, value, grade' (para (a)) and that goods or services have 'sponsorship, approval, performance characteristics' they do not have (para (g)); a pecuniary penalty may be imposed for a contravention of s 29(1). These provisions reach statements a business makes about its AI, and statements an AI system makes to consumers on the business's behalf.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Competition and Consumer Act 2010 (Cth), Schedule 2 (Australian Consumer Law)",
+          "citation": "ACL s 18(1) (misleading or deceptive conduct); s 29(1)(a), (g) (false or misleading representations)",
+          "url": "https://www.legislation.gov.au/C2004A00109/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "deployer",
+          "provider"
+        ],
+        "useCaseIDs": [
+          "UC8",
+          "UC2",
+          "UC3",
+          "UC4"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2004A00109/2026-08-27/2026-08-27/text/original/epub/OEBPS/document_4/document_4.html",
+          "title": "Competition and Consumer Act 2010 (Cth), Schedule 2 (Australian Consumer Law) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Operative words quoted from the 27 August 2026 compilation. The link to AI-generated statements and AI claims is an analytical mapping, not words in the Act. Financial services are covered by the parallel ASIC Act provisions (ss 12DA, 12DB), not researched here. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0003",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-CSA-27",
+        "title": "Ransomware payment reporting within 72 hours"
+      },
+      "record": {
+        "obligationID": "OBL-AU-CSA-27",
+        "title": "Ransomware payment reporting within 72 hours",
+        "statement": "Section 27(1) provides that a reporting business entity 'must give the designated Commonwealth body a report' within '72 hours of making the ransomware payment or becoming aware that the ransomware payment has been made'; a contravention attracts a civil penalty of 60 penalty units (s 27(5)). Under s 26 a reporting business entity is one carrying on business in Australia with an annual turnover above the threshold set by the rules, or a responsible entity for a critical infrastructure asset to which Part 2B of the SOCI Act applies. The provision reaches incidents affecting AI systems as it does any other system.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Cyber Security Act 2024 (Cth)",
+          "citation": "s 26 (application: reporting business entities); s 27 (ransomware payment report within 72 hours)",
+          "url": "https://www.legislation.gov.au/C2024A00098/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization",
+          "criticalInfrastructureAssetOwner"
+        ],
+        "roles": [
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC9"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2024A00098/asmade/2024-11-29/text/1/epub/OEBPS/document_1/document_1.html",
+          "title": "Cyber Security Act 2024 (Cth) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from the Act as made. The turnover threshold is in the Cyber Security (Ransomware Payment Reporting) Rules 2025 (F2025L00278), not fetched. Part 3 commencement date not recorded: the Proclamation was not fetched (open question). Mapping to AI use cases is analytical. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0004",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-SOCI-30AC",
+        "title": "Critical infrastructure risk management program covering hazards, including from AI"
+      },
+      "record": {
+        "obligationID": "OBL-AU-SOCI-30AC",
+        "title": "Critical infrastructure risk management program covering hazards, including from AI",
+        "statement": "Section 30AC provides that the responsible entity for one or more critical infrastructure assets 'must: (a) adopt; and (b) maintain; a critical infrastructure risk management program'. Under s 30AH(1) the program's purpose is, for each asset, to 'identify each hazard where there is a material risk that the occurrence of the hazard could have a relevant impact on the asset', and so far as reasonably practicable to minimise or eliminate that risk and mitigate the impact. The annual report on the program is to be approved by the board, council or other governing body where there is one (s 30AG(2)(f)). Hazards from AI systems used in operating an asset fall within this hazard-based approach.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Security of Critical Infrastructure Act 2018 (Cth)",
+          "citation": "Part 2A: s 30AC (adopt and maintain a CIRMP); s 30AH(1) (purpose of the program); s 30AG(2)(f) (annual report approved by the board)",
+          "url": "https://www.legislation.gov.au/C2018A00029/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "criticalInfrastructureAssetOwner"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board"
+        ],
+        "useCaseIDs": [
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC9",
+          "UC4"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2018A00029/2026-06-04/2026-06-04/text/original/epub/OEBPS/document_1/document_1.html",
+          "title": "Security of Critical Infrastructure Act 2018 (Cth) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Part 2A applies only to assets specified under s 30AB and the rules (Security of Critical Infrastructure (Critical infrastructure risk management program) Rules (LIN 23/006) 2023, not fetched). The AI mapping is analytical; the Act is hazard-based and does not mention AI. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0005",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-SOCI-30BC",
+        "title": "Mandatory cyber security incident reporting for critical infrastructure"
+      },
+      "record": {
+        "obligationID": "OBL-AU-SOCI-30BC",
+        "title": "Mandatory cyber security incident reporting for critical infrastructure",
+        "statement": "Under s 30BC the responsible entity for a critical infrastructure asset notifies a critical cyber security incident 'as soon as practicable, and in any event within 12 hours, after the entity becomes so aware' (s 30BC(1)(d)); under s 30BD other cyber security incidents with a relevant impact are notified 'as soon as practicable, and in any event within 72 hours' (s 30BD(1)(d)). Incidents affecting AI systems that support the asset are reported on the same terms.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Security of Critical Infrastructure Act 2018 (Cth)",
+          "citation": "Part 2B: s 30BC (critical cyber security incidents, 12 hours); s 30BD (other cyber security incidents, 72 hours)",
+          "url": "https://www.legislation.gov.au/C2018A00029/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "criticalInfrastructureAssetOwner"
+        ],
+        "roles": [
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC9"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2018A00029/2026-06-04/2026-06-04/text/original/epub/OEBPS/document_1/document_1.html",
+          "title": "Security of Critical Infrastructure Act 2018 (Cth) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Timeframes quoted from s 30BC(1)(d) and s 30BD(1)(d). Part 2B applies to assets specified under the Act and rules. AI mapping is analytical. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0006",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-PRIVACY-TORT",
+        "title": "Statutory tort for serious invasions of privacy"
+      },
+      "record": {
+        "obligationID": "OBL-AU-PRIVACY-TORT",
+        "title": "Statutory tort for serious invasions of privacy",
+        "statement": "The OAIC states that a statutory tort for serious invasions of privacy, 'contained within Schedule 2 of the Privacy Act', commenced on 10 June 2025. An individual may sue where the defendant invaded their privacy by 'intruding upon the individual's seclusion' or by misusing information relating to them, they 'would have had a reasonable expectation of privacy in all the circumstances', and 'the public interest in protecting their privacy outweighs any countervailing public interest'. Unlike the APPs, it is not limited by the small business exemption. AI uses that surveil individuals or generate or expose information about them (for example deepfakes) can engage it.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "OAIC",
+          "instrument": "Privacy Act 1988 (Cth), Schedule 2 (statutory tort for serious invasions of privacy), inserted by the Privacy and Other Legislation Amendment Act 2024",
+          "citation": "Schedule 2 (cause of action for serious invasions of privacy)",
+          "url": "https://www.oaic.gov.au/privacy/your-privacy-rights/more-privacy-rights/statutory-tort-for-serious-invasions-of-privacy",
+          "externalOrgID": "EXT-OAIC"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "deployer",
+          "provider"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC8",
+          "UC5"
+        ],
+        "effectiveDate": "2025-06-10",
+        "effectiveDates": [
+          {
+            "dateType": "commences",
+            "date": "2025-06-10",
+            "note": "Per OAIC"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.oaic.gov.au/privacy/your-privacy-rights/more-privacy-rights/statutory-tort-for-serious-invasions-of-privacy",
+          "title": "Privacy Act 1988 (Cth), Schedule 2 (statutory tort for serious invasions of privacy), inserted by the Privacy and Other Legislation Amendment Act 2024 (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Elements from the OAIC page (rank 2); the Schedule 2 text itself was not fetched, and the page does not state the intent/recklessness or seriousness elements that commentary describes. Treat as a lead until checked against Schedule 2. The statement that the small business exemption does not apply is from commentary and the structure of Schedule 2, to confirm. AI mapping is analytical. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0007",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-OAIC-AI-PRODUCTS",
+        "title": "Privacy when deploying commercially available AI products (OAIC)"
+      },
+      "record": {
+        "obligationID": "OBL-AU-OAIC-AI-PRODUCTS",
+        "title": "Privacy when deploying commercially available AI products (OAIC)",
+        "statement": "Guidance for 'organisations that are deploying AI systems'. Its takeaways include that 'Privacy obligations will apply to any personal information input into an AI system', that organisations should 'update their privacy policies and notifications', that generating or inferring personal information with AI 'is a collection of personal information' under APP 3, that APP 6 limits use and disclosure to the primary purpose, and that as best practice organisations 'do not enter personal information, and particularly sensitive information, into publicly available generative AI tools'.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "OAIC",
+          "instrument": "OAIC Guidance on privacy and the use of commercially available AI products",
+          "citation": "Guidance (whole), incl. 'Top five takeaways'; APPs 1, 3, 5, 6, 8, 10, 11",
+          "url": "https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-the-use-of-commercially-available-ai-products",
+          "externalOrgID": "EXT-OAIC"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "deployer",
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC8",
+          "UC7",
+          "UC10"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2024-10-21",
+            "note": "Updated 17 January 2025"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-the-use-of-commercially-available-ai-products",
+          "title": "OAIC Guidance on privacy and the use of commercially available AI products (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The APPs bind APP entities; most businesses with annual turnover of $3 million or less are not APP entities (small business exemption), which counsel should check. Quoted fragments only; the guidance is longer. Rests on: Privacy Act 1988 Sch 1 APPs 1, 3, 5, 6, 8, 10, 11 (binding on APP entities) Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0008",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-OAIC-GENAI-DEV",
+        "title": "Privacy when developing and training generative AI models (OAIC)"
+      },
+      "record": {
+        "obligationID": "OBL-AU-OAIC-GENAI-DEV",
+        "title": "Privacy when developing and training generative AI models (OAIC)",
+        "statement": "Guidance 'intended for developers of generative artificial intelligence (AI) models or systems' subject to the Privacy Act. It states that 'Just because data is publicly available or otherwise accessible does not mean it can legally be used' to train models, that sensitive information generally needs consent, that developers 'must take reasonable steps to ensure accuracy' (APP 10), and that 'the creation of a dataset through web scraping may constitute a covert and therefore unfair means of collection' under APP 3.5.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "OAIC",
+          "instrument": "OAIC Guidance on privacy and developing and training generative AI models",
+          "citation": "Guidance (whole), incl. 'Top five takeaways'; APP 3.5 (fair means), APP 6, APP 10",
+          "url": "https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-developing-and-training-generative-ai-models",
+          "externalOrgID": "EXT-OAIC"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "provider"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC7",
+          "UC8"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2024-10-21"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-developing-and-training-generative-ai-models",
+          "title": "OAIC Guidance on privacy and developing and training generative AI models (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Addressed to developers, including organisations that fine-tune or train models on data they hold. Small business exemption as above. Rests on: Privacy Act 1988 Sch 1 APPs 3, 6, 10 (binding on APP entities) Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0009",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-NSW-WSA-10-12",
+        "title": "Notice and policy for computer surveillance of employees (NSW)"
+      },
+      "record": {
+        "obligationID": "OBL-AU-NSW-WSA-10-12",
+        "title": "Notice and policy for computer surveillance of employees (NSW)",
+        "statement": "'Computer surveillance' is surveillance 'by means of software or other equipment that monitors or records the information input or output, or other use, of a computer' (s 3). 'Surveillance of an employee must not commence without prior notice in writing to the employee', given 'at least 14 days before the surveillance commences' unless the employee agrees to less (s 10(1), (2)). Computer surveillance is not to be carried out unless it 'is carried out in accordance with a policy of the employer on computer surveillance of employees at work' (s 12(a)). AI tools that monitor or record staff use of computers, such as productivity analytics or copilot telemetry, can fall within these provisions.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of New South Wales",
+          "instrument": "Workplace Surveillance Act 2005 (NSW)",
+          "citation": "s 3 ('computer surveillance'); s 10(1), (2) (14 days' written notice); s 12(a) (in accordance with a computer surveillance policy)",
+          "url": "https://legislation.nsw.gov.au/view/pdf/asmade/act-2005-47",
+          "externalOrgID": "EXT-PARL-NSW"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://legislation.nsw.gov.au/view/pdf/asmade/act-2005-47",
+          "title": "Workplace Surveillance Act 2005 (NSW) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from the Act as made; the in-force consolidation could not be fetched. Check ss 3, 10 and 12 against the current version. Applies to employees at work in NSW. The AI mapping is analytical. Other states' surveillance laws not researched. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0010",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-DTC-10A",
+        "title": "Supplying controlled technology to foreign persons, including through AI tools"
+      },
+      "record": {
+        "obligationID": "OBL-AU-DTC-10A",
+        "title": "Supplying controlled technology to foreign persons, including through AI tools",
+        "statement": "Section 10A(1) makes it an offence for a person to supply 'DSGL technology to another person' who 'is a foreign person' where the supply occurs in Australia, without a permit under s 11 or an exemption ('Penalty: Imprisonment for 10 years or 2,500 penalty units, or both'). Supply includes 'the provision of access to DSGL technology'. Defence states the amendments took effect on 1 September 2024, alongside ss 10B (re-supply) and 10C (DSGL services). Placing controlled technical data into AI tools or models that foreign persons, or offshore providers, can reach may amount to supply.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Defence Trade Controls Act 2012 (Cth), as amended by the Defence Trade Controls Amendment Act 2024",
+          "citation": "s 10A(1) (supply of DSGL technology to a foreign person in Australia); see also ss 10B, 10C",
+          "url": "https://www.legislation.gov.au/C2024A00021/asmade/2024-04-08/text/2/epub/OEBPS/document_1/document_1.html",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "defenceIndustrySupplier"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC7",
+          "UC10",
+          "UC9"
+        ],
+        "effectiveDate": "2024-09-01",
+        "effectiveDates": [
+          {
+            "dateType": "commences",
+            "date": "2024-09-01",
+            "note": "Per Defence; Schedule 1 commenced by Proclamation (F2024N00654)"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2024A00021/asmade/2024-04-08/text/2/epub/OEBPS/document_1/document_1.html",
+          "title": "Defence Trade Controls Act 2012 (Cth), as amended by the Defence Trade Controls Amendment Act 2024 (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        },
+        {
+          "url": "https://www.defence.gov.au/business-industry/exporting/export-controls-framework/changes-export-controls",
+          "title": "Defence Trade Controls Act 2012 (Cth), as amended by the Defence Trade Controls Amendment Act 2024 (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: s 10A quoted from the amending Act as made (Sch 1 item 15); the current compilation of the principal Act was not fetched. Whether AI input is a 'supply' is for counsel; the mapping is analytical. Applies to anyone holding DSGL technology, not only defence suppliers. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0011",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-AHPRA-AI",
+        "title": "Health practitioners' professional obligations when using AI (Ahpra)"
+      },
+      "record": {
+        "obligationID": "OBL-AU-AHPRA-AI",
+        "title": "Health practitioners' professional obligations when using AI (Ahpra)",
+        "statement": "Ahpra and the National Boards explain how existing obligations in the Boards' codes of conduct apply when practitioners use AI, under the headings Accountability, Understanding, Transparency, Informed consent, and Ethical and legal issues. It states: 'Regardless of what technology is used in providing healthcare the practitioner remains responsible'.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "Ahpra",
+          "instrument": "Ahpra and National Boards: Meeting your professional obligations when using Artificial Intelligence in healthcare",
+          "citation": "Guidance (whole): Accountability; Understanding; Transparency; Informed consent; Ethical and legal issues",
+          "url": "https://www.ahpra.gov.au/Resources/Artificial-Intelligence-in-healthcare.aspx",
+          "externalOrgID": "EXT-AHPRA"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "healthServiceProvider"
+        ],
+        "roles": [
+          "deployer",
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC8"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2024-08-22",
+            "note": "Page reviewed date; publication date not stated on the page"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.ahpra.gov.au/Resources/Artificial-Intelligence-in-healthcare.aspx",
+          "title": "Ahpra and National Boards: Meeting your professional obligations when using Artificial Intelligence in healthcare (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Addressed to registered health practitioners, not organisations as such; mapped to healthServiceProvider so a health organisation's brief includes it. The codes of conduct are binding professional standards for practitioners; this guidance explains them. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0012",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-SG-PDPA-24",
+        "title": "Protection of personal data, including data placed in AI systems (Singapore)"
+      },
+      "record": {
+        "obligationID": "OBL-SG-PDPA-24",
+        "title": "Protection of personal data, including data placed in AI systems (Singapore)",
+        "statement": "The PDPC states that 'Section 24 of the PDPA requires an organisation to make reasonable security arrangements to protect personal data in its possession or under its control in order to prevent unauthorised access, collection, use, disclosure, copying, modification, disposal or similar risks' (para 17.1). What is reasonable depends on factors including 'the nature of the personal data', the form in which it is held and 'the possible impact to the individual concerned' (para 17.2), and on the organisation's size and whether a third party holds the data for it (para 17.4). Personal data placed in AI tools or held by AI providers falls within it.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "PDPC",
+          "instrument": "Personal Data Protection Act 2012",
+          "citation": "s 24 (Protection Obligation), as stated in PDPC Advisory Guidelines on Key Concepts, ch 17, paras 17.1-17.4",
+          "url": "https://sso.agc.gov.sg/Act/PDPA2012?ProvIds=pr24-",
+          "externalOrgID": "EXT-PDPC"
+        },
+        "jurisdiction": "SG",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC7",
+          "UC8",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.pdpc.gov.sg/-/media/Files/PDPC/PDF-Files/Advisory-Guidelines/AG-on-Key-Concepts/Chapter-17-9-Oct-2019.pdf",
+          "title": "Personal Data Protection Act 2012 (PDPC advisory guidelines)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        },
+        {
+          "url": "https://lawplayer.com/sg/act/PDPA2012/24",
+          "title": "Personal Data Protection Act 2012 (Other)",
+          "sourceRank": 5,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The Act's text on Singapore Statutes Online could not be fetched; s 24 is quoted as the PDPC states it in its advisory guidelines (2019 revision; a later consolidated edition of the guidelines exists). Check against the Act. AI mapping is analytical. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0013",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-SG-PDPA-26D",
+        "title": "Assessing and notifying data breaches within 3 calendar days (Singapore)"
+      },
+      "record": {
+        "obligationID": "OBL-SG-PDPA-26D",
+        "title": "Assessing and notifying data breaches within 3 calendar days (Singapore)",
+        "statement": "Where an organisation assesses that a data breach is notifiable, it 'must notify the Commission as soon as is practicable, but in any case no later than 3 calendar days after the day the organisation makes that assessment' (s 26D(1)), and then notify affected individuals where the breach is likely to result in significant harm to them (s 26D(2)). A breach is notifiable if it is likely to result in significant harm, or is of significant scale: 'the prescribed number of affected individuals is 500' (reg 4). The PDPC guide states the assessment is to be made 'within 30 calendar days'. Breaches through AI tools or AI providers are assessed and notified on the same terms.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "PDPC",
+          "instrument": "Personal Data Protection Act 2012, Part 6A, and Personal Data Protection (Notification of Data Breaches) Regulations 2021",
+          "citation": "ss 26B, 26C, 26D(1)-(2); Regulations reg 4 (500 individuals)",
+          "url": "https://sso.agc.gov.sg/Act/PDPA2012",
+          "externalOrgID": "EXT-PDPC"
+        },
+        "jurisdiction": "SG",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC7",
+          "UC8",
+          "UC10"
+        ],
+        "effectiveDate": "2021-02-01",
+        "effectiveDates": [
+          {
+            "dateType": "commences",
+            "date": "2021-02-01",
+            "note": "Regulations came into operation"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://sso.agc.gov.sg/SL/PDPA2012-S64-2021",
+          "title": "Personal Data Protection Act 2012, Part 6A, and Personal Data Protection (Notification of Data Breaches) Regulations 2021 (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        },
+        {
+          "url": "https://www.pdpc.gov.sg/-/media/Files/PDPC/PDF-Files/Other-Guides/Guide-on-Managing-and-Notifying-Data-Breaches-under-the-PDPA-15-Mar-2021.pdf",
+          "title": "Personal Data Protection Act 2012, Part 6A, and Personal Data Protection (Notification of Data Breaches) Regulations 2021 (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        },
+        {
+          "url": "https://lawplayer.com/sg/act/PDPA2012/26D",
+          "title": "Personal Data Protection Act 2012, Part 6A, and Personal Data Protection (Notification of Data Breaches) Regulations 2021 (Other)",
+          "sourceRank": 5,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Regulation 4 quoted from SSO. s 26D quoted from a LawPlayer mirror of the Act (rank 5) and consistent with the PDPC guide; check against SSO. The 30-day assessment period is from the PDPC guide (s 26C(3)). Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0014",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-SG-COA-157",
+        "title": "Directors' duty of honesty and reasonable diligence (Singapore)"
+      },
+      "record": {
+        "obligationID": "OBL-SG-COA-157",
+        "title": "Directors' duty of honesty and reasonable diligence (Singapore)",
+        "statement": "Section 157(1) provides that 'A director must at all times act honestly and use reasonable diligence in the discharge of the duties of his or her office.' It does not mention AI; it addresses how directors oversee the company's affairs, including the adoption and control of AI.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Singapore",
+          "instrument": "Companies Act 1967",
+          "citation": "s 157(1) (act honestly and use reasonable diligence)",
+          "url": "https://sso.agc.gov.sg/Act/CoA1967?ProvIds=pr157-",
+          "externalOrgID": "EXT-PARL-SG"
+        },
+        "jurisdiction": "SG",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "privateCompany",
+          "listedEntity",
+          "anyOrganization"
+        ],
+        "roles": [
+          "board"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://lawplayer.com/sg/act/CoA1967/157",
+          "title": "Companies Act 1967 (Other)",
+          "sourceRank": 5,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from a LawPlayer mirror (rank 5) that links to SSO; the SSO text could not be fetched. Expect the Fabric to hold this as a lead until checked against SSO. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0015",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-SG-CSA-CII",
+        "title": "CII owners report cybersecurity incidents within 2 hours (Singapore)"
+      },
+      "record": {
+        "obligationID": "OBL-SG-CSA-CII",
+        "title": "CII owners report cybersecurity incidents within 2 hours (Singapore)",
+        "statement": "The Cyber Security Agency states that from 31 October 2025 reporting by owners of critical information infrastructure covers 'incidents suspected of being caused by Advanced Persistent Threats (APTs)' and incidents 'that result in a disruption of essential services for non-interconnected systems under the CII owner's control', and that CII owners are to 'report such incidents to CSA within 2 hours of becoming aware of such an occurrence'. AI systems interconnected with CII, or relied on to deliver the essential service, are within this reporting.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "CSA",
+          "instrument": "Cybersecurity Act 2018, as amended by the Cybersecurity (Amendment) Act 2024",
+          "citation": "s 14 (CII owner's duty to report cybersecurity incidents), as extended from 31 October 2025",
+          "url": "https://www.csa.gov.sg/news-events/press-releases/provisions-in-the-cybersecurity--amendment--act-to-come-into-force-on-31-october-2025/",
+          "externalOrgID": "EXT-CSA-SG"
+        },
+        "jurisdiction": "SG",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "criticalInfrastructureAssetOwner"
+        ],
+        "roles": [
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC9"
+        ],
+        "effectiveDate": "2025-10-31",
+        "effectiveDates": [
+          {
+            "dateType": "commences",
+            "date": "2025-10-31",
+            "note": "Key provisions of the Amendment Act (passed 7 May 2024) commenced"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.csa.gov.sg/news-events/press-releases/provisions-in-the-cybersecurity--amendment--act-to-come-into-force-on-31-october-2025/",
+          "title": "Cybersecurity Act 2018, as amended by the Cybersecurity (Amendment) Act 2024 (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: From the regulator's release (rank 2); the Act's section text and the 2025 Regulations were not fetched, so the s 14 pinpoint is from commentary. AI mapping is analytical. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0016",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-SG-SGCA-ITT",
+        "title": "Permits for intangible transfer of controlled technology (Singapore)"
+      },
+      "record": {
+        "obligationID": "OBL-SG-SGCA-ITT",
+        "title": "Permits for intangible transfer of controlled technology (Singapore)",
+        "statement": "Singapore Customs describes intangible transfer of technology as 'the electronic transmission of controlled strategic goods technology from Singapore, such as through email or fax', including making controlled technology 'available on a computer or server in Singapore so that someone outside Singapore can access it'. A permit is needed to transmit strategic goods software or technology, or any software or technology under the catch-all provision. Placing controlled technology into AI tools hosted or reachable outside Singapore may be such a transfer.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Singapore Customs",
+          "instrument": "Strategic Goods (Control) Act 2002",
+          "citation": "Intangible transfer of technology (ITT) permits, as administered by Singapore Customs",
+          "url": "https://www.customs.gov.sg/businesses/strategic-goods-control/permit-and-registration-requirements/intangible-transfer-of-technology-itt/",
+          "externalOrgID": "EXT-SG-CUSTOMS"
+        },
+        "jurisdiction": "SG",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "defenceIndustrySupplier"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC7",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.customs.gov.sg/businesses/strategic-goods-control/permit-and-registration-requirements/intangible-transfer-of-technology-itt/",
+          "title": "Strategic Goods (Control) Act 2002 (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: From the regulator's page (rank 2), which does not cite sections of the Act; the Act on SSO was not fetched. Applies to anyone transmitting controlled technology, not only defence suppliers. Whether AI input is a transfer is for counsel. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0017",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-SG-WFA",
+        "title": "Fair employment decisions, including those made with AI tools (Singapore)"
+      },
+      "record": {
+        "obligationID": "OBL-SG-WFA",
+        "title": "Fair employment decisions, including those made with AI tools (Singapore)",
+        "statement": "The Ministry of Manpower states that the first Bill, covering the scope of protections and employers' obligations, was passed on 8 January 2025 and the Dispute Resolution Bill on 4 November 2025, and that 'We aim for the Act to take effect in end-2027'. The Act bars employers from making unfavourable employment decisions because of protected characteristics, and MOM states that employers are to put in place grievance handling processes. Employment decisions made or informed by AI hiring and assessment tools remain the employer's decisions.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "MOM",
+          "instrument": "Workplace Fairness Act 2025 (with the Workplace Fairness (Dispute Resolution) Act)",
+          "citation": "Act (whole): prohibition of discriminatory employment decisions; grievance handling processes",
+          "url": "https://www.mom.gov.sg/newsroom/press-releases/2025/workplace-fairness--dispute-resolution----bill-press-release",
+          "externalOrgID": "EXT-MOM-SG"
+        },
+        "jurisdiction": "SG",
+        "sourceTier": "anticipated",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "made",
+            "date": "2025-01-08",
+            "note": "First Bill passed"
+          }
+        ],
+        "status": "pending",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.mom.gov.sg/newsroom/press-releases/2025/workplace-fairness%2D%2Ddispute-resolution%2D%2D%2D%2Dbill-press-release",
+          "title": "Workplace Fairness Act 2025 (with the Workplace Fairness (Dispute Resolution) Act) (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        },
+        {
+          "url": "https://www.mom.gov.sg/newsroom/press-releases/2025/1014-workplace-fairness-dispute-resolution-bill-factsheet",
+          "title": "Workplace Fairness Act 2025 (with the Workplace Fairness (Dispute Resolution) Act) (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Commencement is a stated aim ('end-2027'), not a fixed date, so no commences date is recorded. Small-firm thresholds and the list of protected characteristics are from commentary, not verified. The AI link is analytical; the MOM pages do not mention AI. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0018",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-SG-CPFTA-AI",
+        "title": "Unfair practices, including AI-generated fake reviews (Singapore)"
+      },
+      "record": {
+        "obligationID": "OBL-SG-CPFTA-AI",
+        "title": "Unfair practices, including AI-generated fake reviews (Singapore)",
+        "statement": "The Competition and Consumer Commission of Singapore treated a business's posting of fake reviews, written with ChatGPT and attributed to customers without consent, as an 'unfair trade practice' under the Consumer Protection (Fair Trading) Act, and accepted undertakings to stop and remedy it. CCCS described it as 'the first case involving both a third-party platform and the use of AI to create these fake reviews'.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "CCCS",
+          "instrument": "Consumer Protection (Fair Trading) Act 2003",
+          "citation": "Unfair practices (Part 2), as applied by CCCS to AI-generated fake reviews (Lambency Detailing, 3 July 2025)",
+          "url": "https://www.ccs.gov.sg/media-and-events/newsroom/announcements-and-media-releases/action-taken-against-lambency-detailing-for-ai-generated-fake-reviews-on-sgcarmart-com/",
+          "externalOrgID": "EXT-CCCS"
+        },
+        "jurisdiction": "SG",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC8",
+          "UC1"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.ccs.gov.sg/media-and-events/newsroom/announcements-and-media-releases/action-taken-against-lambency-detailing-for-ai-generated-fake-reviews-on-sgcarmart-com/",
+          "title": "Consumer Protection (Fair Trading) Act 2003 (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The release does not cite section numbers; the CPFTA text (s 4 and the Second Schedule) was not fetched. Applies to suppliers dealing with consumers. Expect the Fabric to hold this as a lead until the Act's provisions are cited. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0019",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-SG-MOH-AIHGLE",
+        "title": "AI in healthcare guidelines for licensees and professionals (Singapore)"
+      },
+      "record": {
+        "obligationID": "OBL-SG-MOH-AIHGLE",
+        "title": "AI in healthcare guidelines for licensees and professionals (Singapore)",
+        "statement": "MOH circular dated 13 March 2026, addressed to 'All HCSA Licensees' and 'All Healthcare Professionals', announces AIHGle 2.0, co-developed with HSA and launched on 10 March 2026, building on the 2021 guidelines and covering generative AI. Its focus areas are 'Strengthening accountability through clarity of responsibilities for key stakeholders', 'Improving trust via guidance on transparency to facilitate informed decision-making', and updated guidance on assessing and mitigating deployment risks, with a deployers' toolkit.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "MOH",
+          "instrument": "MOH and HSA Artificial Intelligence in Healthcare Guidelines (AIHGle 2.0), MOH circular MH 70:47/1 MOH-MHC-0024-2026",
+          "citation": "Circular paras 1-5 and the Guidelines (whole)",
+          "url": "https://isomer-user-content.by.gov.sg/7/f5b5f08c-4c34-499c-89d4-3368b5d93088/MOH%20MHC%20Cir%200024_2026%20Updated%20MOH%20Artificial%20Intelligence%20in%20Healthcare%20Guidelines%20%28AIHGle%202.0%29.pdf",
+          "externalOrgID": "EXT-MOH-SG"
+        },
+        "jurisdiction": "SG",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "healthServiceProvider"
+        ],
+        "roles": [
+          "deployer",
+          "provider",
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC8"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2026-03-10",
+            "note": "Launched; circular dated 13 March 2026"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://isomer-user-content.by.gov.sg/7/f5b5f08c-4c34-499c-89d4-3368b5d93088/MOH%20MHC%20Cir%200024_2026%20Updated%20MOH%20Artificial%20Intelligence%20in%20Healthcare%20Guidelines%20%28AIHGle%202.0%29.pdf",
+          "title": "MOH and HSA Artificial Intelligence in Healthcare Guidelines (AIHGle 2.0), MOH circular MH 70:47/1 MOH-MHC-0024-2026 (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from the MOH circular (rank 2); the Guidelines document itself was not fetched. 'HCSA' is taken to be the Healthcare Services Act. The circular does not say whether the guidelines are mandatory; filed as Expected. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0020",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-FSB-AI-SP",
+        "title": "FSB sound practices for responsible AI adoption by financial institutions"
+      },
+      "record": {
+        "obligationID": "OBL-INT-FSB-AI-SP",
+        "title": "FSB sound practices for responsible AI adoption by financial institutions",
+        "statement": "Published 15 October 2026, the report 'sets out 12 sound practices financial institutions are encouraged to consider', and states that 'The board and senior management of financial institutions are strongly encouraged to reference the sound practices'. Sound Practice 1 is for the board and senior management to 'align AI adoption and governance with the financial institution's business model, risk appetite, and strategy'; Sound Practice 10 calls on institutions to 'implement appropriate and effective human oversight relevant to the materiality, risk' of each use; Sound Practice 12 to 'manage risks from third-party AI dependencies with a focus on performance, transparency, data quality'.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "FSB",
+          "instrument": "FSB Sound Practices for Responsible Adoption of Artificial Intelligence (AI): Final report",
+          "citation": "Sound Practices 1-12, esp. 1 (strategic direction and oversight), 10 (human oversight), 12 (third-party AI risk management)",
+          "url": "https://www.fsb.org/2026/10/sound-practices-for-responsible-adoption-of-artificial-intelligence-ai-final-report/",
+          "externalOrgID": "EXT-FSB"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "authorisedDepositTakingInstitution",
+          "generalInsurer",
+          "lifeInsurer",
+          "privateHealthInsurer",
+          "superannuationTrustee",
+          "financialServicesLicensee",
+          "creditLicensee",
+          "paymentServiceProvider",
+          "bank",
+          "insurer",
+          "capitalMarketsIntermediary",
+          "financialInstitution"
+        ],
+        "roles": [
+          "board",
+          "seniorManagement",
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2026-10-15"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-08"
+      },
+      "evidence": [
+        {
+          "url": "https://www.fsb.org/2026/10/sound-practices-for-responsible-adoption-of-artificial-intelligence-ai-final-report/",
+          "title": "FSB Sound Practices for Responsible Adoption of Artificial Intelligence (AI): Final report (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: From the FSB web page (rank 2); the PDF (https://www.fsb.org/uploads/P151026-1.pdf) could not be fetched. FSB practices bind no one directly; filed as Expected because they set out practices member authorities, including APRA and MAS, may draw on. The FSB is an international body, so jurisdiction INT. Research brief: data/research/BRIEF-2026-11-general-and-2026.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0021",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-PARL-NSW",
+        "title": "Parliament of New South Wales"
+      },
+      "record": {
+        "externalOrgID": "EXT-PARL-NSW",
+        "name": "Parliament of New South Wales",
+        "type": "legislature",
+        "jurisdiction": "AU",
+        "jurisdictionCodes": [
+          "AU"
+        ],
+        "website": "https://www.parliament.nsw.gov.au"
+      },
+      "evidence": [
+        {
+          "url": "https://www.parliament.nsw.gov.au",
+          "title": "Parliament of New South Wales website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0022",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-AHPRA",
+        "title": "Australian Health Practitioner Regulation Agency"
+      },
+      "record": {
+        "externalOrgID": "EXT-AHPRA",
+        "name": "Australian Health Practitioner Regulation Agency",
+        "acronym": "Ahpra",
+        "type": "regulator",
+        "jurisdiction": "AU",
+        "jurisdictionCodes": [
+          "AU"
+        ],
+        "website": "https://www.ahpra.gov.au"
+      },
+      "evidence": [
+        {
+          "url": "https://www.ahpra.gov.au",
+          "title": "Australian Health Practitioner Regulation Agency website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0023",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CSA-SG",
+        "title": "Cyber Security Agency of Singapore"
+      },
+      "record": {
+        "externalOrgID": "EXT-CSA-SG",
+        "name": "Cyber Security Agency of Singapore",
+        "acronym": "CSA",
+        "type": "regulator",
+        "jurisdiction": "SG",
+        "jurisdictionCodes": [
+          "SG"
+        ],
+        "website": "https://www.csa.gov.sg"
+      },
+      "evidence": [
+        {
+          "url": "https://www.csa.gov.sg",
+          "title": "Cyber Security Agency of Singapore website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0024",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-SG-CUSTOMS",
+        "title": "Singapore Customs"
+      },
+      "record": {
+        "externalOrgID": "EXT-SG-CUSTOMS",
+        "name": "Singapore Customs",
+        "type": "regulator",
+        "jurisdiction": "SG",
+        "jurisdictionCodes": [
+          "SG"
+        ],
+        "website": "https://www.customs.gov.sg"
+      },
+      "evidence": [
+        {
+          "url": "https://www.customs.gov.sg",
+          "title": "Singapore Customs website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0025",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-MOM-SG",
+        "title": "Ministry of Manpower"
+      },
+      "record": {
+        "externalOrgID": "EXT-MOM-SG",
+        "name": "Ministry of Manpower",
+        "acronym": "MOM",
+        "type": "government",
+        "jurisdiction": "SG",
+        "jurisdictionCodes": [
+          "SG"
+        ],
+        "website": "https://www.mom.gov.sg"
+      },
+      "evidence": [
+        {
+          "url": "https://www.mom.gov.sg",
+          "title": "Ministry of Manpower website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0026",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CCCS",
+        "title": "Competition and Consumer Commission of Singapore"
+      },
+      "record": {
+        "externalOrgID": "EXT-CCCS",
+        "name": "Competition and Consumer Commission of Singapore",
+        "acronym": "CCCS",
+        "type": "regulator",
+        "jurisdiction": "SG",
+        "jurisdictionCodes": [
+          "SG"
+        ],
+        "website": "https://www.ccs.gov.sg"
+      },
+      "evidence": [
+        {
+          "url": "https://www.ccs.gov.sg",
+          "title": "Competition and Consumer Commission of Singapore website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0027",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-MOH-SG",
+        "title": "Ministry of Health"
+      },
+      "record": {
+        "externalOrgID": "EXT-MOH-SG",
+        "name": "Ministry of Health",
+        "acronym": "MOH",
+        "type": "government",
+        "jurisdiction": "SG",
+        "jurisdictionCodes": [
+          "SG"
+        ],
+        "website": "https://www.moh.gov.sg"
+      },
+      "evidence": [
+        {
+          "url": "https://www.moh.gov.sg",
+          "title": "Ministry of Health website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0028",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-FSB",
+        "title": "Financial Stability Board"
+      },
+      "record": {
+        "externalOrgID": "EXT-FSB",
+        "name": "Financial Stability Board",
+        "acronym": "FSB",
+        "type": "standardsBody",
+        "jurisdiction": "INT",
+        "jurisdictionCodes": [
+          "INT"
+        ],
+        "website": "https://www.fsb.org"
+      },
+      "evidence": [
+        {
+          "url": "https://www.fsb.org",
+          "title": "Financial Stability Board website",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0029",
+      "changeType": "create",
+      "target": {
+        "domainType": "dataFlow",
+        "entityID": "DF-PARLIAMENTOFNEWSOUTHWALES-20261108-01",
+        "title": "Watch: NSW Legislation"
+      },
+      "record": {
+        "dataFlowID": "DF-PARLIAMENTOFNEWSOUTHWALES-20261108-01",
+        "title": "Watch: NSW Legislation",
+        "description": "Authoritative NSW Acts, including the Workplace Surveillance Act 2005",
+        "sourceSystems": [
+          {
+            "endpointType": "register",
+            "title": "NSW Legislation",
+            "url": "https://legislation.nsw.gov.au"
+          }
+        ],
+        "targetSystems": [
+          {
+            "endpointType": "software",
+            "title": "Atlas update agent (via the Reasoning Fabric connector)"
+          }
+        ],
+        "frequency": "daily",
+        "schemaReference": {
+          "format": "html"
+        },
+        "sourcePrecedence": {
+          "rank": 1,
+          "basis": "officialText",
+          "canSetStatusOrDate": true
+        },
+        "externalOrgID": "EXT-PARL-NSW",
+        "jurisdiction": "AU",
+        "governance": {
+          "ownerTitle": "Triodian method owner",
+          "humanApprovalRequired": true
+        },
+        "status": "planned"
+      },
+      "evidence": [
+        {
+          "url": "https://legislation.nsw.gov.au",
+          "title": "NSW Legislation",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0030",
+      "changeType": "create",
+      "target": {
+        "domainType": "dataFlow",
+        "entityID": "DF-CSA-20261108-02",
+        "title": "Watch: Cyber Security Agency of Singapore, press releases"
+      },
+      "record": {
+        "dataFlowID": "DF-CSA-20261108-02",
+        "title": "Watch: Cyber Security Agency of Singapore, press releases",
+        "description": "Cybersecurity Act commencements and CII duties",
+        "sourceSystems": [
+          {
+            "endpointType": "webPage",
+            "title": "Cyber Security Agency of Singapore, press releases",
+            "url": "https://www.csa.gov.sg/news-events/press-releases/"
+          }
+        ],
+        "targetSystems": [
+          {
+            "endpointType": "software",
+            "title": "Atlas update agent (via the Reasoning Fabric connector)"
+          }
+        ],
+        "frequency": "daily",
+        "schemaReference": {
+          "format": "html"
+        },
+        "sourcePrecedence": {
+          "rank": 2,
+          "basis": "regulatorPublication",
+          "canSetStatusOrDate": true
+        },
+        "externalOrgID": "EXT-CSA-SG",
+        "jurisdiction": "SG",
+        "governance": {
+          "ownerTitle": "Triodian method owner",
+          "humanApprovalRequired": true
+        },
+        "status": "planned"
+      },
+      "evidence": [
+        {
+          "url": "https://www.csa.gov.sg/news-events/press-releases/",
+          "title": "Cyber Security Agency of Singapore, press releases",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0031",
+      "changeType": "create",
+      "target": {
+        "domainType": "dataFlow",
+        "entityID": "DF-FSB-20261108-03",
+        "title": "Watch: Financial Stability Board publications"
+      },
+      "record": {
+        "dataFlowID": "DF-FSB-20261108-03",
+        "title": "Watch: Financial Stability Board publications",
+        "description": "International AI sound practices for financial institutions",
+        "sourceSystems": [
+          {
+            "endpointType": "webPage",
+            "title": "Financial Stability Board publications",
+            "url": "https://www.fsb.org/publications/"
+          }
+        ],
+        "targetSystems": [
+          {
+            "endpointType": "software",
+            "title": "Atlas update agent (via the Reasoning Fabric connector)"
+          }
+        ],
+        "frequency": "daily",
+        "schemaReference": {
+          "format": "html"
+        },
+        "sourcePrecedence": {
+          "rank": 2,
+          "basis": "regulatorPublication",
+          "canSetStatusOrDate": true
+        },
+        "externalOrgID": "EXT-FSB",
+        "jurisdiction": "INT",
+        "governance": {
+          "ownerTitle": "Triodian method owner",
+          "humanApprovalRequired": true
+        },
+        "status": "planned"
+      },
+      "evidence": [
+        {
+          "url": "https://www.fsb.org/publications/",
+          "title": "Financial Stability Board publications",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-08-0032",
+      "changeType": "create",
+      "target": {
+        "domainType": "dataFlow",
+        "entityID": "DF-MOH-20261108-04",
+        "title": "Watch: MOH Artificial Intelligence in Healthcare"
+      },
+      "record": {
+        "dataFlowID": "DF-MOH-20261108-04",
+        "title": "Watch: MOH Artificial Intelligence in Healthcare",
+        "description": "AIHGle and related circulars",
+        "sourceSystems": [
+          {
+            "endpointType": "webPage",
+            "title": "MOH Artificial Intelligence in Healthcare",
+            "url": "https://moh.gov.sg/licensing-and-regulation/artificial-intelligence-in-healthcare"
+          }
+        ],
+        "targetSystems": [
+          {
+            "endpointType": "software",
+            "title": "Atlas update agent (via the Reasoning Fabric connector)"
+          }
+        ],
+        "frequency": "daily",
+        "schemaReference": {
+          "format": "html"
+        },
+        "sourcePrecedence": {
+          "rank": 2,
+          "basis": "regulatorPublication",
+          "canSetStatusOrDate": true
+        },
+        "externalOrgID": "EXT-MOH-SG",
+        "jurisdiction": "SG",
+        "governance": {
+          "ownerTitle": "Triodian method owner",
+          "humanApprovalRequired": true
+        },
+        "status": "planned"
+      },
+      "evidence": [
+        {
+          "url": "https://moh.gov.sg/licensing-and-regulation/artificial-intelligence-in-healthcare",
+          "title": "MOH Artificial Intelligence in Healthcare",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-08T00:00:00Z"
+        }
+      ]
+    }
+  ]
+}
