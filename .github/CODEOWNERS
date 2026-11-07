@@ -1,0 +1,8 @@
+# Every change needs a review from a Triodian maintainer before it can merge into main (with the branch ruleset's
+# "Require review from Code Owners"). Add maintainers here as the team grows, or name a team such as @Triodian/maintainers.
+*                       @damohickey1966
+
+# Deployment, sign-in and the files shared across the apps: changes here deploy to the live sites or affect every app.
+/wrangler.jsonc         @damohickey1966
+/lib/identity/          @damohickey1966
+/.github/               @damohickey1966
