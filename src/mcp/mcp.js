@@ -19,7 +19,7 @@ export const TOOLS = [
         tier: { type: 'array', items: { type: 'string', enum: ['binding', 'expected', 'anticipated'] }, description: 'Source tiers' },
         useCase: { type: 'array', items: { type: 'string', pattern: '^UC([1-9]|10)$' }, description: 'Standardised use cases, e.g. UC3 (automated triage or decline), UC7 (AI inside a provider). Records specific to these come first, then records that apply to any AI use.' },
         includeAnyUse: { type: 'boolean', default: true, description: 'false to leave out records that apply to any AI use when filtering by use case' },
-        entityType: { type: 'array', items: { type: 'string' }, description: 'Entity types, e.g. authorisedDepositTakingInstitution, generalInsurer, superannuationTrustee, bank, insurer, listedEntity' },
+        entityType: { type: 'array', items: { type: 'string' }, description: 'Entity types, e.g. authorisedDepositTakingInstitution, generalInsurer, superannuationTrustee, bank, insurer, listedEntity, or for organisations outside financial regulation privateCompany, notForProfit, criticalInfrastructureAssetOwner, defenceIndustrySupplier, healthServiceProvider. Records addressed to anyOrganization match every type.' },
         q: { type: 'string', description: 'Text to match in title, statement, instrument or citation' },
         current: { type: 'boolean', description: 'Exclude superseded, repealed and withdrawn records' },
         includeInternational: { type: 'boolean', default: true },

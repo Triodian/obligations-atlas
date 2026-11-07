@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { Atlas, buildMatterBrief, sha256Hex } from '../src/core/atlas.js';
+import { Atlas, buildMatterBrief, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES } from '../src/core/atlas.js';
 import { createApp } from '../src/api/app.js';
 import { TOOLS } from '../src/mcp/mcp.js';
 
@@ -172,6 +172,23 @@ test('entity types are grouped by the jurisdiction whose records address them', 
   assert.ok(g.AU.includes('generalInsurer') && !g.AU.includes('bank'));
   assert.ok(g.SG.includes('bank') && !g.SG.includes('generalInsurer'));
   assert.ok(!g.INT);
+});
+
+test('organisations outside financial regulation: offered everywhere, and reached by sources of general application (task 2.2)', () => {
+  const g = atlas.entityTypesByJurisdiction();
+  for (const j of ['AU', 'SG']) for (const e of GENERAL_ENTITY_TYPES) assert.ok(g[j].includes(e), `${j} offers ${e}`);
+  for (const e of GENERAL_ENTITY_TYPES) assert.ok(ENTITY_TYPES[e], `${e} has a label`);
+  const vendored = JSON.parse(fs.readFileSync('vendor/triodian-metamodel/schemas/semantic-library/obligation.schema.json', 'utf8'));
+  for (const e of GENERAL_ENTITY_TYPES) assert.ok(vendored.definitions.regulatedEntityType.enum.includes(e), `${e} is in the Metamodel`);
+  for (const e of GENERAL_ENTITY_TYPES) {
+    const list = atlas.findObligations({ entityType: e, jurisdiction: ['AU'] });
+    assert.ok(list.length > 0, `${e} reaches some AU records`);
+    assert.ok(list.every((o) => (o.entityTypes || []).some((t) => t === e || t === 'anyOrganization')), `${e} reaches only records addressed to it or to any organisation`);
+  }
+  const b = buildMatterBrief(atlas.dataset(), { matterLabel: 'NFP', jurisdictions: ['AU'], entityTypes: ['notForProfit'], useCaseIDs: [] });
+  const ids = JSON.stringify(b);
+  assert.match(ids, /OBL-AU-PRIVACY-APP1-7/);
+  assert.doesNotMatch(ids, /OBL-AU-CPS230/);
 });
 
 test('change log: commencements dated when they take effect, upcoming marked, leads carry no research notes', () => {

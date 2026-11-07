@@ -40,9 +40,20 @@ export const ENTITY_TYPES = {
   capitalMarketsIntermediary: 'Capital markets intermediary',
   paymentServiceProvider: 'Payment service provider',
   financialInstitution: 'Financial institution',
+  privateCompany: 'Private company',
+  notForProfit: 'Not-for-profit',
+  criticalInfrastructureAssetOwner: 'Critical infrastructure asset owner',
+  defenceIndustrySupplier: 'Defence industry supplier',
+  healthServiceProvider: 'Health service provider',
   anyOrganization: 'Any organisation',
   other: 'Other',
 };
+
+/**
+ * Organisations no financial regulator licenses (Metamodel 2.4.0). Sources of general application (anyOrganization)
+ * reach them, so they are offered in every covered jurisdiction even before a record names them.
+ */
+export const GENERAL_ENTITY_TYPES = ['privateCompany', 'notForProfit', 'criticalInfrastructureAssetOwner', 'defenceIndustrySupplier', 'healthServiceProvider'];
 
 export const ROLES = {
   regulatedEntity: 'Regulated entity', board: 'Board', seniorManagement: 'Senior management', accountablePerson: 'Accountable person',
@@ -296,7 +307,7 @@ export class Atlas {
     return notes;
   }
 
-  /** Entity types used by each covered jurisdiction's records. */
+  /** Entity types used by each covered jurisdiction's records, plus the general types (GENERAL_ENTITY_TYPES). */
   entityTypesByJurisdiction() {
     const out = {};
     for (const gr of this.obligationRecords) {
@@ -307,6 +318,8 @@ export class Atlas {
         (out[j] || (out[j] = [])).includes(e) || out[j].push(e);
       }
     }
+    // Every covered jurisdiction offers the general types: its sources of general application reach them.
+    for (const j of Object.keys(out)) for (const e of GENERAL_ENTITY_TYPES) out[j].includes(e) || out[j].push(e);
     const order = Object.keys(ENTITY_TYPES);
     for (const j of Object.keys(out)) out[j].sort((a, b) => order.indexOf(a) - order.indexOf(b));
     return out;
