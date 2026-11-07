@@ -432,7 +432,7 @@
     },
     "regulatedEntityType": {
       "type": "string",
-      "description": "A kind of entity a source is addressed to. Jurisdiction-specific licence categories map to the nearest value; anyOrganization is for sources of general application",
+      "description": "A kind of entity a source is addressed to. Jurisdiction-specific licence categories map to the nearest value. privateCompany, notForProfit, criticalInfrastructureAssetOwner, defenceIndustrySupplier and healthServiceProvider cover organisations outside financial regulation; anyOrganization is for sources of general application",
       "enum": [
         "authorisedDepositTakingInstitution",
         "generalInsurer",
@@ -447,6 +447,11 @@
         "capitalMarketsIntermediary",
         "paymentServiceProvider",
         "financialInstitution",
+        "privateCompany",
+        "notForProfit",
+        "criticalInfrastructureAssetOwner",
+        "defenceIndustrySupplier",
+        "healthServiceProvider",
         "anyOrganization",
         "other"
       ]
