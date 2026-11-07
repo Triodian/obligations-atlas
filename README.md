@@ -1,5 +1,7 @@
 # AI Obligations Atlas
 
+[![Tests](https://github.com/Triodian/obligations-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/Triodian/obligations-atlas/actions/workflows/ci.yml) [![Licence: Apache 2.0](https://img.shields.io/badge/licence-Apache%202.0-blue.svg)](LICENSE)
+
 The Atlas sets out AI governance obligations by jurisdiction, maps them to standardised AI use cases (UC1 to UC10), and tags each by the tier of its source:
 - **Binding**: law or prudential standard in force;
 - **Expected**: regulator expectation, guidance or recognised standard;
@@ -84,6 +86,25 @@ node scripts/connector.js snapshot ai-obligations-atlas ../obligations-atlas/dat
 **Coverage.** The Atlas covers Australia, Singapore and international standards. Asking the API or MCP server about another jurisdiction (EU, GB, NZ, US) returns a `coverage` note saying it isn't covered yet, so an empty result isn't read as "no obligations".
 
 **Language rules.** Every API and MCP response is checked against the dataset's language rules before it leaves. A response that fails the check is withheld.
+
+## Part of the Triodian AI governance apps
+
+| App | What it is for |
+| --- | --- |
+| [AI Obligations Atlas](https://github.com/Triodian/obligations-atlas) | The AI governance obligations that apply by jurisdiction and use case, tiered by source, with a matter brief for counsel |
+| [AI Board Direction](https://github.com/Triodian/board-direction) | A board sets its direction on AI: where to use it, what to rule out, what comes back to the board |
+| [AI Risk Appetite](https://github.com/Triodian/risk_appetite) | A regulated entity settles its appetite for AI risk, for the board to approve |
+| [AI Use Assessment](https://github.com/Triodian/use-assessment) | The AI in a regulated entity's supply chain, measured against that appetite |
+| [AI Confidentiality Exposure Assessment](https://github.com/Triodian/Confidentiality-Exposure-Assessment) | Where confidential information in one transaction can reach an external AI model |
+| [Installer and suite test](https://github.com/Triodian/triodian-install) | Puts the apps a client needs into a Cloudflare account, and tests them together |
+
+The engagement apps are separate, each with its own repo and database. Deployed together they share one sign-in and
+reach each other through Cloudflare service bindings.
+
+## Contributing
+
+Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md) and the [code of conduct](CODE_OF_CONDUCT.md).
+Report security problems privately, as [SECURITY.md](SECURITY.md) describes, not as issues.
 
 ## Supporting the project
 
