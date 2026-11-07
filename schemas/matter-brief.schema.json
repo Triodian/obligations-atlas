@@ -18,6 +18,7 @@
       "additionalProperties": false,
       "properties": {
         "jurisdictions": { "type": "array", "items": { "type": "string" }, "description": "Jurisdiction codes" },
+        "sectors": { "type": "array", "description": "Regulated sectors chosen, from the Metamodel's reference-data/regulated-sectors.json", "items": { "type": "object", "required": ["regulatedSectorID", "name"], "additionalProperties": false, "properties": { "regulatedSectorID": { "type": "string", "pattern": "^[A-Z]{2}-[A-Z-]+$", "description": "Sector id, e.g. AU-INSURANCE" }, "name": { "type": "string", "description": "Sector name" } } } },
         "entityTypes": { "type": "array", "items": { "type": "string" }, "description": "Entity types, from the Metamodel's regulatedEntityType list" },
         "useCases": {
           "type": "array",
@@ -47,7 +48,12 @@
         "anticipated": { "type": "array", "items": { "$ref": "#/definitions/obligationRef" }, "description": "Made but not yet in force, or under consultation" }
       }
     },
-    "counts": { "type": "object", "description": "Number of references in each tier", "additionalProperties": { "type": "integer" } },
+    "counts": { "type": "object", "description": "Number of references in each tier, and how many are specific to the use cases or apply to any AI use", "additionalProperties": { "type": "integer" } },
+    "coverage": {
+      "type": "array",
+      "description": "Jurisdictions in scope the Atlas does not yet cover. No records there does not mean no obligations apply",
+      "items": { "type": "object", "required": ["jurisdiction", "coverage", "note"], "additionalProperties": false, "properties": { "jurisdiction": { "type": "string", "description": "Jurisdiction code" }, "coverage": { "const": "notYetCovered", "description": "Coverage state" }, "note": { "type": "string", "description": "What that means for the reader" } } }
+    },
     "questionsForCounsel": {
       "type": "array",
       "description": "Questions counsel will need to determine",
@@ -72,6 +78,7 @@
         "instrument": { "type": "string", "description": "Instrument" },
         "citation": { "type": "string", "description": "Provision" },
         "jurisdiction": { "type": "string", "description": "Jurisdiction" },
+        "appliesToAnyAIUse": { "type": "boolean", "description": "True when the record applies to any AI use, not only the selected use cases" },
         "status": { "type": "string", "description": "Status of the source" },
         "keyDates": { "type": "array", "description": "Key dates", "items": { "type": "object" } },
         "useCaseIDs": { "type": "array", "items": { "type": "string" }, "description": "Use cases in scope the record reaches" },

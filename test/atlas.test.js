@@ -4,10 +4,14 @@ import fs from 'node:fs';
 import { Atlas, buildMatterBrief, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES, REGULATED_SECTORS, sectorByID, reachedEntityTypes } from '../src/core/atlas.js';
 import { createApp } from '../src/api/app.js';
 import { TOOLS } from '../src/mcp/mcp.js';
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 
 const preview = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.preview.json', 'utf8'));
 const published = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.json', 'utf8'));
 const atlas = new Atlas(preview, { preview: true });
+const ajv = new Ajv({ strict: false, allErrors: true }); addFormats(ajv);
+const validBrief = ajv.compile(JSON.parse(fs.readFileSync('schemas/matter-brief.schema.json', 'utf8')));
 const app = createApp({ snapshot: preview, preview: true });
 const get = async (p, init) => { const r = await app.request(p, init); return { status: r.status, body: await r.json(), headers: r.headers }; };
 const rpc = async (body, headers = {}) => { const r = await app.request('/mcp', { method: 'POST', headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body) }); return { status: r.status, body: r.status === 202 ? null : await r.json() }; };
@@ -75,6 +79,7 @@ test('matter brief: obligations by tier, counsel questions, engagements that fit
   assert.ok(b.notices.some((n) => n.includes('not sent to Triodian')));
   const brief = JSON.parse(fs.readFileSync('schemas/matter-brief.schema.json', 'utf8'));
   assert.equal(brief.properties.briefFormat.const, b.briefFormat);
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
 });
 
 test('REST API responses pass the language rules and carry the standing rule', async () => {
@@ -229,6 +234,7 @@ test('regulated sectors: the sector filter narrows to its jurisdiction and entit
 test('regulated sectors: a matter brief records the sectors in scope', () => {
   const b = buildMatterBrief(atlas.dataset(), { jurisdictions: ['AU'], sectors: ['AU-SUPERANNUATION'], useCaseIDs: ['UC3'] });
   assert.deepEqual(b.scope.sectors.map((d) => d.regulatedSectorID), ['AU-SUPERANNUATION']);
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
 });
 
 test('deployment defaults: the dataset carries the jurisdiction and sector set at install', async () => {
