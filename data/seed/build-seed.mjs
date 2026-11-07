@@ -13,6 +13,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { evidenceFor as evidenceForAt } from './evidence.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..');
 const research = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/research/2026-10-27-au-sg.json'), 'utf8'));
@@ -111,28 +112,8 @@ const CORRECTIONS = {
   'OBL-AU-DISR-VAISS': { supersededBy: 'OBL-AU-DISR-AI-ADOPTION' }, // updated by Guidance for AI Adoption (Oct 2025)
 };
 
-// ------------------------------------------------------------ evidence ranking
-function rankFor(url) {
-  const u = url.toLowerCase();
-  if (/legislation\.gov\.au|sso\.agc\.gov\.sg|handbook\.apra\.gov\.au/.test(u)) return [1, 'Official legislation register'];
-  if (/apra\.gov\.au\/(standards?|sites\/default\/files\/cps_)/.test(u)) return [1, 'APRA prudential standard'];
-  if (/mas\.gov\.sg\/-\/media\/.*guidelines.*\.pdf/.test(u) || /mas\.gov\.sg\/regulation\/notices\//.test(u)) return [1, 'MAS instrument'];
-  if (/asx\.com\.au\/.*listing-rules|asxonline\.com\/.*gn\d+/.test(u)) return [1, 'ASX Listing Rules and Guidance Notes'];
-  if (/pdpc\.gov\.sg\/-\/media\/.*advisory-guidelines/.test(u)) return [1, 'PDPC advisory guidelines'];
-  if (/iso\.org|nist\.gov/.test(u)) return [3, 'Standards body'];
-  if (/allenandgledhill|bakermckenzie|lexology|herbertsmith|nortonrose|allens\.com|kwm\.com|gtlaw|minterellison/.test(u)) return [4, 'Law firm commentary'];
-  if (/apra\.gov\.au|asic\.gov\.au|oaic\.gov\.au|mas\.gov\.sg|pdpc\.gov\.sg|imda\.gov\.sg|mddi\.gov\.sg|industry\.gov\.au|asx\.com\.au/.test(u)) return [2, 'Regulator publication'];
-  return [5, 'Other'];
-}
-const urlsIn = (s) => [...new Set((s || '').match(/https?:\/\/[^\s;,)]+/g) || [])].map((u) => u.replace(/[.'"]+$/, ''));
-function evidenceFor(o) {
-  const fetched = urlsIn(o.verifiedFrom);
-  const list = (fetched.length ? fetched : [o.url]).map((url) => {
-    const [sourceRank, kind] = rankFor(url);
-    return { url, title: `${o.instrument} (${kind})`.slice(0, 200), sourceRank, retrievedAt: RETRIEVED };
-  });
-  return list.sort((a, b) => a.sourceRank - b.sourceRank);
-}
+// ------------------------------------------------------------ evidence ranking (data/seed/evidence.mjs)
+const evidenceFor = (o) => evidenceForAt(o, RETRIEVED);
 
 // ------------------------------------------------------------ obligations
 const DATE_TYPES = new Set(['made', 'published', 'commences', 'applies', 'transitionEnds', 'consultationOpens', 'consultationCloses', 'reviewDue', 'repealed']);

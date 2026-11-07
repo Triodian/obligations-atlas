@@ -1,0 +1,20 @@
+[
+  {
+    "obligationID": "OBL-SG-MAS-AIRM-3",
+    "kind": "confirmed",
+    "note": "MAS media release of 7 October 2026 confirms the final Guidelines take effect 7 October 2027, Sections 3 and 4 from that date and Sections 5 and 6 by 7 October 2028, as the record holds. MAS clarified in the final Guidelines that existing governance structures can be used and 'a dedicated AI committee is not required', and that basic AI policies may suffice where poor performance or unavailability is unlikely to have a material impact. Reviewer to consider adding that clarification to the statement; paragraph-level text of the final Guidelines not re-fetched.",
+    "verifiedFrom": "https://www.mas.gov.sg/news/media-releases/2026/mas-sets-out-supervisory-expectations-on-responsible-ai-adoption-by-financial-institutions (fetched 2026-11-08)"
+  },
+  {
+    "obligationID": "OBL-AU-CPS230-54",
+    "kind": "instrumentChange",
+    "note": "APRA finalised targeted amendments to CPS 230 on 30 April 2026, effective 1 July 2026: 'limited exemptions from specific contractual requirements in CPS 230' for material arrangements with certain non-traditional service providers (examples: central banks, clearing and settlement facilities) where contractual compliance is not practicable. CPG 230 and the Material Service Provider Register template were also amended. The page does not name the paragraphs; the record's statement is unchanged unless the cited contractual paragraphs are among those exempted.",
+    "verifiedFrom": "https://www.apra.gov.au/news-and-publications/apra-finalises-targeted-amendments-to-cps-230-operational-risk-management (fetched 2026-11-08)"
+  },
+  {
+    "obligationID": "OBL-AU-OAIC-APP1-GUIDE",
+    "kind": "confirmed",
+    "note": "The OAIC resources of 30 September 2026 (APP 1.7-1.9 Transparency Obligation Fact Sheet, Flowchart, and a Supplementary fact sheet for government agencies) are the guidance this record already holds; the obligation applies from 10 December 2026. No new record.",
+    "verifiedFrom": "https://www.oaic.gov.au/news/media-centre/new-resources-on-transparency-for-use-of-ai-and-automated-decision-making (fetched 2026-11-08)"
+  }
+]

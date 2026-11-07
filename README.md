@@ -25,8 +25,9 @@ flowchart LR
 - **Data model:** the open [Triodian Metamodel](https://github.com/Triodian/Triodian_Metamodel), vendored and pinned in `vendor/triodian-metamodel` (`npm run sync-metamodel`). Records are Obligations, External Organizations, Use Cases, Data Flows (monitored sources) and Triggers (instrument changes).
 - **Governance:** every record goes through the Reasoning Fabric connector under the AI Obligations Atlas dataset policy (kept in reasoning_fabric `policies/`, and served in every snapshot and at `/api/v1/policy`). Nothing that sets a status, a date or a tier is published without a named approver. Every record carries a hash-chained provenance trail.
 - **Data in this repo:**
-  - `data/research/` holds the research behind the seed.
-  - `data/seed/build-seed.mjs` turns it into connector proposals.
+  - `data/research/` holds the research: the seed of 27 October 2026, and later rounds, each with its brief (for example `BRIEF-2026-11-general-and-2026.md`).
+  - `data/seed/build-seed.mjs` turned the seed research into connector proposals. `data/seed/build-submission.mjs <research file>` does the same for each later round, and writes the reviewer's notes on records already held beside it.
+  - The update agent submits a round with `node scripts/connector.js submit <file> --url … --token …` in reasoning_fabric. Every proposal goes to the review queue or becomes a lead; nothing is published without a named reviewer.
   - `data/snapshot/` holds what the Fabric returns. `ai-obligations-atlas.json` has the published records only. `ai-obligations-atlas.preview.json` adds records still waiting for review, marked `pendingReview`.
 
 ## Run it
