@@ -35,7 +35,7 @@ function limiter() {
  *   keyProvider  () => [{ firm, keySha256, perMinute }]  firm keys issued through the Fabric (read on each call)
  *   firms        firm registry client (src/firms.js), or null when registration is not configured
  */
-export function createApp({ snapshot, preview = false, apiKeys = [], requireKey = false, anonPerMinute = 60, keyProvider = () => [], firms = null }) {
+export function createApp({ snapshot, preview = false, apiKeys = [], requireKey = false, anonPerMinute = 60, keyProvider = () => [], firms = null, defaults = {} }) {
   const atlas = new Atlas(snapshot, { preview });
   const app = new Hono();
   const limit = limiter();
@@ -93,7 +93,8 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
   app.get('/api/v1/openapi.json', (c) => c.json(openapi(VERSION)));
   app.get('/api/v1/dataset', (c) => {
     c.header('cache-control', 'public, max-age=300');
-    return send(c, atlas.dataset());
+    // defaults: the jurisdiction and regulated sector this deployment starts in (DEFAULT_JURISDICTION, DEFAULT_SECTOR).
+    return send(c, { ...atlas.dataset(), defaults: { jurisdiction: defaults.jurisdiction || 'AU', sector: defaults.sector || '' } });
   });
 
   app.get('/api/v1/obligations', (c) => {

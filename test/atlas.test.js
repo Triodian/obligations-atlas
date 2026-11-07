@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { Atlas, buildMatterBrief, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES } from '../src/core/atlas.js';
+import { Atlas, buildMatterBrief, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES, REGULATED_SECTORS, sectorByID, reachedEntityTypes } from '../src/core/atlas.js';
 import { createApp } from '../src/api/app.js';
 import { TOOLS } from '../src/mcp/mcp.js';
 
@@ -200,4 +200,41 @@ test('change log: commencements dated when they take effect, upcoming marked, le
     assert.doesNotMatch(lead.summary, /UNVERIFIED|Research note|before publication/i);
     assert.match(lead.summary, /not yet been checked against the official text/);
   }
+});
+
+test('regulated sectors: each belongs to a jurisdiction and uses known entity types', () => {
+  assert.ok(REGULATED_SECTORS.length >= 20);
+  for (const d of REGULATED_SECTORS) {
+    assert.match(d.regulatedSectorID, new RegExp(`^${d.jurisdiction}-`));
+    for (const k of [...d.entityTypes, ...(d.alsoReaches || [])]) assert.ok(ENTITY_TYPES[k], `${d.regulatedSectorID}: ${k}`);
+  }
+  assert.ok(sectorByID('AU-SUPERANNUATION').entityTypes.includes('superannuationTrustee'));
+  assert.equal(sectorByID('NOPE'), null);
+});
+
+test('regulated sectors: Singapore financial sectors reach MAS financial-institution obligations', () => {
+  assert.ok(reachedEntityTypes(['bank'], ['SG']).includes('financialInstitution'));
+  assert.ok(!reachedEntityTypes(['bank'], ['AU']).includes('financialInstitution'));
+});
+
+test('regulated sectors: the sector filter narrows to its jurisdiction and entity types', () => {
+  const ins = atlas.findObligations({ sector: 'AU-INSURANCE' });
+  assert.ok(ins.length > 0);
+  assert.ok(ins.every((o) => ['AU', 'INT'].includes(o.jurisdiction)));
+  assert.ok(ins.length <= atlas.findObligations({ jurisdiction: 'AU' }).length);
+  const data = atlas.dataset();
+  assert.ok(data.sectors.some((d) => d.regulatedSectorID === 'AU-BANKING'));
+});
+
+test('regulated sectors: a matter brief records the sectors in scope', () => {
+  const b = buildMatterBrief(atlas.dataset(), { jurisdictions: ['AU'], sectors: ['AU-SUPERANNUATION'], useCaseIDs: ['UC3'] });
+  assert.deepEqual(b.scope.sectors.map((d) => d.regulatedSectorID), ['AU-SUPERANNUATION']);
+});
+
+test('deployment defaults: the dataset carries the jurisdiction and sector set at install', async () => {
+  const a = createApp({ snapshot: preview, preview: true, defaults: { jurisdiction: 'SG', sector: 'SG-INSURANCE' } });
+  const body = await (await a.request('/api/v1/dataset')).json();
+  assert.deepEqual(body.defaults, { jurisdiction: 'SG', sector: 'SG-INSURANCE' });
+  const plain = await get('/api/v1/dataset');
+  assert.equal(plain.body.defaults.jurisdiction, 'AU');
 });

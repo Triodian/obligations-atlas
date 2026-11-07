@@ -7,7 +7,9 @@ const snap = fs.readFileSync('data/snapshot/ai-obligations-atlas.preview.json', 
 // Self-hosted fonts and the logo are not reachable from a single file: fonts come from Google Fonts, the logo is inlined.
 const css = fs.readFileSync('public/styles.css', 'utf8').replace(/^@font-face\{[^\n]*\}\n/gm, '');
 const logo = `data:image/svg+xml;base64,${fs.readFileSync('public/triodian-logo.svg').toString('base64')}`;
-const core = fs.readFileSync('src/core/atlas.js', 'utf8').replace(/^export \{[^}]*\};?$/m, '');
+// The core imports the generated sector list; a single file inlines it instead.
+const sectors = fs.readFileSync('src/core/sectors.js', 'utf8').replace(/^export const /m, 'const ');
+const core = fs.readFileSync('src/core/atlas.js', 'utf8').replace(/^import \{ REGULATED_SECTORS \} from '\.\/sectors\.js';$/m, sectors).replace(/^export \{[^}]*\};?$/m, '');
 const app = fs.readFileSync('public/app.js', 'utf8').replace(/^import .* from '\/core\/atlas\.js';$/m, '');
 const body = fs.readFileSync('public/index.html', 'utf8').match(/<body>([\s\S]*)<\/body>/)[1].replace(/<script type="module" src="\/app\.js"><\/script>/, '').replaceAll('/triodian-logo.svg', logo);
 const html = `<title>AI Obligations Atlas</title>
@@ -26,7 +28,7 @@ ${body}
 ${core}
 const __snapshot = JSON.parse(document.getElementById('atlas-snapshot').textContent);
 const __atlas = new Atlas(__snapshot, { preview: true });
-window.ATLAS_EMBED = { dataset: () => __atlas.dataset(), provenance: (id) => __atlas.provenance(id) };
+window.ATLAS_EMBED = { dataset: () => ({ ...__atlas.dataset(), defaults: { jurisdiction: 'AU', sector: '' } }), provenance: (id) => __atlas.provenance(id) };
 ${app}
 </script>
 `;

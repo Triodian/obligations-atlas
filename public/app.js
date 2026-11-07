@@ -3,7 +3,7 @@
  * filtering and matter briefs run here in the browser, so nothing about a
  * lawyer's matter is sent to the server.
  */
-import { buildMatterBrief, ENTITY_TYPES, ROLES, TIERS, STATUS, JURISDICTIONS, ASSESSMENTS, STANDING_RULE, SOURCE_RANKS } from '/core/atlas.js';
+import { buildMatterBrief, ENTITY_TYPES, ROLES, TIERS, STATUS, JURISDICTIONS, ASSESSMENTS, STANDING_RULE, SOURCE_RANKS, sectorByID, reachedEntityTypes } from '/core/atlas.js';
 
 const main = document.getElementById('main');
 // When embedded (single-file preview), data comes from window.ATLAS_EMBED and routes are plain #names.
@@ -16,7 +16,9 @@ const parseRoute = () => {
   return m ? [m[1], m[2]] : [h, ''];
 };
 let data;
-const state = { tier: '', jurisdiction: 'AU', entityType: '', useCase: '', q: '', current: true };
+const state = { tier: '', jurisdiction: 'AU', sector: '', entityType: '', useCase: '', q: '', current: true };
+// The regulated sectors of one jurisdiction (Metamodel reference data, in the dataset).
+const sectorsOf = (j) => (data.sectors || []).filter((d) => d.jurisdiction === j);
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmtDate = (d) => (d ? new Date(`${d.slice(0, 10)}T00:00:00Z`).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '');
@@ -53,10 +55,19 @@ function setNav(name) {
   document.querySelectorAll('.steps [data-nav], .drawer [data-nav]').forEach((a) => (a.dataset.nav === name ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
 }
 
+/** The chosen entity type, or else the chosen sector's types, widened by the broader types they reach. */
+function entityMatch(o) {
+  const d = state.sector ? sectorByID(state.sector) : null;
+  const chosen = state.entityType ? [state.entityType] : d ? d.entityTypes : [];
+  if (!chosen.length) return true;
+  const reach = reachedEntityTypes(chosen, state.jurisdiction ? [state.jurisdiction] : []);
+  return o.entityTypes.some((e) => reach.includes(e) || e === 'anyOrganization');
+}
+
 function filtered() {
   return data.obligations.filter((o) => (!state.jurisdiction || o.jurisdiction === state.jurisdiction || o.jurisdiction === 'INT')
     && (!state.tier || o.sourceTier === state.tier)
-    && (!state.entityType || o.entityTypes.includes(state.entityType) || o.entityTypes.includes('anyOrganization'))
+    && entityMatch(o)
     && (!state.useCase || o.useCaseIDs.includes(state.useCase))
     && (!state.current || !['superseded', 'repealed', 'withdrawn'].includes(o.status))
     && (!state.q || [o.title, o.statement, o.instrument, o.citation, o.authority].join(' ').toLowerCase().includes(state.q.toLowerCase())));
@@ -80,7 +91,12 @@ function renderRegister() {
   const jurOpts = [['', 'All jurisdictions'], ...data.jurisdictions.filter((j) => j.available && j.code !== 'INT').map((j) => [j.code, j.name])];
   // Entity types belong to a jurisdiction; offer only those of the chosen one.
   const entJurs = state.jurisdiction ? [state.jurisdiction] : [];
+  // A sector belongs to a jurisdiction, and narrows the entity types offered to its own.
+  if (state.sector && (!state.jurisdiction || !sectorsOf(state.jurisdiction).some((d) => d.regulatedSectorID === state.sector))) state.sector = '';
+  const sec = state.sector ? sectorByID(state.sector) : null;
+  const secOpts = [['', state.jurisdiction ? 'Any sector' : 'Choose a jurisdiction first'], ...(state.jurisdiction ? sectorsOf(state.jurisdiction).map((d) => [d.regulatedSectorID, d.name]) : [])];
   if (state.entityType && !entityGroups(entJurs).some(([, t]) => t.includes(state.entityType))) state.entityType = '';
+  if (state.entityType && sec && !sec.entityTypes.includes(state.entityType)) state.entityType = '';
   const ucOpts = [['', 'Any use case'], ...ucIDs().map((u) => [u, [u, ucTitle(u)].filter(Boolean).join(' ')])];
   const tierOpts = [['', 'All tiers'], ...Object.entries(TIERS).map(([k, t]) => [k, t.label])];
   const rows = filtered();
@@ -100,7 +116,8 @@ function renderRegister() {
     <form class="filters" id="query" role="search" aria-label="Find obligations">
       <label>Tier<select name="tier">${options(tierOpts, state.tier)}</select></label>
       <label>Jurisdiction<select name="jurisdiction">${options(jurOpts, state.jurisdiction)}</select></label>
-      <label>Entity<select name="entityType"><option value="">Any entity</option>${entityOptions(state.entityType, entJurs)}</select></label>
+      <label>Sector<select name="sector"${state.jurisdiction ? '' : ' disabled'}>${options(secOpts, state.sector)}</select></label>
+      <label>Entity<select name="entityType"><option value="">${sec ? `Any in ${esc(sec.name.toLowerCase())}` : 'Any entity'}</option>${sec ? options(sec.entityTypes.map((e) => [e, ENTITY_TYPES[e] || e]), state.entityType) : entityOptions(state.entityType, entJurs)}</select></label>
       <label>Use case<select name="useCase">${options(ucOpts, state.useCase)}</select></label>
       <label class="grow">Search<input name="q" type="search" placeholder="Title, instrument or text" value="${esc(state.q)}"></label>
     </form>
@@ -286,11 +303,13 @@ function briefHTML(b) {
 function renderBrief() {
   setNav('brief');
   const saved = store.get('atlas.briefs', []);
-  const draft = store.get('atlas.briefDraft', { matterLabel: '', jurisdictions: ['AU'], entityTypes: [], useCaseIDs: [], consequence: {} });
+  const dflt = data.defaults || {};
+  const dSec = sectorByID(dflt.sector);
+  const draft = { sectors: [], ...store.get('atlas.briefDraft', { matterLabel: '', jurisdictions: [dflt.jurisdiction || 'AU'], entityTypes: dSec ? [...dSec.entityTypes] : [], sectors: dSec ? [dSec.regulatedSectorID] : [], useCaseIDs: [], consequence: {} }) };
   const jurs = data.jurisdictions.filter((j) => j.available && j.code !== 'INT');
   const cOpts = [['', 'Not set'], ['c1', 'C1'], ['c2', 'C2'], ['c3', 'C3'], ['c4', 'C4'], ['c5', 'C5']];
   main.innerHTML = `<div class="opening screen-only"><div class="eyebrow">Build a brief for a client matter</div><h1>Matter brief</h1>
-    <p class="lede">Choose the client's jurisdictions, entity type and AI use cases. The brief lists the obligations in scope by tier, the questions for counsel and the engagements that fit.</p></div>
+    <p class="lede">Choose the client's jurisdictions, regulated sector, entity type and AI use cases. The brief lists the obligations in scope by tier, the questions for counsel and the engagements that fit.</p></div>
     <div class="split brief-split">
       <form class="brief-form" id="bf">
         <fieldset class="card">
@@ -302,8 +321,9 @@ function renderBrief() {
           </div>
         </fieldset>
         <fieldset class="card">
-          <legend class="sh"><span class="stepno">2</span>Entity type <span class="hint">Leave all clear for any entity</span></legend>
+          <legend class="sh"><span class="stepno">2</span>Regulated sector and entity type <span class="hint">A sector ticks its entity types. Leave all clear for any entity</span></legend>
           ${entityGroups([]).map(([j, types]) => `<div class="entgroup" data-jur="${esc(j)}"${draft.jurisdictions.length && !draft.jurisdictions.includes(j) ? ' hidden' : ''}><div class="entjur">${esc(jurName(j))}</div>
+            ${sectorsOf(j).length ? `<div class="checkgrid secgrid">${sectorsOf(j).map((sc) => `<label class="check"><input type="checkbox" name="sec" value="${esc(sc.regulatedSectorID)}" ${draft.sectors.includes(sc.regulatedSectorID) ? 'checked' : ''}> <strong>${esc(sc.name)}</strong></label>`).join('')}</div>` : ''}
             <div class="checkgrid">${types.map((k) => `<label class="check"><input type="checkbox" name="ent" value="${esc(k)}" ${draft.entityTypes.includes(k) ? 'checked' : ''}> ${esc(ENTITY_TYPES[k] || k)}</label>`).join('')}</div></div>`).join('')}
         </fieldset>
         <fieldset class="card">
@@ -333,7 +353,7 @@ function renderBrief() {
   let brief = null;
   const read = () => {
     const f = new FormData(form);
-    const d = { matterLabel: f.get('matterLabel') || '', jurisdictions: f.getAll('jur'), entityTypes: [...new Set(f.getAll('ent'))], useCaseIDs: f.getAll('uc'), consequence: {} };
+    const d = { matterLabel: f.get('matterLabel') || '', jurisdictions: f.getAll('jur'), entityTypes: [...new Set(f.getAll('ent'))], sectors: f.getAll('sec'), useCaseIDs: f.getAll('uc'), consequence: {} };
     for (const u of ucIDs()) { const c = f.get(`c-${u}`); if (c) d.consequence[u] = c; }
     store.set('atlas.briefDraft', d);
     return d;
@@ -357,6 +377,7 @@ function renderBrief() {
     document.getElementById('scope').innerHTML = `
       <dt>Matter</dt><dd>${d.matterLabel ? esc(d.matterLabel) : none('No label')}</dd>
       <dt>Jurisdictions</dt><dd>${d.jurisdictions.length ? esc(d.jurisdictions.map(jurName).join(', ')) : none('All')}</dd>
+      <dt>Sectors</dt><dd>${d.sectors.length ? esc(d.sectors.map((x) => (sectorByID(x) || {}).name || x).join(', ')) : none('None chosen')}</dd>
       <dt>Entities</dt><dd>${d.entityTypes.length ? esc(d.entityTypes.map((e) => ENTITY_TYPES[e] || e).join(', ')) : none('Any')}</dd>
       <dt>Use cases</dt><dd>${d.useCaseIDs.length ? esc(d.useCaseIDs.map((u) => `${u}${d.consequence[u] ? ` (${d.consequence[u].toUpperCase()})` : ''}`).join(', ')) : none('Any')}</dd>
       <dt class="brk">In scope</dt><dd class="brk"><strong>${n} record${n === 1 ? '' : 's'}</strong><ul class="tiers">${Object.keys(TIERS).map((t) => `<li>${tierBadge(t)}<span>${(b.obligationsByTier[t] || []).length}</span></li>`).join('')}</ul></dd>`;
@@ -371,6 +392,12 @@ function renderBrief() {
         g.hidden = hide;
         if (hide) g.querySelectorAll('input:checked').forEach((x) => { x.checked = false; });
       });
+    }
+    if (e.target.name === 'sec') {
+      // A sector ticks its entity types; unticking clears those no other ticked sector needs.
+      const sc = sectorByID(e.target.value);
+      const keep = new Set([...form.querySelectorAll('[name="sec"]:checked')].flatMap((x) => (sectorByID(x.value) || {}).entityTypes || []));
+      for (const k of (sc ? sc.entityTypes : [])) form.querySelectorAll(`.entgroup[data-jur="${sc.jurisdiction}"] [name="ent"][value="${k}"]`).forEach((x) => { x.checked = e.target.checked || keep.has(k); });
     }
     if (e.target.name === 'ent') form.querySelectorAll(`[name="ent"][value="${e.target.value}"]`).forEach((x) => { x.checked = e.target.checked; });
     if (e.target.name === 'uc') { const row = e.target.closest('.ucrow'); row.classList.toggle('on', e.target.checked); row.querySelector('select').disabled = !e.target.checked; }
@@ -682,7 +709,6 @@ function route() {
 }
 
 async function start() {
-  Object.assign(state, store.get('atlas.filters', {}));
   try {
     if (EMBED) data = EMBED.dataset();
     else {
@@ -694,6 +720,10 @@ async function start() {
     main.innerHTML = `<h1>The register could not be loaded</h1><p>The dataset request failed (${esc(e.message)}). Check your connection and reload the page.</p>`;
     return;
   }
+  // Start where this deployment is set (DEFAULT_JURISDICTION, DEFAULT_SECTOR) unless this browser chose otherwise.
+  const saved = store.get('atlas.filters', null);
+  if (saved) Object.assign(state, saved);
+  else Object.assign(state, { jurisdiction: (data.defaults && data.defaults.jurisdiction) || 'AU', sector: (data.defaults && data.defaults.sector) || '' });
   document.getElementById('standing-rule').textContent = STANDING_RULE;
   const jurs = data.jurisdictions.filter((j) => j.available).length;
   document.getElementById('dataset-line').textContent = `Triodian Metamodel ${data.info.metamodelVersion} · data ${fmtDate(data.info.generatedAt)}`;

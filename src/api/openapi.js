@@ -22,6 +22,7 @@ export function openapi(version) {
             list(['tier', 'binding, expected, anticipated']),
             list(['useCase', 'UC1 to UC10. Records specific to these use cases come first; records that apply to any AI use (appliesToAnyAIUse) follow']),
             list(['includeAnyUse', 'false to leave out records that apply to any AI use when filtering by use case']),
+            list(['sector', 'regulated sector, e.g. AU-BANKING or SG-INSURANCE; sets the jurisdiction and its entity types']),
             list(['entityType', 'e.g. authorisedDepositTakingInstitution, generalInsurer, bank, privateCompany, notForProfit; records addressed to anyOrganization match every type']),
             list(['role', 'e.g. board, deployer, serviceProvider']),
             list(['status', 'proposed, pending, inForce, amended, superseded, repealed, withdrawn']),

@@ -1,0 +1,281 @@
+{
+  "title": "Regulated sectors",
+  "description": "The regulated sectors in each jurisdiction the Atlas covers, and the entity types in each. A user chooses a jurisdiction, then a sector, then the entity type. Each item validates against schemas/regulated-sector.schema.json.",
+  "schema": "regulated-sector.schema.json",
+  "version": "1.0",
+  "items": [
+    {
+      "regulatedSectorID": "AU-BANKING",
+      "jurisdiction": "AU",
+      "name": "Banking",
+      "description": "Banks, building societies, credit unions and other authorised deposit-taking institutions",
+      "financiallyRegulated": true,
+      "regulators": [
+        "APRA",
+        "ASIC"
+      ],
+      "entityTypes": [
+        "authorisedDepositTakingInstitution"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-INSURANCE",
+      "jurisdiction": "AU",
+      "name": "Insurance",
+      "description": "General, life and private health insurers",
+      "financiallyRegulated": true,
+      "regulators": [
+        "APRA",
+        "ASIC"
+      ],
+      "entityTypes": [
+        "generalInsurer",
+        "lifeInsurer",
+        "privateHealthInsurer"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-SUPERANNUATION",
+      "jurisdiction": "AU",
+      "name": "Superannuation",
+      "description": "Trustees of superannuation funds",
+      "financiallyRegulated": true,
+      "regulators": [
+        "APRA",
+        "ASIC"
+      ],
+      "entityTypes": [
+        "superannuationTrustee"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-FINANCIAL-SERVICES",
+      "jurisdiction": "AU",
+      "name": "Financial services and markets",
+      "description": "Holders of an Australian financial services licence, such as advisers, fund managers and market intermediaries",
+      "financiallyRegulated": true,
+      "regulators": [
+        "ASIC"
+      ],
+      "entityTypes": [
+        "financialServicesLicensee"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-CREDIT",
+      "jurisdiction": "AU",
+      "name": "Credit",
+      "description": "Holders of an Australian credit licence, such as lenders and brokers",
+      "financiallyRegulated": true,
+      "regulators": [
+        "ASIC"
+      ],
+      "entityTypes": [
+        "creditLicensee"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-PAYMENTS",
+      "jurisdiction": "AU",
+      "name": "Payments",
+      "description": "Providers of payment services",
+      "financiallyRegulated": true,
+      "entityTypes": [
+        "paymentServiceProvider"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-LISTED",
+      "jurisdiction": "AU",
+      "name": "Listed companies",
+      "description": "Entities listed on a securities exchange",
+      "financiallyRegulated": false,
+      "regulators": [
+        "ASIC",
+        "ASX"
+      ],
+      "entityTypes": [
+        "listedEntity"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-HEALTH",
+      "jurisdiction": "AU",
+      "name": "Health",
+      "description": "Hospitals, clinics and other providers of health services",
+      "financiallyRegulated": false,
+      "entityTypes": [
+        "healthServiceProvider"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-CRITICAL-INFRASTRUCTURE",
+      "jurisdiction": "AU",
+      "name": "Critical infrastructure",
+      "description": "Owners and operators of assets a critical infrastructure law covers",
+      "financiallyRegulated": false,
+      "entityTypes": [
+        "criticalInfrastructureAssetOwner"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-DEFENCE",
+      "jurisdiction": "AU",
+      "name": "Defence industry",
+      "description": "Suppliers to the Australian Defence Force or the Department of Defence",
+      "financiallyRegulated": false,
+      "entityTypes": [
+        "defenceIndustrySupplier"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "AU-GENERAL",
+      "jurisdiction": "AU",
+      "name": "Not financially regulated",
+      "description": "Private companies and not-for-profits outside the sectors above",
+      "financiallyRegulated": false,
+      "entityTypes": [
+        "privateCompany",
+        "notForProfit"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "SG-BANKING",
+      "jurisdiction": "SG",
+      "name": "Banking",
+      "description": "Banks licensed in Singapore",
+      "financiallyRegulated": true,
+      "regulators": [
+        "MAS"
+      ],
+      "entityTypes": [
+        "bank"
+      ],
+      "alsoReaches": [
+        "financialInstitution"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "SG-INSURANCE",
+      "jurisdiction": "SG",
+      "name": "Insurance",
+      "description": "Insurers licensed in Singapore",
+      "financiallyRegulated": true,
+      "regulators": [
+        "MAS"
+      ],
+      "entityTypes": [
+        "insurer"
+      ],
+      "alsoReaches": [
+        "financialInstitution"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "SG-CAPITAL-MARKETS",
+      "jurisdiction": "SG",
+      "name": "Capital markets",
+      "description": "Holders of a capital markets services licence, such as brokers and fund managers",
+      "financiallyRegulated": true,
+      "regulators": [
+        "MAS"
+      ],
+      "entityTypes": [
+        "capitalMarketsIntermediary"
+      ],
+      "alsoReaches": [
+        "financialInstitution"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "SG-PAYMENTS",
+      "jurisdiction": "SG",
+      "name": "Payments",
+      "description": "Payment service providers licensed in Singapore",
+      "financiallyRegulated": true,
+      "regulators": [
+        "MAS"
+      ],
+      "entityTypes": [
+        "paymentServiceProvider"
+      ],
+      "alsoReaches": [
+        "financialInstitution"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "SG-LISTED",
+      "jurisdiction": "SG",
+      "name": "Listed companies",
+      "description": "Entities listed on a securities exchange",
+      "financiallyRegulated": false,
+      "regulators": [
+        "SGX"
+      ],
+      "entityTypes": [
+        "listedEntity"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "SG-HEALTH",
+      "jurisdiction": "SG",
+      "name": "Health",
+      "description": "Hospitals, clinics and other providers of health services",
+      "financiallyRegulated": false,
+      "entityTypes": [
+        "healthServiceProvider"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "SG-CRITICAL-INFRASTRUCTURE",
+      "jurisdiction": "SG",
+      "name": "Critical infrastructure",
+      "description": "Owners and operators of assets a critical infrastructure law covers",
+      "financiallyRegulated": false,
+      "entityTypes": [
+        "criticalInfrastructureAssetOwner"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "SG-DEFENCE",
+      "jurisdiction": "SG",
+      "name": "Defence industry",
+      "description": "Suppliers to the Singapore Armed Forces or the Ministry of Defence",
+      "financiallyRegulated": false,
+      "entityTypes": [
+        "defenceIndustrySupplier"
+      ],
+      "version": "1.0"
+    },
+    {
+      "regulatedSectorID": "SG-GENERAL",
+      "jurisdiction": "SG",
+      "name": "Not financially regulated",
+      "description": "Private companies and not-for-profits outside the sectors above",
+      "financiallyRegulated": false,
+      "entityTypes": [
+        "privateCompany",
+        "notForProfit"
+      ],
+      "version": "1.0"
+    }
+  ]
+}
