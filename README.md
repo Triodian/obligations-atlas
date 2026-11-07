@@ -102,6 +102,10 @@ node scripts/connector.js snapshot ai-obligations-atlas ../obligations-atlas/dat
 | [AI Confidentiality Exposure Assessment](https://github.com/Triodian/Confidentiality-Exposure-Assessment) | Where confidential information in one transaction can reach an external AI model |
 | [Installer and suite test](https://github.com/Triodian/triodian-install) | Puts the apps a client needs into a Cloudflare account, and tests them together |
 
+A matter brief routes by the client's entity type and sector: a financially regulated client to AI Risk Appetite, AI
+Use Assessment and AI Board Direction in connected mode; any other client to AI Board Direction in standalone mode and
+AI Confidentiality Exposure Assessment. With neither chosen, the use cases decide.
+
 The engagement apps are separate, each with its own repo and database. Deployed together they share one sign-in and
 reach each other through Cloudflare service bindings.
 

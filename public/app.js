@@ -294,7 +294,7 @@ function briefHTML(b) {
     <h2>Obligations by tier</h2>${sect('binding')}${sect('expected')}${sect('anticipated')}
     <h2>Questions for counsel to determine</h2><ol>${b.questionsForCounsel.map((q) => `<li>${esc(q.question)}</li>`).join('')}</ol>
     <h2>Engagements that fit</h2>
-    ${b.engagementsThatFit.length ? `<ul>${b.engagementsThatFit.map((e) => `<li><strong>${esc(e.name)}</strong>: ${esc(e.purpose)}. <span class="muted">From ${esc(e.useCaseIDs.join(', '))}.</span></li>`).join('')}</ul><p class="notice">Counsel decides whether to engage, and on what terms.</p>` : '<p class="muted">Select use cases to see which engagements fit.</p>'}
+    ${b.engagementsThatFit.length ? `<ul>${b.engagementsThatFit.map((e) => `<li><strong>${esc(e.name)}</strong>${e.mode ? ` <span class="checkcount b-grey">${e.mode === 'connected' ? 'Connected' : 'Standalone'}</span>` : ''}: ${esc(e.purpose)}. <span class="muted">${esc(e.reason || '')}${e.useCaseIDs.length ? `${e.reason ? '; ' : ''}from ${esc(e.useCaseIDs.join(', '))}` : ''}.</span></li>`).join('')}</ul><p class="notice">Counsel decides whether to engage, and on what terms.</p>` : '<p class="muted">Choose an entity type, sector or use cases to see which engagements fit.</p>'}
     <div class="screen-only" id="bring-slot"></div>
     ${b.notices.map((n) => `<p class="notice">${esc(n)}</p>`).join('')}
   </div>`;
@@ -608,7 +608,7 @@ async function renderFirmPanel(el, { brief = null } = {}) {
     const was = f && f.status;
     el.innerHTML = `${heading}<div class="firmcard">
       ${was ? `<p class="small">The registration for ${esc(f.firm)} was ${was === 'revoked' ? 'revoked' : 'not approved'}. You can register again.</p>` : ''}
-      <p>${brief ? 'Registered firms can ask Triodian to help with this matter: an AI risk appetite for the board, an assessment of a particular AI use, or a review of confidential information exposure.' : 'Register your firm to ask Triodian for help with a matter and to get an API key for the REST API and MCP server.'} Triodian approves each firm.</p>
+      <p>${brief ? 'Registered firms can ask Triodian to help with this matter: the board’s direction on AI, an AI risk appetite for the board, an assessment of a particular AI use, or a review of confidential information exposure.' : 'Register your firm to ask Triodian for help with a matter and to get an API key for the REST API and MCP server.'} Triodian approves each firm.</p>
       <form id="regform" class="regform">
         <label class="field">Your name<input class="text" name="name" autocomplete="name" required maxlength="120"></label>
         <label class="field">Work email<input class="text" name="email" type="email" autocomplete="email" required maxlength="254"></label>

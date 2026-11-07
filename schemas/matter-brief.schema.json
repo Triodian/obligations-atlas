@@ -61,9 +61,10 @@
     },
     "engagementsThatFit": {
       "type": "array",
-      "description": "Assessment engagements that fit the use cases in scope. Counsel decides whether to engage.",
-      "items": { "type": "object", "required": ["assessmentType", "name", "useCaseIDs"], "additionalProperties": false, "properties": { "assessmentType": { "type": "string", "enum": ["aiRiskAppetite", "aiUseAssessment", "aiConfidentialityExposureAssessment"], "description": "Kind of assessment" }, "name": { "type": "string", "description": "Engagement name" }, "purpose": { "type": "string", "description": "What it does" }, "useCaseIDs": { "type": "array", "items": { "type": "string" }, "description": "Use cases that lead to it" } } }
+      "description": "Engagements that fit the scope: by entity type and sector when either is chosen (see profile), otherwise by the use cases. Counsel decides whether to engage.",
+      "items": { "type": "object", "required": ["assessmentType", "name", "useCaseIDs"], "additionalProperties": false, "properties": { "assessmentType": { "type": "string", "enum": ["aiRiskAppetite", "aiUseAssessment", "aiConfidentialityExposureAssessment", "aiBoardDirection"], "description": "Kind of engagement" }, "name": { "type": "string", "description": "Engagement name" }, "purpose": { "type": "string", "description": "What it does" }, "useCaseIDs": { "type": "array", "items": { "type": "string" }, "description": "Use cases in scope that lead to it" }, "mode": { "type": "string", "enum": ["connected", "standalone"], "description": "AI Board Direction only: connected for a financially regulated entity (the board's directions bound the AI Risk Appetite engagement), standalone otherwise" }, "reason": { "type": "string", "description": "Why it fits, in plain words" } } }
     },
+    "profile": { "type": "string", "enum": ["regulated", "general"], "description": "regulated when an entity type or sector in scope is financially regulated, general when the scope names others only; absent when it names neither" },
     "notices": { "type": "array", "items": { "type": "string" }, "description": "The standing rule and other notices, carried into every export" }
   },
   "definitions": {
