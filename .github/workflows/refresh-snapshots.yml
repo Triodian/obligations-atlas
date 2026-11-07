@@ -1,0 +1,75 @@
+name: Refresh snapshots
+
+# Fetches fresh snapshots from the Reasoning Fabric (published records, and the preview with records waiting for
+# review) and opens a pull request when they changed. Merging it redeploys the sites, so the test site shows the
+# current review queue. Run it from Actions → Refresh snapshots → Run workflow, or let the weekly schedule run it.
+#
+# Needs the repository secret FABRIC_PREVIEW_TOKEN: a Fabric token with the read and preview scopes only.
+# It can read records waiting for review; it cannot submit, list or decide proposals.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 6 * * 1' # Mondays 06:23 UTC (16:23 in Brisbane)
+
+permissions:
+  contents: write       # push the snapshot branch (main stays protected by the ruleset)
+  pull-requests: write  # open the pull request
+  actions: write        # start the Test workflow on the new branch, so the required check runs
+
+concurrency: refresh-snapshots
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Fetch snapshots from the Fabric
+        id: fetch
+        run: |
+          if [ -z "$FABRIC_PREVIEW_TOKEN" ]; then
+            echo "::error::Add the FABRIC_PREVIEW_TOKEN repository secret (a Fabric token with the read and preview scopes)."
+            exit 1
+          fi
+          node scripts/refresh-snapshots.mjs
+        env:
+          FABRIC_PREVIEW_TOKEN: ${{ secrets.FABRIC_PREVIEW_TOKEN }}
+
+      - name: Check the new snapshots
+        if: steps.fetch.outputs.changed == 'true'
+        run: |
+          npm run data:check
+          npm test
+
+      - name: Open a pull request
+        if: steps.fetch.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="snapshot/$(date -u +%Y-%m-%d-%H%M)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add data/snapshot
+          git commit -q -m "Refresh snapshots from the Reasoning Fabric"
+          git push -q origin "$branch"
+          summary=$(node -e '
+            const fs = require("fs");
+            for (const f of ["ai-obligations-atlas.json", "ai-obligations-atlas.preview.json"]) {
+              const s = JSON.parse(fs.readFileSync("data/snapshot/" + f, "utf8"));
+              const w = s.records.filter((r) => r.publicationStatus === "pendingReview").length;
+              console.log(`- \`${f}\`: ${s.records.length} records (${s.records.length - w} published, ${w} waiting for review), ledger head #${s.ledgerHead ? s.ledgerHead.sequence : "none"}`);
+            }')
+          gh pr create --base main --head "$branch" --title "Refresh snapshots from the Reasoning Fabric" --body "$(printf 'Fetched by the Refresh snapshots workflow. The data check and tests passed on the new files.\n\n%s\n\nMerging redeploys the sites: the test site then shows the current review queue, and the live site falls back to these published records if the Fabric cannot be reached.\n' "$summary")"
+          # Pushes made with the workflow token do not start other workflows, so start the required Test check here.
+          gh workflow run ci.yml --ref "$branch"
+
+      - name: Nothing new
+        if: steps.fetch.outputs.changed != 'true'
+        run: echo "::notice::The Fabric's records match the snapshots in the repo; no pull request opened."
