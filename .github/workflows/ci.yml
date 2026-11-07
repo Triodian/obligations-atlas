@@ -6,6 +6,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# The workflow only reads the code: the token GitHub gives it cannot push, merge or change settings.
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
