@@ -4,8 +4,9 @@
  * AI Use Assessment and AI Confidentiality Exposure Assessment. The dialog shows the four-step chain for regulated
  * entities, then the two apps an unregulated company uses: AI Board Direction in standalone mode, and AI Confidentiality
  * Exposure Assessment. It is not part of any app's own logic: it adds a band at the top of the page
- * and a dialog, and touches nothing else. To switch it off for a client deployment, set DEMO to
- * false below, or remove the <script src="/suite.js"> line from public/index.html.
+ * and a dialog, and touches nothing else. It shows only on a page the Worker marks data-suite-demo="on" (the demo
+ * and test sites, SUITE_DEMO in wrangler.jsonc); a client deployment marks it "off" and shows none. A page with no
+ * mark, in an app whose Worker does not set it, shows it.
  *
  * The introduction opens once per browser session on each site, and again whenever someone
  * presses "Switch app". Links between the apps carry ?suite=1 so the introduction does not open
@@ -13,7 +14,9 @@
  */
 (function () {
   'use strict';
-  var DEMO = true;
+  // The Worker marks each page with data-suite-demo (lib/identity/session.js, markDemo): "on" for the demo and test
+  // sites, "off" for a client deployment. A page with no mark (an app that does not set it) shows the demo parts.
+  var DEMO = (document.documentElement.getAttribute('data-suite-demo') || 'on') !== 'off';
   if (!DEMO) return;
 
   var script = document.currentScript;
