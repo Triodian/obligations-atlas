@@ -88,7 +88,27 @@ export const ASSESSMENTS = {
   aiRiskAppetite: { name: 'AI Risk Appetite', does: 'Sets the board’s AI risk appetite and the triggers that act on it' },
   aiUseAssessment: { name: 'AI Use Assessment', does: 'Assesses a particular AI use, including AI in the supply chain' },
   aiConfidentialityExposureAssessment: { name: 'AI Confidentiality Exposure Assessment', does: 'Assesses exposure of confidential information, such as deal information, to AI tools' },
+  aiBoardDirection: { name: 'AI Board Direction', does: 'Records the board’s directions on AI: its appetite, red lines and questions for counsel, resolved at a board meeting' },
 };
+
+/** Entity types in a financially regulated sector (Metamodel reference data), including the broader types those sectors reach. */
+export const FINANCIALLY_REGULATED_TYPES = [...new Set(REGULATED_SECTORS.filter((d) => d.financiallyRegulated).flatMap((d) => [...d.entityTypes, ...(d.alsoReaches || [])]))];
+
+/**
+ * Which engagements suit a scope. A financially regulated scope (any entity type or sector in one) goes to
+ * AI Risk Appetite, AI Use Assessment and AI Board Direction in connected mode; any other scope with an entity type
+ * or sector goes to AI Board Direction in standalone mode and AI Confidentiality Exposure Assessment. With neither,
+ * the use cases decide, and AI Board Direction is listed without a mode.
+ * @returns {{ profile: 'regulated'|'general'|null, assessments: string[], boardMode: 'connected'|'standalone'|null }}
+ */
+export function engagementRoute(entityTypes = [], sectors = []) {
+  const secs = sectors.map((d) => (typeof d === 'string' ? sectorByID(d) : d)).filter(Boolean);
+  if (!entityTypes.length && !secs.length) return { profile: null, assessments: [], boardMode: null };
+  const regulated = entityTypes.some((e) => FINANCIALLY_REGULATED_TYPES.includes(e)) || secs.some((d) => d.financiallyRegulated);
+  return regulated
+    ? { profile: 'regulated', assessments: ['aiRiskAppetite', 'aiUseAssessment', 'aiBoardDirection'], boardMode: 'connected' }
+    : { profile: 'general', assessments: ['aiBoardDirection', 'aiConfidentialityExposureAssessment'], boardMode: 'standalone' };
+}
 
 /** The ten standardised use cases. A record mapped to all of them applies to any AI use. */
 export const ALL_USE_CASES = ['UC1', 'UC2', 'UC3', 'UC4', 'UC5', 'UC6', 'UC7', 'UC8', 'UC9', 'UC10'];
@@ -528,7 +548,19 @@ export function buildMatterBrief(data, input) {
     if (!fits.has(a)) fits.set(a, []);
     fits.get(a).push(u);
   }
-  const engagementsThatFit = [...fits.entries()].map(([a, u]) => ({ assessmentType: a, name: ASSESSMENTS[a].name, purpose: ASSESSMENTS[a].does, useCaseIDs: u }));
+  // Routed by the scope's entity types and sectors (engagementRoute); with neither, by the use cases alone.
+  const route = engagementRoute(input.entityTypes || [], secs);
+  const order = route.profile ? route.assessments : [...fits.keys(), 'aiBoardDirection'];
+  const why = {
+    regulated: 'Fits a financially regulated entity',
+    general: 'Fits an entity outside financial regulation',
+  };
+  const engagementsThatFit = order.map((a) => ({
+    assessmentType: a, name: ASSESSMENTS[a].name, purpose: ASSESSMENTS[a].does,
+    useCaseIDs: a === 'aiBoardDirection' ? ucs.slice() : (fits.get(a) || []),
+    ...(a === 'aiBoardDirection' && route.boardMode ? { mode: route.boardMode } : {}),
+    reason: route.profile ? why[route.profile] : (a === 'aiBoardDirection' ? 'Fits any board; choose an entity type or sector to see which mode' : 'Fits the use cases in scope'),
+  }));
 
   return {
     briefFormat: 'triodian.matterBrief/1',
@@ -551,6 +583,7 @@ export function buildMatterBrief(data, input) {
     coverage: jur.filter((j) => j !== 'INT' && !data.obligations.some((o) => o.jurisdiction === j)).map((j) => ({ jurisdiction: j, coverage: 'notYetCovered', note: notCoveredNote(j) })),
     questionsForCounsel: questions,
     engagementsThatFit,
+    ...(route.profile ? { profile: route.profile } : {}),
     notices: [
       STANDING_RULE,
       'Tiers describe sources: Binding (law or prudential standard in force), Expected (regulator expectation, guidance or recognised standard), Anticipated (made but not yet in force, or under consultation).',

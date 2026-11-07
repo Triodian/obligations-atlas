@@ -1,13 +1,17 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { Atlas, buildMatterBrief, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES, REGULATED_SECTORS, sectorByID, reachedEntityTypes } from '../src/core/atlas.js';
+import { Atlas, buildMatterBrief, engagementRoute, ASSESSMENTS, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES, REGULATED_SECTORS, sectorByID, reachedEntityTypes } from '../src/core/atlas.js';
 import { createApp } from '../src/api/app.js';
 import { TOOLS } from '../src/mcp/mcp.js';
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 
 const preview = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.preview.json', 'utf8'));
 const published = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.json', 'utf8'));
 const atlas = new Atlas(preview, { preview: true });
+const ajv = new Ajv({ strict: false, allErrors: true }); addFormats(ajv);
+const validBrief = ajv.compile(JSON.parse(fs.readFileSync('schemas/matter-brief.schema.json', 'utf8')));
 const app = createApp({ snapshot: preview, preview: true });
 const get = async (p, init) => { const r = await app.request(p, init); return { status: r.status, body: await r.json(), headers: r.headers }; };
 const rpc = async (body, headers = {}) => { const r = await app.request('/mcp', { method: 'POST', headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body) }); return { status: r.status, body: r.status === 202 ? null : await r.json() }; };
@@ -68,13 +72,14 @@ test('matter brief: obligations by tier, counsel questions, engagements that fit
   const b = buildMatterBrief(data, { matterLabel: 'Test matter', jurisdictions: ['AU'], entityTypes: ['generalInsurer'], useCaseIDs: ['UC3', 'UC7', 'UC10'], consequence: { UC3: 'c4' } });
   assert.equal(b.briefFormat, 'triodian.matterBrief/1');
   assert.ok(b.counts.binding > 0 && b.counts.expected > 0);
-  assert.deepEqual(b.engagementsThatFit.map((e) => e.assessmentType).sort(), ['aiConfidentialityExposureAssessment', 'aiRiskAppetite', 'aiUseAssessment']);
+  assert.deepEqual(b.engagementsThatFit.map((e) => e.assessmentType), ['aiRiskAppetite', 'aiUseAssessment', 'aiBoardDirection'], 'a general insurer is routed as regulated');
   assert.ok(b.questionsForCounsel.some((q) => q.question.includes('C1 to C5')));
   assert.equal(b.scope.useCases.find((u) => u.useCaseID === 'UC3').consequenceLevel, 'c4');
   assert.deepEqual(atlas.languageIssues(b, 'matterBrief'), []);
   assert.ok(b.notices.some((n) => n.includes('not sent to Triodian')));
   const brief = JSON.parse(fs.readFileSync('schemas/matter-brief.schema.json', 'utf8'));
   assert.equal(brief.properties.briefFormat.const, b.briefFormat);
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
 });
 
 test('REST API responses pass the language rules and carry the standing rule', async () => {
@@ -229,6 +234,7 @@ test('regulated sectors: the sector filter narrows to its jurisdiction and entit
 test('regulated sectors: a matter brief records the sectors in scope', () => {
   const b = buildMatterBrief(atlas.dataset(), { jurisdictions: ['AU'], sectors: ['AU-SUPERANNUATION'], useCaseIDs: ['UC3'] });
   assert.deepEqual(b.scope.sectors.map((d) => d.regulatedSectorID), ['AU-SUPERANNUATION']);
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
 });
 
 test('deployment defaults: the dataset carries the jurisdiction and sector set at install', async () => {
@@ -237,4 +243,41 @@ test('deployment defaults: the dataset carries the jurisdiction and sector set a
   assert.deepEqual(body.defaults, { jurisdiction: 'SG', sector: 'SG-INSURANCE' });
   const plain = await get('/api/v1/dataset');
   assert.equal(plain.body.defaults.jurisdiction, 'AU');
+});
+
+test('engagement routing (2.4): regulated scopes get Risk Appetite, Use Assessment and Board Direction connected', () => {
+  const data = atlas.dataset();
+  const b = buildMatterBrief(data, { jurisdictions: ['AU'], entityTypes: ['authorisedDepositTakingInstitution'], useCaseIDs: ['UC3'] });
+  assert.equal(b.profile, 'regulated');
+  assert.deepEqual(b.engagementsThatFit.map((e) => e.assessmentType), ['aiRiskAppetite', 'aiUseAssessment', 'aiBoardDirection']);
+  const bd = b.engagementsThatFit.find((e) => e.assessmentType === 'aiBoardDirection');
+  assert.equal(bd.mode, 'connected');
+  assert.deepEqual(bd.useCaseIDs, ['UC3']);
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
+  assert.deepEqual(atlas.languageIssues(b, 'matterBrief'), []);
+  // A sector alone routes the same way; so does a Singapore bank, through the MAS financial-institution type.
+  assert.equal(buildMatterBrief(data, { sectors: ['AU-SUPERANNUATION'] }).profile, 'regulated');
+  assert.equal(engagementRoute(['bank']).profile, 'regulated');
+});
+
+test('engagement routing (2.4): other scopes get Board Direction standalone and Confidentiality Exposure', () => {
+  const data = atlas.dataset();
+  for (const input of [{ jurisdictions: ['AU'], entityTypes: ['privateCompany'], useCaseIDs: ['UC3'] }, { sectors: ['AU-CRITICAL-INFRASTRUCTURE'] }, { jurisdictions: ['SG'], entityTypes: ['listedEntity'] }]) {
+    const b = buildMatterBrief(data, input);
+    assert.equal(b.profile, 'general', JSON.stringify(input));
+    assert.deepEqual(b.engagementsThatFit.map((e) => e.assessmentType), ['aiBoardDirection', 'aiConfidentialityExposureAssessment']);
+    assert.equal(b.engagementsThatFit[0].mode, 'standalone');
+    assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
+  }
+  // Regulated wins when a scope mixes both.
+  assert.equal(engagementRoute(['privateCompany', 'lifeInsurer']).profile, 'regulated');
+});
+
+test('engagement routing (2.4): with no entity type or sector, the use cases decide and Board Direction has no mode', () => {
+  const b = buildMatterBrief(atlas.dataset(), { jurisdictions: ['AU'], useCaseIDs: ['UC3', 'UC7', 'UC10'] });
+  assert.equal(b.profile, undefined);
+  assert.deepEqual(b.engagementsThatFit.map((e) => e.assessmentType).sort(), ['aiBoardDirection', 'aiConfidentialityExposureAssessment', 'aiRiskAppetite', 'aiUseAssessment']);
+  assert.equal(b.engagementsThatFit.find((e) => e.assessmentType === 'aiBoardDirection').mode, undefined);
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
+  assert.ok(ASSESSMENTS.aiBoardDirection.name === 'AI Board Direction');
 });
