@@ -23,6 +23,8 @@
     "FABRIC_URL": "https://uat.api.orthogramic.com/governance/v1",
     "ATLAS_CACHE_SECONDS": "300",
     "ATLAS_REQUIRE_KEY": "false",
+    // Requests a minute for each caller without a key: the keyless tier for the REST API and the MCP server.
+    "ATLAS_KEYLESS_PER_MINUTE": "60",
     // The jurisdiction and regulated sector the register and matter brief start in (users can change both).
     // The installer sets them for a client; the demo starts in Australia with no sector.
     "DEFAULT_JURISDICTION": "AU",

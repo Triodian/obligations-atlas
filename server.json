@@ -1,0 +1,12 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Triodian/obligations-atlas",
+  "title": "AI Obligations Atlas",
+  "description": "AI governance obligations in Australia and Singapore, by source tier and use case. No key needed.",
+  "version": "0.1.0",
+  "websiteUrl": "https://obligations-atlas.triodian.com",
+  "repository": { "url": "https://github.com/Triodian/obligations-atlas", "source": "github" },
+  "remotes": [
+    { "type": "streamable-http", "url": "https://obligations-atlas.triodian.com/mcp" }
+  ]
+}

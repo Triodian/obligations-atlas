@@ -54,6 +54,7 @@ export function createHandler({ published, preview, fetchImpl = (...a) => fetch(
       preview: isPreview,
       apiKeys: env.ATLAS_API_KEYS ? JSON.parse(env.ATLAS_API_KEYS) : [],
       requireKey: env.ATLAS_REQUIRE_KEY === 'true',
+      ...(Number(env.ATLAS_KEYLESS_PER_MINUTE) > 0 ? { anonPerMinute: Number(env.ATLAS_KEYLESS_PER_MINUTE) } : {}),
       keyProvider: () => firmKeys.items,
       firms: firmsFor(env),
       defaults: { jurisdiction: (env.DEFAULT_JURISDICTION || 'AU').toUpperCase(), sector: env.DEFAULT_SECTOR || '' },
