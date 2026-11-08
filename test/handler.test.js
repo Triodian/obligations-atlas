@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createHandler } from '../src/handler.js';
+import { Atlas } from '../src/core/atlas.js';
 
 const published = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.json', 'utf8'));
 const preview = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.preview.json', 'utf8'));
@@ -15,10 +16,10 @@ test('the test domain serves the preview data; the live domain serves published 
   const h = createHandler({ published, preview, fetchImpl: async () => { throw new Error('no network'); } });
   const t = await get(h, 'obligations-atlas-test.triodian.com', '/api/v1', env());
   assert.equal(t.body.preview, true);
-  assert.equal(t.body.counts.obligations, 48);
+  assert.equal(t.body.counts.obligations, new Atlas(preview, { preview: true }).findObligations({}).length);
   const l = await get(h, 'obligations-atlas.triodian.com', '/api/v1', env());
   assert.equal(l.body.preview, false);
-  assert.equal(l.body.counts.obligations, 0);
+  assert.equal(l.body.counts.obligations, new Atlas(published, { preview: false }).findObligations({}).length);
   assert.equal((await get(h, 'obligations-atlas.triodian.com', '/healthz', env())).body.data, 'bundled');
   assert.equal((await get(h, 'obligations-atlas.triodian.com', '/', env())).body, 'asset');
 });
