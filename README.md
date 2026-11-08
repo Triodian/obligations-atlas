@@ -63,7 +63,7 @@ The register and the matter brief open in the jurisdiction and regulated sector 
 
 The reviewer approves in the review console. The live site then reads the approved records from the Fabric straight away.
 
-The test site, and the live site's fallback, read the snapshots in `data/snapshot/`. To refresh them, run **Actions → Refresh snapshots → Run workflow** (it also runs every Monday). It fetches both snapshots from the Fabric, checks them with the data check and tests, and opens a pull request when they changed; merging it redeploys the sites. It uses the repository secret `FABRIC_PREVIEW_TOKEN`, a Fabric token with the `read` and `preview` scopes only, which can read records waiting for review but cannot submit, list or decide proposals.
+The test site, and the live site's fallback, read the snapshots in `data/snapshot/`. To refresh them, run **Actions → Refresh snapshots → Run workflow** (it also runs every Monday). It fetches both snapshots from the Fabric, checks them with the data check and tests, and opens a pull request when they changed; merging it redeploys the sites. Opening the pull request needs "Allow GitHub Actions to create and approve pull requests" in the organisation's and the repository's Actions settings; without it, the job pushes the branch and its run summary links to open the pull request by hand. It uses the repository secret `FABRIC_PREVIEW_TOKEN`, a Fabric token with the `read` and `preview` scopes only, which can read records waiting for review but cannot submit, list or decide proposals.
 
 To refresh by hand instead: `FABRIC_PREVIEW_TOKEN=… node scripts/refresh-snapshots.mjs`.
 
