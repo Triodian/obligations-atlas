@@ -17,10 +17,13 @@ const get = async (p, init) => { const r = await app.request(p, init); return { 
 const rpc = async (body, headers = {}) => { const r = await app.request('/mcp', { method: 'POST', headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body) }); return { status: r.status, body: r.status === 202 ? null : await r.json() }; };
 
 test('the published build never shows records waiting for review', () => {
-  const a = new Atlas(published, { preview: false });
-  assert.equal(a.findObligations({}).length, 0);
-  const b = new Atlas(preview, { preview: false });
-  assert.equal(b.findObligations({}).length, 0, 'preview data is hidden unless the build is a preview');
+  // Holds whatever the reviewer has approved so far: the published snapshot holds no waiting records, and a
+  // record waiting for review is hidden unless the build is a preview.
+  assert.ok(published.records.every((r) => r.publicationStatus !== 'pendingReview'), 'the published snapshot holds only approved records');
+  assert.ok(new Atlas(published, { preview: false }).findObligations({}).every((o) => o.publicationStatus === 'published'));
+  const waiting = { ...preview, records: preview.records.map((r) => (r.domainType === 'obligation' ? { ...r, publicationStatus: 'pendingReview' } : r)) };
+  assert.equal(new Atlas(waiting, { preview: false }).findObligations({}).length, 0, 'waiting records are hidden unless the build is a preview');
+  assert.ok(new Atlas(waiting, { preview: true }).findObligations({}).length > 0, 'a preview build shows them');
   assert.ok(atlas.findObligations({}).every((o) => ['published', 'pendingReview'].includes(o.publicationStatus)));
 });
 
