@@ -5,6 +5,8 @@
 import { STANDING_RULE } from '../core/atlas.js';
 
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
+// The keyless tier (task 2.9): stated to every client at initialize.
+const TIER = 'No key is needed: the published records are free to read within a per-minute limit for each caller. A firm that registers gets its own key, a higher limit, and can bring in Triodian from a matter brief built in the Atlas.';
 const RELAY = `Coverage: the Atlas holds records for Australia, Singapore and international standards. When a response carries a coverage note for a jurisdiction, tell the user that the Atlas does not yet cover it; never read an empty result as meaning no obligations apply. Records with appliesToAnyAIUse apply to any AI use rather than to particular use cases. Responses are records, not legal conclusions. When you quote a record, cite its source link, tier and last-verified date (the citeAs field does this). Describe tiers as describing sources: never tell the user that they or a client are compliant, in breach, or required to do something; say what the source says and that counsel decides what applies. For Anticipated records give the status or key date, never a likelihood that the source will pass or apply. ${STANDING_RULE}`;
 
 export const TOOLS = [
@@ -94,7 +96,7 @@ export async function handleRpc(atlas, msg, serverInfo) {
         protocolVersion: PROTOCOLS.includes(asked) ? asked : PROTOCOLS[0],
         capabilities: { tools: { listChanged: false } },
         serverInfo,
-        instructions: `The AI Obligations Atlas sets out AI governance obligations by jurisdiction, mapped to standardised AI use cases and tagged by source tier (Binding, Expected, Anticipated). ${RELAY}`,
+        instructions: `The AI Obligations Atlas sets out AI governance obligations by jurisdiction, mapped to standardised AI use cases and tagged by source tier (Binding, Expected, Anticipated). ${RELAY} ${TIER}`,
       });
     }
     case 'notifications/initialized':

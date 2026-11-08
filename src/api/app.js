@@ -9,6 +9,12 @@ import { openapi } from './openapi.js';
 
 const VERSION = '0.1.0';
 
+/* The keyless tier (development plan task 2.9): anyone may read the published records, through the REST API or
+   the MCP server, without a key, within a per-minute limit for each caller. A registered firm gets its own key and
+   a higher limit, and can bring in Triodian from a matter brief. */
+export const KEYLESS_PER_MINUTE = 60;
+const KEYLESS_NOTE = (n) => `The keyless tier allows ${n} requests a minute from each caller. A registered firm gets its own key and a higher limit: register at https://obligations-atlas.triodian.com/#/firm.`;
+
 /** Fixed-window rate limiter per caller (per isolate on Workers). */
 function limiter() {
   const hits = new Map();
@@ -35,7 +41,7 @@ function limiter() {
  *   keyProvider  () => [{ firm, keySha256, perMinute }]  firm keys issued through the Fabric (read on each call)
  *   firms        firm registry client (src/firms.js), or null when registration is not configured
  */
-export function createApp({ snapshot, preview = false, apiKeys = [], requireKey = false, anonPerMinute = 60, keyProvider = () => [], firms = null, defaults = {} }) {
+export function createApp({ snapshot, preview = false, apiKeys = [], requireKey = false, anonPerMinute = KEYLESS_PER_MINUTE, keyProvider = () => [], firms = null, defaults = {} }) {
   const atlas = new Atlas(snapshot, { preview });
   const app = new Hono();
   const limit = limiter();
@@ -82,7 +88,7 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
     c.header('x-ratelimit-remaining', String(r.remaining));
     if (!r.ok) {
       c.header('retry-after', String(r.retryAfter));
-      return problem(c, 429, 'rate.limited', 'Too many requests');
+      return problem(c, 429, 'rate.limited', 'Too many requests', { detail: who.firm ? `Your firm's limit is ${who.perMinute} requests a minute.` : KEYLESS_NOTE(who.perMinute), retryAfter: r.retryAfter });
     }
     c.set('firm', who.firm);
     return next();
@@ -94,7 +100,8 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
   app.get('/api/v1/dataset', (c) => {
     c.header('cache-control', 'public, max-age=300');
     // defaults: the jurisdiction and regulated sector this deployment starts in (DEFAULT_JURISDICTION, DEFAULT_SECTOR).
-    return send(c, { ...atlas.dataset(), defaults: { jurisdiction: defaults.jurisdiction || 'AU', sector: defaults.sector || '' } });
+    // keylessPerMinute: the keyless tier's limit, shown on the API and MCP page (task 2.9).
+    return send(c, { ...atlas.dataset(), defaults: { jurisdiction: defaults.jurisdiction || 'AU', sector: defaults.sector || '' }, keylessPerMinute: anonPerMinute });
   });
 
   app.get('/api/v1/obligations', (c) => {
@@ -170,7 +177,9 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
     if (who.invalid) return c.json({ jsonrpc: '2.0', id: null, error: { code: -32001, message: 'API key not recognised' } }, 401);
     if (requireKey && !who.firm) return c.json({ jsonrpc: '2.0', id: null, error: { code: -32001, message: 'Firm API key required' } }, 401);
     const r = limit(`mcp:${who.id}`, who.perMinute);
-    if (!r.ok) return c.json({ jsonrpc: '2.0', id: null, error: { code: -32002, message: 'Rate limited' } }, 429);
+    c.header('x-ratelimit-limit', String(who.perMinute));
+    c.header('x-ratelimit-remaining', String(r.remaining));
+    if (!r.ok) return c.json({ jsonrpc: '2.0', id: null, error: { code: -32002, message: 'Rate limited', data: { retryAfter: r.retryAfter, detail: who.firm ? `Your firm's limit is ${who.perMinute} requests a minute.` : KEYLESS_NOTE(who.perMinute) } } }, 429, { 'retry-after': String(r.retryAfter) });
     let body;
     try {
       body = await c.req.json();

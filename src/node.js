@@ -4,6 +4,7 @@
  *   ATLAS_PREVIEW   "true" to use the preview snapshot and show records pending review
  *   ATLAS_API_KEYS  JSON [{ firm, keySha256, perMinute }]
  *   ATLAS_REQUIRE_KEY "true" to refuse anonymous API calls
+ *   ATLAS_KEYLESS_PER_MINUTE  requests a minute for each caller without a key (default 60)
  *   FABRIC_URL, FABRIC_READ_TOKEN  optional: firm registration and firm keys from the Fabric's firm registry
  *   PORT            default 8787
  */
@@ -36,6 +37,7 @@ const api = createApp({
   preview,
   apiKeys: process.env.ATLAS_API_KEYS ? JSON.parse(process.env.ATLAS_API_KEYS) : [],
   requireKey: process.env.ATLAS_REQUIRE_KEY === 'true',
+  ...(Number(process.env.ATLAS_KEYLESS_PER_MINUTE) > 0 ? { anonPerMinute: Number(process.env.ATLAS_KEYLESS_PER_MINUTE) } : {}),
   defaults: { jurisdiction: (process.env.DEFAULT_JURISDICTION || 'AU').toUpperCase(), sector: process.env.DEFAULT_SECTOR || '' },
 });
 

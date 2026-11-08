@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createHandler } from '../src/handler.js';
-import { Atlas } from '../src/core/atlas.js';
+import { Atlas, sha256Hex as sha256 } from '../src/core/atlas.js';
 
 const published = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.json', 'utf8'));
 const preview = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.preview.json', 'utf8'));
@@ -100,4 +100,42 @@ test('firm registration, status and Bring in Triodian go to the Fabric firm regi
   const noFabric = createHandler({ published, preview });
   const r = await noFabric(new Request('https://obligations-atlas.triodian.com/api/v1/firms/register', { method: 'POST', body: JSON.stringify({ accessSecret: secret }) }), env(), {});
   assert.equal(r.status, 503);
+});
+
+test('keyless tier (2.9): an MCP client without a key reads published Australian and Singapore records within the limit', async () => {
+  const h = createHandler({ published, preview, fetchImpl: async (url) => (/\/firms\/v1\//.test(url) ? Response.json({ items: [] }) : Response.json(liveSnap)) });
+  const e = env({ FABRIC_READ_TOKEN: 'tok', FABRIC_URL: 'https://fabric.example/governance/v1', ATLAS_KEYLESS_PER_MINUTE: '4',
+    ATLAS_API_KEYS: JSON.stringify([{ firm: 'Firm A', keySha256: await sha256('firm-key'), perMinute: 100 }]) });
+  const rpc = async (body, ip = '203.0.113.7', headers = {}) => {
+    const r = await h(new Request('https://obligations-atlas.triodian.com/mcp', { method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip, ...headers }, body: JSON.stringify(body) }), e, { waitUntil: () => {} });
+    return { status: r.status, headers: r.headers, body: await r.json() };
+  };
+  const init = await rpc({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18' } });
+  assert.equal(init.status, 200);
+  assert.match(init.body.result.instructions, /No key is needed/);
+  assert.equal(init.headers.get('x-ratelimit-limit'), '4');
+  for (const j of ['AU', 'SG']) {
+    const r = await rpc({ jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'find_obligations', arguments: { jurisdiction: j } } });
+    assert.equal(r.status, 200, j);
+    const items = r.body.result.structuredContent.obligations;
+    assert.ok(items.length > 0, `${j} records`);
+    assert.ok(items.every((o) => o.publicationStatus === 'published'), 'published records only');
+  }
+  await rpc({ jsonrpc: '2.0', id: 3, method: 'tools/list' });
+  // the fifth call in the minute is refused, with when to retry and how to get a higher limit
+  const over = await rpc({ jsonrpc: '2.0', id: 4, method: 'tools/list' });
+  assert.equal(over.status, 429);
+  assert.equal(over.body.error.code, -32002);
+  assert.ok(Number(over.headers.get('retry-after')) > 0);
+  assert.match(over.body.error.data.detail, /keyless tier allows 4 requests a minute.*register/);
+  // another caller has its own allowance; a firm key has its own, higher limit
+  assert.equal((await rpc({ jsonrpc: '2.0', id: 5, method: 'tools/list' }, '198.51.100.9')).status, 200);
+  const firm = await rpc({ jsonrpc: '2.0', id: 6, method: 'tools/list' }, '203.0.113.7', { 'x-api-key': 'firm-key' });
+  assert.equal(firm.status, 200);
+  assert.equal(firm.headers.get('x-ratelimit-limit'), '100');
+  // the REST API shares the keyless tier and says the same
+  for (let i = 0; i < 4; i++) await get(h, 'obligations-atlas.triodian.com', '/api/v1/obligations?jurisdiction=AU', e);
+  const rest = await h(new Request('https://obligations-atlas.triodian.com/api/v1/obligations?jurisdiction=SG', { headers: { 'cf-connecting-ip': 'local' } }), e, { waitUntil: () => {} });
+  assert.equal(rest.status, 429);
+  assert.match((await rest.json()).detail, /keyless tier/);
 });
