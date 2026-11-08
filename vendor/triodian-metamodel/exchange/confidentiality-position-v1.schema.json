@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/exchange/confidentiality-position-v1.schema.json",
+  "title": "Confidentiality position (triodian.bd.confidentiality.v1)",
+  "description": "The board's position on which classes of information (G1 to G6) may go into which kinds of AI tool (K1 to K7): P permitted, C with conditions, N not permitted. Exported by AI Board Direction (board-direction public/bd-outputs.js, the Confidentiality position file); imported by the AI Confidentiality Exposure Assessment (public/cea-rules.js readBoardPosition()), which suggests a required rung on each channel for counsel to confirm. It carries no inventory lines and no names.",
+  "type": "object",
+  "required": ["format", "markings"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "triodian.bd.confidentiality.v1", "description": "Format and version" },
+    "engagementId": { "type": "string", "description": "Board engagement identifier" },
+    "status": { "type": "string", "enum": ["draft", "resolved"], "description": "draft until the chair records the board's resolution" },
+    "resolvedOn": { "type": ["string", "null"], "description": "Date of the resolution" },
+    "issuedOn": { "type": "string", "description": "Date the file was issued" },
+    "classes": { "type": "array", "items": { "type": "string", "pattern": "^G[1-6]$" }, "description": "The information classes" },
+    "kinds": { "type": "array", "items": { "type": "string", "pattern": "^K[1-7]$" }, "description": "The tool kinds" },
+    "markings": {
+      "type": "object",
+      "propertyNames": { "pattern": "^G[1-6]:K[1-7]$" },
+      "additionalProperties": { "type": "string", "enum": ["P", "C", "N"] },
+      "description": "Class:kind to P, C or N"
+    },
+    "conditions": { "type": "array", "maxItems": 40, "items": { "type": "string", "maxLength": 600 }, "description": "Conditions for C markings" },
+    "note": { "type": "string", "description": "What the file is, in plain words" }
+  }
+}

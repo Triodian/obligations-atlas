@@ -1,0 +1,71 @@
+{
+  "privilegeMarking": null,
+  "schema": "triodian.aua.extract.v2",
+  "generated": "2026-11-08T08:00:00.000Z",
+  "calibration": "working v1",
+  "entries": [
+    {
+      "function": "Claims",
+      "location": "provider",
+      "tier": "A3",
+      "consequence": "C4",
+      "received": "E2"
+    },
+    {
+      "function": "Claims",
+      "location": "provider",
+      "tier": "A3",
+      "consequence": "C4",
+      "received": "E1"
+    },
+    {
+      "function": "Policy administration",
+      "location": "own",
+      "tier": "A1",
+      "consequence": "C2",
+      "received": "E3"
+    }
+  ],
+  "engagementId": "e-test",
+  "company": "Corvane General Insurance (fictional)",
+  "measures": [
+    {
+      "ref": "M1",
+      "value": 1,
+      "basis": "Register entries flagged above the authority ceiling (P1) and not named in an approved exception"
+    },
+    {
+      "ref": "M2",
+      "value": null,
+      "basis": "Time limits are set as events, so the register cannot date them"
+    },
+    {
+      "ref": "M6",
+      "value": 67,
+      "basis": "Per cent of 3 critical operations on one platform"
+    },
+    {
+      "ref": "M9",
+      "value": 0,
+      "basis": "Register entries at C4 or C5 established with low confidence"
+    },
+    {
+      "ref": "M10",
+      "value": 2,
+      "basis": "Critical operations that depend on one provider"
+    }
+  ],
+  "measuresNote": "A test fixture in the shape AI Use Assessment issues.",
+  "gapsByPriority": {
+    "High": 1,
+    "Medium": 2,
+    "Low": 0
+  },
+  "findings": [],
+  "overdue": [
+    {
+      "entry": "REG-002",
+      "item": "F4 open too long (allowed until 2026-11-01)"
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "format": "triodian.bd.directions.v1",
+  "engagementId": "e-corvane-bd",
+  "company": "Corvane General Insurance (fictional)",
+  "jurisdiction": "AU",
+  "sector": "AU-INSURANCE",
+  "entityType": "generalInsurer",
+  "sectorPack": "generalInsurer",
+  "version": "V2",
+  "recordedOn": "2026-11-10T09:00:00.000Z",
+  "recordedBy": "Chair (fictional)",
+  "status": "recorded",
+  "beingRevised": false,
+  "note": "A test fixture in the shape AI Board Direction issues (board-direction lib/core/directions.js).",
+  "directions": {
+    "BD1": {
+      "name": "Posture by area",
+      "readOn": [
+        "d1"
+      ],
+      "areas": [
+        {
+          "id": "A1",
+          "name": "Underwriting and pricing",
+          "posture": "S2",
+          "postureLabel": "Cautious",
+          "maxTier": "A2",
+          "condition": ""
+        },
+        {
+          "id": "A2",
+          "name": "Claims",
+          "posture": "S2",
+          "postureLabel": "Cautious",
+          "maxTier": "A2",
+          "condition": "A person decides every decline"
+        },
+        {
+          "id": "A3",
+          "name": "Fraud and investigations",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": ""
+        },
+        {
+          "id": "A4",
+          "name": "Policy administration",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": ""
+        },
+        {
+          "id": "A5",
+          "name": "Complaints and disputes",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": ""
+        },
+        {
+          "id": "A6",
+          "name": "Customer communications",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": ""
+        },
+        {
+          "id": "A7",
+          "name": "Finance and reserving",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": ""
+        },
+        {
+          "id": "A8",
+          "name": "Legal and compliance",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": ""
+        },
+        {
+          "id": "A9",
+          "name": "Technology operations",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": ""
+        }
+      ],
+      "goals": []
+    },
+    "BD2": {
+      "name": "Red lines",
+      "readOn": [
+        "d1",
+        "d6"
+      ],
+      "lines": [
+        {
+          "id": "RL1",
+          "use": "AI declining a claim with no person reviewing the decision",
+          "scope": "Claims",
+          "appliesTo": "The insurer and its providers"
+        }
+      ]
+    },
+    "BD3": {
+      "name": "Reserved decisions",
+      "readOn": [
+        "d1",
+        "d4"
+      ],
+      "events": [
+        {
+          "id": "RV1",
+          "event": "A new AI use at A3 (Decides) or above",
+          "timing": "Before it starts",
+          "by": "CEO"
+        }
+      ],
+      "reservedFrom": "A3"
+    },
+    "BD4": {
+      "name": "Confidential information",
+      "readOn": [],
+      "markings": {},
+      "conditions": []
+    },
+    "BD5": {
+      "name": "Harm not tolerated",
+      "readOn": [
+        "d2"
+      ],
+      "harms": [
+        {
+          "id": "H1",
+          "harmTo": "Customers or members",
+          "notTolerated": "A valid claim declined",
+          "threshold": "Any single instance"
+        }
+      ]
+    },
+    "BD6": {
+      "name": "Reporting expected",
+      "readOn": [
+        "d7"
+      ],
+      "measures": [
+        {
+          "id": "BM3",
+          "measure": "Material AI incidents",
+          "limit": "0",
+          "owner": "CRO"
+        }
+      ],
+      "events": [
+        {
+          "id": "EV1",
+          "event": "A material AI incident",
+          "to": "Chair",
+          "within": "24 hours"
+        }
+      ]
+    },
+    "BD7": {
+      "name": "Accountability",
+      "readOn": [],
+      "owners": []
+    }
+  }
+}

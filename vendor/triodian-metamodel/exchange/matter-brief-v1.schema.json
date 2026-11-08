@@ -1,0 +1,369 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/exchange/matter-brief-v1.schema.json",
+  "title": "Matter brief (triodian.matterBrief/1)",
+  "description": "The fixed-format brief the AI Obligations Atlas builds in the lawyer's browser and exports for the assessment apps. It lists the obligations in scope by source tier, the questions counsel will need to determine, and the engagements that fit. It contains no statement of what the law requires of the client. Built by the AI Obligations Atlas (obligations-atlas src/core/atlas.js); read by AI Board Direction and AI Use Assessment (public/shared/matter-brief.js). Copied from obligations-atlas schemas/matter-brief.schema.json, which remains the Atlas build check until the Atlas vendors this copy.",
+  "type": "object",
+  "required": [
+    "briefFormat",
+    "generatedAt",
+    "matterLabel",
+    "scope",
+    "dataset",
+    "obligationsByTier",
+    "questionsForCounsel",
+    "engagementsThatFit",
+    "notices"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "briefFormat": {
+      "const": "triodian.matterBrief/1",
+      "description": "Format and version, for the loading app"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the brief was built"
+    },
+    "matterLabel": {
+      "type": "string",
+      "description": "The lawyer's own label for the matter; never sent to Triodian"
+    },
+    "preparedBy": {
+      "type": "string",
+      "description": "Who prepared the brief"
+    },
+    "scope": {
+      "type": "object",
+      "description": "What the brief covers",
+      "required": [
+        "jurisdictions",
+        "entityTypes",
+        "useCases"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "jurisdictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Jurisdiction codes"
+        },
+        "sectors": {
+          "type": "array",
+          "description": "Regulated sectors chosen, from the Metamodel's reference-data/regulated-sectors.json",
+          "items": {
+            "type": "object",
+            "required": [
+              "regulatedSectorID",
+              "name"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "regulatedSectorID": {
+                "type": "string",
+                "pattern": "^[A-Z]{2}-[A-Z-]+$",
+                "description": "Sector id, e.g. AU-INSURANCE"
+              },
+              "name": {
+                "type": "string",
+                "description": "Sector name"
+              }
+            }
+          }
+        },
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Entity types, from the Metamodel's regulatedEntityType list"
+        },
+        "useCases": {
+          "type": "array",
+          "description": "Standardised use cases in scope, with the consequence level counsel set for this client",
+          "items": {
+            "type": "object",
+            "required": [
+              "useCaseID"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "useCaseID": {
+                "type": "string",
+                "pattern": "^UC([1-9]|10)$",
+                "description": "Use case"
+              },
+              "title": {
+                "type": "string",
+                "description": "Use case title"
+              },
+              "consequenceLevel": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "c1",
+                  "c2",
+                  "c3",
+                  "c4",
+                  "c5",
+                  null
+                ],
+                "description": "Consequence C1 to C5 against the client's own thresholds, or null when not set"
+              }
+            }
+          }
+        }
+      }
+    },
+    "dataset": {
+      "type": "object",
+      "description": "The Atlas dataset the brief was built from, for audit",
+      "additionalProperties": true
+    },
+    "obligationsByTier": {
+      "type": "object",
+      "description": "Obligation references grouped by source tier",
+      "required": [
+        "binding",
+        "expected",
+        "anticipated"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "binding": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/obligationRef"
+          },
+          "description": "Law or prudential standard in force"
+        },
+        "expected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/obligationRef"
+          },
+          "description": "Regulator expectation, guidance or recognised standard"
+        },
+        "anticipated": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/obligationRef"
+          },
+          "description": "Made but not yet in force, or under consultation"
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "description": "Number of references in each tier, and how many are specific to the use cases or apply to any AI use",
+      "additionalProperties": {
+        "type": "integer"
+      }
+    },
+    "coverage": {
+      "type": "array",
+      "description": "Jurisdictions in scope the Atlas does not yet cover. No records there does not mean no obligations apply",
+      "items": {
+        "type": "object",
+        "required": [
+          "jurisdiction",
+          "coverage",
+          "note"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "jurisdiction": {
+            "type": "string",
+            "description": "Jurisdiction code"
+          },
+          "coverage": {
+            "const": "notYetCovered",
+            "description": "Coverage state"
+          },
+          "note": {
+            "type": "string",
+            "description": "What that means for the reader"
+          }
+        }
+      }
+    },
+    "questionsForCounsel": {
+      "type": "array",
+      "description": "Questions counsel will need to determine",
+      "items": {
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "about": {
+            "type": "string",
+            "description": "Use case or obligation the question concerns"
+          },
+          "question": {
+            "type": "string",
+            "description": "The question"
+          }
+        }
+      }
+    },
+    "engagementsThatFit": {
+      "type": "array",
+      "description": "Engagements that fit the scope: by entity type and sector when either is chosen (see profile), otherwise by the use cases. Counsel decides whether to engage.",
+      "items": {
+        "type": "object",
+        "required": [
+          "assessmentType",
+          "name",
+          "useCaseIDs"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "assessmentType": {
+            "type": "string",
+            "enum": [
+              "aiRiskAppetite",
+              "aiUseAssessment",
+              "aiConfidentialityExposureAssessment",
+              "aiBoardDirection"
+            ],
+            "description": "Kind of engagement"
+          },
+          "name": {
+            "type": "string",
+            "description": "Engagement name"
+          },
+          "purpose": {
+            "type": "string",
+            "description": "What it does"
+          },
+          "useCaseIDs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Use cases in scope that lead to it"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "connected",
+              "standalone"
+            ],
+            "description": "AI Board Direction only: connected for a financially regulated entity (the board's directions bound the AI Risk Appetite engagement), standalone otherwise"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why it fits, in plain words"
+          }
+        }
+      }
+    },
+    "profile": {
+      "type": "string",
+      "enum": [
+        "regulated",
+        "general"
+      ],
+      "description": "regulated when an entity type or sector in scope is financially regulated, general when the scope names others only; absent when it names neither"
+    },
+    "notices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The standing rule and other notices, carried into every export"
+    }
+  },
+  "definitions": {
+    "obligationRef": {
+      "type": "object",
+      "description": "A reference to one Atlas obligation record",
+      "required": [
+        "obligationID",
+        "title",
+        "instrument",
+        "citation",
+        "sourceURL",
+        "lastVerified",
+        "governedRecordID"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "obligationID": {
+          "type": "string",
+          "description": "Obligation ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title"
+        },
+        "instrument": {
+          "type": "string",
+          "description": "Instrument"
+        },
+        "citation": {
+          "type": "string",
+          "description": "Provision"
+        },
+        "jurisdiction": {
+          "type": "string",
+          "description": "Jurisdiction"
+        },
+        "appliesToAnyAIUse": {
+          "type": "boolean",
+          "description": "True when the record applies to any AI use, not only the selected use cases"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the source"
+        },
+        "keyDates": {
+          "type": "array",
+          "description": "Key dates",
+          "items": {
+            "type": "object"
+          }
+        },
+        "useCaseIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Use cases in scope the record reaches"
+        },
+        "sourceURL": {
+          "type": "string",
+          "format": "uri",
+          "description": "Official source"
+        },
+        "lastVerified": {
+          "type": "string",
+          "format": "date",
+          "description": "Last verified against the official text"
+        },
+        "governedRecordID": {
+          "type": "string",
+          "description": "Atlas record version cited"
+        },
+        "publicationStatus": {
+          "type": "string",
+          "description": "published, or pendingReview in preview data"
+        },
+        "provenanceRef": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Latest provenance ledger entry for the record"
+        }
+      }
+    }
+  }
+}

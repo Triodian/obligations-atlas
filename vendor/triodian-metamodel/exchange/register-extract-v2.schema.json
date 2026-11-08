@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/exchange/register-extract-v2.schema.json",
+  "title": "Register extract v2, the in-use feed (triodian.aua.extract.v2)",
+  "description": "The in-use feed: each register entry's authority, consequence and evidence (as in v1), plus the measures the register can count, open gaps by priority, the finding on each provider arrangement and overdue items. Issued by AI Use Assessment (use-assessment public/aua.js registerExtractV2(), served at GET /api/appetite-feedback); AI Risk Appetite reads it on decisions 3 and 8 and passes the measures to the board view. It carries no provider names and no evidence documents.",
+  "type": "object",
+  "required": ["schema", "entries", "measures"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "triodian.aua.extract.v2", "description": "Format and version of this file" },
+    "privilegeMarking": { "type": ["string", "null"], "description": "The privilege marking" },
+    "generated": { "type": "string", "description": "When the feed was generated (ISO 8601)" },
+    "calibration": { "type": "string", "description": "The calibration the register was measured against, e.g. 'approved v2' or 'uncalibrated'" },
+    "engagementId": { "type": "string", "description": "Use Assessment engagement identifier" },
+    "company": { "type": "string", "description": "The entity assessed" },
+    "entries": { "$ref": "register-extract-v1.schema.json#/properties/entries" },
+    "measures": {
+      "type": "array",
+      "description": "Measures M1 to M10 the register can count. A measure the register cannot count has value null and says why; nothing is estimated.",
+      "items": {
+        "type": "object",
+        "required": ["ref", "value"],
+        "additionalProperties": false,
+        "properties": {
+          "ref": { "type": "string", "pattern": "^M([1-9]|10)$", "description": "Measure reference" },
+          "value": { "type": ["number", "null"], "description": "The count or percentage, or null if the register cannot count it" },
+          "basis": { "type": "string", "description": "What was counted, or why it could not be" }
+        }
+      }
+    },
+    "measuresNote": { "type": "string", "description": "How the measures were counted" },
+    "gapsByPriority": {
+      "type": "object",
+      "description": "Open F2 evidence gaps by priority",
+      "additionalProperties": false,
+      "properties": {
+        "High": { "type": "integer", "minimum": 0, "description": "High priority gaps" },
+        "Medium": { "type": "integer", "minimum": 0, "description": "Medium priority gaps" },
+        "Low": { "type": "integer", "minimum": 0, "description": "Low priority gaps" }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "description": "The finding on each provider arrangement: F1 to F4, or null where none",
+      "items": {
+        "type": "object",
+        "required": ["arrangement"],
+        "additionalProperties": false,
+        "properties": {
+          "arrangement": { "type": "string", "description": "Arrangement identifier" },
+          "type": { "type": ["string", "null"], "pattern": "^F[1-4]$", "description": "Finding type" },
+          "priority": { "enum": ["Low", "Medium", "High", null], "description": "Priority of an F2 gap" }
+        }
+      }
+    },
+    "overdue": {
+      "type": "array",
+      "description": "Items past the time the appetite allows",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "entry": { "type": "string", "description": "Register entry identifier" },
+          "item": { "type": "string", "description": "What is overdue" }
+        }
+      }
+    }
+  }
+}

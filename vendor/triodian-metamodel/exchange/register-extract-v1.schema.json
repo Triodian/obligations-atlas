@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/exchange/register-extract-v1.schema.json",
+  "title": "Register extract (triodian.aua.extract.v1)",
+  "description": "The AI Use Assessment register reduced to authority, consequence and evidence for each entry, for AI Risk Appetite's decision 3 check (K10). Written by use-assessment public/aua.js registerExtract(). Superseded by v2, the in-use feed; AI Risk Appetite still accepts v1.",
+  "type": "object",
+  "required": ["schema", "entries"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "triodian.aua.extract.v1", "description": "Format and version of this file" },
+    "privilegeMarking": { "type": ["string", "null"], "description": "The privilege marking" },
+    "generated": { "type": "string", "description": "When the file was generated (ISO 8601)" },
+    "calibration": { "type": "string", "description": "The calibration the register was measured against, e.g. 'approved v2' or 'uncalibrated'" },
+    "entries": {
+      "type": "array",
+      "description": "One line per register entry: no names and no provider details",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "function": { "type": ["string", "null"], "description": "Function the entry serves" },
+          "location": { "enum": ["own", "provider", "platform", null], "description": "Where the AI runs" },
+          "tier": { "type": ["string", "null"], "pattern": "^A[1-6]$", "description": "Authority tier" },
+          "consequence": { "type": ["string", "null"], "pattern": "^C[1-5]$", "description": "Consequence level" },
+          "received": { "type": ["string", "null"], "pattern": "^E[0-6]$", "description": "Evidence rung received" }
+        }
+      }
+    }
+  }
+}
