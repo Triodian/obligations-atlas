@@ -1,0 +1,36 @@
+{
+  "format": "triodian.bd.confidentiality.v1",
+  "engagementId": "e-harrow-bd",
+  "status": "resolved",
+  "resolvedOn": "2026-11-04",
+  "issuedOn": "2026-11-05",
+  "classes": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6"
+  ],
+  "kinds": [
+    "K1",
+    "K2",
+    "K3",
+    "K4",
+    "K5",
+    "K7"
+  ],
+  "markings": {
+    "G1:K1": "P",
+    "G1:K2": "P",
+    "G2:K1": "C",
+    "G2:K2": "N",
+    "G3:K1": "N",
+    "G4:K5": "C",
+    "G6:K7": "N"
+  },
+  "conditions": [
+    "Only through the company's enterprise AI tenant, with retention off"
+  ],
+  "note": "An example in the shape AI Board Direction exports (board-direction public/bd-outputs.js)."
+}

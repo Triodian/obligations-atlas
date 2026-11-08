@@ -1,0 +1,212 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/exchange/calibration-set-v1.schema.json",
+  "title": "Calibration set (triodian.raf.calibration.v1)",
+  "description": "The AI risk appetite as parameters P1 to P11. The AI Risk Appetite app issues it when the CRO agrees the working appetite, and again when the board approves it; AI Use Assessment measures each AI arrangement against it. Written by risk_appetite public/app.js calibrationSet(); read by use-assessment public/aua.js validateCalibration(). A parameter the engagement has not set falls back to the framework default and is named in fellBackIds.",
+  "type": "object",
+  "required": ["schema", "status", "version", "parameters"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "triodian.raf.calibration.v1", "description": "Format and version of this file" },
+    "privilegeMarking": { "type": ["string", "null"], "description": "The privilege marking the engagement carries, repeated on every output" },
+    "status": { "type": "string", "enum": ["default", "working", "approved"], "description": "default: nothing agreed yet, framework defaults apply; working: agreed by the CRO; approved: approved by the board" },
+    "version": { "type": "integer", "minimum": 0, "description": "Calibration version; 0 before anything is agreed" },
+    "statusMark": { "type": "string", "description": "The status in words, as it appears on every output" },
+    "date": { "type": ["string", "null"], "description": "The date the status was reached: the approval date if approved, otherwise the date agreed" },
+    "agreedBy": { "type": ["string", "null"], "description": "Who agreed the working appetite (the CRO)" },
+    "agreedOn": { "type": ["string", "null"], "description": "Date the working appetite was agreed (YYYY-MM-DD)" },
+    "approvedBy": { "type": ["string", "null"], "description": "Who approved the appetite (the board or its committee)" },
+    "approvedOn": { "type": ["string", "null"], "description": "Date the appetite was approved (YYYY-MM-DD)" },
+    "minuteRef": { "type": ["string", "null"], "description": "Reference of the board minute that approved it" },
+    "engagementRef": { "type": ["string", "null"], "description": "The engagement's own reference" },
+    "generated": { "type": "string", "description": "When the file was generated (ISO 8601 date and time)" },
+    "parameters": { "$ref": "#/definitions/parameters" },
+    "fellBackToDefault": { "type": "array", "items": { "type": "string" }, "description": "Each parameter that fell back to the framework default, in words, e.g. 'P9: 1 of 1 cells default'" },
+    "fellBackIds": { "type": "array", "items": { "type": "string", "pattern": "^P([1-9]|1[01])$" }, "description": "The parameters that fell back to the framework default" },
+    "defaults": { "type": "object", "description": "The framework default for each parameter named in fellBackIds, keyed by parameter" }
+  },
+  "definitions": {
+    "tier": { "type": "string", "pattern": "^A[1-6]$", "description": "Authority tier, A1 to A6" },
+    "rung": { "type": "string", "pattern": "^E[0-6]$", "description": "Evidence rung, E0 to E6" },
+    "priority": { "type": "string", "enum": ["Low", "Medium", "High"], "description": "Gap priority" },
+    "mark": { "type": "string", "enum": ["Accepted", "Escalate", "Not accepted"], "description": "Whether a location is accepted" },
+    "parameters": {
+      "type": "object",
+      "description": "The appetite, parameter by parameter (AI Risk Appetite Framework)",
+      "required": ["P3"],
+      "additionalProperties": false,
+      "properties": {
+        "P1": {
+          "description": "Authority ceiling: for each function (by name), the highest authority tier AI may have in each location (own, provider, platform), with any condition; null where none is set",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "object",
+                  "required": ["tier"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "tier": { "$ref": "#/definitions/tier" },
+                    "condition": { "type": ["string", "null"], "description": "Condition attached to the ceiling" }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "P2": {
+          "description": "Consequence thresholds in the entity's own terms, keyed by level and label (e.g. 'C4 Policyholder harm'), or 'generic' for the framework's wording",
+          "oneOf": [
+            { "const": "generic" },
+            { "type": "object", "propertyNames": { "pattern": "^C[2-5]\\b" }, "additionalProperties": { "type": ["string", "null"] } }
+          ]
+        },
+        "P3": {
+          "description": "Expected evidence rung for each authority tier (A1 to A6) and consequence level (C1 to C5)",
+          "type": "object",
+          "required": ["A1", "A2", "A3", "A4", "A5", "A6"],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^A[1-6]$": {
+              "type": "object",
+              "required": ["C1", "C2", "C3", "C4", "C5"],
+              "additionalProperties": false,
+              "patternProperties": { "^C[1-5]$": { "$ref": "#/definitions/rung" } }
+            }
+          }
+        },
+        "P4": {
+          "description": "Gap priority for each evidence gap (g1: 1 rung, g2: 2 rungs, g3: 3 or more) and consequence band (b12: C1 or C2, b3: C3, b45: C4 or C5)",
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^g[1-3]$": {
+              "type": "object",
+              "additionalProperties": false,
+              "patternProperties": { "^(b12|b3|b45)$": { "$ref": "#/definitions/priority" } }
+            }
+          }
+        },
+        "P5": {
+          "description": "For each priority, the time limit to close a gap and the interim position while it is open",
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^(Low|Medium|High)$": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "timeLimit": { "type": ["string", "null"], "description": "Time limit to close the gap" },
+                "interim": { "type": ["string", "null"], "description": "Interim position while it is open" }
+              }
+            }
+          }
+        },
+        "P6": {
+          "description": "For each consequence band, how much may be not known, and how long an F4 finding may stay open",
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^(b12|b3|b45)$": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "notKnown": { "type": ["string", "null"], "description": "What may be not known" },
+                "f4": { "type": ["string", "null"], "description": "How long an F4 finding may stay open" }
+              }
+            }
+          }
+        },
+        "P7": {
+          "description": "For each consequence band, the lowest confidence accepted in an evidence level",
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": { "^(b12|b3|b45)$": { "enum": ["Low", "Medium", "High", null] } }
+        },
+        "P8": {
+          "description": "Locations: for each jurisdiction, whether a provider established there, and AI that runs there, is accepted",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["established", "runs"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string", "description": "Jurisdiction name" },
+              "established": { "$ref": "#/definitions/mark" },
+              "runs": { "$ref": "#/definitions/mark" }
+            }
+          }
+        },
+        "P9": {
+          "description": "Concentration limit: the highest share, in per cent, of critical operations that may depend on one platform or AI provider",
+          "oneOf": [{ "type": "null" }, { "type": "number", "minimum": 0, "maximum": 100 }]
+        },
+        "P10": {
+          "description": "Triggers: what is reported, against which measure and threshold, how fast and to whom",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["ref"],
+            "additionalProperties": false,
+            "properties": {
+              "ref": { "type": "string", "pattern": "^[A-Za-z0-9_.:-]{1,64}$", "description": "Trigger reference, e.g. TR1" },
+              "trigger": { "type": ["string", "null"], "description": "The trigger" },
+              "measure": { "type": ["string", "null"], "description": "The measure it is read from" },
+              "threshold": { "type": ["string", "null"], "description": "The threshold" },
+              "hours": { "type": ["number", "null"], "description": "Hours allowed to report" },
+              "recipient": { "type": ["string", "null"], "description": "Who is told" }
+            }
+          }
+        },
+        "P11": {
+          "description": "Review: the events that reopen the appetite, and the regular interval",
+          "type": "object",
+          "required": ["events", "interval"],
+          "additionalProperties": false,
+          "properties": {
+            "events": {
+              "type": "array",
+              "description": "Events that reopen the appetite",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "event": { "type": ["string", "null"], "description": "The event" },
+                  "revisit": { "type": ["string", "null"], "description": "What is revisited" }
+                }
+              }
+            },
+            "interval": { "type": ["string", "null"], "description": "Regular review interval, e.g. Annual" }
+          }
+        }
+      }
+    },
+    "issued": {
+      "type": "object",
+      "description": "A calibration set as the AI Risk Appetite app serves it at GET /api/calibration-set (risk_appetite lib/core/api.js issuedCalibration()) and inside the board view: the latest approved version, or the working version if none is approved",
+      "required": ["version", "status", "calibrationSet"],
+      "additionalProperties": false,
+      "properties": {
+        "version": { "type": "integer", "minimum": 0, "description": "Issued version" },
+        "status": { "type": "string", "enum": ["working", "approved"], "description": "Status of the issued version" },
+        "issuedOn": { "type": ["string", "null"], "description": "Date issued" },
+        "issuedBy": { "type": ["string", "null"], "description": "Who issued it" },
+        "minuteRef": { "type": ["string", "null"], "description": "Board minute reference, if approved" },
+        "calibrationSet": { "$ref": "#", "description": "The calibration set itself" },
+        "laterVersion": {
+          "type": "object",
+          "description": "A later version the CRO has agreed but the board has not yet approved: named, not served",
+          "additionalProperties": false,
+          "properties": {
+            "version": { "type": "integer", "description": "Later version" },
+            "status": { "type": "string", "description": "Its status" },
+            "on": { "type": ["string", "null"], "description": "Date" }
+          }
+        }
+      }
+    }
+  }
+}

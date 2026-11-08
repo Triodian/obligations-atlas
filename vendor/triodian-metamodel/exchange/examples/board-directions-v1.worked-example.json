@@ -1,0 +1,383 @@
+{
+  "format": "triodian.bd.directions.v1",
+  "engagementId": "example",
+  "company": "Harrow Valley Foods Pty Ltd",
+  "jurisdiction": "AU",
+  "sector": "",
+  "entityType": "privateCompany",
+  "sectorPack": "general",
+  "version": "V2",
+  "recordedOn": "2026-12-02T15:40:00Z",
+  "recordedBy": "Margaret Lowe",
+  "status": "confirmed",
+  "beingRevised": false,
+  "note": "The board’s directions, as the chair recorded them. They are read on the AI risk appetite decisions named on each. A position there that goes past a direction cannot form part of the working appetite until a reason is recorded and the board revisits it.",
+  "directions": {
+    "BD1": {
+      "name": "Posture by area",
+      "readOn": [
+        "d1"
+      ],
+      "areas": [
+        {
+          "id": "A1",
+          "name": "Customer service and communications",
+          "posture": "S2",
+          "postureLabel": "Cautious",
+          "maxTier": "A2",
+          "condition": "The chatbot hands any complaint or refund to a person"
+        },
+        {
+          "id": "A2",
+          "name": "Sales and marketing",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": ""
+        },
+        {
+          "id": "A3",
+          "name": "People and hiring",
+          "posture": "S2",
+          "postureLabel": "Cautious",
+          "maxTier": "A2",
+          "condition": "No applicant is rejected without a person reviewing"
+        },
+        {
+          "id": "A4",
+          "name": "Finance and payments",
+          "posture": "S2",
+          "postureLabel": "Cautious",
+          "maxTier": "A2",
+          "condition": "Payments over $10,000 need a second person"
+        },
+        {
+          "id": "A5",
+          "name": "Operations and production",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": "Within food-safety limits the line already works to"
+        },
+        {
+          "id": "A6",
+          "name": "Product, research and engineering",
+          "posture": "S3",
+          "postureLabel": "Open",
+          "maxTier": "A4",
+          "condition": ""
+        },
+        {
+          "id": "A7",
+          "name": "Procurement and suppliers",
+          "posture": "S2",
+          "postureLabel": "Cautious",
+          "maxTier": "A2",
+          "condition": ""
+        },
+        {
+          "id": "A8",
+          "name": "Legal, contracts and compliance",
+          "posture": "S1",
+          "postureLabel": "Avoid",
+          "maxTier": "A1",
+          "condition": ""
+        },
+        {
+          "id": "A9",
+          "name": "IT and security",
+          "posture": "S2",
+          "postureLabel": "Cautious",
+          "maxTier": "A2",
+          "condition": ""
+        },
+        {
+          "id": "A10",
+          "name": "Board and executive work",
+          "posture": "S2",
+          "postureLabel": "Cautious",
+          "maxTier": "A2",
+          "condition": "Board papers only in the licensed assistant"
+        }
+      ],
+      "goals": [
+        {
+          "id": "GL1",
+          "goal": "Use AI to take routine work off staff in the office and on the packing lines, safely",
+          "owner": "Tom Adeyemi, CEO",
+          "measure": "BM1: AI uses in the inventory, and how many are new since the last report"
+        },
+        {
+          "id": "GL2",
+          "goal": "Keep customers’ and applicants’ trust in how we use AI on them",
+          "owner": "Priya Raman",
+          "measure": "BM3: material AI incidents"
+        },
+        {
+          "id": "GL3",
+          "goal": "Keep the lines running if an AI provider fails or changes its service",
+          "owner": "Dana Whitfield",
+          "measure": "Hours of packing-line stoppage caused by an AI provider, each quarter"
+        }
+      ]
+    },
+    "BD2": {
+      "name": "Red lines",
+      "readOn": [
+        "d1",
+        "d6"
+      ],
+      "lines": [
+        {
+          "id": "RL1",
+          "use": "AI making a final decision to hire, dismiss or discipline a person, with no person reviewing it",
+          "scope": "All areas",
+          "appliesTo": "The company and its providers"
+        },
+        {
+          "id": "RL2",
+          "use": "Board papers, pricing or acquisition information (G6) entered into any tool outside the company’s own estate",
+          "scope": "All areas",
+          "appliesTo": "The company and its advisers"
+        },
+        {
+          "id": "RL3",
+          "use": "AI holding credentials to release payments unattended",
+          "scope": "Finance and payments",
+          "appliesTo": "The company and its providers"
+        }
+      ]
+    },
+    "BD3": {
+      "name": "Reserved decisions",
+      "readOn": [
+        "d1",
+        "d4"
+      ],
+      "events": [
+        {
+          "id": "RV1",
+          "event": "A new AI use at A3 (Decides) or above",
+          "timing": "Before it starts",
+          "by": "CEO"
+        },
+        {
+          "id": "RV2",
+          "event": "A new AI use in an area marked Avoid",
+          "timing": "Before it starts",
+          "by": "CEO"
+        },
+        {
+          "id": "RV3",
+          "event": "An exception to a red line",
+          "timing": "Before it starts",
+          "by": "CEO"
+        },
+        {
+          "id": "RV4",
+          "event": "A new provider whose AI sees G5 or G6 information",
+          "timing": "Before it starts",
+          "by": "CEO"
+        },
+        {
+          "id": "RV5",
+          "event": "A material AI incident",
+          "timing": "Told within 24 hours",
+          "by": "CEO"
+        },
+        {
+          "id": "RV6",
+          "event": "A change to the statement or the measures",
+          "timing": "Before it takes effect",
+          "by": "Chair"
+        }
+      ],
+      "reservedFrom": "A3"
+    },
+    "BD4": {
+      "name": "Confidential information",
+      "readOn": [],
+      "markings": {
+        "G1:K1": "P",
+        "G1:K2": "P",
+        "G1:K3": "P",
+        "G1:K4": "P",
+        "G1:K5": "P",
+        "G1:K7": "P",
+        "G2:K1": "P",
+        "G2:K2": "P",
+        "G2:K3": "P",
+        "G2:K4": "C",
+        "G2:K5": "C",
+        "G2:K7": "P",
+        "G3:K1": "P",
+        "G3:K2": "C",
+        "G3:K3": "C",
+        "G3:K4": "N",
+        "G3:K5": "N",
+        "G3:K7": "C",
+        "G4:K1": "C",
+        "G4:K2": "C",
+        "G4:K3": "C",
+        "G4:K4": "N",
+        "G4:K5": "N",
+        "G4:K7": "C",
+        "G5:K1": "C",
+        "G5:K2": "N",
+        "G5:K3": "N",
+        "G5:K4": "N",
+        "G5:K5": "N",
+        "G5:K7": "C",
+        "G6:K1": "C",
+        "G6:K2": "N",
+        "G6:K3": "N",
+        "G6:K4": "N",
+        "G6:K5": "N",
+        "G6:K7": "N"
+      },
+      "conditions": [
+        "With conditions means: only in a tool on the company’s enterprise licence that does not train on our content, and only for the people who already have access to the information.",
+        "Meeting AI may not run in board meetings or on calls about pricing or acquisitions."
+      ]
+    },
+    "BD5": {
+      "name": "Harm not tolerated",
+      "readOn": [
+        "d2"
+      ],
+      "harms": [
+        {
+          "id": "H1",
+          "harmTo": "Customers or members",
+          "notTolerated": "A customer given wrong allergen or ingredient information",
+          "threshold": "Any single instance"
+        },
+        {
+          "id": "H2",
+          "harmTo": "Staff and applicants",
+          "notTolerated": "An applicant screened out unfairly",
+          "threshold": "Any pattern across a hiring round"
+        },
+        {
+          "id": "H3",
+          "harmTo": "The company’s money",
+          "notTolerated": "A wrong payment released",
+          "threshold": "$10,000 per event or $50,000 a year"
+        },
+        {
+          "id": "H4",
+          "harmTo": "Operations",
+          "notTolerated": "A packing line stopped",
+          "threshold": "More than 4 hours"
+        },
+        {
+          "id": "H5",
+          "harmTo": "Legal and regulatory standing",
+          "notTolerated": "A breach of privacy law or a customer contract",
+          "threshold": "Any"
+        },
+        {
+          "id": "H6",
+          "harmTo": "Reputation and trust",
+          "notTolerated": "A public failure attributed to our use of AI",
+          "threshold": "Any media or regulator attention"
+        }
+      ]
+    },
+    "BD6": {
+      "name": "Reporting expected",
+      "readOn": [
+        "d7"
+      ],
+      "measures": [
+        {
+          "id": "BM1",
+          "measure": "AI uses in the inventory, and how many are new since the last report",
+          "limit": "n/a",
+          "owner": "CEO"
+        },
+        {
+          "id": "BM2",
+          "measure": "Uses that cross a red line or exceed their area’s posture without board approval",
+          "limit": "0",
+          "owner": "CEO"
+        },
+        {
+          "id": "BM3",
+          "measure": "Material AI incidents",
+          "limit": "0",
+          "owner": "CEO"
+        },
+        {
+          "id": "BM4",
+          "measure": "Known uses of information marked N in B5",
+          "limit": "0",
+          "owner": "CEO"
+        },
+        {
+          "id": "BM5",
+          "measure": "Actions on the 90-day list overdue",
+          "limit": "2",
+          "owner": "CEO"
+        }
+      ],
+      "events": [
+        {
+          "id": "EV1",
+          "event": "A material AI incident",
+          "to": "Chair",
+          "within": "24 hours"
+        },
+        {
+          "id": "EV2",
+          "event": "A red line crossed",
+          "to": "Chair",
+          "within": "24 hours"
+        },
+        {
+          "id": "EV3",
+          "event": "A regulator, customer or counterparty raises AI use with the company",
+          "to": "Chair and GC",
+          "within": "2 working days"
+        },
+        {
+          "id": "EV4",
+          "event": "A provider changes the AI it uses for an area marked Avoid or Cautious",
+          "to": "CEO",
+          "within": "10 working days"
+        }
+      ]
+    },
+    "BD7": {
+      "name": "Accountability",
+      "readOn": [],
+      "owners": [
+        {
+          "id": "AC1",
+          "role": "Board committee that oversees AI",
+          "named": "Audit and risk committee"
+        },
+        {
+          "id": "AC2",
+          "role": "Director who leads on AI",
+          "named": "Priya Raman"
+        },
+        {
+          "id": "AC3",
+          "role": "Executive accountable for AI overall",
+          "named": "Tom Adeyemi, CEO"
+        },
+        {
+          "id": "AC4",
+          "role": "Owner of each area’s positions",
+          "named": "Each executive for their area"
+        },
+        {
+          "id": "AC5",
+          "role": "Who may approve an exception, and within what limit",
+          "named": "The CEO, for up to 90 days, reported under BM2"
+        }
+      ]
+    }
+  }
+}

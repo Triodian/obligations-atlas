@@ -11,7 +11,9 @@ const preview = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.p
 const published = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.json', 'utf8'));
 const atlas = new Atlas(preview, { preview: true });
 const ajv = new Ajv({ strict: false, allErrors: true }); addFormats(ajv);
-const validBrief = ajv.compile(JSON.parse(fs.readFileSync('schemas/matter-brief.schema.json', 'utf8')));
+// The matter brief is checked against the published exchange schema (Triodian_Metamodel exchange/, task R.4).
+const EXCHANGE_BRIEF = JSON.parse(fs.readFileSync('vendor/triodian-metamodel/exchange/matter-brief-v1.schema.json', 'utf8'));
+const validBrief = ajv.compile(EXCHANGE_BRIEF);
 const app = createApp({ snapshot: preview, preview: true });
 const get = async (p, init) => { const r = await app.request(p, init); return { status: r.status, body: await r.json(), headers: r.headers }; };
 const rpc = async (body, headers = {}) => { const r = await app.request('/mcp', { method: 'POST', headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body) }); return { status: r.status, body: r.status === 202 ? null : await r.json() }; };
@@ -82,6 +84,9 @@ test('matter brief: obligations by tier, counsel questions, engagements that fit
   assert.ok(b.notices.some((n) => n.includes('not sent to Triodian')));
   const brief = JSON.parse(fs.readFileSync('schemas/matter-brief.schema.json', 'utf8'));
   assert.equal(brief.properties.briefFormat.const, b.briefFormat);
+  // the Atlas's own copy (served at /schemas) says the same as the published one, apart from its id and wording
+  const rules = s => JSON.stringify({ ...s, $id: '', title: '', description: '' });
+  assert.equal(rules(brief), rules(EXCHANGE_BRIEF), 'schemas/matter-brief.schema.json has drifted from the published exchange schema');
   assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
 });
 

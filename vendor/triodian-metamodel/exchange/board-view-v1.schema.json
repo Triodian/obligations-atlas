@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/exchange/board-view-v1.schema.json",
+  "title": "Board view (triodian.raf.boardview.v1)",
+  "description": "What AI Board Direction shows the board at each meeting: the positions the board approved (the calibration set as issued), where the appetite stands now, and the latest in-use measures. Served by AI Risk Appetite at GET /api/board-view (risk_appetite lib/core/api.js boardView()) and read over AI Board Direction's service binding.",
+  "type": "object",
+  "required": ["format", "appetite"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "triodian.raf.boardview.v1", "description": "Format and version" },
+    "company": { "type": "string", "description": "The entity" },
+    "sectorPack": { "type": "string", "description": "Sector pack in use" },
+    "appetite": {
+      "type": "object",
+      "description": "Where the appetite stands now",
+      "additionalProperties": false,
+      "properties": {
+        "status": { "type": "string", "enum": ["default", "working", "approved"], "description": "Current status" },
+        "version": { "type": "integer", "minimum": 0, "description": "Current version" },
+        "agreedOn": { "type": ["string", "null"], "description": "Date agreed" },
+        "approvedOn": { "type": ["string", "null"], "description": "Date approved" },
+        "minuteRef": { "type": ["string", "null"], "description": "Board minute reference" }
+      }
+    },
+    "approved": {
+      "description": "The calibration set as issued (the same body as GET /api/calibration-set), or null if none has been issued",
+      "oneOf": [{ "type": "null" }, { "$ref": "calibration-set-v1.schema.json#/definitions/issued" }]
+    },
+    "approvedNote": { "type": "string", "description": "Why nothing is approved, when approved is null" },
+    "inUse": {
+      "description": "The latest in-use measures from the AI Use Assessment feed, or null if no feed is loaded",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "on": { "type": ["string", "null"], "description": "When the feed was loaded" },
+            "generated": { "type": ["string", "null"], "description": "When the feed was generated" },
+            "measures": {
+              "type": "array",
+              "maxItems": 20,
+              "description": "The feed's measures as AI Risk Appetite holds them: each named and given the board's limit from the framework (risk_appetite public/app.js, loading the in-use feed on decision 3)",
+              "items": {
+                "type": "object",
+                "required": ["ref", "value"],
+                "additionalProperties": false,
+                "properties": {
+                  "ref": { "type": "string", "pattern": "^M\\d{1,2}$", "description": "Measure reference" },
+                  "measure": { "type": "string", "description": "The measure in words" },
+                  "limit": { "type": "string", "description": "The limit the appetite sets for it" },
+                  "value": { "type": ["number", "null"], "description": "The count or percentage, or null if the register cannot count it" },
+                  "basis": { "type": "string", "maxLength": 400, "description": "What was counted, or why it could not be" }
+                }
+              }
+            },
+            "gapsByPriority": {
+              "description": "Open gaps by priority, or null",
+              "oneOf": [{ "type": "null" }, { "$ref": "register-extract-v2.schema.json#/properties/gapsByPriority" }]
+            },
+            "overdue": { "$ref": "register-extract-v2.schema.json#/properties/overdue" }
+          }
+        }
+      ]
+    },
+    "inUseNote": { "type": "string", "description": "Where the measures came from, or why there are none" }
+  }
+}

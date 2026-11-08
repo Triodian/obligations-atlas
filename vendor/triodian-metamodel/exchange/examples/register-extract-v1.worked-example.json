@@ -1,0 +1,36 @@
+{
+ "privilegeMarking": "Privileged and confidential \u00b7 prepared at the direction of counsel \u00b7 worked example",
+ "schema": "triodian.aua.extract.v1",
+ "generated": "2026-11-08T08:21:41.130Z",
+ "calibration": "uncalibrated",
+ "entries": [
+  {
+   "function": "Claims",
+   "location": "provider",
+   "tier": "A3",
+   "consequence": "C4",
+   "received": "E1"
+  },
+  {
+   "function": "Claims",
+   "location": "platform",
+   "tier": null,
+   "consequence": null,
+   "received": null
+  },
+  {
+   "function": "Legal and compliance",
+   "location": "own",
+   "tier": "A1",
+   "consequence": "C2",
+   "received": "E1"
+  },
+  {
+   "function": "Underwriting and pricing",
+   "location": "provider",
+   "tier": null,
+   "consequence": null,
+   "received": null
+  }
+ ]
+}

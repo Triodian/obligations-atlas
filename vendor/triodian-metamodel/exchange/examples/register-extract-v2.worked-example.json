@@ -1,0 +1,114 @@
+{
+ "privilegeMarking": "Privileged and confidential \u00b7 prepared at the direction of counsel \u00b7 worked example",
+ "schema": "triodian.aua.extract.v2",
+ "generated": "2026-11-08T08:21:41.125Z",
+ "calibration": "uncalibrated",
+ "entries": [
+  {
+   "function": "Claims",
+   "location": "provider",
+   "tier": "A3",
+   "consequence": "C4",
+   "received": "E1"
+  },
+  {
+   "function": "Claims",
+   "location": "platform",
+   "tier": null,
+   "consequence": null,
+   "received": null
+  },
+  {
+   "function": "Legal and compliance",
+   "location": "own",
+   "tier": "A1",
+   "consequence": "C2",
+   "received": "E1"
+  },
+  {
+   "function": "Underwriting and pricing",
+   "location": "provider",
+   "tier": null,
+   "consequence": null,
+   "received": null
+  }
+ ],
+ "engagementId": "b6r61x7",
+ "company": "Corvane General Insurance (fictional)",
+ "measures": [
+  {
+   "ref": "M1",
+   "value": null,
+   "basis": "Needs the calibration set, which is not loaded (P1)"
+  },
+  {
+   "ref": "M2",
+   "value": null,
+   "basis": "Time limits are set as events (for example the next risk committee), so the register cannot date them. The gaps by priority are given below"
+  },
+  {
+   "ref": "M3",
+   "value": null,
+   "basis": "The next contract date is not held in the register"
+  },
+  {
+   "ref": "M4",
+   "value": null,
+   "basis": "Needs the calibration set, which is not loaded (P6)"
+  },
+  {
+   "ref": "M5",
+   "value": null,
+   "basis": "Evidence due dates are held in the technical schedule, outside the register"
+  },
+  {
+   "ref": "M6",
+   "value": 100,
+   "basis": "Per cent of 1 critical operations on Quillon Analytics (fictional), the platform most of them depend on"
+  },
+  {
+   "ref": "M7",
+   "value": null,
+   "basis": "Needs the calibration set, which is not loaded (P8)"
+  },
+  {
+   "ref": "M8",
+   "value": null,
+   "basis": "The trigger log is kept outside the register"
+  },
+  {
+   "ref": "M9",
+   "value": 0,
+   "basis": "Register entries at C4 or C5 whose evidence level was established with low confidence"
+  },
+  {
+   "ref": "M10",
+   "value": 1,
+   "basis": "Critical operations that depend on Quillon Analytics (fictional), the provider most of them depend on"
+  }
+ ],
+ "measuresNote": "Counted from the register as it stood when the feed was issued. A measure with no value cannot be counted from the register; the reason is given.",
+ "gapsByPriority": {
+  "High": 0,
+  "Medium": 0,
+  "Low": 0
+ },
+ "findings": [
+  {
+   "arrangement": "ARR-01",
+   "type": null,
+   "priority": null
+  },
+  {
+   "arrangement": "ARR-02",
+   "type": "F1",
+   "priority": null
+  },
+  {
+   "arrangement": "ARR-03",
+   "type": "F4",
+   "priority": null
+  }
+ ],
+ "overdue": []
+}

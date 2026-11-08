@@ -1,0 +1,265 @@
+{
+  "briefFormat": "triodian.matterBrief/1",
+  "generatedAt": "2026-11-05T08:34:49.988Z",
+  "matterLabel": "Test matter",
+  "scope": {
+    "jurisdictions": [
+      "AU"
+    ],
+    "entityTypes": [
+      "anyOrganization"
+    ],
+    "useCases": [
+      {
+        "useCaseID": "UC1",
+        "title": "Staff copilot drafts and summarises",
+        "consequenceLevel": null
+      },
+      {
+        "useCaseID": "UC3",
+        "title": "Automated triage or decline",
+        "consequenceLevel": null
+      },
+      {
+        "useCaseID": "UC6",
+        "title": "Agent with write access to systems of record",
+        "consequenceLevel": null
+      }
+    ]
+  },
+  "dataset": {
+    "name": "AI Obligations Atlas",
+    "generatedAt": "2026-10-27T03:00:57.061Z",
+    "metamodelVersion": "2.3.0",
+    "ledgerHead": {
+      "sequence": 469,
+      "hash": "72296710246a909b3baaf91a5427c986ea48d1914854739f8e6bf62abb4887bb"
+    },
+    "preview": true
+  },
+  "obligationsByTier": {
+    "binding": [],
+    "expected": [
+      {
+        "obligationID": "OBL-AU-OAIC-APP1-GUIDE",
+        "title": "OAIC guidance on ADM privacy policy transparency",
+        "instrument": "OAIC APP Guidelines Chapter 1 (APP 1) update and APP 1.7-1.9 Transparency Obligation Fact Sheet and Flowchart",
+        "citation": "APP Guidelines Chapter 1; Fact Sheet; Flowchart",
+        "jurisdiction": "AU",
+        "appliesToAnyAIUse": false,
+        "status": "inForce",
+        "keyDates": [
+          {
+            "dateType": "published",
+            "date": "2026-09-30",
+            "note": "OAIC media release"
+          }
+        ],
+        "useCaseIDs": [
+          "UC3"
+        ],
+        "sourceURL": "https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-1-app-1-open-and-transparent-management-of-personal-information",
+        "lastVerified": "2026-10-27",
+        "governedRecordID": "OBL-AU-OAIC-APP1-GUIDE@1",
+        "publicationStatus": "pendingReview",
+        "provenanceRef": "PROV-AI-OBLIGATIONS-ATLAS-0000116"
+      },
+      {
+        "obligationID": "OBL-AU-DISR-AI-ADOPTION",
+        "title": "Six essential practices for responsible AI adoption",
+        "instrument": "Guidance for AI Adoption (Foundations and Implementation Practices)",
+        "citation": "Essential practices 1-6",
+        "jurisdiction": "AU",
+        "appliesToAnyAIUse": true,
+        "status": "inForce",
+        "keyDates": [
+          {
+            "dateType": "published",
+            "date": "2025-10-21",
+            "note": "Released by the National AI Centre"
+          }
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC3",
+          "UC6"
+        ],
+        "sourceURL": "https://www.industry.gov.au/publications/guidance-ai-adoption",
+        "lastVerified": "2026-10-27",
+        "governedRecordID": "OBL-AU-DISR-AI-ADOPTION@1",
+        "publicationStatus": "pendingReview",
+        "provenanceRef": "PROV-AI-OBLIGATIONS-ATLAS-0000144"
+      },
+      {
+        "obligationID": "OBL-INT-ISO42001",
+        "title": "AI management system standard",
+        "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+        "citation": "Whole standard (clauses 4-10, Annex A controls)",
+        "jurisdiction": "INT",
+        "appliesToAnyAIUse": true,
+        "status": "inForce",
+        "keyDates": [
+          {
+            "dateType": "published",
+            "date": "2023-12-18",
+            "note": "Edition 1; stage 60.60"
+          }
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC3",
+          "UC6"
+        ],
+        "sourceURL": "https://www.iso.org/standard/42001",
+        "lastVerified": "2026-10-27",
+        "governedRecordID": "OBL-INT-ISO42001@1",
+        "publicationStatus": "pendingReview",
+        "provenanceRef": "PROV-AI-OBLIGATIONS-ATLAS-0000158"
+      },
+      {
+        "obligationID": "OBL-INT-NIST-AIRMF",
+        "title": "NIST AI RMF and Generative AI Profile",
+        "instrument": "NIST AI Risk Management Framework 1.0 (NIST AI 100-1) and Generative AI Profile (NIST AI 600-1)",
+        "citation": "Core functions: Govern, Map, Measure, Manage",
+        "jurisdiction": "INT",
+        "appliesToAnyAIUse": true,
+        "status": "inForce",
+        "keyDates": [
+          {
+            "dateType": "published",
+            "date": "2023-01-26",
+            "note": "AI RMF 1.0"
+          },
+          {
+            "dateType": "published",
+            "date": "2024-07-26",
+            "note": "NIST AI 600-1 Generative AI Profile"
+          }
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC3",
+          "UC6"
+        ],
+        "sourceURL": "https://www.nist.gov/itl/ai-risk-management-framework",
+        "lastVerified": "2026-10-27",
+        "governedRecordID": "OBL-INT-NIST-AIRMF@1",
+        "publicationStatus": "pendingReview",
+        "provenanceRef": "PROV-AI-OBLIGATIONS-ATLAS-0000162"
+      }
+    ],
+    "anticipated": [
+      {
+        "obligationID": "OBL-AU-PRIVACY-APP1-7",
+        "title": "Privacy policy disclosure of automated decisions (APP 1.7-1.9)",
+        "instrument": "Privacy Act 1988 (Cth), Schedule 1 (APPs), as amended by the Privacy and Other Legislation Amendment Act 2024",
+        "citation": "APP 1.7, 1.8, 1.9 (inserted by POLA Act 2024 Sch 1 Part 15, item 88; application item 89)",
+        "jurisdiction": "AU",
+        "appliesToAnyAIUse": false,
+        "status": "pending",
+        "keyDates": [
+          {
+            "dateType": "made",
+            "date": "2024-12-10",
+            "note": "Royal Assent"
+          },
+          {
+            "dateType": "commences",
+            "date": "2026-12-10",
+            "note": "Sch 1 Part 15 commences the day after 24 months from Royal Assent (s 2 table item 7)"
+          },
+          {
+            "dateType": "applies",
+            "date": "2026-12-10",
+            "note": "Item 89: applies to decisions made after commencement, regardless of when the program was arranged or the information collected"
+          }
+        ],
+        "useCaseIDs": [
+          "UC3"
+        ],
+        "sourceURL": "https://legislation.gov.au/C2024A00128/asmade/2024-12-10/text/original/epub/OEBPS/document_1/document_1.html",
+        "lastVerified": "2026-10-27",
+        "governedRecordID": "OBL-AU-PRIVACY-APP1-7@1",
+        "publicationStatus": "pendingReview",
+        "provenanceRef": "PROV-AI-OBLIGATIONS-ATLAS-0000112"
+      }
+    ]
+  },
+  "counts": {
+    "binding": 0,
+    "expected": 4,
+    "anticipated": 1,
+    "specificToUseCases": 2,
+    "anyAIUse": 3
+  },
+  "coverage": [],
+  "questionsForCounsel": [
+    {
+      "about": "UC1",
+      "question": "Measured against the client’s own thresholds, which consequence level (C1 to C5) should counsel set for UC1 (Staff copilot drafts and summarises)?"
+    },
+    {
+      "about": "UC3",
+      "question": "Measured against the client’s own thresholds, which consequence level (C1 to C5) should counsel set for UC3 (Automated triage or decline)?"
+    },
+    {
+      "about": "UC6",
+      "question": "Measured against the client’s own thresholds, which consequence level (C1 to C5) should counsel set for UC6 (Agent with write access to systems of record)?"
+    },
+    {
+      "about": "OBL-AU-DISR-AI-ADOPTION",
+      "question": "What weight should the client give to Guidance for AI Adoption (Foundations and Implementation Practices) (National Artificial Intelligence Centre (Department of Industry, Science and Resources)) in its approach to the selected use cases?"
+    },
+    {
+      "about": "OBL-AU-OAIC-APP1-GUIDE",
+      "question": "What weight should the client give to OAIC APP Guidelines Chapter 1 (APP 1) update and APP 1.7-1.9 Transparency Obligation Fact Sheet and Flowchart (OAIC) in its approach to the selected use cases?"
+    },
+    {
+      "about": "OBL-AU-PRIVACY-APP1-7",
+      "question": "How should the client prepare for Privacy Act 1988 (Cth), Schedule 1 (APPs), as amended by the Privacy and Other Legislation Amendment Act 2024, which is made but not yet in force (key date 2026-12-10)?"
+    },
+    {
+      "about": "OBL-INT-ISO42001",
+      "question": "What weight should the client give to ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (ISO/IEC JTC 1/SC 42) in its approach to the selected use cases?"
+    },
+    {
+      "about": "OBL-INT-NIST-AIRMF",
+      "question": "What weight should the client give to NIST AI Risk Management Framework 1.0 (NIST AI 100-1) and Generative AI Profile (NIST AI 600-1) (NIST (US Department of Commerce)) in its approach to the selected use cases?"
+    }
+  ],
+  "engagementsThatFit": [
+    {
+      "assessmentType": "aiUseAssessment",
+      "name": "AI Use Assessment",
+      "purpose": "Assesses a particular AI use, including AI in the supply chain",
+      "useCaseIDs": [
+        "UC1",
+        "UC3",
+        "UC6"
+      ]
+    },
+    {
+      "assessmentType": "aiConfidentialityExposureAssessment",
+      "name": "AI Confidentiality Exposure Assessment",
+      "purpose": "Assesses exposure of confidential information, such as deal information, to AI tools",
+      "useCaseIDs": [
+        "UC1"
+      ]
+    },
+    {
+      "assessmentType": "aiRiskAppetite",
+      "name": "AI Risk Appetite",
+      "purpose": "Sets the board’s AI risk appetite and the triggers that act on it",
+      "useCaseIDs": [
+        "UC3",
+        "UC6"
+      ]
+    }
+  ],
+  "notices": [
+    "Records state what sources say and how they are classified. They are not legal advice and do not say what the law requires of any particular client; counsel decides what applies.",
+    "Tiers describe sources: Binding (law or prudential standard in force), Expected (regulator expectation, guidance or recognised standard), Anticipated (made but not yet in force, or under consultation).",
+    "This brief was built in the browser. The matter label, scope and consequence levels were not sent to Triodian.",
+    "Preview data: records marked pending review have not yet been approved by a Triodian reviewer."
+  ]
+}

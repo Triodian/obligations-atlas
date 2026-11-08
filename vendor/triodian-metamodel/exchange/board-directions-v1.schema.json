@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/exchange/board-directions-v1.schema.json",
+  "title": "Board directions (triodian.bd.directions.v1)",
+  "description": "The board's directions BD1 to BD7, as the chair recorded them in AI Board Direction (connected mode). AI Risk Appetite reads them over its service binding or as a file, shows the relevant one on each decision, and holds back a ceiling above a direction (check K11). Written by board-direction lib/core/directions.js directionsFrom() and served at GET /api/board-directions; read by risk_appetite public/shared/directions.js directionsError(). Built from the version kept when the chair recorded the directions, never from the engagement while it is being edited.",
+  "type": "object",
+  "required": ["format", "directions"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "triodian.bd.directions.v1", "description": "Format and version of this file" },
+    "engagementId": { "type": "string", "description": "Board engagement identifier" },
+    "company": { "type": "string", "description": "Company name" },
+    "jurisdiction": { "type": "string", "description": "Jurisdiction code, e.g. AU" },
+    "sector": { "type": "string", "description": "Regulated sector identifier, e.g. AU-SUPERANNUATION" },
+    "entityType": { "type": "string", "description": "Entity type, e.g. superannuationTrustee" },
+    "sectorPack": { "type": "string", "description": "Sector pack in use" },
+    "version": { "type": "string", "description": "Identifier of the recorded version" },
+    "recordedOn": { "type": "string", "description": "When the chair recorded the directions" },
+    "recordedBy": { "type": "string", "description": "Who recorded them" },
+    "status": { "type": "string", "enum": ["recorded", "confirmed"], "description": "recorded by the chair, or confirmed by the board's resolution" },
+    "beingRevised": { "type": "boolean", "description": "True while positions have changed since the directions were recorded" },
+    "note": { "type": "string", "description": "What the file is, in plain words" },
+    "directions": {
+      "type": "object",
+      "description": "The seven directions. Each names the AI Risk Appetite decisions (d1 to d8) it is read on.",
+      "required": ["BD1"],
+      "additionalProperties": false,
+      "properties": {
+        "BD1": {
+          "type": "object",
+          "description": "Posture by area, and the board's AI governance goals",
+          "required": ["areas"],
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string", "description": "Name of the direction" },
+            "readOn": { "$ref": "#/definitions/readOn" },
+            "areas": {
+              "type": "array",
+              "maxItems": 60,
+              "description": "Posture by area",
+              "items": {
+                "type": "object",
+                "required": ["name"],
+                "additionalProperties": false,
+                "properties": {
+                  "id": { "type": "string", "description": "Area identifier" },
+                  "name": { "type": "string", "maxLength": 200, "description": "Area name; AI Risk Appetite matches it to its functions by name" },
+                  "posture": { "type": ["string", "null"], "pattern": "^S[1-4]$", "description": "Posture S1 to S4, or null if not set" },
+                  "postureLabel": { "type": "string", "description": "Posture in words" },
+                  "maxTier": { "type": ["string", "null"], "pattern": "^A[1-6]$", "description": "Highest authority tier the posture accepts" },
+                  "condition": { "type": ["string", "null"], "maxLength": 2000, "description": "Condition the board attached" }
+                }
+              }
+            },
+            "goals": { "$ref": "#/definitions/list", "description": "AI governance goals: id, goal, owner, measure" }
+          }
+        },
+        "BD2": { "$ref": "#/definitions/direction", "description": "Red lines: lines (id, use, scope, appliesTo)" },
+        "BD3": { "$ref": "#/definitions/direction", "description": "Reserved decisions: events (id, event, timing, by) and reservedFrom, the lowest tier the board reserves before a use starts" },
+        "BD4": { "$ref": "#/definitions/direction", "description": "Confidential information: markings (class:kind to P, C or N) and conditions" },
+        "BD5": { "$ref": "#/definitions/direction", "description": "Harm not tolerated: harms (id, harmTo, notTolerated, threshold)" },
+        "BD6": { "$ref": "#/definitions/direction", "description": "Reporting expected: measures (id, measure, limit, owner) and events (id, event, to, within)" },
+        "BD7": { "$ref": "#/definitions/direction", "description": "Accountability: owners (id, role, named)" }
+      }
+    }
+  },
+  "definitions": {
+    "readOn": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^d[1-8]$" },
+      "description": "The AI Risk Appetite decisions the direction is read on"
+    },
+    "list": {
+      "type": "array",
+      "description": "A list of short records; every field is text",
+      "items": { "type": "object", "additionalProperties": { "type": "string" } }
+    },
+    "direction": {
+      "type": "object",
+      "description": "A direction: its name, the decisions it is read on, and its content",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "description": "Name of the direction" },
+        "readOn": { "$ref": "#/definitions/readOn" },
+        "lines": { "$ref": "#/definitions/list", "description": "BD2 red lines" },
+        "events": { "$ref": "#/definitions/list", "description": "BD3 reserved decisions, or BD6 events reported to the board" },
+        "reservedFrom": { "type": ["string", "null"], "pattern": "^A[1-6]$", "description": "BD3: lowest authority tier the board reserves to itself before a use starts" },
+        "markings": {
+          "type": "object",
+          "propertyNames": { "pattern": "^G[1-6]:K[1-7]$" },
+          "additionalProperties": { "type": "string", "enum": ["P", "C", "N"] },
+          "description": "BD4: information class by tool kind; P permitted, C with conditions, N not permitted"
+        },
+        "conditions": { "type": "array", "items": { "type": "string" }, "description": "BD4: conditions for C markings" },
+        "harms": { "$ref": "#/definitions/list", "description": "BD5 harms not tolerated" },
+        "measures": { "$ref": "#/definitions/list", "description": "BD6 measures reported to the board" },
+        "owners": { "$ref": "#/definitions/list", "description": "BD7 who is accountable for what" }
+      }
+    }
+  }
+}
