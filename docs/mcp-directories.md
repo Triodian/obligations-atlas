@@ -20,15 +20,16 @@ listing it in public MCP directories (development plan task 2.9).
 ## The official MCP Registry
 
 `server.json` in the repository root describes the server for the official registry
-([registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io)). The name `io.github.Triodian/...`
-is verified by signing in with GitHub as a member of the Triodian organisation.
+([registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io)) as `io.github.Triodian/obligations-atlas`.
 
-1. Install the publisher: see the registry's publishing guide for the current install command.
-2. From the repository root: `mcp-publisher login github`, then `mcp-publisher publish`.
-3. When the version in `server.json` changes, publish again.
+Publish it from **Actions → Publish to MCP Registry → Run workflow**. The workflow signs in with GitHub OIDC, so the
+registry trusts it because it runs in this repository, owned by the Triodian organisation; no token or secret is
+needed. The interactive `mcp-publisher login github` cannot publish under an organisation's name: it cannot read
+organisation roles, and the registry answers 403.
 
-Check `description` stays within 100 characters, and that the `$schema` date matches the registry's current schema
-before publishing; the registry refuses a file that does not validate.
+When `server.json` changes, raise its `version` and run the workflow again. Keep `description` within 100
+characters (the workflow checks it); if the registry refuses the file, check its `$schema` date against the
+registry's current schema.
 
 ## Other directories
 

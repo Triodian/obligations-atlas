@@ -1,0 +1,36 @@
+name: Publish to MCP Registry
+
+# Publishes server.json to the official MCP Registry as io.github.Triodian/obligations-atlas.
+# Run it from Actions → Publish to MCP Registry → Run workflow, after changing server.json (raise its version).
+# It signs in with GitHub OIDC: the registry trusts this repository, owned by the Triodian organisation, so no token
+# or secret is needed (the interactive `mcp-publisher login github` cannot publish under an organisation's name).
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # GitHub OIDC sign-in to the registry
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check server.json
+        run: |
+          node -e '
+            const s = require("./server.json");
+            if (!s.name.startsWith("io.github.Triodian/")) throw new Error("The name must be io.github.Triodian/...");
+            if (s.description.length > 100) throw new Error("The description is over 100 characters");
+            console.log(s.name + "@" + s.version + " -> " + s.remotes.map((r) => r.url).join(", "));'
+
+      - name: Install mcp-publisher
+        run: curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+      - name: Sign in to the MCP Registry
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish
+        run: ./mcp-publisher publish
