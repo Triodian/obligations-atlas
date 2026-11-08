@@ -1,6 +1,6 @@
 {
   "dataset": "ai-obligations-atlas",
-  "generatedAt": "2026-11-08T02:56:46.473Z",
+  "generatedAt": "2026-11-08T03:01:42.004Z",
   "interfaceVersion": "1.0.0",
   "metamodelVersion": "2.5.0",
   "metamodelCommit": "4af576d8ab588143c9266be5a28877c7545f2ccd",
@@ -7473,6 +7473,126 @@
     },
     {
       "changeProposalIDs": [
+        "CP-2026-11-08-0016"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-3E9F631C3D",
+      "governedRecordID": "TRG-LEAD-3E9F631C3D@1",
+      "metamodelVersion": "2.5.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000738",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000739",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000740",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000741",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000742"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-08T03:00:25.238Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-SG-SGCA-ITT",
+            "title": "Permits for intangible transfer of controlled technology (Singapore)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-08-0016"
+        ],
+        "description": "Strategic Goods (Control) Act 2002 has not yet been checked against the official text (read so far: regulator publication), so it cannot set a status or date until a reviewer confirms it.",
+        "detectionDate": "2026-11-08",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "Strategic Goods (Control) Act 2002",
+          "jurisdiction": "SG",
+          "sourceRank": 2,
+          "sourceURL": "https://www.customs.gov.sg/businesses/strategic-goods-control/permit-and-registration-requirements/intangible-transfer-of-technology-itt/"
+        },
+        "label": "Lead: Permits for intangible transfer of controlled technology (Singapore)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://www.customs.gov.sg/businesses/strategic-goods-control/permit-and-registration-requirements/intangible-transfer-of-technology-itt/",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-3E9F631C3D"
+      },
+      "verification": {
+        "confidence": {
+          "band": "high",
+          "corroboration": 0.5,
+          "recency": 0.999,
+          "reliability": 0.9,
+          "score": 0.85,
+          "stale": false
+        },
+        "lastVerified": "2026-11-08",
+        "stale": false
+      },
+      "version": 1
+    },
+    {
+      "changeProposalIDs": [
+        "CP-2026-11-08-0018"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-9FD4053FEB",
+      "governedRecordID": "TRG-LEAD-9FD4053FEB@1",
+      "metamodelVersion": "2.5.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000748",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000749",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000750",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000751",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000752"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-08T03:00:25.634Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-SG-CPFTA-AI",
+            "title": "Unfair practices, including AI-generated fake reviews (Singapore)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-08-0018"
+        ],
+        "description": "Consumer Protection (Fair Trading) Act 2003 has not yet been checked against the official text (read so far: regulator publication), so it cannot set a status or date until a reviewer confirms it.",
+        "detectionDate": "2026-11-08",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "Consumer Protection (Fair Trading) Act 2003",
+          "jurisdiction": "SG",
+          "sourceRank": 2,
+          "sourceURL": "https://www.ccs.gov.sg/media-and-events/newsroom/announcements-and-media-releases/action-taken-against-lambency-detailing-for-ai-generated-fake-reviews-on-sgcarmart-com/"
+        },
+        "label": "Lead: Unfair practices, including AI-generated fake reviews (Singapore)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://www.ccs.gov.sg/media-and-events/newsroom/announcements-and-media-releases/action-taken-against-lambency-detailing-for-ai-generated-fake-reviews-on-sgcarmart-com/",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-9FD4053FEB"
+      },
+      "verification": {
+        "confidence": {
+          "band": "high",
+          "corroboration": 0.5,
+          "recency": 0.999,
+          "reliability": 0.9,
+          "score": 0.85,
+          "stale": false
+        },
+        "lastVerified": "2026-11-08",
+        "stale": false
+      },
+      "version": 1
+    },
+    {
+      "changeProposalIDs": [
         "CP-SEED-2026-10-27-0043"
       ],
       "publicationStatus": "unverified",
@@ -7529,6 +7649,186 @@
           "reliability": 0.4
         }
       }
+    },
+    {
+      "changeProposalIDs": [
+        "CP-2026-11-08-0015"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-67C563F8A2",
+      "governedRecordID": "TRG-LEAD-67C563F8A2@1",
+      "metamodelVersion": "2.5.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000733",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000734",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000735",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000736",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000737"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-08T03:00:25.034Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-SG-CSA-CII",
+            "title": "CII owners report cybersecurity incidents within 2 hours (Singapore)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-08-0015"
+        ],
+        "description": "Cybersecurity Act 2018, as amended by the Cybersecurity (Amendment) Act 2024 has not yet been checked against the official text (read so far: regulator publication), so it cannot set a status or date until a reviewer confirms it.",
+        "detectionDate": "2026-11-08",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "Cybersecurity Act 2018, as amended by the Cybersecurity (Amendment) Act 2024",
+          "jurisdiction": "SG",
+          "sourceRank": 2,
+          "sourceURL": "https://www.csa.gov.sg/news-events/press-releases/provisions-in-the-cybersecurity--amendment--act-to-come-into-force-on-31-october-2025/"
+        },
+        "label": "Lead: CII owners report cybersecurity incidents within 2 hours (Singapore)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://www.csa.gov.sg/news-events/press-releases/provisions-in-the-cybersecurity--amendment--act-to-come-into-force-on-31-october-2025/",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-67C563F8A2"
+      },
+      "verification": {
+        "confidence": {
+          "band": "high",
+          "corroboration": 0.5,
+          "recency": 0.999,
+          "reliability": 0.9,
+          "score": 0.85,
+          "stale": false
+        },
+        "lastVerified": "2026-11-08",
+        "stale": false
+      },
+      "version": 1
+    },
+    {
+      "changeProposalIDs": [
+        "CP-2026-11-08-0014"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-840070FB68",
+      "governedRecordID": "TRG-LEAD-840070FB68@1",
+      "metamodelVersion": "2.5.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000728",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000729",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000730",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000731",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000732"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-08T03:00:24.824Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-SG-COA-157",
+            "title": "Directors' duty of honesty and reasonable diligence (Singapore)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-08-0014"
+        ],
+        "description": "Companies Act 1967 has not yet been checked against the official text (read so far: other source), so it cannot set a status or date until a reviewer confirms it. Official source to check: https://sso.agc.gov.sg/Act/CoA1967?ProvIds=pr157-.",
+        "detectionDate": "2026-11-08",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "Companies Act 1967",
+          "jurisdiction": "SG",
+          "sourceRank": 5,
+          "sourceURL": "https://lawplayer.com/sg/act/CoA1967/157"
+        },
+        "label": "Lead: Directors' duty of honesty and reasonable diligence (Singapore)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://lawplayer.com/sg/act/CoA1967/157",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-840070FB68"
+      },
+      "verification": {
+        "confidence": {
+          "band": "low",
+          "corroboration": 0,
+          "recency": 0.999,
+          "reliability": 0.2,
+          "score": 0.4,
+          "stale": false
+        },
+        "lastVerified": "2026-11-08",
+        "stale": false
+      },
+      "version": 1
+    },
+    {
+      "changeProposalIDs": [
+        "CP-2026-11-08-0006"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-D6F91D2900",
+      "governedRecordID": "TRG-LEAD-D6F91D2900@1",
+      "metamodelVersion": "2.5.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000691",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000692",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000693",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000694",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000695"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-08T03:00:23.275Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-AU-PRIVACY-TORT",
+            "title": "Statutory tort for serious invasions of privacy"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-08-0006"
+        ],
+        "description": "Privacy Act 1988 (Cth), Schedule 2 (statutory tort for serious invasions of privacy), inserted by the Privacy and Other Legislation Amendment Act 2024 has not yet been checked against the official text (read so far: regulator publication), so it cannot set a status or date until a reviewer confirms it.",
+        "detectionDate": "2026-11-08",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "Privacy Act 1988 (Cth), Schedule 2 (statutory tort for serious invasions of privacy), inserted by the Privacy and Other Legislation Amendment Act 2024",
+          "jurisdiction": "AU",
+          "sourceRank": 2,
+          "sourceURL": "https://www.oaic.gov.au/privacy/your-privacy-rights/more-privacy-rights/statutory-tort-for-serious-invasions-of-privacy"
+        },
+        "label": "Lead: Statutory tort for serious invasions of privacy",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://www.oaic.gov.au/privacy/your-privacy-rights/more-privacy-rights/statutory-tort-for-serious-invasions-of-privacy",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-D6F91D2900"
+      },
+      "verification": {
+        "confidence": {
+          "band": "high",
+          "corroboration": 0.5,
+          "recency": 0.999,
+          "reliability": 0.9,
+          "score": 0.85,
+          "stale": false
+        },
+        "lastVerified": "2026-11-08",
+        "stale": false
+      },
+      "version": 1
     },
     {
       "publicationStatus": "published",
@@ -26858,10 +27158,715 @@
         "https://consult.industry.gov.au/ai-regulatory-guardrails"
       ],
       "hash": "4dfdda5282a47cd0129a399bd40222e1b36a42856c5e4ce5020be4e5376ef493"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-08)"
+      },
+      "changeProposalID": "CP-2026-11-08-0006",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Privacy Act 1988 (Cth), Schedule 2 (statutory tort for serious invasions of privacy), inserted by the Privacy and Other Legislation Amendment Act 2024 (Regulator publication) (rank 2)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.oaic.gov.au/privacy/your-privacy-rights/more-privacy-rights/statutory-tort-for-serious-invasions-of-privacy"
+      ],
+      "hash": "ab74739f3377cb590f523101a2092300d5c269b27e8223a6e494a728f95df131",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000670"
+      ],
+      "previousHash": "e9c4c41e16e8f6667519650a25d3311e1d18a0c6aa4a45a44dce881253a3af0c",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000691",
+      "recordedAt": "2026-11-08T03:00:23.202Z",
+      "sequence": 691,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-D6F91D2900"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0006",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "df785497086c7fad7cfed7acfeb75b88dace2874a630e934425d8779bf7d84b1",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000691"
+      ],
+      "previousHash": "ab74739f3377cb590f523101a2092300d5c269b27e8223a6e494a728f95df131",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000692",
+      "recordedAt": "2026-11-08T03:00:23.220Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 692,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-D6F91D2900"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0006",
+      "confidenceScore": 0.85,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.85 (high)",
+      "eventType": "scored",
+      "hash": "bc65a92a1872a962ab8c18f322128609f9dc06ac3a6a45c14864dd0a6ecab150",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000692"
+      ],
+      "previousHash": "df785497086c7fad7cfed7acfeb75b88dace2874a630e934425d8779bf7d84b1",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000693",
+      "recordedAt": "2026-11-08T03:00:23.241Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 693,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-D6F91D2900"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0006",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "092fde86d4f45a783f452c4cc5dc4b00f1cd5d066755ec1c6a85ef7cd768bad1",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000693"
+      ],
+      "previousHash": "bc65a92a1872a962ab8c18f322128609f9dc06ac3a6a45c14864dd0a6ecab150",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000694",
+      "recordedAt": "2026-11-08T03:00:23.258Z",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "sequence": 694,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-D6F91D2900"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0006",
+      "confidenceScore": 0.85,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-D6F91D2900@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.oaic.gov.au/privacy/your-privacy-rights/more-privacy-rights/statutory-tort-for-serious-invasions-of-privacy"
+      ],
+      "governedRecordID": "TRG-LEAD-D6F91D2900@1",
+      "hash": "66b1d96d920a0f16be6f2eedcd7b8ef43921940c1797975c79dfe1b201bd6fb9",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000694"
+      ],
+      "previousHash": "092fde86d4f45a783f452c4cc5dc4b00f1cd5d066755ec1c6a85ef7cd768bad1",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000695",
+      "recordedAt": "2026-11-08T03:00:23.279Z",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "sequence": 695,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-D6F91D2900"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-08)"
+      },
+      "changeProposalID": "CP-2026-11-08-0014",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Companies Act 1967 (Other) (rank 5)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://lawplayer.com/sg/act/CoA1967/157"
+      ],
+      "hash": "af77cf977873993945ff595c8ff80f2617e241228040715ef8918d2576d21738",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000670"
+      ],
+      "previousHash": "447f9abfc8530b82c3b84ec7c093603c7dead234623562ffb3bd86bc1c3e61a0",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000728",
+      "recordedAt": "2026-11-08T03:00:24.746Z",
+      "sequence": 728,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-840070FB68"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0014",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "d4fd9142c548740eba4dbd066e2c17010edd04349dfb675660187c5a79ab1df7",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000728"
+      ],
+      "previousHash": "af77cf977873993945ff595c8ff80f2617e241228040715ef8918d2576d21738",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000729",
+      "recordedAt": "2026-11-08T03:00:24.765Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 729,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-840070FB68"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0014",
+      "confidenceScore": 0.4,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.4 (low)",
+      "eventType": "scored",
+      "hash": "4028e5caed504c5e10c6eaf6409e11ba7b6d24d857619ed424af63ec091ad318",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000729"
+      ],
+      "previousHash": "d4fd9142c548740eba4dbd066e2c17010edd04349dfb675660187c5a79ab1df7",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000730",
+      "recordedAt": "2026-11-08T03:00:24.786Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 730,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-840070FB68"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0014",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "241557ce0deac6413e0b0ed32ab528abada5c4c5ea7cbe8b8cac8ed64c7ab1c9",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000730"
+      ],
+      "previousHash": "4028e5caed504c5e10c6eaf6409e11ba7b6d24d857619ed424af63ec091ad318",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000731",
+      "recordedAt": "2026-11-08T03:00:24.805Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 731,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-840070FB68"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0014",
+      "confidenceScore": 0.4,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-840070FB68@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://lawplayer.com/sg/act/CoA1967/157"
+      ],
+      "governedRecordID": "TRG-LEAD-840070FB68@1",
+      "hash": "19194cb6be4d9145bf47a0db9d312c458e5bd8684e14a3b2e1997981e37fdcdc",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000731"
+      ],
+      "previousHash": "241557ce0deac6413e0b0ed32ab528abada5c4c5ea7cbe8b8cac8ed64c7ab1c9",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000732",
+      "recordedAt": "2026-11-08T03:00:24.827Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 732,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-840070FB68"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-08)"
+      },
+      "changeProposalID": "CP-2026-11-08-0015",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Cybersecurity Act 2018, as amended by the Cybersecurity (Amendment) Act 2024 (Regulator publication) (rank 2)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.csa.gov.sg/news-events/press-releases/provisions-in-the-cybersecurity--amendment--act-to-come-into-force-on-31-october-2025/"
+      ],
+      "hash": "de534b78c8fc1ec2991f401a1acf164423f770b54ac98786d25cf90cda2e96d9",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000670"
+      ],
+      "previousHash": "19194cb6be4d9145bf47a0db9d312c458e5bd8684e14a3b2e1997981e37fdcdc",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000733",
+      "recordedAt": "2026-11-08T03:00:24.956Z",
+      "sequence": 733,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-67C563F8A2"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0015",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "d60adc6f0f937cb4d6d9e5094f8de37e62237e4ff4e0415dd8e1e3f505366231",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000733"
+      ],
+      "previousHash": "de534b78c8fc1ec2991f401a1acf164423f770b54ac98786d25cf90cda2e96d9",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000734",
+      "recordedAt": "2026-11-08T03:00:24.977Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 734,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-67C563F8A2"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0015",
+      "confidenceScore": 0.85,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.85 (high)",
+      "eventType": "scored",
+      "hash": "2575ab1fb51bcd81eb7ac0a7f030f92fef453a2d7f201b3f8d371d968f8344a6",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000734"
+      ],
+      "previousHash": "d60adc6f0f937cb4d6d9e5094f8de37e62237e4ff4e0415dd8e1e3f505366231",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000735",
+      "recordedAt": "2026-11-08T03:00:24.999Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 735,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-67C563F8A2"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0015",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "cab2c6fb9af8c9b7293942820fcf05d4ffc9f1e3bc612de2d998d56cd963b11f",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000735"
+      ],
+      "previousHash": "2575ab1fb51bcd81eb7ac0a7f030f92fef453a2d7f201b3f8d371d968f8344a6",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000736",
+      "recordedAt": "2026-11-08T03:00:25.016Z",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "sequence": 736,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-67C563F8A2"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0015",
+      "confidenceScore": 0.85,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-67C563F8A2@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.csa.gov.sg/news-events/press-releases/provisions-in-the-cybersecurity--amendment--act-to-come-into-force-on-31-october-2025/"
+      ],
+      "governedRecordID": "TRG-LEAD-67C563F8A2@1",
+      "hash": "52898abec033e6f55cf4166676ec6a15857917afd0b6a02240ca2741706351eb",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000736"
+      ],
+      "previousHash": "cab2c6fb9af8c9b7293942820fcf05d4ffc9f1e3bc612de2d998d56cd963b11f",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000737",
+      "recordedAt": "2026-11-08T03:00:25.036Z",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "sequence": 737,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-67C563F8A2"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-08)"
+      },
+      "changeProposalID": "CP-2026-11-08-0016",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Strategic Goods (Control) Act 2002 (Regulator publication) (rank 2)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.customs.gov.sg/businesses/strategic-goods-control/permit-and-registration-requirements/intangible-transfer-of-technology-itt/"
+      ],
+      "hash": "7444db5bfac745af3b9db05d51eaf9e845fc13d93b676b8c6d6216071a0747d7",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000670"
+      ],
+      "previousHash": "52898abec033e6f55cf4166676ec6a15857917afd0b6a02240ca2741706351eb",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000738",
+      "recordedAt": "2026-11-08T03:00:25.163Z",
+      "sequence": 738,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3E9F631C3D"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0016",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "9f10b59dbd62f89a9287204366780b541e9381fad060b658db445194007614da",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000738"
+      ],
+      "previousHash": "7444db5bfac745af3b9db05d51eaf9e845fc13d93b676b8c6d6216071a0747d7",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000739",
+      "recordedAt": "2026-11-08T03:00:25.181Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 739,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3E9F631C3D"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0016",
+      "confidenceScore": 0.85,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.85 (high)",
+      "eventType": "scored",
+      "hash": "a0739a45522cb4985097d9ca3119024fb94ea515c370bb0f7b9ab285c2fc4235",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000739"
+      ],
+      "previousHash": "9f10b59dbd62f89a9287204366780b541e9381fad060b658db445194007614da",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000740",
+      "recordedAt": "2026-11-08T03:00:25.199Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 740,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3E9F631C3D"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0016",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "f151e34f593a3fda6cf74c2f226785b7eb46960c8961ec6e8a2bf62cb3423cd0",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000740"
+      ],
+      "previousHash": "a0739a45522cb4985097d9ca3119024fb94ea515c370bb0f7b9ab285c2fc4235",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000741",
+      "recordedAt": "2026-11-08T03:00:25.218Z",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "sequence": 741,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3E9F631C3D"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0016",
+      "confidenceScore": 0.85,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-3E9F631C3D@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.customs.gov.sg/businesses/strategic-goods-control/permit-and-registration-requirements/intangible-transfer-of-technology-itt/"
+      ],
+      "governedRecordID": "TRG-LEAD-3E9F631C3D@1",
+      "hash": "b676347e717d6c2ff83c3b73bc22dd82b3aaab0feb870e66033a6d748505f84e",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000741"
+      ],
+      "previousHash": "f151e34f593a3fda6cf74c2f226785b7eb46960c8961ec6e8a2bf62cb3423cd0",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000742",
+      "recordedAt": "2026-11-08T03:00:25.241Z",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "sequence": 742,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-3E9F631C3D"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-08)"
+      },
+      "changeProposalID": "CP-2026-11-08-0018",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Consumer Protection (Fair Trading) Act 2003 (Regulator publication) (rank 2)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.ccs.gov.sg/media-and-events/newsroom/announcements-and-media-releases/action-taken-against-lambency-detailing-for-ai-generated-fake-reviews-on-sgcarmart-com/"
+      ],
+      "hash": "5264fe38d6068c6ce3197453fa451ae5c1cbb467f15bfec8c1f508c6c2db344a",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000670"
+      ],
+      "previousHash": "401141962b5cb29296ee54e18eb6fe7a674cae7de348ae321f38f6de3f7080ad",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000748",
+      "recordedAt": "2026-11-08T03:00:25.553Z",
+      "sequence": 748,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-9FD4053FEB"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0018",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "5983c524098fd1f5dd85c09cccf7ddc6f391f780206f9219f53b06d0928da864",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000748"
+      ],
+      "previousHash": "5264fe38d6068c6ce3197453fa451ae5c1cbb467f15bfec8c1f508c6c2db344a",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000749",
+      "recordedAt": "2026-11-08T03:00:25.575Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 749,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-9FD4053FEB"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0018",
+      "confidenceScore": 0.85,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.85 (high)",
+      "eventType": "scored",
+      "hash": "d2323ebce6c89477b7c5cb8460cf181eca5c71b778e348db9d6bc513acaa70a4",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000749"
+      ],
+      "previousHash": "5983c524098fd1f5dd85c09cccf7ddc6f391f780206f9219f53b06d0928da864",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000750",
+      "recordedAt": "2026-11-08T03:00:25.595Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 750,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-9FD4053FEB"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0018",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "d15ad56055d98bb9d506af711bf30ae15858716296754734813e5318447d5e3c",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000750"
+      ],
+      "previousHash": "d2323ebce6c89477b7c5cb8460cf181eca5c71b778e348db9d6bc513acaa70a4",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000751",
+      "recordedAt": "2026-11-08T03:00:25.615Z",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "sequence": 751,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-9FD4053FEB"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-08-0018",
+      "confidenceScore": 0.85,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-9FD4053FEB@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.ccs.gov.sg/media-and-events/newsroom/announcements-and-media-releases/action-taken-against-lambency-detailing-for-ai-generated-fake-reviews-on-sgcarmart-com/"
+      ],
+      "governedRecordID": "TRG-LEAD-9FD4053FEB@1",
+      "hash": "359cbf95304169784915df9cef9e2317dd715888894746c3eb1497cbf28ff268",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000751"
+      ],
+      "previousHash": "d15ad56055d98bb9d506af711bf30ae15858716296754734813e5318447d5e3c",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000752",
+      "recordedAt": "2026-11-08T03:00:25.636Z",
+      "ruleIDs": [
+        "precedence.rankCannotSetForTier"
+      ],
+      "sequence": 752,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-9FD4053FEB"
+      }
     }
   ],
   "ledgerHead": {
-    "sequence": 669,
-    "hash": "4dfdda5282a47cd0129a399bd40222e1b36a42856c5e4ce5020be4e5376ef493"
+    "sequence": 808,
+    "hash": "728332e9da3b1317d19bb6aa564b66c81fe16c4abfbd19060452b9acac50180d"
   }
 }
