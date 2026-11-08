@@ -3,7 +3,7 @@
  * filtering and matter briefs run here in the browser, so nothing about a
  * lawyer's matter is sent to the server.
  */
-import { buildMatterBrief, ENTITY_TYPES, ROLES, TIERS, STATUS, JURISDICTIONS, ASSESSMENTS, STANDING_RULE, SOURCE_RANKS, sectorByID, reachedEntityTypes } from '/core/atlas.js';
+import { buildMatterBrief, ENTITY_TYPES, ROLES, TIERS, STATUS, JURISDICTIONS, ASSESSMENTS, STANDING_RULE, SOURCE_RANKS, sectorByID, reachedEntityTypes, PORTFOLIO_FORMAT, draftFromBrief, normalisePortfolio, saveToPortfolio, removeFromPortfolio, exportPortfolio, importPortfolio } from '/core/atlas.js';
 
 const main = document.getElementById('main');
 // When embedded (single-file preview), data comes from window.ATLAS_EMBED and routes are plain #names.
@@ -300,9 +300,28 @@ function briefHTML(b) {
   </div>`;
 }
 
+/* The client portfolio (task 2.5): one brief per client, kept in this browser (localStorage), and moved to another
+   browser as a file. Briefs saved before the portfolio existed (atlas.briefs) are carried into it once. */
+const PF_KEY = 'atlas.portfolio';
+function loadPortfolio() {
+  const stored = store.get(PF_KEY, null);
+  if (stored) return normalisePortfolio(stored);
+  const legacy = store.get('atlas.briefs', []);
+  const pf = normalisePortfolio((Array.isArray(legacy) ? legacy : []).map((b) => ({ draft: draftFromBrief(b), brief: b, savedAt: b && b.generatedAt })));
+  if (pf.length) { store.set(PF_KEY, { format: PORTFOLIO_FORMAT, clients: pf }); store.set('atlas.briefs', []); }
+  return pf;
+}
+const savePortfolio = (pf) => store.set(PF_KEY, { format: PORTFOLIO_FORMAT, clients: pf });
+const pfScope = (d) => [d.jurisdictions.map(jurName).join(', ') || 'All jurisdictions', d.sectors.map((x) => (sectorByID(x) || {}).name || x).join(', '), d.useCaseIDs.length ? `${d.useCaseIDs.length} use case${d.useCaseIDs.length === 1 ? '' : 's'}` : 'any use case'].filter(Boolean).join(' · ');
+function portfolioHTML(pf) {
+  return `<div class="saved-wrap" id="portfolio"><h2 class="sh" style="margin-top:18px">Client portfolio${pf.length ? ` · ${pf.length}` : ''}</h2>
+    <p class="small soft" style="margin:0 0 8px">One brief per client, kept in this browser. Saving under the same label replaces that client’s brief.${EMBED ? '' : ' Export the portfolio to keep a copy or move it to another browser.'}</p>
+    ${pf.length ? `<ul class="saved portfolio">${pf.map((x, i) => `<li><span class="pf-main"><button class="linkish" data-open="${i}">${esc(x.label)}</button><span class="small soft">${esc(pfScope(x.draft))}</span></span><span class="small soft">${esc(fmtDate(x.savedAt))}</span><button class="linkish small" data-del="${i}" aria-label="Delete ${esc(x.label)}">Delete</button></li>`).join('')}</ul>` : '<p class="small soft" style="margin:0">No clients yet. Label the matter, then <em>Save to client portfolio</em>.</p>'}
+    ${EMBED ? '' : `<div class="pf-actions"><button class="btn secondary" id="pfExport" type="button" ${pf.length ? '' : 'disabled'}>Export portfolio</button><label class="btn secondary" for="pfImport" style="cursor:pointer">Import portfolio</label><input type="file" id="pfImport" accept=".json,application/json" class="vh"></div>`}</div>`;
+}
 function renderBrief() {
   setNav('brief');
-  const saved = store.get('atlas.briefs', []);
+  let portfolio = loadPortfolio();
   const dflt = data.defaults || {};
   const dSec = sectorByID(dflt.sector);
   const draft = { sectors: [], ...store.get('atlas.briefDraft', { matterLabel: '', jurisdictions: [dflt.jurisdiction || 'AU'], entityTypes: dSec ? [...dSec.entityTypes] : [], sectors: dSec ? [dSec.regulatedSectorID] : [], useCaseIDs: [], consequence: {} }) };
@@ -340,11 +359,11 @@ function renderBrief() {
           <button class="btn" id="build" type="button">Build brief</button>
           <button class="btn secondary" id="export" type="button">${EMBED ? 'Copy brief as JSON' : 'Export for an assessment app'}</button>
           ${EMBED ? '' : '<button class="btn secondary" id="print" type="button">Print</button>'}
-          <button class="btn secondary" id="save" type="button">Save in this browser</button>
+          <button class="btn secondary" id="save" type="button">Save to client portfolio</button>
         </div>
         <p class="small" style="margin:0 0 6px;color:var(--green)" id="briefstatus" aria-live="polite"></p>
         <p class="small soft" style="margin:0">Built and kept in this browser. Nothing you enter here is sent to Triodian unless you choose to share the scope when you bring in Triodian.</p>
-        ${saved.length ? `<div class="saved-wrap"><h2 class="sh" style="margin-top:18px">Saved in this browser</h2><ul class="saved">${saved.map((x, i) => `<li><button class="linkish" data-open="${i}">${esc(x.matterLabel || 'Untitled matter')}</button><span class="small soft">${esc(fmtDate(x.generatedAt))}</span><button class="linkish small" data-del="${i}" aria-label="Delete ${esc(x.matterLabel || 'untitled matter')}">Delete</button></li>`).join('')}</ul></div>` : ''}
+        ${portfolioHTML(portfolio)}
       </aside>
     </div>
     <div id="out"></div>`;
@@ -425,13 +444,50 @@ function renderBrief() {
   });
   document.getElementById('save').addEventListener('click', () => {
     const b = current();
-    store.set('atlas.briefs', [b, ...saved].slice(0, 30));
+    const r = saveToPortfolio(portfolio, read(), b, new Date().toISOString());
+    if (r.error) { status(r.error); document.getElementById('ml').focus(); return; }
+    savePortfolio(r.portfolio);
     renderBrief();
-    document.getElementById('out').innerHTML = briefHTML(b);
-    document.getElementById('briefstatus').textContent = `Saved “${b.matterLabel || 'Untitled matter'}” in this browser`;
+    show(b);
+    status(`${r.replaced ? 'Updated' : 'Saved'} “${b.matterLabel}” in the client portfolio`);
   });
-  main.querySelectorAll('[data-open]').forEach((b) => b.addEventListener('click', () => { show(saved[Number(b.dataset.open)]); out().scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
-  main.querySelectorAll('[data-del]').forEach((b) => b.addEventListener('click', () => { saved.splice(Number(b.dataset.del), 1); store.set('atlas.briefs', saved); renderBrief(); }));
+  // Opening a client restores its choices in the form and shows its brief, rebuilt from today's records.
+  main.querySelectorAll('[data-open]').forEach((el) => el.addEventListener('click', () => {
+    const x = portfolio[Number(el.dataset.open)]; if (!x) return;
+    store.set('atlas.briefDraft', x.draft);
+    renderBrief();
+    document.getElementById('build').click();
+    status(`Opened “${x.label}”, saved ${fmtDate(x.savedAt)}. The brief is rebuilt from the current records.`);
+  }));
+  // Delete asks for a second click on the same button.
+  main.querySelectorAll('[data-del]').forEach((el) => el.addEventListener('click', () => {
+    const x = portfolio[Number(el.dataset.del)]; if (!x) return;
+    if (el.dataset.armed !== '1') { el.dataset.armed = '1'; el.textContent = 'Delete, sure?'; return; }
+    savePortfolio(removeFromPortfolio(portfolio, x.label));
+    renderBrief();
+    status(`Deleted “${x.label}” from this browser`);
+  }));
+  if (!EMBED) {
+    const ex = document.getElementById('pfExport');
+    if (ex) ex.addEventListener('click', () => {
+      const file = exportPortfolio(portfolio, new Date().toISOString());
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(file, null, 2)], { type: 'application/json' }));
+      a.download = `atlas-portfolio-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      status(`Downloaded ${a.download}: ${portfolio.length} client${portfolio.length === 1 ? '' : 's'}`);
+    });
+    document.getElementById('pfImport').addEventListener('change', async (e) => {
+      const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+      const r = importPortfolio(portfolio, await f.text());
+      if (r.error) { status(r.error); return; }
+      savePortfolio(r.portfolio);
+      renderBrief();
+      const c = r.counts;
+      status(`Imported: ${c.added} added, ${c.updated} updated${c.keptNewer ? `, ${c.keptNewer} already up to date here` : ''}${c.skipped ? `, ${c.skipped} skipped (no label)` : ''}.`);
+    });
+  }
 }
 
 function renderDevelopers() {

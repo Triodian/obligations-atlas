@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { Atlas, buildMatterBrief, engagementRoute, ASSESSMENTS, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES, REGULATED_SECTORS, sectorByID, reachedEntityTypes } from '../src/core/atlas.js';
+import { Atlas, buildMatterBrief, engagementRoute, ASSESSMENTS, PORTFOLIO_FORMAT, draftFromBrief, normalisePortfolio, saveToPortfolio, removeFromPortfolio, exportPortfolio, importPortfolio, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES, REGULATED_SECTORS, sectorByID, reachedEntityTypes } from '../src/core/atlas.js';
 import { createApp } from '../src/api/app.js';
 import { TOOLS } from '../src/mcp/mcp.js';
 import Ajv from 'ajv';
@@ -283,4 +283,41 @@ test('engagement routing (2.4): with no entity type or sector, the use cases dec
   assert.equal(b.engagementsThatFit.find((e) => e.assessmentType === 'aiBoardDirection').mode, undefined);
   assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
   assert.ok(ASSESSMENTS.aiBoardDirection.name === 'AI Board Direction');
+});
+
+test('client portfolio (2.5): one brief per client, matched by label', () => {
+  const d = { matterLabel: 'Acme Insurance', jurisdictions: ['AU'], entityTypes: ['generalInsurer'], sectors: ['AU-INSURANCE'], useCaseIDs: ['UC3'], consequence: { UC3: 'c3' } };
+  const b = buildMatterBrief(atlas.dataset(), d);
+  let r = saveToPortfolio([], d, b, '2026-11-08T01:00:00.000Z');
+  assert.equal(r.portfolio.length, 1); assert.equal(r.replaced, false);
+  r = saveToPortfolio(r.portfolio, { ...d, matterLabel: '  acme   INSURANCE ', useCaseIDs: ['UC3', 'UC7'] }, b, '2026-11-08T02:00:00.000Z');
+  assert.equal(r.portfolio.length, 1, 'the same client, however it is spaced or capitalised');
+  assert.equal(r.replaced, true);
+  assert.deepEqual(r.portfolio[0].draft.useCaseIDs, ['UC3', 'UC7']);
+  assert.match(saveToPortfolio(r.portfolio, { ...d, matterLabel: ' ' }, b, '2026-11-08T03:00:00.000Z').error, /label/);
+  r = saveToPortfolio(r.portfolio, { ...d, matterLabel: 'Beta Super', sectors: ['AU-SUPERANNUATION'] }, b, '2026-11-08T03:00:00.000Z');
+  assert.deepEqual(r.portfolio.map((x) => x.label), ['Beta Super', 'acme INSURANCE'], 'newest first; spaces tidied');
+  assert.deepEqual(removeFromPortfolio(r.portfolio, 'beta super').map((x) => x.label), ['acme INSURANCE']);
+});
+
+test('client portfolio (2.5): export, then import merges by label and keeps the newer copy', () => {
+  const mk = (label, at, ucs = ['UC1']) => ({ draft: { matterLabel: label, jurisdictions: ['AU'], entityTypes: [], sectors: [], useCaseIDs: ucs, consequence: {} }, savedAt: at });
+  const here = normalisePortfolio([mk('Acme', '2026-11-08T05:00:00.000Z'), mk('Beta', '2026-11-01T00:00:00.000Z')]);
+  const file = exportPortfolio([mk('Acme', '2026-11-07T00:00:00.000Z', ['UC9']), mk('Beta', '2026-11-05T00:00:00.000Z', ['UC2']), mk('Gamma', '2026-11-06T00:00:00.000Z'), { draft: { matterLabel: '' } }], '2026-11-08T06:00:00.000Z');
+  assert.equal(file.format, PORTFOLIO_FORMAT);
+  file.clients.push({ draft: { matterLabel: '' }, savedAt: '2026-11-08T00:00:00.000Z' });
+  const r = importPortfolio(here, JSON.stringify(file));
+  assert.deepEqual(r.counts, { added: 1, updated: 1, keptNewer: 1, skipped: 1 });
+  const by = Object.fromEntries(r.portfolio.map((x) => [x.label, x.draft.useCaseIDs.join()]));
+  assert.deepEqual(by, { Acme: 'UC1', Beta: 'UC2', Gamma: 'UC1' });
+  assert.match(importPortfolio(here, 'nope').error, /not valid JSON/);
+  assert.match(importPortfolio(here, JSON.stringify(buildMatterBrief(atlas.dataset(), {}))).error, /single matter brief/);
+  assert.match(importPortfolio(here, '{"format":"other"}').error, /not a portfolio/);
+});
+
+test('client portfolio (2.5): a brief saved before the portfolio reopens with its choices', () => {
+  const d = { matterLabel: 'Old matter', jurisdictions: ['SG'], entityTypes: ['bank'], sectors: ['SG-BANKING'], useCaseIDs: ['UC3', 'UC4'], consequence: { UC4: 'c2' } };
+  const back = draftFromBrief(buildMatterBrief(atlas.dataset(), d));
+  assert.deepEqual(back, { ...d, consequence: { UC4: 'c2' } });
+  assert.equal(normalisePortfolio([{ draft: back, brief: buildMatterBrief(atlas.dataset(), d), savedAt: '2026-10-30T00:00:00.000Z' }])[0].brief.briefFormat, 'triodian.matterBrief/1');
 });

@@ -271,6 +271,12 @@ input.text,textarea.text{width:100%}
 .notice{font:400 14px/1.55 var(--serif);color:var(--ink);background:#fff;border:1px solid var(--rule);border-left:3px solid var(--ink-soft);border-radius:4px;padding:10px 14px;max-width:var(--measure)}
 .saved{list-style:none;padding:0}
 .saved li{display:flex;gap:14px;align-items:baseline;padding:4px 0}
+.portfolio li{border-top:1px solid var(--rule, #ddd);padding:8px 0}
+.pf-main{display:flex;flex-direction:column;align-items:flex-start;gap:2px;flex:1;min-width:0}
+.pf-main .linkish{text-align:left}
+.pf-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin-top:10px}
+.pf-actions .btn{margin:0;display:inline-flex;align-items:center;justify-content:center}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 button.linkish{background:none;border:none;color:var(--aubergine);padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- developer page ---------- */

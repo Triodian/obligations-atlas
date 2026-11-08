@@ -593,4 +593,87 @@ export function buildMatterBrief(data, input) {
   };
 }
 
+/* ---------- client portfolio (development plan task 2.5) ----------
+   One entry per client, kept in the lawyer's browser and moved between browsers as a file. Nothing here is sent
+   to the server. An entry holds the brief's choices (so the form can be restored) and the last brief built from
+   them. Entries are matched by their label, ignoring case and spacing. */
+export const PORTFOLIO_FORMAT = 'triodian.atlasPortfolio/1';
+export const PORTFOLIO_LIMIT = 200;
+const pfKey = (label) => String(label || '').trim().replace(/\s+/g, ' ').toLowerCase();
+const strs = (v, n = 40) => (Array.isArray(v) ? v.filter((x) => typeof x === 'string').slice(0, n) : []);
+
+/** The choices behind a brief, so a brief saved before the portfolio existed can be reopened in the form. */
+export function draftFromBrief(b) {
+  const sc = (b && b.scope) || {};
+  const ucs = Array.isArray(sc.useCases) ? sc.useCases.filter((u) => u && typeof u.useCaseID === 'string') : [];
+  const consequence = {};
+  for (const u of ucs) if (/^C[1-5]$/i.test(u.consequenceLevel || '')) consequence[u.useCaseID] = u.consequenceLevel.toLowerCase();
+  return {
+    matterLabel: typeof (b && b.matterLabel) === 'string' ? b.matterLabel : '',
+    jurisdictions: strs(sc.jurisdictions), entityTypes: strs(sc.entityTypes), useCaseIDs: ucs.map((u) => u.useCaseID),
+    sectors: Array.isArray(sc.sectors) ? sc.sectors.map((x) => (x && typeof x === 'object' ? x.regulatedSectorID : x)).filter((x) => typeof x === 'string') : [],
+    consequence,
+  };
+}
+
+/** A clean entry, or null when it cannot be one. */
+function cleanEntry(e) {
+  if (!e || typeof e !== 'object' || !e.draft || typeof e.draft !== 'object') return null;
+  const d = e.draft;
+  const label = String(d.matterLabel || e.label || '').replace(/\s+/g, ' ').trim().slice(0, 200);
+  if (!label) return null;
+  const consequence = {};
+  for (const [k, v] of Object.entries(d.consequence && typeof d.consequence === 'object' ? d.consequence : {})) if (/^UC\d{1,3}$/.test(k) && /^c[1-5]$/.test(v)) consequence[k] = v;
+  const draft = { matterLabel: label, jurisdictions: strs(d.jurisdictions), entityTypes: strs(d.entityTypes, 60), sectors: strs(d.sectors), useCaseIDs: strs(d.useCaseIDs), consequence };
+  const savedAt = typeof e.savedAt === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(e.savedAt) ? e.savedAt : '1970-01-01T00:00:00.000Z';
+  const brief = e.brief && typeof e.brief === 'object' && e.brief.briefFormat ? e.brief : null;
+  return { label, draft, savedAt, ...(brief ? { brief } : {}) };
+}
+
+/** The portfolio as stored, newest first, one entry per label. Accepts the stored object, a list of entries, or nothing. */
+export function normalisePortfolio(p) {
+  const list = Array.isArray(p) ? p : (p && Array.isArray(p.clients) ? p.clients : []);
+  const byKey = new Map();
+  for (const raw of list) {
+    const e = cleanEntry(raw); if (!e) continue;
+    const k = pfKey(e.label), had = byKey.get(k);
+    if (!had || e.savedAt > had.savedAt) byKey.set(k, e);
+  }
+  return [...byKey.values()].sort((a, b) => (a.savedAt < b.savedAt ? 1 : a.savedAt > b.savedAt ? -1 : 0)).slice(0, PORTFOLIO_LIMIT);
+}
+
+/** Add or replace one client's entry. */
+export function saveToPortfolio(portfolio, draft, brief, savedAt) {
+  const e = cleanEntry({ draft, brief, savedAt });
+  if (!e) return { portfolio: normalisePortfolio(portfolio), error: 'Give the matter a label first: the portfolio keeps one brief per label.' };
+  const rest = normalisePortfolio(portfolio).filter((x) => pfKey(x.label) !== pfKey(e.label));
+  return { portfolio: normalisePortfolio([e, ...rest]), replaced: rest.length < normalisePortfolio(portfolio).length };
+}
+
+export function removeFromPortfolio(portfolio, label) {
+  return normalisePortfolio(portfolio).filter((x) => pfKey(x.label) !== pfKey(label));
+}
+
+/** The file a portfolio is exported as. */
+export function exportPortfolio(portfolio, exportedAt) {
+  return { format: PORTFOLIO_FORMAT, exportedAt, note: 'Matter briefs kept in the AI Obligations Atlas in one browser. Import it into another browser from the Matter brief page.', clients: normalisePortfolio(portfolio) };
+}
+
+/** Read an exported file and merge it into the portfolio: an entry replaces the one with the same label only when it is newer. */
+export function importPortfolio(portfolio, text) {
+  let o = text;
+  if (typeof text === 'string') { try { o = JSON.parse(text); } catch { return { error: 'This file is not a portfolio: it is not valid JSON.' }; } }
+  if (!o || typeof o !== 'object' || o.format !== PORTFOLIO_FORMAT || !Array.isArray(o.clients)) {
+    return { error: o && o.briefFormat ? 'This is a single matter brief, not a portfolio. Load it in the assessment app it was made for.' : `This file is not a portfolio exported from the AI Obligations Atlas (format ${PORTFOLIO_FORMAT}).` };
+  }
+  const mine = normalisePortfolio(portfolio), theirs = normalisePortfolio(o.clients);
+  const counts = { added: 0, updated: 0, keptNewer: 0, skipped: o.clients.length - theirs.length };
+  const byKey = new Map(mine.map((e) => [pfKey(e.label), e]));
+  for (const e of theirs) {
+    const had = byKey.get(pfKey(e.label));
+    if (!had) { byKey.set(pfKey(e.label), e); counts.added++; } else if (e.savedAt > had.savedAt) { byKey.set(pfKey(e.label), e); counts.updated++; } else counts.keptNewer++;
+  }
+  return { portfolio: normalisePortfolio([...byKey.values()]), counts };
+}
+
 export { list as splitList, today };

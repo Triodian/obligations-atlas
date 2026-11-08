@@ -77,6 +77,7 @@ To refresh by hand instead: `FABRIC_PREVIEW_TOKEN=… node scripts/refresh-snaps
 
 **Privacy.**
 - The web app downloads the whole public dataset once and filters it in the browser. The matter brief is built and kept there too, in the format in `schemas/matter-brief.schema.json`. No client facts reach the server unless the lawyer chooses to share a brief's scope with Triodian (see below). The matter label is never sent.
+- The **client portfolio** keeps one brief per client in the browser (`localStorage`), matched by the matter label. Opening a client restores its choices and rebuilds the brief from the current records. **Export portfolio** downloads it as a file (`triodian.atlasPortfolio/1`) and **Import portfolio** merges such a file into another browser, keeping the newer copy of each client. None of this is sent to the server.
 - `public/_headers` sets a Content-Security-Policy, so the page runs only its own scripts and connects only to its own API. An analytics beacon injected by Cloudflare can't load. Turn off Web Analytics for the Atlas hostnames in Cloudflare as well.
 
 **Firm registration and Bring in Triodian.**
