@@ -66,9 +66,18 @@ jobs:
               const w = s.records.filter((r) => r.publicationStatus === "pendingReview").length;
               console.log(`- \`${f}\`: ${s.records.length} records (${s.records.length - w} published, ${w} waiting for review), ledger head #${s.ledgerHead ? s.ledgerHead.sequence : "none"}`);
             }')
-          gh pr create --base main --head "$branch" --title "Refresh snapshots from the Reasoning Fabric" --body "$(printf 'Fetched by the Refresh snapshots workflow. The data check and tests passed on the new files.\n\n%s\n\nMerging redeploys the sites: the test site then shows the current review queue, and the live site falls back to these published records if the Fabric cannot be reached.\n' "$summary")"
+          body="$(printf 'Fetched by the Refresh snapshots workflow. The data check and tests passed on the new files.\n\n%s\n\nMerging redeploys the sites: the test site then shows the current review queue, and the live site falls back to these published records if the Fabric cannot be reached.\n' "$summary")"
           # Pushes made with the workflow token do not start other workflows, so start the required Test check here.
           gh workflow run ci.yml --ref "$branch"
+          # Opening the pull request needs "Allow GitHub Actions to create and approve pull requests" (organisation and
+          # repository settings). Without it, the branch is still pushed and the summary links to open it by hand.
+          if url=$(gh pr create --base main --head "$branch" --title "Refresh snapshots from the Reasoning Fabric" --body "$body" 2>&1); then
+            echo "Opened $url" >> "$GITHUB_STEP_SUMMARY"
+          else
+            link="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/main...$branch?expand=1"
+            echo "::warning::Could not open the pull request ($url). Open it from the link in the run summary."
+            { echo "## New snapshots are on branch \`$branch\`"; echo; echo "[Create the pull request]($link)"; echo; echo "$summary"; } >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Nothing new
         if: steps.fetch.outputs.changed != 'true'
