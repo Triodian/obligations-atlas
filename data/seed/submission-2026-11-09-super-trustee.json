@@ -247,7 +247,7 @@
       "record": {
         "obligationID": "OBL-AU-SPS220",
         "title": "Risk management framework covering AI risk, including AI in outsourced functions",
-        "statement": "SPS 220 provides that an RSE licensee 'must at all times have a risk management framework' (para 5) and that 'The Board of the RSE licensee (the Board) is ultimately responsible for the risk management framework' (para 7). The framework covers, at a minimum, material risks including '(d) operational risk' and '(e) insurance risk' (para 12), and 'must also cover risks that arise from functions that are outsourced' (footnote 2). 'The risk appetite statement must be approved by the Board' (para 19); the framework is subject to a comprehensive review by operationally independent persons at least every three years (para 27); and 'The Board must, on an annual basis, provide APRA with a declaration on risk management' (para 32). The standard does not mention AI; it addresses AI risk in the trustee's own operations and in the functions its administrators, insurers and other providers perform.",
+        "statement": "SPS 220 provides that an RSE licensee 'must at all times have a risk management framework' (para 5) and that 'The Board of the RSE licensee (the Board) is ultimately responsible for the risk management framework' (para 7). The framework covers, at a minimum, material risks including '(d) operational risk' and '(e) insurance risk' (para 12), and 'must also cover risks that arise from functions that are outsourced' (footnote 2). 'The risk appetite statement must be approved by the Board' (para 19); the framework's appropriateness, effectiveness and adequacy are subject to 'a comprehensive review by operationally independent, appropriately trained and competent persons at least every three years' (para 27); and 'The Board must, on an annual basis, provide APRA with a declaration on risk management' (para 32). The standard does not mention AI; it addresses AI risk in the trustee's own operations and in the functions its administrators, insurers and other providers perform.",
         "obligationType": "prudentialStandard",
         "source": {
           "authority": "APRA",
@@ -306,7 +306,7 @@
           "retrievedAt": "2026-11-09T00:00:00Z"
         }
       ],
-      "rationale": "Research note: Quoted from the standard as made (F2019L01578). APRA's page shows it in force and lists no later version, but the CPS 230 commencement on 1 July 2025 may have brought consequential amendments; not confirmed (open question). The para 27 reviewer wording is paraphrased. Sits beside CPS 230, which the Atlas already holds for operational risk and service providers. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+      "rationale": "Research note: Every quote checked against the text of the standard as made (F2019L01578). Footnote 2 refers outsourced functions to SPS 231 Outsourcing, which CPS 230 replaced from 1 July 2025; whether APRA amended SPS 220 at that point is not confirmed (open question), so the record cites the footnote's coverage of outsourced functions and not its cross-reference. Sits beside CPS 230, which the Atlas already holds for operational risk and service providers. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
     },
     {
       "changeProposalID": "CP-2026-11-09-0006",

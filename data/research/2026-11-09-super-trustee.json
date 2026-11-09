@@ -147,7 +147,7 @@
       "authority": "APRA",
       "obligationType": "prudentialStandard",
       "title": "Risk management framework covering AI risk, including AI in outsourced functions",
-      "statement": "SPS 220 provides that an RSE licensee 'must at all times have a risk management framework' (para 5) and that 'The Board of the RSE licensee (the Board) is ultimately responsible for the risk management framework' (para 7). The framework covers, at a minimum, material risks including '(d) operational risk' and '(e) insurance risk' (para 12), and 'must also cover risks that arise from functions that are outsourced' (footnote 2). 'The risk appetite statement must be approved by the Board' (para 19); the framework is subject to a comprehensive review by operationally independent persons at least every three years (para 27); and 'The Board must, on an annual basis, provide APRA with a declaration on risk management' (para 32). The standard does not mention AI; it addresses AI risk in the trustee's own operations and in the functions its administrators, insurers and other providers perform.",
+      "statement": "SPS 220 provides that an RSE licensee 'must at all times have a risk management framework' (para 5) and that 'The Board of the RSE licensee (the Board) is ultimately responsible for the risk management framework' (para 7). The framework covers, at a minimum, material risks including '(d) operational risk' and '(e) insurance risk' (para 12), and 'must also cover risks that arise from functions that are outsourced' (footnote 2). 'The risk appetite statement must be approved by the Board' (para 19); the framework's appropriateness, effectiveness and adequacy are subject to 'a comprehensive review by operationally independent, appropriately trained and competent persons at least every three years' (para 27); and 'The Board must, on an annual basis, provide APRA with a declaration on risk management' (para 32). The standard does not mention AI; it addresses AI risk in the trustee's own operations and in the functions its administrators, insurers and other providers perform.",
       "sourceTier": "binding",
       "status": "inForce",
       "keyDates": [
@@ -180,8 +180,8 @@
         "UC10"
       ],
       "url": "https://www.apra.gov.au/standards/sps-220",
-      "verifiedFrom": "https://legislation.gov.au/F2019L01578/asmade/2019-12-05/text/original/pdf (fetched 2026-11-09); https://www.apra.gov.au/standards/sps-220 (fetched 2026-11-09: determination No. 3 of 2019, commencing 1 January 2020)",
-      "confidenceNote": "Quoted from the standard as made (F2019L01578). APRA's page shows it in force and lists no later version, but the CPS 230 commencement on 1 July 2025 may have brought consequential amendments; not confirmed (open question). The para 27 reviewer wording is paraphrased. Sits beside CPS 230, which the Atlas already holds for operational risk and service providers."
+      "verifiedFrom": "F2019L01578 as made, January 2020 (copy supplied by the user and read 2026-11-09); https://legislation.gov.au/F2019L01578/asmade/2019-12-05/text/original/pdf (fetched 2026-11-09); https://www.apra.gov.au/standards/sps-220 (fetched 2026-11-09: determination No. 3 of 2019, commencing 1 January 2020)",
+      "confidenceNote": "Every quote checked against the text of the standard as made (F2019L01578). Footnote 2 refers outsourced functions to SPS 231 Outsourcing, which CPS 230 replaced from 1 July 2025; whether APRA amended SPS 220 at that point is not confirmed (open question), so the record cites the footnote's coverage of outsourced functions and not its cross-reference. Sits beside CPS 230, which the Atlas already holds for operational risk and service providers."
     },
     {
       "id": "OBL-AU-CORPS-994B-994E",
@@ -277,7 +277,7 @@
         "UC8"
       ],
       "url": "https://asic.gov.au/regulatory-resources/find-a-document/regulatory-guides/rg-271-internal-dispute-resolution",
-      "verifiedFrom": "https://asic.gov.au/regulatory-resources/find-a-document/regulatory-guides/rg-271-internal-dispute-resolution (fetched 2026-11-09); https://download.asic.gov.au/media/qhalgs0w/rep844-published-02-november-2026.pdf (fetched 2026-11-09; REP 844 quotes RG 271.117, .119, .121 and .179)",
+      "verifiedFrom": "https://asic.gov.au/regulatory-resources/find-a-document/regulatory-guides/rg-271-internal-dispute-resolution (fetched 2026-11-09, and a copy of the page supplied by the user: issued 2 September 2021; 'The standards and requirements highlighted in this guide are enforceable'; covers trustees of regulated superannuation funds other than SMSFs); https://download.asic.gov.au/media/qhalgs0w/rep844-published-02-november-2026.pdf (fetched 2026-11-09; REP 844 quotes RG 271.117, .119, .121 and .179)",
       "confidenceNote": "The RG 271 PDF could not be fetched; the paragraph quotes are as ASIC restates them in REP 844 (rank 2), and the reviewer can check them against the guide. Filed as Expected because the source is a regulatory guide; its highlighted paragraphs are enforceable through Instrument 2020/98, so the reviewer may raise the tier to Binding for those paragraphs. Which paragraphs are highlighted was not confirmed."
     },
     {
@@ -476,7 +476,7 @@
   ],
   "openQuestions": [
     "SIS Act s 52A: fetch the trustee directors' covenants (s 52A(2)(b) and (c)) and decide whether they belong in OBL-AU-SIS-52-2 or a record of their own.",
-    "SPS 220: confirm whether APRA amended it when CPS 230 commenced on 1 July 2025 (the Federal Register lists any compilation); the record quotes the 2019 text as made.",
+    "SPS 220: the text as made (checked) refers outsourced functions to SPS 231 in footnote 2; confirm on the Federal Register whether APRA amended SPS 220 when CPS 230 replaced SPS 231 on 1 July 2025.",
     "RG 271: fetch the guide (download.asic.gov.au rg271-published-2-september-2021.pdf) to check the paragraph quotes taken from REP 844, and which paragraphs are highlighted as enforceable.",
     "Design and distribution: fetch ASIC RG 274 on reasonable steps and digital distribution, and ASIC's 2022 review of super trustees' target market determinations (22-236MR), and decide whether either is a record or a lead.",
     "REP 806 (death benefits, 2024) is not recorded separately; REP 831 restates its expectations. Reviewer to decide whether REP 806 is a record.",
