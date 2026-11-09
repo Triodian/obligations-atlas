@@ -1,0 +1,593 @@
+{
+  "submissionID": "SUB-ATLAS-2026-11-09-SUPER-TRUSTEE",
+  "interfaceVersion": "1.0.0",
+  "metamodelVersion": "2.6.0",
+  "mode": "propose",
+  "dataset": "ai-obligations-atlas",
+  "submittedAt": "2026-11-09T00:00:00Z",
+  "submitter": {
+    "actorType": "agent",
+    "actorID": "atlas-update-agent",
+    "displayName": "Atlas update agent (research of 2026-11-09)"
+  },
+  "proposals": [
+    {
+      "changeProposalID": "CP-2026-11-09-0001",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-SIS-52-2",
+        "title": "Trustee covenants: care, skill and diligence, and best financial interests, including over AI"
+      },
+      "record": {
+        "obligationID": "OBL-AU-SIS-52-2",
+        "title": "Trustee covenants: care, skill and diligence, and best financial interests, including over AI",
+        "statement": "Section 52(1) provides that the governing rules of a registrable superannuation entity are 'taken to contain covenants to that effect' where they do not contain the s 52 covenants. Section 52(2)(b) is the covenant 'to exercise, in relation to all matters affecting the entity, the same degree of care, skill and diligence' as a prudent superannuation trustee, and s 52(2)(c) the covenant 'to perform the trustee's duties and exercise the trustee's powers in the best financial interests of the beneficiaries'. The covenants do not mention AI; they address how a trustee decides and acts, including when it adopts AI in member services, administration, advice or investments, and what that AI costs members.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Superannuation Industry (Supervision) Act 1993 (Cth)",
+          "citation": "s 52(1); s 52(2)(b) (care, skill and diligence); s 52(2)(c) (best financial interests)",
+          "url": "https://www.legislation.gov.au/C2004A04633/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "superannuationTrustee"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2004A04633/2026-07-01/2026-07-01/text/original/pdf/1",
+          "title": "Superannuation Industry (Supervision) Act 1993 (Cth) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from the compilation of 1 July 2026. The prudent-trustee comparison in s 52(2)(b) is paraphrased; the quote is the opening words only. Trustee directors have matching covenants in s 52A, not fetched (open question). Whether a particular AI use meets the covenants is for counsel. Mapping to all ten use cases: the covenants reach any AI use. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-09-0002",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-SIS-52-7",
+        "title": "Insurance covenants: insurance strategy and pursuing members' claims, including where AI assesses claims"
+      },
+      "record": {
+        "obligationID": "OBL-AU-SIS-52-7",
+        "title": "Insurance covenants: insurance strategy and pursuing members' claims, including where AI assesses claims",
+        "statement": "Section 52(7) contains the insurance covenants: s 52(7)(a) 'to formulate, review regularly and give effect to an insurance strategy for the benefit of beneficiaries of the entity'; s 52(7)(b) 'to consider the cost to all beneficiaries of offering or acquiring insurance of a particular kind'; and s 52(7)(d) 'to do everything that is reasonable to pursue an insurance claim for the benefit of a beneficiary' where the claim has a reasonable prospect of success. The provision addresses claims triage, assessment and follow-up, including where an insurer, an administrator or the trustee uses AI to sort, assess or decline claims or to decide what evidence to seek.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Superannuation Industry (Supervision) Act 1993 (Cth)",
+          "citation": "s 52(7)(a), (b), (c) and (d) (insurance covenants)",
+          "url": "https://www.legislation.gov.au/C2004A04633/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "superannuationTrustee"
+        ],
+        "roles": [
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC7",
+          "UC8"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2004A04633/2026-07-01/2026-07-01/text/original/pdf/1",
+          "title": "Superannuation Industry (Supervision) Act 1993 (Cth) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from the compilation of 1 July 2026; the reasonable-prospect condition at the end of s 52(7)(d) is paraphrased. Paragraph (c), on offering insurance only where its cost does not inappropriately erode retirement income, is not quoted in full. Mapping to use cases is analytical: claims triage (UC3), recommendations to assessors (UC2), straight-through payment (UC4), and AI inside insurers and administrators (UC7). Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-09-0003",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-SIS-52-8A",
+        "title": "Retirement income covenant: the strategy and the member information it rests on"
+      },
+      "record": {
+        "obligationID": "OBL-AU-SIS-52-8A",
+        "title": "Retirement income covenant: the strategy and the member information it rests on",
+        "statement": "Section 52(8A)(a) is the covenant 'to formulate, review regularly and give effect to a retirement income strategy that meets the requirements in section 52AA', and s 52(8A)(b) 'to take reasonable steps to gather the information necessary to inform the formulation and review of the strategy'. The trustee also records the strategy in writing and publishes a summary on its website; s 52(8B) exempts entities whose only benefits are death or incapacity benefits. The provision addresses how a trustee understands its members' retirement needs, including where it uses AI to segment members, analyse their data or offer guidance in retirement.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Superannuation Industry (Supervision) Act 1993 (Cth)",
+          "citation": "s 52(8A)(a) and (b); s 52AA (retirement income strategy requirements); s 52(8B) (exemption)",
+          "url": "https://www.legislation.gov.au/C2004A04633/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "superannuationTrustee"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC8"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2004A04633/2026-07-01/2026-07-01/text/original/pdf/1",
+          "title": "Superannuation Industry (Supervision) Act 1993 (Cth) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Paragraphs (a) and (b) quoted from the compilation of 1 July 2026; the record-keeping, decision-documenting and website summary paragraphs and s 52(8B) are paraphrased from the 1 January 2024 compilation, read in the same session. The content of s 52AA is not quoted. Whether AI-generated retirement guidance is personal advice is a separate question for counsel under the Corporations Act. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-09-0004",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-SPS515",
+        "title": "Strategic planning and member outcomes, as they reach investment in AI"
+      },
+      "record": {
+        "obligationID": "OBL-AU-SPS515",
+        "title": "Strategic planning and member outcomes, as they reach investment in AI",
+        "statement": "SPS 515 calls for a written business plan and a measured view of performance against the trustee's strategic objectives: 'The strategic objectives must be approved by the Board' (para 8); the trustee 'must create and maintain a written rolling plan, of at least three years' duration' (para 11); performance is measured 'using key performance indicators and triggers determined for this purpose' (para 23); the trustee 'must, on an annual basis, review its performance in achieving its strategic objectives' (para 25); and it is to 'document the methodology applied in undertaking the annual outcomes assessment under section 52(9)' of the SIS Act (para 27). The standard does not mention AI; it addresses how an AI programme, and what it costs and returns to members, enters the business plan, the metrics and the annual review.",
+        "obligationType": "prudentialStandard",
+        "source": {
+          "authority": "APRA",
+          "instrument": "Prudential Standard SPS 515 Strategic Planning and Member Outcomes (Superannuation (prudential standard) determination No. 5 of 2024, F2024L00940)",
+          "citation": "paras 8 (Board approves strategic objectives), 11 (business plan), 23 (performance metrics, key performance indicators and triggers), 25 (annual business performance review), 27 (outcomes assessment methodology, SIS Act s 52(9))",
+          "url": "https://www.apra.gov.au/standards/sps-515",
+          "externalOrgID": "EXT-APRA"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "superannuationTrustee"
+        ],
+        "roles": [
+          "board",
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "effectiveDate": "2025-07-01",
+        "effectiveDates": [
+          {
+            "dateType": "commences",
+            "date": "2025-07-01"
+          },
+          {
+            "dateType": "made",
+            "date": "2024-07-29"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://www.apra.gov.au/standards/sps-515",
+          "title": "Prudential Standard SPS 515 Strategic Planning and Member Outcomes (Superannuation (prudential standard) determination No. 5 of 2024, F2024L00940) (APRA prudential standard)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        },
+        {
+          "url": "https://apra.gov.au/sites/default/files/2024-06/Prudential",
+          "title": "Prudential Standard SPS 515 Strategic Planning and Member Outcomes (Superannuation (prudential standard) determination No. 5 of 2024, F2024L00940) (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from APRA's PDF of the July 2025 version (rank 1); the Federal Register text (F2024L00940) could not be fetched in this session. APRA's page lists no later amendment. Mapping to all ten use cases: the standard reaches any AI investment that enters the business plan. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-09-0005",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-SPS220",
+        "title": "Risk management framework covering AI risk, including AI in outsourced functions"
+      },
+      "record": {
+        "obligationID": "OBL-AU-SPS220",
+        "title": "Risk management framework covering AI risk, including AI in outsourced functions",
+        "statement": "SPS 220 provides that an RSE licensee 'must at all times have a risk management framework' (para 5) and that 'The Board of the RSE licensee (the Board) is ultimately responsible for the risk management framework' (para 7). The framework covers, at a minimum, material risks including '(d) operational risk' and '(e) insurance risk' (para 12), and 'must also cover risks that arise from functions that are outsourced' (footnote 2). 'The risk appetite statement must be approved by the Board' (para 19); the framework's appropriateness, effectiveness and adequacy are subject to 'a comprehensive review by operationally independent, appropriately trained and competent persons at least every three years' (para 27); and 'The Board must, on an annual basis, provide APRA with a declaration on risk management' (para 32). The standard does not mention AI; it addresses AI risk in the trustee's own operations and in the functions its administrators, insurers and other providers perform.",
+        "obligationType": "prudentialStandard",
+        "source": {
+          "authority": "APRA",
+          "instrument": "Prudential Standard SPS 220 Risk Management (Superannuation (prudential standard) determination No. 3 of 2019, F2019L01578)",
+          "citation": "paras 5 (risk management framework), 7 (Board responsibility), 12(d) and (e) (operational and insurance risk), 19 (risk appetite statement), 27 (comprehensive review at least every three years), 32 (annual risk management declaration); footnote 2 (outsourced functions)",
+          "url": "https://www.apra.gov.au/standards/sps-220",
+          "externalOrgID": "EXT-APRA"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "superannuationTrustee"
+        ],
+        "roles": [
+          "board",
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "effectiveDate": "2020-01-01",
+        "effectiveDates": [
+          {
+            "dateType": "commences",
+            "date": "2020-01-01"
+          },
+          {
+            "dateType": "made",
+            "date": "2019-12-04"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://legislation.gov.au/F2019L01578/asmade/2019-12-05/text/original/pdf",
+          "title": "Prudential Standard SPS 220 Risk Management (Superannuation (prudential standard) determination No. 3 of 2019, F2019L01578) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        },
+        {
+          "url": "https://www.apra.gov.au/standards/sps-220",
+          "title": "Prudential Standard SPS 220 Risk Management (Superannuation (prudential standard) determination No. 3 of 2019, F2019L01578) (APRA prudential standard)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Every quote checked against the text of the standard as made (F2019L01578). Footnote 2 refers outsourced functions to SPS 231 Outsourcing, which CPS 230 replaced from 1 July 2025; whether APRA amended SPS 220 at that point is not confirmed (open question), so the record cites the footnote's coverage of outsourced functions and not its cross-reference. Sits beside CPS 230, which the Atlas already holds for operational risk and service providers. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-09-0006",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-CORPS-994B-994E",
+        "title": "Design and distribution obligations, as they reach AI-driven distribution of super products"
+      },
+      "record": {
+        "obligationID": "OBL-AU-CORPS-994B-994E",
+        "title": "Design and distribution obligations, as they reach AI-driven distribution of super products",
+        "statement": "Section 994B(1) provides that 'a person must make a target market determination for a financial product' where a Product Disclosure Statement or disclosure document is called for; s 994B(3)(a) excludes 'a MySuper product', so for a super trustee the provision reaches choice products. A determination is to 'specify any conditions and restrictions on retail product distribution conduct' (s 994B(5)(c)) and 'specify events and circumstances (review triggers)' (s 994B(5)(d)). Under s 994E(1) the issuer 'must take reasonable steps that will, or are reasonably likely to, result in retail product distribution conduct' consistent with the determination, and s 994F calls for records and for distributors to 'report in writing to the person who made the target market determination' (s 994F(4)). The provisions do not mention AI; they address distribution through digital channels, including where AI selects, targets or recommends products to members or prospective members.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Corporations Act 2001 (Cth), Part 7.8A (design and distribution obligations)",
+          "citation": "s 994B(1), (3)(a), (5)(c) and (d) (target market determinations); s 994C (review); s 994E(1) (reasonable steps); s 994F(1) and (4) (records and distributor reporting)",
+          "url": "https://www.legislation.gov.au/C2004A00818/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "superannuationTrustee",
+          "lifeInsurer",
+          "generalInsurer",
+          "financialServicesLicensee"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC8"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2004A00818/2026-08-27/2026-08-27/text/original/epub/OEBPS/document_4/document_4.html",
+          "title": "Corporations Act 2001 (Cth), Part 7.8A (design and distribution obligations) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from Volume 4 of the compilation of 27 August 2026. Exceptions in s 994B(3)(d)-(f) and the content of s 994B(5)(a), (b) and (e)-(g) not recorded. ASIC's guidance in RG 274 was not fetched. Whether AI-driven targeting is retail product distribution conduct, and what reasonable steps are, are for counsel. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-09-0007",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-SIS-101",
+        "title": "Dispute resolution systems: internal dispute resolution and AFCA, including complaints about AI"
+      },
+      "record": {
+        "obligationID": "OBL-AU-SIS-101",
+        "title": "Dispute resolution systems: internal dispute resolution and AFCA, including complaints about AI",
+        "statement": "Section 101(1) provides that each trustee of a regulated superannuation fund other than a self managed superannuation fund, and of an approved deposit fund, 'must be a member of the AFCA scheme' (s 101(1)(a)) and 'must have an internal dispute resolution procedure that complies with the standards, and requirements,' that apply under the Corporations Act (s 101(1)(b)). The provision addresses complaints about any member service, including those delivered or decided by AI, such as chat assistants, automated claims decisions and automated correspondence.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Parliament of Australia",
+          "instrument": "Superannuation Industry (Supervision) Act 1993 (Cth)",
+          "citation": "s 101(1)(a) (AFCA membership) and (b) (internal dispute resolution procedure)",
+          "url": "https://www.legislation.gov.au/C2004A04633/latest/text",
+          "externalOrgID": "EXT-PARL-AU"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "superannuationTrustee"
+        ],
+        "roles": [
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC3",
+          "UC4",
+          "UC8"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://www.legislation.gov.au/C2004A04633/2026-07-01/2026-07-01/text/original/pdf/1",
+          "title": "Superannuation Industry (Supervision) Act 1993 (Cth) (Official legislation register)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from the compilation of 1 July 2026; the reference to the Corporations Act standards at the end of s 101(1)(b) is paraphrased. The standards are ASIC's, in RG 271 (see OBL-AU-ASIC-RG271). Mapping to use cases is analytical. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-09-0008",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-ASIC-RG271",
+        "title": "Internal dispute resolution: identifying systemic issues, including those caused by AI"
+      },
+      "record": {
+        "obligationID": "OBL-AU-ASIC-RG271",
+        "title": "Internal dispute resolution: identifying systemic issues, including those caused by AI",
+        "statement": "RG 271 sets the IDR standards for superannuation trustees (other than SMSFs) and other financial firms; ASIC states that 'The standards and requirements highlighted in this guide are enforceable.' RG 271.117 provides that 'A systemic issue is a matter that affects, or has the potential to affect, more than one consumer'; under RG 271.119 reporting to boards and senior executives covers 'metrics and analysis of complaints data'; RG 271.120 calls for regular analysis of complaints data and prompt escalation of possible systemic issues; RG 271.121 for prompt action 'to identify affected consumers and provide fair remediation'; and RG 271.179 for firms to 'record all complaints that they receive and have an effective system for recording information'. The guide addresses complaints as the early signal that an AI system serving members, or one inside an administrator or insurer, is producing poor outcomes.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "ASIC",
+          "instrument": "ASIC Regulatory Guide 271 Internal dispute resolution (issued 2 September 2021), with ASIC Corporations, Credit and Superannuation (Internal Dispute Resolution) Instrument 2020/98",
+          "citation": "RG 271.27 (definition of complaint); RG 271.117 (systemic issue); RG 271.119 (board and executive reporting); RG 271.120(b) and (c) (analysis and escalation); RG 271.121 (remediation); RG 271.179 (recording complaints)",
+          "url": "https://asic.gov.au/regulatory-resources/find-a-document/regulatory-guides/rg-271-internal-dispute-resolution",
+          "externalOrgID": "EXT-ASIC"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "superannuationTrustee",
+          "financialServicesLicensee",
+          "creditLicensee",
+          "lifeInsurer",
+          "generalInsurer"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board",
+          "seniorManagement"
+        ],
+        "useCaseIDs": [
+          "UC3",
+          "UC4",
+          "UC7",
+          "UC8"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2021-09-02"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://asic.gov.au/regulatory-resources/find-a-document/regulatory-guides/rg-271-internal-dispute-resolution",
+          "title": "ASIC Regulatory Guide 271 Internal dispute resolution (issued 2 September 2021), with ASIC Corporations, Credit and Superannuation (Internal Dispute Resolution) Instrument 2020/98 (Regulator publicati",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        },
+        {
+          "url": "https://download.asic.gov.au/media/qhalgs0w/rep844-published-02-november-2026.pdf",
+          "title": "ASIC Regulatory Guide 271 Internal dispute resolution (issued 2 September 2021), with ASIC Corporations, Credit and Superannuation (Internal Dispute Resolution) Instrument 2020/98 (Regulator publicati",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The RG 271 PDF could not be fetched; the paragraph quotes are as ASIC restates them in REP 844 (rank 2), and the reviewer can check them against the guide. Filed as Expected because the source is a regulatory guide; its highlighted paragraphs are enforceable through Instrument 2020/98, so the reviewer may raise the tier to Binding for those paragraphs. Which paragraphs are highlighted was not confirmed. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-09-0009",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-ASIC-REP844",
+        "title": "ASIC: escalate complaint insights on how AI used for member services is performing"
+      },
+      "record": {
+        "obligationID": "OBL-AU-ASIC-REP844",
+        "title": "ASIC: escalate complaint insights on how AI used for member services is performing",
+        "statement": "Published 2 November 2026, REP 844 reviews how 45 trustees learn from complaints. Among its key actions, ASIC states: 'Where artificial intelligence (AI) is used for member services, build clear pathways for detecting and rapidly escalating insights from complaints to relevant business owners on how AI is performing.' The report notes that six reviewed trustees used AI in complaints handling, with 'Common uses included generating call summaries or transcripts, supporting quality assurance', and that trustees 'need to actively monitor issues raised in complaints' to find where AI may be causing problems. ASIC also expects trustees to 'Set performance metrics for identifying possible systemic issues from complaints' and to apply definitions consistently 'by both the trustee and its service providers'. The report addresses complaints as monitoring evidence for AI in member services.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "ASIC",
+          "instrument": "ASIC Report 844 Lessons to be learned: How trustees use insights from superannuation complaints",
+          "citation": "Table 1 (key actions), item 13 (AI used for member services); 'Use of advanced technology' (pp 46-47)",
+          "url": "https://download.asic.gov.au/media/qhalgs0w/rep844-published-02-november-2026.pdf",
+          "externalOrgID": "EXT-ASIC"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "superannuationTrustee"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board",
+          "seniorManagement"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC3",
+          "UC7",
+          "UC8"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2026-11-02"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://download.asic.gov.au/media/qhalgs0w/rep844-published-02-november-2026.pdf",
+          "title": "ASIC Report 844 Lessons to be learned: How trustees use insights from superannuation complaints (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        },
+        {
+          "url": "https://asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-265mr-asic-calls-out-super-trustees-for-blind-spots-in-overseeing-member-complaints",
+          "title": "ASIC Report 844 Lessons to be learned: How trustees use insights from superannuation complaints (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Item 13 is quoted in two consecutive pieces read from the PDF; the reviewer can confirm it reads as one sentence. A report binds no one; filed as Expected because it states ASIC's expectations of trustees under RG 271. AI is named in the report, so this is one of the few super-specific sources that mentions AI directly. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-09-0010",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-ASIC-REP831",
+        "title": "ASIC: death benefit claims handling, data and oversight of insurers and administrators"
+      },
+      "record": {
+        "obligationID": "OBL-AU-ASIC-REP831",
+        "title": "ASIC: death benefit claims handling, data and oversight of insurers and administrators",
+        "statement": "REP 831 follows up REP 806 on death benefit claims. ASIC states that 'Trustees should take appropriate action now and regularly review practices, complaints data and claims handling times' and 'should treat their members and claimants as customers' (p 6); that 'trustees should continue to prioritise improvements to their data governance' (p 11); that 'It is essential that trustees use complaints as an early warning system to detect systemic issues' (p 15); that 'All trustees should ensure robust reporting to their boards about death benefit claims handling' (p 19); and that 'Trustees are ultimately responsible and accountable to their members and beneficiaries for the services delivered' by service providers (p 21). The report does not mention AI; it addresses claims handling whether done by people or by AI in the trustee, its administrator or its insurer.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "ASIC",
+          "instrument": "ASIC Report 831 Delivering on death benefits: Have super trustees stepped up?",
+          "citation": "pp 4-6 (expectations), p 11 (data governance), p 15 (complaints as early warning), pp 19-21 (board reporting; service providers)",
+          "url": "https://download.asic.gov.au/media/xm5beip0/rep831-published-10-june-2026.pdf",
+          "externalOrgID": "EXT-ASIC"
+        },
+        "jurisdiction": "AU",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "superannuationTrustee"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC7"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2026-06-10"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-09"
+      },
+      "evidence": [
+        {
+          "url": "https://download.asic.gov.au/media/xm5beip0/rep831-published-10-june-2026.pdf",
+          "title": "ASIC Report 831 Delivering on death benefits: Have super trustees stepped up? (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-09T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The PDF gives the month (June 2026); 10 June is from the file name and media release 26-116MR, not fetched. The report cites the SIS Act and Corporations Act without pinpoints. Filed as Expected: a report sets out ASIC's expectations, not law. Mapping to AI use cases is analytical. Research brief: data/research/BRIEF-2026-11-super-trustee.md"
+    }
+  ]
+}
