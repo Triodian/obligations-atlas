@@ -1,0 +1,122 @@
+[
+  {
+    "obligationID": "OBL-AU-APRA-AI-01",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-APRA-AI-02",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-APRA-AI-03",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-APRA-AI-04",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-APRA-AI-05",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-APRA-AI-06",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-APRA-AI-07",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-APRA-AI-08",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-APRA-AI-09",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-ASIC-26-092",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-CPS230-20",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-CPS230-33",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-CPS230-35",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-CPS230-47",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-CPS230-54",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-CPS234-13",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-CPS234-16",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-CPS234-27",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-FAR-20",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  },
+  {
+    "obligationID": "OBL-AU-FAR-21",
+    "kind": "confirmed",
+    "note": "Confirmed 9 November 2026: published in the snapshot (data/snapshot/ai-obligations-atlas.json) and tagged for superannuationTrustee, so a matter brief for a super trustee lists it.",
+    "verifiedFrom": "data/snapshot/ai-obligations-atlas.json"
+  }
+]
