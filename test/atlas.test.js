@@ -326,3 +326,34 @@ test('client portfolio (2.5): a brief saved before the portfolio reopens with it
   assert.deepEqual(back, { ...d, consequence: { UC4: 'c2' } });
   assert.equal(normalisePortfolio([{ draft: back, brief: buildMatterBrief(atlas.dataset(), d), savedAt: '2026-10-30T00:00:00.000Z' }])[0].brief.briefFormat, 'triodian.matterBrief/1');
 });
+
+// Task 2.3b: the super trustee sources. Each proposal in the submission is checked against the obligation schema, and,
+// treated as approved beside the published snapshot, a matter brief for a superannuation trustee lists them with the
+// 20 records already published for super trustees.
+test('super trustee sources: valid proposals, and once approved a super trustee brief lists them', () => {
+  const sub = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-09-super-trustee.json', 'utf8'));
+  const OBLIGATION = JSON.parse(fs.readFileSync('vendor/triodian-metamodel/schemas/semantic-library/obligation.schema.json', 'utf8'));
+  const v = new Ajv({ strict: false, allErrors: true }); addFormats(v);
+  v.addSchema(JSON.parse(fs.readFileSync('vendor/triodian-metamodel/schemas/common.schema.json', 'utf8')));
+  const valid = v.compile(OBLIGATION);
+  const obs = sub.proposals.filter((p) => p.target.domainType === 'obligation');
+  assert.equal(obs.length, 10);
+  for (const p of obs) assert.ok(valid(p.record), `${p.target.entityID}: ${JSON.stringify(valid.errors)}`);
+  for (const p of obs) assert.ok(p.evidence.length && p.evidence.every((e) => /^https:\/\//.test(e.url)), `${p.target.entityID} carries its evidence`);
+  // outside the quoted source text: a quote opens after a space or bracket and closes before one, so apostrophes stay
+  const words = obs.map((p) => p.record.statement.replace(/(^|[\s(])'[\s\S]*?'(?=[\s).,;:]|$)/g, '$1')).join(' ');
+  assert.ok(!/\b(must|required to)\b/i.test(words), 'statements say what sources provide, not what a trustee must do');
+
+  const before = published.records.filter((r) => r.domainType === 'obligation' && r.record.entityTypes.includes('superannuationTrustee')).map((r) => r.entityID);
+  assert.equal(before.length, 20, 'the 20 super trustee records are in the published snapshot');
+  const approved = obs.map((p) => ({ publicationStatus: 'published', publishedAt: '2026-11-10T00:00:00.000Z', domainType: 'obligation', entityID: p.target.entityID, governedRecordID: `${p.target.entityID}@1`, version: 1, record: p.record, provenanceRecordIDs: [], changeProposalIDs: [p.changeProposalID], dataset: 'ai-obligations-atlas' }));
+  const after = new Atlas({ ...published, records: [...published.records, ...approved] }, { preview: false });
+  const b = buildMatterBrief(after.dataset(), { matterLabel: 'Super trustee', sectors: ['AU-SUPERANNUATION'] });
+  const listed = new Set(Object.values(b.obligationsByTier).flat().map((o) => o.obligationID));
+  for (const id of [...before, ...obs.map((p) => p.target.entityID)]) assert.ok(listed.has(id), `${id} is in the brief`);
+  assert.ok(b.obligationsByTier.binding.some((o) => o.obligationID === 'OBL-AU-SPS220') && b.obligationsByTier.expected.some((o) => o.obligationID === 'OBL-AU-ASIC-REP844'));
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
+  const claims = buildMatterBrief(after.dataset(), { sectors: ['AU-SUPERANNUATION'], useCaseIDs: ['UC3'] });
+  assert.ok(claims.obligationsByTier.binding.some((o) => o.obligationID === 'OBL-AU-SIS-52-7'), 'claims triage (UC3) brings in the insurance covenant');
+  assert.ok(!Object.values(claims.obligationsByTier).flat().some((o) => o.obligationID === 'OBL-AU-SIS-52-8A'), 'and not the retirement income covenant');
+});
