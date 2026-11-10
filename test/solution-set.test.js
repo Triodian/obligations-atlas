@@ -100,7 +100,11 @@ test('the REST API serves the table and the solution set, and refuses unknown id
   const app = createApp({ snapshot, requireKey: true });
   let r = await app.request('http://atlas.test/api/v1/solution-set/table');
   assert.equal(r.status, 200, 'open without a key, for the front door');
-  assert.equal((await r.json()).format, 'triodian.routingTable/1');
+  const table = await r.json();
+  assert.equal(table.format, 'triodian.routingTable/1');
+  assert.ok(table.jurisdictions.some((j) => j.code === 'AU' && j.covered) && table.jurisdictions.some((j) => j.code === 'NZ' && !j.covered));
+  assert.ok(table.sectors.some((d) => d.regulatedSectorID === 'AU-SUPERANNUATION' && d.financiallyRegulated));
+  assert.ok(table.generalEntityTypes.some((e) => e.id === 'privateCompany'));
   r = await app.request('http://atlas.test/api/v1/solution-set?role=fractionalGC&sector=AU-SUPERANNUATION&jurisdiction=au&prompt=apraLetter');
   const s = await r.json();
   assert.equal(r.status, 200);

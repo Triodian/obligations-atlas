@@ -3,7 +3,7 @@
  * Runs on Cloudflare Workers (src/worker.js) and Node (src/node.js).
  */
 import { Hono } from 'hono';
-import { Atlas, STANDING_RULE, sha256Hex, ENTITY_TYPES, JURISDICTIONS } from '../core/atlas.js';
+import { Atlas, STANDING_RULE, sha256Hex, ENTITY_TYPES, JURISDICTIONS, REGULATED_SECTORS, GENERAL_ENTITY_TYPES } from '../core/atlas.js';
 import { handleRpc } from '../mcp/mcp.js';
 import { openapi } from './openapi.js';
 import { ROUTING_TABLE, solutionSet } from '../core/solution-set.js';
@@ -136,7 +136,15 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
   app.get('/api/v1/use-cases', (c) => send(c, { items: atlas.useCases() }));
   // The solution set (task 5.3): the routing table the front door asks its questions from, and the engagements that
   // fit one person and organisation. The matter brief routes from the same table.
-  app.get('/api/v1/solution-set/table', (c) => { c.header('cache-control', 'public, max-age=300'); return send(c, ROUTING_TABLE); });
+  app.get('/api/v1/solution-set/table', (c) => {
+    c.header('cache-control', 'public, max-age=300');
+    // With the choices the front door offers for organisation type: jurisdictions, regulated sectors and the general types.
+    return send(c, { ...ROUTING_TABLE,
+      jurisdictions: Object.entries(JURISDICTIONS).filter(([k]) => k !== 'INT').map(([code, j]) => ({ code, name: j.name, covered: j.depth === 'full' })),
+      sectors: REGULATED_SECTORS.map((d) => ({ regulatedSectorID: d.regulatedSectorID, jurisdiction: d.jurisdiction, name: d.name, financiallyRegulated: !!d.financiallyRegulated, entityTypes: d.entityTypes })),
+      generalEntityTypes: GENERAL_ENTITY_TYPES.map((id) => ({ id, name: ENTITY_TYPES[id] })),
+      entityTypeNames: ENTITY_TYPES });
+  });
   app.get('/api/v1/solution-set', (c) => {
     const q = c.req.query(), list = (k) => (q[k] || '').split(',').map((x) => x.trim()).filter(Boolean);
     const unknown = list('entityType').filter((e) => !(e in ENTITY_TYPES));
