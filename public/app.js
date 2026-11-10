@@ -4,6 +4,7 @@
  * lawyer's matter is sent to the server.
  */
 import { buildMatterBrief, ENTITY_TYPES, ROLES, TIERS, STATUS, JURISDICTIONS, ASSESSMENTS, STANDING_RULE, SOURCE_RANKS, sectorByID, reachedEntityTypes, PORTFOLIO_FORMAT, draftFromBrief, normalisePortfolio, saveToPortfolio, removeFromPortfolio, exportPortfolio, importPortfolio } from '/core/atlas.js';
+import { scopeFromLink } from '/core/solution-set.js';
 
 const main = document.getElementById('main');
 // When embedded (single-file preview), data comes from window.ATLAS_EMBED and routes are plain #names.
@@ -319,12 +320,15 @@ function portfolioHTML(pf) {
     ${pf.length ? `<ul class="saved portfolio">${pf.map((x, i) => `<li><span class="pf-main"><button class="linkish" data-open="${i}">${esc(x.label)}</button><span class="small soft">${esc(pfScope(x.draft))}</span></span><span class="small soft">${esc(fmtDate(x.savedAt))}</span><button class="linkish small" data-del="${i}" aria-label="Delete ${esc(x.label)}">Delete</button></li>`).join('')}</ul>` : '<p class="small soft" style="margin:0">No clients yet. Label the matter, then <em>Save to client portfolio</em>.</p>'}
     ${EMBED ? '' : `<div class="pf-actions"><button class="btn secondary" id="pfExport" type="button" ${pf.length ? '' : 'disabled'}>Export portfolio</button><label class="btn secondary" for="pfImport" style="cursor:pointer">Import portfolio</label><input type="file" id="pfImport" accept=".json,application/json" class="vh"></div>`}</div>`;
 }
-function renderBrief() {
+function renderBrief(arg) {
   setNav('brief');
   let portfolio = loadPortfolio();
   const dflt = data.defaults || {};
   const dSec = sectorByID(dflt.sector);
+  // A link from the front door's solution set (task 5.3) carries a scope: #/brief/j=AU&e=...&s=...&u=...
+  const linked = arg && arg.includes('=') ? scopeFromLink(arg) : null;
   const draft = { sectors: [], ...store.get('atlas.briefDraft', { matterLabel: '', jurisdictions: [dflt.jurisdiction || 'AU'], entityTypes: dSec ? [...dSec.entityTypes] : [], sectors: dSec ? [dSec.regulatedSectorID] : [], useCaseIDs: [], consequence: {} }) };
+  if (linked) Object.assign(draft, { matterLabel: '', consequence: {}, ...Object.fromEntries(Object.entries(linked).filter(([k, v]) => v.length || k !== 'jurisdictions')) });
   const jurs = data.jurisdictions.filter((j) => j.available && j.code !== 'INT');
   const cOpts = [['', 'Not set'], ['c1', 'C1'], ['c2', 'C2'], ['c3', 'C3'], ['c4', 'C4'], ['c5', 'C5']];
   main.innerHTML = `<div class="opening screen-only"><div class="eyebrow">Build a brief for a client matter</div><h1>Matter brief</h1>
@@ -767,7 +771,7 @@ function route() {
   if (page === 'obligation') renderObligation(arg);
   else if (page === 'use-cases') renderUseCases();
   else if (page === 'changes') renderChanges();
-  else if (page === 'brief') renderBrief();
+  else if (page === 'brief') renderBrief(arg);
   else if (page === 'developers') renderDevelopers();
   else if (page === 'firm') renderFirm();
   else if (page === 'policy') renderPolicy();

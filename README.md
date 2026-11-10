@@ -72,7 +72,7 @@ To refresh by hand instead: `FABRIC_PREVIEW_TOKEN=… node scripts/refresh-snaps
 | Channel | Calls |
 | --- | --- |
 | Web app | Register (query by tier, jurisdiction, entity, use case), record pages with provenance, use cases, changes, matter brief, API and MCP page |
-| REST API | `/api/v1/obligations`, `/obligations/{id}`, `/instruments`, `/changes?since=`, `/provenance/{ref}`, `/use-cases`, `/jurisdictions`, `/organizations`, `/policy`, `/openapi.json` |
+| REST API | `/api/v1/obligations`, `/obligations/{id}`, `/instruments`, `/changes?since=`, `/provenance/{ref}`, `/use-cases`, `/jurisdictions`, `/organizations`, `/policy`, `/solution-set`, `/solution-set/table`, `/openapi.json` |
 | MCP (Streamable HTTP at `/mcp`) | `find_obligations`, `get_obligation`, `list_changes`, `explain_provenance` |
 
 **Free entry point (keyless tier).** No key is needed for the REST API or the MCP server: each caller may make `ATLAS_KEYLESS_PER_MINUTE` requests a minute (60 by default) and reads the published records for Australia, Singapore and the international standards. Over the limit, the answer says when to retry and how a registered firm gets its own key and a higher limit. `server.json` lists the MCP server in the official MCP Registry (publish it with **Actions → Publish to MCP Registry**); [docs/mcp-directories.md](docs/mcp-directories.md) is the listing checklist.
@@ -87,6 +87,8 @@ To refresh by hand instead: `FABRIC_PREVIEW_TOKEN=… node scripts/refresh-snaps
 - After approval, the browser collects the firm's API key once. From any matter brief, the lawyer can then bring in Triodian, with a note and, if they tick the box, the brief's scope.
 - Keys issued this way are read from the Fabric with the snapshot and accepted by the REST API and MCP server.
 - The Worker uses `FABRIC_READ_TOKEN`, which needs the `firms.submit` scope. `/healthz` reports how many firm keys are loaded.
+
+**Solution set and the routing table.** `src/core/solution-set.js` holds one routing table: who the person is, what prompted them, the organisation's size, the two routes (financially regulated, or not) and what each engagement needs (people, documents, sessions). `/api/v1/solution-set?role=&entityType=&sector=&jurisdiction=&size=&prompt=` answers with the engagements in the order the work is done, why each fits, the person's usual role in each, and a link that opens the matter brief with the same scope (`#/brief/j=…&e=…&s=…&u=…`). The matter brief routes from the same table, so the two always agree; `test/solution-set.test.js` checks every combination of role, entity type and jurisdiction, with each prompt. The front door (Triodian Start, development plan phase 5) asks its questions from `/api/v1/solution-set/table`. Both are open without a key.
 
 **Use cases and "any AI use".** A record mapped to every standardised use case (UC1–UC10) applies to any AI use, such as board accountability or risk management, rather than to particular uses. When a lawyer filters by use case, records specific to it come first and records that apply to any AI use follow. They appear in a folded group in the register and a separate list in the brief. The API marks them `appliesToAnyAIUse`; `includeAnyUse=false` leaves them out.
 

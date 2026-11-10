@@ -3,9 +3,10 @@
  * Runs on Cloudflare Workers (src/worker.js) and Node (src/node.js).
  */
 import { Hono } from 'hono';
-import { Atlas, STANDING_RULE, sha256Hex } from '../core/atlas.js';
+import { Atlas, STANDING_RULE, sha256Hex, ENTITY_TYPES, JURISDICTIONS, REGULATED_SECTORS, GENERAL_ENTITY_TYPES } from '../core/atlas.js';
 import { handleRpc } from '../mcp/mcp.js';
 import { openapi } from './openapi.js';
+import { ROUTING_TABLE, solutionSet } from '../core/solution-set.js';
 
 const VERSION = '0.1.0';
 
@@ -82,7 +83,7 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
     if (c.req.method === 'OPTIONS') return c.body(null, 204);
     const who = await caller(c);
     if (who.invalid) return problem(c, 401, 'auth.invalidKey', 'The API key is not recognised');
-    const openPath = c.req.path === '/api/v1/dataset' || c.req.path === '/api/v1' || c.req.path === '/api/v1/openapi.json' || c.req.path.startsWith('/api/v1/firms/');
+    const openPath = c.req.path === '/api/v1/dataset' || c.req.path === '/api/v1' || c.req.path === '/api/v1/openapi.json' || c.req.path.startsWith('/api/v1/firms/') || c.req.path.startsWith('/api/v1/solution-set');
     if (requireKey && !who.firm && !openPath) return problem(c, 401, 'auth.keyRequired', 'Register a firm account and send its API key in the x-api-key header');
     const r = limit(who.id, who.perMinute);
     c.header('x-ratelimit-remaining', String(r.remaining));
@@ -133,6 +134,27 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
     return p ? send(c, p) : problem(c, 404, 'reference.notFound', `No record or provenance entry ${c.req.param('ref')}`);
   });
   app.get('/api/v1/use-cases', (c) => send(c, { items: atlas.useCases() }));
+  // The solution set (task 5.3): the routing table the front door asks its questions from, and the engagements that
+  // fit one person and organisation. The matter brief routes from the same table.
+  app.get('/api/v1/solution-set/table', (c) => {
+    c.header('cache-control', 'public, max-age=300');
+    // With the choices the front door offers for organisation type: jurisdictions, regulated sectors and the general types.
+    return send(c, { ...ROUTING_TABLE,
+      jurisdictions: Object.entries(JURISDICTIONS).filter(([k]) => k !== 'INT').map(([code, j]) => ({ code, name: j.name, covered: j.depth === 'full' })),
+      sectors: REGULATED_SECTORS.map((d) => ({ regulatedSectorID: d.regulatedSectorID, jurisdiction: d.jurisdiction, name: d.name, financiallyRegulated: !!d.financiallyRegulated, entityTypes: d.entityTypes })),
+      generalEntityTypes: GENERAL_ENTITY_TYPES.map((id) => ({ id, name: ENTITY_TYPES[id] })),
+      entityTypeNames: ENTITY_TYPES });
+  });
+  app.get('/api/v1/solution-set', (c) => {
+    const q = c.req.query(), list = (k) => (q[k] || '').split(',').map((x) => x.trim()).filter(Boolean);
+    const unknown = list('entityType').filter((e) => !(e in ENTITY_TYPES));
+    if (unknown.length) return problem(c, 400, 'query.entityType', `Unknown entity type ${unknown.join(', ')}`);
+    const jur = (q.jurisdiction || '').toUpperCase();
+    if (jur && !(jur in JURISDICTIONS)) return problem(c, 400, 'query.jurisdiction', `Unknown jurisdiction ${jur}`);
+    const atlasUrl = new URL(c.req.url).origin;
+    const r = solutionSet({ role: q.role, entityTypes: list('entityType'), sectors: list('sector'), jurisdiction: jur || undefined, size: q.size, prompt: q.prompt }, { atlasUrl });
+    return r.error ? problem(c, 400, 'query.solutionSet', r.error) : send(c, r);
+  });
   app.get('/api/v1/jurisdictions', (c) => send(c, { items: atlas.jurisdictions() }));
   app.get('/api/v1/organizations', (c) => send(c, { items: atlas.organizations() }));
   // Indented, so it reads cleanly when opened in a browser; the web app's Dataset policy page explains it.

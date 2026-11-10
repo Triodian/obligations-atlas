@@ -77,7 +77,9 @@ test('matter brief: obligations by tier, counsel questions, engagements that fit
   const b = buildMatterBrief(data, { matterLabel: 'Test matter', jurisdictions: ['AU'], entityTypes: ['generalInsurer'], useCaseIDs: ['UC3', 'UC7', 'UC10'], consequence: { UC3: 'c4' } });
   assert.equal(b.briefFormat, 'triodian.matterBrief/1');
   assert.ok(b.counts.binding > 0 && b.counts.expected > 0);
-  assert.deepEqual(b.engagementsThatFit.map((e) => e.assessmentType), ['aiRiskAppetite', 'aiUseAssessment', 'aiBoardDirection'], 'a general insurer is routed as regulated');
+  // UC10 (AI tools reachable by a deal team) adds the confidentiality assessment to the regulated chain (routing table, task 5.3)
+  assert.deepEqual(b.engagementsThatFit.map((e) => e.assessmentType), ['aiRiskAppetite', 'aiUseAssessment', 'aiBoardDirection', 'aiConfidentialityExposureAssessment'], 'a general insurer is routed as regulated');
+  assert.equal(b.engagementsThatFit[3].reason, 'Fits the use cases in scope');
   assert.ok(b.questionsForCounsel.some((q) => q.question.includes('C1 to C5')));
   assert.equal(b.scope.useCases.find((u) => u.useCaseID === 'UC3').consequenceLevel, 'c4');
   assert.deepEqual(atlas.languageIssues(b, 'matterBrief'), []);

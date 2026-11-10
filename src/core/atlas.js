@@ -1,4 +1,5 @@
 import { REGULATED_SECTORS } from './sectors.js';
+import { routeFor, FINANCIALLY_REGULATED_TYPES, ROUTING_TABLE } from './solution-set.js';
 /**
  * Atlas core: queries over a governed-record snapshot from the Reasoning Fabric
  * connector. Plain ES module whose only import is the generated sectors.js, shared by the server, the
@@ -92,7 +93,7 @@ export const ASSESSMENTS = {
 };
 
 /** Entity types in a financially regulated sector (Metamodel reference data), including the broader types those sectors reach. */
-export const FINANCIALLY_REGULATED_TYPES = [...new Set(REGULATED_SECTORS.filter((d) => d.financiallyRegulated).flatMap((d) => [...d.entityTypes, ...(d.alsoReaches || [])]))];
+export { FINANCIALLY_REGULATED_TYPES };
 
 /**
  * Which engagements suit a scope. A financially regulated scope (any entity type or sector in one) goes to
@@ -101,13 +102,11 @@ export const FINANCIALLY_REGULATED_TYPES = [...new Set(REGULATED_SECTORS.filter(
  * the use cases decide, and AI Board Direction is listed without a mode.
  * @returns {{ profile: 'regulated'|'general'|null, assessments: string[], boardMode: 'connected'|'standalone'|null }}
  */
-export function engagementRoute(entityTypes = [], sectors = []) {
-  const secs = sectors.map((d) => (typeof d === 'string' ? sectorByID(d) : d)).filter(Boolean);
-  if (!entityTypes.length && !secs.length) return { profile: null, assessments: [], boardMode: null };
-  const regulated = entityTypes.some((e) => FINANCIALLY_REGULATED_TYPES.includes(e)) || secs.some((d) => d.financiallyRegulated);
-  return regulated
-    ? { profile: 'regulated', assessments: ['aiRiskAppetite', 'aiUseAssessment', 'aiBoardDirection'], boardMode: 'connected' }
-    : { profile: 'general', assessments: ['aiBoardDirection', 'aiConfidentialityExposureAssessment'], boardMode: 'standalone' };
+export function engagementRoute(entityTypes = [], sectors = [], useCaseIDs = []) {
+  // One routing table (src/core/solution-set.js, task 5.3), shared with the front door's solution set.
+  if (!entityTypes.length && !sectors.length) return { profile: null, assessments: [], boardMode: null };
+  const { profile, assessments, boardMode } = routeFor(entityTypes, sectors, useCaseIDs);
+  return { profile, assessments, boardMode };
 }
 
 /** The ten standardised use cases. A record mapped to all of them applies to any AI use. */
@@ -549,17 +548,14 @@ export function buildMatterBrief(data, input) {
     fits.get(a).push(u);
   }
   // Routed by the scope's entity types and sectors (engagementRoute); with neither, by the use cases alone.
-  const route = engagementRoute(input.entityTypes || [], secs);
-  const order = route.profile ? route.assessments : [...fits.keys(), 'aiBoardDirection'];
-  const why = {
-    regulated: 'Fits a financially regulated entity',
-    general: 'Fits an entity outside financial regulation',
-  };
+  const route = routeFor(input.entityTypes || [], secs, ucs, [...fits.keys()]);
+  const order = route.assessments;
+  const why = { regulated: ROUTING_TABLE.profiles.regulated.reason, general: ROUTING_TABLE.profiles.general.reason };
   const engagementsThatFit = order.map((a) => ({
     assessmentType: a, name: ASSESSMENTS[a].name, purpose: ASSESSMENTS[a].does,
     useCaseIDs: a === 'aiBoardDirection' ? ucs.slice() : (fits.get(a) || []),
     ...(a === 'aiBoardDirection' && route.boardMode ? { mode: route.boardMode } : {}),
-    reason: route.profile ? why[route.profile] : (a === 'aiBoardDirection' ? 'Fits any board; choose an entity type or sector to see which mode' : 'Fits the use cases in scope'),
+    reason: route.added.includes(a) ? 'Fits the use cases in scope' : route.profile ? why[route.profile] : (a === 'aiBoardDirection' ? 'Fits any board; choose an entity type or sector to see which mode' : 'Fits the use cases in scope'),
   }));
 
   return {
