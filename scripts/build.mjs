@@ -1,4 +1,4 @@
-// Copy the shared core into public/ so the browser can import it as /core/atlas.js, and turn the vendored Metamodel's
+// Copy the shared core into public/ so the browser can import it as /core/atlas.js (and /core/solution-set.js), and turn the vendored Metamodel's
 // regulated sectors (reference-data/regulated-sectors.json) into src/core/sectors.js, which the core imports.
 import fs from 'node:fs';
 const ref = JSON.parse(fs.readFileSync('vendor/triodian-metamodel/reference-data/regulated-sectors.json', 'utf8'));
@@ -9,4 +9,5 @@ if (!fs.existsSync('src/core/sectors.js') || fs.readFileSync('src/core/sectors.j
 fs.mkdirSync('public/core', { recursive: true });
 fs.copyFileSync('src/core/atlas.js', 'public/core/atlas.js');
 fs.copyFileSync('src/core/sectors.js', 'public/core/sectors.js');
-console.log('public/core/atlas.js and sectors.js updated');
+fs.copyFileSync('src/core/solution-set.js', 'public/core/solution-set.js');
+console.log('public/core/atlas.js, sectors.js and solution-set.js updated');
