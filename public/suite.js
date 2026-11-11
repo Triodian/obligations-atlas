@@ -68,7 +68,7 @@
     'body{padding-top:var(--demo-h)}',
     '.hdr{top:calc(var(--demo-h) + env(safe-area-inset-top,0px)) !important}',
     '.drawer,.overlay{top:var(--demo-h) !important}',
-    '.tsu-band{position:fixed;top:0;left:0;right:0;height:var(--demo-h);z-index:160;display:flex;align-items:center;gap:10px;padding:0 12px 0 16px;',
+    '.tsu-band{position:fixed;top:0;left:0;right:0;min-height:' + BAND_H + 'px;z-index:160;display:flex;align-items:center;gap:10px;padding:3px 12px 3px 16px;',
     '  background:repeating-linear-gradient(135deg,#FBF2DE 0 10px,#F6E8C6 10px 20px);border-bottom:1px dashed #C99A3A;color:#5C3D00;',
     "  font:500 12px/1 'IBM Plex Sans',system-ui,sans-serif;box-sizing:border-box}",
     '.tsu-tag{font:700 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;background:#7A5200;color:#fff;padding:4px 7px;border-radius:3px}',
@@ -77,7 +77,12 @@
     "  border:1px dashed #7A5200;border-radius:16px;padding:5px 12px;font:600 12px/1 'IBM Plex Sans',system-ui,sans-serif}",
     '.tsu-switch:hover{background:#7A5200;color:#fff;border-style:solid}',
     '.tsu-switch:focus-visible,.tsu-card a:focus-visible,.tsu-x:focus-visible{outline:2px solid #182635;outline-offset:2px}',
-    '@media (max-width:620px){.tsu-note .tsu-long{display:none}}',
+    // An app's own note (its worked example, with the way out) is shown in the band in place of a band of its own.
+    '.tsu-note button,.tsu-note a{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0 0 0 10px;cursor:pointer;text-decoration:underline;text-underline-offset:2px}',
+    '.tsu-note.tsu-app{line-height:1.5}',
+    '.tsu-note button:focus-visible,.tsu-note a:focus-visible{outline:2px solid #182635;outline-offset:2px}',
+    '.tsu-note .tsu-short{display:none}',
+    '@media (max-width:620px){.tsu-note .tsu-long{display:none}.tsu-note .tsu-short{display:inline}.tsu-note.tsu-app{white-space:normal;line-height:1.3}}',
     '.tsu-bg{position:fixed;inset:0;z-index:300;background:rgba(24,38,53,.62);display:flex;align-items:flex-start;justify-content:center;padding:max(5vh,20px) 16px 24px;overflow:auto;box-sizing:border-box}',
     ".tsu-dlg{position:relative;background:#fff;color:#17202B;border-radius:14px;max-width:1180px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.28);padding:32px 34px 22px;box-sizing:border-box;font:400 15px/1.55 'IBM Plex Sans',system-ui,sans-serif}",
     '.tsu-dlg *{box-sizing:border-box}',
@@ -200,11 +205,25 @@
     document.head.appendChild(style);
     var band = el('<div class="tsu-band" role="region" aria-label="Demo">' +
       '<span class="tsu-tag">DEMO</span>' +
-      '<span class="tsu-note">Triodian demonstration<span class="tsu-long"> · this band is added for demos and is not part of the app</span></span>' +
+      '<span class="tsu-note"></span>' +
       '<button class="tsu-switch" type="button" aria-haspopup="dialog"><span aria-hidden="true">⇄</span> Switch app</button>' +
       '</div>');
     document.body.insertBefore(band, document.body.firstChild);
     band.querySelector('.tsu-switch').addEventListener('click', open);
+    // The band's words. An app with something to say about the page as a whole (it is showing its worked example)
+    // puts the HTML in window.TriodianSuiteNote and fires "triodian:note"; the band then carries it, so the app
+    // doesn't need a band of its own under its header. With no note the band says only what it is.
+    var note = band.querySelector('.tsu-note');
+    function paintNote() {
+      var h = typeof window.TriodianSuiteNote === 'string' ? window.TriodianSuiteNote : '';
+      if (note.getAttribute('data-h') !== h) { note.innerHTML = h || 'Not part of the app'; note.setAttribute('data-h', h); note.classList.toggle('tsu-app', !!h); }
+      fit();
+    }
+    // The band can wrap to a second line on a phone; the page below starts where the band ends.
+    function fit() { var hgt = band.offsetHeight; if (hgt) document.documentElement.style.setProperty('--demo-h', hgt + 'px'); }
+    window.addEventListener('triodian:note', paintNote);
+    window.addEventListener('resize', fit);
+    paintNote();
 
     // Arrived from the introduction or another app's menu: don't show it again straight away.
     var q = new URLSearchParams(location.search);
