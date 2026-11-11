@@ -44,6 +44,7 @@ export function openapi(version) {
         parameters: ['role', 'entityType', 'sector', 'jurisdiction', 'size', 'prompt'].map((name) => ({ name, in: 'query', required: false, schema: { type: 'string' }, description: name === 'entityType' || name === 'sector' ? 'Comma-separated' : 'One id from /api/v1/solution-set/table' })),
         responses: { 200: { description: 'Solution set' }, 400: { description: 'An unknown id' } } } },
       '/api/v1/solution-set/table': { get: { summary: 'The routing table the solution set and the matter brief share: roles, prompts, sizes, profiles and what each engagement needs', responses: { 200: { description: 'Routing table' } } } },
+      '/api/v1/firms/directory': { get: { summary: 'The practitioner directory: approved firms that asked to be listed, with the roles their people gave and their jurisdictions (format triodian.practitionerDirectory/1). No person is in it. Open without a key', responses: { 200: { description: 'available (false when the firm registry cannot be reached) and items: firmID, firm, roles, jurisdictions' } } } },
       '/api/v1/jurisdictions': { get: { summary: 'Jurisdictions and coverage', responses: { 200: { description: 'Jurisdictions' } } } },
       '/api/v1/organizations': { get: { summary: 'Regulators and standards bodies', responses: { 200: { description: 'Organizations' } } } },
       '/api/v1/dataset': { get: { summary: 'Whole dataset in compact form (used by the web app to filter and build matter briefs in the browser)', responses: { 200: { description: 'Dataset' } } } },

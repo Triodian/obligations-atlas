@@ -63,6 +63,7 @@ test('a malformed Fabric response is not served', async () => {
 
 test('firm registration, status and Bring in Triodian go to the Fabric firm registry; firm keys from the Fabric work', async () => {
   const seen = [];
+  let directoryDown = false;
   const key = 'oa_test_key_123';
   const keyHash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(key)))].map((b) => b.toString(16).padStart(2, '0')).join('');
   const fetchImpl = async (url, init) => {
@@ -71,6 +72,8 @@ test('firm registration, status and Bring in Triodian go to the Fabric firm regi
     if (url.endsWith('/firms/v1/ai-obligations-atlas/registrations')) return Response.json({ registrationID: 'FIRMREG-20261028000000-abcdef0123', status: 'pending' });
     if (/\/registrations\/FIRMREG-20261028000000-abcdef0123\/status$/.test(url)) return Response.json({ status: 'approved', apiKey: key });
     if (url.endsWith('/firms/v1/ai-obligations-atlas/contacts')) return Response.json({ contactID: 'CONTACT-1', status: 'new' });
+    if (/\/registrations\/FIRMREG-20261028000000-abcdef0123\/listing$/.test(url)) return Response.json({ status: 'approved', listed: JSON.parse(init.body).listed });
+    if (url.endsWith('/firms/v1/ai-obligations-atlas/directory')) return directoryDown ? new Response('no', { status: 502 }) : Response.json({ items: [{ firmID: 'firm-0123456789abcdef', firm: 'Firm & Co', roles: ['Fractional GC'], jurisdictions: ['AU'] }] });
     return Response.json(liveSnap);
   };
   const h = createHandler({ published, preview, fetchImpl });
@@ -97,7 +100,29 @@ test('firm registration, status and Bring in Triodian go to the Fabric firm regi
   const bad = await h(new Request('https://obligations-atlas.triodian.com/api/v1/obligations', { headers: { 'x-api-key': 'oa_unknown' } }), e, { waitUntil: () => {} });
   assert.equal(bad.status, 401);
 
+  // The practitioner directory (task 5.4): the firm's own choice goes to the Fabric; the list is open and holds no person.
+  const withList = await post('/api/v1/firms/register', { name: 'Ada', email: 'ada@firm.example', firm: 'Firm', accessSecret: secret, listed: true });
+  assert.equal(withList.status, 200);
+  assert.equal(seen.filter((x) => x.url.endsWith('/registrations')).pop().body.listed, true);
+  assert.equal(sent.body.listed, undefined, 'not listed unless the firm asks');
+  const ls = await post('/api/v1/firms/listing', { registrationID: 'FIRMREG-20261028000000-abcdef0123', accessSecret: secret, listed: true });
+  assert.equal(ls.body.listed, true);
+  const lsSent = seen.find((x) => /\/listing$/.test(x.url));
+  assert.deepEqual(Object.keys(lsSent.body).sort(), ['accessSecretSha256', 'listed']);
+  const getDir = async () => { const r = await h(new Request('https://obligations-atlas.triodian.com/api/v1/firms/directory'), e, { waitUntil: () => {} }); return { status: r.status, body: await r.json() }; };
+  const dir = await getDir();
+  assert.equal(dir.status, 200, 'open without a key');
+  assert.deepEqual(dir.body, { format: 'triodian.practitionerDirectory/1', available: true, items: [{ firmID: 'firm-0123456789abcdef', firm: 'Firm & Co', roles: ['Fractional GC'], jurisdictions: ['AU'] }] });
+  // The registry cannot be reached: the last good list is served, marked unavailable.
+  directoryDown = true;
+  await post('/api/v1/firms/listing', { registrationID: 'FIRMREG-20261028000000-abcdef0123', accessSecret: secret, listed: false }); // clears the cache
+  const down = await getDir();
+  assert.equal(down.body.available, false);
+  assert.equal(down.body.items.length, 1);
+
   const noFabric = createHandler({ published, preview });
+  const none = await noFabric(new Request('https://obligations-atlas.triodian.com/api/v1/firms/directory'), env(), { waitUntil: () => {} });
+  assert.deepEqual(await none.json(), { format: 'triodian.practitionerDirectory/1', available: false, items: [] });
   const r = await noFabric(new Request('https://obligations-atlas.triodian.com/api/v1/firms/register', { method: 'POST', body: JSON.stringify({ accessSecret: secret }) }), env(), {});
   assert.equal(r.status, 503);
 });

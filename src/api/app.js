@@ -164,6 +164,8 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
   // Passed to the Reasoning Fabric's firm registry; personal details are not kept here.
   // The browser's access secret is hashed before it leaves.
   const postLimit = limiter();
+  const DIRECTORY_TTL_MS = 5 * 60 * 1000;
+  const directory = { items: [], at: 0, ok: false };
   const firmCall = (handler) => async (c) => {
     if (!firms) return problem(c, 503, 'firms.unavailable', 'Firm registration is not available on this server yet');
     const ip = c.req.header('cf-connecting-ip') || c.req.header('x-forwarded-for') || 'local';
@@ -184,8 +186,25 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
   };
   app.post('/api/v1/firms/register', firmCall((b, hash, c) => firms.register({
     name: b.name, email: b.email, firm: b.firm, role: b.role, jurisdictions: b.jurisdictions,
-    site: new URL(c.req.url).hostname, accessSecretSha256: hash,
+    site: new URL(c.req.url).hostname, accessSecretSha256: hash, ...(b.listed === true ? { listed: true } : {}),
   })));
+  app.post('/api/v1/firms/listing', firmCall((b, hash) => {
+    directory.at = 0; // the next read of the directory shows the change
+    return firms.listing(String(b.registrationID || ''), hash, b.listed);
+  }));
+
+  // The practitioner directory (development plan task 5.4): approved firms that asked to be listed, for Triodian
+  // Start's "who runs it" choice. Open, like the solution set: it holds firm names, roles and jurisdictions only.
+  // `available` is false when the registry is not configured or cannot be reached; the list is then the last good one.
+  app.get('/api/v1/firms/directory', async (c) => {
+    c.header('cache-control', 'public, max-age=60');
+    if (!firms) return c.json({ format: 'triodian.practitionerDirectory/1', available: false, items: [] });
+    if (Date.now() - directory.at > DIRECTORY_TTL_MS) {
+      try { directory.items = await firms.directory(); directory.ok = true; } catch (e) { console.error('firm directory', e.message); directory.ok = false; }
+      directory.at = Date.now();
+    }
+    return c.json({ format: 'triodian.practitionerDirectory/1', available: directory.ok, items: directory.items });
+  });
   app.post('/api/v1/firms/status', firmCall((b, hash) => firms.status(String(b.registrationID || ''), hash)));
   app.post('/api/v1/firms/contact', firmCall((b, hash) => firms.contact({
     registrationID: b.registrationID, accessSecretSha256: hash, message: b.message, preferredContact: b.preferredContact, scope: b.scope,
