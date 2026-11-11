@@ -635,6 +635,8 @@ function renderPolicy() {
 // The browser keeps its registration ID and an access secret; the Atlas passes the
 // registration to Triodian's review console, where a named reviewer approves firms.
 const FIRM_KEY = 'atlas.firm';
+// Being listed as a practitioner is the firm's choice, off unless it asks (development plan task 5.4).
+const LISTING_TEXT = 'List the firm as a practitioner. An organisation choosing who runs its engagement in Triodian Start then sees the firm’s name, your role and its jurisdictions. No person’s name or email is shown, and you can change this at any time.';
 const firmState = { checked: false, apiKey: null };
 const getFirm = () => store.get(FIRM_KEY, null);
 const setFirm = (f) => store.set(FIRM_KEY, f);
@@ -650,7 +652,7 @@ async function refreshFirm() {
   const r = await firmPost('status', { registrationID: f.registrationID, accessSecret: f.accessSecret });
   firmState.checked = true;
   if (r.ok) {
-    Object.assign(f, { status: r.body.status, firm: r.body.firm || f.firm, name: r.body.name || f.name });
+    Object.assign(f, { status: r.body.status, firm: r.body.firm || f.firm, name: r.body.name || f.name, listed: !!r.body.listed });
     if (r.body.apiKey) firmState.apiKey = r.body.apiKey; // shown once
     setFirm(f);
   } else if (r.status === 404) {
@@ -685,6 +687,7 @@ async function renderFirmPanel(el, { brief = null } = {}) {
         <label class="field">Work email<input class="text" name="email" type="email" autocomplete="email" required maxlength="254"></label>
         <label class="field">Firm<input class="text" name="firm" autocomplete="organization" required maxlength="160"></label>
         <label class="field"><span>Role <span class="soft" style="font-weight:400">(optional)</span></span><input class="text" name="role" maxlength="120" placeholder="e.g. Partner, technology and AI"></label>
+        <label class="check"><input type="checkbox" name="listed"> <span>${LISTING_TEXT}</span></label>
         <div class="actions" style="margin:4px 0 0"><button class="btn" type="submit">Register your firm</button></div>
         <p class="small soft" id="regmsg" aria-live="polite" style="margin:0">Your name, email and firm go to Triodian's review console. Matter details do not.</p>
       </form></div>`;
@@ -695,11 +698,11 @@ async function renderFirmPanel(el, { brief = null } = {}) {
       const btn = e.target.querySelector('button');
       btn.disabled = true; msg.textContent = 'Sending…';
       const accessSecret = newSecret();
-      const body = { name: fd.get('name'), email: fd.get('email'), firm: fd.get('firm'), role: fd.get('role') || undefined, jurisdictions: brief ? brief.scope.jurisdictions : [], accessSecret };
+      const body = { name: fd.get('name'), email: fd.get('email'), firm: fd.get('firm'), role: fd.get('role') || undefined, jurisdictions: brief ? brief.scope.jurisdictions : [], accessSecret, ...(fd.get('listed') ? { listed: true } : {}) };
       const r = await firmPost('register', body);
       btn.disabled = false;
       if (!r.ok) { msg.textContent = [401, 403, 502, 503].includes(r.status) ? 'Registration is not available yet. Please try again later.' : (r.body.title || 'The registration could not be sent. Check the details and try again.'); return; }
-      setFirm({ registrationID: r.body.registrationID, accessSecret, status: r.body.status, firm: body.firm, name: body.name, email: body.email });
+      setFirm({ registrationID: r.body.registrationID, accessSecret, status: r.body.status, firm: body.firm, name: body.name, email: body.email, listed: !!body.listed });
       firmState.checked = true;
       renderFirmPanel(el, { brief });
     });
@@ -732,8 +735,21 @@ async function renderFirmPanel(el, { brief = null } = {}) {
       ${scopeList.length ? `<label class="check"><input type="checkbox" name="share"> <span>Share this brief's scope with Triodian: ${esc(scopeList.join('; '))}. The matter label and anything else in the brief stay in this browser.</span></label>` : ''}
       <div class="actions" style="margin:4px 0 0"><button class="btn" type="submit">Send to Triodian</button></div>
       <p class="small soft" id="contactmsg" aria-live="polite" style="margin:0">Triodian replies to ${esc(f.email || 'your registered email')}.</p>
-    </form>` : `<p>From any <a href="${href('brief')}">matter brief</a> you can now bring in Triodian.</p>`}
+    </form>` : `<p>From any <a href="${href('brief')}">matter brief</a> you can now bring in Triodian.</p>
+      <label class="check"><input type="checkbox" id="listed"${f.listed ? ' checked' : ''}> <span>${LISTING_TEXT}</span></label>
+      <p class="small soft" id="listmsg" aria-live="polite" style="margin:6px 0 0">${f.listed ? `${esc(f.firm)} is listed as a practitioner.` : `${esc(f.firm)} is not listed.`}</p>`}
   </div>`;
+  const listed = el.querySelector('#listed');
+  if (listed) listed.addEventListener('change', async () => {
+    const msg = el.querySelector('#listmsg');
+    const want = listed.checked;
+    listed.disabled = true; msg.textContent = 'Saving…';
+    const r = await firmPost('listing', { registrationID: f.registrationID, accessSecret: f.accessSecret, listed: want });
+    listed.disabled = false;
+    if (!r.ok) { listed.checked = !want; msg.textContent = 'That could not be saved. Please try again.'; return; }
+    f.listed = !!r.body.listed; setFirm(f);
+    msg.textContent = f.listed ? `${f.firm} is listed as a practitioner.` : `${f.firm} is not listed.`;
+  });
   const copy = el.querySelector('#copykey');
   if (copy) copy.addEventListener('click', async () => { try { await navigator.clipboard.writeText(firmState.apiKey); copy.textContent = 'Copied'; } catch { /* select manually */ } });
   const form = el.querySelector('#contactform');
