@@ -15,9 +15,9 @@ const atlas = new Atlas(snapshot);
 const data = atlas.dataset();
 // The role ids each app defines (public/shared/rules.js or lib/core/roles.js in each app repo), so `yourPart` names a real role.
 const APP_ROLES = {
-  aiBoardDirection: ['methodOwner', 'recorder', 'advisor', 'gc', 'chair', 'director', 'ceo', 'cro', 'areaOwner'],
+  aiBoardDirection: ['methodOwner', 'recorder', 'advisor', 'gc', 'chair', 'director', 'ceo', 'cro', 'areaOwner', 'technologyOwner', 'aiGovernance'],
   aiRiskAppetite: ['counsel', 'gc', 'triodian', 'cro', 'risk', 'independent', 'board'],
-  aiUseAssessment: ['methodOwner', 'assessor', 'peer', 'validation', 'delivery', 'counsel', 'gc', 'owner', 'ir', 'cro', 'executive'],
+  aiUseAssessment: ['methodOwner', 'assessor', 'peer', 'validation', 'delivery', 'counsel', 'gc', 'owner', 'ir', 'cro', 'executive', 'technologyOwner', 'aiGovernance'],
   aiConfidentialityExposureAssessment: ['methodOwner', 'assessor', 'peer', 'validation', 'delivery', 'counsel', 'gc', 'dealLead', 'tenantOwner', 'checker', 'executive'],
 };
 
