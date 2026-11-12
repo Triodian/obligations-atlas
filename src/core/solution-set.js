@@ -10,7 +10,7 @@ import { REGULATED_SECTORS } from './sectors.js';
  */
 
 export const SOLUTION_SET_FORMAT = 'triodian.solutionSet/1';
-export const ROUTING_TABLE_VERSION = '1.0.0';
+export const ROUTING_TABLE_VERSION = '1.1.0';
 
 const SUITE = 'triodian.com';
 const site = (host) => `https://${host}.${SUITE}/`;
@@ -26,6 +26,8 @@ export const ROUTING_TABLE = {
     { id: 'boardAdvisor', name: 'Board advisor', parts: { aiBoardDirection: 'advisor' } },
     { id: 'directorOrChair', name: 'Director or chair', parts: { aiBoardDirection: 'chair', aiRiskAppetite: 'board' } },
     { id: 'croOrRisk', name: 'CRO or risk', parts: { aiBoardDirection: 'cro', aiRiskAppetite: 'cro', aiUseAssessment: 'cro' } },
+    // Management's seats for AI (development plan task 7.7): they supply what exists and shape the reporting.
+    { id: 'technologyLead', name: 'CIO, CTO or AI governance lead', parts: { aiBoardDirection: 'technologyOwner', aiRiskAppetite: 'risk', aiUseAssessment: 'technologyOwner' } },
     { id: 'externalCounsel', name: 'External counsel', parts: { aiRiskAppetite: 'counsel', aiUseAssessment: 'counsel', aiConfidentialityExposureAssessment: 'counsel' } },
     { id: 'consultant', name: 'Consultant', parts: {} },
   ],
@@ -62,7 +64,7 @@ export const ROUTING_TABLE = {
         general: 'The board sets the whole AI appetite in one engagement',
       },
       needs: {
-        people: ['Chair', 'Directors', 'CEO or accountable executive', 'General counsel', 'Board advisor (optional)', 'CRO (connected mode)', 'Triodian method owner and recorder'],
+        people: ['Chair', 'Directors', 'CEO or accountable executive', 'General counsel', 'Board advisor (optional)', 'CRO (connected mode)', 'Technology owner and AI governance team (optional)', 'Triodian method owner and recorder'],
         documents: ['A list of the AI tools and uses in the business (the B1 inventory; a provider register can be imported)', 'An Atlas matter brief'],
         sessions: { connected: 'A director briefing, then the board’s directions before the AI risk appetite engagement, and its approval of the statement after', standalone: 'A director briefing, one workshop of about three hours, and the resolution at the next board meeting: two to four weeks' },
       },
@@ -72,7 +74,7 @@ export const ROUTING_TABLE = {
       does: 'Sets the board’s AI risk appetite and the triggers that act on it',
       why: { regulated: 'Turns the board’s directions into an AI risk appetite statement, a tolerance and trigger schedule and a calibration set' },
       needs: {
-        people: ['Counsel (facilitator)', 'General counsel', 'CRO', 'Risk function', 'Independent reviewer', 'The board, to approve', 'Triodian recorder'],
+        people: ['Counsel (facilitator)', 'General counsel', 'CRO', 'Risk or AI governance function', 'Independent reviewer', 'The board, to approve', 'Triodian recorder'],
         documents: ['The existing risk appetite statement', 'Critical operations and their tolerances', 'Operational risk thresholds', 'The AI inventory', 'The board’s directions, from AI Board Direction'],
         sessions: { any: 'Eight decisions in two sessions and a challenge round: two to three weeks, alongside the first two weeks of the assessment' },
       },
@@ -82,7 +84,7 @@ export const ROUTING_TABLE = {
       does: 'Assesses a particular AI use, including AI in the supply chain',
       why: { regulated: 'Tests, arrangement by arrangement, what evidence of AI behaviour each provider can produce, against the calibration set', any: 'Fits the use cases in scope' },
       needs: {
-        people: ['Counsel', 'General counsel', 'CRO', 'Arrangement owners', 'Independent reviewer', 'Triodian method owner, assessor, peer reviewer, validation and delivery manager'],
+        people: ['Counsel', 'General counsel', 'CRO', 'Arrangement owners', 'Independent reviewer', 'Technology owner and AI governance team, for the hand-over (optional)', 'Triodian method owner, assessor, peer reviewer, validation and delivery manager'],
         documents: ['The AI inventory or provider register', 'The agreement for each arrangement in scope', 'The calibration set, from AI Risk Appetite'],
         sessions: { any: 'Three to four weeks; in Lite scope, the 10 to 15 arrangements behind critical operations' },
       },
