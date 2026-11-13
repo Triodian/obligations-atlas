@@ -6,6 +6,7 @@ The Atlas sets out AI governance obligations by jurisdiction, maps them to stand
 - **Binding**: law or prudential standard in force;
 - **Expected**: regulator expectation, guidance or recognised standard;
 - **Anticipated**: made but not yet in force, under consultation, or a pending bill.
+- **Adopted standard**: a voluntary standard a client has adopted for itself, such as the controls of ISO/IEC 42001:2023 Annex A. A matter brief lists these only where the client's Statement of Applicability, loaded in the browser, says they apply.
 
 It is built for AI, technology and regulatory lawyers in external counsel firms. It serves the same records three ways: a web app, a REST API and an MCP server.
 

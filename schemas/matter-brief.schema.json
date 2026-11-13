@@ -39,13 +39,14 @@
     "dataset": { "type": "object", "description": "The Atlas dataset the brief was built from, for audit", "additionalProperties": true },
     "obligationsByTier": {
       "type": "object",
-      "description": "Obligation references grouped by source tier",
+      "description": "Obligation references grouped by source tier. adopted is present when the brief lists controls of a standard the client has adopted, chosen by the client's Statement of Applicability",
       "required": ["binding", "expected", "anticipated"],
       "additionalProperties": false,
       "properties": {
         "binding": { "type": "array", "items": { "$ref": "#/definitions/obligationRef" }, "description": "Law or prudential standard in force" },
         "expected": { "type": "array", "items": { "$ref": "#/definitions/obligationRef" }, "description": "Regulator expectation, guidance or recognised standard" },
-        "anticipated": { "type": "array", "items": { "$ref": "#/definitions/obligationRef" }, "description": "Made but not yet in force, or under consultation" }
+        "anticipated": { "type": "array", "items": { "$ref": "#/definitions/obligationRef" }, "description": "Made but not yet in force, or under consultation" },
+        "adopted": { "type": "array", "items": { "$ref": "#/definitions/obligationRef" }, "description": "A voluntary standard the client has adopted for itself (for example ISO/IEC 42001:2023 Annex A), listed where the client's Statement of Applicability says it applies" }
       }
     },
     "counts": { "type": "object", "description": "Number of references in each tier, and how many are specific to the use cases or apply to any AI use", "additionalProperties": { "type": "integer" } },
@@ -87,7 +88,8 @@
         "lastVerified": { "type": "string", "format": "date", "description": "Last verified against the official text" },
         "governedRecordID": { "type": "string", "description": "Atlas record version cited" },
         "publicationStatus": { "type": "string", "description": "published, or pendingReview in preview data" },
-        "provenanceRef": { "type": ["string", "null"], "description": "Latest provenance ledger entry for the record" }
+        "provenanceRef": { "type": ["string", "null"], "description": "Latest provenance ledger entry for the record" },
+        "statementOfApplicability": { "type": "object", "description": "For an adopted-standard record: the client's Statement of Applicability row for it, as the brief read it. It stays in the brief and is not sent to the Atlas", "additionalProperties": false, "properties": { "applicable": { "type": "boolean", "description": "Whether the Statement says the control applies" }, "justification": { "type": "string", "description": "The Statement's justification for including or excluding it" }, "implementation": { "type": "string", "description": "How far the Statement says it is implemented" } } }
       }
     }
   }

@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://triodian.com/schemas/semantic-library/obligation.schema.json",
   "title": "Obligation Schema",
-  "description": "A requirement the organization must meet, captured at clause level from its governing source (statute, prudential standard, regulatory guidance, industry code, contract, clinical standard or internal policy). Obligations are the source end of the semantic library's traceability: each semantic constraint maps to the obligations it enforces, and the inverse index tells a regulatory watch which constraints to review when an obligation changes. Obligations can also be published as a reference dataset, such as a register of AI governance obligations by jurisdiction: each record is then tagged with the tier of its source (binding, expected or anticipated), the entity types, roles and standardised use cases it may reach, its key dates, and when it was last verified against the official text. A source tier describes the source, never an organization's position: it does not say that anyone is compliant, in breach, or required to act.",
+  "description": "A requirement the organization must meet, captured at clause level from its governing source (statute, prudential standard, regulatory guidance, industry code, contract, clinical standard or internal policy). Obligations are the source end of the semantic library's traceability: each semantic constraint maps to the obligations it enforces, and the inverse index tells a regulatory watch which constraints to review when an obligation changes. Obligations can also be published as a reference dataset, such as a register of AI governance obligations by jurisdiction: each record is then tagged with the tier of its source (binding, expected, anticipated or adopted), the entity types, roles and standardised use cases it may reach, its key dates, and when it was last verified against the official text. A source tier describes the source, never an organization's position: it does not say that anyone is compliant, in breach, or required to act.",
   "type": "object",
   "required": [
     "obligationID",
@@ -99,7 +99,7 @@
       ]
     },
     "sourceTier": {
-      "description": "Tier of the source the obligation comes from: binding (law or prudential standard in force), expected (regulator expectation, guidance or recognised standard) or anticipated (made but not yet in force, under consultation, or a pending bill). Describes the source only",
+      "description": "Tier of the source the obligation comes from: binding (law or prudential standard in force), expected (regulator expectation, guidance or recognised standard), anticipated (made but not yet in force, under consultation, or a pending bill) or adopted (a voluntary standard an organization has adopted for itself; the client's Statement of Applicability decides which records apply). Describes the source only",
       "allOf": [
         {
           "$ref": "#/definitions/sourceTier"
@@ -335,6 +335,35 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "sourceTier": {
+            "const": "adopted"
+          }
+        },
+        "required": [
+          "sourceTier"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "anyOf": [
+              {
+                "const": "inForce"
+              },
+              {
+                "const": "superseded"
+              },
+              {
+                "const": "withdrawn"
+              }
+            ]
+          }
+        }
+      }
     }
   ],
   "definitions": {
@@ -353,11 +382,12 @@
     },
     "sourceTier": {
       "type": "string",
-      "description": "Tier of an obligation's source. binding = law or prudential standard in force; expected = regulator expectations, guidance and recognised standards; anticipated = made but not yet in force, under consultation, or a pending bill. A tier says nothing about whether an organization meets the source, or whether it will apply",
+      "description": "Tier of an obligation's source. binding = law or prudential standard in force; expected = regulator expectations, guidance and recognised standards; anticipated = made but not yet in force, under consultation, or a pending bill; adopted = a voluntary standard an organization has adopted for itself, such as the controls of ISO/IEC 42001:2023 Annex A, which applies to a client only as far as the client's own Statement of Applicability says. A tier says nothing about whether an organization meets the source, or whether it will apply",
       "enum": [
         "binding",
         "expected",
-        "anticipated"
+        "anticipated",
+        "adopted"
       ]
     },
     "tierBasis": {

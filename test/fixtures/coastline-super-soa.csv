@@ -1,0 +1,10 @@
+control,title,applicable,justification,implemented
+A.2.2,AI policy,yes,Board-approved AI policy,yes
+A.3.2,AI roles and responsibilities,yes,Accountability map under the Financial Accountability Regime,yes
+A.3.3,Reporting of concerns,yes,Whistleblower and concerns policy extended to AI,partly
+A.5.2,AI system impact assessment process,yes,Every arrangement at A3 or above,partly
+A.6.2.6,AI system operation and monitoring,yes,Provider evidence under the technical schedule,partly
+A.7.4,Quality of data for AI systems,no,The fund does not train or fine-tune models,
+A.8.2,System documentation and information for users,no,Members are not users of the AI systems,
+A.9.2,Processes for responsible use of AI systems,yes,Acceptable-use policy,yes
+A.10.3,Suppliers,yes,Material service providers under CPS 230,partly

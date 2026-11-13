@@ -3,6 +3,7 @@
  * filtering and matter briefs run here in the browser, so nothing about a
  * lawyer's matter is sent to the server.
  */
+import { readSoA, summary as importSummary } from '/core/import.js';
 import { buildMatterBrief, ENTITY_TYPES, ROLES, TIERS, STATUS, JURISDICTIONS, ASSESSMENTS, STANDING_RULE, SOURCE_RANKS, sectorByID, reachedEntityTypes, PORTFOLIO_FORMAT, draftFromBrief, normalisePortfolio, saveToPortfolio, removeFromPortfolio, exportPortfolio, importPortfolio } from '/core/atlas.js';
 import { scopeFromLink } from '/core/solution-set.js';
 
@@ -30,7 +31,7 @@ const store = {
 const jurName = (c) => (JURISDICTIONS[c] ? JURISDICTIONS[c].name : c);
 // Use-case titles come from the published use-case records; when one is not yet published, show the ID alone.
 const ucTitle = (id) => (data.useCases.find((u) => u.useCaseID === id) || {}).title || '';
-const TIER_SHORT = { binding: 'in force', expected: 'guidance or standard', anticipated: 'not yet in force' };
+const TIER_SHORT = { binding: 'in force', expected: 'guidance or standard', anticipated: 'not yet in force', adopted: 'the client’s own choice' };
 const tierLabel = (tier) => (TIERS[tier] ? TIERS[tier].label : tier);
 const tierBadge = (tier) => `<span class="badge ${esc(tier)}" title="${esc(TIERS[tier] ? TIERS[tier].describes : '')}">${esc(tierLabel(tier))}</span>`;
 const pendingBadge = (o) => (o.publicationStatus === 'pendingReview' ? '<span class="badge pending" title="Not yet approved by a Triodian reviewer">Pending review</span>' : '');
@@ -277,15 +278,15 @@ function renderChanges() {
 
 // ------------------------------------------------------------ matter brief
 function briefHTML(b) {
-  const item = (o) => `<li><strong>${esc(o.instrument)}, ${esc(o.citation)}</strong>: ${esc(o.title)} <span class="muted">(${esc(o.jurisdiction)}; ${esc(STATUS[o.status] || o.status)}; verified ${esc(fmtDate(o.lastVerified))}; <a href="${esc(o.sourceURL)}">source</a>; record ${esc(o.governedRecordID)}${o.publicationStatus === 'pendingReview' ? '; pending review' : ''})</span></li>`;
+  const item = (o) => `<li><strong>${esc(o.instrument)}, ${esc(o.citation)}</strong>: ${esc(o.title)}${o.statementOfApplicability ? ` <span class="soa">· ${esc(o.statementOfApplicability.implementation)}${o.statementOfApplicability.justification ? ': ' + esc(o.statementOfApplicability.justification) : ''}</span>` : ''} <span class="muted">(${esc(o.jurisdiction)}; ${esc(STATUS[o.status] || o.status)}; verified ${esc(fmtDate(o.lastVerified))}; <a href="${esc(o.sourceURL)}">source</a>; record ${esc(o.governedRecordID)}${o.publicationStatus === 'pendingReview' ? '; pending review' : ''})</span></li>`;
   const hasUCs = b.scope.useCases.length > 0;
   const sect = (tier) => {
-    const items = b.obligationsByTier[tier] || [];
-    const specific = hasUCs ? items.filter((o) => !o.appliesToAnyAIUse) : items;
-    const anyUse = hasUCs ? items.filter((o) => o.appliesToAnyAIUse) : [];
+    const items = b.obligationsByTier[tier] || [], split = hasUCs && tier !== 'adopted';   // adopted controls are chosen by the Statement, not by use case
+    const specific = split ? items.filter((o) => !o.appliesToAnyAIUse) : items;
+    const anyUse = split ? items.filter((o) => o.appliesToAnyAIUse) : [];
     return `<h3>${tierBadge(tier)} ${items.length} record${items.length === 1 ? '' : 's'}</h3>
       ${!items.length ? '<p class="muted">None in scope.</p>' : ''}
-      ${specific.length ? `${hasUCs ? '<p class="subgroup">Specific to the selected use cases</p>' : ''}<ol>${specific.map(item).join('')}</ol>` : ''}
+      ${specific.length ? `${split ? '<p class="subgroup">Specific to the selected use cases</p>' : ''}<ol>${specific.map(item).join('')}</ol>` : ''}
       ${anyUse.length ? `<p class="subgroup">Apply to any AI use</p><ol>${anyUse.map(item).join('')}</ol>` : ''}`;
   };
   return `<div class="brief" id="brief-out">
@@ -293,6 +294,7 @@ function briefHTML(b) {
     <p class="muted">Matter brief, ${esc(fmtDate(b.generatedAt))}. Scope: ${esc(b.scope.jurisdictions.map(jurName).join(', ') || 'all jurisdictions')}; ${esc(b.scope.entityTypes.map((e) => ENTITY_TYPES[e]).join(', ') || 'any entity')}; ${esc(b.scope.useCases.map((u) => `${u.useCaseID}${u.consequenceLevel ? ` (${u.consequenceLevel.toUpperCase()})` : ''}`).join(', ') || 'any use case')}.</p>
     ${(b.coverage || []).map((c) => `<p class="notice">${esc(c.note)}</p>`).join('')}
     <h2>Obligations by tier</h2>${sect('binding')}${sect('expected')}${sect('anticipated')}
+    ${b.obligationsByTier.adopted ? `<h2 id="adopted">Adopted standard: the controls the client has adopted</h2><p class="muted">From the client’s Statement of Applicability. A control the Statement excludes is not listed.</p>${sect('adopted')}` : ''}
     <h2>Questions for counsel to determine</h2><ol>${b.questionsForCounsel.map((q) => `<li>${esc(q.question)}</li>`).join('')}</ol>
     <h2>Engagements that fit</h2>
     ${b.engagementsThatFit.length ? `<ul>${b.engagementsThatFit.map((e) => `<li><strong>${esc(e.name)}</strong>${e.mode ? ` <span class="checkcount b-grey">${e.mode === 'connected' ? 'Connected' : 'Standalone'}</span>` : ''}: ${esc(e.purpose)}. <span class="muted">${esc(e.reason || '')}${e.useCaseIDs.length ? `${e.reason ? '; ' : ''}from ${esc(e.useCaseIDs.join(', '))}` : ''}.</span></li>`).join('')}</ul><p class="notice">Counsel decides whether to engage, and on what terms.</p>` : '<p class="muted">Choose an entity type, sector or use cases to see which engagements fit.</p>'}
@@ -355,6 +357,12 @@ function renderBrief(arg) {
             <label class="check"><input type="checkbox" name="uc" value="${esc(u)}" ${on ? 'checked' : ''}><span><strong>${esc(u)}</strong> ${esc(ucTitle(u))}</span></label>
             <select class="small" name="c-${esc(u)}" aria-label="Consequence for ${esc(u)}" ${on ? '' : 'disabled'}>${options(cOpts, draft.consequence[u] || '')}</select></div>`; }).join('')}</div>
         </fieldset>
+        <fieldset class="card" id="soa-set">
+          <legend class="sh"><span class="stepno">4</span>Statement of Applicability <span class="hint">Optional. For a client that has adopted ISO/IEC 42001:2023</span></legend>
+          <p class="small soft" style="margin:0 0 8px">A CSV with a header row: control (such as A.6.2.6), applicable (yes or no), justification and implemented (yes, partly or no). It is read in this browser and not sent to Triodian. The brief then lists the Annex A controls the Statement says apply.</p>
+          <div class="row" style="gap:8px;align-items:center"><label class="btn secondary" for="soaFile" style="cursor:pointer">Load the Statement (CSV)</label><input type="file" id="soaFile" accept=".csv,text/csv" class="vh"><button class="linkish small" type="button" id="soaClear" ${draft.soa && draft.soa.length ? '' : 'hidden'}>Remove</button></div>
+          <p class="small" id="soaStatus" aria-live="polite">${draft.soa && draft.soa.length ? `${draft.soa.length} controls loaded${draft.soaFile ? ' from ' + esc(draft.soaFile) : ''}; ${draft.soa.filter((r) => r.applicable).length} apply.` : 'No Statement loaded.'}</p>
+        </fieldset>
       </form>
       <aside class="card facts brief-aside" aria-label="Brief scope">
         <h2 class="sh">Scope</h2>
@@ -376,7 +384,7 @@ function renderBrief(arg) {
   let brief = null;
   const read = () => {
     const f = new FormData(form);
-    const d = { matterLabel: f.get('matterLabel') || '', jurisdictions: f.getAll('jur'), entityTypes: [...new Set(f.getAll('ent'))], sectors: f.getAll('sec'), useCaseIDs: f.getAll('uc'), consequence: {} };
+    const d = { matterLabel: f.get('matterLabel') || '', jurisdictions: f.getAll('jur'), entityTypes: [...new Set(f.getAll('ent'))], sectors: f.getAll('sec'), useCaseIDs: f.getAll('uc'), consequence: {}, soa: draft.soa || [], soaFile: draft.soaFile || '' };
     for (const u of ucIDs()) { const c = f.get(`c-${u}`); if (c) d.consequence[u] = c; }
     store.set('atlas.briefDraft', d);
     return d;
@@ -406,6 +414,15 @@ function renderBrief(arg) {
       <dt class="brk">In scope</dt><dd class="brk"><strong>${n} record${n === 1 ? '' : 's'}</strong><ul class="tiers">${Object.keys(TIERS).map((t) => `<li>${tierBadge(t)}<span>${(b.obligationsByTier[t] || []).length}</span></li>`).join('')}</ul></dd>`;
     status('');
   };
+  // The Statement of Applicability (task ISO.8): read here, kept with the draft in this browser, never sent.
+  document.getElementById('soaFile').addEventListener('change', async (e) => {
+    const file = e.target.files && e.target.files[0]; if (!file) return;
+    const r = readSoA(await file.text());
+    document.getElementById('soaStatus').textContent = r.error ? r.error : importSummary('controls', r) + ` ${r.rows.filter((x) => x.applicable).length} apply.`;
+    if (!r.error && r.rows.length) { draft.soa = r.rows.map(({ control, title, applicable, justification, implemented }) => ({ control, title, applicable, justification, implemented })); draft.soaFile = file.name; document.getElementById('soaClear').hidden = false; scope(); }
+    e.target.value = '';
+  });
+  document.getElementById('soaClear').addEventListener('click', () => { draft.soa = []; draft.soaFile = ''; document.getElementById('soaClear').hidden = true; document.getElementById('soaStatus').textContent = 'No Statement loaded.'; scope(); });
   form.addEventListener('change', (e) => {
     if (e.target.name === 'jur') {
       // Show only the entity types of the chosen jurisdictions; clear ticks in the ones hidden.
