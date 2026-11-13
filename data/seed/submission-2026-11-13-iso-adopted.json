@@ -1,0 +1,2201 @@
+{
+  "submissionID": "SUB-ATLAS-2026-11-13-ISO-ADOPTED",
+  "interfaceVersion": "1.0.0",
+  "metamodelVersion": "2.7.0",
+  "mode": "propose",
+  "dataset": "ai-obligations-atlas",
+  "submittedAt": "2026-11-13T00:00:00Z",
+  "submitter": {
+    "actorType": "agent",
+    "actorID": "atlas-update-agent",
+    "displayName": "Atlas update agent (research of 2026-11-13)"
+  },
+  "proposals": [
+    {
+      "changeProposalID": "CP-2026-11-13-0001",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-2-2",
+        "title": "A.2.2 AI policy"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-2-2",
+        "title": "A.2.2 AI policy",
+        "statement": "Control A.2.2 (AI policy) of Annex A of ISO/IEC 42001:2023 is about the organization documenting a policy for the development or use of AI systems. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.2.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0002",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-2-3",
+        "title": "A.2.3 Alignment with other organizational policies"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-2-3",
+        "title": "A.2.3 Alignment with other organizational policies",
+        "statement": "Control A.2.3 (Alignment with other organizational policies) of Annex A of ISO/IEC 42001:2023 is about the organization working out where its other policies, such as those on information security, privacy or quality, bear on its AI objectives or apply to its AI systems. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.2.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0003",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-2-4",
+        "title": "A.2.4 Review of the AI policy"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-2-4",
+        "title": "A.2.4 Review of the AI policy",
+        "statement": "Control A.2.4 (Review of the AI policy) of Annex A of ISO/IEC 42001:2023 is about reviewing the AI policy at planned intervals, or when needed, so that it stays suitable, adequate and effective. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.2.4",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0004",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-3-2",
+        "title": "A.3.2 AI roles and responsibilities"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-3-2",
+        "title": "A.3.2 AI roles and responsibilities",
+        "statement": "Control A.3.2 (AI roles and responsibilities) of Annex A of ISO/IEC 42001:2023 is about defining and allocating roles and responsibilities for AI to suit the organization. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.3.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0005",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-3-3",
+        "title": "A.3.3 Reporting of concerns"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-3-3",
+        "title": "A.3.3 Reporting of concerns",
+        "statement": "Control A.3.3 (Reporting of concerns) of Annex A of ISO/IEC 42001:2023 is about a process by which people in the organization can report concerns about its role in an AI system across the system’s life cycle. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.3.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0006",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-4-2",
+        "title": "A.4.2 Resource documentation"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-4-2",
+        "title": "A.4.2 Resource documentation",
+        "statement": "Control A.4.2 (Resource documentation) of Annex A of ISO/IEC 42001:2023 is about identifying and documenting the resources the organization’s AI activities need at each stage of the life cycle. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.4.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0007",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-4-3",
+        "title": "A.4.3 Data resources"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-4-3",
+        "title": "A.4.3 Data resources",
+        "statement": "Control A.4.3 (Data resources) of Annex A of ISO/IEC 42001:2023 is about documenting information about the data resources an AI system uses. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.4.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0008",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-4-4",
+        "title": "A.4.4 Tooling resources"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-4-4",
+        "title": "A.4.4 Tooling resources",
+        "statement": "Control A.4.4 (Tooling resources) of Annex A of ISO/IEC 42001:2023 is about documenting information about the tooling resources an AI system uses. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.4.4",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0009",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-4-5",
+        "title": "A.4.5 System and computing resources"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-4-5",
+        "title": "A.4.5 System and computing resources",
+        "statement": "Control A.4.5 (System and computing resources) of Annex A of ISO/IEC 42001:2023 is about documenting information about the system and computing resources an AI system uses. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.4.5",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0010",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-4-6",
+        "title": "A.4.6 Human resources"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-4-6",
+        "title": "A.4.6 Human resources",
+        "statement": "Control A.4.6 (Human resources) of Annex A of ISO/IEC 42001:2023 is about documenting the human resources an AI system draws on, and their competences. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.4.6",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0011",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-5-2",
+        "title": "A.5.2 AI system impact assessment process"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-5-2",
+        "title": "A.5.2 AI system impact assessment process",
+        "statement": "Control A.5.2 (AI system impact assessment process) of Annex A of ISO/IEC 42001:2023 is about a process for assessing the potential consequences an AI system can have for individuals, groups of individuals and societies across its life cycle. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.5.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0012",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-5-3",
+        "title": "A.5.3 Documentation of AI system impact assessments"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-5-3",
+        "title": "A.5.3 Documentation of AI system impact assessments",
+        "statement": "Control A.5.3 (Documentation of AI system impact assessments) of Annex A of ISO/IEC 42001:2023 is about documenting the results of AI system impact assessments and keeping them for a defined period. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.5.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0013",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-5-4",
+        "title": "A.5.4 Assessing AI system impact on individuals or groups of individuals"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-5-4",
+        "title": "A.5.4 Assessing AI system impact on individuals or groups of individuals",
+        "statement": "Control A.5.4 (Assessing AI system impact on individuals or groups of individuals) of Annex A of ISO/IEC 42001:2023 is about assessing and documenting the potential impact of an AI system on individuals or groups of individuals across its life cycle. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.5.4",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0014",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-5-5",
+        "title": "A.5.5 Assessing societal impacts of AI systems"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-5-5",
+        "title": "A.5.5 Assessing societal impacts of AI systems",
+        "statement": "Control A.5.5 (Assessing societal impacts of AI systems) of Annex A of ISO/IEC 42001:2023 is about assessing and documenting the potential societal impacts of an AI system across its life cycle. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.5.5",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0015",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-6-1-2",
+        "title": "A.6.1.2 Objectives for responsible development of AI system"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-6-1-2",
+        "title": "A.6.1.2 Objectives for responsible development of AI system",
+        "statement": "Control A.6.1.2 (Objectives for responsible development of AI system) of Annex A of ISO/IEC 42001:2023 is about identifying and documenting objectives that guide the responsible development of AI systems, and building measures to meet them into the life cycle. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.6.1.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0016",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-6-1-3",
+        "title": "A.6.1.3 Processes for responsible AI system design and development"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-6-1-3",
+        "title": "A.6.1.3 Processes for responsible AI system design and development",
+        "statement": "Control A.6.1.3 (Processes for responsible AI system design and development) of Annex A of ISO/IEC 42001:2023 is about defining and documenting the processes the organization follows to design and develop AI systems responsibly. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.6.1.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0017",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-6-2-2",
+        "title": "A.6.2.2 AI system requirements and specification"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-6-2-2",
+        "title": "A.6.2.2 AI system requirements and specification",
+        "statement": "Control A.6.2.2 (AI system requirements and specification) of Annex A of ISO/IEC 42001:2023 is about specifying and documenting the requirements for a new AI system, or a material change to an existing one. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.6.2.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0018",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-6-2-3",
+        "title": "A.6.2.3 Documentation of AI system design and development"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-6-2-3",
+        "title": "A.6.2.3 Documentation of AI system design and development",
+        "statement": "Control A.6.2.3 (Documentation of AI system design and development) of Annex A of ISO/IEC 42001:2023 is about documenting the design and development of an AI system against the organization’s objectives, requirements and criteria. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.6.2.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0019",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-6-2-4",
+        "title": "A.6.2.4 AI system verification and validation"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-6-2-4",
+        "title": "A.6.2.4 AI system verification and validation",
+        "statement": "Control A.6.2.4 (AI system verification and validation) of Annex A of ISO/IEC 42001:2023 is about defining and documenting how an AI system is verified and validated, and the criteria used. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.6.2.4",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0020",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-6-2-5",
+        "title": "A.6.2.5 AI system deployment"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-6-2-5",
+        "title": "A.6.2.5 AI system deployment",
+        "statement": "Control A.6.2.5 (AI system deployment) of Annex A of ISO/IEC 42001:2023 is about documenting a plan for deploying an AI system and checking that its requirements are met before it is deployed. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.6.2.5",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0021",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-6-2-6",
+        "title": "A.6.2.6 AI system operation and monitoring"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-6-2-6",
+        "title": "A.6.2.6 AI system operation and monitoring",
+        "statement": "Control A.6.2.6 (AI system operation and monitoring) of Annex A of ISO/IEC 42001:2023 is about defining and documenting what the ongoing operation of an AI system needs, including the monitoring of the system and its performance, repairs, updates and support. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.6.2.6",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0022",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-6-2-7",
+        "title": "A.6.2.7 AI system technical documentation"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-6-2-7",
+        "title": "A.6.2.7 AI system technical documentation",
+        "statement": "Control A.6.2.7 (AI system technical documentation) of Annex A of ISO/IEC 42001:2023 is about working out what technical documentation each kind of interested party needs about an AI system, and providing it in a suitable form. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.6.2.7",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0023",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-6-2-8",
+        "title": "A.6.2.8 AI system recording of event logs"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-6-2-8",
+        "title": "A.6.2.8 AI system recording of event logs",
+        "statement": "Control A.6.2.8 (AI system recording of event logs) of Annex A of ISO/IEC 42001:2023 is about deciding at which stages of an AI system’s life cycle event logs are kept, including at least while the system is in use. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.6.2.8",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0024",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-7-2",
+        "title": "A.7.2 Data for development and enhancement of AI system"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-7-2",
+        "title": "A.7.2 Data for development and enhancement of AI system",
+        "statement": "Control A.7.2 (Data for development and enhancement of AI system) of Annex A of ISO/IEC 42001:2023 is about defining, documenting and putting in place processes for managing the data used to develop and enhance AI systems. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.7.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0025",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-7-3",
+        "title": "A.7.3 Acquisition of data"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-7-3",
+        "title": "A.7.3 Acquisition of data",
+        "statement": "Control A.7.3 (Acquisition of data) of Annex A of ISO/IEC 42001:2023 is about recording how the data an AI system uses is acquired and selected. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.7.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0026",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-7-4",
+        "title": "A.7.4 Quality of data for AI systems"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-7-4",
+        "title": "A.7.4 Quality of data for AI systems",
+        "statement": "Control A.7.4 (Quality of data for AI systems) of Annex A of ISO/IEC 42001:2023 is about setting and documenting requirements for the quality of the data an AI system uses, and making sure the data meets them. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.7.4",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0027",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-7-5",
+        "title": "A.7.5 Data provenance"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-7-5",
+        "title": "A.7.5 Data provenance",
+        "statement": "Control A.7.5 (Data provenance) of Annex A of ISO/IEC 42001:2023 is about a process for recording where the data an AI system uses comes from, across the life cycle of the data and the system. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.7.5",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0028",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-7-6",
+        "title": "A.7.6 Data preparation"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-7-6",
+        "title": "A.7.6 Data preparation",
+        "statement": "Control A.7.6 (Data preparation) of Annex A of ISO/IEC 42001:2023 is about setting and documenting the criteria for choosing how data is prepared for an AI system, and the methods used. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.7.6",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0029",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-8-2",
+        "title": "A.8.2 System documentation and information for users"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-8-2",
+        "title": "A.8.2 System documentation and information for users",
+        "statement": "Control A.8.2 (System documentation and information for users) of Annex A of ISO/IEC 42001:2023 is about working out what information the users of an AI system need, and providing it. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.8.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0030",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-8-3",
+        "title": "A.8.3 External reporting"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-8-3",
+        "title": "A.8.3 External reporting",
+        "statement": "Control A.8.3 (External reporting) of Annex A of ISO/IEC 42001:2023 is about giving interested parties a way to report adverse impacts of an AI system. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.8.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0031",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-8-4",
+        "title": "A.8.4 Communication of incidents"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-8-4",
+        "title": "A.8.4 Communication of incidents",
+        "statement": "Control A.8.4 (Communication of incidents) of Annex A of ISO/IEC 42001:2023 is about a documented plan for telling users of an AI system about incidents. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.8.4",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0032",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-8-5",
+        "title": "A.8.5 Information for interested parties"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-8-5",
+        "title": "A.8.5 Information for interested parties",
+        "statement": "Control A.8.5 (Information for interested parties) of Annex A of ISO/IEC 42001:2023 is about working out and documenting what the organization reports to interested parties about an AI system. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.8.5",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0033",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-9-2",
+        "title": "A.9.2 Processes for responsible use of AI systems"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-9-2",
+        "title": "A.9.2 Processes for responsible use of AI systems",
+        "statement": "Control A.9.2 (Processes for responsible use of AI systems) of Annex A of ISO/IEC 42001:2023 is about defining and documenting the processes for the responsible use of AI systems. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.9.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0034",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-9-3",
+        "title": "A.9.3 Objectives for responsible use of AI system"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-9-3",
+        "title": "A.9.3 Objectives for responsible use of AI system",
+        "statement": "Control A.9.3 (Objectives for responsible use of AI system) of Annex A of ISO/IEC 42001:2023 is about identifying and documenting objectives that guide the responsible use of AI systems. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.9.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0035",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-9-4",
+        "title": "A.9.4 Intended use of the AI system"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-9-4",
+        "title": "A.9.4 Intended use of the AI system",
+        "statement": "Control A.9.4 (Intended use of the AI system) of Annex A of ISO/IEC 42001:2023 is about making sure an AI system is used as intended and in line with its documentation. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.9.4",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0036",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-10-2",
+        "title": "A.10.2 Allocating responsibilities"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-10-2",
+        "title": "A.10.2 Allocating responsibilities",
+        "statement": "Control A.10.2 (Allocating responsibilities) of Annex A of ISO/IEC 42001:2023 is about allocating responsibilities across an AI system’s life cycle between the organization and its partners, suppliers, customers and other third parties. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.10.2",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer",
+          "serviceProvider"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0037",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-10-3",
+        "title": "A.10.3 Suppliers"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-10-3",
+        "title": "A.10.3 Suppliers",
+        "statement": "Control A.10.3 (Suppliers) of Annex A of ISO/IEC 42001:2023 is about a process for making sure that the services, products or materials the organization gets from suppliers fit its approach to the responsible development and use of AI. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.10.3",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer",
+          "serviceProvider"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0038",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42001-A-10-4",
+        "title": "A.10.4 Customers"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42001-A-10-4",
+        "title": "A.10.4 Customers",
+        "statement": "Control A.10.4 (Customers) of Annex A of ISO/IEC 42001:2023 is about taking the expectations and needs of customers into account in the organization’s responsible approach to developing and using AI systems. Annex A is the reference set of controls for the AI risk treatment in clause 6.1.3; an organization that has adopted the standard records in its Statement of Applicability whether this control applies to it, why, and how far it is implemented.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system",
+          "citation": "Annex A, control A.10.4",
+          "url": "https://www.iso.org/standard/42001",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42001",
+          "title": "ISO/IEC 42001:2023 Information technology - Artificial intelligence - Management system (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The control number and short title are as published in Table A.1 and listed by several secondary sources; the sentence on what the control is about is Triodian’s paraphrase, not the control text. Reviewer to check the paraphrase against a licensed copy of ISO/IEC 42001:2023 before approving. The client’s Statement of Applicability, not this record, decides whether the control applies to a client. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-13-0039",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-INT-ISO42005",
+        "title": "AI system impact assessment (ISO/IEC 42005:2025)"
+      },
+      "record": {
+        "obligationID": "OBL-INT-ISO42005",
+        "title": "AI system impact assessment (ISO/IEC 42005:2025)",
+        "statement": "ISO/IEC 42005:2025 gives guidance for organizations conducting AI system impact assessments: how an AI system, and its foreseeable applications, may affect individuals, groups of individuals and society, across the system’s life cycle. It is guidance, not a set of requirements, and it is not certifiable. An organization that has adopted ISO/IEC 42001:2023 can use it to carry out the impact assessments of Annex A, controls A.5.2 to A.5.5.",
+        "obligationType": "recognisedStandard",
+        "source": {
+          "authority": "ISO/IEC",
+          "instrument": "ISO/IEC 42005:2025 Information technology - Artificial intelligence (AI) - AI system impact assessment",
+          "citation": "Whole standard",
+          "url": "https://www.iso.org/standard/42005",
+          "externalOrgID": "EXT-ISO-IEC"
+        },
+        "jurisdiction": "INT",
+        "sourceTier": "adopted",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-13"
+      },
+      "evidence": [
+        {
+          "url": "https://www.iso.org/standard/42005",
+          "title": "ISO/IEC 42005:2025 Information technology - Artificial intelligence (AI) - AI system impact assessment (Standards body)",
+          "sourceRank": 3,
+          "retrievedAt": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Edition, date and description are from the ISO catalogue page. A matter brief lists this record when the client’s Statement of Applicability says any of A.5.2 to A.5.5 applies. Reviewer to confirm that the Atlas should hold it in the adopted tier rather than the expected tier, since it is guidance. Rests on: OBL-INT-ISO42001 (the standard as a whole, Expected) Research brief: data/research/BRIEF-2026-11-iso-adopted.md"
+    }
+  ]
+}

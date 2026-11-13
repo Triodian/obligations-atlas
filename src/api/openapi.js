@@ -19,7 +19,7 @@ export function openapi(version) {
           summary: 'Find obligations',
           parameters: [
             list(['jurisdiction', 'Comma-separated codes: AU, SG, EU, GB, NZ, US, INT']),
-            list(['tier', 'binding, expected, anticipated']),
+            list(['tier', 'binding, expected, anticipated, adopted']),
             list(['useCase', 'UC1 to UC10. Records specific to these use cases come first; records that apply to any AI use (appliesToAnyAIUse) follow']),
             list(['includeAnyUse', 'false to leave out records that apply to any AI use when filtering by use case']),
             list(['sector', 'regulated sector, e.g. AU-BANKING or SG-INSURANCE; sets the jurisdiction and its entity types']),

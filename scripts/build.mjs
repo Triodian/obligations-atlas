@@ -10,4 +10,5 @@ fs.mkdirSync('public/core', { recursive: true });
 fs.copyFileSync('src/core/atlas.js', 'public/core/atlas.js');
 fs.copyFileSync('src/core/sectors.js', 'public/core/sectors.js');
 fs.copyFileSync('src/core/solution-set.js', 'public/core/solution-set.js');
+fs.copyFileSync('src/core/import.js', 'public/core/import.js'); // the Statement of Applicability parser the engagement apps use (public/shared/import.js there)
 console.log('public/core/atlas.js, sectors.js and solution-set.js updated');

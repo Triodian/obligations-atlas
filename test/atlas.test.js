@@ -359,3 +359,59 @@ test('super trustee sources: valid proposals, and once approved a super trustee 
   assert.ok(claims.obligationsByTier.binding.some((o) => o.obligationID === 'OBL-AU-SIS-52-7'), 'claims triage (UC3) brings in the insurance covenant');
   assert.ok(!Object.values(claims.obligationsByTier).flat().some((o) => o.obligationID === 'OBL-AU-SIS-52-8A'), 'and not the retirement income covenant');
 });
+
+// ---------------------------------------------------------------- the adopted-standard tier (task ISO.8)
+// The 39 records of the research round of 13 November 2026 (ISO/IEC 42001:2023 Annex A and ISO/IEC 42005:2025), as
+// they would read once the Fabric holds them, waiting for review. A brief lists them only where the client's
+// Statement of Applicability says they apply.
+import { readSoA } from '../src/core/import.js';
+const ISO_ROUND = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-13-iso-adopted.json', 'utf8'));
+const asHeld = (snap) => {
+  const tpl = snap.records.find((r) => r.domainType === 'obligation');
+  const extra = ISO_ROUND.proposals.map((p, i) => ({ ...tpl, entityID: p.target.entityID, version: 1, governedRecordID: `${p.target.entityID}@1`, publicationStatus: 'pendingReview', changeProposalIDs: [p.changeProposalID], record: p.record, approval: undefined, provenanceRecordIDs: [] }));
+  return { ...snap, records: snap.records.concat(extra) };
+};
+const isoAtlas = new Atlas(asHeld(preview), { preview: true });
+const SOA = readSoA(fs.readFileSync('test/fixtures/coastline-super-soa.csv', 'utf8'));
+
+test('the research round holds the 38 Annex A controls and ISO/IEC 42005, all adopted, each resting on the standard', () => {
+  const recs = ISO_ROUND.proposals.map((p) => p.record);
+  assert.equal(recs.length, 39);
+  assert.ok(recs.every((r) => r.sourceTier === 'adopted' && r.status === 'inForce' && r.jurisdiction === 'INT' && r.obligationType === 'recognisedStandard'));
+  const ids = recs.map((r) => (r.source.citation.match(/A\.\d+(\.\d+){1,2}/) || [])[0]).filter(Boolean);
+  assert.equal(new Set(ids).size, 38);
+  assert.ok(ISO_ROUND.proposals.every((p) => p.evidence[0].sourceRank === 3 && /iso\.org/.test(p.evidence[0].url)), 'the evidence is the standards body');
+  assert.ok(ISO_ROUND.proposals.every((p) => /Rests on: OBL-INT-ISO42001/.test(p.rationale)));
+  assert.ok(recs.every((r) => !/\b(must|shall|required)\b/i.test(r.statement)), 'records describe what a control is about, in Triodian’s words');
+});
+
+test('with no Statement of Applicability the brief lists no adopted controls and says how to add them', () => {
+  const b = buildMatterBrief(isoAtlas.dataset(), { matterLabel: 'Coastline Super', jurisdictions: ['AU'], sectors: ['AU-SUPERANNUATION'], useCaseIDs: ['UC3'] });
+  assert.equal(b.obligationsByTier.adopted, undefined);
+  assert.ok(b.notices.some((n) => /load the client’s Statement of Applicability/.test(n)));
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
+  assert.ok(!b.questionsForCounsel.some((q) => /Annex A/.test(q.question)));
+});
+
+test('a brief for Coastline Super with its Statement loaded lists the applicable Annex A controls under their own heading', () => {
+  assert.equal(SOA.refused.length, 0);
+  const b = buildMatterBrief(isoAtlas.dataset(), { matterLabel: 'Coastline Super', jurisdictions: ['AU'], sectors: ['AU-SUPERANNUATION'], useCaseIDs: ['UC3'], soa: SOA.rows });
+  const got = b.obligationsByTier.adopted.map((o) => o.obligationID).sort();
+  const want = ['A.2.2', 'A.3.2', 'A.3.3', 'A.5.2', 'A.6.2.6', 'A.9.2', 'A.10.3'].map((c) => 'OBL-INT-ISO42001-' + c.replace(/\./g, '-')).concat('OBL-INT-ISO42005').sort();
+  assert.deepEqual(got, want, 'the controls the Statement says apply, and ISO/IEC 42005 because A.5.2 applies');
+  assert.ok(!got.includes('OBL-INT-ISO42001-A-7-4') && !got.includes('OBL-INT-ISO42001-A-8-2'), 'an excluded control is not listed');
+  const sup = b.obligationsByTier.adopted.find((o) => o.obligationID === 'OBL-INT-ISO42001-A-10-3');
+  assert.deepEqual(sup.statementOfApplicability, { applicable: true, justification: 'Material service providers under CPS 230', implementation: 'Implemented in part' });
+  assert.equal(b.counts.adopted, 8);
+  assert.ok(b.obligationsByTier.binding.some((o) => /CPS 230/.test(o.instrument)), 'beside the CPS 230 paragraphs');
+  assert.ok(!b.questionsForCounsel.some((q) => /42001|42005/.test(q.question) && /Annex A|impact assessment/.test(q.question)), 'adopted controls raise no question for counsel');
+  assert.ok(b.notices.some((n) => /7 of 9 controls listed/.test(n) && /not sent to Triodian/.test(n)));
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
+});
+
+test('with a Statement loaded but no adopted records held yet, the brief says so', () => {
+  const b = buildMatterBrief(atlas.dataset(), { jurisdictions: ['AU'], sectors: ['AU-SUPERANNUATION'], useCaseIDs: ['UC3'], soa: SOA.rows });
+  assert.deepEqual(b.obligationsByTier.adopted, []);
+  assert.ok(b.notices.some((n) => /holds no adopted-standard records yet/.test(n)));
+  assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
+});

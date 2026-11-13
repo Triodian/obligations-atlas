@@ -16,6 +16,7 @@ export const TIERS = {
   binding: { label: 'Binding', describes: 'Law or prudential standard in force' },
   expected: { label: 'Expected', describes: 'Regulator expectation, guidance or recognised standard' },
   anticipated: { label: 'Anticipated', describes: 'Made but not yet in force, under consultation, or a pending bill' },
+  adopted: { label: 'Adopted standard', describes: 'A voluntary standard the client has adopted for itself, such as ISO/IEC 42001:2023 Annex A; the client’s Statement of Applicability decides which records apply' },
 };
 
 export const JURISDICTIONS = {
@@ -278,7 +279,7 @@ export class Atlas {
       if (q && ![o.title, o.statement, o.source.instrument, o.source.citation, o.source.authority, o.obligationID].join(' ').toLowerCase().includes(q)) return false;
       return true;
     });
-    const tierOrder = { binding: 0, expected: 1, anticipated: 2 };
+    const tierOrder = { binding: 0, expected: 1, anticipated: 2, adopted: 3 };
     const anyFirst = (a, b) => (ucs.length ? Number(appliesToAnyAIUse(a.record.useCaseIDs)) - Number(appliesToAnyAIUse(b.record.useCaseIDs)) : 0);
     return out
       .sort((a, b) => anyFirst(a, b) || (a.record.jurisdiction === b.record.jurisdiction ? 0 : a.record.jurisdiction === 'INT' ? 1 : b.record.jurisdiction === 'INT' ? -1 : a.record.jurisdiction < b.record.jurisdiction ? -1 : 1)
@@ -498,6 +499,20 @@ export class Atlas {
  * @param {object} data   Atlas.dataset() output
  * @param {object} input  { matterLabel, jurisdictions[], sectors[] (regulated sector ids), entityTypes[], useCaseIDs[], consequence: { UCn: 'c1'..'c5' }, preparedBy }
  */
+/* ---------- the adopted-standard tier (development plan task ISO.8) ----------
+   A record in the adopted tier is a control of a standard the client may have adopted for itself, such as ISO/IEC
+   42001:2023 Annex A. Whether it applies is the client's choice, recorded in its Statement of Applicability, so a brief
+   lists an adopted record only where the Statement, loaded in the browser, says it applies. ISO/IEC 42005:2025 (impact
+   assessment) is listed where any of A.5.2 to A.5.5 applies. With no Statement loaded, the tier is empty. */
+export const controlOf = (o) => ((String(o.citation || '').match(/\bA\.\d{1,2}(?:\.\d{1,2}){1,2}\b/) || [])[0]) || '';
+export function adoptedFor(o, soa) {
+  const ix = new Map((soa || []).map((r) => [r.control, r]));
+  const c = controlOf(o);
+  if (c) { const r = ix.get(c); return r && r.applicable ? r : null; }
+  if (/42005/.test(o.instrument || '')) { const r = ['A.5.2', 'A.5.3', 'A.5.4', 'A.5.5'].map((k) => ix.get(k)).find((x) => x && x.applicable); return r ? { control: r.control, applicable: true, justification: `Applies because ${r.control} applies: ${r.justification || 'no justification given'}`, implemented: r.implemented } : null; }
+  return null;
+}
+const IMPLEMENTED = { yes: 'Implemented', partly: 'Implemented in part', no: 'Not implemented' };
 export function buildMatterBrief(data, input) {
   const jur = (input.jurisdictions || []).map((j) => j.toUpperCase());
   const secs = (input.sectors || []).map(sectorByID).filter(Boolean);
@@ -509,15 +524,19 @@ export function buildMatterBrief(data, input) {
     && (!reach.length || o.entityTypes.some((e) => reach.includes(e) || e === 'anyOrganization'))
     && (!ucs.length || o.useCaseIDs.some((u) => ucs.includes(u)))
     && !['superseded', 'repealed', 'withdrawn'].includes(o.status));
+  const soa = Array.isArray(input.soa) && input.soa.length ? input.soa : null;
+  const sel = (o) => o.sourceTier !== 'adopted' || (soa && adoptedFor(o, soa));
+  const inScope = obligations.filter(sel);
   const ref = (o) => ({
     obligationID: o.obligationID, title: o.title, instrument: o.instrument, citation: o.citation, jurisdiction: o.jurisdiction,
     appliesToAnyAIUse: appliesToAnyAIUse(o.useCaseIDs),
     status: o.status, keyDates: o.keyDates, useCaseIDs: o.useCaseIDs.filter((u) => !ucs.length || ucs.includes(u)),
     sourceURL: o.sourceURL, lastVerified: o.lastVerified, governedRecordID: o.governedRecordID, publicationStatus: o.publicationStatus, provenanceRef: o.provenanceRef,
+    ...(o.sourceTier === 'adopted' && soa ? (() => { const r = adoptedFor(o, soa); return { statementOfApplicability: { applicable: true, justification: r.justification || '', implementation: IMPLEMENTED[r.implemented] || 'Not stated' } }; })() : {}),
   });
-  const byTier = { binding: [], expected: [], anticipated: [] };
+  const byTier = { binding: [], expected: [], anticipated: [], ...(soa ? { adopted: [] } : {}) };
   // Records specific to the selected use cases come before records that apply to any AI use.
-  const sorted = obligations.slice().sort((a, b) => Number(appliesToAnyAIUse(a.useCaseIDs)) - Number(appliesToAnyAIUse(b.useCaseIDs)));
+  const sorted = inScope.slice().sort((a, b) => Number(appliesToAnyAIUse(a.useCaseIDs)) - Number(appliesToAnyAIUse(b.useCaseIDs)));
   for (const o of sorted) (byTier[o.sourceTier] || (byTier[o.sourceTier] = [])).push(ref(o));
   const ucByID = new Map(data.useCases.map((u) => [u.useCaseID, u]));
 
@@ -529,7 +548,8 @@ export function buildMatterBrief(data, input) {
     questions.push({ about: u, question: `Measured against the client’s own thresholds, which consequence level (C1 to C5) should counsel set for ${u} (${uc.title})?` });
   }
   const instruments = new Map();
-  for (const o of obligations) {
+  for (const o of inScope) {
+    if (o.sourceTier === 'adopted') continue; // the client's own choice, recorded in its Statement of Applicability
     const k = `${o.instrument}`;
     if (!instruments.has(k)) instruments.set(k, o);
   }
@@ -572,9 +592,9 @@ export function buildMatterBrief(data, input) {
     dataset: { name: data.info.name, generatedAt: data.info.generatedAt, metamodelVersion: data.info.metamodelVersion, ledgerHead: data.info.ledgerHead, preview: data.info.preview },
     obligationsByTier: byTier,
     counts: {
-      binding: byTier.binding.length, expected: byTier.expected.length, anticipated: byTier.anticipated.length,
-      specificToUseCases: obligations.filter((o) => !appliesToAnyAIUse(o.useCaseIDs)).length,
-      anyAIUse: obligations.filter((o) => appliesToAnyAIUse(o.useCaseIDs)).length,
+      binding: byTier.binding.length, expected: byTier.expected.length, anticipated: byTier.anticipated.length, ...(soa ? { adopted: byTier.adopted.length } : {}),
+      specificToUseCases: inScope.filter((o) => !appliesToAnyAIUse(o.useCaseIDs)).length,
+      anyAIUse: inScope.filter((o) => appliesToAnyAIUse(o.useCaseIDs)).length,
     },
     coverage: jur.filter((j) => j !== 'INT' && !data.obligations.some((o) => o.jurisdiction === j)).map((j) => ({ jurisdiction: j, coverage: 'notYetCovered', note: notCoveredNote(j) })),
     questionsForCounsel: questions,
@@ -582,7 +602,9 @@ export function buildMatterBrief(data, input) {
     ...(route.profile ? { profile: route.profile } : {}),
     notices: [
       STANDING_RULE,
-      'Tiers describe sources: Binding (law or prudential standard in force), Expected (regulator expectation, guidance or recognised standard), Anticipated (made but not yet in force, or under consultation).',
+      'Tiers describe sources: Binding (law or prudential standard in force), Expected (regulator expectation, guidance or recognised standard), Anticipated (made but not yet in force, or under consultation)' + (soa ? ', Adopted standard (a voluntary standard the client has adopted for itself).' : '.'),
+      ...(soa && !data.obligations.some((o) => o.sourceTier === 'adopted') ? ['Adopted standard: the Atlas holds no adopted-standard records yet, so none can be listed. The ISO/IEC 42001:2023 Annex A controls are with a Triodian reviewer.'] : []),
+      ...(soa ? [`Adopted standard: the controls the client’s Statement of Applicability says apply (${soa.filter((r) => r.applicable).length} of ${soa.length} controls listed), with its justification and implementation status. The Statement was read in this browser and not sent to Triodian. Whether the client meets a control is not for the Atlas to say.`] : (data.obligations.some((o) => o.sourceTier === 'adopted') ? ['Adopted standard: load the client’s Statement of Applicability to list the ISO/IEC 42001:2023 Annex A controls it has adopted.'] : [])),
       'This brief was built in the browser. The matter label, scope and consequence levels were not sent to Triodian.',
       ...(data.info.preview ? ['Preview data: records marked pending review have not yet been approved by a Triodian reviewer.'] : []),
     ],
