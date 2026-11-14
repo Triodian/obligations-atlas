@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/baseline-profile.schema.json",
+  "title": "Baseline Profile Schema",
+  "description": "A best-practice baseline: a sector profile that holds in any jurisdiction, drawn from international standard setters and adopted standards, never from one country's rules. A jurisdiction's main sectors are a baseline plus that jurisdiction's overlay of binding and expected obligations. A baseline gives starting positions for the engagement apps (areas, critical operations, typical uses, failure cases, uses boards commonly consider ruling out). It states no legal conclusion and says nothing about what any organization is obliged to do; that depends on the jurisdiction's overlay and is for counsel.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "baselineProfileID",
+    "name",
+    "description",
+    "governingBody",
+    "sources",
+    "areas",
+    "criticalOperations",
+    "typicalUses",
+    "failureCases",
+    "redLineCandidates",
+    "controls"
+  ],
+  "properties": {
+    "baselineProfileID": {
+      "description": "Unique identifier, e.g. BP-BANKING",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Short name shown to users"
+    },
+    "description": {
+      "type": "string",
+      "description": "Who the profile is for"
+    },
+    "governingBody": {
+      "type": "string",
+      "enum": [
+        "board",
+        "accountableAuthority"
+      ],
+      "description": "Who sets the direction: a company board, or the accountable authority of a public body (agency head, statutory authority board or minister's delegate). Apps use it to label the governing body"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "issuer",
+          "date",
+          "publicationStage"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title as the issuer gives it"
+          },
+          "issuer": {
+            "type": "string",
+            "description": "Issuing body"
+          },
+          "date": {
+            "type": "string",
+            "description": "Publication date or year as the issuer gives it"
+          },
+          "publicationStage": {
+            "type": "string",
+            "enum": [
+              "current",
+              "final",
+              "draft",
+              "inDevelopment",
+              "consultation"
+            ],
+            "description": "Where the source stands when last checked: current or final, a draft, in development, or out for consultation"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "internationalGuidance",
+              "adoptedStandard",
+              "referenceProfile"
+            ],
+            "description": "internationalGuidance = a standard setter's principles or paper; adoptedStandard = an ISO, IEC or NIST standard an organization may adopt; referenceProfile = a national framework used only as a cross-walk target"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Where the source is published"
+          },
+          "usedFor": {
+            "type": "string",
+            "description": "What the profile takes from the source"
+          }
+        }
+      },
+      "minItems": 1,
+      "description": "International sources and adopted standards the profile draws on, as checked on the date in the data set's description"
+    },
+    "sourceGap": {
+      "type": "string",
+      "description": "Where no international source specific to AI in the sector was found, what the profile rests on instead"
+    },
+    "areas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Starting areas of the business"
+    },
+    "criticalOperations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Operations whose disruption the profile treats as critical"
+    },
+    "typicalUses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "use",
+          "authorityLevel"
+        ],
+        "properties": {
+          "use": {
+            "type": "string",
+            "description": "The use, in one line"
+          },
+          "authorityLevel": {
+            "$ref": "use-case.schema.json#/definitions/authorityLevel"
+          }
+        }
+      },
+      "minItems": 1,
+      "description": "Typical AI uses in the sector, each with its usual authority level"
+    },
+    "failureCases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Failure cases for the director briefing"
+    },
+    "redLineCandidates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Uses boards commonly consider ruling out, shown only if the board asks; not a recommendation"
+    },
+    "controls": {
+      "type": "array",
+      "description": "Baseline controls (baseline-controls.json) the profile carries",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/definitions/identifier"
+          }
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the profile"
+    }
+  }
+}

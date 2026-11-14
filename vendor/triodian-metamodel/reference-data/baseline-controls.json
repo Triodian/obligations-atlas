@@ -1,0 +1,40 @@
+{
+  "title": "Baseline controls",
+  "description": "Controls every baseline profile carries, whatever the jurisdiction. Each item validates against schemas/baseline-control.schema.json.",
+  "schema": "baseline-control.schema.json",
+  "version": "1.0",
+  "items": [
+    {
+      "baselineControlID": "BC1",
+      "name": "Agent controls",
+      "description": "For each AI use at A3 and above: its permission scope, an action log, a human checkpoint before actions at A4 and above, and a way to stop it",
+      "appliesFrom": "a3Decision",
+      "version": "1.0"
+    },
+    {
+      "baselineControlID": "BC2",
+      "name": "Fast path",
+      "description": "A position set by the board or accountable authority: AI uses at A1 and A2 with consequence C1 or C2 are approved by management within a stated number of days",
+      "appliesFrom": "a1Productivity",
+      "version": "1.0"
+    },
+    {
+      "baselineControlID": "BC3",
+      "name": "One evidence register",
+      "description": "Each provider's evidence (E0 to E6) recorded once and cross-walked to every regime in the matter brief",
+      "appliesFrom": "a1Productivity",
+      "version": "1.0"
+    },
+    {
+      "baselineControlID": "BC4",
+      "name": "Productivity measures",
+      "description": "Two measures in the board view, so an organization can show whether governance speeds or slows AI use",
+      "appliesFrom": "a1Productivity",
+      "measures": [
+        "Days from request to approval for a new AI use",
+        "Share of AI use on sanctioned tools"
+      ],
+      "version": "1.0"
+    }
+  ]
+}

@@ -44,6 +44,9 @@ function limiter() {
  */
 export function createApp({ snapshot, preview = false, apiKeys = [], requireKey = false, anonPerMinute = KEYLESS_PER_MINUTE, keyProvider = () => [], firms = null, defaults = {} }) {
   const atlas = new Atlas(snapshot, { preview });
+  // Jurisdictions shown as covered: those the Atlas goes to full depth in and holds records for (US records arrive
+  // through the review queue, so the front door says covered only once some are published).
+  const heldJurisdictions = () => atlas.jurisdictions().filter((j) => j.depth === 'full' && j.available).map((j) => j.code);
   const app = new Hono();
   const limit = limiter();
   const staticKeys = apiKeys;
@@ -140,7 +143,7 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
     c.header('cache-control', 'public, max-age=300');
     // With the choices the front door offers for organisation type: jurisdictions, regulated sectors and the general types.
     return send(c, { ...ROUTING_TABLE,
-      jurisdictions: Object.entries(JURISDICTIONS).filter(([k]) => k !== 'INT').map(([code, j]) => ({ code, name: j.name, covered: j.depth === 'full' })),
+      jurisdictions: Object.entries(JURISDICTIONS).filter(([k]) => k !== 'INT').map(([code, j]) => ({ code, name: j.name, covered: j.depth === 'full' && heldJurisdictions().includes(code) })),
       sectors: REGULATED_SECTORS.map((d) => ({ regulatedSectorID: d.regulatedSectorID, jurisdiction: d.jurisdiction, name: d.name, financiallyRegulated: !!d.financiallyRegulated, entityTypes: d.entityTypes })),
       generalEntityTypes: GENERAL_ENTITY_TYPES.map((id) => ({ id, name: ENTITY_TYPES[id] })),
       entityTypeNames: ENTITY_TYPES });
@@ -152,7 +155,7 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
     const jur = (q.jurisdiction || '').toUpperCase();
     if (jur && !(jur in JURISDICTIONS)) return problem(c, 400, 'query.jurisdiction', `Unknown jurisdiction ${jur}`);
     const atlasUrl = new URL(c.req.url).origin;
-    const r = solutionSet({ role: q.role, entityTypes: list('entityType'), sectors: list('sector'), jurisdiction: jur || undefined, size: q.size, prompt: q.prompt }, { atlasUrl });
+    const r = solutionSet({ role: q.role, entityTypes: list('entityType'), sectors: list('sector'), jurisdiction: jur || undefined, size: q.size, prompt: q.prompt }, { atlasUrl, coveredJurisdictions: heldJurisdictions() });
     return r.error ? problem(c, 400, 'query.solutionSet', r.error) : send(c, r);
   });
   app.get('/api/v1/jurisdictions', (c) => send(c, { items: atlas.jurisdictions() }));

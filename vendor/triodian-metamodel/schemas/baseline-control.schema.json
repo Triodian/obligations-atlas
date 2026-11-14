@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://triodian.com/schemas/baseline-control.schema.json",
+  "title": "Baseline Control Schema",
+  "description": "A control every baseline profile carries, whatever the jurisdiction: what the engagement apps hold for it. A control is a starting position for the organization to adopt or change, not an obligation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "baselineControlID",
+    "name",
+    "description",
+    "appliesFrom"
+  ],
+  "properties": {
+    "baselineControlID": {
+      "description": "Unique identifier, e.g. BC1",
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/definitions/identifier"
+        }
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Short name shown to users"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the apps hold for the control"
+    },
+    "appliesFrom": {
+      "type": "string",
+      "description": "Where the control starts to apply, in the suite's scales"
+    },
+    "measures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Measures the control adds to the board view"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the profile"
+    }
+  }
+}

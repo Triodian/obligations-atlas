@@ -8,9 +8,14 @@ export function rankFor(url) {
   if (/mas\.gov\.sg\/-\/media\/.*guidelines.*\.pdf/.test(u) || /mas\.gov\.sg\/regulation\/notices\//.test(u)) return [1, 'MAS instrument'];
   if (/asx\.com\.au\/.*listing-rules|asxonline\.com\/.*gn\d+/.test(u)) return [1, 'ASX Listing Rules and Guidance Notes'];
   if (/pdpc\.gov\.sg\/-\/media\/.*advisory-guidelines/.test(u)) return [1, 'PDPC advisory guidelines'];
+  // United States: official legal text and the self-regulatory rulebooks and reliability standards.
+  if (/ecfr\.gov|federalregister\.gov|govinfo\.gov|uscode\.house\.gov|capitol\.texas\.gov\/tlodocs|leg\.colorado\.gov|cppa\.ca\.gov\/regulations\/pdf/.test(u)) return [1, 'Official legal text'];
+  if (/finra\.org\/rules-guidance\/rulebooks|nerc\.com\/pa\/stand\/reliability/.test(u)) return [1, 'SRO rule or reliability standard'];
+  if (/federalreserve\.gov\/supervisionreg\/srletters/.test(u)) return [2, 'Regulator publication'];
   if (/iso\.org|nist\.gov/.test(u)) return [3, 'Standards body'];
-  if (/allenandgledhill|bakermckenzie|lexology|herbertsmith|nortonrose|allens\.com|kwm\.com|gtlaw|minterellison|klgates|hsfkramer/.test(u)) return [4, 'Law firm commentary'];
-  if (/apra\.gov\.au|asic\.gov\.au|oaic\.gov\.au|mas\.gov\.sg|pdpc\.gov\.sg|imda\.gov\.sg|mddi\.gov\.sg|industry\.gov\.au|asx\.com\.au|ahpra\.gov\.au|csa\.gov\.sg|customs\.gov\.sg|mom\.gov\.sg|ccs\.gov\.sg|moh\.gov\.sg|isomer-user-content\.by\.gov\.sg|defence\.gov\.au|fsb\.org/.test(u)) return [2, 'Regulator publication'];
+  if (/allenandgledhill|bakermckenzie|lexology|herbertsmith|nortonrose|allens\.com|kwm\.com|gtlaw|minterellison|klgates|hsfkramer|hunton|hklaw|mofo\.com|akingump|debevoise|mayerbrown|mcdermottlaw|insideprivacy/.test(u)) return [4, 'Law firm commentary'];
+  if (/law\.cornell\.edu/.test(u)) return [4, 'Unofficial copy of legal text'];
+  if (/apra\.gov\.au|asic\.gov\.au|oaic\.gov\.au|mas\.gov\.sg|pdpc\.gov\.sg|imda\.gov\.sg|mddi\.gov\.sg|industry\.gov\.au|asx\.com\.au|ahpra\.gov\.au|csa\.gov\.sg|customs\.gov\.sg|mom\.gov\.sg|ccs\.gov\.sg|moh\.gov\.sg|isomer-user-content\.by\.gov\.sg|defence\.gov\.au|fsb\.org|occ\.gov|fdic\.gov|ncua\.gov|sec\.gov|finra\.org|hhs\.gov|healthit\.gov|cisa\.gov|naic\.org|dfs\.ny\.gov|cppa\.ca\.gov|texasattorneygeneral\.gov|nerc\.com|federalreserve\.gov/.test(u)) return [2, 'Regulator publication'];
   return [5, 'Other'];
 }
 export const urlsIn = (s) => [...new Set((s || '').match(/https?:\/\/[^\s;,)]+/g) || [])].map((u) => u.replace(/[.'"]+$/, ''));

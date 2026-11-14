@@ -1,0 +1,895 @@
+{
+  "title": "Best-practice baseline profiles",
+  "description": "Sector profiles that hold in any jurisdiction, drawn from international standard setters and adopted standards. A jurisdiction's main sectors are a baseline plus the jurisdiction's overlay. Each item validates against schemas/baseline-profile.schema.json. Sources were checked on 14 November 2026; draft and in-development sources are re-checked each quarter.",
+  "schema": "baseline-profile.schema.json",
+  "version": "1.0",
+  "items": [
+    {
+      "baselineProfileID": "BP-BANKING",
+      "name": "Banking",
+      "description": "Deposit-takers and lenders",
+      "governingBody": "board",
+      "sources": [
+        {
+          "title": "Principles for the sound management of third-party risk",
+          "issuer": "BCBS",
+          "date": "2025-12-10",
+          "publicationStage": "current",
+          "kind": "internationalGuidance",
+          "url": "https://www.bis.org/bcbs/publ/d605.htm",
+          "usedFor": "Third-party arrangements, including AI providers"
+        },
+        {
+          "title": "Enhancing third-party risk management and oversight: a toolkit",
+          "issuer": "FSB",
+          "date": "2023-12",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.fsb.org/2023/12/enhancing-third-party-risk-management-and-oversight-a-toolkit-for-financial-institutions-and-financial-authorities/",
+          "usedFor": "Third-party and concentration risk"
+        },
+        {
+          "title": "Monitoring adoption of AI and related vulnerabilities in the financial sector",
+          "issuer": "FSB",
+          "date": "2025-10-10",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.fsb.org/2025/10/monitoring-adoption-of-artificial-intelligence-and-related-vulnerabilities-in-the-financial-sector/",
+          "usedFor": "Concentration in the generative AI supply chain"
+        },
+        {
+          "title": "Financial Services AI Risk Management Framework and AI Lexicon",
+          "issuer": "US Department of the Treasury with the FSSCC",
+          "date": "2026-02-19",
+          "publicationStage": "final",
+          "kind": "referenceProfile",
+          "url": "https://home.treasury.gov/",
+          "usedFor": "Cross-walk target only, not a baseline source"
+        },
+        {
+          "title": "ISO/IEC 42001:2023, Artificial intelligence management system",
+          "issuer": "ISO/IEC",
+          "date": "2023-12",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.iso.org/standard/81230.html",
+          "usedFor": "Management-system frame and Annex A controls"
+        },
+        {
+          "title": "AI Risk Management Framework (NIST AI 100-1)",
+          "issuer": "NIST",
+          "date": "2023-01",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "usedFor": "Govern, map, measure, manage"
+        }
+      ],
+      "areas": [
+        "Retail lending",
+        "Business lending",
+        "Deposits and payments",
+        "Fraud and financial crime",
+        "Markets and treasury",
+        "Customer service",
+        "Operations",
+        "Technology and security"
+      ],
+      "criticalOperations": [
+        "Payments and settlement",
+        "Customer access to deposits",
+        "Credit decisioning",
+        "Fraud and AML screening"
+      ],
+      "typicalUses": [
+        {
+          "use": "Document summarisation",
+          "authorityLevel": "a1Productivity"
+        },
+        {
+          "use": "Credit scoring a person approves",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Automated low-value credit decisions",
+          "authorityLevel": "a3Decision"
+        },
+        {
+          "use": "Fraud blocks on transactions",
+          "authorityLevel": "a3Decision"
+        },
+        {
+          "use": "Treasury or payment agents",
+          "authorityLevel": "a4Transactional"
+        },
+        {
+          "use": "Agents with system credentials in operations",
+          "authorityLevel": "a6Actuation"
+        }
+      ],
+      "failureCases": [
+        "A credit model declines a group of applicants on a proxy for a protected attribute",
+        "A fraud model freezes legitimate accounts at scale",
+        "A provider's model change shifts decisions without notice",
+        "An agent with payment authority is compromised"
+      ],
+      "redLineCandidates": [
+        "A final credit or account-closure decision no person can review",
+        "Agents initiating payments above a set value unattended",
+        "Customer data used to train an external model"
+      ],
+      "controls": [
+        "BC1",
+        "BC2",
+        "BC3",
+        "BC4"
+      ],
+      "version": "1.0"
+    },
+    {
+      "baselineProfileID": "BP-INSURANCE",
+      "name": "Insurance",
+      "description": "Life, general and health insurers",
+      "governingBody": "board",
+      "sources": [
+        {
+          "title": "Application Paper on the supervision of artificial intelligence",
+          "issuer": "IAIS",
+          "date": "2025-07-02",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.iais.org/2025/07/the-iais-publishes-application-paper-on-the-supervision-of-artificial-intelligence/",
+          "usedFor": "Governance, robustness, transparency and fairness under the ICPs"
+        },
+        {
+          "title": "Enhancing third-party risk management and oversight: a toolkit",
+          "issuer": "FSB",
+          "date": "2023-12",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.fsb.org/2023/12/enhancing-third-party-risk-management-and-oversight-a-toolkit-for-financial-institutions-and-financial-authorities/",
+          "usedFor": "Third-party and concentration risk"
+        },
+        {
+          "title": "ISO/IEC 42001:2023, Artificial intelligence management system",
+          "issuer": "ISO/IEC",
+          "date": "2023-12",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.iso.org/standard/81230.html",
+          "usedFor": "Management-system frame and Annex A controls"
+        },
+        {
+          "title": "AI Risk Management Framework (NIST AI 100-1)",
+          "issuer": "NIST",
+          "date": "2023-01",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "usedFor": "Govern, map, measure, manage"
+        }
+      ],
+      "areas": [
+        "Distribution and sales",
+        "Underwriting",
+        "Pricing",
+        "Claims",
+        "Customer service",
+        "Reinsurance and capital",
+        "Investments",
+        "Technology"
+      ],
+      "criticalOperations": [
+        "Claims payment",
+        "Policy issue and renewal",
+        "Premium collection"
+      ],
+      "typicalUses": [
+        {
+          "use": "Claims triage",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Straight-through claims under a value limit",
+          "authorityLevel": "a3Decision"
+        },
+        {
+          "use": "Pricing models",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Fraud referral",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Customer chatbots",
+          "authorityLevel": "a1Productivity"
+        }
+      ],
+      "failureCases": [
+        "Granular pricing excludes a group from cover",
+        "Automated claims decline valid claims",
+        "A third-party model's output cannot be explained to a claimant",
+        "The insurer cannot obtain evidence from the vendor of a model it relies on"
+      ],
+      "redLineCandidates": [
+        "Claim denial with no person reviewing it",
+        "Pricing on data the customer did not provide and cannot see",
+        "Health or genetic data in models outside the insurer's control"
+      ],
+      "controls": [
+        "BC1",
+        "BC2",
+        "BC3",
+        "BC4"
+      ],
+      "version": "1.0"
+    },
+    {
+      "baselineProfileID": "BP-SECURITIES",
+      "name": "Securities and investment advice",
+      "description": "Broker-dealers, advisers and fund managers",
+      "governingBody": "board",
+      "sources": [
+        {
+          "title": "Supervisory Toolkit for AI use in Capital Markets",
+          "issuer": "IOSCO",
+          "date": "2026-05-25",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.iosco.org/",
+          "usedFor": "Supervisory expectations for AI in capital markets"
+        },
+        {
+          "title": "Artificial Intelligence in Capital Markets: Use Cases, Risks, and Challenges",
+          "issuer": "IOSCO",
+          "date": "2025-03-12",
+          "publicationStage": "consultation",
+          "kind": "internationalGuidance",
+          "url": "https://www.iosco.org/",
+          "usedFor": "Use cases and risks"
+        },
+        {
+          "title": "The use of artificial intelligence and machine learning by market intermediaries and asset managers",
+          "issuer": "IOSCO",
+          "date": "2021-09",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.iosco.org/",
+          "usedFor": "Six measures"
+        },
+        {
+          "title": "ISO/IEC 42001:2023, Artificial intelligence management system",
+          "issuer": "ISO/IEC",
+          "date": "2023-12",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.iso.org/standard/81230.html",
+          "usedFor": "Management-system frame and Annex A controls"
+        },
+        {
+          "title": "AI Risk Management Framework (NIST AI 100-1)",
+          "issuer": "NIST",
+          "date": "2023-01",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "usedFor": "Govern, map, measure, manage"
+        }
+      ],
+      "areas": [
+        "Advice and recommendations",
+        "Client communications",
+        "Trading and execution",
+        "Research",
+        "Portfolio management",
+        "Compliance and surveillance",
+        "Operations"
+      ],
+      "criticalOperations": [
+        "Order handling and execution",
+        "Client asset safeguarding",
+        "Trade surveillance"
+      ],
+      "typicalUses": [
+        {
+          "use": "Research summaries",
+          "authorityLevel": "a1Productivity"
+        },
+        {
+          "use": "Suitability suggestions an adviser reviews",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "AI-drafted client communications",
+          "authorityLevel": "a1Productivity"
+        },
+        {
+          "use": "Trading algorithms",
+          "authorityLevel": "a4Transactional"
+        },
+        {
+          "use": "Agents acting across client accounts",
+          "authorityLevel": "a5Agentic"
+        }
+      ],
+      "failureCases": [
+        "Unsuitable or misleading AI-generated advice reaches clients",
+        "A trading agent acts beyond its mandate",
+        "Prompts and outputs are not kept as records",
+        "Several firms using the same model move together in a stress"
+      ],
+      "redLineCandidates": [
+        "Advice sent to retail clients with no adviser review",
+        "Trading agents without a hard limit and a stop",
+        "Client communications generated with no record of the prompt"
+      ],
+      "controls": [
+        "BC1",
+        "BC2",
+        "BC3",
+        "BC4"
+      ],
+      "version": "1.0"
+    },
+    {
+      "baselineProfileID": "BP-HEALTH",
+      "name": "Health care",
+      "description": "Health care providers and health plans",
+      "governingBody": "board",
+      "sources": [
+        {
+          "title": "Ethics and governance of artificial intelligence for health: Guidance on large multi-modal models",
+          "issuer": "WHO",
+          "date": "2024-01",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.who.int/publications-detail-redirect/9789240084759",
+          "usedFor": "Over 40 recommendations; six principles"
+        },
+        {
+          "title": "Ethics and governance of artificial intelligence for health",
+          "issuer": "WHO",
+          "date": "2021-06",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.who.int/publications/i/item/9789240029200",
+          "usedFor": "Founding guidance"
+        },
+        {
+          "title": "ISO 14971, Medical devices: application of risk management",
+          "issuer": "ISO",
+          "date": "2019",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.iso.org/standard/72704.html",
+          "usedFor": "Where AI is a medical device; which device rules apply is each jurisdiction's"
+        },
+        {
+          "title": "IEC 62304, Medical device software: software life cycle processes",
+          "issuer": "IEC",
+          "date": "2006, amended 2015",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "usedFor": "Where AI is a medical device"
+        },
+        {
+          "title": "ISO/IEC 42001:2023, Artificial intelligence management system",
+          "issuer": "ISO/IEC",
+          "date": "2023-12",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.iso.org/standard/81230.html",
+          "usedFor": "Management-system frame and Annex A controls"
+        },
+        {
+          "title": "AI Risk Management Framework (NIST AI 100-1)",
+          "issuer": "NIST",
+          "date": "2023-01",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "usedFor": "Govern, map, measure, manage"
+        }
+      ],
+      "areas": [
+        "Clinical care",
+        "Diagnostics",
+        "Patient communication",
+        "Scheduling and administration",
+        "Clinical documentation",
+        "Coverage and prior authorisation",
+        "Research"
+      ],
+      "criticalOperations": [
+        "Patient treatment",
+        "Medication",
+        "Emergency care",
+        "Coverage decisions"
+      ],
+      "typicalUses": [
+        {
+          "use": "Ambient clinical documentation",
+          "authorityLevel": "a1Productivity"
+        },
+        {
+          "use": "Diagnostic support a clinician reviews",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Triage",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Prior-authorisation recommendations",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Automated coverage approvals",
+          "authorityLevel": "a3Decision"
+        }
+      ],
+      "failureCases": [
+        "A clinician relies on a wrong AI suggestion (automation bias)",
+        "Coverage is denied by an algorithm with no clinical review",
+        "Patient data reaches a model outside the organization's control",
+        "A model performs worse for a population it was not trained on"
+      ],
+      "redLineCandidates": [
+        "A denial of care or coverage with no clinician's review",
+        "Patient-facing advice with no clinical oversight",
+        "Health information in tools not under the organization's contract"
+      ],
+      "controls": [
+        "BC1",
+        "BC2",
+        "BC3",
+        "BC4"
+      ],
+      "version": "1.0"
+    },
+    {
+      "baselineProfileID": "BP-PAYMENTS",
+      "name": "Payments and money transmission",
+      "description": "Payment providers, remitters and e-money issuers",
+      "governingBody": "board",
+      "sources": [
+        {
+          "title": "FATF Recommendations, including Recommendation 15 (new technologies) and Recommendation 16 (payment transparency)",
+          "issuer": "FATF",
+          "date": "2012, R.16 revised 2025",
+          "publicationStage": "current",
+          "kind": "internationalGuidance",
+          "usedFor": "Screening, identity and new technologies"
+        },
+        {
+          "title": "Principles for financial market infrastructures",
+          "issuer": "CPMI-IOSCO",
+          "date": "2012-04",
+          "publicationStage": "current",
+          "kind": "internationalGuidance",
+          "url": "https://www.bis.org/cpmi/publ/d101a.pdf",
+          "usedFor": "Systemically important payment systems only"
+        },
+        {
+          "title": "Enhancing third-party risk management and oversight: a toolkit",
+          "issuer": "FSB",
+          "date": "2023-12",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.fsb.org/2023/12/enhancing-third-party-risk-management-and-oversight-a-toolkit-for-financial-institutions-and-financial-authorities/",
+          "usedFor": "Third-party and concentration risk"
+        },
+        {
+          "title": "ISO/IEC 42001:2023, Artificial intelligence management system",
+          "issuer": "ISO/IEC",
+          "date": "2023-12",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.iso.org/standard/81230.html",
+          "usedFor": "Management-system frame and Annex A controls"
+        },
+        {
+          "title": "AI Risk Management Framework (NIST AI 100-1)",
+          "issuer": "NIST",
+          "date": "2023-01",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "usedFor": "Govern, map, measure, manage"
+        }
+      ],
+      "sourceGap": "No international standard setter has issued AI-specific guidance for payment providers as at November 2026; the profile rests on FATF, the FSB toolkit and the common sources",
+      "areas": [
+        "Onboarding and identity",
+        "Transaction processing",
+        "Fraud",
+        "Sanctions and AML screening",
+        "Disputes and chargebacks",
+        "Customer service",
+        "Treasury and liquidity"
+      ],
+      "criticalOperations": [
+        "Payment processing",
+        "Settlement",
+        "Sanctions screening"
+      ],
+      "typicalUses": [
+        {
+          "use": "Identity verification",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Real-time fraud scoring that blocks a payment",
+          "authorityLevel": "a3Decision"
+        },
+        {
+          "use": "Sanctions screening triage",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Agents that initiate or route payments",
+          "authorityLevel": "a4Transactional"
+        }
+      ],
+      "failureCases": [
+        "False positives stop legitimate payments at scale",
+        "A sanctions hit is missed because a model was tuned for fewer alerts",
+        "An agent initiates payments on a compromised instruction",
+        "A payment initiated by a customer's AI agent cannot be attributed"
+      ],
+      "redLineCandidates": [
+        "Agents initiating payments without a value limit and a stop",
+        "Account closure on a model score alone",
+        "Screening thresholds changed without a person's sign-off"
+      ],
+      "controls": [
+        "BC1",
+        "BC2",
+        "BC3",
+        "BC4"
+      ],
+      "version": "1.0"
+    },
+    {
+      "baselineProfileID": "BP-CI-GOVERNMENT",
+      "name": "Critical infrastructure, government-managed",
+      "description": "Utilities, transport, water and networks run by a public body",
+      "governingBody": "accountableAuthority",
+      "sources": [
+        {
+          "title": "Principles for the Secure Integration of Artificial Intelligence in Operational Technology",
+          "issuer": "CISA with the ACSC and six other national cyber agencies",
+          "date": "2025-12",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://labs.cloudsecurityalliance.org/research/csa-research-note-cisa-ot-zero-trust-ai-governance-20260501/",
+          "usedFor": "AI in operational technology"
+        },
+        {
+          "title": "IEC 62443, Industrial automation and control systems security",
+          "issuer": "IEC",
+          "date": "series",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "usedFor": "Control-system security"
+        },
+        {
+          "title": "AI RMF Profile on Trustworthy AI in Critical Infrastructure (concept note)",
+          "issuer": "NIST",
+          "date": "2026-04-07",
+          "publicationStage": "inDevelopment",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/programs-projects/concept-note-ai-rmf-profile-trustworthy-ai-critical-infrastructure",
+          "usedFor": "AI across IT, OT and control systems; re-check each quarter"
+        },
+        {
+          "title": "Adapting Zero Trust Principles to Operational Technology",
+          "issuer": "CISA, DOE, FBI, State and DoD",
+          "date": "2026-04-29",
+          "publicationStage": "final",
+          "kind": "referenceProfile",
+          "url": "https://www.cisa.gov/",
+          "usedFor": "Cross-walk target"
+        },
+        {
+          "title": "Governing with Artificial Intelligence: The State of Play and Way Forward in Core Government Functions",
+          "issuer": "OECD",
+          "date": "2025-09-18",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.oecd.org/en/publications/2025/06/governing-with-artificial-intelligence_398fa287.html",
+          "usedFor": "Public-sector governance; high-benefit, low-risk first"
+        },
+        {
+          "title": "ISO/IEC 42001:2023, Artificial intelligence management system",
+          "issuer": "ISO/IEC",
+          "date": "2023-12",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.iso.org/standard/81230.html",
+          "usedFor": "Management-system frame and Annex A controls"
+        },
+        {
+          "title": "AI Risk Management Framework (NIST AI 100-1)",
+          "issuer": "NIST",
+          "date": "2023-01",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "usedFor": "Govern, map, measure, manage"
+        }
+      ],
+      "areas": [
+        "Network operations",
+        "Asset maintenance",
+        "Customer and community service",
+        "Emergency response",
+        "Procurement",
+        "Information technology",
+        "Operational technology"
+      ],
+      "criticalOperations": [
+        "Service supply (power, water, transport)",
+        "Safety systems",
+        "Emergency response"
+      ],
+      "typicalUses": [
+        {
+          "use": "Predictive maintenance",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Outage and demand forecasting",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Control-room decision support",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Automated switching or setpoint changes",
+          "authorityLevel": "a6Actuation"
+        }
+      ],
+      "failureCases": [
+        "An AI-enabled change reaches a safety system",
+        "A supplier's remote access is used by an attacker's agent",
+        "Decisions about the community (service restriction, prioritisation) cannot be explained or reviewed",
+        "The operator cannot show what an AI did after an incident"
+      ],
+      "redLineCandidates": [
+        "AI that changes setpoints or switches in operational technology without a person's approval",
+        "AI with a path from the internet to control systems",
+        "Decisions about individuals' service with no review"
+      ],
+      "controls": [
+        "BC1",
+        "BC2",
+        "BC3",
+        "BC4"
+      ],
+      "version": "1.0"
+    },
+    {
+      "baselineProfileID": "BP-CI-CORPORATE",
+      "name": "Critical infrastructure, corporate-managed",
+      "description": "Utilities, transport, water and networks run by a company or under concession",
+      "governingBody": "board",
+      "sources": [
+        {
+          "title": "Principles for the Secure Integration of Artificial Intelligence in Operational Technology",
+          "issuer": "CISA with the ACSC and six other national cyber agencies",
+          "date": "2025-12",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://labs.cloudsecurityalliance.org/research/csa-research-note-cisa-ot-zero-trust-ai-governance-20260501/",
+          "usedFor": "AI in operational technology"
+        },
+        {
+          "title": "IEC 62443, Industrial automation and control systems security",
+          "issuer": "IEC",
+          "date": "series",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "usedFor": "Control-system security"
+        },
+        {
+          "title": "AI RMF Profile on Trustworthy AI in Critical Infrastructure (concept note)",
+          "issuer": "NIST",
+          "date": "2026-04-07",
+          "publicationStage": "inDevelopment",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/programs-projects/concept-note-ai-rmf-profile-trustworthy-ai-critical-infrastructure",
+          "usedFor": "AI across IT, OT and control systems; re-check each quarter"
+        },
+        {
+          "title": "Adapting Zero Trust Principles to Operational Technology",
+          "issuer": "CISA, DOE, FBI, State and DoD",
+          "date": "2026-04-29",
+          "publicationStage": "final",
+          "kind": "referenceProfile",
+          "url": "https://www.cisa.gov/",
+          "usedFor": "Cross-walk target"
+        },
+        {
+          "title": "ISO/IEC 42001:2023, Artificial intelligence management system",
+          "issuer": "ISO/IEC",
+          "date": "2023-12",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.iso.org/standard/81230.html",
+          "usedFor": "Management-system frame and Annex A controls"
+        },
+        {
+          "title": "AI Risk Management Framework (NIST AI 100-1)",
+          "issuer": "NIST",
+          "date": "2023-01",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "usedFor": "Govern, map, measure, manage"
+        }
+      ],
+      "areas": [
+        "Network operations",
+        "Asset maintenance",
+        "Customer and community service",
+        "Emergency response",
+        "Supplier management",
+        "Information technology",
+        "Operational technology",
+        "Commercial operations"
+      ],
+      "criticalOperations": [
+        "Service supply (power, water, transport)",
+        "Safety systems",
+        "Emergency response"
+      ],
+      "typicalUses": [
+        {
+          "use": "Predictive maintenance",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Outage and demand forecasting",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Control-room decision support",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Automated switching or setpoint changes",
+          "authorityLevel": "a6Actuation"
+        }
+      ],
+      "failureCases": [
+        "An AI-enabled change reaches a safety system",
+        "A supplier's remote access is used by an attacker's agent",
+        "Decisions about the community (service restriction, prioritisation) cannot be explained or reviewed",
+        "The operator cannot show what an AI did after an incident",
+        "A concession or licence condition is breached by an AI-driven change",
+        "A vendor's model update changes plant behaviour"
+      ],
+      "redLineCandidates": [
+        "AI that changes setpoints or switches in operational technology without a person's approval",
+        "AI with a path from the internet to control systems",
+        "Decisions about individuals' service with no review"
+      ],
+      "controls": [
+        "BC1",
+        "BC2",
+        "BC3",
+        "BC4"
+      ],
+      "version": "1.0"
+    },
+    {
+      "baselineProfileID": "BP-GOVERNMENT",
+      "name": "Government in general",
+      "description": "Departments and agencies",
+      "governingBody": "accountableAuthority",
+      "sources": [
+        {
+          "title": "Governing with Artificial Intelligence: The State of Play and Way Forward in Core Government Functions",
+          "issuer": "OECD",
+          "date": "2025-09-18",
+          "publicationStage": "final",
+          "kind": "internationalGuidance",
+          "url": "https://www.oecd.org/en/publications/2025/06/governing-with-artificial-intelligence_398fa287.html",
+          "usedFor": "Public-sector governance; high-benefit, low-risk first"
+        },
+        {
+          "title": "OECD AI Principles",
+          "issuer": "OECD",
+          "date": "2019, updated 2024",
+          "publicationStage": "current",
+          "kind": "internationalGuidance",
+          "url": "https://oecd.ai/en/ai-principles",
+          "usedFor": "Accountability and transparency"
+        },
+        {
+          "title": "ISO/IEC 42005:2025, AI system impact assessment",
+          "issuer": "ISO/IEC",
+          "date": "2025",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "usedFor": "Impact on individuals and groups"
+        },
+        {
+          "title": "ISO/IEC 42001:2023, Artificial intelligence management system",
+          "issuer": "ISO/IEC",
+          "date": "2023-12",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.iso.org/standard/81230.html",
+          "usedFor": "Management-system frame and Annex A controls"
+        },
+        {
+          "title": "AI Risk Management Framework (NIST AI 100-1)",
+          "issuer": "NIST",
+          "date": "2023-01",
+          "publicationStage": "current",
+          "kind": "adoptedStandard",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "usedFor": "Govern, map, measure, manage"
+        }
+      ],
+      "areas": [
+        "Service delivery",
+        "Benefits and entitlements",
+        "Tax and revenue",
+        "Regulation and enforcement",
+        "Policy",
+        "Corporate services",
+        "Procurement"
+      ],
+      "criticalOperations": [
+        "Payments to people",
+        "Decisions about entitlements",
+        "Public safety functions"
+      ],
+      "typicalUses": [
+        {
+          "use": "Correspondence drafting",
+          "authorityLevel": "a1Productivity"
+        },
+        {
+          "use": "Case triage",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Eligibility recommendations",
+          "authorityLevel": "a2Analytical"
+        },
+        {
+          "use": "Automated decisions about entitlements",
+          "authorityLevel": "a3Decision"
+        },
+        {
+          "use": "Fraud and compliance targeting",
+          "authorityLevel": "a2Analytical"
+        }
+      ],
+      "failureCases": [
+        "An automated decision about entitlements is wrong at scale and cannot be explained",
+        "AI use is not disclosed and public trust is lost",
+        "Procurement locks the agency into a provider it cannot assess",
+        "The agency cannot answer a review or information request about what an AI did"
+      ],
+      "redLineCandidates": [
+        "A decision adverse to a person made by AI with no officer's review",
+        "AI use not listed on a public register",
+        "Personal information used to train an external model"
+      ],
+      "controls": [
+        "BC1",
+        "BC2",
+        "BC3",
+        "BC4"
+      ],
+      "version": "1.0"
+    }
+  ]
+}

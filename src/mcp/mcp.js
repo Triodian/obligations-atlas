@@ -17,7 +17,7 @@ export const TOOLS = [
     inputSchema: {
       type: 'object',
       properties: {
-        jurisdiction: { type: 'array', items: { type: 'string', enum: ['AU', 'SG', 'EU', 'GB', 'NZ', 'US', 'INT'] }, description: 'Jurisdiction codes. Covered now: AU, SG and INT (international standards, included unless includeInternational is false). EU, GB, NZ and US are not yet covered; asking for them returns a coverage note, not an answer that nothing applies.' },
+        jurisdiction: { type: 'array', items: { type: 'string', enum: ['AU', 'SG', 'EU', 'GB', 'NZ', 'US', 'INT'] }, description: 'Jurisdiction codes. Covered now: AU, SG, US and INT (international standards, included unless includeInternational is false). EU, GB and NZ are not yet covered, and a covered jurisdiction whose records are still in review holds none yet; asking for either returns a coverage note, not an answer that nothing applies.' },
         tier: { type: 'array', items: { type: 'string', enum: ['binding', 'expected', 'anticipated', 'adopted'] }, description: 'Source tiers. adopted: a voluntary standard a client has adopted for itself, such as ISO/IEC 42001:2023 Annex A' },
         useCase: { type: 'array', items: { type: 'string', pattern: '^UC([1-9]|10)$' }, description: 'Standardised use cases, e.g. UC3 (automated triage or decline), UC7 (AI inside a provider). Records specific to these come first, then records that apply to any AI use.' },
         includeAnyUse: { type: 'boolean', default: true, description: 'false to leave out records that apply to any AI use when filtering by use case' },

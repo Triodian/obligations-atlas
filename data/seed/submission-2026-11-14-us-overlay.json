@@ -1,0 +1,1623 @@
+{
+  "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY",
+  "interfaceVersion": "1.0.0",
+  "metamodelVersion": "2.9.0",
+  "mode": "propose",
+  "dataset": "ai-obligations-atlas",
+  "submittedAt": "2026-11-14T00:00:00Z",
+  "submitter": {
+    "actorType": "agent",
+    "actorID": "atlas-update-agent",
+    "displayName": "Atlas update agent (research of 2026-11-14)"
+  },
+  "proposals": [
+    {
+      "changeProposalID": "CP-2026-11-14-0001",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-SR26-2-MRM",
+        "title": "Model risk management, including vendor and AI-based models (SR 26-2)"
+      },
+      "record": {
+        "obligationID": "OBL-US-SR26-2-MRM",
+        "title": "Model risk management, including vendor and AI-based models (SR 26-2)",
+        "statement": "Issued by the Federal Reserve, OCC and FDIC on 17 April 2026, SR 26-2 'supersedes and replaces SR letter 11-7'. It defines a model as 'a complex quantitative method, system, or approach' that applies statistical, economic or financial theories to produce quantitative estimates. Its principles apply to 'non-generative, non-agentic AI models'; it treats generative and agentic AI as 'novel and rapidly evolving' and outside its scope. For vendor models it states that 'the principles of model risk management remain applicable': understand, validate and monitor them, and document customisations. It states that it 'does not set forth enforceable standards' and that non-compliance 'will not result in supervisory criticism'. It is most relevant to banking organisations with over $30 billion in total assets.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "Federal Reserve",
+          "instrument": "SR 26-2 / OCC Bulletin 2026-13, Revised Guidance on Model Risk Management",
+          "citation": "Attachment, Supervisory Guidance on Model Risk Management (17 April 2026)",
+          "url": "https://www.federalreserve.gov/supervisionreg/srletters/sr2602.htm",
+          "externalOrgID": "EXT-FRB"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "bank"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "seniorManagement"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC7"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2026-04-17"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.federalreserve.gov/supervisionreg/srletters/SR2602.pdf",
+          "title": "SR 26-2 / OCC Bulletin 2026-13, Revised Guidance on Model Risk Management (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from the SR 26-2 letter and attachment. The OCC bulletin number (2026-13) is from commentary, not fetched. The guidance names no board role; governance is described through roles and accountability. Generative and agentic AI are outside its scope, so UC1, UC5, UC6 and UC8 are not mapped. Whether a particular AI use is a model under the definition is for counsel. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0002",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TPRM-2023",
+        "title": "Third-party relationships: life cycle risk management, including AI providers (2023 interagency guidance)"
+      },
+      "record": {
+        "obligationID": "OBL-US-TPRM-2023",
+        "title": "Third-party relationships: life cycle risk management, including AI providers (2023 interagency guidance)",
+        "statement": "The Federal Reserve, FDIC and OCC guidance 'is final as of June 6, 2023'. It describes risk management across the life cycle of a third-party relationship (planning, due diligence and selection, contract negotiation, ongoing monitoring, termination), states that 'the board has ultimate oversight responsibility', calls for contracts that generally include 'provisions for periodic, independent audits of the third party and its relevant subcontractors', and addresses how a bank evaluates its third party's own oversight of subcontractors. It does not mention AI; it reaches any arrangement under which an AI capability is provided to the bank. It remains in effect until replaced by the guidance proposed on 11 September 2026.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "Federal Reserve",
+          "instrument": "Interagency Guidance on Third-Party Relationships: Risk Management (88 FR 37920)",
+          "citation": "Sections II.F (subcontractors), IV.C (life cycle), IV.C.3.d (audit), IV.D (oversight and accountability)",
+          "url": "https://www.govinfo.gov/content/pkg/FR-2023-06-09/html/2023-12340.htm",
+          "externalOrgID": "EXT-FRB"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "bank"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board",
+          "seniorManagement"
+        ],
+        "useCaseIDs": [
+          "UC7"
+        ],
+        "effectiveDate": "2023-06-06",
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2023-06-09"
+          },
+          {
+            "dateType": "applies",
+            "date": "2023-06-06"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.govinfo.gov/content/pkg/FR-2023-06-09/html/2023-12340.htm",
+          "title": "Interagency Guidance on Third-Party Relationships: Risk Management (88 FR 37920) (Official legal text)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://www.federalreserve.gov/supervisionreg/srletters/sr2304.htm",
+          "title": "Interagency Guidance on Third-Party Relationships: Risk Management (88 FR 37920) (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from the Federal Register text. NCUA is not a party to the 2023 guidance; credit unions are reached only if the 2026 proposal is finalised. Mapped to UC7 (AI inside a provider); other use cases reach it when the AI is supplied by a third party. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0003",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TPRM-2026-PROPOSED",
+        "title": "Proposed replacement of the 2023 third-party guidance (September 2026)"
+      },
+      "record": {
+        "obligationID": "OBL-US-TPRM-2026-PROPOSED",
+        "title": "Proposed replacement of the 2023 third-party guidance (September 2026)",
+        "statement": "On 11 September 2026 the OCC, Federal Reserve, FDIC and, for the first time on this subject, the NCUA proposed guidance 'revising and replacing existing guidance on third-party risk management'. The OCC bulletin states that 'non-compliance with the guidance will not result in supervisory action against a banking organization'. Commentary reports that the proposal replaces 'critical activities' with 'higher risk' relationships, organises practice into four risk management components, and states there are no generally applicable expected contract terms. The bulletin does not mention AI. Comments closed 16 November 2026.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "OCC",
+          "instrument": "Proposed Third-Party Risk Management Guidance (OCC Bulletin 2026-46; Federal Register 15 September 2026)",
+          "citation": "Whole proposal",
+          "url": "https://occ.gov/news-issuances/bulletins/2026/bulletin-2026-46.html",
+          "externalOrgID": "EXT-OCC"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "anticipated",
+        "entityTypes": [
+          "bank"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board"
+        ],
+        "useCaseIDs": [
+          "UC7"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2026-09-11"
+          },
+          {
+            "dateType": "consultationCloses",
+            "date": "2026-11-16"
+          }
+        ],
+        "status": "proposed",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://occ.gov/news-issuances/bulletins/2026/bulletin-2026-46.html",
+          "title": "Proposed Third-Party Risk Management Guidance (OCC Bulletin 2026-46; Federal Register 15 September 2026) (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://www.hunton.com/insights/legal/banking-agencies-propose-to-replace-the-2023-third-party-risk-management-guidance-and-to-rescind-the-bank-fintech-joint-statement",
+          "title": "Proposed Third-Party Risk Management Guidance (OCC Bulletin 2026-46; Federal Register 15 September 2026) (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://mofo.com/resources/insights/261002-banking-agencies-issue-proposed",
+          "title": "Proposed Third-Party Risk Management Guidance (OCC Bulletin 2026-46; Federal Register 15 September 2026) (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The bulletin was fetched; the Federal Register text could not be fetched (the site refused the request), so the contract-terms and four-components points rest on law firm commentary. Hunton gives a 10 November comment date and others 16 November; the Federal Register summary, seen in a search result, says 16 November. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0004",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NY-500-11",
+        "title": "New York: third-party service provider security policy, reaching AI providers (23 NYCRR 500.11)"
+      },
+      "record": {
+        "obligationID": "OBL-US-NY-500-11",
+        "title": "New York: third-party service provider security policy, reaching AI providers (23 NYCRR 500.11)",
+        "statement": "Section 500.11(a) provides that 'Each covered entity shall implement written policies and procedures designed to ensure the security of information systems' and nonpublic information held by third-party service providers, based on its risk assessment, addressing 'the identification and risk assessment of third-party service providers', minimum cybersecurity practices, due diligence, and 'periodic assessment of such third-party service providers based on the risk they present'. Section 500.11(b) addresses access controls, encryption, notice of cybersecurity events affecting the covered entity, and representations and warranties. The section applies in New York to DFS-licensed banks, insurers and other financial services companies, and reaches AI providers that hold or can reach their systems or data.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "NYDFS",
+          "instrument": "23 NYCRR Part 500 (New York Department of Financial Services Cybersecurity Regulation)",
+          "citation": "s 500.11 (third-party service provider security policy)",
+          "url": "https://www.dfs.ny.gov/industry_guidance/cybersecurity",
+          "externalOrgID": "EXT-NYDFS"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "bank",
+          "insurer",
+          "financialInstitution"
+        ],
+        "roles": [
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.law.cornell.edu/regulations/new-york/23-NYCRR-500.11",
+          "title": "23 NYCRR Part 500 (New York Department of Financial Services Cybersecurity Regulation) (Unofficial copy of legal text)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: New York law, recorded under US because the Atlas filters by country; the title names the state. Text read from the Cornell LII copy, not the DFS official text; the reviewer to confirm against dfs.ny.gov. The November 2023 amendments and their phased dates are not recorded here. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0005",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NAIC-AI-BULLETIN",
+        "title": "Written AI systems programme and oversight of third-party AI (NAIC model bulletin, as adopted by states)"
+      },
+      "record": {
+        "obligationID": "OBL-US-NAIC-AI-BULLETIN",
+        "title": "Written AI systems programme and oversight of third-party AI (NAIC model bulletin, as adopted by states)",
+        "statement": "Adopted by the NAIC on 4 December 2023 for states to issue as their own bulletins, it states that insurers 'are expected to develop, implement, and maintain a written program' for the responsible use of AI systems, with responsibility in 'senior management accountable to the board or an appropriate committee of the board'. For third-party AI systems and data it calls for due diligence and, where appropriate and available, contract terms that provide 'audit rights and/or entitle the Insurer to receive audit reports by qualified auditing entities' and that 'Require the third party to cooperate with the Insurer with regard to regulatory inquiries and investigations'. A programme may rely on frameworks such as 'the National Institute of Standards and Technology (NIST) Artificial Intelligence Risk Management Framework'. It applies in a state only once that state's insurance regulator issues it.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "National Association of Insurance Commissioners",
+          "instrument": "NAIC Model Bulletin: Use of Artificial Intelligence Systems by Insurers",
+          "citation": "Sections 3 (AIS Program), 3.4 (third-party AI systems and data)",
+          "url": "https://content.naic.org/sites/default/files/inline-files/2023-12-4%20Model%20Bulletin_Adopted_0.pdf",
+          "externalOrgID": "EXT-NAIC-US"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "insurer"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board",
+          "seniorManagement"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2023-12-04"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://content.naic.org/sites/default/files/2023-12-4%252520Model%252520Bulletin_Adopted_0.pdf",
+          "title": "NAIC Model Bulletin: Use of Artificial Intelligence Systems by Insurers (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://content.naic.org/research/jir/artificial-intelligence-and-insurance-regulation",
+          "title": "NAIC Model Bulletin: Use of Artificial Intelligence Systems by Insurers (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Quoted from the adopted model text. About 24 to 25 states and DC have adopted it (NAIC Journal of Insurance Regulation, May 2026; commentary July 2026); the list of adopting states is not recorded per state. Tier is expected: the model carries no force until a state issues it, and a state bulletin is itself guidance. Mapped to all use cases because the programme reaches every AI system an insurer uses. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0006",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NY-CL7-2024",
+        "title": "New York: AI and external data in underwriting and pricing, with vendor contract terms (Circular Letter 7)"
+      },
+      "record": {
+        "obligationID": "OBL-US-NY-CL7-2024",
+        "title": "New York: AI and external data in underwriting and pricing, with vendor contract terms (Circular Letter 7)",
+        "statement": "Dated 11 July 2024, the letter addresses AI systems, external data and predictive models in 'underwriting and pricing insurance policies'. It states that 'The role of an insurer's board of directors, or other governing body, is to provide oversight of the insurer's activities' and that 'Senior management is responsible for day-to-day implementation'. Insurers 'retain responsibility for understanding any tools' used, and where appropriate and available should include contract terms that '(i) provide audit rights or entitle the insurer to receive audit reports by qualified auditing entities' and '(ii) require the third-party vendor to cooperate with the insurer regarding regulatory inquiries and investigations'.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "NYDFS",
+          "instrument": "NYDFS Insurance Circular Letter No. 7 (2024): Use of AI Systems and External Consumer Data and Information Sources in Insurance Underwriting and Pricing",
+          "citation": "paras 2, 21, 23, 35, 37",
+          "url": "https://www.dfs.ny.gov/industry-guidance/circular-letters/cl2024-07",
+          "externalOrgID": "EXT-NYDFS"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "insurer"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "board",
+          "seniorManagement"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC7"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2024-07-11"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.dfs.ny.gov/industry-guidance/circular-letters/cl2024-07",
+          "title": "NYDFS Insurance Circular Letter No. 7 (2024): Use of AI Systems and External Consumer Data and Information Sources in Insurance Underwriting and Pricing (Regulator publication)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: New York guidance recorded under US; the title names the state. Commentary notes circular letters do not change applicable law, so the tier is expected. The scope is underwriting and pricing only, hence the narrower use case mapping. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0007",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-REGSP-248-30",
+        "title": "Incident response and service provider oversight, with 72-hour breach notice (Regulation S-P)"
+      },
+      "record": {
+        "obligationID": "OBL-US-REGSP-248-30",
+        "title": "Incident response and service provider oversight, with 72-hour breach notice (Regulation S-P)",
+        "statement": "Rule 248.30(a)(3) calls for a response program 'reasonably designed to detect, respond to, and recover from unauthorized access' to customer information. Rule 248.30(a)(5) provides for written policies and procedures requiring oversight of service providers, through due diligence and monitoring, so that a service provider protects customer information and notifies the covered institution as soon as possible and no later than 72 hours after becoming aware of a breach affecting a customer information system it maintains. The institution may have a service provider give customer notices on its behalf but remains responsible for them. It reaches AI providers that receive, maintain or process customer information.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "SEC",
+          "instrument": "Regulation S-P (17 CFR Part 248), as amended 2024",
+          "citation": "17 CFR 248.30(a)(3) (incident response program), (a)(5) (service providers)",
+          "url": "https://www.ecfr.gov/current/title-17/chapter-II/part-248/subpart-A/subject-group-ECFR83262a0bce5ffaa/section-248.30",
+          "externalOrgID": "EXT-SEC"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "capitalMarketsIntermediary"
+        ],
+        "roles": [
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC10"
+        ],
+        "effectiveDate": "2025-12-03",
+        "effectiveDates": [
+          {
+            "dateType": "applies",
+            "date": "2025-12-03",
+            "note": "Larger entities"
+          },
+          {
+            "dateType": "applies",
+            "date": "2026-06-03",
+            "note": "Smaller entities"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.ecfr.gov/current/title-17/chapter-II/part-248/subpart-A/subject-group-ECFR83262a0bce5ffaa/section-248.30",
+          "title": "Regulation S-P (17 CFR Part 248), as amended 2024 (Official legal text)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://www.hklaw.com/en/insights/publications/2026/05/regulation-s-p-amendments-compliance-deadline-approaching",
+          "title": "Regulation S-P (17 CFR Part 248), as amended 2024 (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The (a)(3) words are quoted; (a)(5) is paraphrased from the eCFR (up to date as of 23 October 2026). Compliance dates from commentary. Covered institutions include broker-dealers, investment companies, registered investment advisers and transfer agents. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0008",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-FINRA-3110",
+        "title": "Supervisory system and written supervisory procedures, including over AI use (FINRA Rule 3110)"
+      },
+      "record": {
+        "obligationID": "OBL-US-FINRA-3110",
+        "title": "Supervisory system and written supervisory procedures, including over AI use (FINRA Rule 3110)",
+        "statement": "Rule 3110(a) provides that 'Each member shall establish and maintain a system to supervise the activities of each associated person' reasonably designed to achieve compliance with securities laws and FINRA rules, and Rule 3110(b)(1) that each member 'shall establish, maintain, and enforce written procedures to supervise the types of business in which it engages'. The rule does not mention AI; FINRA treats its rules as technology-neutral, so a member's supervisory system and procedures reach its use of AI tools and agents.",
+        "obligationType": "industryCode",
+        "source": {
+          "authority": "FINRA",
+          "instrument": "FINRA Rule 3110 (Supervision)",
+          "citation": "Rule 3110(a), (b)(1)",
+          "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/3110",
+          "externalOrgID": "EXT-FINRA"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "capitalMarketsIntermediary"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "seniorManagement"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8",
+          "UC9",
+          "UC10"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.finra.org/rules-guidance/rulebooks/finra-rules/3110",
+          "title": "FINRA Rule 3110 (Supervision) (SRO rule or reliability standard)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: FINRA is a self-regulatory organisation; its rules are approved by the SEC and bind members, so the tier is binding and the type industryCode. Applies to broker-dealers, not to investment advisers that are not FINRA members. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0009",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-FINRA-2026-GENAI",
+        "title": "Generative AI and AI agents: supervision, testing and monitoring (FINRA 2026 oversight report)"
+      },
+      "record": {
+        "obligationID": "OBL-US-FINRA-2026-GENAI",
+        "title": "Generative AI and AI agents: supervision, testing and monitoring (FINRA 2026 oversight report)",
+        "statement": "Published 9 December 2025, the report has a standalone section on generative AI that reminds firms of their continuing obligations, describes expectations for governance, testing and monitoring, and for the first time addresses AI agents, which it describes as 'systems or programs that are capable of autonomously performing and completing tasks on behalf of a user'. It encourages firms exploring agents to consider whether their autonomy raises new supervisory or operational questions and to develop agent-specific supervisory processes, including over system access, data handling and human oversight.",
+        "obligationType": "regulatoryGuidance",
+        "source": {
+          "authority": "FINRA",
+          "instrument": "FINRA 2026 Annual Regulatory Oversight Report",
+          "citation": "Section on generative AI, including AI agents",
+          "url": "https://www.finra.org/sites/default/files/2025-12/2026-annual-regulatory-oversight-report.pdf",
+          "externalOrgID": "EXT-FINRA"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "expected",
+        "entityTypes": [
+          "capitalMarketsIntermediary"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "seniorManagement"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8"
+        ],
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2025-12-09"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.debevoise.com/insights/publications/2025/12/finras-2026-regulatory-oversight-report-continued",
+          "title": "FINRA 2026 Annual Regulatory Oversight Report (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://www.mayerbrown.com/-/media/files/perspectives-events/publications/2025/12/finra-2026-regulatory-oversight-report.pdf%3Frev=-1",
+          "title": "FINRA 2026 Annual Regulatory Oversight Report (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The FINRA PDF could not be fetched in this round; the statement rests on law firm summaries and the agent definition is as they quote it. The reviewer to check against the report before approving. Rests on: OBL-US-FINRA-3110 (the rule the report applies) Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0010",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-45CFR-92-210",
+        "title": "Identify and mitigate discrimination risk in patient care decision support tools, including AI (45 CFR 92.210)"
+      },
+      "record": {
+        "obligationID": "OBL-US-45CFR-92-210",
+        "title": "Identify and mitigate discrimination risk in patient care decision support tools, including AI (45 CFR 92.210)",
+        "statement": "Section 92.210(a) provides that 'A covered entity must not discriminate on the basis of race, color, national origin, sex, age, or disability' through the use of patient care decision support tools. Section 92.210(b) sets 'an ongoing duty to make reasonable efforts to identify uses of patient care decision support tools' that employ input variables measuring those characteristics, and 92.210(c) to 'make reasonable efforts to mitigate the risk of discrimination resulting from the tool's use'. The defined tools include automated and non-automated tools, AI among them, used in clinical decision-making that affects patient care.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "HHS",
+          "instrument": "45 CFR Part 92 (Nondiscrimination in Health Programs or Activities), section 1557 of the Affordable Care Act",
+          "citation": "45 CFR 92.210(a), (b), (c)",
+          "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-A/part-92/subpart-C/section-92.210",
+          "externalOrgID": "EXT-HHS"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "healthServiceProvider"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC7",
+          "UC8"
+        ],
+        "effectiveDate": "2025-05-01",
+        "effectiveDates": [
+          {
+            "dateType": "applies",
+            "date": "2025-05-01",
+            "note": "Paragraphs (b) and (c)"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.law.cornell.edu/cfr/text/45/92.210",
+          "title": "45 CFR Part 92 (Nondiscrimination in Health Programs or Activities), section 1557 of the Affordable Care Act (Unofficial copy of legal text)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Text read from the Cornell LII copy of the eCFR; the reviewer to confirm against ecfr.gov. Covered entities are recipients of HHS financial assistance and others in 45 CFR 92.2, which reach most hospitals and many health insurers. The applicability date for (b) and (c) is from commentary. HTI-5 (October 2026) does not change this section. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0011",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-HIPAA-164-314",
+        "title": "Business associate contracts for AI providers handling electronic health information (HIPAA Security Rule)"
+      },
+      "record": {
+        "obligationID": "OBL-US-HIPAA-164-314",
+        "title": "Business associate contracts for AI providers handling electronic health information (HIPAA Security Rule)",
+        "statement": "Section 164.308(b) permits a covered entity to let a business associate create, receive, maintain or transmit electronic protected health information on its behalf only with satisfactory assurances, documented in a contract or other arrangement. Section 164.314(a)(2)(i) provides that the contract provide that the business associate will '(A) Comply with the applicable requirements of this subpart', '(B) ... ensure that any subcontractors that create, receive, maintain, or transmit electronic protected health information' agree to do the same, and '(C) Report to the covered entity any security incident of which it becomes aware'. An AI provider that processes electronic health information for a covered entity is reached as a business associate.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "HHS",
+          "instrument": "HIPAA Security Rule (45 CFR Part 164, Subpart C)",
+          "citation": "45 CFR 164.308(b); 164.314(a)(2)(i)(A)-(C)",
+          "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-C/section-164.314",
+          "externalOrgID": "EXT-HHS"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "healthServiceProvider"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "serviceProvider"
+        ],
+        "useCaseIDs": [
+          "UC1",
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC8"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-C/section-164.314",
+          "title": "HIPAA Security Rule (45 CFR Part 164, Subpart C) (Official legal text)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: 164.314 quoted from the eCFR (up to date as of 23 October 2026); 164.308(b) paraphrased from search results of the eCFR and govinfo editions, not fetched. Whether an AI provider is a business associate in a particular arrangement is for counsel. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0012",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-HTI5-DSI",
+        "title": "HTI-5 removes model-card and risk management criteria for decision support in certified health IT"
+      },
+      "record": {
+        "obligationID": "OBL-US-HTI5-DSI",
+        "title": "HTI-5 removes model-card and risk management criteria for decision support in certified health IT",
+        "statement": "Published on 28 October 2026 and effective 28 December 2026 for this change, HTI-5 narrows the decision support interventions certification criterion: certified health IT no longer has to support source attributes ('model cards') or apply intervention risk management to predictive decision support. The change binds certified health IT developers, not providers. For a hospital or health system it removes a federal baseline of information about predictive tools embedded in certified software; the provider's own duty under 45 CFR 92.210 is unchanged, so that information now has to be sought from the vendor by contract or due diligence.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "HHS",
+          "instrument": "HTI-5 final rule (91 FR 67916; amending 45 CFR Part 170)",
+          "citation": "45 CFR 170.315(b)(11) as revised",
+          "url": "https://www.federalregister.gov/documents/2026/10/28/2026-21943/health-data-technology-and-interoperability-onc-deregulatory-actions-to-unleash-prosperity",
+          "externalOrgID": "EXT-HHS"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "healthServiceProvider"
+        ],
+        "roles": [
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC7"
+        ],
+        "effectiveDate": "2026-12-28",
+        "effectiveDates": [
+          {
+            "dateType": "published",
+            "date": "2026-10-28"
+          },
+          {
+            "dateType": "commences",
+            "date": "2026-12-28"
+          }
+        ],
+        "status": "pending",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.akingump.com/en/insights/ai-law-and-regulation-tracker/onc-issues-hti-5-final-rule-removing-model-card-and-risk-management-requirements-for-predictive-decision-support-interventions",
+          "title": "HTI-5 final rule (91 FR 67916; amending 45 CFR Part 170) (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://www.hklaw.com/en/insights/publications/2026/10/hti5-promotes-deregulatory-certification-actions",
+          "title": "HTI-5 final rule (91 FR 67916; amending 45 CFR Part 170) (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://www.mcdermottlaw.com/?p=50392216",
+          "title": "HTI-5 final rule (91 FR 67916; amending 45 CFR Part 170) (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The Federal Register text could not be fetched; the statement rests on law firm summaries that agree on the change and dates. The last sentence is Triodian's reading of the effect on providers, not the rule's words. Status pending until 28 December 2026. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0013",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NERC-CIP-013-2",
+        "title": "Supply chain cyber security risk management plans for bulk electric system vendors, including AI tools (CIP-013-2)"
+      },
+      "record": {
+        "obligationID": "OBL-US-NERC-CIP-013-2",
+        "title": "Supply chain cyber security risk management plans for bulk electric system vendors, including AI tools (CIP-013-2)",
+        "statement": "CIP-013-2 aims 'to mitigate cyber security risks to the reliable operation of the Bulk Electric System (BES)' by 'implementing security controls for supply chain risk management of BES Cyber Systems'. R1 provides that 'Each Responsible Entity shall develop one or more documented supply chain cyber security risk management plan(s)', including processes to identify and assess 'cyber security risk(s) to the Bulk Electric System from vendor products or services' and procurement processes addressing vendor incident notification, coordination of responses, access revocation, 'Disclosure by vendors of known vulnerabilities', software integrity and authenticity, and 'Coordination of controls for vendor-initiated remote access'. R3 calls for review and CIP Senior Manager approval 'at least once every 15 calendar months'. The standard does not mention AI; it reaches AI products and services procured for high and medium impact BES Cyber Systems.",
+        "obligationType": "industryCode",
+        "source": {
+          "authority": "NERC",
+          "instrument": "NERC Reliability Standard CIP-013-2 (Cyber Security - Supply Chain Risk Management)",
+          "citation": "Purpose; R1 (1.1, 1.2.1-1.2.6); R3",
+          "url": "https://www.nerc.com/pa/Stand/Reliability%20Standards/CIP-013-2.pdf",
+          "externalOrgID": "EXT-NERC"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "criticalInfrastructureAssetOwner"
+        ],
+        "roles": [
+          "regulatedEntity",
+          "accountablePerson"
+        ],
+        "useCaseIDs": [
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC9"
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.nerc.com/pa/Stand/Reliability%20Standards/CIP-013-2.pdf",
+          "title": "NERC Reliability Standard CIP-013-2 (Cyber Security - Supply Chain Risk Management) (SRO rule or reliability standard)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Mandatory and enforceable once approved by FERC; recorded as industryCode because NERC is the electric reliability organisation, not a government agency. The effective date is in the Project 2019-03 implementation plan, not fetched. Applies to registered entities such as balancing authorities, generator and transmission owners and operators; not to other critical infrastructure sectors. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0014",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CIRCIA-681B",
+        "title": "Cyber incident (72 hours) and ransom payment (24 hours) reporting to CISA, from the final rule (CIRCIA)"
+      },
+      "record": {
+        "obligationID": "OBL-US-CIRCIA-681B",
+        "title": "Cyber incident (72 hours) and ransom payment (24 hours) reporting to CISA, from the final rule (CIRCIA)",
+        "statement": "Section 681b(a)(1)(A) provides that a covered entity 'shall report the covered cyber incident to the Agency not later than 72 hours' after it reasonably believes the incident occurred, and 681b(a)(2)(A) that it 'shall report the payment to the Agency not later than 24 hours after the ransom payment has been made'. Under 681b(a)(7) these duties 'shall take effect on the dates prescribed in the final rule'. CISA sent its final rule to OIRA for review on 1 October 2026. Covered entities are to be defined by the rule across the critical infrastructure sectors. An incident in which an AI system or AI provider is the vector or the target is reached like any other.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Congress",
+          "instrument": "Cyber Incident Reporting for Critical Infrastructure Act of 2022 (6 U.S.C. 681b)",
+          "citation": "6 U.S.C. 681b(a)(1)(A), (a)(2)(A), (a)(7)",
+          "url": "https://www.govinfo.gov/link/uscode/6/681b",
+          "externalOrgID": "EXT-CONGRESS-US"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "criticalInfrastructureAssetOwner",
+          "bank",
+          "insurer",
+          "healthServiceProvider",
+          "capitalMarketsIntermediary"
+        ],
+        "roles": [
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC5",
+          "UC6",
+          "UC7",
+          "UC9"
+        ],
+        "status": "pending",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://www.govinfo.gov/link/uscode/6/681b",
+          "title": "Cyber Incident Reporting for Critical Infrastructure Act of 2022 (6 U.S.C. 681b) (Official legal text)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://www.insideprivacy.com/critical-infrastructure/cisa-submits-final-circia-rule-for-omb-review/",
+          "title": "Cyber Incident Reporting for Critical Infrastructure Act of 2022 (6 U.S.C. 681b) (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Statute quoted from govinfo. The duties are not yet in force: status pending until the final rule sets dates. Entity types are indicative (financial services, health care and others are critical infrastructure sectors); the final rule will set who is covered. Record the rule's dates when it is published. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0015",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CA-CCPA-ADMT",
+        "title": "California: automated decisionmaking technology and risk assessments (CCPA regulations)"
+      },
+      "record": {
+        "obligationID": "OBL-US-CA-CCPA-ADMT",
+        "title": "California: automated decisionmaking technology and risk assessments (CCPA regulations)",
+        "statement": "Section 7001(e) defines ADMT as 'any technology that processes personal information and uses computation to replace human decisionmaking or substantially replace human decisionmaking'. Section 7200(a) provides that 'A business that uses ADMT to make a significant decision concerning a consumer must comply' with Article 11 (notice, opt-out and access), and 7200(b) that a business already doing so 'must be in compliance with the requirements of this Article no later than January 1, 2027'. Section 7150(b)(3) lists 'Using ADMT for a significant decision concerning a consumer' among the processing that calls for a risk assessment before it begins; for processing begun before the regulations took effect, 7155(b) sets 31 December 2027.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "CPPA",
+          "instrument": "California Consumer Privacy Act Regulations (Cal. Code Regs. tit. 11, div. 6, ch. 1)",
+          "citation": "ss 7001(e), 7150(b)(3), 7155(b), 7200(a)-(b)",
+          "url": "https://cppa.ca.gov/regulations/pdf/ccpa_statute_eff_20260101.pdf",
+          "externalOrgID": "EXT-CPPA"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "deployer",
+          "regulatedEntity"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC8"
+        ],
+        "effectiveDate": "2026-01-01",
+        "effectiveDates": [
+          {
+            "dateType": "commences",
+            "date": "2026-01-01"
+          },
+          {
+            "dateType": "applies",
+            "date": "2027-01-01",
+            "note": "Article 11 (ADMT)"
+          },
+          {
+            "dateType": "transitionEnds",
+            "date": "2027-12-31",
+            "note": "Risk assessments for existing processing"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://cppa.ca.gov/regulations/pdf/ccpa_statute_eff_20260101.pdf",
+          "title": "California Consumer Privacy Act Regulations (Cal. Code Regs. tit. 11, div. 6, ch. 1) (Official legal text)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: California law recorded under US; the title names the state. Applies to businesses that meet the CCPA thresholds; information subject to GLBA, HIPAA and other federal regimes is partly exempt, which counsel should check for financial and health entities. The definition of significant decision (s 7001(ddd)) was not fetched. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0016",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TX-TRAIGA",
+        "title": "Texas: prohibited AI uses, disclosure and Attorney General enforcement (TRAIGA)"
+      },
+      "record": {
+        "obligationID": "OBL-US-TX-TRAIGA",
+        "title": "Texas: prohibited AI uses, disclosure and Attorney General enforcement (TRAIGA)",
+        "statement": "The Act 'takes effect January 1, 2026'. It prohibits developing or deploying AI with intent to manipulate behaviour towards self-harm, harm to others or crime, to infringe constitutional rights, or to unlawfully discriminate (disparate impact alone is not sufficient), and restricts government social scoring and biometric capture. Governmental agencies disclose AI interaction to consumers, and where AI is used in relation to health care services or treatment the disclosure is given 'not later than the date the service or treatment is first provided'. The Attorney General gives notice and a 60-day cure period before suit; a defendant is not liable where it finds a violation through internal review and 'substantially complies with the most recent version of the' NIST AI Risk Management Framework: Generative AI Profile or another recognised framework.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Texas Legislature",
+          "instrument": "Texas Responsible Artificial Intelligence Governance Act (H.B. 149, 89th Legislature; Business & Commerce Code Title 11, Subtitle D)",
+          "citation": "ss 552.051-552.056, 552.104-552.105",
+          "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm",
+          "externalOrgID": "EXT-LEG-TX"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC8"
+        ],
+        "effectiveDate": "2026-01-01",
+        "effectiveDates": [
+          {
+            "dateType": "commences",
+            "date": "2026-01-01"
+          }
+        ],
+        "status": "inForce",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm",
+          "title": "Texas Responsible Artificial Intelligence Governance Act (H.B. 149, 89th Legislature; Business & Commerce Code Title 11, Subtitle D) (Official legal text)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: Texas law recorded under US; the title names the state. Read from the enrolled bill text. Penalty amounts not recorded. The health care disclosure is by the provider; the consumer disclosure duty in 552.051 is for governmental agencies. Rests on: OBL-INT-NIST-AIRMF (the framework the defence names) Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0017",
+      "changeType": "create",
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CO-SB26-189",
+        "title": "Colorado: notice, explanation and human review for automated decisions, from 2027 (SB 26-189)"
+      },
+      "record": {
+        "obligationID": "OBL-US-CO-SB26-189",
+        "title": "Colorado: notice, explanation and human review for automated decisions, from 2027 (SB 26-189)",
+        "statement": "Signed on 14 May 2026 and taking effect 1 January 2027, SB 26-189 replaces the 2024 Colorado AI Act's duty of care, risk management programmes and impact assessments with a narrower framework for automated decision-making technology that materially influences consequential decisions about consumers (education, employment, housing, financial services, insurance, health care and essential government services). Commentary reports that deployers give notice before use, a plain-language explanation after an adverse outcome, meaningful human review on request where commercially reasonable, and keep records for three years; developers give deployers documentation of intended uses, known harmful uses, limitations and human-review instructions. Contract terms purporting to indemnify a party for its own discriminatory acts are reported to be void. The Attorney General makes rules and gives a 60-day cure period until 2030.",
+        "obligationType": "statutory",
+        "source": {
+          "authority": "Colorado General Assembly",
+          "instrument": "Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205)",
+          "citation": "Whole Act",
+          "url": "https://leg.colorado.gov/bills/sb26-189",
+          "externalOrgID": "EXT-LEG-CO"
+        },
+        "jurisdiction": "US",
+        "sourceTier": "binding",
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "roles": [
+          "provider",
+          "deployer"
+        ],
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC7",
+          "UC8"
+        ],
+        "effectiveDate": "2027-01-01",
+        "effectiveDates": [
+          {
+            "dateType": "made",
+            "date": "2026-05-14"
+          },
+          {
+            "dateType": "commences",
+            "date": "2027-01-01"
+          }
+        ],
+        "status": "pending",
+        "monitoringFrequency": "daily",
+        "lastVerified": "2026-11-14"
+      },
+      "evidence": [
+        {
+          "url": "https://hklaw.com/en/insights/publications/2026/05/colorado-governor-signs-sb-189",
+          "title": "Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205) (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        },
+        {
+          "url": "https://www.hunton.com/privacy-and-information-security-law/colorado-ai-act-amended-and-effective-date-delayed",
+          "title": "Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205) (Law firm commentary)",
+          "sourceRank": 4,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ],
+      "rationale": "Research note: The bill text was not fetched; the statement rests on law firm commentary, which agrees on the dates and the shape of the duties. The reviewer to check the enacted text and the bill URL. The United States intervened in litigation against the 2024 Act; the effect on SB 26-189 is not settled. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0018",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-FRB",
+        "title": "Board of Governors of the Federal Reserve System"
+      },
+      "record": {
+        "externalOrgID": "EXT-FRB",
+        "name": "Board of Governors of the Federal Reserve System",
+        "acronym": "Federal Reserve",
+        "type": "regulator",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://www.federalreserve.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://www.federalreserve.gov",
+          "title": "Board of Governors of the Federal Reserve System website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0019",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-OCC",
+        "title": "Office of the Comptroller of the Currency"
+      },
+      "record": {
+        "externalOrgID": "EXT-OCC",
+        "name": "Office of the Comptroller of the Currency",
+        "acronym": "OCC",
+        "type": "regulator",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://www.occ.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://www.occ.gov",
+          "title": "Office of the Comptroller of the Currency website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0020",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NYDFS",
+        "title": "New York State Department of Financial Services"
+      },
+      "record": {
+        "externalOrgID": "EXT-NYDFS",
+        "name": "New York State Department of Financial Services",
+        "acronym": "NYDFS",
+        "type": "regulator",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://www.dfs.ny.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://www.dfs.ny.gov",
+          "title": "New York State Department of Financial Services website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0021",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NAIC-US",
+        "title": "National Association of Insurance Commissioners"
+      },
+      "record": {
+        "externalOrgID": "EXT-NAIC-US",
+        "name": "National Association of Insurance Commissioners",
+        "type": "industryBody",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://content.naic.org"
+      },
+      "evidence": [
+        {
+          "url": "https://content.naic.org",
+          "title": "National Association of Insurance Commissioners website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0022",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-SEC",
+        "title": "Securities and Exchange Commission"
+      },
+      "record": {
+        "externalOrgID": "EXT-SEC",
+        "name": "Securities and Exchange Commission",
+        "acronym": "SEC",
+        "type": "regulator",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://www.sec.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://www.sec.gov",
+          "title": "Securities and Exchange Commission website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0023",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-FINRA",
+        "title": "Financial Industry Regulatory Authority"
+      },
+      "record": {
+        "externalOrgID": "EXT-FINRA",
+        "name": "Financial Industry Regulatory Authority",
+        "acronym": "FINRA",
+        "type": "regulator",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://www.finra.org"
+      },
+      "evidence": [
+        {
+          "url": "https://www.finra.org",
+          "title": "Financial Industry Regulatory Authority website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0024",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-HHS",
+        "title": "Department of Health and Human Services"
+      },
+      "record": {
+        "externalOrgID": "EXT-HHS",
+        "name": "Department of Health and Human Services",
+        "acronym": "HHS",
+        "type": "regulator",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://www.hhs.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://www.hhs.gov",
+          "title": "Department of Health and Human Services website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0025",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NERC",
+        "title": "North American Electric Reliability Corporation"
+      },
+      "record": {
+        "externalOrgID": "EXT-NERC",
+        "name": "North American Electric Reliability Corporation",
+        "acronym": "NERC",
+        "type": "regulator",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://www.nerc.com"
+      },
+      "evidence": [
+        {
+          "url": "https://www.nerc.com",
+          "title": "North American Electric Reliability Corporation website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0026",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CONGRESS-US",
+        "title": "United States Congress"
+      },
+      "record": {
+        "externalOrgID": "EXT-CONGRESS-US",
+        "name": "United States Congress",
+        "acronym": "Congress",
+        "type": "legislature",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://www.congress.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://www.congress.gov",
+          "title": "United States Congress website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0027",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CPPA",
+        "title": "California Privacy Protection Agency"
+      },
+      "record": {
+        "externalOrgID": "EXT-CPPA",
+        "name": "California Privacy Protection Agency",
+        "acronym": "CPPA",
+        "type": "regulator",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://cppa.ca.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://cppa.ca.gov",
+          "title": "California Privacy Protection Agency website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0028",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-TX",
+        "title": "Texas Legislature"
+      },
+      "record": {
+        "externalOrgID": "EXT-LEG-TX",
+        "name": "Texas Legislature",
+        "type": "legislature",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://capitol.texas.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://capitol.texas.gov",
+          "title": "Texas Legislature website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0029",
+      "changeType": "create",
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-CO",
+        "title": "Colorado General Assembly"
+      },
+      "record": {
+        "externalOrgID": "EXT-LEG-CO",
+        "name": "Colorado General Assembly",
+        "type": "legislature",
+        "jurisdiction": "US",
+        "jurisdictionCodes": [
+          "US"
+        ],
+        "website": "https://leg.colorado.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://leg.colorado.gov",
+          "title": "Colorado General Assembly website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0030",
+      "changeType": "create",
+      "target": {
+        "domainType": "dataFlow",
+        "entityID": "DF-FEDERALRESERVE-20261114-01",
+        "title": "Watch: Federal Reserve SR letters"
+      },
+      "record": {
+        "dataFlowID": "DF-FEDERALRESERVE-20261114-01",
+        "title": "Watch: Federal Reserve SR letters",
+        "description": "SR 26-2 model risk guidance and its successors; interagency third-party guidance",
+        "sourceSystems": [
+          {
+            "endpointType": "webPage",
+            "title": "Federal Reserve SR letters",
+            "url": "https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm"
+          }
+        ],
+        "targetSystems": [
+          {
+            "endpointType": "software",
+            "title": "Atlas update agent (via the Reasoning Fabric connector)"
+          }
+        ],
+        "frequency": "daily",
+        "schemaReference": {
+          "format": "html"
+        },
+        "sourcePrecedence": {
+          "rank": 2,
+          "basis": "regulatorPublication",
+          "canSetStatusOrDate": true
+        },
+        "externalOrgID": "EXT-FRB",
+        "jurisdiction": "US",
+        "governance": {
+          "ownerTitle": "Triodian method owner",
+          "humanApprovalRequired": true
+        },
+        "status": "planned"
+      },
+      "evidence": [
+        {
+          "url": "https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm",
+          "title": "Federal Reserve SR letters",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0031",
+      "changeType": "create",
+      "target": {
+        "domainType": "dataFlow",
+        "entityID": "DF-OCC-20261114-02",
+        "title": "Watch: OCC bulletins"
+      },
+      "record": {
+        "dataFlowID": "DF-OCC-20261114-02",
+        "title": "Watch: OCC bulletins",
+        "description": "Final third-party risk management guidance replacing the 2023 guidance",
+        "sourceSystems": [
+          {
+            "endpointType": "webPage",
+            "title": "OCC bulletins",
+            "url": "https://www.occ.gov/news-issuances/bulletins/index-bulletins.html"
+          }
+        ],
+        "targetSystems": [
+          {
+            "endpointType": "software",
+            "title": "Atlas update agent (via the Reasoning Fabric connector)"
+          }
+        ],
+        "frequency": "daily",
+        "schemaReference": {
+          "format": "html"
+        },
+        "sourcePrecedence": {
+          "rank": 2,
+          "basis": "regulatorPublication",
+          "canSetStatusOrDate": true
+        },
+        "externalOrgID": "EXT-OCC",
+        "jurisdiction": "US",
+        "governance": {
+          "ownerTitle": "Triodian method owner",
+          "humanApprovalRequired": true
+        },
+        "status": "planned"
+      },
+      "evidence": [
+        {
+          "url": "https://www.occ.gov/news-issuances/bulletins/index-bulletins.html",
+          "title": "OCC bulletins",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0032",
+      "changeType": "create",
+      "target": {
+        "domainType": "dataFlow",
+        "entityID": "DF-NATIONALASSOCIATIONOFINSURANCECOMMISSIONERS-20261114-03",
+        "title": "Watch: NAIC artificial intelligence topic page"
+      },
+      "record": {
+        "dataFlowID": "DF-NATIONALASSOCIATIONOFINSURANCECOMMISSIONERS-20261114-03",
+        "title": "Watch: NAIC artificial intelligence topic page",
+        "description": "State adoption of the AI model bulletin; third-party data and model vendor framework",
+        "sourceSystems": [
+          {
+            "endpointType": "webPage",
+            "title": "NAIC artificial intelligence topic page",
+            "url": "https://content.naic.org/insurance-topics/artificial-intelligence"
+          }
+        ],
+        "targetSystems": [
+          {
+            "endpointType": "software",
+            "title": "Atlas update agent (via the Reasoning Fabric connector)"
+          }
+        ],
+        "frequency": "daily",
+        "schemaReference": {
+          "format": "html"
+        },
+        "sourcePrecedence": {
+          "rank": 2,
+          "basis": "regulatorPublication",
+          "canSetStatusOrDate": true
+        },
+        "externalOrgID": "EXT-NAIC-US",
+        "jurisdiction": "US",
+        "governance": {
+          "ownerTitle": "Triodian method owner",
+          "humanApprovalRequired": true
+        },
+        "status": "planned"
+      },
+      "evidence": [
+        {
+          "url": "https://content.naic.org/insurance-topics/artificial-intelligence",
+          "title": "NAIC artificial intelligence topic page",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0033",
+      "changeType": "create",
+      "target": {
+        "domainType": "dataFlow",
+        "entityID": "DF-CONGRESS-20261114-04",
+        "title": "Watch: eCFR and Federal Register"
+      },
+      "record": {
+        "dataFlowID": "DF-CONGRESS-20261114-04",
+        "title": "Watch: eCFR and Federal Register",
+        "description": "17 CFR 248.30, 45 CFR 92.210, 45 CFR 164; the CIRCIA final rule when published",
+        "sourceSystems": [
+          {
+            "endpointType": "register",
+            "title": "eCFR and Federal Register",
+            "url": "https://www.ecfr.gov"
+          }
+        ],
+        "targetSystems": [
+          {
+            "endpointType": "software",
+            "title": "Atlas update agent (via the Reasoning Fabric connector)"
+          }
+        ],
+        "frequency": "daily",
+        "schemaReference": {
+          "format": "html"
+        },
+        "sourcePrecedence": {
+          "rank": 1,
+          "basis": "officialText",
+          "canSetStatusOrDate": true
+        },
+        "externalOrgID": "EXT-CONGRESS-US",
+        "jurisdiction": "US",
+        "governance": {
+          "ownerTitle": "Triodian method owner",
+          "humanApprovalRequired": true
+        },
+        "status": "planned"
+      },
+      "evidence": [
+        {
+          "url": "https://www.ecfr.gov",
+          "title": "eCFR and Federal Register",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "changeProposalID": "CP-2026-11-14-0034",
+      "changeType": "create",
+      "target": {
+        "domainType": "dataFlow",
+        "entityID": "DF-NERC-20261114-05",
+        "title": "Watch: NERC Reliability Standards"
+      },
+      "record": {
+        "dataFlowID": "DF-NERC-20261114-05",
+        "title": "Watch: NERC Reliability Standards",
+        "description": "CIP-013 revisions (the supply chain SAR)",
+        "sourceSystems": [
+          {
+            "endpointType": "register",
+            "title": "NERC Reliability Standards",
+            "url": "https://www.nerc.com/pa/Stand/Pages/ReliabilityStandards.aspx"
+          }
+        ],
+        "targetSystems": [
+          {
+            "endpointType": "software",
+            "title": "Atlas update agent (via the Reasoning Fabric connector)"
+          }
+        ],
+        "frequency": "daily",
+        "schemaReference": {
+          "format": "html"
+        },
+        "sourcePrecedence": {
+          "rank": 1,
+          "basis": "officialText",
+          "canSetStatusOrDate": true
+        },
+        "externalOrgID": "EXT-NERC",
+        "jurisdiction": "US",
+        "governance": {
+          "ownerTitle": "Triodian method owner",
+          "humanApprovalRequired": true
+        },
+        "status": "planned"
+      },
+      "evidence": [
+        {
+          "url": "https://www.nerc.com/pa/Stand/Pages/ReliabilityStandards.aspx",
+          "title": "NERC Reliability Standards",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-14T00:00:00Z"
+        }
+      ]
+    }
+  ]
+}

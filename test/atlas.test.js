@@ -415,3 +415,21 @@ test('with a Statement loaded but no adopted records held yet, the brief says so
   assert.ok(b.notices.some((n) => /holds no adopted-standard records yet/.test(n)));
   assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
 });
+
+test('the US research round builds a submission the Fabric can take', async () => {
+  const { execFileSync } = await import('node:child_process');
+  const fs = await import('node:fs');
+  execFileSync('node', ['data/seed/build-submission.mjs', 'data/research/2026-11-14-us-overlay.json'], { stdio: 'pipe' });
+  const sub = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-14-us-overlay.json', 'utf8'));
+  const obs = sub.proposals.filter((p) => p.target.domainType === 'obligation');
+  assert.equal(obs.length, 17);
+  assert.ok(obs.every((p) => p.record.jurisdiction === 'US' && /^OBL-US-/.test(p.record.obligationID)));
+  // Every record has its source organisation, and the insurance commissioners do not take the Australian EXT-NAIC.
+  assert.ok(obs.every((p) => p.record.source.externalOrgID), 'every authority maps to an organisation');
+  assert.equal(obs.find((p) => p.record.obligationID === 'OBL-US-NAIC-AI-BULLETIN').record.source.externalOrgID, 'EXT-NAIC-US');
+  // Each main sector has records: banking, insurance, securities, health care, critical infrastructure.
+  for (const et of ['bank', 'insurer', 'capitalMarketsIntermediary', 'healthServiceProvider', 'criticalInfrastructureAssetOwner']) assert.ok(obs.some((p) => p.record.entityTypes.includes(et)), et);
+  // Tiers stay honest: the proposal is anticipated, guidance expected.
+  assert.equal(obs.find((p) => p.record.obligationID === 'OBL-US-TPRM-2026-PROPOSED').record.sourceTier, 'anticipated');
+  assert.equal(obs.find((p) => p.record.obligationID === 'OBL-US-SR26-2-MRM').record.sourceTier, 'expected');
+});

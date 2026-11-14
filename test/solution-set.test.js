@@ -104,6 +104,11 @@ test('the REST API serves the table and the solution set, and refuses unknown id
   assert.equal(table.format, 'triodian.routingTable/1');
   assert.ok(table.jurisdictions.some((j) => j.code === 'AU' && j.covered) && table.jurisdictions.some((j) => j.code === 'NZ' && !j.covered));
   assert.ok(table.sectors.some((d) => d.regulatedSectorID === 'AU-SUPERANNUATION' && d.financiallyRegulated));
+  // The United States: its sectors are offered, but it is shown as covered only once records for it are published.
+  for (const id of ['US-BANKING', 'US-INSURANCE', 'US-SECURITIES', 'US-HEALTH', 'US-CRITICAL-INFRASTRUCTURE']) assert.ok(table.sectors.some((d) => d.regulatedSectorID === id), id);
+  const us = table.jurisdictions.find((j) => j.code === 'US');
+  assert.equal(us.name, 'United States');
+  assert.equal(us.covered, snapshot.records.some((x) => x.record && x.record.obligationID && x.record.jurisdiction === 'US'));
   assert.ok(table.generalEntityTypes.some((e) => e.id === 'privateCompany'));
   r = await app.request('http://atlas.test/api/v1/solution-set?role=fractionalGC&sector=AU-SUPERANNUATION&jurisdiction=au&prompt=apraLetter');
   const s = await r.json();

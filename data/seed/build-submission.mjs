@@ -33,6 +33,10 @@ const ORG_IDS = {
   'ISO/IEC': 'EXT-ISO-IEC', NIST: 'EXT-NIST', SA: 'EXT-STANDARDS-AU',
   'Parliament of New South Wales': 'EXT-PARL-NSW', Ahpra: 'EXT-AHPRA', CSA: 'EXT-CSA-SG', 'Singapore Customs': 'EXT-SG-CUSTOMS',
   MOM: 'EXT-MOM-SG', CCCS: 'EXT-CCCS', MOH: 'EXT-MOH-SG', FSB: 'EXT-FSB',
+  // United States (US.3). EXT-NAIC is Australia's National AI Centre, so the insurance commissioners take EXT-NAIC-US.
+  'Federal Reserve': 'EXT-FRB', OCC: 'EXT-OCC', NYDFS: 'EXT-NYDFS', 'National Association of Insurance Commissioners': 'EXT-NAIC-US',
+  SEC: 'EXT-SEC', FINRA: 'EXT-FINRA', HHS: 'EXT-HHS', NERC: 'EXT-NERC', Congress: 'EXT-CONGRESS-US', CPPA: 'EXT-CPPA',
+  'Texas Legislature': 'EXT-LEG-TX', 'Colorado General Assembly': 'EXT-LEG-CO',
 };
 const orgID = (key) => ORG_IDS[key];
 
@@ -42,7 +46,7 @@ const cp = () => `CP-${RESEARCHED}-${String(++n).padStart(4, '0')}`;
 const DATE_TYPES = new Set(['made', 'published', 'commences', 'applies', 'transitionEnds', 'consultationOpens', 'consultationCloses', 'reviewDue', 'repealed']);
 
 for (const o of research.obligations) {
-  if (!/^OBL-(AU|SG|INT)-[A-Z0-9-]+$/.test(o.id)) throw new Error(`Bad obligation id ${o.id}`);
+  if (!/^OBL-(AU|SG|US|INT)-[A-Z0-9-]+$/.test(o.id)) throw new Error(`Bad obligation id ${o.id}`);
   const unknown = o.entityTypes.filter((e) => !ENTITY_TYPES.includes(e));
   if (unknown.length) throw new Error(`${o.id}: unknown entity types ${unknown.join(', ')}`);
   const keyDates = (o.keyDates || []).filter((k) => DATE_TYPES.has(k.dateType)).map((k) => ({ dateType: k.dateType, date: k.date, ...(k.note ? { note: k.note.slice(0, 300) } : {}) }));
@@ -77,7 +81,7 @@ for (const o of research.obligations) {
 }
 
 for (const org of research.externalOrganizations || []) {
-  const id = orgID(org.acronym || org.name);
+  const id = orgID(org.name) || orgID(org.acronym);
   if (!id) throw new Error(`No ID for organization ${org.acronym || org.name}`);
   const juris = org.jurisdiction === 'INTL' ? 'INT' : org.jurisdiction;
   const record = { externalOrgID: id, name: org.name, ...(org.acronym ? { acronym: org.acronym } : {}), type: org.type, jurisdiction: juris, jurisdictionCodes: [juris], website: org.website };

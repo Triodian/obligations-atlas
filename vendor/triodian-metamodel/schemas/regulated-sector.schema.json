@@ -69,6 +69,22 @@
     "version": {
       "type": "string",
       "description": "Version of the sector definition"
+    },
+    "mainSector": {
+      "type": "boolean",
+      "description": "True for one of the jurisdiction's main sectors (at most five a jurisdiction): a sector with its own Atlas records, a sector pack in each engagement app and a worked example. Other sectors stay selectable and use their baseline or the general path"
+    },
+    "baselineProfiles": {
+      "type": "array",
+      "description": "Baseline profiles (baseline-profiles.json) the sector builds on; the sector's own obligations are the jurisdiction's overlay on them",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/definitions/identifier"
+          }
+        ]
+      },
+      "uniqueItems": true
     }
   }
 }
