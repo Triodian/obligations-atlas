@@ -76,7 +76,7 @@ To refresh by hand instead: `FABRIC_PREVIEW_TOKEN=… node scripts/refresh-snaps
 | REST API | `/api/v1/obligations`, `/obligations/{id}`, `/instruments`, `/changes?since=`, `/provenance/{ref}`, `/use-cases`, `/jurisdictions`, `/organizations`, `/policy`, `/solution-set`, `/firms/directory`, `/solution-set/table`, `/openapi.json` |
 | MCP (Streamable HTTP at `/mcp`) | `find_obligations`, `get_obligation`, `list_changes`, `explain_provenance` |
 
-**Free entry point (keyless tier).** No key is needed for the REST API or the MCP server: each caller may make `ATLAS_KEYLESS_PER_MINUTE` requests a minute (60 by default) and reads the published records for Australia, Singapore and the international standards. Over the limit, the answer says when to retry and how a registered firm gets its own key and a higher limit. `server.json` lists the MCP server in the official MCP Registry (publish it with **Actions → Publish to MCP Registry**); [docs/mcp-directories.md](docs/mcp-directories.md) is the listing checklist.
+**Free entry point (keyless tier).** No key is needed for the REST API or the MCP server: each caller may make `ATLAS_KEYLESS_PER_MINUTE` requests a minute (60 by default) and reads the published records for Australia, Singapore, the United States and the international standards. Over the limit, the answer says when to retry and how a registered firm gets its own key and a higher limit. `server.json` lists the MCP server in the official MCP Registry (publish it with **Actions → Publish to MCP Registry**); [docs/mcp-directories.md](docs/mcp-directories.md) is the listing checklist.
 
 **Privacy.**
 - The web app downloads the whole public dataset once and filters it in the browser. The matter brief is built and kept there too, in the format in `schemas/matter-brief.schema.json`. No client facts reach the server unless the lawyer chooses to share a brief's scope with Triodian (see below). The matter label is never sent.
@@ -95,7 +95,7 @@ To refresh by hand instead: `FABRIC_PREVIEW_TOKEN=… node scripts/refresh-snaps
 
 **Use cases and "any AI use".** A record mapped to every standardised use case (UC1–UC10) applies to any AI use, such as board accountability or risk management, rather than to particular uses. When a lawyer filters by use case, records specific to it come first and records that apply to any AI use follow. They appear in a folded group in the register and a separate list in the brief. The API marks them `appliesToAnyAIUse`; `includeAnyUse=false` leaves them out.
 
-**Coverage.** The Atlas covers Australia, Singapore and international standards. Asking the API or MCP server about another jurisdiction (EU, GB, NZ, US) returns a `coverage` note saying it isn't covered yet, so an empty result isn't read as "no obligations".
+**Coverage.** The Atlas covers Australia, Singapore, the United States and international standards. United States records come through the review queue from the November 2026 research round (`data/research/2026-11-14-us-overlay.json`); until some are published, and for other jurisdictions (EU, GB, NZ), the API and MCP server return a `coverage` note saying the jurisdiction isn't covered yet, so an empty result isn't read as "no obligations". State laws (New York, California, Texas, Colorado) are recorded under `US` with the state named in the title.
 
 **Language rules.** Every API and MCP response is checked against the dataset's language rules before it leaves. A response that fails the check is withheld.
 

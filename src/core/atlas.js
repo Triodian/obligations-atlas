@@ -25,7 +25,7 @@ export const JURISDICTIONS = {
   EU: { name: 'European Union', depth: 'core' },
   GB: { name: 'United Kingdom', depth: 'core' },
   NZ: { name: 'New Zealand', depth: 'core' },
-  US: { name: 'United States (insurance)', depth: 'core' },
+  US: { name: 'United States', depth: 'full' },
   INT: { name: 'International standards', depth: 'reference' },
 };
 

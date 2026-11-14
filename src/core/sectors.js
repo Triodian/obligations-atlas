@@ -13,6 +13,10 @@ export const REGULATED_SECTORS = [
     "entityTypes": [
       "authorisedDepositTakingInstitution"
     ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-BANKING"
+    ],
     "version": "1.0"
   },
   {
@@ -30,6 +34,10 @@ export const REGULATED_SECTORS = [
       "lifeInsurer",
       "privateHealthInsurer"
     ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-INSURANCE"
+    ],
     "version": "1.0"
   },
   {
@@ -45,6 +53,7 @@ export const REGULATED_SECTORS = [
     "entityTypes": [
       "superannuationTrustee"
     ],
+    "mainSector": true,
     "version": "1.0"
   },
   {
@@ -58,6 +67,9 @@ export const REGULATED_SECTORS = [
     ],
     "entityTypes": [
       "financialServicesLicensee"
+    ],
+    "baselineProfiles": [
+      "BP-SECURITIES"
     ],
     "version": "1.0"
   },
@@ -73,6 +85,9 @@ export const REGULATED_SECTORS = [
     "entityTypes": [
       "creditLicensee"
     ],
+    "baselineProfiles": [
+      "BP-BANKING"
+    ],
     "version": "1.0"
   },
   {
@@ -83,6 +98,9 @@ export const REGULATED_SECTORS = [
     "financiallyRegulated": true,
     "entityTypes": [
       "paymentServiceProvider"
+    ],
+    "baselineProfiles": [
+      "BP-PAYMENTS"
     ],
     "version": "1.0"
   },
@@ -110,6 +128,10 @@ export const REGULATED_SECTORS = [
     "entityTypes": [
       "healthServiceProvider"
     ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-HEALTH"
+    ],
     "version": "1.0"
   },
   {
@@ -120,6 +142,11 @@ export const REGULATED_SECTORS = [
     "financiallyRegulated": false,
     "entityTypes": [
       "criticalInfrastructureAssetOwner"
+    ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-CI-CORPORATE",
+      "BP-CI-GOVERNMENT"
     ],
     "version": "1.0"
   },
@@ -161,6 +188,10 @@ export const REGULATED_SECTORS = [
     "alsoReaches": [
       "financialInstitution"
     ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-BANKING"
+    ],
     "version": "1.0"
   },
   {
@@ -177,6 +208,10 @@ export const REGULATED_SECTORS = [
     ],
     "alsoReaches": [
       "financialInstitution"
+    ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-INSURANCE"
     ],
     "version": "1.0"
   },
@@ -195,6 +230,10 @@ export const REGULATED_SECTORS = [
     "alsoReaches": [
       "financialInstitution"
     ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-SECURITIES"
+    ],
     "version": "1.0"
   },
   {
@@ -212,6 +251,9 @@ export const REGULATED_SECTORS = [
     "alsoReaches": [
       "financialInstitution"
     ],
+    "baselineProfiles": [
+      "BP-PAYMENTS"
+    ],
     "version": "1.0"
   },
   {
@@ -226,6 +268,7 @@ export const REGULATED_SECTORS = [
     "entityTypes": [
       "listedEntity"
     ],
+    "mainSector": true,
     "version": "1.0"
   },
   {
@@ -237,6 +280,9 @@ export const REGULATED_SECTORS = [
     "entityTypes": [
       "healthServiceProvider"
     ],
+    "baselineProfiles": [
+      "BP-HEALTH"
+    ],
     "version": "1.0"
   },
   {
@@ -247,6 +293,11 @@ export const REGULATED_SECTORS = [
     "financiallyRegulated": false,
     "entityTypes": [
       "criticalInfrastructureAssetOwner"
+    ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-CI-CORPORATE",
+      "BP-CI-GOVERNMENT"
     ],
     "version": "1.0"
   },
@@ -264,6 +315,164 @@ export const REGULATED_SECTORS = [
   {
     "regulatedSectorID": "SG-GENERAL",
     "jurisdiction": "SG",
+    "name": "Not financially regulated",
+    "description": "Private companies and not-for-profits outside the sectors above",
+    "financiallyRegulated": false,
+    "entityTypes": [
+      "privateCompany",
+      "notForProfit"
+    ],
+    "version": "1.0"
+  },
+  {
+    "regulatedSectorID": "US-BANKING",
+    "jurisdiction": "US",
+    "name": "Banking",
+    "description": "Banks, savings associations and credit unions",
+    "financiallyRegulated": true,
+    "regulators": [
+      "OCC",
+      "Federal Reserve",
+      "FDIC",
+      "NCUA",
+      "State banking regulators"
+    ],
+    "entityTypes": [
+      "bank"
+    ],
+    "alsoReaches": [
+      "financialInstitution"
+    ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-BANKING"
+    ],
+    "version": "1.0"
+  },
+  {
+    "regulatedSectorID": "US-INSURANCE",
+    "jurisdiction": "US",
+    "name": "Insurance",
+    "description": "Insurers licensed by a state insurance regulator",
+    "financiallyRegulated": true,
+    "regulators": [
+      "State insurance regulators",
+      "NAIC"
+    ],
+    "entityTypes": [
+      "insurer"
+    ],
+    "alsoReaches": [
+      "financialInstitution"
+    ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-INSURANCE"
+    ],
+    "version": "1.0"
+  },
+  {
+    "regulatedSectorID": "US-SECURITIES",
+    "jurisdiction": "US",
+    "name": "Securities and investment advice",
+    "description": "Broker-dealers, investment advisers and other SEC or FINRA registrants",
+    "financiallyRegulated": true,
+    "regulators": [
+      "SEC",
+      "FINRA",
+      "State securities regulators"
+    ],
+    "entityTypes": [
+      "capitalMarketsIntermediary"
+    ],
+    "alsoReaches": [
+      "financialInstitution"
+    ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-SECURITIES"
+    ],
+    "version": "1.0"
+  },
+  {
+    "regulatedSectorID": "US-HEALTH",
+    "jurisdiction": "US",
+    "name": "Health care",
+    "description": "Hospitals, health systems, clinics and other providers of health services",
+    "financiallyRegulated": false,
+    "regulators": [
+      "HHS",
+      "FDA",
+      "State health regulators"
+    ],
+    "entityTypes": [
+      "healthServiceProvider"
+    ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-HEALTH"
+    ],
+    "version": "1.0"
+  },
+  {
+    "regulatedSectorID": "US-CRITICAL-INFRASTRUCTURE",
+    "jurisdiction": "US",
+    "name": "Critical infrastructure",
+    "description": "Owners and operators in the sixteen critical infrastructure sectors, corporate or government managed",
+    "financiallyRegulated": false,
+    "regulators": [
+      "CISA",
+      "Sector risk management agencies"
+    ],
+    "entityTypes": [
+      "criticalInfrastructureAssetOwner"
+    ],
+    "mainSector": true,
+    "baselineProfiles": [
+      "BP-CI-CORPORATE",
+      "BP-CI-GOVERNMENT"
+    ],
+    "version": "1.0"
+  },
+  {
+    "regulatedSectorID": "US-PAYMENTS",
+    "jurisdiction": "US",
+    "name": "Payments and money transmission",
+    "description": "Money transmitters and other payment service providers",
+    "financiallyRegulated": true,
+    "regulators": [
+      "State money transmission regulators",
+      "CFPB",
+      "FinCEN"
+    ],
+    "entityTypes": [
+      "paymentServiceProvider"
+    ],
+    "alsoReaches": [
+      "financialInstitution"
+    ],
+    "baselineProfiles": [
+      "BP-PAYMENTS"
+    ],
+    "version": "1.0"
+  },
+  {
+    "regulatedSectorID": "US-LISTED",
+    "jurisdiction": "US",
+    "name": "Listed companies",
+    "description": "Entities listed on a securities exchange",
+    "financiallyRegulated": false,
+    "regulators": [
+      "SEC"
+    ],
+    "entityTypes": [
+      "listedEntity"
+    ],
+    "version": "1.0"
+  },
+  {
+    "regulatedSectorID": "US-GENERAL",
+    "jurisdiction": "US",
     "name": "Not financially regulated",
     "description": "Private companies and not-for-profits outside the sectors above",
     "financiallyRegulated": false,
