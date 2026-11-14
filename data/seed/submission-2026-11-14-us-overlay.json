@@ -686,7 +686,7 @@
           "externalOrgID": "EXT-HHS"
         },
         "jurisdiction": "US",
-        "sourceTier": "binding",
+        "sourceTier": "anticipated",
         "entityTypes": [
           "healthServiceProvider"
         ],
@@ -734,7 +734,7 @@
           "retrievedAt": "2026-11-14T00:00:00Z"
         }
       ],
-      "rationale": "Research note: The Federal Register text could not be fetched; the statement rests on law firm summaries that agree on the change and dates. The last sentence is Triodian's reading of the effect on providers, not the rule's words. Status pending until 28 December 2026. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+      "rationale": "Research note: The Federal Register text could not be fetched; the statement rests on law firm summaries that agree on the change and dates. The last sentence is Triodian's reading of the effect on providers, not the rule's words. Tier anticipated and status pending until 28 December 2026, when it becomes binding and in force (the Metamodel keeps binding for instruments in force). Research brief: data/research/BRIEF-2026-11-us-overlay.md"
     },
     {
       "changeProposalID": "CP-2026-11-14-0013",
@@ -806,7 +806,7 @@
           "externalOrgID": "EXT-CONGRESS-US"
         },
         "jurisdiction": "US",
-        "sourceTier": "binding",
+        "sourceTier": "anticipated",
         "entityTypes": [
           "criticalInfrastructureAssetOwner",
           "bank",
@@ -841,7 +841,7 @@
           "retrievedAt": "2026-11-14T00:00:00Z"
         }
       ],
-      "rationale": "Research note: Statute quoted from govinfo. The duties are not yet in force: status pending until the final rule sets dates. Entity types are indicative (financial services, health care and others are critical infrastructure sectors); the final rule will set who is covered. Record the rule's dates when it is published. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+      "rationale": "Research note: Statute quoted from govinfo. The statute is law, but its reporting duties are not yet in force, so the record is anticipated and pending until the final rule sets dates (the Metamodel keeps binding for duties in force). Entity types are indicative (financial services, health care and others are critical infrastructure sectors); the final rule will set who is covered. Record the rule's dates when it is published. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
     },
     {
       "changeProposalID": "CP-2026-11-14-0015",
@@ -985,7 +985,7 @@
           "externalOrgID": "EXT-LEG-CO"
         },
         "jurisdiction": "US",
-        "sourceTier": "binding",
+        "sourceTier": "anticipated",
         "entityTypes": [
           "anyOrganization"
         ],
@@ -1029,7 +1029,7 @@
           "retrievedAt": "2026-11-14T00:00:00Z"
         }
       ],
-      "rationale": "Research note: The bill text was not fetched; the statement rests on law firm commentary, which agrees on the dates and the shape of the duties. The reviewer to check the enacted text and the bill URL. The United States intervened in litigation against the 2024 Act; the effect on SB 26-189 is not settled. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
+      "rationale": "Research note: The bill text was not fetched; the statement rests on law firm commentary, which agrees on the dates and the shape of the duties. The reviewer to check the enacted text and the bill URL. Anticipated and pending until 1 January 2027. The United States intervened in litigation against the 2024 Act; the effect on SB 26-189 is not settled. Research brief: data/research/BRIEF-2026-11-us-overlay.md"
     },
     {
       "changeProposalID": "CP-2026-11-14-0018",
