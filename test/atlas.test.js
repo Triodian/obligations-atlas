@@ -432,4 +432,6 @@ test('the US research round builds a submission the Fabric can take', async () =
   // Tiers stay honest: the proposal is anticipated, guidance expected.
   assert.equal(obs.find((p) => p.record.obligationID === 'OBL-US-TPRM-2026-PROPOSED').record.sourceTier, 'anticipated');
   assert.equal(obs.find((p) => p.record.obligationID === 'OBL-US-SR26-2-MRM').record.sourceTier, 'expected');
+  // The Metamodel keeps binding for instruments in force: made-but-not-in-force is anticipated and pending.
+  for (const p of obs) if (p.record.sourceTier === 'binding') assert.ok(['inForce', 'amended', 'superseded', 'repealed'].includes(p.record.status), `${p.record.obligationID} is binding but ${p.record.status}`);
 });

@@ -401,7 +401,7 @@
    "obligationType": "statutory",
    "title": "HTI-5 removes model-card and risk management criteria for decision support in certified health IT",
    "statement": "Published on 28 October 2026 and effective 28 December 2026 for this change, HTI-5 narrows the decision support interventions certification criterion: certified health IT no longer has to support source attributes ('model cards') or apply intervention risk management to predictive decision support. The change binds certified health IT developers, not providers. For a hospital or health system it removes a federal baseline of information about predictive tools embedded in certified software; the provider's own duty under 45 CFR 92.210 is unchanged, so that information now has to be sought from the vendor by contract or due diligence.",
-   "sourceTier": "binding",
+   "sourceTier": "anticipated",
    "status": "pending",
    "keyDates": [
     {
@@ -427,7 +427,7 @@
    ],
    "url": "https://www.federalregister.gov/documents/2026/10/28/2026-21943/health-data-technology-and-interoperability-onc-deregulatory-actions-to-unleash-prosperity",
    "verifiedFrom": "https://www.akingump.com/en/insights/ai-law-and-regulation-tracker/onc-issues-hti-5-final-rule-removing-model-card-and-risk-management-requirements-for-predictive-decision-support-interventions; https://www.hklaw.com/en/insights/publications/2026/10/hti5-promotes-deregulatory-certification-actions; https://www.mcdermottlaw.com/?p=50392216 (seen 2026-11-14)",
-   "confidenceNote": "The Federal Register text could not be fetched; the statement rests on law firm summaries that agree on the change and dates. The last sentence is Triodian's reading of the effect on providers, not the rule's words. Status pending until 28 December 2026.",
+   "confidenceNote": "The Federal Register text could not be fetched; the statement rests on law firm summaries that agree on the change and dates. The last sentence is Triodian's reading of the effect on providers, not the rule's words. Tier anticipated and status pending until 28 December 2026, when it becomes binding and in force (the Metamodel keeps binding for instruments in force).",
    "jurisdiction": "US"
   },
   {
@@ -467,7 +467,7 @@
    "obligationType": "statutory",
    "title": "Cyber incident (72 hours) and ransom payment (24 hours) reporting to CISA, from the final rule (CIRCIA)",
    "statement": "Section 681b(a)(1)(A) provides that a covered entity 'shall report the covered cyber incident to the Agency not later than 72 hours' after it reasonably believes the incident occurred, and 681b(a)(2)(A) that it 'shall report the payment to the Agency not later than 24 hours after the ransom payment has been made'. Under 681b(a)(7) these duties 'shall take effect on the dates prescribed in the final rule'. CISA sent its final rule to OIRA for review on 1 October 2026. Covered entities are to be defined by the rule across the critical infrastructure sectors. An incident in which an AI system or AI provider is the vector or the target is reached like any other.",
-   "sourceTier": "binding",
+   "sourceTier": "anticipated",
    "status": "pending",
    "keyDates": [],
    "entityTypes": [
@@ -488,7 +488,7 @@
    ],
    "url": "https://www.govinfo.gov/link/uscode/6/681b",
    "verifiedFrom": "https://www.govinfo.gov/link/uscode/6/681b (fetched 2026-11-14); https://www.insideprivacy.com/critical-infrastructure/cisa-submits-final-circia-rule-for-omb-review/",
-   "confidenceNote": "Statute quoted from govinfo. The duties are not yet in force: status pending until the final rule sets dates. Entity types are indicative (financial services, health care and others are critical infrastructure sectors); the final rule will set who is covered. Record the rule's dates when it is published.",
+   "confidenceNote": "Statute quoted from govinfo. The statute is law, but its reporting duties are not yet in force, so the record is anticipated and pending until the final rule sets dates (the Metamodel keeps binding for duties in force). Entity types are indicative (financial services, health care and others are critical infrastructure sectors); the final rule will set who is covered. Record the rule's dates when it is published.",
    "jurisdiction": "US"
   },
   {
@@ -579,7 +579,7 @@
    "obligationType": "statutory",
    "title": "Colorado: notice, explanation and human review for automated decisions, from 2027 (SB 26-189)",
    "statement": "Signed on 14 May 2026 and taking effect 1 January 2027, SB 26-189 replaces the 2024 Colorado AI Act's duty of care, risk management programmes and impact assessments with a narrower framework for automated decision-making technology that materially influences consequential decisions about consumers (education, employment, housing, financial services, insurance, health care and essential government services). Commentary reports that deployers give notice before use, a plain-language explanation after an adverse outcome, meaningful human review on request where commercially reasonable, and keep records for three years; developers give deployers documentation of intended uses, known harmful uses, limitations and human-review instructions. Contract terms purporting to indemnify a party for its own discriminatory acts are reported to be void. The Attorney General makes rules and gives a 60-day cure period until 2030.",
-   "sourceTier": "binding",
+   "sourceTier": "anticipated",
    "status": "pending",
    "keyDates": [
     {
@@ -607,7 +607,7 @@
    ],
    "url": "https://leg.colorado.gov/bills/sb26-189",
    "verifiedFrom": "https://hklaw.com/en/insights/publications/2026/05/colorado-governor-signs-sb-189 (fetched 2026-11-14); https://www.hunton.com/privacy-and-information-security-law/colorado-ai-act-amended-and-effective-date-delayed",
-   "confidenceNote": "The bill text was not fetched; the statement rests on law firm commentary, which agrees on the dates and the shape of the duties. The reviewer to check the enacted text and the bill URL. The United States intervened in litigation against the 2024 Act; the effect on SB 26-189 is not settled.",
+   "confidenceNote": "The bill text was not fetched; the statement rests on law firm commentary, which agrees on the dates and the shape of the duties. The reviewer to check the enacted text and the bill URL. Anticipated and pending until 1 January 2027. The United States intervened in litigation against the 2024 Act; the effect on SB 26-189 is not settled.",
    "jurisdiction": "US"
   }
  ],
