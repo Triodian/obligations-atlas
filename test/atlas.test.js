@@ -176,9 +176,10 @@ test('jurisdictions without records say "not yet covered" in the API and MCP', a
   assert.match(r.body.coverage[0].note, /does not yet cover the European Union/);
   const au = await get('/api/v1/obligations?jurisdiction=AU');
   assert.equal(au.body.coverage, undefined);
-  const m = await rpc({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'find_obligations', arguments: { jurisdiction: ['US'], includeInternational: false } } });
+  // GB, not US: the US round is in the Fabric, so the preview snapshot holds US records waiting for review.
+  const m = await rpc({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'find_obligations', arguments: { jurisdiction: ['GB'], includeInternational: false } } });
   assert.equal(m.body.result.structuredContent.total, 0);
-  assert.equal(m.body.result.structuredContent.coverage[0].jurisdiction, 'US');
+  assert.equal(m.body.result.structuredContent.coverage[0].jurisdiction, 'GB');
   assert.ok(atlas.jurisdictions().find((j) => j.code === 'NZ').coverage === 'notYetCovered');
 });
 
