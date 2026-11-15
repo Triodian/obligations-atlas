@@ -1,6 +1,6 @@
 {
   "dataset": "ai-obligations-atlas",
-  "generatedAt": "2026-11-15T05:05:41.547Z",
+  "generatedAt": "2026-11-15T06:13:16.896Z",
   "interfaceVersion": "1.0.0",
   "metamodelVersion": "2.7.0",
   "metamodelCommit": "2121f8c840758182c8b8bdc486cf07b304feaa2f",
@@ -3892,52 +3892,53 @@
     },
     {
       "approval": {
-        "approvedAt": "2026-11-15T00:42:08.492Z",
+        "approvedAt": "2026-11-15T06:12:26.091Z",
         "approverName": "Damian Hickey",
         "approverRole": "Method owner",
-        "reviewDecisionID": "RD-CP-2026-11-08-0021-1794703328492"
+        "reviewDecisionID": "RD-CP-2026-11-15-AU-STATE-CODES-J002-1794723146091"
       },
       "changeProposalIDs": [
-        "CP-2026-11-08-0021"
+        "CP-2026-11-15-AU-STATE-CODES-J002"
       ],
       "dataset": "ai-obligations-atlas",
       "domainType": "externalOrganization",
       "entityID": "EXT-PARL-NSW",
-      "governedRecordID": "EXT-PARL-NSW@1",
+      "governedRecordID": "EXT-PARL-NSW@2",
       "metamodelVersion": "2.7.0",
       "provenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000761",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000762",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000763",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000764",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000993",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000994"
+        "PROV-AI-OBLIGATIONS-ATLAS-0001121",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001122",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001123",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001124",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001127",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001128"
       ],
       "publicationStatus": "published",
-      "publishedAt": "2026-11-15T00:42:08.523Z",
+      "publishedAt": "2026-11-15T06:12:26.124Z",
       "record": {
         "externalOrgID": "EXT-PARL-NSW",
-        "jurisdiction": "AU",
+        "jurisdiction": "AU-NSW",
         "jurisdictionCodes": [
-          "AU"
+          "AU-NSW"
         ],
         "name": "Parliament of New South Wales",
         "type": "legislature",
         "website": "https://www.parliament.nsw.gov.au"
       },
+      "supersedesVersion": 1,
       "verification": {
         "confidence": {
           "band": "high",
           "corroboration": 0.5,
-          "recency": 0.999,
+          "recency": 0.997,
           "reliability": 0.9,
-          "score": 0.85,
+          "score": 0.849,
           "stale": false
         },
         "lastVerified": "2026-11-15",
         "stale": false
       },
-      "version": 1
+      "version": 2
     },
     {
       "publicationStatus": "published",
@@ -7259,34 +7260,34 @@
     },
     {
       "approval": {
-        "approvedAt": "2026-11-15T00:35:48.557Z",
+        "approvedAt": "2026-11-15T06:12:22.355Z",
         "approverName": "Damian Hickey",
         "approverRole": "Method owner",
-        "reviewDecisionID": "RD-CP-2026-11-08-0009-1794702948557"
+        "reviewDecisionID": "RD-CP-2026-11-15-AU-STATE-CODES-J001-1794723142355"
       },
       "changeProposalIDs": [
-        "CP-2026-11-08-0009"
+        "CP-2026-11-15-AU-STATE-CODES-J001"
       ],
       "dataset": "ai-obligations-atlas",
       "domainType": "obligation",
       "entityID": "OBL-AU-NSW-WSA-10-12",
-      "governedRecordID": "OBL-AU-NSW-WSA-10-12@1",
+      "governedRecordID": "OBL-AU-NSW-WSA-10-12@2",
       "metamodelVersion": "2.7.0",
       "provenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000704",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000705",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000706",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000707",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000977",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000978"
+        "PROV-AI-OBLIGATIONS-ATLAS-0001117",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001118",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001119",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001120",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001125",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001126"
       ],
       "publicationStatus": "published",
-      "publishedAt": "2026-11-15T00:35:48.589Z",
+      "publishedAt": "2026-11-15T06:12:22.394Z",
       "record": {
         "entityTypes": [
           "anyOrganization"
         ],
-        "jurisdiction": "AU",
+        "jurisdiction": "AU-NSW",
         "lastVerified": "2026-11-08",
         "monitoringFrequency": "daily",
         "obligationID": "OBL-AU-NSW-WSA-10-12",
@@ -7311,20 +7312,21 @@
           "UC2"
         ]
       },
+      "supersedesVersion": 1,
       "verification": {
         "confidence": {
           "band": "high",
           "corroboration": 0.5,
-          "recency": 0.999,
+          "recency": 0.96,
           "reliability": 1,
-          "score": 0.9,
+          "score": 0.888,
           "stale": false
         },
         "freshnessThreshold": "P180D",
         "lastVerified": "2026-11-08",
         "stale": false
       },
-      "version": 1
+      "version": 2
     },
     {
       "approval": {
@@ -32140,116 +32142,6 @@
         "actorType": "agent",
         "displayName": "Atlas update agent (research of 2026-11-08)"
       },
-      "changeProposalID": "CP-2026-11-08-0009",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Read Workplace Surveillance Act 2005 (NSW) (Official legislation register) (rank 1)",
-      "eventType": "sourceRead",
-      "evidenceURLs": [
-        "https://legislation.nsw.gov.au/view/pdf/asmade/act-2005-47"
-      ],
-      "hash": "ee46b934b455d4572354b871e947ccfff8437893a5548c344444f2016956d8ad",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000670"
-      ],
-      "previousHash": "85dab2e4ee16744b2f1087bd427ea4a2a9b4c4d72d825cc091e81e687f9b1a3c",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000704",
-      "recordedAt": "2026-11-08T03:00:23.812Z",
-      "sequence": 704,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-AU-NSW-WSA-10-12"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-08-0009",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Valid against the Metamodel and the dataset language rules",
-      "eventType": "validated",
-      "hash": "2b610599008f7aa6c831fe51bdc5084f0cbf659d960fd173d4e4218dd1c05748",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000704"
-      ],
-      "previousHash": "ee46b934b455d4572354b871e947ccfff8437893a5548c344444f2016956d8ad",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000705",
-      "recordedAt": "2026-11-08T03:00:23.830Z",
-      "ruleIDs": [
-        "schema.metamodel",
-        "language.rules"
-      ],
-      "sequence": 705,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-AU-NSW-WSA-10-12"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-08-0009",
-      "confidenceScore": 0.9,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Confidence 0.9 (high)",
-      "eventType": "scored",
-      "hash": "37e51b7b8236d3a83add57e7961ed336eec852ea3cb56bcba32acece8533bbdb",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000705"
-      ],
-      "previousHash": "2b610599008f7aa6c831fe51bdc5084f0cbf659d960fd173d4e4218dd1c05748",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000706",
-      "recordedAt": "2026-11-08T03:00:23.850Z",
-      "ruleIDs": [
-        "coverage.weighting"
-      ],
-      "sequence": 706,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-AU-NSW-WSA-10-12"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-08-0009",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Treatment: reviewQueue",
-      "eventType": "treatmentAssigned",
-      "hash": "eed00a4823475e6d4dfa0421cb5e8b2ea6b08d65c1d8355fde5a5540b23888c3",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000706"
-      ],
-      "previousHash": "37e51b7b8236d3a83add57e7961ed336eec852ea3cb56bcba32acece8533bbdb",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000707",
-      "recordedAt": "2026-11-08T03:00:23.868Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 707,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-AU-NSW-WSA-10-12"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
-    },
-    {
-      "actor": {
-        "actorID": "atlas-update-agent",
-        "actorType": "agent",
-        "displayName": "Atlas update agent (research of 2026-11-08)"
-      },
       "changeProposalID": "CP-2026-11-08-0010",
       "dataset": "ai-obligations-atlas",
       "decision": "Read Defence Trade Controls Act 2012 (Cth), as amended by the Defence Trade Controls Amendment Act 2024 (Official legislation register) (rank 1)",
@@ -33710,116 +33602,6 @@
       "subject": {
         "domainType": "obligation",
         "entityID": "OBL-INT-FSB-AI-SP"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
-    },
-    {
-      "actor": {
-        "actorID": "atlas-update-agent",
-        "actorType": "agent",
-        "displayName": "Atlas update agent (research of 2026-11-08)"
-      },
-      "changeProposalID": "CP-2026-11-08-0021",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Read Parliament of New South Wales website (rank 2)",
-      "eventType": "sourceRead",
-      "evidenceURLs": [
-        "https://www.parliament.nsw.gov.au"
-      ],
-      "hash": "8ae4e54299acda889e9dac0a23ba7ecd7349afa67acc331e8eb15a769e12637d",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000670"
-      ],
-      "previousHash": "672ec90698938583f97965461fe2977d6d36a621f6ed2350bb76fc94aefc1293",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000761",
-      "recordedAt": "2026-11-08T03:00:26.105Z",
-      "sequence": 761,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-PARL-NSW"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-08-0021",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Valid against the Metamodel and the dataset language rules",
-      "eventType": "validated",
-      "hash": "c28f0d3abd0389debacf6bdfba7a7bf5ad0de85481720fc269e6405fff6289df",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000761"
-      ],
-      "previousHash": "8ae4e54299acda889e9dac0a23ba7ecd7349afa67acc331e8eb15a769e12637d",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000762",
-      "recordedAt": "2026-11-08T03:00:26.122Z",
-      "ruleIDs": [
-        "schema.metamodel",
-        "language.rules"
-      ],
-      "sequence": 762,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-PARL-NSW"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-08-0021",
-      "confidenceScore": 0.85,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Confidence 0.85 (high)",
-      "eventType": "scored",
-      "hash": "a2c04ba24cbe40156551fc13b3b56d7ee16608dbf070b8620f0f99eb238bfa30",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000762"
-      ],
-      "previousHash": "c28f0d3abd0389debacf6bdfba7a7bf5ad0de85481720fc269e6405fff6289df",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000763",
-      "recordedAt": "2026-11-08T03:00:26.144Z",
-      "ruleIDs": [
-        "coverage.weighting"
-      ],
-      "sequence": 763,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-PARL-NSW"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-08-0021",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Treatment: reviewQueue",
-      "eventType": "treatmentAssigned",
-      "hash": "d9a1bd2cbbfea5a10bd28e189be658503a34aa219f89eae973545259a9da5a2d",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000763"
-      ],
-      "previousHash": "a2c04ba24cbe40156551fc13b3b56d7ee16608dbf070b8620f0f99eb238bfa30",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000764",
-      "recordedAt": "2026-11-08T03:00:26.159Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 764,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-PARL-NSW"
       },
       "submissionID": "SUB-ATLAS-2026-11-08-GENERAL-AND-2026"
     },
@@ -38894,63 +38676,6 @@
         "actorType": "person",
         "displayName": "Damian Hickey"
       },
-      "changeProposalID": "CP-2026-11-08-0009",
-      "dataset": "ai-obligations-atlas",
-      "decision": "approve by Damian Hickey (Method owner)",
-      "eventType": "reviewDecided",
-      "hash": "6d03178c39a1cd08980c10b94c4d4dffcfb9ade05dbb1691294c8c8a3fe6353d",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000707"
-      ],
-      "previousHash": "b9f2312003c787bbd10c4df1f6339017ebf4d38af65c92933af9082c653d1ddc",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000977",
-      "recordedAt": "2026-11-15T00:35:48.572Z",
-      "ruleIDs": [
-        "review.namedApprover"
-      ],
-      "sequence": 977,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-AU-NSW-WSA-10-12"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-08-0009",
-      "confidenceScore": 0.9,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Published as published: OBL-AU-NSW-WSA-10-12@1, approved by Damian Hickey",
-      "eventType": "published",
-      "evidenceURLs": [
-        "https://legislation.nsw.gov.au/view/pdf/asmade/act-2005-47"
-      ],
-      "governedRecordID": "OBL-AU-NSW-WSA-10-12@1",
-      "hash": "7bdde5421106a7047cd5b90700928bbb296028d8013022b94e7eaeaddc9b9d7f",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000977"
-      ],
-      "previousHash": "6d03178c39a1cd08980c10b94c4d4dffcfb9ade05dbb1691294c8c8a3fe6353d",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000978",
-      "recordedAt": "2026-11-15T00:35:48.591Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 978,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-AU-NSW-WSA-10-12"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
       "changeProposalID": "CP-2026-11-08-0010",
       "dataset": "ai-obligations-atlas",
       "decision": "approve by Damian Hickey (Method owner)",
@@ -39347,63 +39072,6 @@
       "subject": {
         "domainType": "obligation",
         "entityID": "OBL-INT-FSB-AI-SP"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-08-0021",
-      "dataset": "ai-obligations-atlas",
-      "decision": "approve by Damian Hickey (Method owner)",
-      "eventType": "reviewDecided",
-      "hash": "a3250b79c68625bc67348d211ecd93692346cadb3100d173ed027ffe2d0616c4",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000764"
-      ],
-      "previousHash": "6a4a1d9178a6868cfc1586aac5afd5a99deb259fd44192fb074db7719b9330e2",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000993",
-      "recordedAt": "2026-11-15T00:42:08.507Z",
-      "ruleIDs": [
-        "review.namedApprover"
-      ],
-      "sequence": 993,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-PARL-NSW"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-08-0021",
-      "confidenceScore": 0.85,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Published as published: EXT-PARL-NSW@1, approved by Damian Hickey",
-      "eventType": "published",
-      "evidenceURLs": [
-        "https://www.parliament.nsw.gov.au"
-      ],
-      "governedRecordID": "EXT-PARL-NSW@1",
-      "hash": "97752655a32feb46b6773fa187085c43434eced01731a2877dc0b3b38f56e55e",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000993"
-      ],
-      "previousHash": "a3250b79c68625bc67348d211ecd93692346cadb3100d173ed027ffe2d0616c4",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000994",
-      "recordedAt": "2026-11-15T00:42:08.525Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 994,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-PARL-NSW"
       }
     },
     {
@@ -42404,10 +42072,344 @@
         "domainType": "externalOrganization",
         "entityID": "EXT-LEG-CO"
       }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J001",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Workplace Surveillance Act 2005 (NSW) (rank 1)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://legislation.nsw.gov.au/view/pdf/asmade/act-2005-47"
+      ],
+      "hash": "89fa297e5aa0c4f9b4a97461da2a6119f35cc02161cc0e434fae854a44613342",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001116"
+      ],
+      "previousHash": "dd304bf5261ec1b36420a292c2b8430e8445289c874b7d57e929b5b03014635f",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001117",
+      "recordedAt": "2026-11-15T06:11:47.087Z",
+      "sequence": 1117,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-NSW-WSA-10-12"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-AU-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J001",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "6c686229c51dac8c1da7d2a131de71a30cd9e78199c064b8fcbe6b715d18ad6a",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001117"
+      ],
+      "previousHash": "89fa297e5aa0c4f9b4a97461da2a6119f35cc02161cc0e434fae854a44613342",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001118",
+      "recordedAt": "2026-11-15T06:11:47.105Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 1118,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-NSW-WSA-10-12"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-AU-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J001",
+      "confidenceScore": 0.888,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.888 (high)",
+      "eventType": "scored",
+      "hash": "ae080ebdcfd43d642711ea73bb9c7d79a097d2046e1830100f7e5d850213990e",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001118"
+      ],
+      "previousHash": "6c686229c51dac8c1da7d2a131de71a30cd9e78199c064b8fcbe6b715d18ad6a",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001119",
+      "recordedAt": "2026-11-15T06:11:47.123Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 1119,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-NSW-WSA-10-12"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-AU-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J001",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: reviewQueue",
+      "eventType": "treatmentAssigned",
+      "hash": "fa8450ef4af5e1bd1ee2d5874a1d7137ee763d44919958782e87ee7e50eeabab",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001119"
+      ],
+      "previousHash": "ae080ebdcfd43d642711ea73bb9c7d79a097d2046e1830100f7e5d850213990e",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001120",
+      "recordedAt": "2026-11-15T06:11:47.140Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1120,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-NSW-WSA-10-12"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-AU-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J002",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Parliament of New South Wales website (rank 2)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.parliament.nsw.gov.au"
+      ],
+      "hash": "d31d30dd072031a58c7d3c128dee633f6c460e099910b5788919b00588abf7a2",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001116"
+      ],
+      "previousHash": "fa8450ef4af5e1bd1ee2d5874a1d7137ee763d44919958782e87ee7e50eeabab",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001121",
+      "recordedAt": "2026-11-15T06:11:47.305Z",
+      "sequence": 1121,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-PARL-NSW"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-AU-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J002",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "689f7a09806149a3ed5219fc3e1679c3d1432a62dd94bfef455063c34581dbda",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001121"
+      ],
+      "previousHash": "d31d30dd072031a58c7d3c128dee633f6c460e099910b5788919b00588abf7a2",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001122",
+      "recordedAt": "2026-11-15T06:11:47.321Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 1122,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-PARL-NSW"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-AU-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J002",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.849 (high)",
+      "eventType": "scored",
+      "hash": "efb0b7425609c0d7d38d0ed9c3eda341ea0bd40193a303ed92230f4fe904c51a",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001122"
+      ],
+      "previousHash": "689f7a09806149a3ed5219fc3e1679c3d1432a62dd94bfef455063c34581dbda",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001123",
+      "recordedAt": "2026-11-15T06:11:47.340Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 1123,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-PARL-NSW"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-AU-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J002",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: reviewQueue",
+      "eventType": "treatmentAssigned",
+      "hash": "ad7b2d1da7f870b1107ad2f151a935011be36c319665fe776adb2a82a610573e",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001123"
+      ],
+      "previousHash": "efb0b7425609c0d7d38d0ed9c3eda341ea0bd40193a303ed92230f4fe904c51a",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001124",
+      "recordedAt": "2026-11-15T06:11:47.357Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1124,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-PARL-NSW"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-AU-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J001",
+      "dataset": "ai-obligations-atlas",
+      "decision": "approve by Damian Hickey (Method owner)",
+      "eventType": "reviewDecided",
+      "hash": "bcc98d220bb157368acc1d6bf87349f3823c74f2538c246a2e54307898904fd1",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001120"
+      ],
+      "previousHash": "ad7b2d1da7f870b1107ad2f151a935011be36c319665fe776adb2a82a610573e",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001125",
+      "recordedAt": "2026-11-15T06:12:22.377Z",
+      "ruleIDs": [
+        "review.namedApprover"
+      ],
+      "sequence": 1125,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-NSW-WSA-10-12"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J001",
+      "confidenceScore": 0.888,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published as published: OBL-AU-NSW-WSA-10-12@2, approved by Damian Hickey",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://legislation.nsw.gov.au/view/pdf/asmade/act-2005-47"
+      ],
+      "governedRecordID": "OBL-AU-NSW-WSA-10-12@2",
+      "hash": "f483b0dcd053ff3515df8849c630c687f9ca81dff2126001190354a9eed90812",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001125"
+      ],
+      "previousHash": "bcc98d220bb157368acc1d6bf87349f3823c74f2538c246a2e54307898904fd1",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001126",
+      "recordedAt": "2026-11-15T06:12:22.396Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1126,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-NSW-WSA-10-12"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J002",
+      "dataset": "ai-obligations-atlas",
+      "decision": "approve by Damian Hickey (Method owner)",
+      "eventType": "reviewDecided",
+      "hash": "fe51276147977c4508eedce651e53c65c1302bcd5fc0b99e98b13273141e7803",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001124"
+      ],
+      "previousHash": "f483b0dcd053ff3515df8849c630c687f9ca81dff2126001190354a9eed90812",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001127",
+      "recordedAt": "2026-11-15T06:12:26.105Z",
+      "ruleIDs": [
+        "review.namedApprover"
+      ],
+      "sequence": 1127,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-PARL-NSW"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J002",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published as published: EXT-PARL-NSW@2, approved by Damian Hickey",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.parliament.nsw.gov.au"
+      ],
+      "governedRecordID": "EXT-PARL-NSW@2",
+      "hash": "3b5349f7f1ded479b1eb88f86a8f4ee3df2bd924d04f2c68ad936a0ebc7e6caf",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001127"
+      ],
+      "previousHash": "fe51276147977c4508eedce651e53c65c1302bcd5fc0b99e98b13273141e7803",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001128",
+      "recordedAt": "2026-11-15T06:12:26.126Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1128,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-PARL-NSW"
+      }
     }
   ],
   "ledgerHead": {
-    "sequence": 1115,
-    "hash": "127d4c8490a1ecfe5d3d781480f1669bb4032bf95280490be254d2f060cd48ec"
+    "sequence": 1128,
+    "hash": "3b5349f7f1ded479b1eb88f86a8f4ee3df2bd924d04f2c68ad936a0ebc7e6caf"
   }
 }
