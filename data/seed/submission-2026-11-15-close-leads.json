@@ -1,0 +1,109 @@
+{
+  "submissionID": "SUB-ATLAS-2026-11-15-CLOSE-LEADS",
+  "interfaceVersion": "1.0.0",
+  "metamodelVersion": "2.9.0",
+  "mode": "propose",
+  "dataset": "ai-obligations-atlas",
+  "submittedAt": "2026-11-15T00:00:00Z",
+  "submitter": {
+    "actorType": "agent",
+    "actorID": "atlas-update-agent",
+    "displayName": "Atlas update agent (closing leads, 2026-11-15)"
+  },
+  "proposals": [
+    {
+      "changeProposalID": "CP-2026-11-15-CLOSE-LEADS-J001",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5F7BF75ACA",
+        "title": "Lead: New York: third-party service provider security policy, reaching AI providers (23 NYCRR 500.11)"
+      },
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-US-NY-500-11",
+            "title": "New York: third-party service provider security policy, reaching AI providers (23 NYCRR 500.11)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-14-0004"
+        ],
+        "description": "23 NYCRR Part 500 (New York Department of Financial Services Cybersecurity Regulation) has not yet been checked against the official text (read so far: commentary), so it cannot set a status or date until a reviewer confirms it. Official source to check: https://www.dfs.ny.gov/industry_guidance/cybersecurity. Promoted on 2026-11-15: the record OBL-US-NY-500-11@1 replaces this lead.",
+        "detectionDate": "2026-11-14",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "23 NYCRR Part 500 (New York Department of Financial Services Cybersecurity Regulation)",
+          "jurisdiction": "US",
+          "sourceRank": 4,
+          "sourceURL": "https://www.law.cornell.edu/regulations/new-york/23-NYCRR-500.11"
+        },
+        "label": "Lead: New York: third-party service provider security policy, reaching AI providers (23 NYCRR 500.11)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://www.law.cornell.edu/regulations/new-york/23-NYCRR-500.11",
+        "status": "promoted",
+        "triggerID": "TRG-LEAD-5F7BF75ACA"
+      },
+      "evidence": [
+        {
+          "url": "https://www.dfs.ny.gov/industry_guidance/cybersecurity",
+          "title": "23 NYCRR Part 500 (New York Department of Financial Services Cybersecurity Regulation)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Close the lead: OBL-US-NY-500-11 is published (version 1) and replaces it. The record was approved before lead promotion (reasoning_fabric #13) was running, or under another key, so the Fabric did not close the lead itself."
+    },
+    {
+      "changeProposalID": "CP-2026-11-15-CLOSE-LEADS-J002",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-AB3C3034B0",
+        "title": "Lead: Colorado: notice, explanation and human review for automated decisions, from 2027 (SB 26-189)"
+      },
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-US-CO-SB26-189",
+            "title": "Colorado: notice, explanation and human review for automated decisions, from 2027 (SB 26-189)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-14-0017"
+        ],
+        "description": "Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205) has not yet been checked against the official text (read so far: commentary), so it cannot set a status or date until a reviewer confirms it. Official source to check: https://leg.colorado.gov/bills/sb26-189. Promoted on 2026-11-15: the record OBL-US-CO-SB26-189@1 replaces this lead.",
+        "detectionDate": "2026-11-14",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205)",
+          "jurisdiction": "US",
+          "sourceRank": 4,
+          "sourceURL": "https://hklaw.com/en/insights/publications/2026/05/colorado-governor-signs-sb-189"
+        },
+        "label": "Lead: Colorado: notice, explanation and human review for automated decisions, from 2027 (SB 26-189)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://hklaw.com/en/insights/publications/2026/05/colorado-governor-signs-sb-189",
+        "status": "promoted",
+        "triggerID": "TRG-LEAD-AB3C3034B0"
+      },
+      "evidence": [
+        {
+          "url": "https://leg.colorado.gov/bills/sb26-189",
+          "title": "Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205)",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Close the lead: OBL-US-CO-SB26-189 is published (version 1) and replaces it. The record was approved before lead promotion (reasoning_fabric #13) was running, or under another key, so the Fabric did not close the lead itself."
+    }
+  ]
+}

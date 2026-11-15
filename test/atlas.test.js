@@ -581,3 +581,21 @@ test('US leads, second attempt: the three refused proposals again, under new ids
   lead.record.status = 'lead';
   assert.ok(new Atlas(snap, { preview: true }).changes('2026-01-01').some((c) => c.kind === 'lead' && c.title === 'test'), 'an open lead still shows');
 });
+
+// Leads the Fabric did not close itself (records approved before lead promotion): data/seed/submission-2026-11-15-close-leads.json
+// marks each promoted, naming its published record, and changes nothing else in the lead.
+test('close leads: each open lead whose record is published is closed as promoted, and only those', () => {
+  const sub = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-15-close-leads.json', 'utf8'));
+  for (const p of sub.proposals) {
+    const l = published.records.find((r) => r.entityID === p.target.entityID);
+    assert.equal(p.changeType, 'update'); assert.equal(p.target.domainType, 'trigger');
+    if (l.record.status === 'lead') {   // before the Fabric publishes the update
+      assert.equal(p.baseVersion, l.version);
+      const { status, description, ...rest } = p.record, { status: s0, description: d0, ...was } = l.record;
+      assert.deepEqual(rest, was); assert.equal(status, 'promoted'); assert.ok(description.startsWith(d0) && /replaces this lead\.$/.test(description));
+    } else assert.equal(l.record.status, 'promoted');
+    const rec = published.records.find((r) => r.entityID === p.record.affectedEntities[0].entityID);
+    assert.equal(rec.publicationStatus, 'published');
+  }
+  assert.deepEqual(sub.proposals.map((p) => p.target.entityID).sort(), ['TRG-LEAD-5F7BF75ACA', 'TRG-LEAD-AB3C3034B0']);
+});
