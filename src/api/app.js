@@ -3,7 +3,7 @@
  * Runs on Cloudflare Workers (src/worker.js) and Node (src/node.js).
  */
 import { Hono } from 'hono';
-import { Atlas, STANDING_RULE, sha256Hex, ENTITY_TYPES, JURISDICTIONS, REGULATED_SECTORS, GENERAL_ENTITY_TYPES } from '../core/atlas.js';
+import { Atlas, STANDING_RULE, sha256Hex, ENTITY_TYPES, JURISDICTIONS, REGULATED_SECTORS, GENERAL_ENTITY_TYPES, isJurisdiction, jurisdictionFilter } from '../core/atlas.js';
 import { handleRpc } from '../mcp/mcp.js';
 import { openapi } from './openapi.js';
 import { ROUTING_TABLE, solutionSet } from '../core/solution-set.js';
@@ -128,7 +128,8 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
     const since = c.req.query('since') || '1970-01-01';
     if (!/^\d{4}-\d{2}-\d{2}/.test(since)) return problem(c, 400, 'query.since', 'since must be a date, YYYY-MM-DD');
     const jur = (c.req.query('jurisdiction') || '').toUpperCase();
-    const items = atlas.changes(since).filter((i) => !jur || !i.jurisdiction || i.jurisdiction === jur);
+    const inJur = jurisdictionFilter(jur);
+    const items = atlas.changes(since).filter((i) => !jur || !i.jurisdiction || inJur(i.jurisdiction));
     const coverage = atlas.coverage(jur);
     return send(c, { since, items, ...(coverage.length ? { coverage } : {}) });
   });
@@ -153,7 +154,7 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
     const unknown = list('entityType').filter((e) => !(e in ENTITY_TYPES));
     if (unknown.length) return problem(c, 400, 'query.entityType', `Unknown entity type ${unknown.join(', ')}`);
     const jur = (q.jurisdiction || '').toUpperCase();
-    if (jur && !(jur in JURISDICTIONS)) return problem(c, 400, 'query.jurisdiction', `Unknown jurisdiction ${jur}`);
+    if (jur && !isJurisdiction(jur)) return problem(c, 400, 'query.jurisdiction', `Unknown jurisdiction ${jur}`);
     const atlasUrl = new URL(c.req.url).origin;
     const r = solutionSet({ role: q.role, entityTypes: list('entityType'), sectors: list('sector'), jurisdiction: jur || undefined, size: q.size, prompt: q.prompt }, { atlasUrl, coveredJurisdictions: heldJurisdictions() });
     return r.error ? problem(c, 400, 'query.solutionSet', r.error) : send(c, r);

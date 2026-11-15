@@ -169,9 +169,9 @@ export function solutionSet(input = {}, { atlasUrl = 'https://obligations-atlas.
       workedExample: e.site,
     };
   });
-  const notices = [];
-  if (jurisdiction && !coveredJurisdictions.includes(jurisdiction)) notices.push(`The Atlas does not yet cover ${jurisdiction}: the engagements still fit, but the matter brief will hold few or no records for it.`);
-  if (prompt && prompt.jurisdictions && jurisdiction && !prompt.jurisdictions.includes(jurisdiction)) notices.push(`${prompt.name} applies in ${prompt.jurisdictions.join(', ')}, not ${jurisdiction}.`);
+  const notices = [], country = String(jurisdiction || '').split('-')[0];   // a state (US-NY) is covered with its country
+  if (jurisdiction && !coveredJurisdictions.includes(country)) notices.push(`The Atlas does not yet cover ${jurisdiction}: the engagements still fit, but the matter brief will hold few or no records for it.`);
+  if (prompt && prompt.jurisdictions && jurisdiction && !prompt.jurisdictions.includes(jurisdiction) && !prompt.jurisdictions.includes(country)) notices.push(`${prompt.name} applies in ${prompt.jurisdictions.join(', ')}, not ${jurisdiction}.`);
   if (!profile) notices.push('Choose an organisation type or a regulated sector to see the route; until then the engagements fit the use cases only.');
   const briefScope = { jurisdictions: jurisdiction ? [jurisdiction] : [], entityTypes, sectors, useCaseIDs };
   const q = new URLSearchParams();

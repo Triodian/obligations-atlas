@@ -4,7 +4,7 @@
  * lawyer's matter is sent to the server.
  */
 import { readSoA, summary as importSummary } from '/core/import.js';
-import { buildMatterBrief, ENTITY_TYPES, ROLES, TIERS, STATUS, JURISDICTIONS, ASSESSMENTS, STANDING_RULE, SOURCE_RANKS, sectorByID, reachedEntityTypes, PORTFOLIO_FORMAT, draftFromBrief, normalisePortfolio, saveToPortfolio, removeFromPortfolio, exportPortfolio, importPortfolio } from '/core/atlas.js';
+import { buildMatterBrief, ENTITY_TYPES, ROLES, TIERS, STATUS, JURISDICTIONS, ASSESSMENTS, STANDING_RULE, SOURCE_RANKS, sectorByID, reachedEntityTypes, PORTFOLIO_FORMAT, draftFromBrief, normalisePortfolio, saveToPortfolio, removeFromPortfolio, exportPortfolio, importPortfolio, jurisdictionName, jurisdictionFilter, countryOf } from '/core/atlas.js';
 import { scopeFromLink } from '/core/solution-set.js';
 
 const main = document.getElementById('main');
@@ -20,7 +20,7 @@ const parseRoute = () => {
 let data;
 const state = { tier: '', jurisdiction: 'AU', sector: '', entityType: '', useCase: '', q: '', current: true };
 // The regulated sectors of one jurisdiction (Metamodel reference data, in the dataset).
-const sectorsOf = (j) => (data.sectors || []).filter((d) => d.jurisdiction === j);
+const sectorsOf = (j) => (data.sectors || []).filter((d) => d.jurisdiction === countryOf(j));   // sectors are by country
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmtDate = (d) => (d ? new Date(`${d.slice(0, 10)}T00:00:00Z`).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '');
@@ -28,7 +28,7 @@ const store = {
   get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* storage unavailable */ } },
 };
-const jurName = (c) => (JURISDICTIONS[c] ? JURISDICTIONS[c].name : c);
+const jurName = jurisdictionName;   // "New York (United States)" for US-NY
 // Use-case titles come from the published use-case records; when one is not yet published, show the ID alone.
 const ucTitle = (id) => (data.useCases.find((u) => u.useCaseID === id) || {}).title || '';
 const TIER_SHORT = { binding: 'in force', expected: 'guidance or standard', anticipated: 'not yet in force', adopted: 'the client’s own choice' };
@@ -62,12 +62,13 @@ function entityMatch(o) {
   const d = state.sector ? sectorByID(state.sector) : null;
   const chosen = state.entityType ? [state.entityType] : d ? d.entityTypes : [];
   if (!chosen.length) return true;
-  const reach = reachedEntityTypes(chosen, state.jurisdiction ? [state.jurisdiction] : []);
+  const reach = reachedEntityTypes(chosen, state.jurisdiction ? [countryOf(state.jurisdiction)] : []);
   return o.entityTypes.some((e) => reach.includes(e) || e === 'anyOrganization');
 }
 
 function filtered() {
-  return data.obligations.filter((o) => (!state.jurisdiction || o.jurisdiction === state.jurisdiction || o.jurisdiction === 'INT')
+  const inJur = jurisdictionFilter(state.jurisdiction);
+  return data.obligations.filter((o) => (!state.jurisdiction || inJur(o.jurisdiction) || o.jurisdiction === 'INT')
     && (!state.tier || o.sourceTier === state.tier)
     && entityMatch(o)
     && (!state.useCase || o.useCaseIDs.includes(state.useCase))
@@ -90,9 +91,10 @@ function entryHTML(o) {
 
 function renderRegister() {
   setNav('register');
-  const jurOpts = [['', 'All jurisdictions'], ...data.jurisdictions.filter((j) => j.available && j.code !== 'INT').map((j) => [j.code, j.name])];
+  // A country with state records is followed by its states: a state lists its own records and the country's.
+  const jurOpts = [['', 'All jurisdictions'], ...data.jurisdictions.filter((j) => j.available && j.code !== 'INT').flatMap((j) => [[j.code, j.name], ...(j.subdivisions || []).map((s) => [s.code, `${j.name} · ${s.name}`])])];
   // Entity types belong to a jurisdiction; offer only those of the chosen one.
-  const entJurs = state.jurisdiction ? [state.jurisdiction] : [];
+  const entJurs = state.jurisdiction ? [countryOf(state.jurisdiction)] : [];
   // A sector belongs to a jurisdiction, and narrows the entity types offered to its own.
   if (state.sector && (!state.jurisdiction || !sectorsOf(state.jurisdiction).some((d) => d.regulatedSectorID === state.sector))) state.sector = '';
   const sec = state.sector ? sectorByID(state.sector) : null;
@@ -342,6 +344,9 @@ function renderBrief(arg) {
           <label class="field" for="ml">Your label for the matter<input id="ml" class="text" name="matterLabel" value="${esc(draft.matterLabel)}" placeholder="e.g. Insurer AI claims triage"></label>
           <div class="field">Jurisdictions
             <div class="toggles">${jurs.map((j) => `<label class="toggle"><input type="checkbox" name="jur" value="${esc(j.code)}" ${draft.jurisdictions.includes(j.code) ? 'checked' : ''}><span>${esc(j.name)}</span></label>`).join('')}</div>
+            ${jurs.filter((j) => (j.subdivisions || []).length).map((j) => `<div class="subjur" data-country="${esc(j.code)}"${draft.jurisdictions.includes(j.code) ? '' : ' hidden'}><span class="small">${esc(j.name)}: the states where the client operates</span>
+              <div class="toggles">${j.subdivisions.map((s) => `<label class="toggle"><input type="checkbox" name="jur" value="${esc(s.code)}" ${draft.jurisdictions.includes(s.code) ? 'checked' : ''}><span>${esc(s.name)}</span></label>`).join('')}</div>
+              <span class="small soft">Leave them all clear to list every state’s records, each named by its state. Federal records are always listed.</span></div>`).join('')}
             <span class="small soft">International standards are included with any jurisdiction.</span>
           </div>
         </fieldset>
@@ -427,6 +432,11 @@ function renderBrief(arg) {
     if (e.target.name === 'jur') {
       // Show only the entity types of the chosen jurisdictions; clear ticks in the ones hidden.
       const chosen = [...form.querySelectorAll('[name="jur"]:checked')].map((x) => x.value);
+      // A country's states show while the country is ticked; untick it and its states clear.
+      form.querySelectorAll('.subjur').forEach((s) => {
+        s.hidden = !chosen.includes(s.dataset.country);
+        if (s.hidden) s.querySelectorAll('input:checked').forEach((x) => { x.checked = false; });
+      });
       form.querySelectorAll('.entgroup').forEach((g) => {
         const hide = chosen.length > 0 && !chosen.includes(g.dataset.jur);
         g.hidden = hide;

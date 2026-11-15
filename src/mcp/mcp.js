@@ -2,7 +2,7 @@
  * MCP server for the Atlas: stateless Streamable HTTP (JSON responses), JSON-RPC 2.0.
  * Tools: find_obligations, get_obligation, list_changes, explain_provenance.
  */
-import { STANDING_RULE } from '../core/atlas.js';
+import { STANDING_RULE, jurisdictionFilter } from '../core/atlas.js';
 
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 // The keyless tier (task 2.9): stated to every client at initialize.
@@ -17,7 +17,7 @@ export const TOOLS = [
     inputSchema: {
       type: 'object',
       properties: {
-        jurisdiction: { type: 'array', items: { type: 'string', enum: ['AU', 'SG', 'EU', 'GB', 'NZ', 'US', 'INT'] }, description: 'Jurisdiction codes. Covered now: AU, SG, US and INT (international standards, included unless includeInternational is false). EU, GB and NZ are not yet covered, and a covered jurisdiction whose records are still in review holds none yet; asking for either returns a coverage note, not an answer that nothing applies.' },
+        jurisdiction: { type: 'array', items: { type: 'string', pattern: '^(AU|SG|EU|GB|NZ|US|INT)(-[A-Z0-9]{1,3})?$' }, description: 'Jurisdiction codes. A US state is its ISO 3166-2 code, such as US-NY: asking for US lists federal and every state\'s records; asking for US-NY lists New York\'s and the federal ones. Covered now: AU, SG, US and INT (international standards, included unless includeInternational is false). EU, GB and NZ are not yet covered, and a covered jurisdiction whose records are still in review holds none yet; asking for either returns a coverage note, not an answer that nothing applies.' },
         tier: { type: 'array', items: { type: 'string', enum: ['binding', 'expected', 'anticipated', 'adopted'] }, description: 'Source tiers. adopted: a voluntary standard a client has adopted for itself, such as ISO/IEC 42001:2023 Annex A' },
         useCase: { type: 'array', items: { type: 'string', pattern: '^UC([1-9]|10)$' }, description: 'Standardised use cases, e.g. UC3 (automated triage or decline), UC7 (AI inside a provider). Records specific to these come first, then records that apply to any AI use.' },
         includeAnyUse: { type: 'boolean', default: true, description: 'false to leave out records that apply to any AI use when filtering by use case' },
@@ -71,7 +71,7 @@ async function callTool(atlas, name, args = {}) {
   }
   if (name === 'list_changes') {
     let items = atlas.changes(args.since);
-    if (args.jurisdiction) items = items.filter((i) => !i.jurisdiction || i.jurisdiction === args.jurisdiction.toUpperCase());
+    if (args.jurisdiction) { const inJur = jurisdictionFilter(args.jurisdiction); items = items.filter((i) => !i.jurisdiction || inJur(i.jurisdiction)); }
     const coverage = atlas.coverage(args.jurisdiction);
     return text({ since: args.since, changes: items, ...(coverage.length ? { coverage } : {}) });
   }
