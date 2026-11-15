@@ -348,7 +348,7 @@ test('super trustee sources: valid proposals, and once approved a super trustee 
   assert.ok(!/\b(must|required to)\b/i.test(words), 'statements say what sources provide, not what a trustee must do');
 
   const before = published.records.filter((r) => r.domainType === 'obligation' && r.record.entityTypes.includes('superannuationTrustee')).map((r) => r.entityID);
-  assert.equal(before.length, 20, 'the 20 super trustee records are in the published snapshot');
+  assert.ok(before.length >= 20, `at least the 20 super trustee records are in the published snapshot (${before.length}); approving more, such as the FSB record, adds to them`);
   const approved = obs.map((p) => ({ publicationStatus: 'published', publishedAt: '2026-11-10T00:00:00.000Z', domainType: 'obligation', entityID: p.target.entityID, governedRecordID: `${p.target.entityID}@1`, version: 1, record: p.record, provenanceRecordIDs: [], changeProposalIDs: [p.changeProposalID], dataset: 'ai-obligations-atlas' }));
   const after = new Atlas({ ...published, records: [...published.records, ...approved] }, { preview: false });
   const b = buildMatterBrief(after.dataset(), { matterLabel: 'Super trustee', sectors: ['AU-SUPERANNUATION'] });
