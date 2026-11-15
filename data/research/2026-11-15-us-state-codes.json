@@ -1,0 +1,15 @@
+{
+  "researched": "2026-11-15",
+  "brief": "US state laws carry their state's ISO 3166-2 code (US-CA, US-CO, US-NY, US-TX), as the Metamodel's jurisdictionCode allows, not US. Decided by Damian Hickey, 15 November 2026. Federal law, and multistate models such as the NAIC model bulletin that a state has to adopt, stay under US. A request for US in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones.",
+  "changes": [
+    { "domainType": "obligation", "entityID": "OBL-US-NY-CL7-2024", "jurisdiction": "US-NY", "reason": "Circular Letter No. 7 (2024) is issued by the New York State Department of Financial Services to insurers it licenses." },
+    { "domainType": "obligation", "entityID": "OBL-US-CA-CCPA-ADMT", "jurisdiction": "US-CA", "reason": "The automated decisionmaking technology regulations are California Code of Regulations, title 11, made under the California Consumer Privacy Act." },
+    { "domainType": "obligation", "entityID": "OBL-US-TX-TRAIGA", "jurisdiction": "US-TX", "reason": "TRAIGA is a Texas statute (H.B. 149, 89th Legislature), enforced by the Texas Attorney General." },
+    { "domainType": "obligation", "entityID": "OBL-US-NY-500-11", "jurisdiction": "US-NY", "reason": "23 NYCRR 500.11 is a New York State Department of Financial Services regulation." },
+    { "domainType": "obligation", "entityID": "OBL-US-CO-SB26-189", "jurisdiction": "US-CO", "reason": "SB 26-189 is a Colorado bill." },
+    { "domainType": "externalOrganization", "entityID": "EXT-NYDFS", "jurisdiction": "US-NY", "reason": "A New York State agency." },
+    { "domainType": "externalOrganization", "entityID": "EXT-CPPA", "jurisdiction": "US-CA", "reason": "A California State agency." },
+    { "domainType": "externalOrganization", "entityID": "EXT-LEG-TX", "jurisdiction": "US-TX", "reason": "The Texas state legislature." },
+    { "domainType": "externalOrganization", "entityID": "EXT-LEG-CO", "jurisdiction": "US-CO", "reason": "The Colorado state legislature." }
+  ]
+}

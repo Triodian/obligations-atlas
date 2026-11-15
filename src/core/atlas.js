@@ -29,6 +29,48 @@ export const JURISDICTIONS = {
   INT: { name: 'International standards', depth: 'reference' },
 };
 
+/**
+ * States, provinces and other subdivisions with their own records, as ISO 3166-2 codes (Metamodel jurisdictionCode).
+ * A subdivision's record belongs to its country: asking for the country lists the country's records and every
+ * subdivision's; asking for a subdivision lists its records and the country's. Not listed in JURISDICTIONS, so the
+ * lists of jurisdictions stay a list of countries.
+ */
+export const SUBDIVISIONS = {
+  'US-CA': { name: 'California', country: 'US' },
+  'US-CO': { name: 'Colorado', country: 'US' },
+  'US-NY': { name: 'New York', country: 'US' },
+  'US-TX': { name: 'Texas', country: 'US' },
+};
+/** "US" for "US-NY"; the code itself for a country or INT. */
+export const countryOf = (code) => String(code || '').toUpperCase().split('-')[0];
+/** A well-formed subdivision code of a country the Atlas knows, listed in SUBDIVISIONS or not. */
+export const isSubdivision = (code) => /^[A-Z]{2}-[A-Z0-9]{1,3}$/.test(String(code || '')) && countryOf(code) in JURISDICTIONS;
+export const isJurisdiction = (code) => String(code || '').toUpperCase() in JURISDICTIONS || isSubdivision(String(code || '').toUpperCase());
+/** "New York (United States)" for US-NY, "United States" for US; the code where the Atlas has no name. */
+export function jurisdictionName(code) {
+  const c = String(code || '').toUpperCase();
+  if (JURISDICTIONS[c]) return JURISDICTIONS[c].name;
+  if (isSubdivision(c)) { const s = SUBDIVISIONS[c], n = JURISDICTIONS[countryOf(c)].name; return s ? `${s.name} (${n})` : `${c} (${n})`; }
+  return c;
+}
+/**
+ * Which records a list of requested jurisdictions takes in. For each country asked for: with none of its subdivisions
+ * asked for, its own records and all its subdivisions'; with some, its own records and those subdivisions' only. A
+ * subdivision asked for without its country brings the country's records too. An empty list takes in everything.
+ */
+export function jurisdictionFilter(requested) {
+  const want = list(requested).map((j) => j.toUpperCase());
+  if (!want.length) return () => true;
+  const countries = new Set(want.map(countryOf)), states = new Set(want.filter((j) => j.includes('-')));
+  const narrowed = new Set([...states].map(countryOf));
+  return (code) => {
+    const c = String(code || '').toUpperCase(), k = countryOf(c);
+    if (!countries.has(k)) return false;
+    if (c === k) return true;
+    return narrowed.has(k) ? states.has(c) : true;
+  };
+}
+
 export const ENTITY_TYPES = {
   authorisedDepositTakingInstitution: 'Authorised deposit-taking institution',
   generalInsurer: 'General insurer',
@@ -70,7 +112,7 @@ export const sectorEntityTypes = (d) => (d ? [...d.entityTypes, ...(d.alsoReache
 export function reachedEntityTypes(ets, jurisdictions = []) {
   const out = new Set(ets);
   for (const d of REGULATED_SECTORS) {
-    if (jurisdictions.length && !jurisdictions.includes(d.jurisdiction)) continue;
+    if (jurisdictions.length && !jurisdictions.map(countryOf).includes(d.jurisdiction)) continue;
     if (d.entityTypes.some((e) => ets.includes(e))) for (const e of d.alsoReaches || []) out.add(e);
   }
   return [...out];
@@ -124,6 +166,8 @@ export const SOURCE_RANKS = {
 };
 
 /** Coverage note for a jurisdiction the Atlas holds no records for. */
+/** Coverage note for a subdivision the Atlas holds no records for, where it holds its country's. */
+export const subdivisionNote = (code) => `The Atlas holds no records for ${jurisdictionName(code)}; its ${JURISDICTIONS[countryOf(code)].name} records are listed. No records here does not mean no ${(SUBDIVISIONS[code] || {}).name || code} obligations apply; check other sources.`;
 export const notCoveredNote = (code) => {
   const j = JURISDICTIONS[code];
   const name = j ? j.name : code;
@@ -264,9 +308,10 @@ export class Atlas {
     const q = (filters.q || '').toLowerCase().trim();
     const includeIntl = filters.includeInternational !== false && filters.includeInternational !== 'false';
     const includeAnyUse = filters.includeAnyUse !== false && filters.includeAnyUse !== 'false';
+    const inJur = jurisdictionFilter(jur);
     const out = this.obligationRecords.filter((gr) => {
       const o = gr.record;
-      if (jur.length && !jur.includes(o.jurisdiction) && !(includeIntl && o.jurisdiction === 'INT')) return false;
+      if (jur.length && !inJur(o.jurisdiction) && !(includeIntl && o.jurisdiction === 'INT')) return false;
       if (tiers.length && !tiers.includes(o.sourceTier)) return false;
       if (ucs.length && !(o.useCaseIDs || []).some((u) => ucs.includes(u))) return false;
       if (ucs.length && !includeAnyUse && appliesToAnyAIUse(o.useCaseIDs)) return false;
@@ -327,12 +372,21 @@ export class Atlas {
 
   jurisdictions() {
     return Object.entries(JURISDICTIONS).map(([code, j]) => {
-      const obs = this.obligationRecords.filter((o) => o.record.jurisdiction === code);
+      const obs = this.obligationRecords.filter((o) => countryOf(o.record.jurisdiction) === code);
       const tiers = {};
       for (const o of obs) tiers[o.record.sourceTier] = (tiers[o.record.sourceTier] || 0) + 1;
       const available = obs.length > 0;
-      return { code, ...j, obligations: obs.length, tiers, available, coverage: available ? 'covered' : 'notYetCovered', ...(available ? {} : { note: notCoveredNote(code) }) };
+      const subs = this.subdivisions().filter((s) => s.country === code);
+      return { code, ...j, obligations: obs.length, tiers, available, coverage: available ? 'covered' : 'notYetCovered', ...(subs.length ? { subdivisions: subs } : {}), ...(available ? {} : { note: notCoveredNote(code) }) };
     });
+  }
+
+  /** The subdivisions the Atlas holds records for, with their counts: the states a brief can be narrowed to. */
+  subdivisions() {
+    const by = {};
+    for (const o of this.obligationRecords) { const c = o.record.jurisdiction; if (isSubdivision(c)) by[c] = (by[c] || 0) + 1; }
+    return Object.keys(by).sort((a, b) => jurisdictionName(a).localeCompare(jurisdictionName(b)))
+      .map((code) => ({ code, name: (SUBDIVISIONS[code] || {}).name || code, country: countryOf(code), obligations: by[code] }));
   }
 
   /**
@@ -344,7 +398,10 @@ export class Atlas {
     const notes = [];
     for (const code of codes) {
       if (this.obligationRecords.some((o) => o.record.jurisdiction === code)) continue;
-      notes.push({ jurisdiction: code, name: JURISDICTIONS[code] ? JURISDICTIONS[code].name : code, coverage: 'notYetCovered', note: notCoveredNote(code) });
+      if (isSubdivision(code) && this.obligationRecords.some((o) => o.record.jurisdiction === countryOf(code))) {
+        notes.push({ jurisdiction: code, name: jurisdictionName(code), coverage: 'countryOnly', note: subdivisionNote(code) }); continue;
+      }
+      notes.push({ jurisdiction: code, name: jurisdictionName(code), coverage: 'notYetCovered', note: notCoveredNote(code) });
     }
     return notes;
   }
@@ -353,7 +410,7 @@ export class Atlas {
   entityTypesByJurisdiction() {
     const out = {};
     for (const gr of this.obligationRecords) {
-      const j = gr.record.jurisdiction;
+      const j = countryOf(gr.record.jurisdiction);
       if (j === 'INT') continue;
       for (const e of gr.record.entityTypes || []) {
         if (e === 'anyOrganization' || e === 'other') continue;
@@ -520,7 +577,8 @@ export function buildMatterBrief(data, input) {
   const ets = (input.entityTypes || []).length ? input.entityTypes : secs.flatMap((d) => d.entityTypes);
   const reach = reachedEntityTypes(ets, jur);
   const ucs = input.useCaseIDs || [];
-  const obligations = data.obligations.filter((o) => (!jur.length || jur.includes(o.jurisdiction) || o.jurisdiction === 'INT')
+  const inJur = jurisdictionFilter(jur);
+  const obligations = data.obligations.filter((o) => (!jur.length || inJur(o.jurisdiction) || o.jurisdiction === 'INT')
     && (!reach.length || o.entityTypes.some((e) => reach.includes(e) || e === 'anyOrganization'))
     && (!ucs.length || o.useCaseIDs.some((u) => ucs.includes(u)))
     && !['superseded', 'repealed', 'withdrawn'].includes(o.status));
@@ -596,7 +654,8 @@ export function buildMatterBrief(data, input) {
       specificToUseCases: inScope.filter((o) => !appliesToAnyAIUse(o.useCaseIDs)).length,
       anyAIUse: inScope.filter((o) => appliesToAnyAIUse(o.useCaseIDs)).length,
     },
-    coverage: jur.filter((j) => j !== 'INT' && !data.obligations.some((o) => o.jurisdiction === j)).map((j) => ({ jurisdiction: j, coverage: 'notYetCovered', note: notCoveredNote(j) })),
+    coverage: jur.filter((j) => j !== 'INT' && !data.obligations.some((o) => o.jurisdiction === j)).map((j) => (isSubdivision(j) && data.obligations.some((o) => o.jurisdiction === countryOf(j))
+      ? { jurisdiction: j, coverage: 'countryOnly', note: subdivisionNote(j) } : { jurisdiction: j, coverage: 'notYetCovered', note: notCoveredNote(j) })),
     questionsForCounsel: questions,
     engagementsThatFit,
     ...(route.profile ? { profile: route.profile } : {}),

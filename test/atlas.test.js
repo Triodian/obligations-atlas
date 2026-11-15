@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { Atlas, buildMatterBrief, engagementRoute, ASSESSMENTS, PORTFOLIO_FORMAT, draftFromBrief, normalisePortfolio, saveToPortfolio, removeFromPortfolio, exportPortfolio, importPortfolio, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES, REGULATED_SECTORS, sectorByID, reachedEntityTypes } from '../src/core/atlas.js';
+import { Atlas, buildMatterBrief, jurisdictionName, isJurisdiction, engagementRoute, ASSESSMENTS, PORTFOLIO_FORMAT, draftFromBrief, normalisePortfolio, saveToPortfolio, removeFromPortfolio, exportPortfolio, importPortfolio, sha256Hex, ENTITY_TYPES, GENERAL_ENTITY_TYPES, REGULATED_SECTORS, sectorByID, reachedEntityTypes } from '../src/core/atlas.js';
 import { createApp } from '../src/api/app.js';
 import { TOOLS } from '../src/mcp/mcp.js';
 import Ajv from 'ajv';
@@ -436,3 +436,68 @@ test('the US research round builds a submission the Fabric can take', async () =
   // The Metamodel keeps binding for instruments in force: made-but-not-in-force is anticipated and pending.
   for (const p of obs) if (p.record.sourceTier === 'binding') assert.ok(['inForce', 'amended', 'superseded', 'repealed'].includes(p.record.status), `${p.record.obligationID} is binding but ${p.record.status}`);
 });
+
+// US state codes (decided 15 November 2026): a state law carries its ISO 3166-2 code. The snapshot is moved to the codes
+// here as the update submission (data/seed/submission-2026-11-15-us-state-codes.json) would move it, so the rule is
+// tested before the Fabric publishes the change.
+{
+  const sub = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-15-us-state-codes.json', 'utf8'));
+  const moved = structuredClone(published), by = new Map(sub.proposals.map((p) => [p.target.entityID, p.record]));
+  for (const r of moved.records) if (by.has(r.entityID)) r.record = by.get(r.entityID);
+  const st = new Atlas(moved, { preview: false });
+  const ids = (f) => st.findObligations(f).map((o) => o.obligationID);
+
+  test('state codes: the update submission moves the state records only, each against its published version', () => {
+    assert.deepEqual(sub.proposals.map((p) => [p.target.entityID, p.record.jurisdiction]).sort(), [
+      ['EXT-CPPA', 'US-CA'], ['EXT-LEG-CO', 'US-CO'], ['EXT-LEG-TX', 'US-TX'], ['EXT-NYDFS', 'US-NY'],
+      ['OBL-US-CA-CCPA-ADMT', 'US-CA'], ['OBL-US-NY-CL7-2024', 'US-NY'], ['OBL-US-TX-TRAIGA', 'US-TX']]);
+    for (const p of sub.proposals) {
+      const g = published.records.find((r) => r.entityID === p.target.entityID);
+      assert.equal(p.changeType, 'update'); assert.equal(p.baseVersion, g.version);
+      const { jurisdiction: a, jurisdictionCodes: ac, ...rest } = p.record, { jurisdiction: b, jurisdictionCodes: bc, ...was } = g.record;
+      assert.deepEqual(rest, was, `${p.target.entityID}: nothing but the jurisdiction changes`);
+    }
+  });
+
+  test('state codes: US lists federal and state records; a state lists its own and the federal ones', () => {
+    const us = ids({ jurisdiction: 'US', includeInternational: false }), ny = ids({ jurisdiction: 'US-NY', includeInternational: false });
+    assert.ok(us.includes('OBL-US-SR26-2-MRM') && us.includes('OBL-US-NY-CL7-2024') && us.includes('OBL-US-TX-TRAIGA') && us.includes('OBL-US-CA-CCPA-ADMT'));
+    assert.ok(ny.includes('OBL-US-SR26-2-MRM') && ny.includes('OBL-US-NY-CL7-2024'));
+    assert.ok(!ny.includes('OBL-US-TX-TRAIGA') && !ny.includes('OBL-US-CA-CCPA-ADMT'), 'another state’s records are not listed');
+    const nytx = ids({ jurisdiction: 'US,US-NY,US-TX', includeInternational: false });
+    assert.ok(nytx.includes('OBL-US-TX-TRAIGA') && nytx.includes('OBL-US-NY-CL7-2024') && !nytx.includes('OBL-US-CA-CCPA-ADMT'), 'ticked states narrow the country');
+    assert.ok(!ids({ jurisdiction: 'AU', includeInternational: false }).some((i) => i.startsWith('OBL-US')));
+  });
+
+  test('state codes: names, counts, subdivisions and coverage', () => {
+    assert.equal(jurisdictionName('US-NY'), 'New York (United States)'); assert.equal(jurisdictionName('US'), 'United States'); assert.equal(jurisdictionName('US-NJ'), 'US-NJ (United States)');
+    assert.ok(isJurisdiction('US-NY') && isJurisdiction('US-NJ') && !isJurisdiction('ZZ-NY') && !isJurisdiction('NY'));
+    const us = st.jurisdictions().find((j) => j.code === 'US');
+    assert.equal(us.obligations, published.records.filter((r) => r.domainType === 'obligation' && r.record.jurisdiction === 'US').length, 'the country counts its states’ records');
+    assert.deepEqual(us.subdivisions.map((s) => s.code), ['US-CA', 'US-NY', 'US-TX']);
+    assert.ok(!st.jurisdictions().some((j) => j.code.includes('-')), 'the list of jurisdictions stays a list of countries');
+    const [nj] = st.coverage('US-NJ');
+    assert.equal(nj.coverage, 'countryOnly'); assert.match(nj.note, /no records for US-NJ \(United States\); its United States records are listed/);
+    assert.deepEqual(st.coverage('US-NY'), []);
+    assert.ok(st.entityTypesByJurisdiction().US && !Object.keys(st.entityTypesByJurisdiction()).some((k) => k.includes('-')));
+  });
+
+  test('state codes: the matter brief for a New York insurer lists New York and federal records, and names the state', () => {
+    const b = buildMatterBrief(st.dataset(), { jurisdictions: ['US-NY'], sectors: ['US-INSURANCE'], useCaseIDs: ['UC4', 'UC7'] });
+    const all = Object.values(b.obligationsByTier).flat().map((o) => o.obligationID);
+    assert.ok(all.includes('OBL-US-NY-CL7-2024'), all.join()); assert.ok(!all.includes('OBL-US-TX-TRAIGA'));
+    assert.ok(all.some((i) => /^OBL-US-(SR26|TPRM|NAIC)/.test(i)), 'federal and multistate records are listed');
+    assert.deepEqual(b.coverage, []);
+    assert.ok(validBrief(b), JSON.stringify(validBrief.errors));
+  });
+
+  test('state codes: the API and MCP take a state code', async () => {
+    const sapp = createApp({ snapshot: moved, preview: false });
+    const r = await sapp.request('/api/v1/obligations?jurisdiction=US-NY&includeInternational=false'); const body = await r.json();
+    assert.equal(r.status, 200); assert.ok(body.items.some((o) => o.obligationID === 'OBL-US-NY-CL7-2024') && !body.items.some((o) => o.obligationID === 'OBL-US-TX-TRAIGA'));
+    assert.equal((await sapp.request('/api/v1/solution-set?jurisdiction=US-NY')).status, 200);
+    assert.equal((await sapp.request('/api/v1/solution-set?jurisdiction=ZZ-NY')).status, 400);
+    const schema = TOOLS.find((t) => t.name === 'find_obligations').inputSchema.properties.jurisdiction.items;
+    assert.ok(new RegExp(schema.pattern).test('US-NY') && !new RegExp(schema.pattern).test('ZZ-NY'));
+  });
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "entityID": "OBL-US-NY-500-11",
+    "kind": "jurisdiction",
+    "note": "Not published yet: set the jurisdiction to US-NY at review. 23 NYCRR 500.11 is a New York State Department of Financial Services regulation."
+  },
+  {
+    "entityID": "OBL-US-CO-SB26-189",
+    "kind": "jurisdiction",
+    "note": "Not published yet: set the jurisdiction to US-CO at review. SB 26-189 is a Colorado bill."
+  }
+]

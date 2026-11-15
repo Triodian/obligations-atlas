@@ -1,0 +1,313 @@
+{
+  "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES",
+  "interfaceVersion": "1.0.0",
+  "metamodelVersion": "2.9.0",
+  "mode": "propose",
+  "dataset": "ai-obligations-atlas",
+  "submittedAt": "2026-11-15T00:00:00Z",
+  "submitter": {
+    "actorType": "agent",
+    "actorID": "atlas-update-agent",
+    "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+  },
+  "proposals": [
+    {
+      "changeProposalID": "CP-2026-11-15-J001",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NY-CL7-2024",
+        "title": "New York: AI and external data in underwriting and pricing, with vendor contract terms (Circular Letter 7)"
+      },
+      "record": {
+        "effectiveDates": [
+          {
+            "date": "2024-07-11",
+            "dateType": "published"
+          }
+        ],
+        "entityTypes": [
+          "insurer"
+        ],
+        "jurisdiction": "US-NY",
+        "lastVerified": "2026-11-14",
+        "monitoringFrequency": "daily",
+        "obligationID": "OBL-US-NY-CL7-2024",
+        "obligationType": "regulatoryGuidance",
+        "roles": [
+          "regulatedEntity",
+          "board",
+          "seniorManagement"
+        ],
+        "source": {
+          "authority": "NYDFS",
+          "citation": "paras 2, 21, 23, 35, 37",
+          "externalOrgID": "EXT-NYDFS",
+          "instrument": "NYDFS Insurance Circular Letter No. 7 (2024): Use of AI Systems and External Consumer Data and Information Sources in Insurance Underwriting and Pricing",
+          "url": "https://www.dfs.ny.gov/industry-guidance/circular-letters/cl2024-07"
+        },
+        "sourceTier": "expected",
+        "statement": "Dated 11 July 2024, the letter addresses AI systems, external data and predictive models in 'underwriting and pricing insurance policies'. It states that 'The role of an insurer's board of directors, or other governing body, is to provide oversight of the insurer's activities' and that 'Senior management is responsible for day-to-day implementation'. Insurers 'retain responsibility for understanding any tools' used, and where appropriate and available should include contract terms that '(i) provide audit rights or entitle the insurer to receive audit reports by qualified auditing entities' and '(ii) require the third-party vendor to cooperate with the insurer regarding regulatory inquiries and investigations'.",
+        "status": "inForce",
+        "title": "New York: AI and external data in underwriting and pricing, with vendor contract terms (Circular Letter 7)",
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC7"
+        ]
+      },
+      "evidence": [
+        {
+          "url": "https://www.dfs.ny.gov/industry-guidance/circular-letters/cl2024-07",
+          "title": "NYDFS Insurance Circular Letter No. 7 (2024): Use of AI Systems and External Consumer Data and Information Sources in Insurance Underwriting and Pricing",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Jurisdiction US to US-NY. Circular Letter No. 7 (2024) is issued by the New York State Department of Financial Services to insurers it licenses. US state laws carry their state's ISO 3166-2 code (US-CA, US-CO, US-NY, US-TX), as the Metamodel's jurisdictionCode allows, not US. Decided by Damian Hickey, 15 November 2026. Federal law, and multistate models such as the NAIC model bulletin that a state has to adopt, stay under US. A request for US in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones."
+    },
+    {
+      "changeProposalID": "CP-2026-11-15-J002",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CA-CCPA-ADMT",
+        "title": "California: automated decisionmaking technology and risk assessments (CCPA regulations)"
+      },
+      "record": {
+        "effectiveDate": "2026-01-01",
+        "effectiveDates": [
+          {
+            "date": "2026-01-01",
+            "dateType": "commences"
+          },
+          {
+            "date": "2027-01-01",
+            "dateType": "applies",
+            "note": "Article 11 (ADMT)"
+          },
+          {
+            "date": "2027-12-31",
+            "dateType": "transitionEnds",
+            "note": "Risk assessments for existing processing"
+          }
+        ],
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "jurisdiction": "US-CA",
+        "lastVerified": "2026-11-14",
+        "monitoringFrequency": "daily",
+        "obligationID": "OBL-US-CA-CCPA-ADMT",
+        "obligationType": "statutory",
+        "roles": [
+          "deployer",
+          "regulatedEntity"
+        ],
+        "source": {
+          "authority": "CPPA",
+          "citation": "ss 7001(e), 7150(b)(3), 7155(b), 7200(a)-(b)",
+          "externalOrgID": "EXT-CPPA",
+          "instrument": "California Consumer Privacy Act Regulations (Cal. Code Regs. tit. 11, div. 6, ch. 1)",
+          "url": "https://cppa.ca.gov/regulations/pdf/ccpa_statute_eff_20260101.pdf"
+        },
+        "sourceTier": "binding",
+        "statement": "Section 7001(e) defines ADMT as 'any technology that processes personal information and uses computation to replace human decisionmaking or substantially replace human decisionmaking'. Section 7200(a) provides that 'A business that uses ADMT to make a significant decision concerning a consumer must comply' with Article 11 (notice, opt-out and access), and 7200(b) that a business already doing so 'must be in compliance with the requirements of this Article no later than January 1, 2027'. Section 7150(b)(3) lists 'Using ADMT for a significant decision concerning a consumer' among the processing that calls for a risk assessment before it begins; for processing begun before the regulations took effect, 7155(b) sets 31 December 2027.",
+        "status": "inForce",
+        "title": "California: automated decisionmaking technology and risk assessments (CCPA regulations)",
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC4",
+          "UC8"
+        ]
+      },
+      "evidence": [
+        {
+          "url": "https://cppa.ca.gov/regulations/pdf/ccpa_statute_eff_20260101.pdf",
+          "title": "California Consumer Privacy Act Regulations (Cal. Code Regs. tit. 11, div. 6, ch. 1)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Jurisdiction US to US-CA. The automated decisionmaking technology regulations are California Code of Regulations, title 11, made under the California Consumer Privacy Act. US state laws carry their state's ISO 3166-2 code (US-CA, US-CO, US-NY, US-TX), as the Metamodel's jurisdictionCode allows, not US. Decided by Damian Hickey, 15 November 2026. Federal law, and multistate models such as the NAIC model bulletin that a state has to adopt, stay under US. A request for US in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones."
+    },
+    {
+      "changeProposalID": "CP-2026-11-15-J003",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TX-TRAIGA",
+        "title": "Texas: prohibited AI uses, disclosure and Attorney General enforcement (TRAIGA)"
+      },
+      "record": {
+        "effectiveDate": "2026-01-01",
+        "effectiveDates": [
+          {
+            "date": "2026-01-01",
+            "dateType": "commences"
+          }
+        ],
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "jurisdiction": "US-TX",
+        "lastVerified": "2026-11-14",
+        "monitoringFrequency": "daily",
+        "obligationID": "OBL-US-TX-TRAIGA",
+        "obligationType": "statutory",
+        "roles": [
+          "provider",
+          "deployer"
+        ],
+        "source": {
+          "authority": "Texas Legislature",
+          "citation": "ss 552.051-552.056, 552.104-552.105",
+          "externalOrgID": "EXT-LEG-TX",
+          "instrument": "Texas Responsible Artificial Intelligence Governance Act (H.B. 149, 89th Legislature; Business & Commerce Code Title 11, Subtitle D)",
+          "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm"
+        },
+        "sourceTier": "binding",
+        "statement": "The Act 'takes effect January 1, 2026'. It prohibits developing or deploying AI with intent to manipulate behaviour towards self-harm, harm to others or crime, to infringe constitutional rights, or to unlawfully discriminate (disparate impact alone is not sufficient), and restricts government social scoring and biometric capture. Governmental agencies disclose AI interaction to consumers, and where AI is used in relation to health care services or treatment the disclosure is given 'not later than the date the service or treatment is first provided'. The Attorney General gives notice and a 60-day cure period before suit; a defendant is not liable where it finds a violation through internal review and 'substantially complies with the most recent version of the' NIST AI Risk Management Framework: Generative AI Profile or another recognised framework.",
+        "status": "inForce",
+        "title": "Texas: prohibited AI uses, disclosure and Attorney General enforcement (TRAIGA)",
+        "useCaseIDs": [
+          "UC2",
+          "UC3",
+          "UC8"
+        ]
+      },
+      "evidence": [
+        {
+          "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm",
+          "title": "Texas Responsible Artificial Intelligence Governance Act (H.B. 149, 89th Legislature; Business & Commerce Code Title 11, Subtitle D)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Jurisdiction US to US-TX. TRAIGA is a Texas statute (H.B. 149, 89th Legislature), enforced by the Texas Attorney General. US state laws carry their state's ISO 3166-2 code (US-CA, US-CO, US-NY, US-TX), as the Metamodel's jurisdictionCode allows, not US. Decided by Damian Hickey, 15 November 2026. Federal law, and multistate models such as the NAIC model bulletin that a state has to adopt, stay under US. A request for US in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones."
+    },
+    {
+      "changeProposalID": "CP-2026-11-15-J004",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NYDFS",
+        "title": "New York State Department of Financial Services"
+      },
+      "record": {
+        "acronym": "NYDFS",
+        "externalOrgID": "EXT-NYDFS",
+        "jurisdiction": "US-NY",
+        "jurisdictionCodes": [
+          "US-NY"
+        ],
+        "name": "New York State Department of Financial Services",
+        "type": "regulator",
+        "website": "https://www.dfs.ny.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://www.dfs.ny.gov",
+          "title": "New York State Department of Financial Services website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Jurisdiction US to US-NY. A New York State agency. US state laws carry their state's ISO 3166-2 code (US-CA, US-CO, US-NY, US-TX), as the Metamodel's jurisdictionCode allows, not US. Decided by Damian Hickey, 15 November 2026. Federal law, and multistate models such as the NAIC model bulletin that a state has to adopt, stay under US. A request for US in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones."
+    },
+    {
+      "changeProposalID": "CP-2026-11-15-J005",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CPPA",
+        "title": "California Privacy Protection Agency"
+      },
+      "record": {
+        "acronym": "CPPA",
+        "externalOrgID": "EXT-CPPA",
+        "jurisdiction": "US-CA",
+        "jurisdictionCodes": [
+          "US-CA"
+        ],
+        "name": "California Privacy Protection Agency",
+        "type": "regulator",
+        "website": "https://cppa.ca.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://cppa.ca.gov",
+          "title": "California Privacy Protection Agency website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Jurisdiction US to US-CA. A California State agency. US state laws carry their state's ISO 3166-2 code (US-CA, US-CO, US-NY, US-TX), as the Metamodel's jurisdictionCode allows, not US. Decided by Damian Hickey, 15 November 2026. Federal law, and multistate models such as the NAIC model bulletin that a state has to adopt, stay under US. A request for US in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones."
+    },
+    {
+      "changeProposalID": "CP-2026-11-15-J006",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-TX",
+        "title": "Texas Legislature"
+      },
+      "record": {
+        "externalOrgID": "EXT-LEG-TX",
+        "jurisdiction": "US-TX",
+        "jurisdictionCodes": [
+          "US-TX"
+        ],
+        "name": "Texas Legislature",
+        "type": "legislature",
+        "website": "https://capitol.texas.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://capitol.texas.gov",
+          "title": "Texas Legislature website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Jurisdiction US to US-TX. The Texas state legislature. US state laws carry their state's ISO 3166-2 code (US-CA, US-CO, US-NY, US-TX), as the Metamodel's jurisdictionCode allows, not US. Decided by Damian Hickey, 15 November 2026. Federal law, and multistate models such as the NAIC model bulletin that a state has to adopt, stay under US. A request for US in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones."
+    },
+    {
+      "changeProposalID": "CP-2026-11-15-J007",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-CO",
+        "title": "Colorado General Assembly"
+      },
+      "record": {
+        "externalOrgID": "EXT-LEG-CO",
+        "jurisdiction": "US-CO",
+        "jurisdictionCodes": [
+          "US-CO"
+        ],
+        "name": "Colorado General Assembly",
+        "type": "legislature",
+        "website": "https://leg.colorado.gov"
+      },
+      "evidence": [
+        {
+          "url": "https://leg.colorado.gov",
+          "title": "Colorado General Assembly website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Jurisdiction US to US-CO. The Colorado state legislature. US state laws carry their state's ISO 3166-2 code (US-CA, US-CO, US-NY, US-TX), as the Metamodel's jurisdictionCode allows, not US. Decided by Damian Hickey, 15 November 2026. Federal law, and multistate models such as the NAIC model bulletin that a state has to adopt, stay under US. A request for US in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones."
+    }
+  ]
+}
