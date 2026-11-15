@@ -1,6 +1,6 @@
 {
   "dataset": "ai-obligations-atlas",
-  "generatedAt": "2026-11-15T02:08:39.604Z",
+  "generatedAt": "2026-11-15T05:05:41.547Z",
   "interfaceVersion": "1.0.0",
   "metamodelVersion": "2.7.0",
   "metamodelCommit": "2121f8c840758182c8b8bdc486cf07b304feaa2f",
@@ -2666,53 +2666,54 @@
     },
     {
       "approval": {
-        "approvedAt": "2026-11-15T00:43:19.137Z",
+        "approvedAt": "2026-11-15T04:59:03.393Z",
         "approverName": "Damian Hickey",
         "approverRole": "Method owner",
-        "reviewDecisionID": "RD-CP-2026-11-14-0027-1794703399137"
+        "reviewDecisionID": "RD-CP-2026-11-15-J005-1794718743393"
       },
       "changeProposalIDs": [
-        "CP-2026-11-14-0027"
+        "CP-2026-11-15-J005"
       ],
       "dataset": "ai-obligations-atlas",
       "domainType": "externalOrganization",
       "entityID": "EXT-CPPA",
-      "governedRecordID": "EXT-CPPA@1",
+      "governedRecordID": "EXT-CPPA@2",
       "metamodelVersion": "2.7.0",
       "provenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000929",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000930",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000931",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000932",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001057",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001058"
+        "PROV-AI-OBLIGATIONS-ATLAS-0001090",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001091",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001092",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001093",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001110",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001111"
       ],
       "publicationStatus": "published",
-      "publishedAt": "2026-11-15T00:43:19.197Z",
+      "publishedAt": "2026-11-15T04:59:03.424Z",
       "record": {
         "acronym": "CPPA",
         "externalOrgID": "EXT-CPPA",
-        "jurisdiction": "US",
+        "jurisdiction": "US-CA",
         "jurisdictionCodes": [
-          "US"
+          "US-CA"
         ],
         "name": "California Privacy Protection Agency",
         "type": "regulator",
         "website": "https://cppa.ca.gov"
       },
+      "supersedesVersion": 1,
       "verification": {
         "confidence": {
           "band": "high",
           "corroboration": 0.5,
-          "recency": 0.989,
+          "recency": 0.998,
           "reliability": 0.9,
-          "score": 0.847,
+          "score": 0.849,
           "stale": false
         },
         "lastVerified": "2026-11-15",
         "stale": false
       },
-      "version": 1
+      "version": 2
     },
     {
       "approval": {
@@ -3125,101 +3126,103 @@
     },
     {
       "approval": {
-        "approvedAt": "2026-11-15T00:43:22.283Z",
+        "approvedAt": "2026-11-15T04:59:06.493Z",
         "approverName": "Damian Hickey",
         "approverRole": "Method owner",
-        "reviewDecisionID": "RD-CP-2026-11-14-0029-1794703402283"
+        "reviewDecisionID": "RD-CP-2026-11-15-J007-1794718746493"
       },
       "changeProposalIDs": [
-        "CP-2026-11-14-0029"
+        "CP-2026-11-15-J007"
       ],
       "dataset": "ai-obligations-atlas",
       "domainType": "externalOrganization",
       "entityID": "EXT-LEG-CO",
-      "governedRecordID": "EXT-LEG-CO@1",
+      "governedRecordID": "EXT-LEG-CO@2",
       "metamodelVersion": "2.7.0",
       "provenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000937",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000938",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000939",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000940",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001061",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001062"
+        "PROV-AI-OBLIGATIONS-ATLAS-0001098",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001099",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001100",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001101",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001114",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001115"
       ],
       "publicationStatus": "published",
-      "publishedAt": "2026-11-15T00:43:22.315Z",
+      "publishedAt": "2026-11-15T04:59:06.523Z",
       "record": {
         "externalOrgID": "EXT-LEG-CO",
-        "jurisdiction": "US",
+        "jurisdiction": "US-CO",
         "jurisdictionCodes": [
-          "US"
+          "US-CO"
         ],
         "name": "Colorado General Assembly",
         "type": "legislature",
         "website": "https://leg.colorado.gov"
       },
+      "supersedesVersion": 1,
       "verification": {
         "confidence": {
           "band": "high",
           "corroboration": 0.5,
-          "recency": 0.989,
+          "recency": 0.998,
           "reliability": 0.9,
-          "score": 0.847,
+          "score": 0.849,
           "stale": false
         },
         "lastVerified": "2026-11-15",
         "stale": false
       },
-      "version": 1
+      "version": 2
     },
     {
       "approval": {
-        "approvedAt": "2026-11-15T00:43:21.362Z",
+        "approvedAt": "2026-11-15T04:59:04.533Z",
         "approverName": "Damian Hickey",
         "approverRole": "Method owner",
-        "reviewDecisionID": "RD-CP-2026-11-14-0028-1794703401362"
+        "reviewDecisionID": "RD-CP-2026-11-15-J006-1794718744533"
       },
       "changeProposalIDs": [
-        "CP-2026-11-14-0028"
+        "CP-2026-11-15-J006"
       ],
       "dataset": "ai-obligations-atlas",
       "domainType": "externalOrganization",
       "entityID": "EXT-LEG-TX",
-      "governedRecordID": "EXT-LEG-TX@1",
+      "governedRecordID": "EXT-LEG-TX@2",
       "metamodelVersion": "2.7.0",
       "provenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000933",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000934",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000935",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000936",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001059",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001060"
+        "PROV-AI-OBLIGATIONS-ATLAS-0001094",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001095",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001096",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001097",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001112",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001113"
       ],
       "publicationStatus": "published",
-      "publishedAt": "2026-11-15T00:43:21.393Z",
+      "publishedAt": "2026-11-15T04:59:04.566Z",
       "record": {
         "externalOrgID": "EXT-LEG-TX",
-        "jurisdiction": "US",
+        "jurisdiction": "US-TX",
         "jurisdictionCodes": [
-          "US"
+          "US-TX"
         ],
         "name": "Texas Legislature",
         "type": "legislature",
         "website": "https://capitol.texas.gov"
       },
+      "supersedesVersion": 1,
       "verification": {
         "confidence": {
           "band": "high",
           "corroboration": 0.5,
-          "recency": 0.989,
+          "recency": 0.998,
           "reliability": 0.9,
-          "score": 0.847,
+          "score": 0.849,
           "stale": false
         },
         "lastVerified": "2026-11-15",
         "stale": false
       },
-      "version": 1
+      "version": 2
     },
     {
       "publicationStatus": "published",
@@ -3632,53 +3635,54 @@
     },
     {
       "approval": {
-        "approvedAt": "2026-11-15T00:43:08.113Z",
+        "approvedAt": "2026-11-15T04:59:01.473Z",
         "approverName": "Damian Hickey",
         "approverRole": "Method owner",
-        "reviewDecisionID": "RD-CP-2026-11-14-0020-1794703388113"
+        "reviewDecisionID": "RD-CP-2026-11-15-J004-1794718741473"
       },
       "changeProposalIDs": [
-        "CP-2026-11-14-0020"
+        "CP-2026-11-15-J004"
       ],
       "dataset": "ai-obligations-atlas",
       "domainType": "externalOrganization",
       "entityID": "EXT-NYDFS",
-      "governedRecordID": "EXT-NYDFS@1",
+      "governedRecordID": "EXT-NYDFS@2",
       "metamodelVersion": "2.7.0",
       "provenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000901",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000902",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000903",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000904",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001045",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001046"
+        "PROV-AI-OBLIGATIONS-ATLAS-0001086",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001087",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001088",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001089",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001108",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001109"
       ],
       "publicationStatus": "published",
-      "publishedAt": "2026-11-15T00:43:08.144Z",
+      "publishedAt": "2026-11-15T04:59:01.504Z",
       "record": {
         "acronym": "NYDFS",
         "externalOrgID": "EXT-NYDFS",
-        "jurisdiction": "US",
+        "jurisdiction": "US-NY",
         "jurisdictionCodes": [
-          "US"
+          "US-NY"
         ],
         "name": "New York State Department of Financial Services",
         "type": "regulator",
         "website": "https://www.dfs.ny.gov"
       },
+      "supersedesVersion": 1,
       "verification": {
         "confidence": {
           "band": "high",
           "corroboration": 0.5,
-          "recency": 0.989,
+          "recency": 0.998,
           "reliability": 0.9,
-          "score": 0.847,
+          "score": 0.849,
           "stale": false
         },
         "lastVerified": "2026-11-15",
         "stale": false
       },
-      "version": 1
+      "version": 2
     },
     {
       "publicationStatus": "published",
@@ -9875,29 +9879,29 @@
     },
     {
       "approval": {
-        "approvedAt": "2026-11-15T00:42:57.913Z",
+        "approvedAt": "2026-11-15T04:58:55.851Z",
         "approverName": "Damian Hickey",
         "approverRole": "Method owner",
-        "reviewDecisionID": "RD-CP-2026-11-14-0015-1794703377913"
+        "reviewDecisionID": "RD-CP-2026-11-15-J002-1794718735851"
       },
       "changeProposalIDs": [
-        "CP-2026-11-14-0015"
+        "CP-2026-11-15-J002"
       ],
       "dataset": "ai-obligations-atlas",
       "domainType": "obligation",
       "entityID": "OBL-US-CA-CCPA-ADMT",
-      "governedRecordID": "OBL-US-CA-CCPA-ADMT@1",
+      "governedRecordID": "OBL-US-CA-CCPA-ADMT@2",
       "metamodelVersion": "2.7.0",
       "provenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000879",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000880",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000881",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000882",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001037",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001038"
+        "PROV-AI-OBLIGATIONS-ATLAS-0001078",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001079",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001080",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001081",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001104",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001105"
       ],
       "publicationStatus": "published",
-      "publishedAt": "2026-11-15T00:42:57.943Z",
+      "publishedAt": "2026-11-15T04:58:55.881Z",
       "record": {
         "effectiveDate": "2026-01-01",
         "effectiveDates": [
@@ -9919,7 +9923,7 @@
         "entityTypes": [
           "anyOrganization"
         ],
-        "jurisdiction": "US",
+        "jurisdiction": "US-CA",
         "lastVerified": "2026-11-14",
         "monitoringFrequency": "daily",
         "obligationID": "OBL-US-CA-CCPA-ADMT",
@@ -9946,11 +9950,12 @@
           "UC8"
         ]
       },
+      "supersedesVersion": 1,
       "verification": {
         "confidence": {
           "band": "high",
           "corroboration": 0.5,
-          "recency": 0.994,
+          "recency": 0.993,
           "reliability": 1,
           "score": 0.898,
           "stale": false
@@ -9959,7 +9964,7 @@
         "lastVerified": "2026-11-14",
         "stale": false
       },
-      "version": 1
+      "version": 2
     },
     {
       "approval": {
@@ -10343,29 +10348,29 @@
     },
     {
       "approval": {
-        "approvedAt": "2026-11-15T00:42:43.213Z",
+        "approvedAt": "2026-11-15T04:58:53.053Z",
         "approverName": "Damian Hickey",
         "approverRole": "Method owner",
-        "reviewDecisionID": "RD-CP-2026-11-14-0006-1794703363213"
+        "reviewDecisionID": "RD-CP-2026-11-15-J001-1794718733053"
       },
       "changeProposalIDs": [
-        "CP-2026-11-14-0006"
+        "CP-2026-11-15-J001"
       ],
       "dataset": "ai-obligations-atlas",
       "domainType": "obligation",
       "entityID": "OBL-US-NY-CL7-2024",
-      "governedRecordID": "OBL-US-NY-CL7-2024@1",
+      "governedRecordID": "OBL-US-NY-CL7-2024@2",
       "metamodelVersion": "2.7.0",
       "provenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000835",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000836",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000837",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000838",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001025",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001026"
+        "PROV-AI-OBLIGATIONS-ATLAS-0001074",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001075",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001076",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001077",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001102",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001103"
       ],
       "publicationStatus": "published",
-      "publishedAt": "2026-11-15T00:42:43.242Z",
+      "publishedAt": "2026-11-15T04:58:53.099Z",
       "record": {
         "effectiveDates": [
           {
@@ -10376,7 +10381,7 @@
         "entityTypes": [
           "insurer"
         ],
-        "jurisdiction": "US",
+        "jurisdiction": "US-NY",
         "lastVerified": "2026-11-14",
         "monitoringFrequency": "daily",
         "obligationID": "OBL-US-NY-CL7-2024",
@@ -10404,20 +10409,21 @@
           "UC7"
         ]
       },
+      "supersedesVersion": 1,
       "verification": {
         "confidence": {
           "band": "high",
           "corroboration": 0.5,
-          "recency": 0.989,
-          "reliability": 0.9,
-          "score": 0.847,
+          "recency": 0.987,
+          "reliability": 1,
+          "score": 0.896,
           "stale": false
         },
         "freshnessThreshold": "P90D",
         "lastVerified": "2026-11-14",
         "stale": false
       },
-      "version": 1
+      "version": 2
     },
     {
       "approval": {
@@ -10744,29 +10750,29 @@
     },
     {
       "approval": {
-        "approvedAt": "2026-11-15T00:42:59.932Z",
+        "approvedAt": "2026-11-15T04:58:58.783Z",
         "approverName": "Damian Hickey",
         "approverRole": "Method owner",
-        "reviewDecisionID": "RD-CP-2026-11-14-0016-1794703379932"
+        "reviewDecisionID": "RD-CP-2026-11-15-J003-1794718738783"
       },
       "changeProposalIDs": [
-        "CP-2026-11-14-0016"
+        "CP-2026-11-15-J003"
       ],
       "dataset": "ai-obligations-atlas",
       "domainType": "obligation",
       "entityID": "OBL-US-TX-TRAIGA",
-      "governedRecordID": "OBL-US-TX-TRAIGA@1",
+      "governedRecordID": "OBL-US-TX-TRAIGA@2",
       "metamodelVersion": "2.7.0",
       "provenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000883",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000884",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000885",
-        "PROV-AI-OBLIGATIONS-ATLAS-0000886",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001039",
-        "PROV-AI-OBLIGATIONS-ATLAS-0001040"
+        "PROV-AI-OBLIGATIONS-ATLAS-0001082",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001083",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001084",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001085",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001106",
+        "PROV-AI-OBLIGATIONS-ATLAS-0001107"
       ],
       "publicationStatus": "published",
-      "publishedAt": "2026-11-15T00:42:59.961Z",
+      "publishedAt": "2026-11-15T04:58:58.816Z",
       "record": {
         "effectiveDate": "2026-01-01",
         "effectiveDates": [
@@ -10778,7 +10784,7 @@
         "entityTypes": [
           "anyOrganization"
         ],
-        "jurisdiction": "US",
+        "jurisdiction": "US-TX",
         "lastVerified": "2026-11-14",
         "monitoringFrequency": "daily",
         "obligationID": "OBL-US-TX-TRAIGA",
@@ -10804,11 +10810,12 @@
           "UC8"
         ]
       },
+      "supersedesVersion": 1,
       "verification": {
         "confidence": {
           "band": "high",
           "corroboration": 0.5,
-          "recency": 0.994,
+          "recency": 0.993,
           "reliability": 1,
           "score": 0.898,
           "stale": false
@@ -10817,7 +10824,7 @@
         "lastVerified": "2026-11-14",
         "stale": false
       },
-      "version": 1
+      "version": 2
     },
     {
       "publicationStatus": "published",
@@ -35721,116 +35728,6 @@
         "actorType": "agent",
         "displayName": "Atlas update agent (research of 2026-11-14)"
       },
-      "changeProposalID": "CP-2026-11-14-0006",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Read NYDFS Insurance Circular Letter No. 7 (2024): Use of AI Systems and External Consumer Data and Information Sources in Insurance Underwriting and Pricing (Regulator publication) (rank 2)",
-      "eventType": "sourceRead",
-      "evidenceURLs": [
-        "https://www.dfs.ny.gov/industry-guidance/circular-letters/cl2024-07"
-      ],
-      "hash": "90cac70ddb38c4fbafab34a724336dc228478b74515d9fa526472f188e20528a",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
-      ],
-      "previousHash": "3c5be431df0195ee70344266ab3ea7b71315ad88a0958ad8346e4bc47e2f1025",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000835",
-      "recordedAt": "2026-11-14T23:51:58.369Z",
-      "sequence": 835,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-NY-CL7-2024"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0006",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Valid against the Metamodel and the dataset language rules",
-      "eventType": "validated",
-      "hash": "7ea27fbf9fdd4e902db0700bec2a6b57d63999bba963cd0bf4070d36ea95bdf6",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000835"
-      ],
-      "previousHash": "90cac70ddb38c4fbafab34a724336dc228478b74515d9fa526472f188e20528a",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000836",
-      "recordedAt": "2026-11-14T23:51:58.389Z",
-      "ruleIDs": [
-        "schema.metamodel",
-        "language.rules"
-      ],
-      "sequence": 836,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-NY-CL7-2024"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0006",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Confidence 0.847 (high)",
-      "eventType": "scored",
-      "hash": "ce124698d6ff3820931fdd6536437756a8683f97d289f1c8b1627086015e3930",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000836"
-      ],
-      "previousHash": "7ea27fbf9fdd4e902db0700bec2a6b57d63999bba963cd0bf4070d36ea95bdf6",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000837",
-      "recordedAt": "2026-11-14T23:51:58.413Z",
-      "ruleIDs": [
-        "coverage.weighting"
-      ],
-      "sequence": 837,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-NY-CL7-2024"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0006",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Treatment: reviewQueue",
-      "eventType": "treatmentAssigned",
-      "hash": "e0f93aba935f2473d9fc1b2a0ffb7683b03f5c376c24b10db46df6cf008ff3a8",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000837"
-      ],
-      "previousHash": "ce124698d6ff3820931fdd6536437756a8683f97d289f1c8b1627086015e3930",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000838",
-      "recordedAt": "2026-11-14T23:51:58.431Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 838,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-NY-CL7-2024"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "atlas-update-agent",
-        "actorType": "agent",
-        "displayName": "Atlas update agent (research of 2026-11-14)"
-      },
       "changeProposalID": "CP-2026-11-14-0007",
       "dataset": "ai-obligations-atlas",
       "decision": "Read Regulation S-P (17 CFR Part 248), as amended 2024 (Official legal text) (rank 1)",
@@ -36942,226 +36839,6 @@
         "actorType": "agent",
         "displayName": "Atlas update agent (research of 2026-11-14)"
       },
-      "changeProposalID": "CP-2026-11-14-0015",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Read California Consumer Privacy Act Regulations (Cal. Code Regs. tit. 11, div. 6, ch. 1) (Official legal text) (rank 1)",
-      "eventType": "sourceRead",
-      "evidenceURLs": [
-        "https://cppa.ca.gov/regulations/pdf/ccpa_statute_eff_20260101.pdf"
-      ],
-      "hash": "792f18829c3af92147fd62f0c51edf3338a3fe6c1753b6d5679fbfcd20f34ca0",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
-      ],
-      "previousHash": "caf0b675b8e0c36d173d11bb9138ea7d5fecef7c951fbb167927ff1d2e2e6e17",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000879",
-      "recordedAt": "2026-11-14T23:52:00.261Z",
-      "sequence": 879,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-CA-CCPA-ADMT"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0015",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Valid against the Metamodel and the dataset language rules",
-      "eventType": "validated",
-      "hash": "ad52e62249bc830df5203fd26c625fd432b17f9a234fdf6a86a9f90feb5ad217",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000879"
-      ],
-      "previousHash": "792f18829c3af92147fd62f0c51edf3338a3fe6c1753b6d5679fbfcd20f34ca0",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000880",
-      "recordedAt": "2026-11-14T23:52:00.281Z",
-      "ruleIDs": [
-        "schema.metamodel",
-        "language.rules"
-      ],
-      "sequence": 880,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-CA-CCPA-ADMT"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0015",
-      "confidenceScore": 0.898,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Confidence 0.898 (high)",
-      "eventType": "scored",
-      "hash": "ad5b66e5f6cabe0ec8cf8cfbc78dbb2002043da970d4da7f5877570a93f97b8e",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000880"
-      ],
-      "previousHash": "ad52e62249bc830df5203fd26c625fd432b17f9a234fdf6a86a9f90feb5ad217",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000881",
-      "recordedAt": "2026-11-14T23:52:00.302Z",
-      "ruleIDs": [
-        "coverage.weighting"
-      ],
-      "sequence": 881,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-CA-CCPA-ADMT"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0015",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Treatment: reviewQueue",
-      "eventType": "treatmentAssigned",
-      "hash": "71c5c046dc80c4aafd636ee1352c3c654ea66472d503302bc55d76620ee5d005",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000881"
-      ],
-      "previousHash": "ad5b66e5f6cabe0ec8cf8cfbc78dbb2002043da970d4da7f5877570a93f97b8e",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000882",
-      "recordedAt": "2026-11-14T23:52:00.320Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 882,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-CA-CCPA-ADMT"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "atlas-update-agent",
-        "actorType": "agent",
-        "displayName": "Atlas update agent (research of 2026-11-14)"
-      },
-      "changeProposalID": "CP-2026-11-14-0016",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Read Texas Responsible Artificial Intelligence Governance Act (H.B. 149, 89th Legislature; Business & Commerce Code Title 11, Subtitle D) (Official legal text) (rank 1)",
-      "eventType": "sourceRead",
-      "evidenceURLs": [
-        "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm"
-      ],
-      "hash": "2f405eaacdbb8e04cdea78730a9ce3fd7ec76e6a3fa505a32d732cb6f7262308",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
-      ],
-      "previousHash": "71c5c046dc80c4aafd636ee1352c3c654ea66472d503302bc55d76620ee5d005",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000883",
-      "recordedAt": "2026-11-14T23:52:00.447Z",
-      "sequence": 883,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-TX-TRAIGA"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0016",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Valid against the Metamodel and the dataset language rules",
-      "eventType": "validated",
-      "hash": "7107c9f88ce40f5fe12e0bad22d87d83299406fd9cb7fedf2fd654150b2812f5",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000883"
-      ],
-      "previousHash": "2f405eaacdbb8e04cdea78730a9ce3fd7ec76e6a3fa505a32d732cb6f7262308",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000884",
-      "recordedAt": "2026-11-14T23:52:00.466Z",
-      "ruleIDs": [
-        "schema.metamodel",
-        "language.rules"
-      ],
-      "sequence": 884,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-TX-TRAIGA"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0016",
-      "confidenceScore": 0.898,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Confidence 0.898 (high)",
-      "eventType": "scored",
-      "hash": "4d875749b3a32508c537b32a796149aeafb621255c6b48ebc4a6cdebf21a9676",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000884"
-      ],
-      "previousHash": "7107c9f88ce40f5fe12e0bad22d87d83299406fd9cb7fedf2fd654150b2812f5",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000885",
-      "recordedAt": "2026-11-14T23:52:00.487Z",
-      "ruleIDs": [
-        "coverage.weighting"
-      ],
-      "sequence": 885,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-TX-TRAIGA"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0016",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Treatment: reviewQueue",
-      "eventType": "treatmentAssigned",
-      "hash": "db53b4d7b7793af6925a43f230c6a6feb4e9180915b39a021632a7c4659e3751",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000885"
-      ],
-      "previousHash": "4d875749b3a32508c537b32a796149aeafb621255c6b48ebc4a6cdebf21a9676",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000886",
-      "recordedAt": "2026-11-14T23:52:00.508Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 886,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-TX-TRAIGA"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "atlas-update-agent",
-        "actorType": "agent",
-        "displayName": "Atlas update agent (research of 2026-11-14)"
-      },
       "changeProposalID": "CP-2026-11-14-0017",
       "dataset": "ai-obligations-atlas",
       "decision": "Read Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205) (Law firm commentary) (rank 4)",
@@ -37542,116 +37219,6 @@
       "subject": {
         "domainType": "externalOrganization",
         "entityID": "EXT-OCC"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "atlas-update-agent",
-        "actorType": "agent",
-        "displayName": "Atlas update agent (research of 2026-11-14)"
-      },
-      "changeProposalID": "CP-2026-11-14-0020",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Read New York State Department of Financial Services website (rank 2)",
-      "eventType": "sourceRead",
-      "evidenceURLs": [
-        "https://www.dfs.ny.gov"
-      ],
-      "hash": "87433b54b3586aeba7b5e8d9a28f526a8f4d171b5897e10e354271c789824b76",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
-      ],
-      "previousHash": "175b06fd1c17e534bbdda7676f4fd492cbc2e306927dec9c6dd7abfc10040246",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000901",
-      "recordedAt": "2026-11-14T23:52:01.258Z",
-      "sequence": 901,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-NYDFS"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0020",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Valid against the Metamodel and the dataset language rules",
-      "eventType": "validated",
-      "hash": "0df5086ed195e3e908fc23101433484828b35c31d2cfadb54429d8f6db6c264f",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000901"
-      ],
-      "previousHash": "87433b54b3586aeba7b5e8d9a28f526a8f4d171b5897e10e354271c789824b76",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000902",
-      "recordedAt": "2026-11-14T23:52:01.278Z",
-      "ruleIDs": [
-        "schema.metamodel",
-        "language.rules"
-      ],
-      "sequence": 902,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-NYDFS"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0020",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Confidence 0.847 (high)",
-      "eventType": "scored",
-      "hash": "50e50f6d21b0d6850f5cdf4cc1c3cfcfa9526b403429464f6b0527626f906b0e",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000902"
-      ],
-      "previousHash": "0df5086ed195e3e908fc23101433484828b35c31d2cfadb54429d8f6db6c264f",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000903",
-      "recordedAt": "2026-11-14T23:52:01.298Z",
-      "ruleIDs": [
-        "coverage.weighting"
-      ],
-      "sequence": 903,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-NYDFS"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0020",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Treatment: reviewQueue",
-      "eventType": "treatmentAssigned",
-      "hash": "7a7f3d6e42e5541f3e1ff070cd6731e8913f7762d56223398bab4559732939df",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000903"
-      ],
-      "previousHash": "50e50f6d21b0d6850f5cdf4cc1c3cfcfa9526b403429464f6b0527626f906b0e",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000904",
-      "recordedAt": "2026-11-14T23:52:01.317Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 904,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-NYDFS"
       },
       "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
     },
@@ -38312,336 +37879,6 @@
       "subject": {
         "domainType": "externalOrganization",
         "entityID": "EXT-CONGRESS-US"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "atlas-update-agent",
-        "actorType": "agent",
-        "displayName": "Atlas update agent (research of 2026-11-14)"
-      },
-      "changeProposalID": "CP-2026-11-14-0027",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Read California Privacy Protection Agency website (rank 2)",
-      "eventType": "sourceRead",
-      "evidenceURLs": [
-        "https://cppa.ca.gov"
-      ],
-      "hash": "351ac605c6c3a515b000b6e5bc36a1b40135c696824432f3c985134bac9f156a",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
-      ],
-      "previousHash": "cdb9e0f249cfb393274250e0753a53a6bd59314a46b0490c9bc0fa0e62b5d110",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000929",
-      "recordedAt": "2026-11-14T23:52:02.582Z",
-      "sequence": 929,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-CPPA"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0027",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Valid against the Metamodel and the dataset language rules",
-      "eventType": "validated",
-      "hash": "d5863f05d8e5f0391dd8522ee1e997c3060b342ab61096df173965faad1128f8",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000929"
-      ],
-      "previousHash": "351ac605c6c3a515b000b6e5bc36a1b40135c696824432f3c985134bac9f156a",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000930",
-      "recordedAt": "2026-11-14T23:52:02.603Z",
-      "ruleIDs": [
-        "schema.metamodel",
-        "language.rules"
-      ],
-      "sequence": 930,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-CPPA"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0027",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Confidence 0.847 (high)",
-      "eventType": "scored",
-      "hash": "87d3251277d7fd44a9607d5884ad2e3f1f7b02001132dd9ac5d06f3f0412cccb",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000930"
-      ],
-      "previousHash": "d5863f05d8e5f0391dd8522ee1e997c3060b342ab61096df173965faad1128f8",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000931",
-      "recordedAt": "2026-11-14T23:52:02.624Z",
-      "ruleIDs": [
-        "coverage.weighting"
-      ],
-      "sequence": 931,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-CPPA"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0027",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Treatment: reviewQueue",
-      "eventType": "treatmentAssigned",
-      "hash": "58359db44c261168948690e69aa9394baaef08ca2b6866bbc3bd0fb555f028bc",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000931"
-      ],
-      "previousHash": "87d3251277d7fd44a9607d5884ad2e3f1f7b02001132dd9ac5d06f3f0412cccb",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000932",
-      "recordedAt": "2026-11-14T23:52:02.643Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 932,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-CPPA"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "atlas-update-agent",
-        "actorType": "agent",
-        "displayName": "Atlas update agent (research of 2026-11-14)"
-      },
-      "changeProposalID": "CP-2026-11-14-0028",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Read Texas Legislature website (rank 2)",
-      "eventType": "sourceRead",
-      "evidenceURLs": [
-        "https://capitol.texas.gov"
-      ],
-      "hash": "0b6ff372bef58549d9b8fbe94adeabf554f05514b007320d37dfbd29a7029aa3",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
-      ],
-      "previousHash": "58359db44c261168948690e69aa9394baaef08ca2b6866bbc3bd0fb555f028bc",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000933",
-      "recordedAt": "2026-11-14T23:52:02.771Z",
-      "sequence": 933,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-TX"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0028",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Valid against the Metamodel and the dataset language rules",
-      "eventType": "validated",
-      "hash": "154c8522bee93aaf46d8005e8472fff2bbadb19be4a188aeaf98cce99c81a97d",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000933"
-      ],
-      "previousHash": "0b6ff372bef58549d9b8fbe94adeabf554f05514b007320d37dfbd29a7029aa3",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000934",
-      "recordedAt": "2026-11-14T23:52:02.790Z",
-      "ruleIDs": [
-        "schema.metamodel",
-        "language.rules"
-      ],
-      "sequence": 934,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-TX"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0028",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Confidence 0.847 (high)",
-      "eventType": "scored",
-      "hash": "2477e2f2500aeb011e7ac3c27326fe880f01aa7b0ecae7fc944fc98b5bc3fc2d",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000934"
-      ],
-      "previousHash": "154c8522bee93aaf46d8005e8472fff2bbadb19be4a188aeaf98cce99c81a97d",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000935",
-      "recordedAt": "2026-11-14T23:52:02.807Z",
-      "ruleIDs": [
-        "coverage.weighting"
-      ],
-      "sequence": 935,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-TX"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0028",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Treatment: reviewQueue",
-      "eventType": "treatmentAssigned",
-      "hash": "a88bc6df430281598435667d6995e5b1a240853fee74533131ebda4be8cb850b",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000935"
-      ],
-      "previousHash": "2477e2f2500aeb011e7ac3c27326fe880f01aa7b0ecae7fc944fc98b5bc3fc2d",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000936",
-      "recordedAt": "2026-11-14T23:52:02.824Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 936,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-TX"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "atlas-update-agent",
-        "actorType": "agent",
-        "displayName": "Atlas update agent (research of 2026-11-14)"
-      },
-      "changeProposalID": "CP-2026-11-14-0029",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Read Colorado General Assembly website (rank 2)",
-      "eventType": "sourceRead",
-      "evidenceURLs": [
-        "https://leg.colorado.gov"
-      ],
-      "hash": "0686e74e2f216ec794afbcf51c6e9bb65fbfc7a564ab4253ec6a36a82d9b53f8",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
-      ],
-      "previousHash": "a88bc6df430281598435667d6995e5b1a240853fee74533131ebda4be8cb850b",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000937",
-      "recordedAt": "2026-11-14T23:52:02.954Z",
-      "sequence": 937,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-CO"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0029",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Valid against the Metamodel and the dataset language rules",
-      "eventType": "validated",
-      "hash": "8181e06a1f53be382871b3f2c017bca5b371a5fe382b5965ec402117f3606254",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000937"
-      ],
-      "previousHash": "0686e74e2f216ec794afbcf51c6e9bb65fbfc7a564ab4253ec6a36a82d9b53f8",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000938",
-      "recordedAt": "2026-11-14T23:52:02.973Z",
-      "ruleIDs": [
-        "schema.metamodel",
-        "language.rules"
-      ],
-      "sequence": 938,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-CO"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0029",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Confidence 0.847 (high)",
-      "eventType": "scored",
-      "hash": "bf28ce96cb60f0bc574e5dca1e60eb77f1882248159976cbf8c6fe17e64fb47d",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000938"
-      ],
-      "previousHash": "8181e06a1f53be382871b3f2c017bca5b371a5fe382b5965ec402117f3606254",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000939",
-      "recordedAt": "2026-11-14T23:52:02.992Z",
-      "ruleIDs": [
-        "coverage.weighting"
-      ],
-      "sequence": 939,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-CO"
-      },
-      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
-    },
-    {
-      "actor": {
-        "actorID": "reasoning-fabric",
-        "actorType": "service",
-        "displayName": "Reasoning Fabric"
-      },
-      "changeProposalID": "CP-2026-11-14-0029",
-      "dataset": "ai-obligations-atlas",
-      "decision": "Treatment: reviewQueue",
-      "eventType": "treatmentAssigned",
-      "hash": "b41d8a035d76b94b960ecf3bfeefcb32c91a48021ca734b299d2f242411d8f52",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000939"
-      ],
-      "previousHash": "bf28ce96cb60f0bc574e5dca1e60eb77f1882248159976cbf8c6fe17e64fb47d",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000940",
-      "recordedAt": "2026-11-14T23:52:03.012Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 940,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-CO"
       },
       "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
     },
@@ -41034,63 +40271,6 @@
         "actorType": "person",
         "displayName": "Damian Hickey"
       },
-      "changeProposalID": "CP-2026-11-14-0006",
-      "dataset": "ai-obligations-atlas",
-      "decision": "approve by Damian Hickey (Method owner)",
-      "eventType": "reviewDecided",
-      "hash": "7d48b18b8bbbb9999e955b7ff35421d2a8d8dbac3fd4cef6f42a920512c53670",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000838"
-      ],
-      "previousHash": "b8f2be8287267f385a17ec837bc210b725608f5da8313f0d8d0b444cc5402878",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001025",
-      "recordedAt": "2026-11-15T00:42:43.226Z",
-      "ruleIDs": [
-        "review.namedApprover"
-      ],
-      "sequence": 1025,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-NY-CL7-2024"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0006",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Published as published: OBL-US-NY-CL7-2024@1, approved by Damian Hickey",
-      "eventType": "published",
-      "evidenceURLs": [
-        "https://www.dfs.ny.gov/industry-guidance/circular-letters/cl2024-07"
-      ],
-      "governedRecordID": "OBL-US-NY-CL7-2024@1",
-      "hash": "769840d9d143b14b91aad5fd5ab7c08985505cf9cf89e8c91d0ac2521351f906",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0001025"
-      ],
-      "previousHash": "7d48b18b8bbbb9999e955b7ff35421d2a8d8dbac3fd4cef6f42a920512c53670",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001026",
-      "recordedAt": "2026-11-15T00:42:43.244Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 1026,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-NY-CL7-2024"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
       "changeProposalID": "CP-2026-11-14-0007",
       "dataset": "ai-obligations-atlas",
       "decision": "approve by Damian Hickey (Method owner)",
@@ -41378,120 +40558,6 @@
         "actorType": "person",
         "displayName": "Damian Hickey"
       },
-      "changeProposalID": "CP-2026-11-14-0015",
-      "dataset": "ai-obligations-atlas",
-      "decision": "approve by Damian Hickey (Method owner)",
-      "eventType": "reviewDecided",
-      "hash": "d222a361cfd599eb9d3ea65e1b5c1eb41e4cda4eeba6b9d123621cd1b6850777",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000882"
-      ],
-      "previousHash": "7dd5c9cf14c6f9435116772c20c319ab5edbb51b5ec665d9407184ee1fe35e86",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001037",
-      "recordedAt": "2026-11-15T00:42:57.926Z",
-      "ruleIDs": [
-        "review.namedApprover"
-      ],
-      "sequence": 1037,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-CA-CCPA-ADMT"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0015",
-      "confidenceScore": 0.898,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Published as published: OBL-US-CA-CCPA-ADMT@1, approved by Damian Hickey",
-      "eventType": "published",
-      "evidenceURLs": [
-        "https://cppa.ca.gov/regulations/pdf/ccpa_statute_eff_20260101.pdf"
-      ],
-      "governedRecordID": "OBL-US-CA-CCPA-ADMT@1",
-      "hash": "c4e342d7f4701d5bb4e99eb5cdfb45081777eacdd5ef69a8113475559db971f6",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0001037"
-      ],
-      "previousHash": "d222a361cfd599eb9d3ea65e1b5c1eb41e4cda4eeba6b9d123621cd1b6850777",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001038",
-      "recordedAt": "2026-11-15T00:42:57.945Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 1038,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-CA-CCPA-ADMT"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0016",
-      "dataset": "ai-obligations-atlas",
-      "decision": "approve by Damian Hickey (Method owner)",
-      "eventType": "reviewDecided",
-      "hash": "f1a3ad01c95d1a316b69c909d2c1bca6241e532aa4bf407bf8b8f9658d196b1e",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000886"
-      ],
-      "previousHash": "c4e342d7f4701d5bb4e99eb5cdfb45081777eacdd5ef69a8113475559db971f6",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001039",
-      "recordedAt": "2026-11-15T00:42:59.946Z",
-      "ruleIDs": [
-        "review.namedApprover"
-      ],
-      "sequence": 1039,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-TX-TRAIGA"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0016",
-      "confidenceScore": 0.898,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Published as published: OBL-US-TX-TRAIGA@1, approved by Damian Hickey",
-      "eventType": "published",
-      "evidenceURLs": [
-        "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm"
-      ],
-      "governedRecordID": "OBL-US-TX-TRAIGA@1",
-      "hash": "465b333abf40365da8f67a3e972c2d8fb2b5e31dc121e832d8a416fc54aedd37",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0001039"
-      ],
-      "previousHash": "f1a3ad01c95d1a316b69c909d2c1bca6241e532aa4bf407bf8b8f9658d196b1e",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001040",
-      "recordedAt": "2026-11-15T00:42:59.964Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 1040,
-      "subject": {
-        "domainType": "obligation",
-        "entityID": "OBL-US-TX-TRAIGA"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
       "changeProposalID": "CP-2026-11-14-0018",
       "dataset": "ai-obligations-atlas",
       "decision": "approve by Damian Hickey (Method owner)",
@@ -41598,63 +40664,6 @@
       "subject": {
         "domainType": "externalOrganization",
         "entityID": "EXT-OCC"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0020",
-      "dataset": "ai-obligations-atlas",
-      "decision": "approve by Damian Hickey (Method owner)",
-      "eventType": "reviewDecided",
-      "hash": "5a23e105b00b41cada3cbdbd9c334e6b59e187b33a386ba61557f63d3ed45ae7",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000904"
-      ],
-      "previousHash": "e08ce0b86d8bb88ce6850db7480b1c28ee21a44088b436290eb1ed456ca0afa1",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001045",
-      "recordedAt": "2026-11-15T00:43:08.127Z",
-      "ruleIDs": [
-        "review.namedApprover"
-      ],
-      "sequence": 1045,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-NYDFS"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0020",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Published as published: EXT-NYDFS@1, approved by Damian Hickey",
-      "eventType": "published",
-      "evidenceURLs": [
-        "https://www.dfs.ny.gov"
-      ],
-      "governedRecordID": "EXT-NYDFS@1",
-      "hash": "71da334b57ce88ecafbd17a2c38d10bd3c55eb85398886035ceb63f801698724",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0001045"
-      ],
-      "previousHash": "5a23e105b00b41cada3cbdbd9c334e6b59e187b33a386ba61557f63d3ed45ae7",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001046",
-      "recordedAt": "2026-11-15T00:43:08.146Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 1046,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-NYDFS"
       }
     },
     {
@@ -41948,177 +40957,6 @@
         "actorType": "person",
         "displayName": "Damian Hickey"
       },
-      "changeProposalID": "CP-2026-11-14-0027",
-      "dataset": "ai-obligations-atlas",
-      "decision": "approve by Damian Hickey (Method owner)",
-      "eventType": "reviewDecided",
-      "hash": "39c2a322ca0db03f2f34fc5c8a4c386ed23a51be7e58fc514fd34a6bbb99a9a5",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000932"
-      ],
-      "previousHash": "ee0ddea356a8025a17ec943e26ea1a17e6ac95f6025f8b881af49c7ca06a62b5",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001057",
-      "recordedAt": "2026-11-15T00:43:19.180Z",
-      "ruleIDs": [
-        "review.namedApprover"
-      ],
-      "sequence": 1057,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-CPPA"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0027",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Published as published: EXT-CPPA@1, approved by Damian Hickey",
-      "eventType": "published",
-      "evidenceURLs": [
-        "https://cppa.ca.gov"
-      ],
-      "governedRecordID": "EXT-CPPA@1",
-      "hash": "d5e7a3c58fb33628b9ede7248a995003afceb2eb13f5b8424142285b43f1c3ed",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0001057"
-      ],
-      "previousHash": "39c2a322ca0db03f2f34fc5c8a4c386ed23a51be7e58fc514fd34a6bbb99a9a5",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001058",
-      "recordedAt": "2026-11-15T00:43:19.199Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 1058,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-CPPA"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0028",
-      "dataset": "ai-obligations-atlas",
-      "decision": "approve by Damian Hickey (Method owner)",
-      "eventType": "reviewDecided",
-      "hash": "4764bc0b9f77e47505bfad8bd3c97f337def81440be226428b3fdb251e0d0c2a",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000936"
-      ],
-      "previousHash": "d5e7a3c58fb33628b9ede7248a995003afceb2eb13f5b8424142285b43f1c3ed",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001059",
-      "recordedAt": "2026-11-15T00:43:21.377Z",
-      "ruleIDs": [
-        "review.namedApprover"
-      ],
-      "sequence": 1059,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-TX"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0028",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Published as published: EXT-LEG-TX@1, approved by Damian Hickey",
-      "eventType": "published",
-      "evidenceURLs": [
-        "https://capitol.texas.gov"
-      ],
-      "governedRecordID": "EXT-LEG-TX@1",
-      "hash": "756f0bc4ef2158f804c7aa7a07e747de7cf1c86668ae28f7a82b058991a03da7",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0001059"
-      ],
-      "previousHash": "4764bc0b9f77e47505bfad8bd3c97f337def81440be226428b3fdb251e0d0c2a",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001060",
-      "recordedAt": "2026-11-15T00:43:21.396Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 1060,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-TX"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0029",
-      "dataset": "ai-obligations-atlas",
-      "decision": "approve by Damian Hickey (Method owner)",
-      "eventType": "reviewDecided",
-      "hash": "0bde06fa8e16da54f408507955d4f2457a25e02471af21b8a8dd2f746b1a2aed",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0000940"
-      ],
-      "previousHash": "756f0bc4ef2158f804c7aa7a07e747de7cf1c86668ae28f7a82b058991a03da7",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001061",
-      "recordedAt": "2026-11-15T00:43:22.295Z",
-      "ruleIDs": [
-        "review.namedApprover"
-      ],
-      "sequence": 1061,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-CO"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
-      "changeProposalID": "CP-2026-11-14-0029",
-      "confidenceScore": 0.847,
-      "dataset": "ai-obligations-atlas",
-      "decision": "Published as published: EXT-LEG-CO@1, approved by Damian Hickey",
-      "eventType": "published",
-      "evidenceURLs": [
-        "https://leg.colorado.gov"
-      ],
-      "governedRecordID": "EXT-LEG-CO@1",
-      "hash": "76cb8d7ca2846d4f0be3af4a8d4f6f0f4c00c628032e550794c623bc55ce4ee9",
-      "inputProvenanceRecordIDs": [
-        "PROV-AI-OBLIGATIONS-ATLAS-0001061"
-      ],
-      "previousHash": "0bde06fa8e16da54f408507955d4f2457a25e02471af21b8a8dd2f746b1a2aed",
-      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001062",
-      "recordedAt": "2026-11-15T00:43:22.317Z",
-      "ruleIDs": [
-        "autonomy.create.reviewQueue"
-      ],
-      "sequence": 1062,
-      "subject": {
-        "domainType": "externalOrganization",
-        "entityID": "EXT-LEG-CO"
-      }
-    },
-    {
-      "actor": {
-        "actorID": "Damian Hickey",
-        "actorType": "person",
-        "displayName": "Damian Hickey"
-      },
       "changeProposalID": "CP-2026-11-14-0030",
       "dataset": "ai-obligations-atlas",
       "decision": "approve by Damian Hickey (Method owner)",
@@ -42397,10 +41235,1179 @@
         "domainType": "dataFlow",
         "entityID": "DF-NERC-20261114-05"
       }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+      },
+      "changeProposalID": "CP-2026-11-15-J001",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read NYDFS Insurance Circular Letter No. 7 (2024): Use of AI Systems and External Consumer Data and Information Sources in Insurance Underwriting and Pricing (rank 1)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.dfs.ny.gov/industry-guidance/circular-letters/cl2024-07"
+      ],
+      "hash": "602d4ffe9864d185c2e2a4ef3c02d2c1db5bed18dfd08cd6c458515a69d0d66e",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001073"
+      ],
+      "previousHash": "3fa71df082ba4ed3bf90a1a4bc9176763fb58e8b25a7d5c6a65eecbfdafe405e",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001074",
+      "recordedAt": "2026-11-15T04:58:13.986Z",
+      "sequence": 1074,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NY-CL7-2024"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J001",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "a7958bcbb9cbf46f3a91995a9559c971d97a16ad1eacfb26134f0dd7ac242ba2",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001074"
+      ],
+      "previousHash": "602d4ffe9864d185c2e2a4ef3c02d2c1db5bed18dfd08cd6c458515a69d0d66e",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001075",
+      "recordedAt": "2026-11-15T04:58:14.003Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 1075,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NY-CL7-2024"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J001",
+      "confidenceScore": 0.896,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.896 (high)",
+      "eventType": "scored",
+      "hash": "35ec673fb358ed0dede96099222034beb13fbff5aad7f9b8c9b30a45fd4b905d",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001075"
+      ],
+      "previousHash": "a7958bcbb9cbf46f3a91995a9559c971d97a16ad1eacfb26134f0dd7ac242ba2",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001076",
+      "recordedAt": "2026-11-15T04:58:14.024Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 1076,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NY-CL7-2024"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J001",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: reviewQueue",
+      "eventType": "treatmentAssigned",
+      "hash": "295b88cdc35bcf24ccf32ea0de939135c02b71edad5bef715be99c7f7a3e516c",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001076"
+      ],
+      "previousHash": "35ec673fb358ed0dede96099222034beb13fbff5aad7f9b8c9b30a45fd4b905d",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001077",
+      "recordedAt": "2026-11-15T04:58:14.040Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1077,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NY-CL7-2024"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+      },
+      "changeProposalID": "CP-2026-11-15-J002",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read California Consumer Privacy Act Regulations (Cal. Code Regs. tit. 11, div. 6, ch. 1) (rank 1)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://cppa.ca.gov/regulations/pdf/ccpa_statute_eff_20260101.pdf"
+      ],
+      "hash": "3a5e825cf4f58760f4732dbffe6482d1d8bbb0a272683c53e580afe684b59005",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001073"
+      ],
+      "previousHash": "295b88cdc35bcf24ccf32ea0de939135c02b71edad5bef715be99c7f7a3e516c",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001078",
+      "recordedAt": "2026-11-15T04:58:14.189Z",
+      "sequence": 1078,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CA-CCPA-ADMT"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J002",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "50d48d4c120244836c7f73bcfd528510103631f29ef291fc7e59772a2a2c1de3",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001078"
+      ],
+      "previousHash": "3a5e825cf4f58760f4732dbffe6482d1d8bbb0a272683c53e580afe684b59005",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001079",
+      "recordedAt": "2026-11-15T04:58:14.205Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 1079,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CA-CCPA-ADMT"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J002",
+      "confidenceScore": 0.898,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.898 (high)",
+      "eventType": "scored",
+      "hash": "8a7321f24f8ebab5af6d447b4f2fde847e650fff4a0a9e11eed50fffd4a1b557",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001079"
+      ],
+      "previousHash": "50d48d4c120244836c7f73bcfd528510103631f29ef291fc7e59772a2a2c1de3",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001080",
+      "recordedAt": "2026-11-15T04:58:14.223Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 1080,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CA-CCPA-ADMT"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J002",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: reviewQueue",
+      "eventType": "treatmentAssigned",
+      "hash": "b0609d20f2bbd4ea76ed92a4c55629ecdd3d6ed75e6dc0b8709f00042677807b",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001080"
+      ],
+      "previousHash": "8a7321f24f8ebab5af6d447b4f2fde847e650fff4a0a9e11eed50fffd4a1b557",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001081",
+      "recordedAt": "2026-11-15T04:58:14.239Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1081,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CA-CCPA-ADMT"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+      },
+      "changeProposalID": "CP-2026-11-15-J003",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Texas Responsible Artificial Intelligence Governance Act (H.B. 149, 89th Legislature; Business & Commerce Code Title 11, Subtitle D) (rank 1)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm"
+      ],
+      "hash": "7e89b15ad183c978ea1307128ea79d3dbf89d8f2569efad37713e69accadddb8",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001073"
+      ],
+      "previousHash": "b0609d20f2bbd4ea76ed92a4c55629ecdd3d6ed75e6dc0b8709f00042677807b",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001082",
+      "recordedAt": "2026-11-15T04:58:14.448Z",
+      "sequence": 1082,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TX-TRAIGA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J003",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "72ffca2b1650ea48d52737555a9e9ff202bea0629341caa7ae0d518018bd39d2",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001082"
+      ],
+      "previousHash": "7e89b15ad183c978ea1307128ea79d3dbf89d8f2569efad37713e69accadddb8",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001083",
+      "recordedAt": "2026-11-15T04:58:14.473Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 1083,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TX-TRAIGA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J003",
+      "confidenceScore": 0.898,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.898 (high)",
+      "eventType": "scored",
+      "hash": "49eb2ceec14c26682ce304726459fdfdef5979a97372a087396f28f197f58fe6",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001083"
+      ],
+      "previousHash": "72ffca2b1650ea48d52737555a9e9ff202bea0629341caa7ae0d518018bd39d2",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001084",
+      "recordedAt": "2026-11-15T04:58:14.489Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 1084,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TX-TRAIGA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J003",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: reviewQueue",
+      "eventType": "treatmentAssigned",
+      "hash": "4d6367ce16cb6d8b94c2c02f33327d028df5bb2e4b54919a9e37dfc79d37058e",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001084"
+      ],
+      "previousHash": "49eb2ceec14c26682ce304726459fdfdef5979a97372a087396f28f197f58fe6",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001085",
+      "recordedAt": "2026-11-15T04:58:14.506Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1085,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TX-TRAIGA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+      },
+      "changeProposalID": "CP-2026-11-15-J004",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read New York State Department of Financial Services website (rank 2)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.dfs.ny.gov"
+      ],
+      "hash": "9dfb11225cf42619b0ed724bac5a83708b4b0b74c654ff2b9a41f057409756d2",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001073"
+      ],
+      "previousHash": "4d6367ce16cb6d8b94c2c02f33327d028df5bb2e4b54919a9e37dfc79d37058e",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001086",
+      "recordedAt": "2026-11-15T04:58:14.643Z",
+      "sequence": 1086,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NYDFS"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J004",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "946fdc502ab1cabc7020eac040c38f12b6a172d52c3c3b585ff6be849f6cd960",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001086"
+      ],
+      "previousHash": "9dfb11225cf42619b0ed724bac5a83708b4b0b74c654ff2b9a41f057409756d2",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001087",
+      "recordedAt": "2026-11-15T04:58:14.660Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 1087,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NYDFS"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J004",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.849 (high)",
+      "eventType": "scored",
+      "hash": "6fb837f3f47d89ce5a07cedbb736ba2f8819d75e5d8ec752897773cb7cd728f0",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001087"
+      ],
+      "previousHash": "946fdc502ab1cabc7020eac040c38f12b6a172d52c3c3b585ff6be849f6cd960",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001088",
+      "recordedAt": "2026-11-15T04:58:14.676Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 1088,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NYDFS"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J004",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: reviewQueue",
+      "eventType": "treatmentAssigned",
+      "hash": "c99d666d06919d790e6ee67f142e04e9d9b3c68db6b69b8a614f81fa9263f2e8",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001088"
+      ],
+      "previousHash": "6fb837f3f47d89ce5a07cedbb736ba2f8819d75e5d8ec752897773cb7cd728f0",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001089",
+      "recordedAt": "2026-11-15T04:58:14.695Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1089,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NYDFS"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+      },
+      "changeProposalID": "CP-2026-11-15-J005",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read California Privacy Protection Agency website (rank 2)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://cppa.ca.gov"
+      ],
+      "hash": "66f87978a6164776be1da9c1715a47be92cdc3cd8ec6d5ba08c96b426e395155",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001073"
+      ],
+      "previousHash": "c99d666d06919d790e6ee67f142e04e9d9b3c68db6b69b8a614f81fa9263f2e8",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001090",
+      "recordedAt": "2026-11-15T04:58:14.827Z",
+      "sequence": 1090,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CPPA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J005",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "b5dd87ff9443b16558d0f0de916f2ec86d13c330f65c8d9fc533259ebe32e4fc",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001090"
+      ],
+      "previousHash": "66f87978a6164776be1da9c1715a47be92cdc3cd8ec6d5ba08c96b426e395155",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001091",
+      "recordedAt": "2026-11-15T04:58:14.843Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 1091,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CPPA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J005",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.849 (high)",
+      "eventType": "scored",
+      "hash": "cf5eace0ff6e681365c2ac9c21655978e4d3613f78d4659d5400374ccb6e9b59",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001091"
+      ],
+      "previousHash": "b5dd87ff9443b16558d0f0de916f2ec86d13c330f65c8d9fc533259ebe32e4fc",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001092",
+      "recordedAt": "2026-11-15T04:58:14.882Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 1092,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CPPA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J005",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: reviewQueue",
+      "eventType": "treatmentAssigned",
+      "hash": "36a21e2e6d273c2c5d36c05f94a30b4c19a133e262adc9e59e238edd2bbd2d87",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001092"
+      ],
+      "previousHash": "cf5eace0ff6e681365c2ac9c21655978e4d3613f78d4659d5400374ccb6e9b59",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001093",
+      "recordedAt": "2026-11-15T04:58:14.900Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1093,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CPPA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+      },
+      "changeProposalID": "CP-2026-11-15-J006",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Texas Legislature website (rank 2)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://capitol.texas.gov"
+      ],
+      "hash": "90e3c652a8d1a22ca891cb7779603af195af3be104a4ecc44a29f500ae7c6361",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001073"
+      ],
+      "previousHash": "36a21e2e6d273c2c5d36c05f94a30b4c19a133e262adc9e59e238edd2bbd2d87",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001094",
+      "recordedAt": "2026-11-15T04:58:15.042Z",
+      "sequence": 1094,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-TX"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J006",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "5e2661b21efb152cd2b1ac5235376f6f2d9f1f476f1300e2154c919a2a54ca2a",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001094"
+      ],
+      "previousHash": "90e3c652a8d1a22ca891cb7779603af195af3be104a4ecc44a29f500ae7c6361",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001095",
+      "recordedAt": "2026-11-15T04:58:15.060Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 1095,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-TX"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J006",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.849 (high)",
+      "eventType": "scored",
+      "hash": "6aa5afd83f8f1c48876a4f0500b6ca6af0a7e99ff4799186681a8a56276d6f43",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001095"
+      ],
+      "previousHash": "5e2661b21efb152cd2b1ac5235376f6f2d9f1f476f1300e2154c919a2a54ca2a",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001096",
+      "recordedAt": "2026-11-15T04:58:15.077Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 1096,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-TX"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J006",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: reviewQueue",
+      "eventType": "treatmentAssigned",
+      "hash": "b28cf2baf1b945eef141da582f81a4c9173f24b0bda86266d87348830af3f01c",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001096"
+      ],
+      "previousHash": "6aa5afd83f8f1c48876a4f0500b6ca6af0a7e99ff4799186681a8a56276d6f43",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001097",
+      "recordedAt": "2026-11-15T04:58:15.097Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1097,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-TX"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+      },
+      "changeProposalID": "CP-2026-11-15-J007",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Colorado General Assembly website (rank 2)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://leg.colorado.gov"
+      ],
+      "hash": "444018c93ff9f2e8aa44f8260cdca242f794c3ff723311996b7bad96a41910c4",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001073"
+      ],
+      "previousHash": "b28cf2baf1b945eef141da582f81a4c9173f24b0bda86266d87348830af3f01c",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001098",
+      "recordedAt": "2026-11-15T04:58:15.233Z",
+      "sequence": 1098,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-CO"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J007",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "420e7ea0707a3ee36d9dc7e2ef9f147071f1b6d127c38a7549ba2f036c9d588d",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001098"
+      ],
+      "previousHash": "444018c93ff9f2e8aa44f8260cdca242f794c3ff723311996b7bad96a41910c4",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001099",
+      "recordedAt": "2026-11-15T04:58:15.250Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 1099,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-CO"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J007",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.849 (high)",
+      "eventType": "scored",
+      "hash": "2dfdcfe578d8e113b610549182dfbb348169a2da917fd93ea514ec27988efb20",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001099"
+      ],
+      "previousHash": "420e7ea0707a3ee36d9dc7e2ef9f147071f1b6d127c38a7549ba2f036c9d588d",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001100",
+      "recordedAt": "2026-11-15T04:58:15.268Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 1100,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-CO"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-15-J007",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: reviewQueue",
+      "eventType": "treatmentAssigned",
+      "hash": "2aa8fb5e30a03ca1a394df9b1c203a7a562727a273d0deda772a5c9c0dba5e4c",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001100"
+      ],
+      "previousHash": "2dfdcfe578d8e113b610549182dfbb348169a2da917fd93ea514ec27988efb20",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001101",
+      "recordedAt": "2026-11-15T04:58:15.286Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1101,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-CO"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-15-US-STATE-CODES"
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J001",
+      "dataset": "ai-obligations-atlas",
+      "decision": "approve by Damian Hickey (Method owner)",
+      "eventType": "reviewDecided",
+      "hash": "eb4c0758beccccd8b03b4da99bdf678ce539a3026a580aae6a8d9828fa2df3c1",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001077"
+      ],
+      "previousHash": "2aa8fb5e30a03ca1a394df9b1c203a7a562727a273d0deda772a5c9c0dba5e4c",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001102",
+      "recordedAt": "2026-11-15T04:58:53.080Z",
+      "ruleIDs": [
+        "review.namedApprover"
+      ],
+      "sequence": 1102,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NY-CL7-2024"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J001",
+      "confidenceScore": 0.896,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published as published: OBL-US-NY-CL7-2024@2, approved by Damian Hickey",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.dfs.ny.gov/industry-guidance/circular-letters/cl2024-07"
+      ],
+      "governedRecordID": "OBL-US-NY-CL7-2024@2",
+      "hash": "dc09d431cd8f9e12821ada30a75acf47f5c43d550fbf44ba936ccd25e6fff649",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001102"
+      ],
+      "previousHash": "eb4c0758beccccd8b03b4da99bdf678ce539a3026a580aae6a8d9828fa2df3c1",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001103",
+      "recordedAt": "2026-11-15T04:58:53.101Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1103,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-NY-CL7-2024"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J002",
+      "dataset": "ai-obligations-atlas",
+      "decision": "approve by Damian Hickey (Method owner)",
+      "eventType": "reviewDecided",
+      "hash": "2ec87f149c06097d74a7cdfee9253843d6e2fe07d156058b9d135ad6a09164ad",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001081"
+      ],
+      "previousHash": "dc09d431cd8f9e12821ada30a75acf47f5c43d550fbf44ba936ccd25e6fff649",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001104",
+      "recordedAt": "2026-11-15T04:58:55.866Z",
+      "ruleIDs": [
+        "review.namedApprover"
+      ],
+      "sequence": 1104,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CA-CCPA-ADMT"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J002",
+      "confidenceScore": 0.898,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published as published: OBL-US-CA-CCPA-ADMT@2, approved by Damian Hickey",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://cppa.ca.gov/regulations/pdf/ccpa_statute_eff_20260101.pdf"
+      ],
+      "governedRecordID": "OBL-US-CA-CCPA-ADMT@2",
+      "hash": "74f7a074e757d3404c98676d40c73cc90a8f604fdeac03c6528a5070eccad73b",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001104"
+      ],
+      "previousHash": "2ec87f149c06097d74a7cdfee9253843d6e2fe07d156058b9d135ad6a09164ad",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001105",
+      "recordedAt": "2026-11-15T04:58:55.883Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1105,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-CA-CCPA-ADMT"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J003",
+      "dataset": "ai-obligations-atlas",
+      "decision": "approve by Damian Hickey (Method owner)",
+      "eventType": "reviewDecided",
+      "hash": "2c4573b21ca95fef1bdfe5456184fd81028022c87350f17c228fd7e299e4ef8d",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001085"
+      ],
+      "previousHash": "74f7a074e757d3404c98676d40c73cc90a8f604fdeac03c6528a5070eccad73b",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001106",
+      "recordedAt": "2026-11-15T04:58:58.797Z",
+      "ruleIDs": [
+        "review.namedApprover"
+      ],
+      "sequence": 1106,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TX-TRAIGA"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J003",
+      "confidenceScore": 0.898,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published as published: OBL-US-TX-TRAIGA@2, approved by Damian Hickey",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm"
+      ],
+      "governedRecordID": "OBL-US-TX-TRAIGA@2",
+      "hash": "afb419a519331556318e4c4ea32cfb08ee273aecbb07084ba6b487982a5ed77b",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001106"
+      ],
+      "previousHash": "2c4573b21ca95fef1bdfe5456184fd81028022c87350f17c228fd7e299e4ef8d",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001107",
+      "recordedAt": "2026-11-15T04:58:58.818Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1107,
+      "subject": {
+        "domainType": "obligation",
+        "entityID": "OBL-US-TX-TRAIGA"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J004",
+      "dataset": "ai-obligations-atlas",
+      "decision": "approve by Damian Hickey (Method owner)",
+      "eventType": "reviewDecided",
+      "hash": "f433b318978ff05673ddaa4b98c20cbf9ef97a1f4b1086f55bd8d5b7402a8687",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001089"
+      ],
+      "previousHash": "afb419a519331556318e4c4ea32cfb08ee273aecbb07084ba6b487982a5ed77b",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001108",
+      "recordedAt": "2026-11-15T04:59:01.487Z",
+      "ruleIDs": [
+        "review.namedApprover"
+      ],
+      "sequence": 1108,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NYDFS"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J004",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published as published: EXT-NYDFS@2, approved by Damian Hickey",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.dfs.ny.gov"
+      ],
+      "governedRecordID": "EXT-NYDFS@2",
+      "hash": "218b0aabc67b4a7aa0521e23b1ea4ea5dfb5bface7351d5450345dcb58139195",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001108"
+      ],
+      "previousHash": "f433b318978ff05673ddaa4b98c20cbf9ef97a1f4b1086f55bd8d5b7402a8687",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001109",
+      "recordedAt": "2026-11-15T04:59:01.507Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1109,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-NYDFS"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J005",
+      "dataset": "ai-obligations-atlas",
+      "decision": "approve by Damian Hickey (Method owner)",
+      "eventType": "reviewDecided",
+      "hash": "30da90009711c64a99f76766801a5b1e6158056c6c64c76d01d6aeaf1dac446f",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001093"
+      ],
+      "previousHash": "218b0aabc67b4a7aa0521e23b1ea4ea5dfb5bface7351d5450345dcb58139195",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001110",
+      "recordedAt": "2026-11-15T04:59:03.406Z",
+      "ruleIDs": [
+        "review.namedApprover"
+      ],
+      "sequence": 1110,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CPPA"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J005",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published as published: EXT-CPPA@2, approved by Damian Hickey",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://cppa.ca.gov"
+      ],
+      "governedRecordID": "EXT-CPPA@2",
+      "hash": "d08cce08a99f5a0411a1d9749c8cfb10a5aaa6f2877c41a3be492dafb916cdac",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001110"
+      ],
+      "previousHash": "30da90009711c64a99f76766801a5b1e6158056c6c64c76d01d6aeaf1dac446f",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001111",
+      "recordedAt": "2026-11-15T04:59:03.426Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1111,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-CPPA"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J006",
+      "dataset": "ai-obligations-atlas",
+      "decision": "approve by Damian Hickey (Method owner)",
+      "eventType": "reviewDecided",
+      "hash": "140cc8ba8f787741efe88988035e52297ce20465637725d40a86e5d187f51723",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001097"
+      ],
+      "previousHash": "d08cce08a99f5a0411a1d9749c8cfb10a5aaa6f2877c41a3be492dafb916cdac",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001112",
+      "recordedAt": "2026-11-15T04:59:04.548Z",
+      "ruleIDs": [
+        "review.namedApprover"
+      ],
+      "sequence": 1112,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-TX"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J006",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published as published: EXT-LEG-TX@2, approved by Damian Hickey",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://capitol.texas.gov"
+      ],
+      "governedRecordID": "EXT-LEG-TX@2",
+      "hash": "669a4334b1026106ddd0fc76085020e5ee2423d1000cc3c65d42092fde179e32",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001112"
+      ],
+      "previousHash": "140cc8ba8f787741efe88988035e52297ce20465637725d40a86e5d187f51723",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001113",
+      "recordedAt": "2026-11-15T04:59:04.568Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1113,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-TX"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J007",
+      "dataset": "ai-obligations-atlas",
+      "decision": "approve by Damian Hickey (Method owner)",
+      "eventType": "reviewDecided",
+      "hash": "5a7f8581cf575f32813191e8d21aea81127e065f4bf457e058941bf6013ab89f",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001101"
+      ],
+      "previousHash": "669a4334b1026106ddd0fc76085020e5ee2423d1000cc3c65d42092fde179e32",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001114",
+      "recordedAt": "2026-11-15T04:59:06.507Z",
+      "ruleIDs": [
+        "review.namedApprover"
+      ],
+      "sequence": 1114,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-CO"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "Damian Hickey",
+        "actorType": "person",
+        "displayName": "Damian Hickey"
+      },
+      "changeProposalID": "CP-2026-11-15-J007",
+      "confidenceScore": 0.849,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published as published: EXT-LEG-CO@2, approved by Damian Hickey",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://leg.colorado.gov"
+      ],
+      "governedRecordID": "EXT-LEG-CO@2",
+      "hash": "127d4c8490a1ecfe5d3d781480f1669bb4032bf95280490be254d2f060cd48ec",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0001114"
+      ],
+      "previousHash": "5a7f8581cf575f32813191e8d21aea81127e065f4bf457e058941bf6013ab89f",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0001115",
+      "recordedAt": "2026-11-15T04:59:06.525Z",
+      "ruleIDs": [
+        "autonomy.update.reviewQueue"
+      ],
+      "sequence": 1115,
+      "subject": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-LEG-CO"
+      }
     }
   ],
   "ledgerHead": {
-    "sequence": 1072,
-    "hash": "55e8a3da99e2c8a5e7b505bb1d008dd6dbc5e07df81e10a0981800af39dcfa8d"
+    "sequence": 1115,
+    "hash": "127d4c8490a1ecfe5d3d781480f1669bb4032bf95280490be254d2f060cd48ec"
   }
 }
