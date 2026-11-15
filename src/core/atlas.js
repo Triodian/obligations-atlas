@@ -31,11 +31,22 @@ export const JURISDICTIONS = {
 
 /**
  * States, provinces and other subdivisions with their own records, as ISO 3166-2 codes (Metamodel jurisdictionCode).
+ * The code follows the parliament that made the law: a state's statute carries the state's code; federal law the country's.
  * A subdivision's record belongs to its country: asking for the country lists the country's records and every
  * subdivision's; asking for a subdivision lists its records and the country's. Not listed in JURISDICTIONS, so the
  * lists of jurisdictions stay a list of countries.
  */
 export const SUBDIVISIONS = {
+  // Australian states and territories: law made by a state or territory parliament (federal law stays AU).
+  'AU-ACT': { name: 'Australian Capital Territory', country: 'AU' },
+  'AU-NSW': { name: 'New South Wales', country: 'AU' },
+  'AU-NT': { name: 'Northern Territory', country: 'AU' },
+  'AU-QLD': { name: 'Queensland', country: 'AU' },
+  'AU-SA': { name: 'South Australia', country: 'AU' },
+  'AU-TAS': { name: 'Tasmania', country: 'AU' },
+  'AU-VIC': { name: 'Victoria', country: 'AU' },
+  'AU-WA': { name: 'Western Australia', country: 'AU' },
+  // US states: law made by a state legislature or agency (federal law and multistate models stay US).
   'US-CA': { name: 'California', country: 'US' },
   'US-CO': { name: 'Colorado', country: 'US' },
   'US-NY': { name: 'New York', country: 'US' },

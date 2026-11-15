@@ -29,7 +29,7 @@
     {
       id: 'oa', host: 'obligations-atlas', name: 'AI Obligations Atlas', n: '1', verb: 'What applies',
       who: 'For counsel',
-      text: 'AI governance obligations for Australia, Singapore and international standards, mapped to ten standard AI use cases. Each record is tagged Binding, Expected or Anticipated, and carries its source and review trail.',
+      text: 'AI governance obligations for Australia, Singapore, the United States and international standards, mapped to ten standard AI use cases. Each record is tagged Binding, Expected or Anticipated, and carries its source and review trail.',
       hands: 'Matter brief',
     },
     {
