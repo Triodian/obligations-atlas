@@ -481,7 +481,8 @@ test('the US research round builds a submission the Fabric can take', async () =
     assert.ok(isJurisdiction('US-NY') && isJurisdiction('US-NJ') && !isJurisdiction('ZZ-NY') && !isJurisdiction('NY'));
     const us = st.jurisdictions().find((j) => j.code === 'US');
     assert.equal(us.obligations, published.records.filter((r) => r.domainType === 'obligation' && /^US(-|$)/.test(r.record.jurisdiction)).length, 'the country counts its states’ records');
-    assert.deepEqual(us.subdivisions.map((s) => s.code), ['US-CA', 'US-NY', 'US-TX']);
+    const subs = us.subdivisions.map((s) => s.code);   // more states arrive as records are approved (US-CO with SB 26-189)
+    assert.ok(['US-CA', 'US-NY', 'US-TX'].every((c) => subs.includes(c)) && subs.every((c) => /^US-/.test(c)), subs.join());
     assert.ok(!st.jurisdictions().some((j) => j.code.includes('-')), 'the list of jurisdictions stays a list of countries');
     const [nj] = st.coverage('US-NJ');
     assert.equal(nj.coverage, 'countryOnly'); assert.match(nj.note, /no records for US-NJ \(United States\); its United States records are listed/);
@@ -535,7 +536,27 @@ test('the US research round builds a submission the Fabric can take', async () =
     const fed = moved.records.filter((r) => r.domainType === 'obligation' && r.record.jurisdiction === 'AU').map((r) => r.entityID);
     assert.ok(fed.length > 10 && fed.every((i) => ids('AU-VIC').includes(i)), 'a Victorian brief still has every federal record');
     assert.equal(jurisdictionName('AU-NSW'), 'New South Wales (Australia)');
-    assert.deepEqual(st.jurisdictions().find((j) => j.code === 'AU').subdivisions.map((s) => s.code), ['AU-NSW']);
+    assert.ok(st.jurisdictions().find((j) => j.code === 'AU').subdivisions.map((s) => s.code).includes('AU-NSW'));
     assert.equal(st.coverage('AU-VIC')[0].coverage, 'countryOnly');
   });
 }
+
+// The five US records the Fabric made leads (commentary only as evidence) are proposed again with official evidence
+// (data/seed/submission-2026-11-15-us-leads-official.json): each meets the dataset policy's rank for its tier, the state
+// laws carry their state codes, and nothing else differs from the first proposal.
+test('US leads proposed again: official evidence for each tier, state codes for New York and Colorado', () => {
+  const sub = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-15-us-leads-official.json', 'utf8'));
+  const first = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-14-us-overlay.json', 'utf8'));
+  const CAN_SET = { binding: 1, expected: 2, anticipated: 2 };
+  assert.deepEqual(sub.proposals.map((p) => [p.target.entityID, p.record.jurisdiction]).sort(), [
+    ['OBL-US-45CFR-92-210', 'US'], ['OBL-US-CO-SB26-189', 'US-CO'], ['OBL-US-FINRA-2026-GENAI', 'US'], ['OBL-US-HTI5-DSI', 'US'], ['OBL-US-NY-500-11', 'US-NY']]);
+  for (const p of sub.proposals) {
+    const was = first.proposals.find((x) => x.target.entityID === p.target.entityID);
+    assert.ok(Math.max(...was.evidence.map((e) => e.sourceRank)) >= 4 && Math.min(...was.evidence.map((e) => e.sourceRank)) >= 4, `${p.target.entityID} first cited commentary only`);
+    assert.ok(Math.min(...p.evidence.map((e) => e.sourceRank)) <= CAN_SET[p.record.sourceTier], `${p.target.entityID}: evidence can set a ${p.record.sourceTier} record`);
+    assert.ok(p.evidence.every((e) => /^https:\/\/(www\.)?(dfs\.ny\.gov|leg\.colorado\.gov|govinfo\.gov|www\.govinfo\.gov|ecfr\.gov|federalregister\.gov|finra\.org)\//.test(e.url)), `${p.target.entityID}: official sources only`);
+    const { jurisdiction: a, ...rest } = p.record, { jurisdiction: b, ...prior } = was.record;
+    assert.deepEqual(rest, prior, `${p.target.entityID}: only the jurisdiction differs from the first proposal`);
+    assert.notEqual(p.changeProposalID, was.changeProposalID);
+  }
+});
