@@ -560,3 +560,24 @@ test('US leads proposed again: official evidence for each tier, state codes for 
     assert.notEqual(p.changeProposalID, was.changeProposalID);
   }
 });
+
+// The second attempt for three of the five (the Fabric took them as duplicates of their leads until lead promotion,
+// reasoning_fabric #13): the same records and evidence under new ids. A promoted lead no longer shows in What changed.
+test('US leads, second attempt: the three refused proposals again, under new ids; a promoted lead is not listed as a change', () => {
+  const one = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-15-us-leads-official.json', 'utf8'));
+  const two = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-15-us-leads-official-2.json', 'utf8'));
+  assert.deepEqual(two.proposals.map((p) => p.target.entityID).sort(), ['OBL-US-45CFR-92-210', 'OBL-US-FINRA-2026-GENAI', 'OBL-US-HTI5-DSI']);
+  assert.notEqual(two.submissionID, one.submissionID);
+  for (const p of two.proposals) {
+    const was = one.proposals.find((x) => x.target.entityID === p.target.entityID);
+    assert.deepEqual(p.record, was.record); assert.deepEqual(p.evidence, was.evidence); assert.notEqual(p.changeProposalID, was.changeProposalID);
+  }
+  const snap = structuredClone(published);
+  const lead = { domainType: 'trigger', entityID: 'TRG-LEAD-TEST', version: 2, publicationStatus: 'unverified', publishedAt: '2026-11-15T06:00:00Z',
+    record: { triggerID: 'TRG-LEAD-TEST', label: 'Lead: test', status: 'promoted', description: 'x', affectedEntities: [{ domainType: 'obligation', entityID: 'OBL-US-SR26-2-MRM' }], instrumentChange: { instrument: 'Test', publishedDate: '2026-11-14' } } };
+  snap.records.push(lead);
+  const at = new Atlas(snap, { preview: true });
+  assert.ok(!at.changes('2026-01-01').some((c) => c.title === 'test' || (c.affects || []).includes('OBL-US-SR26-2-MRM') && c.kind === 'lead'));
+  lead.record.status = 'lead';
+  assert.ok(new Atlas(snap, { preview: true }).changes('2026-01-01').some((c) => c.kind === 'lead' && c.title === 'test'), 'an open lead still shows');
+});
