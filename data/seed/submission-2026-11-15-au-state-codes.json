@@ -1,0 +1,92 @@
+{
+  "submissionID": "SUB-ATLAS-2026-11-15-AU-STATE-CODES",
+  "interfaceVersion": "1.0.0",
+  "metamodelVersion": "2.9.0",
+  "mode": "propose",
+  "dataset": "ai-obligations-atlas",
+  "submittedAt": "2026-11-15T00:00:00Z",
+  "submitter": {
+    "actorType": "agent",
+    "actorID": "atlas-update-agent",
+    "displayName": "Atlas update agent (jurisdiction codes, 2026-11-15)"
+  },
+  "proposals": [
+    {
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J001",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "obligation",
+        "entityID": "OBL-AU-NSW-WSA-10-12",
+        "title": "Notice and policy for computer surveillance of employees (NSW)"
+      },
+      "record": {
+        "entityTypes": [
+          "anyOrganization"
+        ],
+        "jurisdiction": "AU-NSW",
+        "lastVerified": "2026-11-08",
+        "monitoringFrequency": "daily",
+        "obligationID": "OBL-AU-NSW-WSA-10-12",
+        "obligationType": "statutory",
+        "roles": [
+          "regulatedEntity",
+          "deployer"
+        ],
+        "source": {
+          "authority": "Parliament of New South Wales",
+          "citation": "s 3 ('computer surveillance'); s 10(1), (2) (14 days' written notice); s 12(a) (in accordance with a computer surveillance policy)",
+          "externalOrgID": "EXT-PARL-NSW",
+          "instrument": "Workplace Surveillance Act 2005 (NSW)",
+          "url": "https://legislation.nsw.gov.au/view/pdf/asmade/act-2005-47"
+        },
+        "sourceTier": "binding",
+        "statement": "'Computer surveillance' is surveillance 'by means of software or other equipment that monitors or records the information input or output, or other use, of a computer' (s 3). 'Surveillance of an employee must not commence without prior notice in writing to the employee', given 'at least 14 days before the surveillance commences' unless the employee agrees to less (s 10(1), (2)). Computer surveillance is not to be carried out unless it 'is carried out in accordance with a policy of the employer on computer surveillance of employees at work' (s 12(a)). AI tools that monitor or record staff use of computers, such as productivity analytics or copilot telemetry, can fall within these provisions.",
+        "status": "inForce",
+        "title": "Notice and policy for computer surveillance of employees (NSW)",
+        "useCaseIDs": [
+          "UC1",
+          "UC2"
+        ]
+      },
+      "evidence": [
+        {
+          "url": "https://legislation.nsw.gov.au/view/pdf/asmade/act-2005-47",
+          "title": "Workplace Surveillance Act 2005 (NSW)",
+          "sourceRank": 1,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Jurisdiction AU to AU-NSW. The Workplace Surveillance Act 2005 (NSW) is an Act of the Parliament of New South Wales and binds employers in New South Wales. The code follows the parliament that made the law (Damian Hickey, 15 November 2026). Federal law, such as the Corporations Act and the prudential standards, stays AU; a law made by a state or territory parliament carries the state's ISO 3166-2 code, as US state law does. A request for AU in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones."
+    },
+    {
+      "changeProposalID": "CP-2026-11-15-AU-STATE-CODES-J002",
+      "changeType": "update",
+      "baseVersion": 1,
+      "target": {
+        "domainType": "externalOrganization",
+        "entityID": "EXT-PARL-NSW",
+        "title": "Parliament of New South Wales"
+      },
+      "record": {
+        "externalOrgID": "EXT-PARL-NSW",
+        "jurisdiction": "AU-NSW",
+        "jurisdictionCodes": [
+          "AU-NSW"
+        ],
+        "name": "Parliament of New South Wales",
+        "type": "legislature",
+        "website": "https://www.parliament.nsw.gov.au"
+      },
+      "evidence": [
+        {
+          "url": "https://www.parliament.nsw.gov.au",
+          "title": "Parliament of New South Wales website",
+          "sourceRank": 2,
+          "retrievedAt": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "rationale": "Jurisdiction AU to AU-NSW. The New South Wales state parliament. The code follows the parliament that made the law (Damian Hickey, 15 November 2026). Federal law, such as the Corporations Act and the prudential standards, stays AU; a law made by a state or territory parliament carries the state's ISO 3166-2 code, as US state law does. A request for AU in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones."
+    }
+  ]
+}

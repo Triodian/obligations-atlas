@@ -537,7 +537,7 @@ function renderDevelopers() {
     </tbody></table></div>
     <p>The description is at <a href="/api/v1/openapi.json">/api/v1/openapi.json</a>.</p>
     <h2>No key needed</h2>
-    <p>The REST API and the MCP server are free to use without a key: anyone can read the published records for Australia, Singapore and the international standards, within ${esc(String(data.keylessPerMinute || 60))} requests a minute for each caller. A registered firm sends its own key in the <code>x-api-key</code> header for a higher limit, and can bring in Triodian from a matter brief. <a href="${href('firm')}">Register your firm</a> to get one.</p>
+    <p>The REST API and the MCP server are free to use without a key: anyone can read the published records for Australia, Singapore, the United States and the international standards, within ${esc(String(data.keylessPerMinute || 60))} requests a minute for each caller. A registered firm sends its own key in the <code>x-api-key</code> header for a higher limit, and can bring in Triodian from a matter brief. <a href="${href('firm')}">Register your firm</a> to get one.</p>
     <h2>MCP server</h2>
     <p>Tools: <code>find_obligations</code>, <code>get_obligation</code>, <code>list_changes</code>, <code>explain_provenance</code>. Their descriptions tell assistants that responses are records, not legal conclusions, and how to cite them.</p>
     <pre class="code">{

@@ -39,7 +39,7 @@ test('records that could not be verified against official text are leads, not ob
 test('filters: jurisdiction includes international standards, tier, use case, entity', () => {
   const au = atlas.findObligations({ jurisdiction: 'AU' });
   assert.ok(au.some((o) => o.jurisdiction === 'INT'));
-  assert.ok(au.every((o) => ['AU', 'INT'].includes(o.jurisdiction)));
+  assert.ok(au.every((o) => /^(AU|INT)(-|$)/.test(o.jurisdiction)));
   assert.ok(!atlas.findObligations({ jurisdiction: 'AU', includeInternational: false }).some((o) => o.jurisdiction === 'INT'));
   const sg = atlas.findObligations({ jurisdiction: 'SG', tier: 'anticipated', useCase: 'UC5' });
   assert.ok(sg.length > 0 && sg.every((o) => o.sourceTier === 'anticipated' && o.useCaseIDs.includes('UC5')));
@@ -236,7 +236,7 @@ test('regulated sectors: Singapore financial sectors reach MAS financial-institu
 test('regulated sectors: the sector filter narrows to its jurisdiction and entity types', () => {
   const ins = atlas.findObligations({ sector: 'AU-INSURANCE' });
   assert.ok(ins.length > 0);
-  assert.ok(ins.every((o) => ['AU', 'INT'].includes(o.jurisdiction)));
+  assert.ok(ins.every((o) => /^(AU|INT)(-|$)/.test(o.jurisdiction)));
   assert.ok(ins.length <= atlas.findObligations({ jurisdiction: 'AU' }).length);
   const data = atlas.dataset();
   assert.ok(data.sectors.some((d) => d.regulatedSectorID === 'AU-BANKING'));
@@ -506,5 +506,36 @@ test('the US research round builds a submission the Fabric can take', async () =
     assert.equal((await sapp.request('/api/v1/solution-set?jurisdiction=ZZ-NY')).status, 400);
     const schema = TOOLS.find((t) => t.name === 'find_obligations').inputSchema.properties.jurisdiction.items;
     assert.ok(new RegExp(schema.pattern).test('US-NY') && !new RegExp(schema.pattern).test('ZZ-NY'));
+  });
+}
+
+// Australian state law (15 November 2026): the code follows the parliament that made the law. The NSW Workplace
+// Surveillance Act takes AU-NSW; federal law stays AU. Moved here as data/seed/submission-2026-11-15-au-state-codes.json
+// would move it; the test holds before and after the Fabric publishes the update.
+{
+  const sub = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-15-au-state-codes.json', 'utf8'));
+  const moved = structuredClone(published), by = new Map(sub.proposals.map((p) => [p.target.entityID, p.record]));
+  for (const r of moved.records) if (by.has(r.entityID)) r.record = by.get(r.entityID);
+  const st = new Atlas(moved, { preview: false });
+  const ids = (j) => st.findObligations({ jurisdiction: j, includeInternational: false }).map((o) => o.obligationID);
+
+  test('AU state codes: the NSW Act and parliament move to AU-NSW, against their published versions, ids unique', () => {
+    assert.deepEqual(sub.proposals.map((p) => [p.target.entityID, p.record.jurisdiction]).sort(), [['EXT-PARL-NSW', 'AU-NSW'], ['OBL-AU-NSW-WSA-10-12', 'AU-NSW']]);
+    const us = JSON.parse(fs.readFileSync('data/seed/submission-2026-11-15-us-state-codes.json', 'utf8')).proposals.map((p) => p.changeProposalID);
+    for (const p of sub.proposals) {
+      assert.ok(!us.includes(p.changeProposalID), `${p.changeProposalID} is not reused`);
+      const g = published.records.find((r) => r.entityID === p.target.entityID);
+      if (g.version === p.baseVersion) { const { jurisdiction: a, jurisdictionCodes: ac, ...rest } = p.record, { jurisdiction: b, jurisdictionCodes: bc, ...was } = g.record; assert.deepEqual(rest, was); }
+      else assert.equal(g.record.jurisdiction, p.record.jurisdiction);
+    }
+  });
+
+  test('AU state codes: AU lists federal and NSW records; NSW lists its own and the federal ones; federal law stays AU', () => {
+    assert.ok(ids('AU').includes('OBL-AU-NSW-WSA-10-12') && ids('AU-NSW').includes('OBL-AU-NSW-WSA-10-12') && !ids('AU-VIC').includes('OBL-AU-NSW-WSA-10-12'));
+    const fed = moved.records.filter((r) => r.domainType === 'obligation' && r.record.jurisdiction === 'AU').map((r) => r.entityID);
+    assert.ok(fed.length > 10 && fed.every((i) => ids('AU-VIC').includes(i)), 'a Victorian brief still has every federal record');
+    assert.equal(jurisdictionName('AU-NSW'), 'New South Wales (Australia)');
+    assert.deepEqual(st.jurisdictions().find((j) => j.code === 'AU').subdivisions.map((s) => s.code), ['AU-NSW']);
+    assert.equal(st.coverage('AU-VIC')[0].coverage, 'countryOnly');
   });
 }

@@ -25,7 +25,10 @@ const CODE = /^([A-Z]{2}(-[A-Z0-9]{1,3})?|INT)$/;   // the Metamodel's jurisdict
 const held = new Map(snapshot.records.filter((r) => r.publicationStatus === 'published').map((r) => [r.entityID, r]));
 const proposals = [], notes = [];
 let n = 0;
-const cp = () => `CP-${RESEARCHED}-J${String(++n).padStart(3, '0')}`;
+// Proposal ids name the change file, so two files built the same day never share one. The first file
+// (2026-11-15-us-state-codes, submitted with J001 to J007) is kept as submitted.
+const TAG = name.replace(/^\d{4}-\d{2}-\d{2}-/, '').toUpperCase();
+const cp = () => (name === '2026-11-15-us-state-codes' ? `CP-${RESEARCHED}-J${String(++n).padStart(3, '0')}` : `CP-${RESEARCHED}-${TAG}-J${String(++n).padStart(3, '0')}`);
 
 for (const c of research.changes) {
   if (!CODE.test(c.jurisdiction)) throw new Error(`${c.entityID}: ${c.jurisdiction} is not a jurisdiction code`);

@@ -1,0 +1,8 @@
+{
+  "researched": "2026-11-15",
+  "brief": "The code follows the parliament that made the law (Damian Hickey, 15 November 2026). Federal law, such as the Corporations Act and the prudential standards, stays AU; a law made by a state or territory parliament carries the state's ISO 3166-2 code, as US state law does. A request for AU in the Atlas still lists every state's records, each named by its state; a request for a state lists its records and the federal ones.",
+  "changes": [
+    { "domainType": "obligation", "entityID": "OBL-AU-NSW-WSA-10-12", "jurisdiction": "AU-NSW", "reason": "The Workplace Surveillance Act 2005 (NSW) is an Act of the Parliament of New South Wales and binds employers in New South Wales." },
+    { "domainType": "externalOrganization", "entityID": "EXT-PARL-NSW", "jurisdiction": "AU-NSW", "reason": "The New South Wales state parliament." }
+  ]
+}
