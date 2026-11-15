@@ -1,14 +1,14 @@
 {
   "dataset": "ai-obligations-atlas",
-  "generatedAt": "2026-11-08T03:01:42.004Z",
+  "generatedAt": "2026-11-15T00:00:21.316Z",
   "interfaceVersion": "1.0.0",
-  "metamodelVersion": "2.5.0",
-  "metamodelCommit": "4af576d8ab588143c9266be5a28877c7545f2ccd",
+  "metamodelVersion": "2.7.0",
+  "metamodelCommit": "2121f8c840758182c8b8bdc486cf07b304feaa2f",
   "includesPending": false,
   "policy": {
     "datasetPolicyID": "POLICY-AI-OBLIGATIONS-ATLAS",
     "dataset": "ai-obligations-atlas",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "effectiveFrom": "2026-10-27",
     "methodOwner": "Triodian method owner",
     "sourcePrecedence": [
@@ -31,7 +31,8 @@
         "basis": "standardsBodyPublication",
         "canSetStatusOrDate": true,
         "onlyForTiers": [
-          "expected"
+          "expected",
+          "adopted"
         ]
       },
       {
@@ -139,6 +140,10 @@
       {
         "sourceTier": "anticipated",
         "threshold": "P30D"
+      },
+      {
+        "sourceTier": "adopted",
+        "threshold": "P365D"
       }
     ],
     "confidenceBands": {
@@ -7533,6 +7538,126 @@
     },
     {
       "changeProposalIDs": [
+        "CP-2026-11-14-0004"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-5F7BF75ACA",
+      "governedRecordID": "TRG-LEAD-5F7BF75ACA@1",
+      "metamodelVersion": "2.7.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000825",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000826",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000827",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000828",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000829"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-14T23:51:57.899Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-US-NY-500-11",
+            "title": "New York: third-party service provider security policy, reaching AI providers (23 NYCRR 500.11)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-14-0004"
+        ],
+        "description": "23 NYCRR Part 500 (New York Department of Financial Services Cybersecurity Regulation) has not yet been checked against the official text (read so far: commentary), so it cannot set a status or date until a reviewer confirms it. Official source to check: https://www.dfs.ny.gov/industry_guidance/cybersecurity.",
+        "detectionDate": "2026-11-14",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "23 NYCRR Part 500 (New York Department of Financial Services Cybersecurity Regulation)",
+          "jurisdiction": "US",
+          "sourceRank": 4,
+          "sourceURL": "https://www.law.cornell.edu/regulations/new-york/23-NYCRR-500.11"
+        },
+        "label": "Lead: New York: third-party service provider security policy, reaching AI providers (23 NYCRR 500.11)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://www.law.cornell.edu/regulations/new-york/23-NYCRR-500.11",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-5F7BF75ACA"
+      },
+      "verification": {
+        "confidence": {
+          "band": "low",
+          "corroboration": 0,
+          "recency": 0.994,
+          "reliability": 0.4,
+          "score": 0.498,
+          "stale": false
+        },
+        "lastVerified": "2026-11-14",
+        "stale": false
+      },
+      "version": 1
+    },
+    {
+      "changeProposalIDs": [
+        "CP-2026-11-14-0010"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-6A7D1069CF",
+      "governedRecordID": "TRG-LEAD-6A7D1069CF@1",
+      "metamodelVersion": "2.7.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000854",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000855",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000856",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000857",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000858"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-14T23:51:59.262Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-US-45CFR-92-210",
+            "title": "Identify and mitigate discrimination risk in patient care decision support tools, including AI (45 CFR 92.210)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-14-0010"
+        ],
+        "description": "45 CFR Part 92 (Nondiscrimination in Health Programs or Activities), section 1557 of the Affordable Care Act has not yet been checked against the official text (read so far: commentary), so it cannot set a status or date until a reviewer confirms it. Official source to check: https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-A/part-92/subpart-C/section-92.210.",
+        "detectionDate": "2026-11-14",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "45 CFR Part 92 (Nondiscrimination in Health Programs or Activities), section 1557 of the Affordable Care Act",
+          "jurisdiction": "US",
+          "sourceRank": 4,
+          "sourceURL": "https://www.law.cornell.edu/cfr/text/45/92.210"
+        },
+        "label": "Lead: Identify and mitigate discrimination risk in patient care decision support tools, including AI (45 CFR 92.210)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://www.law.cornell.edu/cfr/text/45/92.210",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-6A7D1069CF"
+      },
+      "verification": {
+        "confidence": {
+          "band": "low",
+          "corroboration": 0,
+          "recency": 0.994,
+          "reliability": 0.4,
+          "score": 0.498,
+          "stale": false
+        },
+        "lastVerified": "2026-11-14",
+        "stale": false
+      },
+      "version": 1
+    },
+    {
+      "changeProposalIDs": [
         "CP-2026-11-08-0018"
       ],
       "dataset": "ai-obligations-atlas",
@@ -7712,6 +7837,129 @@
     },
     {
       "changeProposalIDs": [
+        "CP-2026-11-14-0009"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-506DAAF7A7",
+      "governedRecordID": "TRG-LEAD-506DAAF7A7@1",
+      "metamodelVersion": "2.7.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000848",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000849",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000850",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000851",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000852",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000853"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-14T23:51:59.037Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-US-FINRA-2026-GENAI",
+            "title": "Generative AI and AI agents: supervision, testing and monitoring (FINRA 2026 oversight report)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-14-0009"
+        ],
+        "description": "FINRA 2026 Annual Regulatory Oversight Report has not yet been checked against the official text (read so far: commentary), so it cannot set a status or date until a reviewer confirms it. Official source to check: https://www.finra.org/sites/default/files/2025-12/2026-annual-regulatory-oversight-report.pdf.",
+        "detectionDate": "2026-11-14",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "FINRA 2026 Annual Regulatory Oversight Report",
+          "jurisdiction": "US",
+          "sourceRank": 4,
+          "sourceURL": "https://www.debevoise.com/insights/publications/2025/12/finras-2026-regulatory-oversight-report-continued"
+        },
+        "label": "Lead: Generative AI and AI agents: supervision, testing and monitoring (FINRA 2026 oversight report)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://www.debevoise.com/insights/publications/2025/12/finras-2026-regulatory-oversight-report-continued",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-506DAAF7A7"
+      },
+      "verification": {
+        "confidence": {
+          "band": "low",
+          "corroboration": 0,
+          "recency": 0.989,
+          "reliability": 0.4,
+          "score": 0.497,
+          "stale": false
+        },
+        "lastVerified": "2026-11-14",
+        "stale": false
+      },
+      "version": 1
+    },
+    {
+      "changeProposalIDs": [
+        "CP-2026-11-14-0012"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-5015E65786",
+      "governedRecordID": "TRG-LEAD-5015E65786@1",
+      "metamodelVersion": "2.7.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000863",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000864",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000865",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000866",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000867",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000868",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000869"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-14T23:51:59.709Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-US-HTI5-DSI",
+            "title": "HTI-5 removes model-card and risk management criteria for decision support in certified health IT"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-14-0012"
+        ],
+        "description": "HTI-5 final rule (91 FR 67916; amending 45 CFR Part 170) has not yet been checked against the official text (read so far: commentary), so it cannot set a status or date until a reviewer confirms it. Official source to check: https://www.federalregister.gov/documents/2026/10/28/2026-21943/health-data-technology-and-interoperability-onc-deregulatory-actions-to-unleash-prosperity.",
+        "detectionDate": "2026-11-14",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "HTI-5 final rule (91 FR 67916; amending 45 CFR Part 170)",
+          "jurisdiction": "US",
+          "sourceRank": 4,
+          "sourceURL": "https://www.akingump.com/en/insights/ai-law-and-regulation-tracker/onc-issues-hti-5-final-rule-removing-model-card-and-risk-management-requirements-for-predictive-decision-support-interventions"
+        },
+        "label": "Lead: HTI-5 removes model-card and risk management criteria for decision support in certified health IT",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://www.akingump.com/en/insights/ai-law-and-regulation-tracker/onc-issues-hti-5-final-rule-removing-model-card-and-risk-management-requirements-for-predictive-decision-support-interventions",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-5015E65786"
+      },
+      "verification": {
+        "confidence": {
+          "band": "low",
+          "corroboration": 0,
+          "recency": 0.967,
+          "reliability": 0.4,
+          "score": 0.49,
+          "stale": false
+        },
+        "lastVerified": "2026-11-14",
+        "stale": false
+      },
+      "version": 1
+    },
+    {
+      "changeProposalIDs": [
         "CP-2026-11-08-0014"
       ],
       "dataset": "ai-obligations-atlas",
@@ -7766,6 +8014,67 @@
           "stale": false
         },
         "lastVerified": "2026-11-08",
+        "stale": false
+      },
+      "version": 1
+    },
+    {
+      "changeProposalIDs": [
+        "CP-2026-11-14-0017"
+      ],
+      "dataset": "ai-obligations-atlas",
+      "domainType": "trigger",
+      "entityID": "TRG-LEAD-AB3C3034B0",
+      "governedRecordID": "TRG-LEAD-AB3C3034B0@1",
+      "metamodelVersion": "2.7.0",
+      "provenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000887",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000888",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000889",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000890",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000891",
+        "PROV-AI-OBLIGATIONS-ATLAS-0000892"
+      ],
+      "publicationStatus": "unverified",
+      "publishedAt": "2026-11-14T23:52:00.724Z",
+      "record": {
+        "affectedEntities": [
+          {
+            "domainType": "obligation",
+            "entityID": "OBL-US-CO-SB26-189",
+            "title": "Colorado: notice, explanation and human review for automated decisions, from 2027 (SB 26-189)"
+          }
+        ],
+        "changeProposalIDs": [
+          "CP-2026-11-14-0017"
+        ],
+        "description": "Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205) has not yet been checked against the official text (read so far: commentary), so it cannot set a status or date until a reviewer confirms it. Official source to check: https://leg.colorado.gov/bills/sb26-189.",
+        "detectionDate": "2026-11-14",
+        "detectionMethod": "Reasoning Fabric connector",
+        "instrumentChange": {
+          "changeType": "guidance",
+          "instrument": "Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205)",
+          "jurisdiction": "US",
+          "sourceRank": 4,
+          "sourceURL": "https://hklaw.com/en/insights/publications/2026/05/colorado-governor-signs-sb-189"
+        },
+        "label": "Lead: Colorado: notice, explanation and human review for automated decisions, from 2027 (SB 26-189)",
+        "origin": "External",
+        "primaryCategory": "regulatoryCompliance",
+        "sourceReference": "https://hklaw.com/en/insights/publications/2026/05/colorado-governor-signs-sb-189",
+        "status": "lead",
+        "triggerID": "TRG-LEAD-AB3C3034B0"
+      },
+      "verification": {
+        "confidence": {
+          "band": "low",
+          "corroboration": 0,
+          "recency": 0.967,
+          "reliability": 0.4,
+          "score": 0.49,
+          "stale": false
+        },
+        "lastVerified": "2026-11-14",
         "stale": false
       },
       "version": 1
@@ -27863,10 +28172,827 @@
         "domainType": "trigger",
         "entityID": "TRG-LEAD-9FD4053FEB"
       }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-14)"
+      },
+      "changeProposalID": "CP-2026-11-14-0004",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read 23 NYCRR Part 500 (New York Department of Financial Services Cybersecurity Regulation) (Unofficial copy of legal text) (rank 4)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.law.cornell.edu/regulations/new-york/23-NYCRR-500.11"
+      ],
+      "hash": "565f7395e851c3f1ebe039f3f7254bf9d3fec91a2eb2060f6e3e2b27dc9d5d35",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
+      ],
+      "previousHash": "e0f4779fdac7a75b33dbbb7ae5ed8df9a9c0ceaae9741b3ad0d0163525cc30d5",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000825",
+      "recordedAt": "2026-11-14T23:51:57.818Z",
+      "sequence": 825,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5F7BF75ACA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0004",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "37d3ad82acf254b76b2fd0604f76049181dd4b2d6e605fea08070e8f7b149f7b",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000825"
+      ],
+      "previousHash": "565f7395e851c3f1ebe039f3f7254bf9d3fec91a2eb2060f6e3e2b27dc9d5d35",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000826",
+      "recordedAt": "2026-11-14T23:51:57.838Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 826,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5F7BF75ACA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0004",
+      "confidenceScore": 0.498,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.498 (low)",
+      "eventType": "scored",
+      "hash": "a73a74b8280c26884290839c2df601c55efd65d2c2e6ce6359f9d1da7d4e4232",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000826"
+      ],
+      "previousHash": "37d3ad82acf254b76b2fd0604f76049181dd4b2d6e605fea08070e8f7b149f7b",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000827",
+      "recordedAt": "2026-11-14T23:51:57.857Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 827,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5F7BF75ACA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0004",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "9b98fea7879015cff1caf87984038696cccc415cde15d6af7cb4aa65469bcbf7",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000827"
+      ],
+      "previousHash": "a73a74b8280c26884290839c2df601c55efd65d2c2e6ce6359f9d1da7d4e4232",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000828",
+      "recordedAt": "2026-11-14T23:51:57.878Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 828,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5F7BF75ACA"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0004",
+      "confidenceScore": 0.498,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-5F7BF75ACA@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.law.cornell.edu/regulations/new-york/23-NYCRR-500.11"
+      ],
+      "governedRecordID": "TRG-LEAD-5F7BF75ACA@1",
+      "hash": "c3d3f21b60260b943e95e37b22022e79ce3e306e0fef87335cab715651f1c8cc",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000828"
+      ],
+      "previousHash": "9b98fea7879015cff1caf87984038696cccc415cde15d6af7cb4aa65469bcbf7",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000829",
+      "recordedAt": "2026-11-14T23:51:57.903Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 829,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5F7BF75ACA"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-14)"
+      },
+      "changeProposalID": "CP-2026-11-14-0009",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read FINRA 2026 Annual Regulatory Oversight Report (Law firm commentary) (rank 4)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.debevoise.com/insights/publications/2025/12/finras-2026-regulatory-oversight-report-continued"
+      ],
+      "hash": "54adc5a209fd9791489d9021a0daa8bc311c886fcfedca761f1074c80d7fa748",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
+      ],
+      "previousHash": "e37a92c474c59645b02eddef983f3b72b1146926d078615a06ad7ab871b48af0",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000848",
+      "recordedAt": "2026-11-14T23:51:58.938Z",
+      "sequence": 848,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-506DAAF7A7"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-14)"
+      },
+      "changeProposalID": "CP-2026-11-14-0009",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read FINRA 2026 Annual Regulatory Oversight Report (Law firm commentary) (rank 4)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.mayerbrown.com/-/media/files/perspectives-events/publications/2025/12/finra-2026-regulatory-oversight-report.pdf%3Frev=-1"
+      ],
+      "hash": "7fe4fbce357581cda4015f895cc840406c8fbef02c556f4851fa2d52b0966c13",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000848"
+      ],
+      "previousHash": "54adc5a209fd9791489d9021a0daa8bc311c886fcfedca761f1074c80d7fa748",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000849",
+      "recordedAt": "2026-11-14T23:51:58.958Z",
+      "sequence": 849,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-506DAAF7A7"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0009",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "9914e935b3435d8aa941c5a9884837158dc4fd1a047e5b67ab884eecd6b4d042",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000849"
+      ],
+      "previousHash": "7fe4fbce357581cda4015f895cc840406c8fbef02c556f4851fa2d52b0966c13",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000850",
+      "recordedAt": "2026-11-14T23:51:58.980Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 850,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-506DAAF7A7"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0009",
+      "confidenceScore": 0.497,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.497 (low)",
+      "eventType": "scored",
+      "hash": "c13860ef29d502b970619a60f458f8f6ef096ac2b91ee85963a038a07a95a31b",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000850"
+      ],
+      "previousHash": "9914e935b3435d8aa941c5a9884837158dc4fd1a047e5b67ab884eecd6b4d042",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000851",
+      "recordedAt": "2026-11-14T23:51:58.997Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 851,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-506DAAF7A7"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0009",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "7be9d2c73d15b1c9b6a4e3bba8e251d7bf474e7ec4151ed0cacd9344cab05b23",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000851"
+      ],
+      "previousHash": "c13860ef29d502b970619a60f458f8f6ef096ac2b91ee85963a038a07a95a31b",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000852",
+      "recordedAt": "2026-11-14T23:51:59.018Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 852,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-506DAAF7A7"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0009",
+      "confidenceScore": 0.497,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-506DAAF7A7@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.debevoise.com/insights/publications/2025/12/finras-2026-regulatory-oversight-report-continued",
+        "https://www.mayerbrown.com/-/media/files/perspectives-events/publications/2025/12/finra-2026-regulatory-oversight-report.pdf%3Frev=-1"
+      ],
+      "governedRecordID": "TRG-LEAD-506DAAF7A7@1",
+      "hash": "d80408e0edc8892bdf76b5d450d5400ed8f2ab29f322196e354e3e44f29c9bfd",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000852"
+      ],
+      "previousHash": "7be9d2c73d15b1c9b6a4e3bba8e251d7bf474e7ec4151ed0cacd9344cab05b23",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000853",
+      "recordedAt": "2026-11-14T23:51:59.040Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 853,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-506DAAF7A7"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-14)"
+      },
+      "changeProposalID": "CP-2026-11-14-0010",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read 45 CFR Part 92 (Nondiscrimination in Health Programs or Activities), section 1557 of the Affordable Care Act (Unofficial copy of legal text) (rank 4)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.law.cornell.edu/cfr/text/45/92.210"
+      ],
+      "hash": "6222efb20f4bc67e7f51dca61f1bc735e631b7f2f1dd54306a3726b75c929bc5",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
+      ],
+      "previousHash": "d80408e0edc8892bdf76b5d450d5400ed8f2ab29f322196e354e3e44f29c9bfd",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000854",
+      "recordedAt": "2026-11-14T23:51:59.181Z",
+      "sequence": 854,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-6A7D1069CF"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0010",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "5eb678a9b6e06d2a74f0437efa957257d640be3d5f83f86a945807c941005584",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000854"
+      ],
+      "previousHash": "6222efb20f4bc67e7f51dca61f1bc735e631b7f2f1dd54306a3726b75c929bc5",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000855",
+      "recordedAt": "2026-11-14T23:51:59.200Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 855,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-6A7D1069CF"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0010",
+      "confidenceScore": 0.498,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.498 (low)",
+      "eventType": "scored",
+      "hash": "4983cd3456ac27001a53d7b7319d3151f5de0d413cbaa8606b6893c824bd48c0",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000855"
+      ],
+      "previousHash": "5eb678a9b6e06d2a74f0437efa957257d640be3d5f83f86a945807c941005584",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000856",
+      "recordedAt": "2026-11-14T23:51:59.220Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 856,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-6A7D1069CF"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0010",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "ea5da5ec1a5bb59bd72d690341b435ffb5682f201a57509b0aaf68249026fe3c",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000856"
+      ],
+      "previousHash": "4983cd3456ac27001a53d7b7319d3151f5de0d413cbaa8606b6893c824bd48c0",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000857",
+      "recordedAt": "2026-11-14T23:51:59.242Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 857,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-6A7D1069CF"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0010",
+      "confidenceScore": 0.498,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-6A7D1069CF@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.law.cornell.edu/cfr/text/45/92.210"
+      ],
+      "governedRecordID": "TRG-LEAD-6A7D1069CF@1",
+      "hash": "d83961b51a92edf9b32903b0dbb6870974bdde0cf4a6e7ea7580ae0bbd5dfdf7",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000857"
+      ],
+      "previousHash": "ea5da5ec1a5bb59bd72d690341b435ffb5682f201a57509b0aaf68249026fe3c",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000858",
+      "recordedAt": "2026-11-14T23:51:59.265Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 858,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-6A7D1069CF"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-14)"
+      },
+      "changeProposalID": "CP-2026-11-14-0012",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read HTI-5 final rule (91 FR 67916; amending 45 CFR Part 170) (Law firm commentary) (rank 4)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.akingump.com/en/insights/ai-law-and-regulation-tracker/onc-issues-hti-5-final-rule-removing-model-card-and-risk-management-requirements-for-predictive-decision-support-interventions"
+      ],
+      "hash": "ffa736c460d00f71e11fca407b6574dfe11ba67b1fbf181b3994bb2f8593c9de",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
+      ],
+      "previousHash": "79dd2409159333c0d785987b99f586fe2a2075156d894d63303eb12bbae50e4b",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000863",
+      "recordedAt": "2026-11-14T23:51:59.589Z",
+      "sequence": 863,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5015E65786"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-14)"
+      },
+      "changeProposalID": "CP-2026-11-14-0012",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read HTI-5 final rule (91 FR 67916; amending 45 CFR Part 170) (Law firm commentary) (rank 4)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.hklaw.com/en/insights/publications/2026/10/hti5-promotes-deregulatory-certification-actions"
+      ],
+      "hash": "446fcd4a72c1f0e560c6676f79a2543ff3cece9545c6909439aef941313d7b7b",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000863"
+      ],
+      "previousHash": "ffa736c460d00f71e11fca407b6574dfe11ba67b1fbf181b3994bb2f8593c9de",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000864",
+      "recordedAt": "2026-11-14T23:51:59.607Z",
+      "sequence": 864,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5015E65786"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-14)"
+      },
+      "changeProposalID": "CP-2026-11-14-0012",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read HTI-5 final rule (91 FR 67916; amending 45 CFR Part 170) (Law firm commentary) (rank 4)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.mcdermottlaw.com/?p=50392216"
+      ],
+      "hash": "0161b721f2e298a5953b009f16e7faf495a27bad4697d37f9eb3ed53b58b3e07",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000864"
+      ],
+      "previousHash": "446fcd4a72c1f0e560c6676f79a2543ff3cece9545c6909439aef941313d7b7b",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000865",
+      "recordedAt": "2026-11-14T23:51:59.626Z",
+      "sequence": 865,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5015E65786"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0012",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "5cb1c9276ede9df47194e02898adfe71cd3bee671a1c76be7c1b44bddca793eb",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000865"
+      ],
+      "previousHash": "0161b721f2e298a5953b009f16e7faf495a27bad4697d37f9eb3ed53b58b3e07",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000866",
+      "recordedAt": "2026-11-14T23:51:59.646Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 866,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5015E65786"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0012",
+      "confidenceScore": 0.49,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.49 (low)",
+      "eventType": "scored",
+      "hash": "69f0c9cded341d26da7a94a5ce6acc6432c4cdbff1692af86460661806c5add1",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000866"
+      ],
+      "previousHash": "5cb1c9276ede9df47194e02898adfe71cd3bee671a1c76be7c1b44bddca793eb",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000867",
+      "recordedAt": "2026-11-14T23:51:59.669Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 867,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5015E65786"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0012",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "77bee0ad7cefb2aa5cdbedb880eb76186bf475d432378fb4365c2675212722a3",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000867"
+      ],
+      "previousHash": "69f0c9cded341d26da7a94a5ce6acc6432c4cdbff1692af86460661806c5add1",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000868",
+      "recordedAt": "2026-11-14T23:51:59.689Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 868,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5015E65786"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0012",
+      "confidenceScore": 0.49,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-5015E65786@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://www.akingump.com/en/insights/ai-law-and-regulation-tracker/onc-issues-hti-5-final-rule-removing-model-card-and-risk-management-requirements-for-predictive-decision-support-interventions",
+        "https://www.hklaw.com/en/insights/publications/2026/10/hti5-promotes-deregulatory-certification-actions",
+        "https://www.mcdermottlaw.com/?p=50392216"
+      ],
+      "governedRecordID": "TRG-LEAD-5015E65786@1",
+      "hash": "b635b3f2ec359571bcbe85d12006b28c140b94fcb2d8e4ad86c4622c103b925e",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000868"
+      ],
+      "previousHash": "77bee0ad7cefb2aa5cdbedb880eb76186bf475d432378fb4365c2675212722a3",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000869",
+      "recordedAt": "2026-11-14T23:51:59.712Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 869,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-5015E65786"
+      }
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-14)"
+      },
+      "changeProposalID": "CP-2026-11-14-0017",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205) (Law firm commentary) (rank 4)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://hklaw.com/en/insights/publications/2026/05/colorado-governor-signs-sb-189"
+      ],
+      "hash": "e13e7f2dfb75ad7e36d756c6b90af9123201a0ac08a3bd9c8a7eca1f7fd18855",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000809"
+      ],
+      "previousHash": "db53b4d7b7793af6925a43f230c6a6feb4e9180915b39a021632a7c4659e3751",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000887",
+      "recordedAt": "2026-11-14T23:52:00.635Z",
+      "sequence": 887,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-AB3C3034B0"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "atlas-update-agent",
+        "actorType": "agent",
+        "displayName": "Atlas update agent (research of 2026-11-14)"
+      },
+      "changeProposalID": "CP-2026-11-14-0017",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Read Colorado SB 26-189 (automated decision-making technology; repeals and re-enacts SB 24-205) (Law firm commentary) (rank 4)",
+      "eventType": "sourceRead",
+      "evidenceURLs": [
+        "https://www.hunton.com/privacy-and-information-security-law/colorado-ai-act-amended-and-effective-date-delayed"
+      ],
+      "hash": "11a3ddc78c26a53f6283b08008262cf008d3ac2b699de7738236e7a8ee530d7a",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000887"
+      ],
+      "previousHash": "e13e7f2dfb75ad7e36d756c6b90af9123201a0ac08a3bd9c8a7eca1f7fd18855",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000888",
+      "recordedAt": "2026-11-14T23:52:00.653Z",
+      "sequence": 888,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-AB3C3034B0"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0017",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Valid against the Metamodel and the dataset language rules",
+      "eventType": "validated",
+      "hash": "206562b32f55f25b6915f6ca55cef3eafb63cd9ff4490a1852f88e547f48f5c0",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000888"
+      ],
+      "previousHash": "11a3ddc78c26a53f6283b08008262cf008d3ac2b699de7738236e7a8ee530d7a",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000889",
+      "recordedAt": "2026-11-14T23:52:00.670Z",
+      "ruleIDs": [
+        "schema.metamodel",
+        "language.rules"
+      ],
+      "sequence": 889,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-AB3C3034B0"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0017",
+      "confidenceScore": 0.49,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Confidence 0.49 (low)",
+      "eventType": "scored",
+      "hash": "90d060ebe43a1fdaae0cf14cae07dfde405904727282f927b71b30efe77dda37",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000889"
+      ],
+      "previousHash": "206562b32f55f25b6915f6ca55cef3eafb63cd9ff4490a1852f88e547f48f5c0",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000890",
+      "recordedAt": "2026-11-14T23:52:00.688Z",
+      "ruleIDs": [
+        "coverage.weighting"
+      ],
+      "sequence": 890,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-AB3C3034B0"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0017",
+      "dataset": "ai-obligations-atlas",
+      "decision": "Treatment: convertedToLead",
+      "eventType": "treatmentAssigned",
+      "hash": "976c6a5c46c2ae6a65ca584ba17b25e1b3b0c94d122d6cf614cf279004435147",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000890"
+      ],
+      "previousHash": "90d060ebe43a1fdaae0cf14cae07dfde405904727282f927b71b30efe77dda37",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000891",
+      "recordedAt": "2026-11-14T23:52:00.706Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 891,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-AB3C3034B0"
+      },
+      "submissionID": "SUB-ATLAS-2026-11-14-US-OVERLAY"
+    },
+    {
+      "actor": {
+        "actorID": "reasoning-fabric",
+        "actorType": "service",
+        "displayName": "Reasoning Fabric"
+      },
+      "changeProposalID": "CP-2026-11-14-0017",
+      "confidenceScore": 0.49,
+      "dataset": "ai-obligations-atlas",
+      "decision": "Published unverified: TRG-LEAD-AB3C3034B0@1",
+      "eventType": "published",
+      "evidenceURLs": [
+        "https://hklaw.com/en/insights/publications/2026/05/colorado-governor-signs-sb-189",
+        "https://www.hunton.com/privacy-and-information-security-law/colorado-ai-act-amended-and-effective-date-delayed"
+      ],
+      "governedRecordID": "TRG-LEAD-AB3C3034B0@1",
+      "hash": "1b60453ec9de1b1870be64a498461d797683de948d3849eba376654a3493082b",
+      "inputProvenanceRecordIDs": [
+        "PROV-AI-OBLIGATIONS-ATLAS-0000891"
+      ],
+      "previousHash": "976c6a5c46c2ae6a65ca584ba17b25e1b3b0c94d122d6cf614cf279004435147",
+      "provenanceRecordID": "PROV-AI-OBLIGATIONS-ATLAS-0000892",
+      "recordedAt": "2026-11-14T23:52:00.728Z",
+      "ruleIDs": [
+        "precedence.leadOnly"
+      ],
+      "sequence": 892,
+      "subject": {
+        "domainType": "trigger",
+        "entityID": "TRG-LEAD-AB3C3034B0"
+      }
     }
   ],
   "ledgerHead": {
-    "sequence": 808,
-    "hash": "728332e9da3b1317d19bb6aa564b66c81fe16c4abfbd19060452b9acac50180d"
+    "sequence": 960,
+    "hash": "1981648600de26d131a84bbf25571606d75ba9e509a8242470156d235129e7ca"
   }
 }
