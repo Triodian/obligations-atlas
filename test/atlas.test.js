@@ -447,15 +447,22 @@ test('the US research round builds a submission the Fabric can take', async () =
   const st = new Atlas(moved, { preview: false });
   const ids = (f) => st.findObligations(f).map((o) => o.obligationID);
 
+  // Before the Fabric publishes the update, each record is at the proposal's base version; after, it is at a later
+  // version and carries the new code. The test holds both ways, so the refresh that brings the update in passes.
   test('state codes: the update submission moves the state records only, each against its published version', () => {
     assert.deepEqual(sub.proposals.map((p) => [p.target.entityID, p.record.jurisdiction]).sort(), [
       ['EXT-CPPA', 'US-CA'], ['EXT-LEG-CO', 'US-CO'], ['EXT-LEG-TX', 'US-TX'], ['EXT-NYDFS', 'US-NY'],
       ['OBL-US-CA-CCPA-ADMT', 'US-CA'], ['OBL-US-NY-CL7-2024', 'US-NY'], ['OBL-US-TX-TRAIGA', 'US-TX']]);
     for (const p of sub.proposals) {
       const g = published.records.find((r) => r.entityID === p.target.entityID);
-      assert.equal(p.changeType, 'update'); assert.equal(p.baseVersion, g.version);
-      const { jurisdiction: a, jurisdictionCodes: ac, ...rest } = p.record, { jurisdiction: b, jurisdictionCodes: bc, ...was } = g.record;
-      assert.deepEqual(rest, was, `${p.target.entityID}: nothing but the jurisdiction changes`);
+      assert.equal(p.changeType, 'update');
+      if (g.version === p.baseVersion) {
+        const { jurisdiction: a, jurisdictionCodes: ac, ...rest } = p.record, { jurisdiction: b, jurisdictionCodes: bc, ...was } = g.record;
+        assert.deepEqual(rest, was, `${p.target.entityID}: nothing but the jurisdiction changes`);
+      } else {
+        assert.ok(g.version > p.baseVersion, `${p.target.entityID}: published at ${g.version}, proposed against ${p.baseVersion}`);
+        assert.equal(g.record.jurisdiction, p.record.jurisdiction, `${p.target.entityID}: published since, with the new code`);
+      }
     }
   });
 
@@ -473,7 +480,7 @@ test('the US research round builds a submission the Fabric can take', async () =
     assert.equal(jurisdictionName('US-NY'), 'New York (United States)'); assert.equal(jurisdictionName('US'), 'United States'); assert.equal(jurisdictionName('US-NJ'), 'US-NJ (United States)');
     assert.ok(isJurisdiction('US-NY') && isJurisdiction('US-NJ') && !isJurisdiction('ZZ-NY') && !isJurisdiction('NY'));
     const us = st.jurisdictions().find((j) => j.code === 'US');
-    assert.equal(us.obligations, published.records.filter((r) => r.domainType === 'obligation' && r.record.jurisdiction === 'US').length, 'the country counts its states’ records');
+    assert.equal(us.obligations, published.records.filter((r) => r.domainType === 'obligation' && /^US(-|$)/.test(r.record.jurisdiction)).length, 'the country counts its states’ records');
     assert.deepEqual(us.subdivisions.map((s) => s.code), ['US-CA', 'US-NY', 'US-TX']);
     assert.ok(!st.jurisdictions().some((j) => j.code.includes('-')), 'the list of jurisdictions stays a list of countries');
     const [nj] = st.coverage('US-NJ');
