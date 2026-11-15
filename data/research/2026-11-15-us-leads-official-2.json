@@ -1,0 +1,47 @@
+{
+  "researched": "2026-11-15",
+  "from": "data/seed/submission-2026-11-14-us-overlay.json",
+  "brief": "Second attempt for three of the five (submission SUB-ATLAS-2026-11-15-US-LEADS-OFFICIAL): the Fabric refused them as duplicates of their own leads, because a lead held the provision's key and nothing let a record replace it. With lead promotion in the Reasoning Fabric (reasoning_fabric #13, deployed first), the same records and evidence are proposed again under new ids; on approval each replaces its lead, which is closed. New York's and Colorado's went through in the first attempt because their state codes changed their key.",
+  "records": [
+    {
+      "entityID": "OBL-US-45CFR-92-210",
+      "evidence": [
+        {
+          "url": "https://www.govinfo.gov/content/pkg/FR-2024-05-06/pdf/2024-08711.pdf",
+          "title": "Nondiscrimination in Health Programs and Activities, final rule, 89 FR 37522 (6 May 2024)",
+          "sourceRank": 1
+        },
+        {
+          "url": "https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-A/part-92",
+          "title": "eCFR, 45 CFR Part 92 (not an official legal edition)",
+          "sourceRank": 2
+        }
+      ]
+    },
+    {
+      "entityID": "OBL-US-HTI5-DSI",
+      "evidence": [
+        {
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-28/pdf/2026-21943.pdf",
+          "title": "HTI-5 final rule, 91 FR 67916 (28 October 2026)",
+          "sourceRank": 1
+        },
+        {
+          "url": "https://www.federalregister.gov/documents/2026/10/28/2026-21943/health-data-technology-and-interoperability-onc-deregulatory-actions-to-unleash-prosperity",
+          "title": "Federal Register document 2026-21943",
+          "sourceRank": 1
+        }
+      ]
+    },
+    {
+      "entityID": "OBL-US-FINRA-2026-GENAI",
+      "evidence": [
+        {
+          "url": "https://www.finra.org/sites/default/files/2025-12/2026-annual-regulatory-oversight-report.pdf",
+          "title": "FINRA, 2026 Annual Regulatory Oversight Report",
+          "sourceRank": 2
+        }
+      ]
+    }
+  ]
+}

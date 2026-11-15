@@ -446,6 +446,7 @@ export class Atlas {
     const items = [];
     for (const t of this.triggerRecords) {
       const r = t.record;
+      if (r.status === 'promoted') continue;   // a lead the Fabric replaced with its record: the record shows instead
       const ic = r.instrumentChange || {};
       const isLead = r.status === 'lead' || t.publicationStatus === 'unverified';
       const date = (ic.changeType === 'commencement' ? ic.effectiveDate || ic.publishedDate : ic.publishedDate || ic.effectiveDate) || r.detectionDate || t.publishedAt.slice(0, 10);
