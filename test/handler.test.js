@@ -164,3 +164,16 @@ test('keyless tier (2.9): an MCP client without a key reads published Australian
   assert.equal(rest.status, 429);
   assert.match((await rest.json()).detail, /keyless tier/);
 });
+
+test('the deployed revision is attestable: /api/version and X-Triodian-Release (development plan P.14)', async () => {
+  const h = createHandler({ published, preview, fetchImpl: async () => { throw new Error('no network'); } });
+  const SHA = '0ba317d4b87a21860347416ac404031f8d9ba3e5';
+  const v = await h(new Request('https://atlas.test/api/version'), { APP_COMMIT: SHA, ATLAS_PREVIEW: 'true' }, { waitUntil() {} });
+  assert.equal(v.status, 200);
+  assert.deepEqual(await v.json(), { app: 'obligations-atlas', commit: SHA });
+  assert.equal(v.headers.get('X-Triodian-Release'), SHA);
+  const z = await h(new Request('https://atlas.test/healthz'), { APP_COMMIT: SHA, ATLAS_PREVIEW: 'true' }, { waitUntil() {} });
+  assert.equal(z.headers.get('X-Triodian-Release'), SHA, 'every API response carries it');
+  const u = await h(new Request('https://atlas.test/api/version'), { ATLAS_PREVIEW: 'true' }, { waitUntil() {} });
+  assert.equal((await u.json()).commit, 'unknown', 'unknown when the var is not set (a hand deploy)');
+});
