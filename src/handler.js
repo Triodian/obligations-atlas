@@ -93,7 +93,17 @@ export function createHandler({ published, preview, fetchImpl = (...a) => fetch(
     return live.snapshot ? { snapshot: live.snapshot, source: 'fabric' } : { snapshot: published, source: 'bundled' };
   }
 
+  // The commit this Worker was deployed from (APP_COMMIT, set by the deploy step), on every response as
+  // X-Triodian-Release and at /api/version, so a test can attest the deployed revision rather than infer it
+  // (penetration retest 16 Nov 2026; development plan P.14). The repository is public, so the commit is not a secret.
+  const release = (env) => String((env && env.APP_COMMIT) || '').trim() || 'unknown';
+  const withRelease = (res, env) => { try { const r = new Response(res.body, res); r.headers.set('X-Triodian-Release', release(env)); return r; } catch (e) { return res; } };
   return async function handle(request, env, ctx) {
+    const url = new URL(request.url);
+    if (url.pathname === '/api/version' && request.method === 'GET') return withRelease(Response.json({ app: 'obligations-atlas', commit: release(env) }), env);
+    return withRelease(await serve(request, env, ctx), env);
+  };
+  async function serve(request, env, ctx) {
     const url = new URL(request.url);
     const previewHosts = (env.ATLAS_PREVIEW_HOSTS || '').split(',').map((h) => h.trim().toLowerCase()).filter(Boolean);
     const isPreview = env.ATLAS_PREVIEW === 'true' || previewHosts.includes(url.hostname.toLowerCase());
@@ -117,5 +127,5 @@ export function createHandler({ published, preview, fetchImpl = (...a) => fetch(
     if (keysReady && !firmKeys.items.length && (request.headers.get('x-api-key') || request.headers.get('authorization'))) await keysReady;
     const app = appFor(isPreview ? 'preview' : 'published', snapshot, env, isPreview);
     return app.fetch(request, env, ctx);
-  };
+  }
 }
