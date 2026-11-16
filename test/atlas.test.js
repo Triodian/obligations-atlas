@@ -90,6 +90,51 @@ test('provenance of a record waiting for review is not served by its ID (penetra
   assert.equal(restOk.status, 200, 'the published record’s provenance over HTTP (control)');
 });
 
+test('provenance of a pending revision of an already-public entity is not served (penetration retest 16 Nov 2026, R-02)', async () => {
+  // The retest's expanded case: entity@1 published and entity@2 waiting for review, each with its own provenance
+  // entry. The P.4 filter admitted an entry whenever its subject entity was shown, so the pending revision's note was
+  // served by its ID through REST and MCP. Eligibility now follows the version that cites the entry.
+  const target = preview.records.find((r) => r.domainType === 'obligation' && r.publicationStatus === 'published' && r.version === 1);
+  const id = target.entityID, pendProv = 'PROV-TEST-PENDING-REV-0000001', uncitedProv = 'PROV-TEST-UNCITED-0000001', supProv = 'PROV-TEST-SUPERSEDED-0000001', supID = 'OBL-TEST-SUPERSEDED-1';
+  const entry = (provenanceRecordID, entityID, decision) => ({ provenanceRecordID, sequence: 999990 + Number(provenanceRecordID.slice(-1)), eventType: 'sourceRead', subject: { domainType: 'obligation', entityID },
+    decision, actor: { actorType: 'agent', actorID: 't', displayName: 't' }, recordedAt: '2026-11-16T00:00:00.000Z', hash: 'x', previousHash: 'x' });
+  const mixed = { ...preview, includesPending: true,
+    records: [...preview.records,
+      // a pending revision of the same entity, citing its own entry
+      { ...target, version: 2, governedRecordID: `${id}@2`, publicationStatus: 'pendingReview', provenanceRecordIDs: [pendProv], record: { ...target.record, title: 'Pending revision' } },
+      // a superseded earlier version of another entity, citing its own entry (a permitted version: it was published)
+      { ...target, entityID: supID, version: 1, governedRecordID: `${supID}@1`, publicationStatus: 'superseded', provenanceRecordIDs: [supProv], record: { ...target.record, title: 'Superseded version' } }],
+    provenance: [...preview.provenance,
+      entry(pendProv, id, 'UNPUBLISHED NOTE: the pending revision’s research note'),
+      entry(uncitedProv, id, 'UNPUBLISHED NOTE: an entry about the public entity that no version cites'),
+      entry(supProv, supID, 'Superseded version’s note')] };
+  const pub = new Atlas(mixed, { preview: false }), pre = new Atlas(mixed, { preview: true });
+  assert.equal(pub.byID.get(id).governedRecordID, `${id}@1`, 'the public build shows the published version of the entity');
+  assert.equal(await pub.provenance(pendProv), null, 'the pending revision’s entry is not served by its ID');
+  assert.equal(await pub.provenance(uncitedProv), null, 'an entry about the public entity that no shown version cites is not served either');
+  const byEntity = await pub.provenance(id);
+  assert.ok(byEntity && byEntity.entries.length > 0 && byEntity.entries.every((e) => e.provenanceRecordID !== pendProv && e.provenanceRecordID !== uncitedProv), 'the entity’s provenance is the published version’s only');
+  assert.ok(!JSON.stringify(pub.dataset()).includes('UNPUBLISHED NOTE'), 'the dataset carries none of it');
+  assert.ok(!JSON.stringify(pub.changes ? pub.changes() : '').includes('UNPUBLISHED NOTE'), 'nor the change feed');
+  const sup = await pub.provenance(supProv);
+  assert.ok(sup && sup.entries[0].decision.startsWith('Superseded'), 'an entry cited by a superseded (once published) version is still served');
+  const control = await pub.provenance(target.provenanceRecordIDs[0]);
+  assert.ok(control && control.entries.length === 1, 'the published version’s own entry is still served by its ID (control)');
+  assert.ok((await pre.provenance(pendProv)) && (await pre.provenance(pendProv)).entries[0].decision.startsWith('UNPUBLISHED'), 'a preview build still shows the pending revision’s entry');
+  // through the HTTP application and the MCP tool, as the retest drove them
+  const pubApp = createApp({ snapshot: mixed, preview: false });
+  assert.equal((await pubApp.request(`/api/v1/provenance/${pendProv}`)).status, 404, 'REST: 404 for the pending revision’s entry');
+  assert.equal((await pubApp.request(`/api/v1/provenance/${uncitedProv}`)).status, 404, 'REST: 404 for the uncited entry');
+  assert.equal((await pubApp.request(`/api/v1/provenance/${target.provenanceRecordIDs[0]}`)).status, 200, 'REST: the published version’s entry (control)');
+  for (const ref of [pendProv, uncitedProv]) {
+    const mcp = await pubApp.request('/mcp', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'explain_provenance', arguments: { ref } } }) });
+    const body = await mcp.json();
+    assert.ok(body.result && body.result.isError && !JSON.stringify(body).includes('UNPUBLISHED'), 'MCP explain_provenance: ' + JSON.stringify(body).slice(0, 160));
+  }
+  const mcpOk = await pubApp.request('/mcp', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'explain_provenance', arguments: { ref: id } } }) });
+  assert.ok(!JSON.stringify(await mcpOk.json()).includes('UNPUBLISHED'), 'MCP explain_provenance by entity: the published version only');
+});
+
 test('provenance hashes verify, and a tampered entry is caught', async () => {
   const p = await atlas.provenance('OBL-AU-CPS230-47');
   assert.ok(p.entries.length >= 4 && p.allHashesVerified);
