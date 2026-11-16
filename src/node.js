@@ -37,6 +37,8 @@ const api = createApp({
   preview,
   apiKeys: process.env.ATLAS_API_KEYS ? JSON.parse(process.env.ATLAS_API_KEYS) : [],
   requireKey: process.env.ATLAS_REQUIRE_KEY === 'true',
+  // Direct Node trusts no forwarded header unless told it sits behind Cloudflare (ATLAS_TRUSTED_PROXY=cloudflare)
+  trustedProxy: process.env.ATLAS_TRUSTED_PROXY === 'cloudflare' ? 'cloudflare' : 'none',
   ...(Number(process.env.ATLAS_KEYLESS_PER_MINUTE) > 0 ? { anonPerMinute: Number(process.env.ATLAS_KEYLESS_PER_MINUTE) } : {}),
   defaults: { jurisdiction: (process.env.DEFAULT_JURISDICTION || 'AU').toUpperCase(), sector: process.env.DEFAULT_SECTOR || '' },
 });

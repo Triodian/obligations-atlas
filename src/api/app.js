@@ -41,8 +41,13 @@ function limiter() {
  *   anonPerMinute
  *   keyProvider  () => [{ firm, keySha256, perMinute }]  firm keys issued through the Fabric (read on each call)
  *   firms        firm registry client (src/firms.js), or null when registration is not configured
+ *   trustedProxy where the caller's address comes from, for the keyless rate limit (penetration test 16 Nov 2026,
+ *                hardening item; suite test F-02): 'cloudflare' reads cf-connecting-ip, which Cloudflare sets
+ *                itself and a client cannot forge; 'none' (direct origin) reads no forwarded header at all, so
+ *                every anonymous direct caller shares one allowance rather than choosing its own by sending
+ *                x-forwarded-for. x-forwarded-for is never trusted: anyone can send it.
  */
-export function createApp({ snapshot, preview = false, apiKeys = [], requireKey = false, anonPerMinute = KEYLESS_PER_MINUTE, keyProvider = () => [], firms = null, defaults = {} }) {
+export function createApp({ snapshot, preview = false, apiKeys = [], requireKey = false, anonPerMinute = KEYLESS_PER_MINUTE, keyProvider = () => [], firms = null, defaults = {}, trustedProxy = 'none' }) {
   const atlas = new Atlas(snapshot, { preview });
   // Jurisdictions shown as covered: those the Atlas goes to full depth in and holds records for (US records arrive
   // through the review queue, so the front door says covered only once some are published).
@@ -55,11 +60,14 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
 
   const problem = (c, status, code, title, extra = {}) => c.json({ type: `https://atlas.triodian.com/problems/${code}`, title, status, code, ...extra }, status, { 'content-type': 'application/problem+json' });
 
+  /** The caller's address as the trusted proxy reports it; 'direct' when no proxy is trusted (see trustedProxy). */
+  const clientIp = (c) => (trustedProxy === 'cloudflare' && c.req.header('cf-connecting-ip')) || 'direct';
+
   /** Identify the caller: a registered firm by API key, or anonymous. */
   const caller = async (c) => {
     const h = c.req.header('authorization') || '';
     const key = c.req.header('x-api-key') || (/^Bearer\s+(.+)$/i.exec(h) || [])[1];
-    if (!key) return { firm: null, perMinute: anonPerMinute, id: `ip:${c.req.header('cf-connecting-ip') || c.req.header('x-forwarded-for') || 'local'}` };
+    if (!key) return { firm: null, perMinute: anonPerMinute, id: `ip:${clientIp(c)}` };
     const k = keyFor(await sha256Hex(key.trim()));
     return k ? { firm: k.firm, perMinute: k.perMinute || 600, id: `firm:${k.firm}` } : { invalid: true };
   };
@@ -172,8 +180,7 @@ export function createApp({ snapshot, preview = false, apiKeys = [], requireKey 
   const directory = { items: [], at: 0, ok: false };
   const firmCall = (handler) => async (c) => {
     if (!firms) return problem(c, 503, 'firms.unavailable', 'Firm registration is not available on this server yet');
-    const ip = c.req.header('cf-connecting-ip') || c.req.header('x-forwarded-for') || 'local';
-    const r = postLimit(`firms:${ip}`, 10);
+    const r = postLimit(`firms:${clientIp(c)}`, 10);
     if (!r.ok) { c.header('retry-after', String(r.retryAfter)); return problem(c, 429, 'rate.limited', 'Too many requests'); }
     let body;
     try { body = await c.req.json(); } catch { return problem(c, 400, 'body.invalid', 'Send a JSON body'); }

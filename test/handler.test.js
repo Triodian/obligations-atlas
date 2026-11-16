@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createHandler } from '../src/handler.js';
+import { createApp } from '../src/api/app.js';
 import { Atlas, sha256Hex as sha256 } from '../src/core/atlas.js';
 
 const published = JSON.parse(fs.readFileSync('data/snapshot/ai-obligations-atlas.json', 'utf8'));
@@ -160,7 +161,7 @@ test('keyless tier (2.9): an MCP client without a key reads published Australian
   assert.equal(firm.headers.get('x-ratelimit-limit'), '100');
   // the REST API shares the keyless tier and says the same
   for (let i = 0; i < 4; i++) await get(h, 'obligations-atlas.triodian.com', '/api/v1/obligations?jurisdiction=AU', e);
-  const rest = await h(new Request('https://obligations-atlas.triodian.com/api/v1/obligations?jurisdiction=SG', { headers: { 'cf-connecting-ip': 'local' } }), e, { waitUntil: () => {} });
+  const rest = await h(new Request('https://obligations-atlas.triodian.com/api/v1/obligations?jurisdiction=SG'), e, { waitUntil: () => {} }); // no connecting address, like the four GETs before it: the same 'direct' allowance
   assert.equal(rest.status, 429);
   assert.match((await rest.json()).detail, /keyless tier/);
 });
@@ -176,4 +177,20 @@ test('the deployed revision is attestable: /api/version and X-Triodian-Release (
   assert.equal(z.headers.get('X-Triodian-Release'), SHA, 'every API response carries it');
   const u = await h(new Request('https://atlas.test/api/version'), { ATLAS_PREVIEW: 'true' }, { waitUntil() {} });
   assert.equal((await u.json()).commit, 'unknown', 'unknown when the var is not set (a hand deploy)');
+});
+
+test('the keyless rate limit cannot be reset by a client-supplied X-Forwarded-For (suite security test 16 Nov 2026, F-02)', async () => {
+  // Behind Cloudflare the caller's address is cf-connecting-ip, which Cloudflare sets and a client cannot forge;
+  // x-forwarded-for is never read. A direct-origin app ('none') trusts no forwarded header at all.
+  const e = { ATLAS_PREVIEW: 'true', ATLAS_KEYLESS_PER_MINUTE: '2' };
+  const h = createHandler({ published, preview, fetchImpl: async () => { throw new Error('no network'); } });
+  const call = (headers) => h(new Request('https://obligations-atlas.triodian.com/api/v1/obligations?jurisdiction=AU', { headers }), e, { waitUntil: () => {} });
+  const codes = [];
+  for (const xff of ['198.51.100.1', '198.51.100.2', '198.51.100.3']) codes.push((await call({ 'cf-connecting-ip': '203.0.113.50', 'x-forwarded-for': xff })).status);
+  assert.deepEqual(codes, [200, 200, 429], 'changing x-forwarded-for does not buy a fresh allowance');
+  assert.equal((await call({ 'cf-connecting-ip': '203.0.113.51' })).status, 200, 'a different connecting address has its own allowance (control)');
+  const direct = createApp({ snapshot: preview, preview: true, anonPerMinute: 2, trustedProxy: 'none' });
+  const d = [];
+  for (const ip of ['10.0.0.1', '10.0.0.2', '10.0.0.3']) d.push((await direct.request('/api/v1/obligations?jurisdiction=AU', { headers: { 'x-forwarded-for': ip, 'cf-connecting-ip': ip } })).status);
+  assert.deepEqual(d, [200, 200, 429], 'direct origin: neither header is trusted, one shared allowance');
 });
