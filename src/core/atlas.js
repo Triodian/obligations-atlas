@@ -226,7 +226,14 @@ export class Atlas {
     this.triggerRecords = of('trigger');
     this.dataFlowRecords = of('dataFlow');
     this.byID = new Map(this.records.map((r) => [r.entityID, r]));
-    this.provenanceByID = new Map((snapshot.provenance || []).map((e) => [e.provenanceRecordID, e]));
+    // Provenance follows the publication boundary of its subject (penetration test 16 Nov 2026, PT-04): an entry is
+    // served only when its subject is a record this build shows (or one it superseded), or a shown record cites it.
+    // Anything else, such as the research notes behind a record still waiting for review, is not reachable by its ID.
+    const shown = new Set([...this.byID.keys(), ...this.superseded.map((r) => r.entityID)]);
+    const cited = new Set(this.records.flatMap((r) => r.provenanceRecordIDs || []));
+    this.provenanceByID = new Map((snapshot.provenance || [])
+      .filter((e) => cited.has(e.provenanceRecordID) || (e.subject && shown.has(e.subject.entityID)))
+      .map((e) => [e.provenanceRecordID, e]));
     this.languageRules = (this.policy && this.policy.languageRules || []).map((r) => ({ ...r, re: new RegExp(r.pattern, 'i') }));
   }
 

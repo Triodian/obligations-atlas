@@ -62,6 +62,34 @@ test('a regulator expectation shows the binding standards it rests on', () => {
   assert.ok(o.tierBasis.some((b) => b.obligationID === 'OBL-AU-CPS220-9' && b.sourceTier === 'binding'));
 });
 
+test('provenance of a record waiting for review is not served by its ID (penetration test 16 Nov 2026, PT-04)', async () => {
+  // A snapshot that mixes publication states: one obligation waiting for review, with a provenance entry whose
+  // decision holds an unpublished note. The published build must not serve that entry, by any path.
+  const target = preview.records.find((r) => r.domainType === 'obligation' && r.publicationStatus === 'published');
+  const pendingID = 'OBL-TEST-PENDING-1', provID = 'PROV-TEST-PENDING-0000001';
+  const mixed = { ...preview, includesPending: true,
+    records: [...preview.records, { ...target, entityID: pendingID, governedRecordID: `${pendingID}@1`, publicationStatus: 'pendingReview', provenanceRecordIDs: [provID], record: { ...target.record, title: 'Pending record' } }],
+    provenance: [...preview.provenance, { provenanceRecordID: provID, sequence: 999999, eventType: 'sourceRead', subject: { domainType: 'obligation', entityID: pendingID },
+      decision: 'UNPUBLISHED NOTE: editorial material that must not leave the review queue', actor: { actorType: 'agent', actorID: 't', displayName: 't' }, recordedAt: '2026-11-16T00:00:00.000Z', hash: 'x', previousHash: 'x' }] };
+  const pub = new Atlas(mixed, { preview: false }), pre = new Atlas(mixed, { preview: true });
+  assert.equal(pub.byID.get(pendingID), undefined, 'the pending record itself is hidden (as before)');
+  assert.equal(await pub.provenance(provID), null, 'its provenance entry is not served by its ID');
+  assert.equal(await pub.provenance(pendingID), null, 'nor by the record ID');
+  assert.ok(!JSON.stringify(pub.dataset()).includes('UNPUBLISHED NOTE'), 'the dataset carries none of it');
+  const okRec = await pub.provenance(target.entityID);
+  assert.ok(okRec && okRec.entries.length > 0 && okRec.allHashesVerified, 'a published record’s provenance is still served (control)');
+  assert.ok((await pre.provenance(provID)) && (await pre.provenance(provID)).entries[0].decision.startsWith('UNPUBLISHED'), 'a preview build still shows it');
+  // through the HTTP application and the MCP tool
+  const pubApp = createApp({ snapshot: mixed, preview: false });
+  const rest = await pubApp.request(`/api/v1/provenance/${provID}`);
+  assert.equal(rest.status, 404);
+  const mcp = await pubApp.request('/mcp', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'explain_provenance', arguments: { ref: provID } } }) });
+  const mcpBody = await mcp.json();
+  assert.ok(mcpBody.result && mcpBody.result.isError && !JSON.stringify(mcpBody).includes('UNPUBLISHED'), JSON.stringify(mcpBody).slice(0, 200));
+  const restOk = await pubApp.request(`/api/v1/provenance/${target.entityID}`);
+  assert.equal(restOk.status, 200, 'the published record’s provenance over HTTP (control)');
+});
+
 test('provenance hashes verify, and a tampered entry is caught', async () => {
   const p = await atlas.provenance('OBL-AU-CPS230-47');
   assert.ok(p.entries.length >= 4 && p.allHashesVerified);
