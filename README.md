@@ -130,4 +130,3 @@ Use it, review it, tell us you use it, or fund its upkeep: see [SUPPORTING.md](S
 
 AI Obligations Atlas is open source under the [Apache License, Version 2.0](LICENSE). Copyright 2026 Triodian Pty Ltd.
 Third-party components bundled with it keep their own licences; see [`NOTICE`](NOTICE).
-test
