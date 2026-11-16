@@ -226,13 +226,14 @@ export class Atlas {
     this.triggerRecords = of('trigger');
     this.dataFlowRecords = of('dataFlow');
     this.byID = new Map(this.records.map((r) => [r.entityID, r]));
-    // Provenance follows the publication boundary of its subject (penetration test 16 Nov 2026, PT-04): an entry is
-    // served only when its subject is a record this build shows (or one it superseded), or a shown record cites it.
-    // Anything else, such as the research notes behind a record still waiting for review, is not reachable by its ID.
-    const shown = new Set([...this.byID.keys(), ...this.superseded.map((r) => r.entityID)]);
-    const cited = new Set(this.records.flatMap((r) => r.provenanceRecordIDs || []));
+    // Provenance follows the publication boundary of the version that cites it (penetration test 16 Nov 2026, PT-04;
+    // retest R-02): an entry is served only when a governed record this build shows, or one it superseded, names it in
+    // its provenanceRecordIDs. A provenance entry's subject names an entity, not a version, so admitting entries by
+    // subject let the research notes behind a pending revision of an already-public entity (entity@2 beside a
+    // published entity@1) out by their ID. Nothing is public merely because another version of its entity is.
+    const cited = new Set([...this.records, ...this.superseded].flatMap((r) => r.provenanceRecordIDs || []));
     this.provenanceByID = new Map((snapshot.provenance || [])
-      .filter((e) => cited.has(e.provenanceRecordID) || (e.subject && shown.has(e.subject.entityID)))
+      .filter((e) => cited.has(e.provenanceRecordID))
       .map((e) => [e.provenanceRecordID, e]));
     this.languageRules = (this.policy && this.policy.languageRules || []).map((r) => ({ ...r, re: new RegExp(r.pattern, 'i') }));
   }
