@@ -37,6 +37,7 @@ flowchart LR
 npm ci
 npm run dev                     # http://localhost:8787, published records only
 ATLAS_PREVIEW=true npm run dev  # include records waiting for review, with a preview banner
+ATLAS_TRUSTED_PROXY=cloudflare npm start  # only when this Node process sits behind Cloudflare: the keyless rate limit then keys on cf-connecting-ip; otherwise no forwarded header is trusted
 npm test                        # API, MCP, matter brief, language rules, provenance, keys, rate limits
 npm run data:check              # every snapshot record against its schema, language rules and hashes
 ```

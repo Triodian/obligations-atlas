@@ -24,7 +24,7 @@
     "build:preview-page": "node scripts/build-preview-page.mjs"
   },
   "dependencies": {
-    "hono": "^4.6.14"
+    "hono": "^4.13.18"
   },
   "devDependencies": {
     "@hono/node-server": "^1.13.7",

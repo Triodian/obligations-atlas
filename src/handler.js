@@ -57,6 +57,7 @@ export function createHandler({ published, preview, fetchImpl = (...a) => fetch(
       ...(Number(env.ATLAS_KEYLESS_PER_MINUTE) > 0 ? { anonPerMinute: Number(env.ATLAS_KEYLESS_PER_MINUTE) } : {}),
       keyProvider: () => firmKeys.items,
       firms: firmsFor(env),
+      trustedProxy: 'cloudflare', // the Worker only ever runs behind Cloudflare, which sets cf-connecting-ip itself
       defaults: { jurisdiction: (env.DEFAULT_JURISDICTION || 'AU').toUpperCase(), sector: env.DEFAULT_SECTOR || '' },
     });
     apps.set(key, { app, snapshot });
