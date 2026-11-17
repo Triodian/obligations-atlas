@@ -1,6 +1,6 @@
 # AI Obligations Atlas
 
-[![Tests](https://github.com/Triodian/obligations-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/Triodian/obligations-atlas/actions/workflows/ci.yml) [![Licence: Apache 2.0](https://img.shields.io/badge/licence-Apache%202.0-blue.svg)](LICENSE)
+[![Tests](https://github.com/Triodian/obligations-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/Triodian/obligations-atlas/actions/workflows/ci.yml) [![Licence: Apache 2.0](https://img.shields.io/badge/licence-Apache%202.0-blue.svg)](LICENSE) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Triodian/obligations-atlas/badge)](https://scorecard.dev/viewer/?uri=github.com/Triodian/obligations-atlas)
 
 The Atlas sets out AI governance obligations by jurisdiction, maps them to standardised AI use cases (UC1 to UC10), and tags each by the tier of its source:
 - **Binding**: law or prudential standard in force;
